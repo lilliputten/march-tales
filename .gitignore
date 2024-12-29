@@ -1,0 +1,70 @@
+# Include special jest files/folders
+!__mocks__
+!__snapshots__
+!__tests__
+
+# dependencies
+/node_modules
+
+# Byte-compiled / optimized / DLL files
+.mypy_cache/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+cam-client-app-build/
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+*.stats
+
+# Environments
+# No `.env` files are stored in the repository, except `*.SAMPLE` ones
+.env*
+!.env*.SAMPLE
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+config.local.yml
+/out
+
+# Data
+*.db
+questions.yaml
+
+# Client files
+/test-*
+/temp*
+/.temp*
+
+# Linked or generated build
+/html-app*
+
+# Auto-generated files
+/uploads
+# /log*
+*.log
+local.log.*
+*.lock
+/.utils/config-local.sh
+
+# Unused & temp files
+\!UNUSED
+~*
+*_
+zia*
+*.sw?
+*~
+\!ARC*
+*.session
+*crashed-session*

@@ -1,0 +1,47 @@
+[tool.poetry]
+name = "march-tales"
+version = "0.0.0"
+description = "March tales django api and web frontend server."
+authors = ["lilliputten <lilliputten@gmail.com>"]
+readme = "README.md"
+
+# @see https://python-poetry.org/docs/pyproject/#packages
+packages = [
+    { include = "api" },
+]
+
+[tool.poetry.dependencies]
+# NOTE: ffmpeg is required, see: https://www.ffmpeg.org/download.html
+python = "^3.11"
+python-dotenv = "^1.0.1"
+concurrent-log-handler = "^0.9.25" # Write logs to a reotating files
+colorama = "^0.4.6"
+
+[tool.poetry.group.dev.dependencies]
+blue = "^0.9.1"
+pyright = "^1.1"
+poetry-plugin-export = "^1.8.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.autopep8]
+max_line_length = 120
+# ignore = "E501,W6"  # or ["E501", "W6"]
+in-place = true
+recursive = true
+aggressive = 3
+
+[tool.black]
+line-length = 120
+
+[tool.blue]
+line-length = 120
+# TODO!
+
+[tool.poetry.scripts]
+export_requirements = "poetry-scripts:export_requirements"
+lint = "poetry-scripts:lint"
+format = "poetry-scripts:format"
+check_all = "poetry-scripts:check_all"
