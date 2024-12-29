@@ -7,7 +7,7 @@ readme = "README.md"
 
 # @see https://python-poetry.org/docs/pyproject/#packages
 packages = [
-    { include = "django_project" },
+    { include = "tales" },
 ]
 
 [tool.poetry.dependencies]
