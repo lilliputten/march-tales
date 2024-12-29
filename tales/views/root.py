@@ -20,7 +20,7 @@ from django.shortcuts import redirect, render
 #
 #     return render(
 #         request=request,
-#         template_name="dds_registration/index.html.django",
+#         template_name="tales/index.html.django",
 #         context={"user": request.user, "events": events},
 #     )
 
@@ -31,7 +31,7 @@ from django.shortcuts import redirect, render
 #         return redirect("index")
 #     return render(
 #         request=request,
-#         template_name="dds_registration/profile.html.django",
+#         template_name="tales/profile.html.django",
 #         context={"active_regs": Registration.active_for_user(request.user), "user": request.user},
 #     )
 

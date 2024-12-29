@@ -1,4 +1,4 @@
-# @module dds_registration/views/__init__.py
+# @module tales/views/__init__.py
 # @changed 2024.03.15, 19:53
 
 
