@@ -40,10 +40,10 @@ def superuser():
     )
     print('Done')
 
+
 def runserver():
     """
     python manage.py runserver
     """
     # NOTE: It can't run this way
     execute_from_command_line(['manage.py', 'runserver'])
-

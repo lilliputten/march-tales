@@ -10,23 +10,92 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
-from pathlib import Path
+import os
+import pathlib
+import posixpath
+import random
+import re
+import string
+from dotenv import dotenv_values
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
+# BASE_DIR = pathlib.Path(os.getcwd()).as_posix()
+STATIC_PATH = posixpath.join(BASE_DIR, 'static')
 
+# App name
+
+APP_NAME = 'tales'
+
+# Define default site id for `sites.models`
+SITE_ID = 1
+
+env = {
+    # Basic environment variables
+    **dotenv_values('.env'),
+    # Local flask server tunneled for telegram webhook access and LOCAL flag
+    **dotenv_values('.env.local'),
+    # Secure parameters for telebot and yt-dlp
+    **dotenv_values('.env.secure'),
+    # Logging server ngrok tunnel address
+    **dotenv_values('.env.logging-ngrok'),
+    # Override loaded values with environment variables
+    **os.environ,
+}
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-$5$q98$aff7kl60!(ftu3h-m^if)47&+8(b^t-k_7b%6#95b5*'
-
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+LOCAL = bool(env.get('LOCAL'))
+DEBUG = LOCAL
 
-ALLOWED_HOSTS = []
+# Preprocess scss source files with django filters
+USE_DJANGO_PREPROCESSORS = False  # LOCAL
 
+# Secrets
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = str(env.get('SECRET_KEY', ''))
+REGISTRATION_SALT = str(env.get('REGISTRATION_SALT', ''))
+# SENDGRID_API_KEY = str(env.get('SENDGRID_API_KEY', ''))
+# STRIPE_PUBLISHABLE_KEY = str(env.get('STRIPE_PUBLISHABLE_KEY', ''))
+# STRIPE_SECRET_KEY = str(env.get('STRIPE_SECRET_KEY', ''))
+# SLACK_WEBHOOK = str(env.get('SLACK_WEBHOOK', ''))
+
+SECRETS = [
+    (SECRET_KEY, 'SECRET_KEY'),
+    (REGISTRATION_SALT, 'REGISTRATION_SALT'),
+    # (SENDGRID_API_KEY, 'SENDGRID_API_KEY'),
+    # (STRIPE_PUBLISHABLE_KEY, 'STRIPE_PUBLISHABLE_KEY'),
+    # (STRIPE_SECRET_KEY, 'STRIPE_SECRET_KEY'),
+]
+
+
+def random_string(length: int = 32) -> str:
+    possibles = string.ascii_letters + string.digits
+    return ''.join(random.sample(possibles, length))
+
+
+for key, label in SECRETS:
+    if not key:
+        if LOCAL and key in (SECRET_KEY, REGISTRATION_SALT):
+            key = random_string()
+        else:
+            error_text = f'Error: Environment configuration variable {label} missing'
+            raise Exception(error_text)
+
+
+DEFAULT_HOST = 'tales.march.team'
+ALLOWED_HOSTS = [
+    DEFAULT_HOST,
+]
+CSRF_TRUSTED_ORIGINS = [
+    'https://' + DEFAULT_HOST,
+]
+
+if LOCAL:
+    # Allow work with local server in local dev mode
+    ALLOWED_HOSTS.append('localhost')
 
 # Application definition
 
@@ -67,7 +136,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'wsgi.application'
+WSGI_APPLICATION = 'tales.wsgi.application'
 
 
 # Database
