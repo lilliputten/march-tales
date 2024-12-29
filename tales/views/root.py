@@ -37,7 +37,7 @@ from django.shortcuts import redirect, render
 
 
 def components_demo(request: HttpRequest):
-    return render(request, "components-demo.html.django")
+    return render(request, 'components-demo.html.django')
 
 
 __all__ = [

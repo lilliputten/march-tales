@@ -155,13 +155,13 @@ if LOCAL:
 # Application definition
 
 INSTALLED_APPS = [
-    "django.contrib.admin",
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
-    "django.contrib.messages",
-    "django.contrib.sessions",
-    "django.contrib.sites",
-    "django.contrib.staticfiles",
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.messages',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    'django.contrib.staticfiles',
     # Added
     'compressor',
     'crispy_forms',
@@ -377,7 +377,7 @@ PASS_VARIABLES = {
     'LOCAL': LOCAL,  # Local dev server mode (from the environment)
     'DEFAULT_HOST': DEFAULT_HOST,
     'GITHUB': 'https://github.com/lilliputten/march-tales',
-    'USE_DJANGO_PREPROCESSORS': False, # Preprocess scss source files with django filters, UNUSED
+    'USE_DJANGO_PREPROCESSORS': False,  # Preprocess scss source files with django filters, UNUSED
     # 'STRIPE_PUBLISHABLE_KEY': STRIPE_PUBLISHABLE_KEY,
     'DEFAULT_FROM_EMAIL': DEFAULT_FROM_EMAIL,
     'DEFAULT_CONTACT_EMAIL': DEFAULT_FROM_EMAIL,

@@ -4,6 +4,7 @@
 from django.urls import include, path
 
 from .. import views
+
 # from ..forms import TalesRegistrationForm
 # from ..views.user_registration import TalesRegistrationView
 

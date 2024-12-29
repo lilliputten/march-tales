@@ -7,6 +7,7 @@ from .root import (
     # index,
     # profile,
 )
-# from .system import RobotsView, page403, page404, page500
+from .system import RobotsView, page403, page404, page500
+
 # from .user import edit_user_profile  # SignUpView,
 # from .user_registration import DdsRegistrationView

@@ -12,17 +12,17 @@ cache_timeout = 0 if settings.LOCAL or settings.DEBUG else 15 * 60  # in seconds
 
 urlpatterns = [
     # App-provided paths...
-    path("admin/", admin.site.urls, name="admin"),
+    path('admin/', admin.site.urls, name='admin'),
     # Service pages...
-    # path(
-    #     "robots.txt",
-    #     cache_page(cache_timeout)(views.RobotsView.as_view()),
-    #     name="robots",
-    # ),
+    path(
+        'robots.txt',
+        cache_page(cache_timeout)(views.RobotsView.as_view()),
+        name='robots',
+    ),
 ]
 
 if settings.DEBUG:
     # Demo pages (for debug/dev purposes only)...
     urlpatterns.append(
-        path("components-demo", views.components_demo, name="components_demo"),
+        path('components-demo', views.components_demo, name='components_demo'),
     )
