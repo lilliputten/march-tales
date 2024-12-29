@@ -8,7 +8,10 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
+
+@changed 2024.12.29, 22:31
 """
+
 
 import os
 import pathlib
@@ -17,6 +20,7 @@ import random
 import re
 import string
 from dotenv import dotenv_values
+# import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
@@ -32,13 +36,11 @@ SITE_ID = 1
 
 env = {
     # Basic environment variables
-    **dotenv_values('.env'),
+    **dotenv_values(os.path.join(BASE_DIR, '.env')),
     # Local flask server tunneled for telegram webhook access and LOCAL flag
-    **dotenv_values('.env.local'),
+    **dotenv_values(os.path.join(BASE_DIR, '.local')),
     # Secure parameters for telebot and yt-dlp
-    **dotenv_values('.env.secure'),
-    # Logging server ngrok tunnel address
-    **dotenv_values('.env.logging-ngrok'),
+    **dotenv_values(os.path.join(BASE_DIR, '.secure')),
     # Override loaded values with environment variables
     **os.environ,
 }
@@ -62,7 +64,7 @@ REGISTRATION_SALT = str(env.get('REGISTRATION_SALT', ''))
 # STRIPE_SECRET_KEY = str(env.get('STRIPE_SECRET_KEY', ''))
 # SLACK_WEBHOOK = str(env.get('SLACK_WEBHOOK', ''))
 
-print('App start', SECRET_KEY)
+print('App started with SECRET_KEY:', SECRET_KEY)
 
 SECRETS = [
     (SECRET_KEY, 'SECRET_KEY'),
