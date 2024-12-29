@@ -83,7 +83,7 @@ for key, label in SECRETS:
         if LOCAL and key in (SECRET_KEY, REGISTRATION_SALT):
             key = random_string()
         else:
-            error_text = f'Error: Environment configuration variable {label} missing'
+            error_text = f'Error: Environment configuration variable {label} is missing'
             raise Exception(error_text)
 
 
