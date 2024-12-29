@@ -59,9 +59,6 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env.secure'))
 LOCAL = bool(env('LOCAL'))
 DEBUG = True if bool(env('DEBUG')) else LOCAL
 
-# # Preprocess scss source files with django filters
-# USE_DJANGO_PREPROCESSORS = False
-
 # Secrets
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = str(env('SECRET_KEY'))
@@ -158,12 +155,13 @@ if LOCAL:
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.messages",
+    "django.contrib.sessions",
+    "django.contrib.sites",
+    "django.contrib.staticfiles",
     # Added
     'compressor',
     'crispy_forms',
@@ -189,7 +187,7 @@ MIDDLEWARE = [
 # Run the reload server with a command: `python manage.py livereload src static`
 INSTALLED_APPS.insert(0, 'livereload')
 # TODO: Do we actually need livereload in production? I remember some issues with it. Can we completely remove it from production?
-# There is already present the check in the `dds_registration/templates/base-core.html.django` template:
+# There is already present the check in the `tales/templates/base-core.html.django` template:
 # ```
 #  {% if settings.DEBUG %}
 #  {% load livereload_tags %}
@@ -378,12 +376,14 @@ PASS_VARIABLES = {
     'DEBUG': DEBUG,  # Pass django debug flag to the code (from environment)
     'LOCAL': LOCAL,  # Local dev server mode (from the environment)
     'DEFAULT_HOST': DEFAULT_HOST,
-    # 'USE_DJANGO_PREPROCESSORS': USE_DJANGO_PREPROCESSORS, # UNUSED?
+    'GITHUB': 'https://github.com/lilliputten/march-tales',
+    'USE_DJANGO_PREPROCESSORS': False, # Preprocess scss source files with django filters, UNUSED
     # 'STRIPE_PUBLISHABLE_KEY': STRIPE_PUBLISHABLE_KEY,
     'DEFAULT_FROM_EMAIL': DEFAULT_FROM_EMAIL,
     'DEFAULT_CONTACT_EMAIL': DEFAULT_FROM_EMAIL,
     # NOTE: Site url and name could be taken from site data via `get_current_site`
     'SITE_NAME': SITE_NAME,
+    'SITE_SHORT_NAME': SITE_NAME,
     'SITE_TITLE': SITE_NAME,
     'SITE_DESCRIPTION': SITE_DESCRIPTION,
     'SITE_KEYWORDS': re.sub(r'\s*[\n\r]+\s*', ', ', SITE_KEYWORDS.strip()),

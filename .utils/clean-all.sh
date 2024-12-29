@@ -19,6 +19,7 @@ $RMCMD -Rf \
   .state-save \
   local.log* \
   *.log \
+  log-* \
   *.py[co] \
   .*sw[op] \
 ; \

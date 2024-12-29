@@ -8,7 +8,7 @@
 
 {% load crispy_forms_tags %}
 
-{% block title %}DdS Event Registration — {{ block.super }}{% endblock title %}
+{% block title %}{{ settings.SITE_SHORT_NAME }} Event Registration — {{ block.super }}{% endblock title %}
 
 {% block content %}
 {{ block.super }}
