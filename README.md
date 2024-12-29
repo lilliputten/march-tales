@@ -1,13 +1,13 @@
 <!--
  @since 2024.12.29, 19:24
- @changed 2024.12.29, 19:24
+ @changed 2024.12.29, 23:55
 -->
 
 
 # march-tales
 
 
-March tales django api and web frontend server.
+March Tales django api and web frontend server.
 
 
 ## Build info (auto-generated)

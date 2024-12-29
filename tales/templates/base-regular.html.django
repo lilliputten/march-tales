@@ -1,0 +1,4 @@
+{# ex: set ft=htmldjango : #}
+{% extends "base-layout.html.django" %}
+
+{% block body_class %}regular{% endblock %}

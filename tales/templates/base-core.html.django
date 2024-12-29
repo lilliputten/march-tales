@@ -1,0 +1,118 @@
+{# ex: set ft=htmldjango : #}
+<!--
+- Html template
+- Version: 1.0.3
+- Last changes timestamp: 2024.04.08 13:55 +0700
+- Generated: {% now "Y.m.d H:i:s O" %}
+-->
+
+{% if settings.DEV %}
+{% load livereload_tags %}
+{% endif %}
+
+{% load cache %}
+{% load compress %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>{% block title %}{{ site.name }}{% endblock title %}</title>
+  <meta name="description" content="{% block meta_description %}{{ settings.SITE_DESCRIPTION }}{% endblock meta_description %}" />
+  <meta name="keywords" content="{% block meta_keywords %}{{ settings.SITE_KEYWORDS }}{% endblock meta_keywords %}" />
+  <meta charset="utf-8" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="index, nofollow" />
+  <link href="{% static 'favicon.ico' %}" rel="icon" type="image/x-icon" />
+
+  {% block meta_og %}
+    {# Opengrap tags #}
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="{{ site.name }}" />
+    <meta property="og:description" content="{{ settings.SITE_DESCRIPTION }}" />
+    <meta property="og:url" content="{{ settings.DEFAULT_HOST }}" />
+    <meta property="og:image" content="https://{{ settings.DEFAULT_HOST }}/static/images/og-splash/dds-painting-1200x630.jpg" />
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="twitter:image" content="https://{{ settings.DEFAULT_HOST }}/static/images/og-splash/dds-painting-320x.jpg" />
+  {% endblock %}
+
+  <!-- {{{ CSS -->
+
+  <link href="{% if settings.DEV %}{% static 'vendor/bootstrap-5.3.2/css/bootstrap.css' %}{% else %}https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css{% endif %}" rel="stylesheet" type="text/css" />
+  <link href="{% if settings.DEV %}{% static 'vendor/bootstrap-icons-1.11.3/font/bootstrap-icons.css' %}{% else %}https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css{% endif %}" rel="stylesheet" type="text/css" />
+
+  <!-- Webfonts -->
+  {% if True and settings.DEV %}
+  <link href="{% static 'vendor/webfonts/roboto/300.css' %}" rel="stylesheet" type="text/css" />
+  <link href="{% static 'vendor/webfonts/roboto/400.css' %}" rel="stylesheet" type="text/css" />
+  <link href="{% static 'vendor/webfonts/roboto/500.css' %}" rel="stylesheet" type="text/css" />
+  <link href="{% static 'vendor/webfonts/roboto/700.css' %}" rel="stylesheet" type="text/css" />
+  {% else %}
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  {% comment %}
+    Full link for the google font:
+    - https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap
+    Get customized link:
+    - https://fonts.google.com/selection/embed
+  {% endcomment %}
+  {% endif %}
+
+  {% compress css %}
+  {% if settings.USE_DJANGO_PREPROCESSORS %}
+  <link href="{% static 'assets/styles.scss' %}" rel="stylesheet" type="text/x-scss" />
+  {% else %}
+  <link href="{% static 'assets/styles.css' %}" rel="stylesheet" type="text/css" />
+  {% endif %}
+  {% endcompress css %}
+
+  <!-- CSS }}} -->
+</head>
+<body class="{% block body_class %}default{% endblock %}">
+
+  <!-- {{{ Page header container -->
+  {% block page_header %}
+  {% endblock page_header %}
+  <!-- }}} Page header container -->
+
+  <!-- {{{ Page content container -->
+  <div class="content container" role="main">
+  {% block content %}
+
+  {% endblock content %}
+  </div>
+  <!-- }}} Page content container -->
+
+  <!-- {{{ Page footer container -->
+  {% block page_footer %}
+  {% endblock page_footer %}
+  <!-- }}} Page footer container -->
+
+  <!-- {{{ JS -->
+
+  {# Bootstrap #}
+  <script src="{% if settings.DEV %}{% static 'vendor/popperjs-2.11.8/popper.min.js' %}{% else %}https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js{% endif %}" type="text/javascript"></script>
+  <script src="{% if settings.DEV %}{% static 'vendor/bootstrap-5.3.2/js/bootstrap.min.js' %}{% else %}https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js{% endif %}" type="text/javascript"></script>
+
+  {# AMD/RequireJS (Used after bootstrap due to conflicts) #}
+  <script src="{% if settings.DEV %}{% static 'vendor/requirejs-2.3.6/require.min.js' %}{% else %}https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js{% endif %}" type="text/javascript"></script>
+
+  {# TODO: Place custom scripts here, within compress tag #}
+  {% compress js %}
+  <script src="{% static 'assets/scripts.js' %}" type="text/javascript"></script>
+  {% include "assets/js-init/js-init.django" %}
+  {% endcompress js %}
+
+  <!-- {{{ Client scripts -->
+  {% block client_scripts %}
+  {% endblock client_scripts %}
+  <!-- }}} Client scripts -->
+
+  <!-- }}} JS -->
+
+</body>
+</html>
