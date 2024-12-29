@@ -62,6 +62,8 @@ REGISTRATION_SALT = str(env.get('REGISTRATION_SALT', ''))
 # STRIPE_SECRET_KEY = str(env.get('STRIPE_SECRET_KEY', ''))
 # SLACK_WEBHOOK = str(env.get('SLACK_WEBHOOK', ''))
 
+print('App start', SECRET_KEY)
+
 SECRETS = [
     (SECRET_KEY, 'SECRET_KEY'),
     (REGISTRATION_SALT, 'REGISTRATION_SALT'),
