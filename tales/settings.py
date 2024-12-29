@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 
-@changed 2024.12.29, 22:31
+@changed 2024.12.29, 22:46
 """
 
 
@@ -17,10 +17,10 @@ import os
 import pathlib
 import posixpath
 import random
-import re
+# import re
 import string
-from dotenv import dotenv_values
-# import environ
+# from dotenv import dotenv_values
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
@@ -34,37 +34,46 @@ APP_NAME = 'tales'
 # Define default site id for `sites.models`
 SITE_ID = 1
 
-env = {
-    # Basic environment variables
-    **dotenv_values(os.path.join(BASE_DIR, '.env')),
-    # Local flask server tunneled for telegram webhook access and LOCAL flag
-    **dotenv_values(os.path.join(BASE_DIR, '.local')),
-    # Secure parameters for telebot and yt-dlp
-    **dotenv_values(os.path.join(BASE_DIR, '.secure')),
-    # Override loaded values with environment variables
-    **os.environ,
-}
+env = environ.Env(
+    # @see local `.dev` file and example in `.dev.SAMPLE`
+    # @see https://django-environ.readthedocs.io
+    LOCAL=(bool, False),
+    DEBUG=(bool, False),
+    SECRET_KEY=(str, ''),
+    REGISTRATION_SALT=(str, ''),
+    DEFAULT_FROM_EMAIL=(str, 'info@tales.march.team'),
+    # SENDGRID_API_KEY=(str, ''),
+    # STRIPE_PUBLISHABLE_KEY=(str, ''),
+    # STRIPE_SECRET_KEY=(str, ''),
+    # SLACK_WEBHOOK=(str, ''),
+)
+
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+environ.Env.read_env(os.path.join(BASE_DIR, '.env.local'))
+environ.Env.read_env(os.path.join(BASE_DIR, '.env.secure'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production!
-LOCAL = bool(env.get('LOCAL'))
-DEBUG = LOCAL
+LOCAL = bool(env('LOCAL'))
+DEBUG = bool(env('DEBUG'))
 
 # Preprocess scss source files with django filters
-USE_DJANGO_PREPROCESSORS = False  # LOCAL
+USE_DJANGO_PREPROCESSORS = False
 
 # Secrets
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = str(env.get('SECRET_KEY', ''))
-REGISTRATION_SALT = str(env.get('REGISTRATION_SALT', ''))
-# SENDGRID_API_KEY = str(env.get('SENDGRID_API_KEY', ''))
-# STRIPE_PUBLISHABLE_KEY = str(env.get('STRIPE_PUBLISHABLE_KEY', ''))
-# STRIPE_SECRET_KEY = str(env.get('STRIPE_SECRET_KEY', ''))
-# SLACK_WEBHOOK = str(env.get('SLACK_WEBHOOK', ''))
+SECRET_KEY = str(env('SECRET_KEY'))
+REGISTRATION_SALT = str(env('REGISTRATION_SALT'))
+# SENDGRID_API_KEY = str(env('SENDGRID_API_KEY'))
+# STRIPE_PUBLISHABLE_KEY = str(env('STRIPE_PUBLISHABLE_KEY'))
+# STRIPE_SECRET_KEY = str(env('STRIPE_SECRET_KEY'))
+# SLACK_WEBHOOK = str(env('SLACK_WEBHOOK'))
 
-print('App started with SECRET_KEY:', SECRET_KEY)
+print('App started')
+print('SECRET_KEY:', SECRET_KEY)
+print('BASE_DIR:', BASE_DIR)
 
 SECRETS = [
     (SECRET_KEY, 'SECRET_KEY'),

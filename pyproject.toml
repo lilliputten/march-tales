@@ -17,6 +17,7 @@ python-dotenv = "^1.0.1"
 concurrent-log-handler = "^0.9.25" # Write logs to a reotating files
 colorama = "^0.4.6"
 django = "^5.1.4"
+django-environ = "^0.11.2"
 
 [tool.poetry.group.dev.dependencies]
 blue = "^0.9.1"
