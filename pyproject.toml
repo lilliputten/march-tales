@@ -7,7 +7,7 @@ readme = "README.md"
 
 # @see https://python-poetry.org/docs/pyproject/#packages
 packages = [
-    { include = "api" },
+    { include = "django_project" },
 ]
 
 [tool.poetry.dependencies]
@@ -16,6 +16,7 @@ python = "^3.11"
 python-dotenv = "^1.0.1"
 concurrent-log-handler = "^0.9.25" # Write logs to a reotating files
 colorama = "^0.4.6"
+django = "^5.1.4"
 
 [tool.poetry.group.dev.dependencies]
 blue = "^0.9.1"
@@ -41,7 +42,7 @@ line-length = 120
 # TODO!
 
 [tool.poetry.scripts]
-export_requirements = "poetry-scripts:export_requirements"
+export_requirements = "poetry-scripts.export_requirements:export_requirements"
 lint = "poetry-scripts:lint"
 format = "poetry-scripts:format"
 check_all = "poetry-scripts:check_all"
