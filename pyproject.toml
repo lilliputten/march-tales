@@ -18,6 +18,15 @@ concurrent-log-handler = "^0.9.25" # Write logs to a reotating files
 colorama = "^0.4.6"
 django = "^5.1.4"
 django-environ = "^0.11.2"
+crispy-bootstrap5 = "^2024.10"
+django-compressor = "^4.5.1"
+django-crispy-forms = "^2.3"
+django-livereload-server = "^0.5.1"
+django-preferences = "^1.0.0"
+django-registration = "^5.1.0"
+django-timezone-field = "^7.0"
+requests = "^2.32.3"
+beautifulsoup4 = "^4.12.3"
 
 [tool.poetry.group.dev.dependencies]
 blue = "^0.9.1"

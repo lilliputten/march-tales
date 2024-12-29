@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 
-@changed 2024.12.29, 22:46
+@changed 2024.12.29, 23:19
 """
 
 
@@ -57,7 +57,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env.secure'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 LOCAL = bool(env('LOCAL'))
-DEBUG = bool(env('DEBUG'))
+DEBUG = True if bool(env('DEBUG')) else LOCAL
 
 # Preprocess scss source files with django filters
 USE_DJANGO_PREPROCESSORS = False
@@ -72,6 +72,7 @@ REGISTRATION_SALT = str(env('REGISTRATION_SALT'))
 # SLACK_WEBHOOK = str(env('SLACK_WEBHOOK'))
 
 print('App started')
+print('LOCAL:', LOCAL)
 print('SECRET_KEY:', SECRET_KEY)
 print('BASE_DIR:', BASE_DIR)
 
@@ -97,6 +98,51 @@ for key, label in SECRETS:
             error_text = f'Error: Environment configuration variable {label} is missing'
             raise Exception(error_text)
 
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/4.2/howto/static-files/
+STATIC_FOLDER = "static/"
+STATIC_ROOT = posixpath.join(BASE_DIR, STATIC_FOLDER)
+STATIC_URL = posixpath.join("/", STATIC_FOLDER)
+
+MEDIA_FOLDER = "media/"
+MEDIA_ROOT = posixpath.join(BASE_DIR, MEDIA_FOLDER)
+MEDIA_URL = posixpath.join("/", MEDIA_FOLDER)
+
+# The folder for asset file sources
+SRC_FOLDER = "src"
+SRC_ROOT = posixpath.join(BASE_DIR, SRC_FOLDER)
+
+ASSETS_FOLDER = "assets/"
+ASSETS_ROOT = posixpath.join(SRC_FOLDER, ASSETS_FOLDER)
+
+# Additional locations of static files
+STATICFILES_DIRS = (
+    # Put strings here, like '/home/html/static' or 'C:/www/django/static'.
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+)
+
+if LOCAL:
+    # Add asset file sources to static folders in dev mode to access scss sources via django filters during dev mode time
+    STATICFILES_DIRS += (SRC_ROOT,)
+
+# List of finder classes that know how to find static files in
+# various locations.
+STATICFILES_FINDERS = (
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+    "compressor.finders.CompressorFinder",
+)
+
+COMPRESS_PRECOMPILERS = (
+    ("text/x-scss", "sass --embed-source-map {infile} {outfile}"),
+    # Sass installation:
+    # - https://sass-lang.com/install/
+    # - https://github.com/sass/dart-sass/releases/latest
+    # @see https://django-compressor.readthedocs.io/en/stable/settings.html#django.conf.settings.COMPRESS_PRECOMPILERS
+)
 
 DEFAULT_HOST = 'tales.march.team'
 ALLOWED_HOSTS = [
