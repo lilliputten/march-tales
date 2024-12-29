@@ -1,0 +1,50 @@
+import subprocess
+import os
+import pathlib
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_project.settings')
+from django.core.management import execute_from_command_line
+
+
+def clean_db():
+    """
+    rm -f db.sqlite3
+    """
+    print('Django remove database...')
+    pathlib.Path('db.sqlite3').unlink(missing_ok=True)
+    print('Done')
+
+
+def migrate():
+    """
+    python manage.py migrate
+    """
+    print('Django migrate...')
+    execute_from_command_line(['manage.py', 'migrate'])
+    print('Done')
+
+
+def superuser():
+    """
+    python manage.py createsuperuser --username admin --email dmia@yandex.ru
+    """
+    print('Create superuser...')
+    execute_from_command_line(
+        [
+            'manage.py',
+            'createsuperuser',
+            '--username',
+            'admin',
+            '--email',
+            'dmia@yandex.ru',
+        ]
+    )
+    print('Done')
+
+def runserver():
+    """
+    python manage.py runserver
+    """
+    # ???
+    execute_from_command_line(['manage.py', 'runserver'])
+
