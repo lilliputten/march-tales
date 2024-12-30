@@ -30,6 +30,7 @@ appEnv = environ.Env(
     SECRET_KEY=(str, ''),
     REGISTRATION_SALT=(str, ''),
     DEFAULT_FROM_EMAIL=(str, 'info@tales.march.team'),
+    WERKZEUG_RUN_MAIN=(bool, False),
     TZ_HOURS_OFFSET=(int, 0),
     # SENDGRID_API_KEY=(str, ''),
     # STRIPE_PUBLISHABLE_KEY=(str, ''),
@@ -76,12 +77,12 @@ TZ_HOURS = appEnv('TZ_HOURS_OFFSET')
 
 # # Secrets
 # # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = str(str(appConfig.get('SECRET_KEY', '')))
-# REGISTRATION_SALT = str(str(appConfig.get('REGISTRATION_SALT', '')))
-# # SENDGRID_API_KEY = str(str(appConfig.get('SENDGRID_API_KEY', '')))
-# # STRIPE_PUBLISHABLE_KEY = str(str(appConfig.get('STRIPE_PUBLISHABLE_KEY', '')))
-# # STRIPE_SECRET_KEY = str(str(appConfig.get('STRIPE_SECRET_KEY', '')))
-# # SLACK_WEBHOOK = str(str(appConfig.get('SLACK_WEBHOOK', '')))
+SECRET_KEY = str(str(appEnv('SECRET_KEY')))
+# REGISTRATION_SALT = str(str(appEnv('REGISTRATION_SALT')))
+# # SENDGRID_API_KEY = str(str(appEnv('SENDGRID_API_KEY')))
+# # STRIPE_PUBLISHABLE_KEY = str(str(appEnv('STRIPE_PUBLISHABLE_KEY')))
+# # STRIPE_SECRET_KEY = str(str(appEnv('STRIPE_SECRET_KEY')))
+# # SLACK_WEBHOOK = str(str(appEnv('SLACK_WEBHOOK')))
 #
 # SECRETS = [
 #     (SECRET_KEY, 'SECRET_KEY'),
