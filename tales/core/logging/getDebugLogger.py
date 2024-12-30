@@ -58,4 +58,3 @@ def getDebugLogger(id: str | None = None):
         logger.addHandler(httpHandler)
     logger.setLevel(loggerConfig.loggingLevel)
     return logger
-

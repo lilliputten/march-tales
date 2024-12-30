@@ -1,8 +1,8 @@
 from django.apps import AppConfig
 
-# from django.utils.functional import cached_property
+from tales import settings
 
 
 class TalesConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
+    default_auto_field = settings.DEFAULT_AUTO_FIELD  # 'django.db.models.BigAutoField'
     name = 'tales'

@@ -21,74 +21,35 @@ import re
 import string
 import environ
 
-from core.appConfig import appConfig, LOCAL, DEBUG
+from core.appEnv import (
+    # appEnv,
+    BASE_DIR,
+    # STATIC_PATH,
+    LOCAL,
+    DEBUG,
+    PROJECT_INFO,
+)
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
-STATIC_PATH = posixpath.join(BASE_DIR, 'static')
+# from core.appConfig import (
+# )
+from core.appSecrets import (
+    SECRET_KEY,
+    REGISTRATION_SALT,
+    # SENDGRID_API_KEY,
+    # STRIPE_PUBLISHABLE_KEY,
+    # STRIPE_SECRET_KEY,
+    # SLACK_WEBHOOK,
+)
+from core.djangoConfig import (
+    APP_NAME,
+    DEFAULT_HOST,
+    DEFAULT_FROM_EMAIL,
+)
 
-# App name
-
-APP_NAME = 'tales'
+print('App started', PROJECT_INFO)
 
 # Define default site id for `sites.models`
 SITE_ID = 1
-
-env = environ.Env(
-    # @see local `.dev` file and example in `.dev.SAMPLE`
-    # @see https://django-environ.readthedocs.io
-    LOCAL=(bool, False),
-    DEBUG=(bool, False),
-    SECRET_KEY=(str, ''),
-    REGISTRATION_SALT=(str, ''),
-    DEFAULT_FROM_EMAIL=(str, 'info@tales.march.team'),
-    # SENDGRID_API_KEY=(str, ''),
-    # STRIPE_PUBLISHABLE_KEY=(str, ''),
-    # STRIPE_SECRET_KEY=(str, ''),
-    # SLACK_WEBHOOK=(str, ''),
-)
-
-environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
-environ.Env.read_env(os.path.join(BASE_DIR, '.env.local'))
-environ.Env.read_env(os.path.join(BASE_DIR, '.env.secure'))
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
-
-# SECURITY WARNING: don't run with debug turned on in production!
-LOCAL = bool(env('LOCAL'))
-DEBUG = True if bool(env('DEBUG')) else LOCAL
-
-# Secrets
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = str(env('SECRET_KEY'))
-REGISTRATION_SALT = str(env('REGISTRATION_SALT'))
-# SENDGRID_API_KEY = str(env('SENDGRID_API_KEY'))
-# STRIPE_PUBLISHABLE_KEY = str(env('STRIPE_PUBLISHABLE_KEY'))
-# STRIPE_SECRET_KEY = str(env('STRIPE_SECRET_KEY'))
-# SLACK_WEBHOOK = str(env('SLACK_WEBHOOK'))
-
-SECRETS = [
-    (SECRET_KEY, 'SECRET_KEY'),
-    (REGISTRATION_SALT, 'REGISTRATION_SALT'),
-    # (SENDGRID_API_KEY, 'SENDGRID_API_KEY'), # EMAIL_HOST_PASSWORD
-    # (STRIPE_PUBLISHABLE_KEY, 'STRIPE_PUBLISHABLE_KEY'),
-    # (STRIPE_SECRET_KEY, 'STRIPE_SECRET_KEY'),
-]
-
-
-def random_string(length: int = 32) -> str:
-    possibles = string.ascii_letters + string.digits
-    return ''.join(random.sample(possibles, length))
-
-
-for key, label in SECRETS:
-    if not key:
-        if LOCAL and key in (SECRET_KEY, REGISTRATION_SALT):
-            key = random_string()
-        else:
-            error_text = f'Error: Environment configuration variable {label} is missing'
-            raise Exception(error_text)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # Static files (CSS, JavaScript, Images)
@@ -135,7 +96,6 @@ COMPRESS_PRECOMPILERS = (
     # @see https://django-compressor.readthedocs.io/en/stable/settings.html#django.conf.settings.COMPRESS_PRECOMPILERS
 )
 
-DEFAULT_HOST = 'tales.march.team'
 ALLOWED_HOSTS = [
     DEFAULT_HOST,
 ]
@@ -265,7 +225,7 @@ AUTHENTICATION_BACKENDS = [
 ACCOUNT_ACTIVATION_DAYS = 7  # One-week activation window
 
 # NOTE: It's possible to store some of these parameters (`DEFAULT_FROM_EMAIL`, definitely) in the site preferences or in the `.env*` files
-DEFAULT_FROM_EMAIL = str(env('DEFAULT_FROM_EMAIL'))
+# DEFAULT_FROM_EMAIL = str(env('DEFAULT_FROM_EMAIL'))
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = 'apikey'  # this is exactly the value 'apikey'
 EMAIL_PORT = 587
