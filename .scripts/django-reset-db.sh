@@ -5,4 +5,4 @@ scriptsPath=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
 # utilsPath="$rootPath/.utils"
 
 . "$scriptsPath/django-clear-migrations.sh"
-. "$scriptsPath/django-add-test-users.sh"
+. "$scriptsPath/django-add-test-users.sh" $*
