@@ -7,7 +7,7 @@ import random
 import re
 import string
 import environ
-from dotenv import dotenv_values
+# from dotenv import dotenv_values
 
 
 BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
@@ -22,66 +22,66 @@ with open(posixpath.join(STATIC_PATH, 'project-info.txt')) as fh:
     if info:
         PROJECT_INFO = info.strip()
 
-# env = environ.Env(
-#     # @see local `.dev` file and example in `.dev.SAMPLE`
-#     # @see https://django-environ.readthedocs.io
-#     LOCAL=(bool, False),
-#     DEBUG=(bool, False),
-#     SECRET_KEY=(str, ''),
-#     REGISTRATION_SALT=(str, ''),
-#     DEFAULT_FROM_EMAIL=(str, 'info@tales.march.team'),
-#     TZ_HOURS_OFFSET=(int, 0),
-#     # SENDGRID_API_KEY=(str, ''),
-#     # STRIPE_PUBLISHABLE_KEY=(str, ''),
-#     # STRIPE_SECRET_KEY=(str, ''),
-#     # SLACK_WEBHOOK=(str, ''),
-#     # Other parameters
-#     **{
-#         'PROJECT_INFO': PROJECT_INFO,
-#         # Paths...
-#         'PROJECT_PATH': PROJECT_PATH,
-#         'STATIC_PATH': STATIC_PATH,
-#     },
-# )
-#
-# environ.Env.read_env(os.path.join(PROJECT_PATH, '.env'))
-# environ.Env.read_env(os.path.join(PROJECT_PATH, '.env.local'))
-# environ.Env.read_env(os.path.join(PROJECT_PATH, '.env.secure'))
-
-appConfig = {
-    **dotenv_values('.env'),
-    **dotenv_values('.env.local'),
-    **dotenv_values('.env.secure'),
-    # Override loaded values with environment variables
-    **os.environ,
+appEnv = environ.Env(
+    # @see local `.dev` file and example in `.dev.SAMPLE`
+    # @see https://django-environ.readthedocs.io
+    LOCAL=(bool, False),
+    DEBUG=(bool, False),
+    SECRET_KEY=(str, ''),
+    REGISTRATION_SALT=(str, ''),
+    DEFAULT_FROM_EMAIL=(str, 'info@tales.march.team'),
+    TZ_HOURS_OFFSET=(int, 0),
+    # SENDGRID_API_KEY=(str, ''),
+    # STRIPE_PUBLISHABLE_KEY=(str, ''),
+    # STRIPE_SECRET_KEY=(str, ''),
+    # SLACK_WEBHOOK=(str, ''),
     # Other parameters
     **{
-        # DEBUG: Changed timestamp
         'PROJECT_INFO': PROJECT_INFO,
         # Paths...
         'PROJECT_PATH': PROJECT_PATH,
         'STATIC_PATH': STATIC_PATH,
     },
-}
+)
+
+environ.Env.read_env(os.path.join(PROJECT_PATH, '.env'))
+environ.Env.read_env(os.path.join(PROJECT_PATH, '.env.local'))
+environ.Env.read_env(os.path.join(PROJECT_PATH, '.env.secure'))
+
+# appConfig = {
+#     **dotenv_values('.env'),
+#     **dotenv_values('.env.local'),
+#     **dotenv_values('.env.secure'),
+#     # Override loaded values with environment variables
+#     **os.environ,
+#     # Other parameters
+#     **{
+#         # DEBUG: Changed timestamp
+#         'PROJECT_INFO': PROJECT_INFO,
+#         # Paths...
+#         'PROJECT_PATH': PROJECT_PATH,
+#         'STATIC_PATH': STATIC_PATH,
+#     },
+# }
 
 
-LOCAL = bool(appConfig.get('LOCAL'))
-DEBUG = True if bool(appConfig.get('DEBUG')) else LOCAL
+LOCAL = bool(appEnv('LOCAL'))
+DEBUG = True if bool(appEnv('DEBUG')) else LOCAL
 
-WERKZEUG_RUN_MAIN = bool(appConfig.get('WERKZEUG_RUN_MAIN'))
+WERKZEUG_RUN_MAIN = bool(appEnv('WERKZEUG_RUN_MAIN'))
 isNormalRun = not LOCAL or WERKZEUG_RUN_MAIN
 
 # Timezone (set `TZ_HOURS` to hours value to adjust date representation to corresponding timezone)
-TZ_HOURS = appConfig.get('TZ_HOURS_OFFSET')
+TZ_HOURS = appEnv('TZ_HOURS_OFFSET')
 
 # # Secrets
 # # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = str(str(appConfig.get('SECRET_KEY', '')))
 # REGISTRATION_SALT = str(str(appConfig.get('REGISTRATION_SALT', '')))
-# # SENDGRID_API_KEY = str(env('SENDGRID_API_KEY'))
-# # STRIPE_PUBLISHABLE_KEY = str(env('STRIPE_PUBLISHABLE_KEY'))
-# # STRIPE_SECRET_KEY = str(env('STRIPE_SECRET_KEY'))
-# # SLACK_WEBHOOK = str(env('SLACK_WEBHOOK'))
+# # SENDGRID_API_KEY = str(str(appConfig.get('SENDGRID_API_KEY', '')))
+# # STRIPE_PUBLISHABLE_KEY = str(str(appConfig.get('STRIPE_PUBLISHABLE_KEY', '')))
+# # STRIPE_SECRET_KEY = str(str(appConfig.get('STRIPE_SECRET_KEY', '')))
+# # SLACK_WEBHOOK = str(str(appConfig.get('SLACK_WEBHOOK', '')))
 #
 # SECRETS = [
 #     (SECRET_KEY, 'SECRET_KEY'),
