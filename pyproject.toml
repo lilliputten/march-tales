@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "march-tales"
-version = "0.0.2"
+version = "0.0.3"
 description = "March Tales django api and web frontend server"
 authors = ["lilliputten <lilliputten@gmail.com>"]
 readme = "README.md"
@@ -47,12 +47,12 @@ in-place = true
 recursive = true
 aggressive = 3
 
-[tool.black]
-line-length = 120
-
 [tool.blue]
 line-length = 120
-# TODO!
+extend-exclude = '''(
+\._
+| .*\/migrations\/.*
+)'''
 
 [tool.poetry.scripts]
 export_requirements = "poetry-scripts.export_requirements:export_requirements"

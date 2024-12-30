@@ -6,8 +6,26 @@ from .root_views import (
     index,
     profile,
 )
-from .accounts_views import logoutUser
-from .system_views import RobotsView, page403, page404, page500
+from .accounts_views import (
+    logoutUser,
+)
+from .system_views import (
+    RobotsView,
+    page403,
+    page404,
+    page500,
+)
 
 # from .user import edit_user_profile  # SignUpView,
 # from .user_registration import DdsRegistrationView
+
+__all__ = [
+    'components_demo',
+    'index',
+    'profile',
+    'logoutUser',
+    'RobotsView',
+    'page403',
+    'page404',
+    'page500',
+]

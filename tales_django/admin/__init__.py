@@ -1,3 +1,9 @@
-from django.contrib import admin
+# from django.contrib import admin
 
-# Register your models here.
+from .UserAdmin import UserAdmin
+from .MembershipAdmin import MembershipAdmin
+
+__all__ = [
+    'UserAdmin',
+    'MembershipAdmin',
+]

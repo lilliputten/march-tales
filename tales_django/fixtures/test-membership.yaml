@@ -1,0 +1,22 @@
+# @changed 2024.12.31, 00:11
+
+-
+  model: "tales_django.membership"
+  pk: 1
+  fields:
+    user: 1
+    membership_type: "HONORARY"
+    started: 2024
+    until: 2025
+    mailing_list: true
+
+-
+  model: "tales_django.membership"
+  pk: 2
+  fields:
+    user: 3
+    membership_type: "ACADEMIC"
+    started: 2024
+    until: 2025
+    mailing_list: false
+
