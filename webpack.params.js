@@ -37,7 +37,7 @@ const projectInfo = fs
 const projectHash = fs
   .readFileSync(path.resolve(__dirname, projectHashFile), { encoding: 'utf8' })
   .trim();
-const outPath = 'static/assets';
+const outPath = 'static/compiled';
 
 // Sync with `src/variables/variables.scss`
 const appId = 'delivery-options';

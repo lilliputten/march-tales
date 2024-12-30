@@ -33,7 +33,7 @@ const {
   // uploadsFolder,
 } = require('./webpack.params');
 
-const maxAssetSize = 32000;
+const maxAssetSize = 8 * 1024;
 
 /** Exclusions for copy plugin */
 // const globOptions = {
@@ -138,7 +138,7 @@ module.exports = {
         type: 'asset',
         parser: {
           dataUrlCondition: {
-            maxSize: 64 * 1024, // 4kb
+            maxSize: maxAssetSize, // 4kb
           },
         },
       },
@@ -258,6 +258,6 @@ module.exports = {
     // NOTE: See also `outDir` field in `tsconfig.json`
     path: path.resolve(__dirname, outPath),
     // @see https://webpack.js.org/configuration/output/#outputassetmodulefilename
-    assetModuleFilename: `[name]-[hash][ext][query]`,
+    assetModuleFilename: `extracted/[name]-[hash][ext][query]`,
   },
 };

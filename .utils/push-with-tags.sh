@@ -1,6 +1,6 @@
 #!/bin/sh
 # @desc Create/update version tag (from build folder)
-# @changed 2024.12.27, 17:29
+# @changed 2024.12.30, 15:44
 
 scriptsPath=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
 rootPath=`dirname "$scriptsPath"`
@@ -15,7 +15,6 @@ test -f "$rootPath/config-check.sh" && . "$rootPath/config-check.sh"
 
 VERSION=`cat "$rootPath/$VERSION_FILE"`
 PROJECT_INFO=`cat "$rootPath/$PROJECT_INFO_FILE"`
-APP_ID=`cat "$rootPath/$APP_ID_FILE"`
 
 echo "Publishing source code $PROJECT_INFO..."
 
