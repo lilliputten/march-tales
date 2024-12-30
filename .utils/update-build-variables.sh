@@ -23,13 +23,20 @@ TIMETAG=`date -r "$VERSION_PATH" "+%y%m%d-%H%M"`
 
 PROJECT_INFO="$APP_ID v.$VERSION / $TIMESTAMP"
 PROJECT_INFO_REP=`echo "$PROJECT_INFO" | sed 's,/,\\\\/,g'` # Quoted for replace, see below
+PROJECT_HASH="v.$VERSION-$TIMETAG"
 
-echo "Updated version/time: $PROJECT_INFO"
+echo "Updated project info: $PROJECT_INFO"
 
 if [ ! -z "${PROJECT_INFO_FILE}" ]; then
   echo "Creating '$PROJECT_INFO_FILE' file..."
   echo "$PROJECT_INFO" > $rootPath/$PROJECT_INFO_FILE
 fi
+
+if [ ! -z "${PROJECT_HASH_FILE}" ]; then
+  echo "Creating '$PROJECT_HASH_FILE' file..."
+  echo "$PROJECT_HASH" > $rootPath/$PROJECT_HASH_FILE
+fi
+
 
 if [ ! -z "${PROJECT_INFO_JSON_FILE}" ]; then
   echo "Creating '$PROJECT_INFO_JSON_FILE' file..."

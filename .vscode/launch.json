@@ -1,0 +1,91 @@
+// ex: set ft=jsonc :
+// @changed 2024.03.15, 15:19
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit:
+  // https://code.visualstudio.com/docs/editor/debugging#_launch-configurations
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch Chrome",
+      "request": "launch",
+      "type": "chrome",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "name": "Attach to Chrome",
+      "port": 9222,
+      "request": "attach",
+      "type": "chrome",
+      "urlFilter": "http://localhost:3000/*", // use urlFilter instead of url!
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "name": "Node: custom script",
+      "program": "${workspaceFolder}/test.js",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "node",
+      // "externalConsole": true,
+      "args": [
+        // "--help",
+      ]
+    },
+    {
+      "name": "Node: current file",
+      "program": "${file}",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "node",
+      "args": [
+        // "--help",
+        // "--tz=Europe/Moscow"
+      ]
+    },
+    {
+      "name": "Python: Run file",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${file}",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Python: Run start-app.py",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "start-app.py",
+      "console": "integratedTerminal",
+      "args": [
+        "--dev",
+        "--demo-files-data-set-folder", "sweet-corn",
+        "--no-demo-files-omit-date-tag"
+      ]
+    },
+    {
+      "name": "Node: Run start-server.mjs",
+      "type": "node",
+      "request": "launch",
+      "program": "start-server.mjs",
+      "console": "integratedTerminal",
+      "args": [
+        "--help"
+        // "--dev",
+        // "--web-port",
+        // "8080"
+      ]
+    },
+    {
+      "name": "Django server",
+      // "type": "python",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "manage.py",
+      "args": [
+        "runserver"
+      ],
+      "console": "integratedTerminal"
+    }
+  ]
+}

@@ -39,16 +39,12 @@ config.local.yml
 /out
 
 # Data
-*.db
-questions.yaml
+/db.*
 
 # Client files
 /test-*
 /temp*
 /.temp*
-
-# Linked or generated build
-/html-app*
 
 # Auto-generated files
 /uploads

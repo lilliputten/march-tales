@@ -20,6 +20,7 @@ VERSION_FILE="project-version.txt"
 
 # Misc generated files (see update-build-variables.sh)
 PROJECT_INFO_FILE="static/project-info.txt"
+PROJECT_HASH_FILE="static/project-hash.txt"
 # PROJECT_INFO_JSON_FILE="lib/project-info.json"
 
 SRC_TAG_PREFIX="v" # "v" for default "v.X.Y.Z"

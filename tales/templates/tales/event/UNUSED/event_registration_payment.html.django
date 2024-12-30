@@ -1,0 +1,44 @@
+{# ex: set ft=htmldjango : #}
+<!--
+  @module event_registration_payment.html.django
+  @changed 2024.03.13, 18:05
+-->
+
+{% extends "base-regular.html.django" %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Event registration payment — {{ block.super }}{% endblock title %}
+
+{% block content %}
+{{ block.super }}
+
+<fieldset>
+  <legend>
+    <h1 class="page-title primary-color">Event registration payment</h1>
+  </legend>
+  {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+</fieldset>
+
+{% include "assets/render-messages/render-messages.django" %}
+
+<p>You are almost ready to finish your registration for the event <strong>{{ event.title }}</strong>{% if settings.DEV %} <i>({{ event.code }})</i>{% endif %}:</p>
+
+<p>Your option:</p>
+
+<ul>
+{% with option=registration.option %}
+  <li>{{ option.item }} {% if option.price %}({% if option.currency %}{{ option.currency }} {% endif %}{{ option.price }}){% endif %}</li>
+{% endwith %}
+</ul>
+
+<form method="get" action="{% url "billing_event_invoice_download" event_code=event.code %}">
+  {% csrf_token %}
+
+  <p>Explanation text for invoice download option</p>
+
+  <input class="btn btn-primary" type="submit" value="Download invoice" />
+
+</form>
+
+{% endblock content %}

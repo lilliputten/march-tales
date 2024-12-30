@@ -1,0 +1,11 @@
+{# ex: set ft=htmldjango : #}
+{% extends "base-layout.html.django" %}
+
+{% block body_class %}main{% endblock %}
+
+{% block content %}
+{{ block.super }}
+
+{% include "assets/main-page-splash/main-page-splash.django" %}
+
+{% endblock content %}

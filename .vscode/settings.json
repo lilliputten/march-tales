@@ -1,0 +1,29 @@
+// ex: set ft=jsonc :
+// @changed 2024.03.17, 23:18
+  {
+    "search.excludeFolders": [
+      ".git",
+      "node_modules",
+      ".venv"
+    ],
+    "search.exclude": {
+      "patches": true,
+      "build": true,
+      "public": true,
+      "publish": true,
+      "src/vendor": true,
+      "static/CACHE": true,
+      "static/vendor": true,
+      "static/admin": true,
+      "static/django": true,
+      "static/assets/scripts.js": true,
+      "static/assets/scripts.js.map": true,
+      "static/assets/styles.css": true,
+      "static/assets/styles.css.map": true,
+      "django": true,
+      "django_registration": true,
+      ".venv": true
+    },
+    "git.ignoreLimitWarning": true,
+    "vscode-as-git-mergetool.settingsAssistantOnStartup": false
+}
