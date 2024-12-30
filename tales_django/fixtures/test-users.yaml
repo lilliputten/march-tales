@@ -1,0 +1,18 @@
+# @changed 2024.12.30, 21:37
+
+- model: tales_django.user
+  pk: 1
+  fields:
+    id: 1
+    password: "pbkdf2_sha256$870000$7PXrYmhd2OfuG6IiEAoXkd$BDZb4XWKI1nzE/D4HL75qo6VoipidLQCyqIrKoGP7UE="
+    last_login: null
+    is_superuser: true
+    username: "admin"
+    first_name: ""
+    last_name: ""
+    email: "dmia@yandex.ru"
+    is_staff: true
+    is_active: true
+    date_joined: "2024-12-30T18:30:47.819Z"
+    groups: []
+    user_permissions: []

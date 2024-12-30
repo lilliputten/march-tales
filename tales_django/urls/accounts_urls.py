@@ -9,7 +9,6 @@ from .. import views
 # from ..views.user_registration import TalesRegistrationView
 
 urlpatterns = [
-    # path('', views.index, name='index'),
     # # Accounts...
     # path(
     #     # Overrided registration form using updated one
@@ -17,16 +16,18 @@ urlpatterns = [
     #     TalesRegistrationView.as_view(form_class=TalesRegistrationForm),
     #     name='django_registration_register',
     # ),
-    # path('profile', views.profile, name='profile'),
+    path('profile', views.profile, name='profile'),
     # path(
     #     'profile/edit',
     #     views.edit_user_profile,
     #     name='profile_edit',
     # ),
-    # # Stock accounts...
-    # path(
-    #     'accounts/',
-    #     include('django_registration.backends.activation.urls'),
-    # ),
-    # path('accounts/', include('django.contrib.auth.urls')),
+    # Stock accounts...
+    # path(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/successfully_logged_out/'}),
+    path('logout/', views.logoutUser, name='logout_user'),
+    path(
+        'accounts/',
+        include('django_registration.backends.activation.urls'),
+    ),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]

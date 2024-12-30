@@ -38,7 +38,7 @@ from core.djangoConfig import (
     DEFAULT_FROM_EMAIL,
 )
 
-print('App started', PROJECT_INFO)
+# print('App started', PROJECT_INFO)
 
 # Define default site id for `sites.models`
 SITE_ID = 1
@@ -100,6 +100,9 @@ if LOCAL:
     ALLOWED_HOSTS.append('localhost')
 
 # Application definition
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -211,7 +214,7 @@ LOGOUT_REDIRECT_URL = 'index'
 # Registration
 # @see https://django-registration.readthedocs.io
 
-# AUTH_USER_MODEL = APP_NAME + '.User' # TODO
+AUTH_USER_MODEL = APP_NAME + '.User'
 AUTHENTICATION_BACKENDS = [
     APP_NAME + '.core.app.backends.EmailBackend',  # TODO?
 ]

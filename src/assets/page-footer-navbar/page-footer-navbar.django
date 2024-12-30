@@ -10,7 +10,7 @@
   <div class="container-fluid">
     <div class="navbar-copyright">
       <a class="navbar-brand" href="{% url 'index' %}">
-        Logo
+        <span class="dimmed-info">[Logo]</span>
         {# <img src="{% static 'images/dds-logo/svg/Green Logo.svg' %}" width="auto" height="48" alt="{{ settings.SITE_SHORT_NAME }} Logo" /> #}
       </a>
     </div>

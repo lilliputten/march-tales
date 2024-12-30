@@ -28,8 +28,9 @@ SRC_TAG_PREFIX="v" # "v" for default "v.X.Y.Z"
 # Timezone for timestamps (GMT, Europe/Moscow, Asia/Bangkok, Asia/Tashkent, etc)
 TIMEZONE="Europe/Moscow"
 
+# PYTHON_RUNTIME="python" # See `check-python-env.sh`
+
 # TODO: To use generic `init-crossplatform-command-names.sh`?
-PYTHON_RUNTIME="python"
 FINDCMD="find"
 SORTCMD="sort"
 GREPCMD="grep"
@@ -37,7 +38,8 @@ RMCMD="rm"
 # # Override posix commands for cygwin or/and windows (may be overrided in `config-local.sh`, see `config-local.sh.TEMPLATE`)...
 if [ "$IS_CYGWIN" ]; then
     # Don't use windows' own native commands
-    FINDCMD="find_"
-    SORTCMD="sort_"
-    GREPCMD="grep_"
+    which find_ > /dev/null 2>&1 && FINDCMD="find_"
+    which sort_ > /dev/null 2>&1 && SORTCMD="sort_"
+    which grep_ > /dev/null 2>&1 && GREPCMD="grep_"
+    which rm_ > /dev/null 2>&1 && RMCMD="rm_"
 fi

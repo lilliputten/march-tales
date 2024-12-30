@@ -14,6 +14,24 @@ def clean_db():
     print('Done')
 
 
+def makemigrations():
+    """
+    python manage.py makemigrations
+    """
+    print('Django makemigrations...')
+    execute_from_command_line(['manage.py', 'makemigrations'])
+    print('Done')
+
+
+def showmigrations():
+    """
+    python manage.py showmigrations
+    """
+    print('Django showmigrations...')
+    execute_from_command_line(['manage.py', 'showmigrations'])
+    print('Done')
+
+
 def migrate():
     """
     python manage.py migrate
@@ -21,6 +39,13 @@ def migrate():
     print('Django migrate...')
     execute_from_command_line(['manage.py', 'migrate'])
     print('Done')
+
+
+def dumpdata():
+    """
+    python manage.py dumpdata
+    """
+    execute_from_command_line(['manage.py', 'dumpdata'])
 
 
 def superuser():

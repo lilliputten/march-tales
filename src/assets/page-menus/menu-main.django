@@ -23,7 +23,7 @@
   <form id="menu-logout-form" action="{#% url 'logout' %#}" method="post">
   {% csrf_token %}
   <ul class="dropdown-menu" id="user-menu">
-    <li><a class="dropdown-item" href="{#% url 'profile' %#}">Profile</a></li>
+    <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
     <li><hr class="dropdown-divider"></li>
     <li><a class="dropdown-item" href="{#% url 'profile_edit' %#}">Edit profile</a></li>
     <li><a class="dropdown-item" href="{#% url 'password_change' %#}">Change password</a></li>
@@ -31,7 +31,8 @@
     <li><hr class="dropdown-divider"></li>
     <li><a
       class="dropdown-item"
-      href="{#% url 'logout' %#}" onClick="document.getElementById('menu-logout-form').submit(); return false"
+      href="{% url 'logout_user' %}"
+      _onClick="document.getElementById('menu-logout-form').submit(); return false"
     >
       Logout
     </a></li>
@@ -39,7 +40,7 @@
   </form>
 </li>
 {% else %}
-<li class="nav-item"><a class="nav-link" href="{#% url 'login' %#}">Log in</a></li>
-<li class="nav-item"><a class="nav-link" href="{#% url 'django_registration_register' %#}">Sign up</a></li>
+<li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Log in</a></li>
+<li class="nav-item"><a class="nav-link" href="{% url 'django_registration_register' %}">Sign up</a></li>
 {% endif %}
 

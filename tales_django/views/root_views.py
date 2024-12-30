@@ -24,19 +24,6 @@ def index(request: HttpRequest):
     )
 
 
-# def index(request: HttpRequest):
-#     events = [obj for obj in Event.objects.filter(public=True) if obj.can_register]
-#     if request.user:
-#         for event in events:
-#             event.registration = event.get_active_event_registration_for_user(request.user)
-#
-#     return render(
-#         request=request,
-#         template_name='tales/index.html.django',
-#         context={'user': request.user, 'events': events},
-#     )
-
-
 @login_required
 def profile(request: HttpRequest):
     if not request.user.is_authenticated:

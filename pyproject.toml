@@ -24,11 +24,12 @@ django-crispy-forms = "^2.3"
 django-environ = "^0.11.2"
 django-livereload-server = "^0.5.1"
 django-preferences = "^1.0.0"
-django-registration = "^5.1.0"
+django-registration = "^5.1.0" # @see https://django-registration.readthedocs.io/en/stable/
 django-timezone-field = "^7.0"
 fpdf2 = "^2.8.2"
 python = "^3.11"
 requests = "^2.32.3"
+pyyaml = "^6.0.2"
 
 [tool.poetry.group.dev.dependencies]
 blue = "^0.9.1"
