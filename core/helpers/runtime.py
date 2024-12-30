@@ -2,10 +2,9 @@
 
 import traceback
 import re
-import os
 import pathlib
 
-_PROJECT_PATH = pathlib.Path(os.getcwd()).as_posix()
+from core.appEnv import PROJECT_PATH
 
 
 def getModulePath(deep: int | bool | None = None, traces: traceback.StackSummary | None = None):
@@ -18,7 +17,7 @@ def getModulePath(deep: int | bool | None = None, traces: traceback.StackSummary
         traces = traceback.extract_stack(None, limit)
     lastTrace = traces[0]
     modPath = pathlib.Path(lastTrace[0]).as_posix()
-    if modPath.startswith(_PROJECT_PATH):
+    if modPath.startswith(PROJECT_PATH):
         modPath = modPath[len(_PROJECT_PATH) + 1 :]
     return modPath
 

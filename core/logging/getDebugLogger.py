@@ -52,8 +52,6 @@ def getDebugLogger(id: str | None = None):
     consoleHandler.setLevel(loggerConfig.loggingLevel)
     consoleHandler.formatter = _defaultFormatter
     # Add local file logger
-    print('getDebugLogger:TEMP_PATH:', TEMP_PATH)
-    print('getDebugLogger:PROJECT_PATH:', PROJECT_PATH)
     if loggerConfig.LOCAL_LOG_FILE and not IS_VERCEL:
         localLogFileHandler = ConcurrentRotatingFileHandler(
             # @see:
