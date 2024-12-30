@@ -88,7 +88,18 @@ module.exports = {
                 mode: 'icss',
               },
               sourceMap: true,
-              url: true,
+              // @see https://webpack.js.org/loaders/css-loader/#url
+              url: {
+                filter:
+                  /**
+                   * @param {string} url
+                   * @param {string} _resourcePath
+                   * @return boolean
+                   */
+                  (url, _resourcePath) => {
+                    return !url.startsWith('/static');
+                  },
+              },
             },
           },
           {
@@ -158,9 +169,10 @@ module.exports = {
     //   // TODO: Exclude log, swap & temp files
     //   patterns: [
     //     // Files to copy...
-    //     { from: 'src/sample-page.html', to: ``, globOptions },
-    //     { from: 'src/images', to: `${uploadsFolder}/images`, globOptions },
-    //     { from: 'public', globOptions },
+    //     // { from: 'src/sample-page.html', to: ``, globOptions },
+    //     // { from: 'src/images', to: `${uploadsFolder}/images`, globOptions },
+    //     // { from: 'public', globOptions },
+    //     // { from: 'static/images/', to: '.', globOptions },
     //     // { from: 'public-uploads', to: `upload/landing-for-owners`, globOptions },
     //   ],
     // }),
@@ -250,7 +262,6 @@ module.exports = {
   },
   performance: {
     hints: false,
-    maxAssetSize,
     maxEntrypointSize: maxAssetSize,
   },
   output: {

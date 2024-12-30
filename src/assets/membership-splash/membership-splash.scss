@@ -56,16 +56,16 @@
     max-width: 720px;
   }
   .visual-cell {
-    @media (max-width: $screenMdMax) {
-      // Hide on small screens
-      display: none;
-    }
     background-image: url('/static/images/splash/membership/splash.png');
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
     min-height: 320px;
     align-self: flex-start;
+    @media (max-width: $screenMdMax) {
+      // Hide on small screens
+      display: none;
+    }
   }
   a:not(.btn) {
     color: #fff;
