@@ -6,6 +6,40 @@ import logging.handlers
 import pathlib
 import posixpath
 
+from core.helpers.runtime import getModulePath
+from core.helpers.time import getTimeStamp
+from concurrent_log_handler import ConcurrentRotatingFileHandler
+
+from core.appEnv import (
+    IS_VERCEL,
+    # BASE_DIR,
+    # LOCAL,
+    # DEBUG,
+    # PROJECT_INFO,
+    TEMP_PATH,
+)
+
+from . import loggerConfig
+from .CustomHttpHandler import CustomHttpHandler, customHttpHandlerFormatter
+from .NoColorFormatter import NoColorFormatter
+
+
+# @see https://habr.com/ru/companies/wunderfund/articles/683880/
+# @see https://docs.python.org/3/library/logging
+
+_noColorFormatter = NoColorFormatter()
+
+# Remove default handlers...
+logging.getLogger().handlers.clear()
+
+# @see https://habr.com/ru/companies/wunderfund/articles/683880/
+logging.basicConfig(
+    level=loggerConfig.loggingLevel,
+    format=loggerConfig.formatStr,
+)
+
+_defaultFormatter = logging.Formatter(loggerConfig.formatStr)
+
 
 def getDebugLogger(id: str | None = None):
     if not id:
@@ -28,6 +62,7 @@ def getDebugLogger(id: str | None = None):
             encoding='utf-8',
             maxBytes=100000,
             backupCount=5,
+            lock_file_directory=TEMP_PATH,
             #  delay=True,
             #  errors=True,
         )  # max log file size 100 MB

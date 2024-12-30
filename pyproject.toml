@@ -11,7 +11,7 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-# concurrent-log-handler = "^0.9.25" # Write logs to a retating files
+concurrent-log-handler = "^0.9.25" # Write logs to a retating files
 # django = "=5.0.3"
 # django-registration = "^3.4"
 # python-dotenv = "^1.0.1" # Used `django-environ` instead

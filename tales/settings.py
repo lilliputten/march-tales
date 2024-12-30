@@ -15,11 +15,25 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 import os
 import pathlib
+import sys
+
+# # Inject project path to allow server-side tests
+# BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
+# print('BASE_DIR:', BASE_DIR)
+# # sys.path.insert(1, BASE_DIR.as_posix())
+
+# from core.helpers.dates import this_year
+
+# print('this_year:', this_year)
+
+
 import posixpath
-import random
+
+# import random
 import re
-import string
-import environ
+
+# import string
+# import environ
 
 from core.appEnv import (
     # appEnv,

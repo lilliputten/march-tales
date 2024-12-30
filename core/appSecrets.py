@@ -22,8 +22,6 @@ SECRETS = [
     # (STRIPE_SECRET_KEY, 'STRIPE_SECRET_KEY'),
 ]
 
-print('SECRET_KEY:', SECRET_KEY)
-
 
 def random_string(length: int = 32) -> str:
     possibles = string.ascii_letters + string.digits

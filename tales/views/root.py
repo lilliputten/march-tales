@@ -7,10 +7,13 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest
 from django.shortcuts import redirect, render
 
+from core.logging import getDebugLogger
+
 # from ..models import Event, Registration
 
-# LOG = logging.getLogger(__name__)
+LOG = getDebugLogger()
 
+LOG.info('root: Started')
 
 # def index(request: HttpRequest):
 #     events = [obj for obj in Event.objects.filter(public=True) if obj.can_register]
