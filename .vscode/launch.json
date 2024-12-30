@@ -86,6 +86,20 @@
         "runserver"
       ],
       "console": "integratedTerminal"
-    }
+    },    {
+      "name": "Django test",
+      // "type": "python",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "manage.py",
+      "args": [
+        "test",
+        "--verbosity", "2",
+        "--failfast",
+        // "--pattern", "test_*.py",
+        "-k", "test_user_create_and_remove",
+      ],
+      "console": "integratedTerminal"
+    },
   ]
 }

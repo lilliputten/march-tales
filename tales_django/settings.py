@@ -220,7 +220,7 @@ ACCOUNT_ACTIVATION_DAYS = 7  # One-week activation window
 
 # NOTE: It's possible to store some of these parameters (`DEFAULT_FROM_EMAIL`, definitely) in the site preferences or in the `.env*` files
 # DEFAULT_FROM_EMAIL = str(env('DEFAULT_FROM_EMAIL'))
-EMAIL_HOST = 'smtp.sendgrid.net'
+# EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = 'apikey'  # this is exactly the value 'apikey'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True

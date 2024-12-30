@@ -7,6 +7,8 @@ import traceback
 import signal
 from pathlib import Path
 
+# @see https://docs.djangoproject.com/en/5.1/intro/tutorial02/
+
 # App root path
 rootPath = os.path.dirname(os.path.abspath(__file__))
 

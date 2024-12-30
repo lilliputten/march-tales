@@ -55,3 +55,11 @@ def livereload():
     """
     # NOTE: It can't run this way
     execute_from_command_line(['manage.py', 'livereload'])
+
+
+def shell():
+    """
+    python manage.py shell
+    """
+    # NOTE: It can't run this way
+    execute_from_command_line(['manage.py', 'shell'])
