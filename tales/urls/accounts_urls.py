@@ -9,7 +9,6 @@ from .. import views
 # from ..views.user_registration import TalesRegistrationView
 
 urlpatterns = [
-    path('', views.components_demo, name='index'),
     # path('', views.index, name='index'),
     # # Accounts...
     # path(

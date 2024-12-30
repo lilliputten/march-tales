@@ -4,8 +4,8 @@
 
 from .root import (
     components_demo,
-    # index,
-    # profile,
+    index,
+    profile,
 )
 from .system import RobotsView, page403, page404, page500
 

@@ -1,8 +1,3 @@
-# @module views
-# @changed 2024.03.25, 16:07
-
-# import logging
-
 from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest
 from django.shortcuts import redirect, render
@@ -11,9 +6,23 @@ from core.logging import getDebugLogger
 
 # from ..models import Event, Registration
 
-LOG = getDebugLogger()
+logger = getDebugLogger()
 
-LOG.info('root: Started')
+logger.info('root: Started')
+
+
+def index(request: HttpRequest):
+    # events = [obj for obj in Event.objects.filter(public=True) if obj.can_register]
+    # if request.user:
+    #     for event in events:
+    #         event.registration = event.get_active_event_registration_for_user(request.user)
+
+    return render(
+        request=request,
+        template_name='tales/index.html.django',
+        # context={'user': request.user, 'events': events},
+    )
+
 
 # def index(request: HttpRequest):
 #     events = [obj for obj in Event.objects.filter(public=True) if obj.can_register]
@@ -23,20 +32,20 @@ LOG.info('root: Started')
 #
 #     return render(
 #         request=request,
-#         template_name="tales/index.html.django",
-#         context={"user": request.user, "events": events},
+#         template_name='tales/index.html.django',
+#         context={'user': request.user, 'events': events},
 #     )
 
 
-# @login_required
-# def profile(request: HttpRequest):
-#     if not request.user.is_authenticated:
-#         return redirect("index")
-#     return render(
-#         request=request,
-#         template_name="tales/profile.html.django",
-#         context={"active_regs": Registration.active_for_user(request.user), "user": request.user},
-#     )
+@login_required
+def profile(request: HttpRequest):
+    if not request.user.is_authenticated:
+        return redirect('index')
+    return render(
+        request=request,
+        template_name='tales/profile.html.django',
+        # context={'active_regs': Registration.active_for_user(request.user), 'user': request.user},
+    )
 
 
 def components_demo(request: HttpRequest):
@@ -44,7 +53,7 @@ def components_demo(request: HttpRequest):
 
 
 __all__ = [
-    # 'index',
-    # 'profile',
+    'index',
+    'profile',
     'components_demo',
 ]

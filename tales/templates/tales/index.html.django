@@ -23,7 +23,9 @@
     <legend>
       <h2 class="primary-color">Open Events</h2>
     </legend>
-    {% if user.is_anonymous %}<p>You need to <a href="/accounts/register/">have a user account</a> and be <a href="/accounts/login/">logged in</a> to register for events.</p>{% endif %}
+    {% if user.is_anonymous %}<p>You need to <a href="/accounts/register/">have
+      a user account</a> and be <a href="/accounts/login/">logged in</a> to
+    register for events.</p>{% endif %}
   </fieldset>
 
   {% include "assets/events-list-block/events-list-block.django" %}
