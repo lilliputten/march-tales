@@ -15,7 +15,7 @@ from django.db.models import Model, Q, QuerySet
 from django.urls import reverse
 from fpdf import FPDF
 
-from tales.core.constants.payments import (
+from tales_django.core.constants.payments import (
     site_default_currency,
     site_supported_currencies,
 )

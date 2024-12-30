@@ -1,7 +1,7 @@
 import os
 import pathlib
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tales.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tales_django.settings')
 from django.core.management import execute_from_command_line
 
 

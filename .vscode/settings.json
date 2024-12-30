@@ -7,21 +7,14 @@
       ".venv"
     ],
     "search.exclude": {
+      "/static": true,
       "patches": true,
       "build": true,
       "public": true,
       "publish": true,
-      "src/vendor": true,
-      "static/CACHE": true,
-      "static/vendor": true,
-      "static/admin": true,
-      "static/django": true,
-      "static/assets/scripts.js": true,
-      "static/assets/scripts.js.map": true,
-      "static/assets/styles.css": true,
-      "static/assets/styles.css.map": true,
       "django": true,
       "django_registration": true,
+      "node_modules": true,
       ".venv": true
     },
     "git.ignoreLimitWarning": true,

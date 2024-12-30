@@ -1,12 +1,13 @@
 /**
  * @module page-header-navbar.scss
- * @changed 2024.03.08, 12:00
+ * @changed 2024.12.30, 18:31
  */
 
 @import '../shared';
 
 .page-header-navbar {
   padding: 0;
+  min-height: $navbarMainHeight;
   // Adaptive layout: trim too long title string with an ellipsis...
   .main-bar {
     flex: 1;
@@ -34,6 +35,7 @@
     }
   }
   @media (min-width: $navbarCollapse) {
+    border: 2px solid red;
     .navbar-brand {
       flex: 1;
     }

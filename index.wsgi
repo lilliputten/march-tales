@@ -22,7 +22,9 @@ sys.path.insert(1, rootPath)
 
 import django
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "default_settings")
+# TODO: To use `tales_django.settings`?
+# os.environ.setdefault("DJANGO_SETTINGS_MODULE", "default_settings")
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tales_django.settings')
 from django.core.wsgi import get_wsgi_application
 
 try:

@@ -4,33 +4,27 @@
   @changed 2024.03.11, 18:47
 -->
 
-{% extends "base-regular.html.django" %}
-
-{% block title %}Activation failed — {{ block.super }}{% endblock %}
-
-{% block content %}
+{% extends "base-regular.html.django" %} {% block title %}Activation failed — {{ block.super }}{%
+endblock %} {% block content %}
 
 <fieldset>
   <legend>
     <h1 class="page-title primary-color">Activation failed</h1>
   </legend>
-  {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+  {% if error_message %}
+  <p><strong>{{ error_message }}</strong></p>
+  {% endif %}
 </fieldset>
 
 {% include "assets/render-messages/render-messages.django" %}
 
-<p>
-  Your activation has failed.
-</p>
+<p>Your activation has failed.</p>
 
-{% if activation_error %}
-  {% if activation_error.message %}
-    <p>
-      {{ activation_error.message }}
-    </p>
-  {% endif %}
+{% if activation_error %} {% if activation_error.message %}
+<p>{{ activation_error.message }}</p>
+{% endif %}
 
-  <!--
+<!--
   {% if activation_error.code %}
     <p>
       Code: {{ activation_error.code }}
@@ -43,6 +37,4 @@
     </p>
   {% endif %}
   -->
-{% endif %}
-
-{% endblock %}
+{% endif %} {% endblock %}

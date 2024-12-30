@@ -1,0 +1,33 @@
+{# ex: set ft=htmldjango : #}
+<!--
+  @module registration_form.html
+  @changed 2024.03.11, 17:03
+-->
+
+{% extends "base-regular.html.django" %} {% block title %}Activation email sent — {{ block.super
+}}{% endblock %} {% block content %}
+
+<fieldset>
+  <legend>
+    <h1 class="page-title primary-color">Activation email sent</h1>
+  </legend>
+  {% if error_message %}
+  <p><strong>{{ error_message }}</strong></p>
+  {% endif %}
+</fieldset>
+
+{% include "assets/render-messages/render-messages.django" %}
+
+<p>
+  We’ve emailed you the activation email. Please check your mail to complete the registration
+  process.
+</p>
+<p>
+  If you don’t receive an email, please make sure you’ve entered the address you registered with,
+  and check your spam folder.
+</p>
+
+{% endblock content %} {% comment %} **registration/registration_complete.html** Used after
+successful completion of the registration form. This template has no context variables of its own,
+and should simply inform the user that an email containing account-activation information has been
+sent. {% endcomment %}

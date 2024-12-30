@@ -9,43 +9,21 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 
-@changed 2024.12.29, 23:19
+@changed 2024.12.30, 18:28
 """
-
-
-import os
-import pathlib
-import sys
-
-# # Inject project path to allow server-side tests
-# BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
-# print('BASE_DIR:', BASE_DIR)
-# # sys.path.insert(1, BASE_DIR.as_posix())
-
-# from core.helpers.dates import this_year
-
-# print('this_year:', this_year)
-
 
 import posixpath
 
-# import random
 import re
-
-# import string
-# import environ
 
 from core.appEnv import (
     # appEnv,
     BASE_DIR,
-    # STATIC_PATH,
     LOCAL,
     DEBUG,
     PROJECT_INFO,
 )
 
-# from core.appConfig import (
-# )
 from core.appSecrets import (
     SECRET_KEY,
     REGISTRATION_SALT,
@@ -168,7 +146,7 @@ if DEBUG:
 # ```
 
 
-ROOT_URLCONF = 'tales.urls'
+ROOT_URLCONF = APP_NAME + '.urls'
 
 # Templates folders...
 APP_TEMPLATES_PATH = BASE_DIR / APP_NAME / 'templates'
@@ -348,6 +326,8 @@ PASS_VARIABLES = {
     'LOCAL': LOCAL,  # Local dev server mode (from the environment)
     'DEFAULT_HOST': DEFAULT_HOST,
     'GITHUB': 'https://github.com/lilliputten/march-tales',
+    'SECRET_KEY': SECRET_KEY,
+    'REGISTRATION_SALT': REGISTRATION_SALT,
     'USE_DJANGO_PREPROCESSORS': False,  # Preprocess scss source files with django filters, UNUSED
     # 'STRIPE_PUBLISHABLE_KEY': STRIPE_PUBLISHABLE_KEY,
     'DEFAULT_FROM_EMAIL': DEFAULT_FROM_EMAIL,

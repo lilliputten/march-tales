@@ -11,7 +11,7 @@ from .. import views
 cache_timeout = 0 if settings.LOCAL or settings.DEBUG else 15 * 60  # in seconds: {min}*60
 
 urlpatterns = [
-        # Root page
+    # Root page
     path('', views.index, name='index'),
     # App-provided paths...
     path('admin/', admin.site.urls, name='admin'),
