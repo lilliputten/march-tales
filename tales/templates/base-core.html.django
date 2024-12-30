@@ -7,7 +7,7 @@
 -->
 
 {% if settings.DEBUG %}
-{% load livereload_tags %}
+{#% load livereload_tags %#}
 {% endif %}
 
 {% load cache %}

@@ -68,10 +68,6 @@ REGISTRATION_SALT = str(env('REGISTRATION_SALT'))
 # STRIPE_SECRET_KEY = str(env('STRIPE_SECRET_KEY'))
 # SLACK_WEBHOOK = str(env('SLACK_WEBHOOK'))
 
-print('App started')
-print('LOCAL:', LOCAL)
-print('BASE_DIR:', BASE_DIR)
-
 SECRETS = [
     (SECRET_KEY, 'SECRET_KEY'),
     (REGISTRATION_SALT, 'REGISTRATION_SALT'),
@@ -93,7 +89,6 @@ for key, label in SECRETS:
         else:
             error_text = f'Error: Environment configuration variable {label} is missing'
             raise Exception(error_text)
-
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # Static files (CSS, JavaScript, Images)
@@ -185,7 +180,7 @@ MIDDLEWARE = [
 # Add livereload app...
 # @see https://pypi.org/project/django-livereload/
 # Run the reload server with a command: `python manage.py livereload src static`
-INSTALLED_APPS.insert(0, 'livereload')
+# INSTALLED_APPS.insert(0, 'livereload')
 # TODO: Do we actually need livereload in production? I remember some issues with it. Can we completely remove it from production?
 # There is already present the check in the `tales/templates/base-core.html.django` template:
 # ```
@@ -193,9 +188,9 @@ INSTALLED_APPS.insert(0, 'livereload')
 #  {% load livereload_tags %}
 #  {% endif %}
 # ```
-
-if DEBUG:
-    MIDDLEWARE.append('livereload.middleware.LiveReloadScript')
+#
+# if DEBUG:
+#     MIDDLEWARE.append('livereload.middleware.LiveReloadScript')
 
 ROOT_URLCONF = 'tales.urls'
 

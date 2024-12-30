@@ -11,23 +11,24 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-# NOTE: ffmpeg is required, see: https://www.ffmpeg.org/download.html
-python = "^3.11"
+# concurrent-log-handler = "^0.9.25" # Write logs to a retating files
+# django = "=5.0.3"
+# django-registration = "^3.4"
 # python-dotenv = "^1.0.1" # Used `django-environ` instead
-django-environ = "^0.11.2"
-concurrent-log-handler = "^0.9.25" # Write logs to a reotating files
+beautifulsoup4 = "^4.12.3"
 colorama = "^0.4.6"
-django = "^5.1.4"
 crispy-bootstrap5 = "^2024.10"
+django = "^5.1.4"
 django-compressor = "^4.5.1"
 django-crispy-forms = "^2.3"
+django-environ = "^0.11.2"
 django-livereload-server = "^0.5.1"
 django-preferences = "^1.0.0"
 django-registration = "^5.1.0"
 django-timezone-field = "^7.0"
-requests = "^2.32.3"
-beautifulsoup4 = "^4.12.3"
 fpdf2 = "^2.8.2"
+python = "^3.11"
+requests = "^2.32.3"
 
 [tool.poetry.group.dev.dependencies]
 blue = "^0.9.1"
