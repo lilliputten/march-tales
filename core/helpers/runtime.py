@@ -18,7 +18,7 @@ def getModulePath(deep: int | bool | None = None, traces: traceback.StackSummary
     lastTrace = traces[0]
     modPath = pathlib.Path(lastTrace[0]).as_posix()
     if modPath.startswith(PROJECT_PATH):
-        modPath = modPath[len(_PROJECT_PATH) + 1 :]
+        modPath = modPath[len(PROJECT_PATH) + 1 :]
     return modPath
 
 
