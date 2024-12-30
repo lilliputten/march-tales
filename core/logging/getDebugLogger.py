@@ -12,6 +12,7 @@ from concurrent_log_handler import ConcurrentRotatingFileHandler
 
 from core.appEnv import (
     IS_VERCEL,
+    PROJECT_PATH,
     # BASE_DIR,
     # LOCAL,
     # DEBUG,
@@ -52,13 +53,13 @@ def getDebugLogger(id: str | None = None):
     consoleHandler.formatter = _defaultFormatter
     # Add local file logger
     print('getDebugLogger:TEMP_PATH:', TEMP_PATH)
+    print('getDebugLogger:PROJECT_PATH:', PROJECT_PATH)
     if loggerConfig.LOCAL_LOG_FILE and not IS_VERCEL:
-        cwd = pathlib.Path(os.getcwd()).as_posix()
         localLogFileHandler = ConcurrentRotatingFileHandler(
             # @see:
             # - https://docs.python.org/3/library/logging.handlers.html#rotatingfilehandler
             # - [logging - Rotating file handler gives error in python logw](https://stackoverflow.com/questions/68253737/rotating-file-handler-gives-error-in-python-log/77394567#77394567)
-            filename=posixpath.join(cwd, loggerConfig.LOCAL_LOG_FILE),
+            filename=posixpath.join(PROJECT_PATH, loggerConfig.LOCAL_LOG_FILE),
             mode='a',
             encoding='utf-8',
             maxBytes=100000,
