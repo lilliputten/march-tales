@@ -47,3 +47,11 @@ def runserver():
     """
     # NOTE: It can't run this way
     execute_from_command_line(['manage.py', 'runserver'])
+
+
+def livereload():
+    """
+    python manage.py livereload
+    """
+    # NOTE: It can't run this way
+    execute_from_command_line(['manage.py', 'livereload'])

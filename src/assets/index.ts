@@ -15,5 +15,7 @@
  * });
  */
 
+console.log('Empty root module');
+
 // Empty root module
-export {};
+// export {};

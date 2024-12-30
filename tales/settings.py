@@ -153,8 +153,12 @@ MIDDLEWARE = [
 
 # Add livereload app...
 # @see https://pypi.org/project/django-livereload/
+# @see https://github.com/tjwalch/django-livereload-server
 # Run the reload server with a command: `python manage.py livereload src static`
-# INSTALLED_APPS.insert(0, 'livereload')
+INSTALLED_APPS.insert(0, 'livereload')
+if DEBUG:
+    MIDDLEWARE.insert(0, 'livereload.middleware.LiveReloadScript')
+    # MIDDLEWARE.append('livereload.middleware.LiveReloadScript')
 # TODO: Do we actually need livereload in production? I remember some issues with it. Can we completely remove it from production?
 # There is already present the check in the `tales/templates/base-core.html.django` template:
 # ```
@@ -162,9 +166,7 @@ MIDDLEWARE = [
 #  {% load livereload_tags %}
 #  {% endif %}
 # ```
-#
-# if DEBUG:
-#     MIDDLEWARE.append('livereload.middleware.LiveReloadScript')
+
 
 ROOT_URLCONF = 'tales.urls'
 

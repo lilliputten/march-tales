@@ -1,6 +1,6 @@
 /**
  * @module membership-splash
- * @changed 2024.03.08, 17:06
+ * @changed 2024.12.30, 15:31
  */
 
 @use 'sass:color';
@@ -8,6 +8,7 @@
 @import '../shared';
 
 .membership-splash {
+  // border: 1px solid red; // DEBUG
   overflow: hidden;
   position: relative;
   padding: 12px;
@@ -59,7 +60,7 @@
       // Hide on small screens
       display: none;
     }
-    background-image: url('/static/images/splash/membership/dds-painting.png');
+    background-image: url('/static/images/splash/membership/splash.png');
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
