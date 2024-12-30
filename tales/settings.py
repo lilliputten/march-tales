@@ -19,9 +19,9 @@ import posixpath
 import random
 import re
 import string
-
-# from dotenv import dotenv_values
 import environ
+
+from core.appConfig import appConfig, LOCAL, DEBUG
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
@@ -311,7 +311,7 @@ LOGGING = {
     # 'incremental': True,
     'formatters': {
         'verbose': {
-            'format': '[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s',
+            'format': '%(asctime)s %(name)s:%(lineno)s %(levelname)s %(message)s',
             'datefmt': '%Y.%m.%d %H:%M:%S',
         },
         'simple': {'format': '%(levelname)s %(message)s'},

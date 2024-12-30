@@ -29,6 +29,7 @@ django-timezone-field = "^7.0"
 fpdf2 = "^2.8.2"
 python = "^3.11"
 requests = "^2.32.3"
+python-dotenv = "^1.0.1"
 
 [tool.poetry.group.dev.dependencies]
 blue = "^0.9.1"
