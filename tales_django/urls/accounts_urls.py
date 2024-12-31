@@ -1,4 +1,4 @@
-# @module tales/urls/accounts.py
+# @module tales_django/urls/accounts.py
 # @changed 2024.12.30, 00:13
 
 from django.urls import include, path
@@ -17,11 +17,11 @@ urlpatterns = [
         name='django_registration_register',
     ),
     path('profile', views.profile, name='profile'),
-    # path(
-    #     'profile/edit',
-    #     views.edit_user_profile,
-    #     name='profile_edit',
-    # ),
+    path(
+        'profile/edit',
+        views.edit_user_profile,
+        name='profile_edit',
+    ),
     # Stock accounts...
     # path(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/successfully_logged_out/'}),
     path('logout/', views.logoutUserRoute, name='logout_user'),

@@ -30,7 +30,7 @@
 
   {% include "assets/events-list-block/events-list-block.django" %}
 {% else %}
-  <p>No events are currently available</p>
+  <p>No events are currently available (as not implemented yet).</p>
 {% endif %}
 
 {% endblock content %}

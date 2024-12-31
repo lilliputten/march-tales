@@ -157,7 +157,7 @@ if DEBUG:
     MIDDLEWARE.insert(0, 'livereload.middleware.LiveReloadScript')
     # MIDDLEWARE.append('livereload.middleware.LiveReloadScript')
 # TODO: Do we actually need livereload in production? I remember some issues with it. Can we completely remove it from production?
-# There is already present the check in the `tales/templates/base-core.html.django` template:
+# There is already present the check in the `tales_django/templates/base-core.html.django` template:
 # ```
 #  {% if settings.DEBUG %}
 #  {% load livereload_tags %}
@@ -347,9 +347,10 @@ SITE_KEYWORDS = """
 march
 tales
 """
-# TODO: Add correct tags, resources for SSO, search engines and social networks (open graph etc)
 
-# Pass settings to context, see `tales/core/app/context_processors.py`...
+SITE_SHORT_NAME = SITE_NAME
+
+# Pass settings to templates' context, see `tales_django/core/app/context_processors.py`...
 PASS_VARIABLES = {
     'DEBUG': DEBUG,  # Pass django debug flag to the code (from environment)
     'LOCAL': LOCAL,  # Local dev server mode (from the environment)
@@ -363,7 +364,7 @@ PASS_VARIABLES = {
     'DEFAULT_CONTACT_EMAIL': DEFAULT_FROM_EMAIL,
     # NOTE: Site url and name could be taken from site data via `get_current_site`
     'SITE_NAME': SITE_NAME,
-    'SITE_SHORT_NAME': SITE_NAME,
+    'SITE_SHORT_NAME': SITE_SHORT_NAME,
     'SITE_TITLE': SITE_NAME,
     'SITE_DESCRIPTION': SITE_DESCRIPTION,
     'SITE_KEYWORDS': re.sub(r'\s*[\n\r]+\s*', ', ', SITE_KEYWORDS.strip()),

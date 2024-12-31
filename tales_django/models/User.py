@@ -4,35 +4,17 @@
 
 import random
 import string
-from datetime import date
-import requests
 
 # from django.utils.translation import ugettext_lazy as _
 
-from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
-from django.db.models import Model, Q, QuerySet
-from django.urls import reverse
-from fpdf import FPDF
+from django.db.models import Q
 
-from core.helpers.dates import this_year
-
-from tales_django.core.constants.payments import (
-    site_default_currency,
-    site_supported_currencies,
-)
-
-from ..core.constants.date_time_formats import dateFormat
-from ..core.constants.payments import currency_emojis, payment_details_by_currency
 
 from .Membership import Membership
 
-# from .core.helpers.create_pdf import (
-#     create_invoice_pdf_from_payment,
-#     create_receipt_pdf_from_payment,
-# )
 # from ..core.helpers.email import send_email
 
 alphabet = string.ascii_lowercase + string.digits

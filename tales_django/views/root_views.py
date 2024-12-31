@@ -2,13 +2,9 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest
 from django.shortcuts import redirect, render
 
-from core.logging import getDebugLogger
-
-# from ..models import Event, Registration
-
-logger = getDebugLogger()
-
-logger.info('root: Started')
+# from core.logging import getDebugLogger
+# logger = getDebugLogger()
+# logger.info('root: Started')
 
 
 def index(request: HttpRequest):
@@ -19,8 +15,11 @@ def index(request: HttpRequest):
 
     return render(
         request=request,
-        template_name='tales/index.html.django',
-        # context={'user': request.user, 'events': events},
+        template_name='tales_django/index.html.django',
+        context={
+            'user': request.user,
+            # 'events': events,
+        },
     )
 
 
@@ -30,13 +29,16 @@ def profile(request: HttpRequest):
         return redirect('index')
     return render(
         request=request,
-        template_name='tales/profile.html.django',
-        # context={'active_regs': Registration.active_for_user(request.user), 'user': request.user},
+        template_name='tales_django/profile.html.django',
+        context={
+            # 'active_regs': Registration.active_for_user(request.user),
+            'user': request.user,
+        },
     )
 
 
 def components_demo(request: HttpRequest):
-    return render(request, 'components-demo.html.django')
+    return render(request, 'demo/components-demo.html.django')
 
 
 __all__ = [

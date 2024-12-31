@@ -50,7 +50,7 @@
   <p>Member since {{ membership.started }}. Membership type: {{ membership.get_membership_type_display }}.</p>
 {% else %}
   <p>Not yet a {{ settings.SITE_SHORT_NAME }} member.
-  {% comment %} <a href="{% url 'membership_application' %}">Apply for membership</a>.</p> {% endcomment %}
+  <a href="{% url 'membership_application' %}">Apply for a membership</a>.</p>
 {% endif %}
 
 {% with payment=membership.payment %}
@@ -67,11 +67,9 @@
 
 <div>
   {# TODO: Put common actions toolbar here #}
-  {% comment %} <a class="btn btn-primary" href="{% url 'profile_edit' %}">Edit profile</a> {% endcomment %}
-  {% comment %}
+  <a class="btn btn-primary" href="{% url 'profile_edit' %}">Edit profile</a>
   <a class="btn btn-primary" href="{% url 'password_change' %}">Change password</a>
   <a class="btn btn-primary" href="{% url 'password_reset' %}">Reset password</a>
-  {% endcomment %}
 </div>
 
 {% endblock content %}

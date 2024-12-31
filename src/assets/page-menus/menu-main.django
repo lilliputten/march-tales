@@ -20,14 +20,14 @@
   <span class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <i class="bi bi-{% if user.is_member %}star-fill{% else %}person-fill{% endif %}"></i> {{ user.get_full_name|default:user.username }}
   </span>
-  <form id="menu-logout-form" action="{#% url 'logout' %#}" method="post">
+  <form id="menu-logout-form" action="{% url 'logout' %}" method="post">
   {% csrf_token %}
   <ul class="dropdown-menu" id="user-menu">
     <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
     <li><hr class="dropdown-divider"></li>
-    <li><a class="dropdown-item" href="{#% url 'profile_edit' %#}">Edit profile</a></li>
-    <li><a class="dropdown-item" href="{#% url 'password_change' %#}">Change password</a></li>
-    <li><a class="dropdown-item" href="{#% url 'password_reset' %#}">Reset password</a></li>
+    <li><a class="dropdown-item" href="{% url 'profile_edit' %}">Edit profile</a></li>
+    <li><a class="dropdown-item" href="{% url 'password_change' %}">Change password</a></li>
+    <li><a class="dropdown-item" href="{% url 'password_reset' %}">Reset password</a></li>
     <li><hr class="dropdown-divider"></li>
     <li><a
       class="dropdown-item"

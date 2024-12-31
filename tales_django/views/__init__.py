@@ -1,4 +1,4 @@
-# @module tales/views/__init__.py
+# @module tales_django/views/__init__.py
 # @changed 2024.03.15, 19:53
 
 from .root_views import (
@@ -15,8 +15,8 @@ from .system_views import (
     page404,
     page500,
 )
+from .edit_user_profile import edit_user_profile
 
-# from .user import edit_user_profile  # SignUpView,
 from .UserRegistrationView import UserRegistrationView
 
 __all__ = [
@@ -29,4 +29,5 @@ __all__ = [
     'page404',
     'page500',
     'UserRegistrationView',
+    'edit_user_profile',
 ]
