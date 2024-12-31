@@ -21,7 +21,7 @@ from core.appEnv import (
     BASE_DIR,
     LOCAL,
     DEBUG,
-    PROJECT_INFO,
+    # PROJECT_INFO,
 )
 
 from core.appSecrets import (
@@ -36,6 +36,8 @@ from core.djangoConfig import (
     APP_NAME,
     DEFAULT_HOST,
     DEFAULT_FROM_EMAIL,
+    EMAIL_HOST,
+    EMAIL_HOST_PASSWORD,
 )
 
 # print('App started', PROJECT_INFO)
@@ -222,18 +224,21 @@ AUTHENTICATION_BACKENDS = [
 ACCOUNT_ACTIVATION_DAYS = 7  # One-week activation window
 
 # NOTE: It's possible to store some of these parameters (`DEFAULT_FROM_EMAIL`, definitely) in the site preferences or in the `.env*` files
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # DEFAULT_FROM_EMAIL = str(env('DEFAULT_FROM_EMAIL'))
-# EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'apikey'  # this is exactly the value 'apikey'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+# EMAIL_HOST = DEFAULT_EMAIL_HOST if DEFAULT_EMAIL_HOST else 'smtp.fullspace.ru'
+# EMAIL_HOST_USER = 'apikey'  # this is exactly the value 'apikey'
+SERVER_EMAIL = DEFAULT_FROM_EMAIL
+EMAIL_PORT = 25 # 465
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = False
 # @see https://docs.sendgrid.com/for-developers/sending-email/django
 # EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Moscow' # 'UTC'
 USE_I18N = True
 USE_TZ = True
 
@@ -296,6 +301,11 @@ LOGGING = {
         },
     },
     'loggers': {
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
         'django': {
             'handlers': ['django'],
             'propagate': True,
@@ -307,6 +317,10 @@ LOGGING = {
         },
     },
 }
+ADMINS = (
+   ('ME', 'lilliputten@gmail.com'),
+)
+MANAGERS = ADMINS
 
 # @see: https://docs.djangoproject.com/en/2.0/ref/settings/#timeout
 TIMEOUT = 30 if DEBUG else 300  # Short value for cache expiration
@@ -342,3 +356,13 @@ PASS_VARIABLES = {
     'SITE_DESCRIPTION': SITE_DESCRIPTION,
     'SITE_KEYWORDS': re.sub(r'\s*[\n\r]+\s*', ', ', SITE_KEYWORDS.strip()),
 }
+
+__all__ = [
+    'EMAIL_HOST',
+    'EMAIL_PORT',
+    'EMAIL_USE_TLS',
+    'EMAIL_USE_SSL',
+    'EMAIL_HOST_PASSWORD',
+    'DEFAULT_FROM_EMAIL',
+    'SERVER_EMAIL',
+]

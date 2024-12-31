@@ -82,6 +82,25 @@ def livereload():
     execute_from_command_line(['manage.py', 'livereload'])
 
 
+def test():
+    """
+    python manage.py test
+    """
+    # NOTE: It can't run this way
+    execute_from_command_line(
+        [
+            'manage.py',
+            'test',
+            '--verbosity',
+            '2',
+            '--failfast',
+            # '--pattern', 'test_*.py',
+            '-k',
+            'test_send_email',
+        ]
+    )
+
+
 def shell():
     """
     python manage.py shell

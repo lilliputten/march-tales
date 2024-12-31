@@ -13,7 +13,7 @@
       "public": true,
       "publish": true,
       "django": true,
-      "django_registration": true,
+      // "django_registration": true,
       "node_modules": true,
       ".venv": true
     },

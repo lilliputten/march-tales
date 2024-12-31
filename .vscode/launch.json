@@ -97,7 +97,7 @@
         "--verbosity", "2",
         "--failfast",
         // "--pattern", "test_*.py",
-        "-k", "test_user_create_and_remove",
+        "-k", "test_send_email",
       ],
       "console": "integratedTerminal"
     },
