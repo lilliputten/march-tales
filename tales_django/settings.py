@@ -21,7 +21,7 @@ from core.appEnv import (
     BASE_DIR,
     LOCAL,
     DEBUG,
-    # PROJECT_INFO,
+    PROJECT_INFO,
 )
 
 from core.appSecrets import (
@@ -35,12 +35,25 @@ from core.appSecrets import (
 from core.djangoConfig import (
     APP_NAME,
     DEFAULT_HOST,
-    DEFAULT_FROM_EMAIL,
+    # Email...
     EMAIL_HOST,
+    EMAIL_PORT,
+    EMAIL_USE_TLS,
+    EMAIL_USE_SSL,
+    DEFAULT_FROM_EMAIL,
+    EMAIL_HOST_USER,
     EMAIL_HOST_PASSWORD,
 )
 
-# print('App started', PROJECT_INFO)
+print('App started:', PROJECT_INFO)
+
+print('EMAIL_HOST:', EMAIL_HOST),
+print('EMAIL_PORT:', EMAIL_PORT),
+print('EMAIL_USE_TLS:', EMAIL_USE_TLS),
+print('EMAIL_USE_SSL:', EMAIL_USE_SSL),
+print('DEFAULT_FROM_EMAIL:', DEFAULT_FROM_EMAIL),
+print('EMAIL_HOST_USER:', EMAIL_HOST_USER),
+print('EMAIL_HOST_PASSWORD:', EMAIL_HOST_PASSWORD),
 
 # Define default site id for `sites.models`
 SITE_ID = 1
@@ -229,16 +242,16 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_HOST = DEFAULT_EMAIL_HOST if DEFAULT_EMAIL_HOST else 'smtp.fullspace.ru'
 # EMAIL_HOST_USER = 'apikey'  # this is exactly the value 'apikey'
 SERVER_EMAIL = DEFAULT_FROM_EMAIL
-EMAIL_PORT = 25 # 465
-EMAIL_USE_TLS = False
-EMAIL_USE_SSL = False
+# EMAIL_PORT = 25 # 465
+# EMAIL_USE_TLS = False
+# EMAIL_USE_SSL = False
 # @see https://docs.sendgrid.com/for-developers/sending-email/django
 # EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'Europe/Moscow' # 'UTC'
+TIME_ZONE = 'Europe/Moscow'   # 'UTC'
 USE_I18N = True
 USE_TZ = True
 
@@ -317,9 +330,7 @@ LOGGING = {
         },
     },
 }
-ADMINS = (
-   ('ME', 'lilliputten@gmail.com'),
-)
+ADMINS = (('ME', 'lilliputten@gmail.com'),)
 MANAGERS = ADMINS
 
 # @see: https://docs.djangoproject.com/en/2.0/ref/settings/#timeout
@@ -362,6 +373,7 @@ __all__ = [
     'EMAIL_PORT',
     'EMAIL_USE_TLS',
     'EMAIL_USE_SSL',
+    'EMAIL_HOST_USER',
     'EMAIL_HOST_PASSWORD',
     'DEFAULT_FROM_EMAIL',
     'SERVER_EMAIL',

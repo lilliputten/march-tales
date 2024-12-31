@@ -97,7 +97,7 @@
         "--verbosity", "2",
         "--failfast",
         // "--pattern", "test_*.py",
-        "-k", "test_send_email",
+        "-k", "test_send_django_email",
       ],
       "console": "integratedTerminal"
     },

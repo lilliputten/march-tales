@@ -96,7 +96,7 @@ def test():
             '--failfast',
             # '--pattern', 'test_*.py',
             '-k',
-            'test_send_email',
+            'test_send_django_email',
         ]
     )
 
