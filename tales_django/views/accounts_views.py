@@ -2,7 +2,7 @@ from django.shortcuts import redirect
 from django.contrib.auth import logout
 
 
-def logoutUser(request):
+def logoutUserRoute(request):
     logout(request)
     return redirect('index')
 

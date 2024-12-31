@@ -7,7 +7,7 @@ from .root_views import (
     profile,
 )
 from .accounts_views import (
-    logoutUser,
+    logoutUserRoute,
 )
 from .system_views import (
     RobotsView,
@@ -17,15 +17,16 @@ from .system_views import (
 )
 
 # from .user import edit_user_profile  # SignUpView,
-# from .user_registration import DdsRegistrationView
+from .UserRegistrationView import UserRegistrationView
 
 __all__ = [
     'components_demo',
     'index',
     'profile',
-    'logoutUser',
+    'logoutUserRoute',
     'RobotsView',
     'page403',
     'page404',
     'page500',
+    'UserRegistrationView',
 ]

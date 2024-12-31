@@ -5,17 +5,17 @@ from django.urls import include, path
 
 from .. import views
 
-# from ..forms import TalesRegistrationForm
-# from ..views.user_registration import TalesRegistrationView
+from ..forms import UserRegistrationForm
+from ..views import UserRegistrationView
 
 urlpatterns = [
-    # # Accounts...
-    # path(
-    #     # Overrided registration form using updated one
-    #     'accounts/register/',
-    #     TalesRegistrationView.as_view(form_class=TalesRegistrationForm),
-    #     name='django_registration_register',
-    # ),
+    # Accounts...
+    path(
+        # Overrided registration form using updated one
+        'accounts/register/',
+        UserRegistrationView.as_view(form_class=UserRegistrationForm),
+        name='django_registration_register',
+    ),
     path('profile', views.profile, name='profile'),
     # path(
     #     'profile/edit',
@@ -24,7 +24,7 @@ urlpatterns = [
     # ),
     # Stock accounts...
     # path(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/successfully_logged_out/'}),
-    path('logout/', views.logoutUser, name='logout_user'),
+    path('logout/', views.logoutUserRoute, name='logout_user'),
     path(
         'accounts/',
         include('django_registration.backends.activation.urls'),
