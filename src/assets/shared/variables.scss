@@ -46,13 +46,14 @@ $navbarCollapseMax: $screenMdMax;
 
 // Primary color...
 
-$primaryLightColor: #8a9;
-$primaryColor: #486;
-$primaryDarkColor: #375;
-$primaryDarkenColor: color.adjust($primaryDarkColor, $lightness: -10%);
-$primaryDarkestColor: #3c5343;
+$primaryColor: #b13; // #486;
+$primaryLightColor: color.adjust($primaryColor, $lightness: 10%);
+$primaryLightenColor: color.adjust($primaryColor, $lightness: 20%);
+$primaryLightesetColor: color.adjust($primaryColor, $lightness: 30%);
+$primaryDarkColor: color.adjust($primaryColor, $lightness: -10%);
+$primaryDarkenColor: color.adjust($primaryColor, $lightness: -20%);
+$primaryDarkestColor: color.adjust($primaryColor, $lightness: -30%);
 
-$primaryColorRgb: 68, 136, 102;
 $primaryColorRgb: rgbComponents($primaryColor);
 
 // Misc colors...

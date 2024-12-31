@@ -17,11 +17,10 @@ import posixpath
 import re
 
 from core.appEnv import (
-    # appEnv,
     BASE_DIR,
     LOCAL,
     DEBUG,
-    PROJECT_INFO,
+    # PROJECT_INFO, # DEBUG
 )
 
 from core.appSecrets import (
@@ -45,16 +44,16 @@ from core.djangoConfig import (
     EMAIL_HOST_PASSWORD,
 )
 
-print('App started:', PROJECT_INFO)
-
-print('EMAIL_HOST:', EMAIL_HOST)
-print('EMAIL_PORT:', EMAIL_PORT)
-print('EMAIL_USE_TLS:', EMAIL_USE_TLS)
-print('EMAIL_USE_SSL:', EMAIL_USE_SSL)
-print('DEFAULT_FROM_EMAIL:', DEFAULT_FROM_EMAIL)
-print('EMAIL_HOST_USER:', EMAIL_HOST_USER)
-print('EMAIL_HOST_PASSWORD:', EMAIL_HOST_PASSWORD)
-print('REGISTRATION_SALT:', REGISTRATION_SALT)
+# # DEBUG: Show basic settings...
+# print('App started:', PROJECT_INFO)
+# print('EMAIL_HOST:', EMAIL_HOST)
+# print('EMAIL_PORT:', EMAIL_PORT)
+# print('EMAIL_USE_TLS:', EMAIL_USE_TLS)
+# print('EMAIL_USE_SSL:', EMAIL_USE_SSL)
+# print('DEFAULT_FROM_EMAIL:', DEFAULT_FROM_EMAIL)
+# print('EMAIL_HOST_USER:', EMAIL_HOST_USER)
+# print('EMAIL_HOST_PASSWORD:', EMAIL_HOST_PASSWORD)
+# print('REGISTRATION_SALT:', REGISTRATION_SALT)
 
 # Define default site id for `sites.models`
 SITE_ID = 1
@@ -224,7 +223,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LOGIN_REDIRECT_URL = 'index'
+LOGIN_REDIRECT_URL = 'profile'
 LOGOUT_REDIRECT_URL = 'index'
 
 # Registration

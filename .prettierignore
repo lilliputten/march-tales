@@ -23,8 +23,7 @@
 
 /static
 
-# Temp: Don't prettify temlates at this stage (needs to check the correctness of changes)
-/tales/templates/django_registration
-/tales/templates/registration
+# Temp: Don't prettify temlates (or ensure correct prettifiying)
+*/templates/**/*.html
 
 **/*_
