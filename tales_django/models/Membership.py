@@ -1,28 +1,7 @@
-# @module models.py
-# @changed 2024.03.28, 19:28
-# type: ignore[attr-defined]
-
-import random
-import string
-
-# from django.utils.translation import ugettext_lazy as _
-
 from django.db import models
-from django.db.models import Model, Q
+from django.db.models import Model
 
 from core.helpers.dates import this_year
-
-
-alphabet = string.ascii_lowercase + string.digits
-random_code_length = 8
-
-
-# NOTE: A single reusable QuerySet to check if the registration active
-REGISTRATION_ACTIVE_QUERY = ~Q(status__in=('CANCELLED', 'WITHDRAWN', 'DECLINED'))
-
-
-def random_code(length=random_code_length):
-    return ''.join(random.choices(alphabet, k=length))
 
 
 class MembershipData:
@@ -81,7 +60,7 @@ class Membership(Model):
     until = models.IntegerField(default=this_year)
 
     # TODO: Implement payment methods
-    # payment = models.OneToOneField(Payment, on_delete=models.SET_NULL, null=True, blank=True)
+    # payment = models.OneToOneField('Payment', on_delete=models.SET_NULL, null=True, blank=True)
 
     mailing_list = models.BooleanField(default=False)
 
