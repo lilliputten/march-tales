@@ -1,0 +1,53 @@
+# @changed 2024.12.30, 21:37
+
+- model: tales_django.user
+  pk: 1
+  fields:
+    # id: 1
+    password: "pbkdf2_sha256$870000$7PXrYmhd2OfuG6IiEAoXkd$BDZb4XWKI1nzE/D4HL75qo6VoipidLQCyqIrKoGP7UE="
+    username: "dmia@yandex.ru"
+    email: "dmia@yandex.ru"
+    first_name: ""
+    last_name: ""
+    is_superuser: true
+    is_staff: true
+    is_active: true
+    date_joined: "2024-12-30T18:30:47.819Z"
+    last_login: null
+    groups: []
+    user_permissions: []
+
+- model: tales_django.user
+  pk: 2
+  fields:
+    # id: 2
+    password: 'pbkdf2_sha256$720000$udjFiM2Nnk8KgGmsqsJFMq$dhA9HzxlTifvXgbg1NW9qLkBJV9p/giyE2y5gx2HsjM='
+    username: "c_march@mail.ru"
+    email: "c_march@mail.ru"
+    first_name: ""
+    last_name: ""
+    is_superuser: true
+    is_staff: true
+    is_active: true
+    date_joined: "2024-12-30T18:30:47.819Z"
+    last_login: null
+    groups: []
+    user_permissions: []
+
+- model: tales_django.user
+  pk: 3
+  fields:
+    # id: 3
+    password: 'pbkdf2_sha256$720000$udjFiM2Nnk8KgGmsqsJFMq$dhA9HzxlTifvXgbg1NW9qLkBJV9p/giyE2y5gx2HsjM='
+    username: "lilliputten@gmail.com"
+    email: 'lilliputten@gmail.com'
+    first_name: "John"
+    last_name: "Lennon"
+    is_superuser: false
+    is_staff: false
+    is_active: true
+    date_joined: "2024-12-30T18:30:47.819Z"
+    last_login: null
+    address: '251 Menlove Avenue, Liverpool, Merseyside L25 7SA, UK'
+    groups: []
+    user_permissions: []

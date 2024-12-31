@@ -1,0 +1,26 @@
+{# ex: set ft=htmldjango : #}
+<!--
+  @module logged_out
+  @changed 2024.03.12, 21:35
+-->
+
+{% extends "base-regular.html.django" %}
+{% block title %}Logged out — {{ block.super }}{% endblock title %}
+{% block content %}
+
+<fieldset>
+  <legend>
+    <h1 class="page-title primary-color">Logged out</h1>
+  </legend>
+  {% if error_message %}
+  <p><strong>{{ error_message }}</strong></p>
+  {% endif %}
+</fieldset>
+
+{% include "assets/render-messages/render-messages.django" %}
+
+<p>Thanks for spending some quality time with the web site today.</p>
+
+<p><a href="{% url 'login' %}">Log in again</a></p>
+
+{% endblock %}
