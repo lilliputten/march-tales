@@ -31,7 +31,7 @@ from ..core.constants.payments import currency_emojis, payment_details_by_curren
 #     create_invoice_pdf_from_payment,
 #     create_receipt_pdf_from_payment,
 # )
-from ..core.helpers.email import send_email
+# from ..core.helpers.email import send_email
 
 
 alphabet = string.ascii_lowercase + string.digits

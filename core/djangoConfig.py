@@ -13,7 +13,7 @@ DEFAULT_HOST = appEnv.str('DEFAULT_HOST', 'tales.march.team')
 
 DEFAULT_FROM_EMAIL = appEnv.str('DEFAULT_FROM_EMAIL', 'tales@' + BASE_HOST)
 EMAIL_HOST = appEnv.str('EMAIL_HOST', 'smtp.fullspace.ru')
-EMAIL_PORT = appEnv.int('EMAIL_PORT', 465) # 465 | 25
+EMAIL_PORT = appEnv.int('EMAIL_PORT', 465)   # 465 | 25
 EMAIL_USE_SSL = appEnv.bool('EMAIL_USE_SSL', True)
 EMAIL_USE_TLS = appEnv.bool('EMAIL_USE_TLS', False)
 

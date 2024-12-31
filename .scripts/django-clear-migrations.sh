@@ -17,8 +17,8 @@ $FINDCMD . -path "$rootPath/$DJANGO_APP/migrations/*.py" -not -name "__init__.py
 $FINDCMD . -path "$rootPath/$DJANGO_APP/migrations/*.pyc" -delete
 
 # TODO: DELETE FROM django_migrations WHERE app = $DJANGO_APP
-$RMCMD -f $rootPath/db.*
+$RMCMD -f $rootPath/db.* \
+&& $PYTHON_RUNTIME manage.py makemigrations \
+&& $PYTHON_RUNTIME manage.py migrate \
+&& echo "All migrations and database has been successfuly cleared"
 
-$PYTHON_RUNTIME manage.py makemigrations
-# $PYTHON_RUNTIME manage.py migrate --fake
-$PYTHON_RUNTIME manage.py migrate

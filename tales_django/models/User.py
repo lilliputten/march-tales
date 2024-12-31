@@ -33,7 +33,7 @@ from .Membership import Membership
 #     create_invoice_pdf_from_payment,
 #     create_receipt_pdf_from_payment,
 # )
-from ..core.helpers.email import send_email
+# from ..core.helpers.email import send_email
 
 alphabet = string.ascii_lowercase + string.digits
 random_code_length = 8
@@ -129,19 +129,19 @@ class User(AbstractUser):
         self._original_email = self.email
         self._original_username = self.username
 
-    def email_user(
-        self,
-        subject: str,
-        message: str,
-        html_content: bool = False,
-        attachment_content: FPDF | None = None,
-        attachment_name: str | None = None,
-        from_email: str | None = settings.DEFAULT_FROM_EMAIL,
-    ) -> None:
-        send_email(
-            recipient_address=self.email,
-            subject=subject,
-            message=message,
-            pdf=attachment_content,
-            pdf_name=attachment_name,
-        )
+    # def email_user(
+    #     self,
+    #     subject: str,
+    #     message: str,
+    #     html_content: bool = False,
+    #     attachment_content: FPDF | None = None,
+    #     attachment_name: str | None = None,
+    #     from_email: str | None = settings.DEFAULT_FROM_EMAIL,
+    # ) -> None:
+    #     send_email(
+    #         recipient_address=self.email,
+    #         subject=subject,
+    #         message=message,
+    #         pdf=attachment_content,
+    #         pdf_name=attachment_name,
+    #     )

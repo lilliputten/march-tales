@@ -18,10 +18,11 @@ from core.djangoConfig import (
     # EMAIL_USE_SSL,
 )
 
+
 def test_send_smtplib_email():
     try:
         """
-        Sending email
+        Send email via smtplib.
         """
         print(f'test_send_smtplib_email: Starting with EMAIL_HOST={EMAIL_HOST}...')
         conn = smtplib.SMTP(EMAIL_HOST, EMAIL_PORT, timeout=5)
