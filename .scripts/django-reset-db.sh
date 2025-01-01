@@ -1,4 +1,7 @@
 #!/bin/sh
+# Call:
+# sh .scripts/django-reset-db.sh
+# sh .scripts/django-reset-db.sh --local
 
 scriptsPath=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
 rootPath=`dirname "$scriptsPath"`
