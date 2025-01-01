@@ -6,9 +6,9 @@
       description: ""
       youtube_url: ""
       tags_list: ""
-        # Locarted under `media` folder
-      audio_file: "samples/test-short.mp3"
-      preview_picture: "samples/sample.png"
+      # Located under `media` folder
+      audio_file: "samples/test-short_H9LmIRC.mp3"
+      preview_picture: "samples/sample_WR5ZIbA.png"
       audio_duration: 5
       audio_size: 22535
       track_status: "PUBLISHED"

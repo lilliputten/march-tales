@@ -1,9 +1,15 @@
 # from django.utils.translation import ugettext_lazy as _
 
-from django import forms
+from datetime import date
+
+# from django import forms
+from datetime import datetime
 from django.db import models
 from django.db.models import Model
-from django.core.validators import FileExtensionValidator
+
+# from django.utils import timezone
+
+# from django.core.validators import FileExtensionValidator
 
 # from core.appEnv import LOCAL
 
@@ -20,8 +26,8 @@ class Track(Model):
         verbose_name='track title',
         help_text='Required. 150 characters or fewer. Track title',
     )
-    description = models.TextField(blank=True, null=False, max_length=512, verbose_name='description')
-    youtube_url = models.URLField(blank=True, null=False, max_length=150)
+    description = models.TextField(blank=True, null=False, max_length=512, verbose_name='Description')
+    youtube_url = models.URLField(blank=True, null=False, max_length=150, verbose_name='YouTube video link url')
     tags_list = models.TextField(blank=True, null=False, max_length=150)
 
     uploadsFolder = getAudioTrackFolderName()
@@ -31,8 +37,6 @@ class Track(Model):
         upload_to=uploadsFolder,
         blank=False,
         null=False,
-        # validators=[FileExtensionValidator(allowed_extensions=['mp3'])],
-        # widget=forms.FileInput(attrs={'accept': 'application/pdf'}),
     )
     preview_picture = models.ImageField(upload_to=uploadsFolder, blank=True, null=True)
 
@@ -40,21 +44,20 @@ class Track(Model):
     audio_size = models.BigIntegerField(null=True, help_text='File size (bytes)')
 
     TRACK_STATUS = [
-        ('HIDDEN', 'Hidden'),
         ('PUBLISHED', 'Published'),
+        ('HIDDEN', 'Hidden'),
     ]
     DEFAULT_TRACK_STATUS = TRACK_STATUS[0][0]
     track_status = models.TextField(choices=TRACK_STATUS, default=DEFAULT_TRACK_STATUS)
 
-    date = models.DateField(null=True)
+    # Timestamps
+    # created_at = models.DateField(auto_now_add=True)
+    created_at = models.DateField(default=date.today)
+    updated_at = models.DateField(auto_now=True)
 
     # Owner/creator
     created_by = models.ForeignKey('User', related_name='creator', on_delete=models.DO_NOTHING)
     updated_by = models.ForeignKey('User', related_name='updater', on_delete=models.DO_NOTHING)
-
-    # Timestamps
-    created_at = models.DateField(auto_now_add=True)
-    updated_at = models.DateField(auto_now=True)
 
     @property
     def active(self) -> bool:
