@@ -1,25 +1,12 @@
 from django.contrib import admin
-
-# from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.admin import UserAdmin
-
 from django.contrib import admin
 from django.contrib.admin import SimpleListFilter
 from django.db.models import Q
 
-from ..forms import (
-    UserAdminForm,
-)
-from ..models import (
-    User,
-)
-
+from ..forms import UserAdminForm
 from ..models import User
-
-
-def _(x):
-    return x
 
 
 class IsRegularUserFilter(SimpleListFilter):
@@ -27,7 +14,7 @@ class IsRegularUserFilter(SimpleListFilter):
     Regular user custom combined filter
     """
 
-    title = 'is_regular_user'
+    title = 'Is regular user'
     parameter_name = 'is_regular_user'
 
     def lookups(self, request, model_admin):
@@ -36,7 +23,7 @@ class IsRegularUserFilter(SimpleListFilter):
             ('0', 'No'),
         )
 
-    def queryset(self, request, queryset):
+    def queryset(self, _request, queryset):
         if self.value() == '1':
             return queryset.filter(is_staff=False, is_superuser=False)
         if self.value() == '0':

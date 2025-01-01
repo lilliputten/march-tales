@@ -1,32 +1,9 @@
-# @module models.py
-# @changed 2024.03.28, 19:28
-# type: ignore[attr-defined]
-
-import random
-import string
-
-# from django.utils.translation import ugettext_lazy as _
-
 from django.contrib.auth.models import AbstractUser
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
-from django.db.models import Q
 
 
 from .Membership import Membership
-
-# from ..core.helpers.email import send_email
-
-alphabet = string.ascii_lowercase + string.digits
-random_code_length = 8
-
-
-# NOTE: A single reusable QuerySet to check if the registration active
-REGISTRATION_ACTIVE_QUERY = ~Q(status__in=('CANCELLED', 'WITHDRAWN', 'DECLINED'))
-
-
-def random_code(length=random_code_length):
-    return ''.join(random.choices(alphabet, k=length))
 
 
 class User(AbstractUser):
@@ -111,6 +88,7 @@ class User(AbstractUser):
         self._original_email = self.email
         self._original_username = self.username
 
+    # # TODO: Redefined mail sender routine if it's required to send atachments or whatever else
     # def email_user(
     #     self,
     #     subject: str,

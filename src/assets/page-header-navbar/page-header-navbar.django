@@ -11,13 +11,15 @@
 <nav class="page-header-navbar navbar fixed-top -bg-dark navbar-dark navbar-primary navbar-expand-lg">
   <div class="container-fluid">
     <div class="main-bar">
-      <a class="navbar-brand" href="{% url 'index' %}">
-        <span class="dimmed-info">[Logo]</span>
-        {# <img src="{% static 'images/dds-logo/svg/Beige Logo.svg' %}" width="auto" height="50" alt="{{ settings.SITE_SHORT_NAME }} Logo" /> #}
-        <span class="site-name">
-          {{ settings.SITE_NAME }} Events and Membership Portal
-        </span>
-      </a>
+      <span class="navbar-brand">
+        <a href="{% url 'index' %}">
+          <span class="dimmed-info">[Logo]</span>
+          {# <img src="{% static 'images/dds-logo/svg/Beige Logo.svg' %}" width="auto" height="50" alt="{{ settings.SITE_SHORT_NAME }} Logo" /> #}
+          <span class="site-name">
+            {{ settings.SITE_NAME }} Events and Membership Portal
+          </span>
+        </a>
+      </span>
 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
