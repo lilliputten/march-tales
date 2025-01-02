@@ -108,7 +108,8 @@ class TrackAdmin(admin.ModelAdmin):
 
     def get_changeform_initial_data(self, request):
         get_data = super(TrackAdmin, self).get_changeform_initial_data(request)
-        get_data['created_by'] = request.user.pk
+        # Set creator user
+        get_data['created_by'] = request.user.id
         return get_data
 
     def save_model(
@@ -121,14 +122,11 @@ class TrackAdmin(admin.ModelAdmin):
         """
         Auto update owning users
         """
-        # if not obj.created_by_id:
-        #     obj.created_by_id = request.user.id
-        # Update user...
+        # Update updater info...
         obj.updated_by_id = request.user.id
         # Get audio duration
         audioFile = obj.audio_file
         fileInstance: File | TemporaryUploadedFile = audioFile.file
-        # track = Track.objects.get(id=obj.id)
         if fileInstance and isinstance(fileInstance, TemporaryUploadedFile):
             try:
                 obj.audio_size = audioFile.size
@@ -153,7 +151,6 @@ class TrackAdmin(admin.ModelAdmin):
                 _logger.error(errorStyle('save_model: ' + errMsg))
                 messages.add_message(request, messages.ERROR, errMsg)
                 obj.track_status = 'HIDDEN'
-                obj.audio_size = None
                 obj.audio_duration = None
                 # TODO: Prevent leaving the edit page?
         return super().save_model(request, obj, form, change)

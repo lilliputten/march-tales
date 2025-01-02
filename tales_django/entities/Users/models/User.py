@@ -28,6 +28,9 @@ class User(AbstractUser):
     _original_email = None
     _original_username = None
 
+    # Track-related parameters
+    favorite_tracks = models.ManyToManyField('Track', related_name='favorited_users')
+
     class Meta(AbstractUser.Meta):
         #  # TODO: Add correct check if email and username are the same?
         #  constraints = [

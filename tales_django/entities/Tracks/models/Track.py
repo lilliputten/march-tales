@@ -41,6 +41,7 @@ class Track(Model):
     TRACK_STATUS = [
         ('PUBLISHED', 'Published'),
         ('HIDDEN', 'Hidden'),
+        ('TEST', 'Test'),
     ]
     DEFAULT_TRACK_STATUS = TRACK_STATUS[0][0]
     track_status = models.TextField(choices=TRACK_STATUS, default=DEFAULT_TRACK_STATUS)

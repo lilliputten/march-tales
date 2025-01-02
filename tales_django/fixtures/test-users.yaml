@@ -16,6 +16,9 @@
     last_login: null
     groups: []
     user_permissions: []
+    # Test favorite tracks: see `test-tracks.yaml`
+    favorite_tracks:
+      - 1
 
 - model: tales_django.user
   pk: 2
