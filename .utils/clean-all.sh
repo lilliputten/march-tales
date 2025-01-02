@@ -14,7 +14,7 @@ test -f "$scriptsPath/config-local.sh" && . "$scriptsPath/config-local.sh"
 #   -not \( -name '*_' -prune \) \
 #   -not \( -name '*~' -prune \) \
 echo "Clearing root folder..." \
-$RMCMD -Rf \
+; $RMCMD -Rf \
   __pycache__ \
   build \
   .handler-saves \
