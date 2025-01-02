@@ -79,7 +79,6 @@ class User(AbstractUser):
     @property
     def is_member(self) -> bool:
         try:
-            return False
             return Membership.objects.get(user=self).active
         except ObjectDoesNotExist:
             return False

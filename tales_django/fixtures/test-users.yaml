@@ -7,7 +7,7 @@
     password: 'pbkdf2_sha256$870000$Otto5XTxyEA7BfVxX8GWre$uKOHnHBaevcvpSQ8aHMAJSCVgG46amaIRSgzR45gMZs='
     username: 'dmia@yandex.ru'
     email: 'dmia@yandex.ru'
-    first_name: ''
+    first_name: 'Admin'
     last_name: ''
     is_superuser: true
     is_staff: true
@@ -24,7 +24,7 @@
     password: 'pbkdf2_sha256$870000$HMKrTbktzNb6S9vrdDZrVU$iIc6EIGsGyAxTZdAFp9aB0FN7tfOkcg7Avh6+Wg0V+U='
     username: 'c_march@mail.ru'
     email: 'c_march@mail.ru'
-    first_name: ''
+    first_name: 'Author'
     last_name: ''
     is_superuser: true
     is_staff: true

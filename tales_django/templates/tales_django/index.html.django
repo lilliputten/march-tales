@@ -13,7 +13,7 @@
 {% endif %}
 
 <h2>{{ settings.SITE_NAME }} Events and Membership Portal</h2>
-<p>This web application allows you to sign up for membership in the <a href="https://{{ settings.DEFAULT_HOST }}/">{{ settings.SITE_NAME }}</a> association. {{ settings.SITE_SHORT_NAME }} hosts conferences, schools, and online seminars; the list of public events is given below. If you have questions, you can reach us at <a href="mailto:events@{{ settings.DEFAULT_HOST }}">events@{{ settings.DEFAULT_HOST }}</a>.</p>
+<p>This web application allows you to sign up for membership in the <a href="https://{{ settings.DEFAULT_HOST }}/">{{ settings.SITE_NAME }}</a> association. {{ settings.SITE_SHORT_NAME }} hosts conferences, schools, and online seminars; the list of public events is given below. If you have questions, you can reach us at <a href="mailto:{{ settings.CONTACT_EMAIL }}">{{ settings.CONTACT_EMAIL }}</a>.</p>
 <p>We wrote this portal ourselves, and it is far from perfect. Feel free to suggest changes at <a target="_blank" class="external" href="{{ settings.GITHUB }}/issues">our issue tracker</a>.</p>
 
 {# TODO: To show smth if there aren't any available public events? #}

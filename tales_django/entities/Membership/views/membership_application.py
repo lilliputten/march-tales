@@ -6,8 +6,8 @@ from django.shortcuts import redirect, render
 
 from core.helpers.dates import this_year
 
-from ..entities.Membership.forms import MembershipForm
-from ..entities.Membership.models import Membership
+from ..forms import MembershipForm
+from ..models import Membership
 
 
 def membership_application(request: HttpRequest):
@@ -89,7 +89,7 @@ def membership_application(request: HttpRequest):
             #     payment.email_invoice()
             #     messages.success(
             #         request,
-            #         f"Your membership has been created! An invoice has been sent to {request.user.email} from events@d-d-s.ch. The invoice can also be downloaded from your profile. Please note your membership is not in force until the invoice is paid.",
+            #         f"Your membership has been created! An invoice has been sent to {request.user.email} from {settings.CONTACT_EMAIL}. The invoice can also be downloaded from your profile. Please note your membership is not in force until the invoice is paid.",
             #     )
             #     return redirect("profile")
             # elif payment.data["method"] == "STRIPE":

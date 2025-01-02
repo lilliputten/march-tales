@@ -366,7 +366,7 @@ PASS_VARIABLES = {
     'USE_DJANGO_PREPROCESSORS': False,  # Preprocess scss source files with django filters, UNUSED
     # 'STRIPE_PUBLISHABLE_KEY': STRIPE_PUBLISHABLE_KEY,
     'DEFAULT_FROM_EMAIL': DEFAULT_FROM_EMAIL,
-    'DEFAULT_CONTACT_EMAIL': DEFAULT_FROM_EMAIL,
+    'CONTACT_EMAIL': DEFAULT_FROM_EMAIL,
     # NOTE: Site url and name could be taken from site data via `get_current_site`
     'SITE_NAME': SITE_NAME,
     'SITE_SHORT_NAME': SITE_SHORT_NAME,

@@ -1,8 +1,8 @@
 from django.urls import path
 
-from ..views.membership import membership_application
+from ..views import membership_application
 
-urlpatterns = [
+membership_urlpatterns = [
     path(
         'membership/apply',
         membership_application,
