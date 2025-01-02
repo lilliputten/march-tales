@@ -41,7 +41,7 @@ config.local.yml
 # Data
 /.data*
 /db.*
-/media
+/media/*
 !/media/samples
 
 # Client files
