@@ -1,13 +1,6 @@
-# import logging
-
 from django.contrib.sites.models import Site
 from django.shortcuts import render
 from django.views.generic import TemplateView
-
-# LOG = logging.getLogger(__name__)
-
-
-# Misc...
 
 
 class RobotsView(TemplateView):

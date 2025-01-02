@@ -15,7 +15,6 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import posixpath
 
 import re
-import os
 
 from core.appEnv import (
     BASE_DIR,
