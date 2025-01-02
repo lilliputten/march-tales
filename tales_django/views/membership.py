@@ -6,10 +6,8 @@ from django.shortcuts import redirect, render
 
 from core.helpers.dates import this_year
 
-from ..forms import MembershipForm
-from ..models import (
-    Membership,
-)
+from ..entities.Membership.forms import MembershipForm
+from ..entities.Membership.models import Membership
 
 
 def membership_application(request: HttpRequest):

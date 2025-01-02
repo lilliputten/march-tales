@@ -1,5 +1,6 @@
 from .User import User
-from .Membership import Membership, MEMBERSHIP_DATA
+
+from ..entities.Membership.models import Membership, MEMBERSHIP_DATA
 
 from ..entities.Tracks.models import Track
 

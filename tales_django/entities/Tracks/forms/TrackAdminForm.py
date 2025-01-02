@@ -1,6 +1,6 @@
 from django.forms.models import ModelForm
 
-from tales_django.forms.common_widgets import textAreaWidget, textInputWidget
+from tales_django.core.widgets import textAreaWidget, textInputWidget
 
 from ..models import Track
 

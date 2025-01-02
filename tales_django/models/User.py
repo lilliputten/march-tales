@@ -3,7 +3,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 
 
-from .Membership import Membership
+from ..entities.Membership.models import Membership
 
 
 class User(AbstractUser):
@@ -79,6 +79,7 @@ class User(AbstractUser):
     @property
     def is_member(self) -> bool:
         try:
+            return False
             return Membership.objects.get(user=self).active
         except ObjectDoesNotExist:
             return False

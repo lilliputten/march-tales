@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.forms.models import ModelForm
 
-from .common_widgets import textAreaWidget, textInputWidget
+from tales_django.core.widgets import textAreaWidget, textInputWidget
 
 
 class UserAdminForm(ModelForm):

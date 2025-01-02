@@ -1,6 +1,5 @@
 from .UserAdmin import UserAdmin
-from .MembershipAdmin import MembershipAdmin
-
+from ..entities.Membership.admin import MembershipAdmin
 from ..entities.Tracks.admin import TrackAdmin
 
 __all__ = [
