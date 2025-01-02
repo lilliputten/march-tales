@@ -18,7 +18,7 @@
     <h1 class="page-title primary-color">Register for {{ event.title }}</h1>
   </legend>
 
-  {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+  {% if error_message %}<p>{{ error_message }}</p>{% endif %}
 
   <div class="event-info mb-3">
     {% if event.description %}
