@@ -9,6 +9,7 @@ from ..views import (
     UserRegistrationView,
     logout_user_route,
     edit_user_profile,
+    delete_user_account,
 )
 
 users_urlpatterns = [
@@ -24,6 +25,11 @@ users_urlpatterns = [
         'profile/edit',
         edit_user_profile,
         name='profile_edit',
+    ),
+    path(
+        'profile/delete',
+        delete_user_account,
+        name='delete_account',
     ),
     # Stock accounts...
     # path(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/successfully_logged_out/'}),

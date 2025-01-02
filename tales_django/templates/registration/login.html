@@ -20,7 +20,7 @@
 </fieldset>
 
 {% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
+<p>We can't find a user with such authorization data. Please try again.</p>
 {% endif %} {% include "assets/render-messages/render-messages.django" %}
 
 <form role="form" method="post" action="{% url 'login' %}">
