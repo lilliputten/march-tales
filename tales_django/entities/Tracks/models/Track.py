@@ -3,11 +3,15 @@
 from datetime import date
 from django.db import models
 from django.db.models import Model
-
-# from core.appEnv import LOCAL
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
 
 from core.appEnv import LOCAL
+from core.logging import getDebugLogger
 from tales_django.core.helpers.audio import getAudioTrackFolderName
+
+
+_logger = getDebugLogger()
 
 
 class Track(Model):
@@ -60,6 +64,20 @@ class Track(Model):
     def active(self) -> bool:
         return self.status == 'PUBLISHED'
 
+    def save(self, *args, **kwargs):
+        # Try to remove the old files...
+        try:
+            track = Track.objects.get(id=self.id)
+            if track.audio_file and self.audio_file and track.audio_file != self.audio_file:
+                track.audio_file.delete(save=False)
+            if track.preview_picture and self.preview_picture and track.preview_picture != self.preview_picture:
+                track.preview_picture.delete(save=False)
+        except Track.DoesNotExist:
+            # Do nothing when a new object is creating
+            pass
+        # Call save first, to create a primary key
+        super(Track, self).save(*args, **kwargs)
+
     def __str__(self):
         items = [
             'Track',
@@ -68,3 +86,16 @@ class Track(Model):
         ]
         info = ' '.join(filter(None, map(str, items)))
         return info
+
+
+@receiver(post_delete, sender=Track)
+def on_track_delete(sender, instance: Track, using, **kwargs):
+    _logger.info('[on_track_delete] On track delete' + repr(Track))
+    try:
+        # Try to remove uloaded files...
+        if instance.audio_file:
+            instance.audio_file.delete(save=False)
+        if instance.preview_picture:
+            instance.preview_picture.delete(save=False)
+    except Exception as _:
+        pass

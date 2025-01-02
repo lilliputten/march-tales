@@ -128,6 +128,7 @@ class TrackAdmin(admin.ModelAdmin):
         # Get audio duration
         audioFile = obj.audio_file
         fileInstance: File | TemporaryUploadedFile = audioFile.file
+        # track = Track.objects.get(id=obj.id)
         if fileInstance and isinstance(fileInstance, TemporaryUploadedFile):
             try:
                 obj.audio_size = audioFile.size
@@ -135,6 +136,8 @@ class TrackAdmin(admin.ModelAdmin):
                 tempFile = fileInstance.file
                 tempFilePath = tempFile.name
                 duration = probeDuration(tempFilePath)
+                if not duration:
+                    raise Exception('Can not determine correct audio duration.')
                 obj.audio_duration = round(duration)
                 sizeFmt = self.size_formated(obj)
                 durationFmt = self.duration_formated(obj)
