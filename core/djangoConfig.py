@@ -9,6 +9,10 @@ APP_NAME = 'tales_django'
 BASE_HOST = appEnv.str('BASE_HOST', 'march.team')
 DEFAULT_HOST = appEnv.str('DEFAULT_HOST', 'tales.march.team')
 
+# Folders
+
+MEDIA_TRACKS_FOLDER = appEnv.str('MEDIA_TRACKS_FOLDER', 'tracks')
+
 # Email...
 
 DEFAULT_FROM_EMAIL = appEnv.str('DEFAULT_FROM_EMAIL', 'tales@' + BASE_HOST)

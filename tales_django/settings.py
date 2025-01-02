@@ -15,6 +15,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import posixpath
 
 import re
+import os
 
 from core.appEnv import (
     BASE_DIR,
@@ -101,6 +102,11 @@ COMPRESS_PRECOMPILERS = (
     # - https://sass-lang.com/install/
     # - https://github.com/sass/dart-sass/releases/latest
     # @see https://django-compressor.readthedocs.io/en/stable/settings.html#django.conf.settings.COMPRESS_PRECOMPILERS
+)
+
+FILE_UPLOAD_HANDLERS = (
+    # TemporaryFileUploadHandler is required for processing uploaded audios with ffmpeg
+    'django.core.files.uploadhandler.TemporaryFileUploadHandler',
 )
 
 ALLOWED_HOSTS = [

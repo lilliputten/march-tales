@@ -13,4 +13,9 @@ fi
 
 echo "Using SITE_YAML:" $SITE_YAML
 
-$PYTHON_RUNTIME manage.py loaddata $SITE_YAML test-users.yaml test-membership.yaml
+$PYTHON_RUNTIME manage.py loaddata \
+  $SITE_YAML \
+  test-users.yaml \
+  test-membership.yaml \
+  test-tracks.yaml \
+&& echo OK

@@ -39,8 +39,10 @@ config.local.yml
 /out
 
 # Data
+/.data*
 /db.*
 /media
+!/media/samples
 
 # Client files
 /test-*

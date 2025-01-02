@@ -1,7 +1,9 @@
 from typing import Optional
 
 from django.test import TestCase
-from django.contrib.auth.models import User
+
+from tales_django.models import Track
+# from django.contrib.models import Track
 
 # from myapp.models import Animal
 
@@ -22,8 +24,8 @@ class Test_user(TestCase):
         print('Method: test_false_is_false.')
         self.assertFalse(False)
 
-    def test_user_create_and_remove(self):
-        user: Optional[User]
+    def test_track_create_and_remove(self):
+        track: Optional[Track] = None
         try:
             """
             Sample test
@@ -33,12 +35,12 @@ class Test_user(TestCase):
             # self.assertEqual(lion.speak(), 'The lion says "roar"')
             # self.assertEqual(cat.speak(), 'The cat says "meow"')
 
-            user = User.objects.create_user('john', 'lennon@thebeatles.com', 'johnpassword')
-            user.last_name = 'Lennon'
-            user.save()
+            track = Track.objects.create(title='Test title')
+            # track.last_name = 'Lennon'
+            track.save()
 
             # Should have integer id
-            self.assertIsInstance(user.id, int)
+            self.assertIsInstance(track.id, int)
         finally:
-            if user:
-                user.delete()
+            if track:
+                track.delete()

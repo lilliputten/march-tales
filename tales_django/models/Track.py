@@ -1,36 +1,63 @@
 # from django.utils.translation import ugettext_lazy as _
 
+from datetime import date
+
+# from django import forms
+from datetime import datetime
 from django.db import models
 from django.db.models import Model
 
+# from django.utils import timezone
 
-uploadsFolder = 'tracks'
+# from django.core.validators import FileExtensionValidator
+
+# from core.appEnv import LOCAL
+
+from core.appEnv import LOCAL
+from tales_django.core.helpers.audio import getAudioTrackFolderName
 
 
 class Track(Model):
-    title = models.TextField(unique=True, blank=False, null=False, max_length=150, verbose_name='track title', help_text='Required. 150 characters or fewer. Track title')
-    description = models.TextField(blank=True, null=False, max_length=512, verbose_name='description')
-    youtube_url = models.URLField(blank=True, null=False, max_length=150)
+    title = models.TextField(
+        unique=False,
+        blank=False,
+        null=False,
+        max_length=150,
+        verbose_name='track title',
+        help_text='Required. 150 characters or fewer. Track title',
+    )
+    description = models.TextField(blank=True, null=False, max_length=512, verbose_name='Description')
+    youtube_url = models.URLField(blank=True, null=False, max_length=150, verbose_name='YouTube video link url')
     tags_list = models.TextField(blank=True, null=False, max_length=150)
 
+    uploadsFolder = getAudioTrackFolderName()
+
     # @see https://forum.djangoproject.com/t/how-to-pass-audio-file-from-model-to-template-in-django/11661
-    preview_picture = models.ImageField(upload_to=uploadsFolder)
-    audio_file = models.FileField(upload_to=uploadsFolder, blank=False, null=False)
+    audio_file = models.FileField(
+        upload_to=uploadsFolder,
+        blank=False,
+        null=False,
+    )
+    preview_picture = models.ImageField(upload_to=uploadsFolder, blank=True, null=True)
+
+    audio_duration = models.BigIntegerField(null=True, help_text='Duration (seconds)')
+    audio_size = models.BigIntegerField(null=True, help_text='File size (bytes)')
 
     TRACK_STATUS = [
-        ('HIDDEN', 'Hidden'),
         ('PUBLISHED', 'Published'),
+        ('HIDDEN', 'Hidden'),
     ]
     DEFAULT_TRACK_STATUS = TRACK_STATUS[0][0]
     track_status = models.TextField(choices=TRACK_STATUS, default=DEFAULT_TRACK_STATUS)
 
+    # Timestamps
+    # created_at = models.DateField(auto_now_add=True)
+    created_at = models.DateField(default=date.today)
+    updated_at = models.DateField(auto_now=True)
+
     # Owner/creator
     created_by = models.ForeignKey('User', related_name='creator', on_delete=models.DO_NOTHING)
     updated_by = models.ForeignKey('User', related_name='updater', on_delete=models.DO_NOTHING)
-
-    # Timestamps
-    created_at = models.DateField(auto_now_add=True)
-    updated_at = models.DateField(auto_now=True)
 
     @property
     def active(self) -> bool:
@@ -38,8 +65,9 @@ class Track(Model):
 
     def __str__(self):
         items = [
-            '[%d]' % self.id,
+            'Track',
             self.title,
+            '[%d]' % self.id if LOCAL else None,
         ]
-        info = ', '.join(filter(None, map(str, items)))
+        info = ' '.join(filter(None, map(str, items)))
         return info

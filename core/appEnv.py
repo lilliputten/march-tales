@@ -8,6 +8,7 @@ import environ
 BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
 PROJECT_PATH = BASE_DIR.as_posix()
 STATIC_PATH = posixpath.join(PROJECT_PATH, 'static')
+MEDIA_PATH = posixpath.join(PROJECT_PATH, 'media')
 # print('BASE_DIR:', BASE_DIR)
 # print('PROJECT_PATH:', PROJECT_PATH)
 # print('STATIC_PATH:', STATIC_PATH)
@@ -41,7 +42,10 @@ VERCEL_URL = appEnv.str('VERCEL_URL', '')
 IS_VERCEL = True if VERCEL_URL else False
 
 # Temp path: Use local 'temp' or vercel specific '/tmp' folders for temporary files
-TEMP_PATH = posixpath.join(PROJECT_PATH, '.temp') if LOCAL or not IS_VERCEL else '/tmp'
+# TEMP_PATH = posixpath.join(PROJECT_PATH, '.temp') if LOCAL or not IS_VERCEL else '/tmp'
+TEMP_PATH = posixpath.join(PROJECT_PATH, '.temp')
+# Set temp path location for django
+os.environ['TMPDIR'] = TEMP_PATH
 pathlib.Path(TEMP_PATH).mkdir(
     parents=True,
     exist_ok=True,

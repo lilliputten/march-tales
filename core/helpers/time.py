@@ -7,6 +7,7 @@ from core.appConfig import TZ_HOURS
 
 
 # TODO: Move these to constants/config?
+dateIdTimeFormat = '%Y-%m-%d'
 idTimeFormat = '%Y-%m-%d-%H-%M-%S'
 shortTimeFormat = '%Y-%m-%d %H:%M'
 shortTzTimeFormat = '%Y-%m-%d %H:%M %z'
@@ -36,6 +37,8 @@ def getTimeFormat(precise: TPrecise | None = None):
         return withSecondsTzTimeFormat
     if precise == 'id':
         return idTimeFormat
+    if precise == 'dateId':
+        return dateIdTimeFormat
     return withSecondsTzTimeFormat
 
 
