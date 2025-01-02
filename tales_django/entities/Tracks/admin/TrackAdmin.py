@@ -5,8 +5,9 @@ from django.contrib.admin import SimpleListFilter
 from django.db.models import Q
 from django.contrib import messages
 
-# from django.core.files.uploadedfile import InMemoryUploadedFile
-# from django.core.files.base import File
+from django.core.files.uploadedfile import TemporaryUploadedFile
+from django.core.files.base import File
+
 # from django.core.files.storage import default_storage
 # from django.core.files.base import ContentFile
 
@@ -54,6 +55,7 @@ class TrackAdmin(admin.ModelAdmin):
         'created_at',
         'created_by',
         'has_preview',
+        'for_members',
         'is_published',
     ]
     readonly_fields = (
@@ -125,25 +127,33 @@ class TrackAdmin(admin.ModelAdmin):
         obj.updated_by_id = request.user.id
         # Get audio duration
         audioFile = obj.audio_file
-        # fileObj: File | InMemoryUploadedFile = audioFile.file # File | InMemoryUploadedFile
-        try:
-            obj.audio_size = audioFile.size
-            # Trying to determine audio track length
-            tempFile = audioFile.file.file
-            tempFilePath = tempFile.name
-            duration = probeDuration(tempFilePath)
-            obj.audio_duration = round(duration)
-        except Exception as err:
-            errText = errorToString(err, show_stacktrace=False)
-            sTraceback = '\n\n' + str(traceback.format_exc()) + '\n\n'
-            errMsg = 'Error probing an audio: ' + errText
-            _logger.info(
-                warningTitleStyle('save_model: Traceback for the following error:') + tretiaryStyle(sTraceback)
-            )
-            _logger.error(errorStyle('save_model: ' + errMsg))
-            messages.add_message(request, messages.ERROR, errMsg)
-        # messages.add_message(request, messages.SUCCESS, 'Add audio track of length %d' % duration)
-        super().save_model(request, obj, form, change)
+        fileInstance: File | TemporaryUploadedFile = audioFile.file
+        if fileInstance and isinstance(fileInstance, TemporaryUploadedFile):
+            try:
+                obj.audio_size = audioFile.size
+                # Trying to determine audio track length
+                tempFile = fileInstance.file
+                tempFilePath = tempFile.name
+                duration = probeDuration(tempFilePath)
+                obj.audio_duration = round(duration)
+                sizeFmt = self.size_formated(obj)
+                durationFmt = self.duration_formated(obj)
+                msgText = f'Audio has been successfully uploaded and its data updated: size is {sizeFmt}, duration is {durationFmt}'
+                messages.add_message(request, messages.SUCCESS, msgText)
+            except Exception as err:
+                errText = errorToString(err, show_stacktrace=False)
+                sTraceback = '\n\n' + str(traceback.format_exc()) + '\n\n'
+                errMsg = 'Error probing an audio: ' + errText
+                _logger.info(
+                    warningTitleStyle('save_model: Traceback for the following error:') + tretiaryStyle(sTraceback)
+                )
+                _logger.error(errorStyle('save_model: ' + errMsg))
+                messages.add_message(request, messages.ERROR, errMsg)
+                obj.track_status = 'HIDDEN'
+                obj.audio_size = None
+                obj.audio_duration = None
+                # TODO: Prevent leaving the edit page?
+        return super().save_model(request, obj, form, change)
 
 
 admin.site.register(Track, TrackAdmin)

@@ -18,3 +18,9 @@ if [ $? = 1 ]; then
 else
   echo "check-python-env: Using .venv"
 fi
+
+if [ -z "$DJANGO_APP" ]; then
+  echo "Django application isn't specified. See 'DJANGO_APP' parameter in 'config.sh'"
+  exit 1
+fi
+

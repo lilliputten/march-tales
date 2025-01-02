@@ -22,15 +22,13 @@ def getFileIdFromUrl(url: str, username: str):
     return filename
 
 
-def sizeofFmt(num, suffix='B'):
-    #  if num == 0:
-    #      return '0'
+def sizeofFmt(num, suffix='B', divider: float = 1024.0):
     if not num:
         return ''
     for unit in ('', 'K', 'M', 'G', 'T', 'P', 'E', 'Z'):
-        if abs(num) < 1024.0:
+        if abs(num) < divider:
             return f'{num:3.1f}{unit}{suffix}'
-        num /= 1024.0
+        num /= divider
     return f'{num:.1f}Yi{suffix}'
 
 

@@ -1,15 +1,8 @@
 # from django.utils.translation import ugettext_lazy as _
 
 from datetime import date
-
-# from django import forms
-from datetime import datetime
 from django.db import models
 from django.db.models import Model
-
-# from django.utils import timezone
-
-# from django.core.validators import FileExtensionValidator
 
 # from core.appEnv import LOCAL
 
@@ -40,15 +33,19 @@ class Track(Model):
     )
     preview_picture = models.ImageField(upload_to=uploadsFolder, blank=True, null=True)
 
-    audio_duration = models.BigIntegerField(null=True, help_text='Duration (seconds)')
-    audio_size = models.BigIntegerField(null=True, help_text='File size (bytes)')
-
+    # Track status
     TRACK_STATUS = [
         ('PUBLISHED', 'Published'),
         ('HIDDEN', 'Hidden'),
     ]
     DEFAULT_TRACK_STATUS = TRACK_STATUS[0][0]
     track_status = models.TextField(choices=TRACK_STATUS, default=DEFAULT_TRACK_STATUS)
+
+    for_members = models.BooleanField(default=False, verbose_name='For members only')
+
+    # Properties derived from the audio track file
+    audio_duration = models.BigIntegerField(null=True, help_text='Duration (seconds)')
+    audio_size = models.BigIntegerField(null=True, help_text='File size (bytes)')
 
     # Timestamps
     # created_at = models.DateField(auto_now_add=True)

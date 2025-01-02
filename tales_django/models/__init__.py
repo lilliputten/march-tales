@@ -1,6 +1,7 @@
 from .User import User
 from .Membership import Membership, MEMBERSHIP_DATA
-from .Track import Track
+
+from ..entities.Tracks.models import Track
 
 __all__ = [
     'User',

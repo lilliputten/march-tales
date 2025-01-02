@@ -1,9 +1,8 @@
-from django import forms
 from django.forms.models import ModelForm
 
-from ..models import Track
+from tales_django.forms.common_widgets import textAreaWidget, textInputWidget
 
-from .common_widgets import textAreaWidget, textInputWidget
+from ..models import Track
 
 
 class TrackAdminForm(ModelForm):
@@ -17,9 +16,3 @@ class TrackAdminForm(ModelForm):
             # 'audio_file': forms.FileInput(attrs={'accept': '.mp3,audio/*'}),
         }
         fields = '__all__'
-
-    # def form_valid(self, form):
-    #     files = form.cleaned_data['audio_file']
-    #     # for f in files:
-    #     #     ...  # Do something with each file.
-    #     return super().form_valid(form)

@@ -1,10 +1,10 @@
-# @changed 2024.12.31, 21:53
+# @changed 2025.01.02, 17:01
 
 - model: tales_django.user
   pk: 1
   fields:
-    # Pass*: <temp>
-    password: 'pbkdf2_sha256$870000$7PXrYmhd2OfuG6IiEAoXkd$BDZb4XWKI1nzE/D4HL75qo6VoipidLQCyqIrKoGP7UE='
+    # X2m***
+    password: 'pbkdf2_sha256$870000$Otto5XTxyEA7BfVxX8GWre$uKOHnHBaevcvpSQ8aHMAJSCVgG46amaIRSgzR45gMZs='
     username: 'dmia@yandex.ru'
     email: 'dmia@yandex.ru'
     first_name: ''
@@ -20,7 +20,7 @@
 - model: tales_django.user
   pk: 2
   fields:
-    # Pass*: mN***
+    # mN***
     password: 'pbkdf2_sha256$870000$HMKrTbktzNb6S9vrdDZrVU$iIc6EIGsGyAxTZdAFp9aB0FN7tfOkcg7Avh6+Wg0V+U='
     username: 'c_march@mail.ru'
     email: 'c_march@mail.ru'
@@ -37,7 +37,7 @@
 - model: tales_django.user
   pk: 3
   fields:
-    # Pass*: mN***
+    # mN***
     password: 'pbkdf2_sha256$870000$HMKrTbktzNb6S9vrdDZrVU$iIc6EIGsGyAxTZdAFp9aB0FN7tfOkcg7Avh6+Wg0V+U='
     username: 'lilliputten@gmail.com'
     email: 'lilliputten@gmail.com'
