@@ -3,12 +3,15 @@
 
 from django.urls import include, path
 
-from .. import views
-
 from ..forms import UserRegistrationForm
-from ..views import UserRegistrationView
+from ..views import (
+    profile,
+    UserRegistrationView,
+    logout_user_route,
+    edit_user_profile,
+)
 
-urlpatterns = [
+users_urlpatterns = [
     # Accounts...
     path(
         # Overrided registration form using updated one
@@ -16,15 +19,15 @@ urlpatterns = [
         UserRegistrationView.as_view(form_class=UserRegistrationForm),
         name='django_registration_register',
     ),
-    path('profile', views.profile, name='profile'),
+    path('profile', profile, name='profile'),
     path(
         'profile/edit',
-        views.edit_user_profile,
+        edit_user_profile,
         name='profile_edit',
     ),
     # Stock accounts...
     # path(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/successfully_logged_out/'}),
-    path('logout/', views.logoutUserRoute, name='logout_user'),
+    path('logout/', logout_user_route, name='logout_user'),
     path(
         'accounts/',
         include('django_registration.backends.activation.urls'),

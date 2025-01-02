@@ -1,12 +1,11 @@
-from .User import User
+from ..entities.Users.models import User
 
-from ..entities.Membership.models import Membership, MEMBERSHIP_DATA
+from ..entities.Membership.models import Membership
 
 from ..entities.Tracks.models import Track
 
 __all__ = [
     'User',
     'Membership',
-    'MEMBERSHIP_DATA',
     'Track',
 ]

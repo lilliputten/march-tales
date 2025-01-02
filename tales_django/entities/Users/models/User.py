@@ -3,7 +3,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 
 
-from ..entities.Membership.models import Membership
+from ...Membership.models import Membership
 
 
 class User(AbstractUser):

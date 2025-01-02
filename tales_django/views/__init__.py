@@ -4,10 +4,6 @@
 from .root_views import (
     components_demo,
     index,
-    profile,
-)
-from .accounts_views import (
-    logoutUserRoute,
 )
 from .system_views import (
     RobotsView,
@@ -15,15 +11,18 @@ from .system_views import (
     page404,
     page500,
 )
-from .edit_user_profile import edit_user_profile
-
-from .UserRegistrationView import UserRegistrationView
+from ..entities.Users.views import (
+    profile,
+    logout_user_route,
+    edit_user_profile,
+    UserRegistrationView,
+)
 
 __all__ = [
     'components_demo',
     'index',
     'profile',
-    'logoutUserRoute',
+    'logout_user_route',
     'RobotsView',
     'page403',
     'page404',
