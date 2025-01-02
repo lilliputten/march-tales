@@ -7,7 +7,7 @@
     tags_list: ''
     # Located under `media` folder
     audio_file: 'samples/test-short.mp3'
-    preview_picture: 'samples/sample.png'
+    preview_picture: 'samples/sample-preview.png'
     audio_duration: 5
     audio_size: 22535
     track_status: 'TEST'

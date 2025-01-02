@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "march-tales"
-version = "0.0.6"
+version = "0.0.7"
 description = "March Tales django api and web frontend server"
 authors = ["lilliputten <lilliputten@gmail.com>"]
 readme = "README.md"

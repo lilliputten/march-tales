@@ -20,7 +20,13 @@ from core.appEnv import (
     BASE_DIR,
     LOCAL,
     DEBUG,
-    # PROJECT_INFO, # DEBUG
+    STATIC_FOLDER,
+    STATIC_ROOT,
+    MEDIA_FOLDER,
+    MEDIA_ROOT,
+    SRC_ROOT,
+    ASSETS_ROOT,
+    PROJECT_INFO, # DEBUG
 )
 
 from core.appSecrets import (
@@ -58,23 +64,8 @@ from core.djangoConfig import (
 # Define default site id for `sites.models`
 SITE_ID = 1
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
-STATIC_FOLDER = 'static/'
-STATIC_ROOT = posixpath.join(BASE_DIR, STATIC_FOLDER)
-STATIC_URL = posixpath.join('/', STATIC_FOLDER)
-
-MEDIA_FOLDER = 'media/'
-MEDIA_ROOT = posixpath.join(BASE_DIR, MEDIA_FOLDER)
-MEDIA_URL = posixpath.join('/', MEDIA_FOLDER)
-
-# The folder for asset file sources
-SRC_FOLDER = 'src'
-SRC_ROOT = posixpath.join(BASE_DIR, SRC_FOLDER)
-
-ASSETS_FOLDER = 'assets/'
-ASSETS_ROOT = posixpath.join(SRC_FOLDER, ASSETS_FOLDER)
+STATIC_URL = f'/{STATIC_FOLDER}/'
+MEDIA_URL = f'/{MEDIA_FOLDER}/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -83,9 +74,11 @@ STATICFILES_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
 )
 
-if LOCAL:
-    # Add asset file sources to static folders in dev mode to access scss sources via django filters during dev mode time
-    STATICFILES_DIRS += (SRC_ROOT,)
+# if LOCAL:
+#     # Add asset file sources to static folders in dev mode to access scss sources via django filters during dev mode time
+#     STATICFILES_DIRS += (
+#         SRC_ROOT,
+#     )
 
 # List of finder classes that know how to find static files in
 # various locations.
@@ -358,6 +351,7 @@ SITE_SHORT_NAME = SITE_NAME
 PASS_VARIABLES = {
     'DEBUG': DEBUG,  # Pass django debug flag to the code (from environment)
     'LOCAL': LOCAL,  # Local dev server mode (from the environment)
+    'PROJECT_INFO': PROJECT_INFO,
     'DEFAULT_HOST': DEFAULT_HOST,
     'GITHUB': 'https://github.com/lilliputten/march-tales',
     'SECRET_KEY': SECRET_KEY,
@@ -372,9 +366,12 @@ PASS_VARIABLES = {
     'SITE_TITLE': SITE_NAME,
     'SITE_DESCRIPTION': SITE_DESCRIPTION,
     'SITE_KEYWORDS': re.sub(r'\s*[\n\r]+\s*', ', ', SITE_KEYWORDS.strip()),
+    'STATIC_URL': STATIC_URL,
+    'MEDIA_URL': MEDIA_URL,
 }
 
 __all__ = [
+    # Email...
     'EMAIL_HOST',
     'EMAIL_PORT',
     'EMAIL_USE_TLS',
@@ -383,4 +380,14 @@ __all__ = [
     'EMAIL_HOST_PASSWORD',
     'DEFAULT_FROM_EMAIL',
     'SERVER_EMAIL',
+
+    # Folders...
+    'ASSETS_ROOT',
+    'MEDIA_FOLDER',
+    'MEDIA_ROOT',
+    'MEDIA_URL',
+    # 'SRC_ROOT',
+    'STATIC_FOLDER',
+    'STATIC_ROOT',
+    'STATIC_URL',
 ]
