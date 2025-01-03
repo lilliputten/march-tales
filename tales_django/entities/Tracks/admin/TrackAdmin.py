@@ -49,30 +49,31 @@ class TrackAdmin(admin.ModelAdmin):
     form = TrackAdminForm
     list_display = [
         'title',
+        'author',
+        'tags_list',
         'duration_formatted',
         'size_formatted',
         # 'resolved_date',
-        'created_at',
-        'created_by',
+        'published_at',
+        'published_by',
         'has_preview',
         'for_members',
         'is_published',
-        'tags_list',
     ]
     readonly_fields = (
         'duration_formatted',
         'size_formatted',
         # 'audio_duration',
         # 'audio_size',
-        # 'created_at',
-        # 'created_by',
+        # 'published_at',
+        # 'published_by',
         # 'updated_at',
         # 'updated_by',
     )
     exclude = (
-        # 'created_by',
+        # 'published_by',
         'updated_by',
-        # 'created_at',
+        # 'published_at',
         'updated_at',
         'audio_duration',
         'audio_size',
@@ -104,7 +105,7 @@ class TrackAdmin(admin.ModelAdmin):
     tags_list.short_description = 'Tags'
 
     # def resolved_date(self, track):
-    #     return track.date if track.date else track.created_at
+    #     return track.date if track.date else track.published_at
     # resolved_date.short_description = 'Date'
 
     def duration_formatted(self, track):
@@ -126,7 +127,7 @@ class TrackAdmin(admin.ModelAdmin):
     def get_changeform_initial_data(self, request):
         get_data = super(TrackAdmin, self).get_changeform_initial_data(request)
         # Set creator user
-        get_data['created_by'] = request.user.id
+        get_data['published_by'] = request.user.id
         return get_data
 
     def save_model(

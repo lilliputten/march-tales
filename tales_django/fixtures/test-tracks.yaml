@@ -3,18 +3,19 @@
     model: "tales_django.track"
     pk: 1
     fields:
-      title: "Sample tags"
+      title: "Sample track"
       description: ""
       youtube_url: ""
+      author: 1
       audio_file: "samples/test-short.mp3"
       preview_picture: "samples/gr-400x225.jpg"
       track_status: "PUBLISHED"
       for_members: false
       audio_duration: 5
       audio_size: 22535
-      created_at: "2025-01-03"
+      published_at: "2025-01-03"
       updated_at: "2025-01-03"
-      created_by: 1
+      published_by: 1
       updated_by: 1
       tags:
         - 1
@@ -35,4 +36,14 @@
       text: "Sample"
       promote: false
       tracks: []
+
+  -
+    model: "tales_django.author"
+    pk: 1
+    fields:
+      name: "Wilhelm Hauff"
+      description: ""
+      portrait_picture: "samples/wilhelm-hauff-sq-200.jpg"
+      promote: true
+
 

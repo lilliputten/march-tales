@@ -12,13 +12,13 @@ class Tag(Model):
         max_length=150,
     )
 
-    promote = models.BooleanField(default=False, verbose_name='Promote on the main page')
+    promote = models.BooleanField(default=False, help_text='Promote on the main page')
 
     @property
     def tracks_count(self):
         return self.track_set.count()
 
-    # Paired rback relation to tracks
+    # Paired (reversed) relation to tracks
     tracks = models.ManyToManyField('Track', blank=True, through='Track_tags')
 
     def __str__(self):

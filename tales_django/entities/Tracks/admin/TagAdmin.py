@@ -11,7 +11,7 @@ class TagAdmin(admin.ModelAdmin):
     list_display = [
         'text',
         'promote',
-        'track_count',
+        'tagged_tracks_count',
     ]
 
     def get_queryset(self, request):
@@ -21,7 +21,7 @@ class TagAdmin(admin.ModelAdmin):
         )
         return queryset
 
-    def track_count(self, obj):
+    def tagged_tracks_count(self, obj):
         return obj._tracks_count
 
-    track_count.admin_order_field = '_tracks_count'
+    tagged_tracks_count.admin_order_field = '_tracks_count'

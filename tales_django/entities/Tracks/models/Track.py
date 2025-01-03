@@ -26,8 +26,15 @@ class Track(Model):
         verbose_name='track title',
         help_text='Required. 150 characters or fewer. The track title text.',
     )
-    description = models.TextField(blank=True, null=False, max_length=512, verbose_name='Description')
-    youtube_url = models.URLField(blank=True, null=False, max_length=150, verbose_name='YouTube video link url')
+    description = models.TextField(
+        blank=True,
+        null=False,
+        max_length=512,
+        help_text='Optional description, up to 512 characters.',
+    )
+    youtube_url = models.URLField(blank=True, null=False, max_length=150, help_text='YouTube video link url')
+
+    author = models.ForeignKey('Author', blank=True, null=True, on_delete=models.DO_NOTHING)
 
     tags = models.ManyToManyField('Tag', blank=True, related_name='tagged_tracks')
 
@@ -39,13 +46,13 @@ class Track(Model):
         blank=False,
         null=False,
     )
-    preview_picture = models.ImageField(upload_to=uploadsFolder, blank=True, null=True)
+    preview_picture = models.ImageField(upload_to=uploadsFolder, blank=True)
 
     # Track status
     TRACK_STATUS = [
         ('PUBLISHED', 'Published'),
         ('HIDDEN', 'Hidden'),
-        ('TEST', 'Test'),
+        ('TEST', 'Test'),  # DEBUG!
     ]
     DEFAULT_TRACK_STATUS = TRACK_STATUS[0][0]
     track_status = models.TextField(choices=TRACK_STATUS, default=DEFAULT_TRACK_STATUS)
@@ -58,11 +65,11 @@ class Track(Model):
 
     # Timestamps
     # created_at = models.DateField(auto_now_add=True)
-    created_at = models.DateField(default=date.today)
+    published_at = models.DateField(default=date.today)
     updated_at = models.DateField(auto_now=True)
 
     # Owner/creator
-    created_by = models.ForeignKey('User', related_name='creator', on_delete=models.DO_NOTHING)
+    published_by = models.ForeignKey('User', related_name='publisher', on_delete=models.DO_NOTHING)
     updated_by = models.ForeignKey('User', related_name='updater', on_delete=models.DO_NOTHING)
 
     @property
