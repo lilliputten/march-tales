@@ -1,6 +1,6 @@
 #!/bin/sh
 # @desc Create/update version tag (from build folder)
-# @changed 2024.12.30, 15:44
+# @changed 2025.01.03, 19:30
 
 scriptsPath=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
 rootPath=`dirname "$scriptsPath"`
@@ -20,8 +20,8 @@ TIMESTAMP=`$DATECMD "+%Y.%m.%d %H:%M:%S %z"`
 echo "Creating test deploy $TIMESTAMP" \
   && touch "$rootPath/project-version.txt" \
   && . "$scriptsPath/update-build-variables.sh" \
-  && cp "$rootPath/$PROJECT_INFO_FILE" "$rootPath/deploy.stamp" \
-  && echo "$TIMESTAMP" >> "$rootPath/deploy.stamp" \
+  && cp "$rootPath/$PROJECT_INFO_FILE" "$rootPath/.deploy.stamp" \
+  && echo "$TIMESTAMP" >> "$rootPath/.deploy.stamp" \
   && git add . -Av \
   && git commit -am "Deploy test $TIMESTAMP" \
   && git push \
