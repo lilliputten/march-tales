@@ -20,7 +20,6 @@ TIMESTAMP=`$DATECMD "+%Y.%m.%d %H:%M:%S %z"`
 echo "Creating test deploy $TIMESTAMP" \
   && touch "$rootPath/project-version.txt" \
   && . "$scriptsPath/update-build-variables.sh" \
-  && cp "$rootPath/$PROJECT_INFO_FILE" "$rootPath/.deploy.stamp" \
   && echo "$TIMESTAMP" >> "$rootPath/.deploy.stamp" \
   && git add . -Av \
   && git commit -am "Deploy test $TIMESTAMP" \
