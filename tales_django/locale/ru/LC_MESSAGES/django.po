@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-03 23:34+0300\n"
+"POT-Creation-Date: 2025-01-03 23:52+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,33 +24,33 @@ msgstr ""
 msgid "Admin panel"
 msgstr "Панель управления"
 
-#: .\src\assets\page-menus\menu-main.django:48
+#: .\src\assets\page-menus\menu-main.django:45
 msgid "Profile"
 msgstr "Профиль"
 
-#: .\src\assets\page-menus\menu-main.django:54
+#: .\src\assets\page-menus\menu-main.django:48
 msgid "Edit profile"
 msgstr "Редактировать профиль"
 
-#: .\src\assets\page-menus\menu-main.django:57
+#: .\src\assets\page-menus\menu-main.django:55
 msgid "Change password"
 msgstr "Сменить пароль"
 
-#: .\src\assets\page-menus\menu-main.django:60
+#: .\src\assets\page-menus\menu-main.django:58
 msgid "Reset password"
 msgstr "Сбросить пароль"
 
-#: .\src\assets\page-menus\menu-main.django:66
+#: .\src\assets\page-menus\menu-main.django:70
 msgid "Logout"
 msgstr "Выйти"
 
-#: .\src\assets\page-menus\menu-main.django:73
+#: .\src\assets\page-menus\menu-main.django:78
 msgid "Log in"
 msgstr "Войти"
 
-#: .\src\assets\page-menus\menu-main.django:76
+#: .\src\assets\page-menus\menu-main.django:81
 msgid "Sign up"
-msgstr "Регистраця"
+msgstr "Регистрация"
 
 #: .\tales_django\entities\App\views\root_views.py:14
 #, python-format

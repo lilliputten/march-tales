@@ -1,13 +1,13 @@
 {# ex: set ft=htmldjango : #}
 <!--
   @module menu-main.django
-  @changed 2025.01.03, 22:59
+  @changed 2025.01.03, 23:46
  -->
 
 {% load i18n %}
 
 <li class="nav-item">
-  <a class="nav-link" href="{% url 'admin:index' %}">{% trans 'Admin panel' %}</a>
+  <a class="nav-link" href="{% url 'admin:index' %}"><i class="bi bi-ui-checks-grid"></i> {% trans 'Admin panel' %}</a>
 </li>
 
 <!-- Switch language -->
@@ -15,7 +15,9 @@
   {% get_current_language as LANGUAGE_CODE %}
   {% get_available_languages as LANGUAGES %}
   {% get_language_info_list for LANGUAGES as languages %}
-  <span class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-translate"></i> {{ settings.LANGUAGES_LIST|getattr:LANGUAGE_CODE }}</span>
+  <span class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <i class="bi bi-translate"></i> {{ settings.LANGUAGES_LIST|getattr:LANGUAGE_CODE }} ({{ LANGUAGE_CODE }})
+  </span>
   <form id="menu-language-form" action="{% url 'set_language' %}" method="post">
     {% csrf_token %}
     <input id="menu-language-form-value" name="language" type="hidden" value="{{ LANGUAGE_CODE }}" />
@@ -33,25 +35,21 @@
 {% if user.is_authenticated %}
   <li class="nav-item dropdown">
     <span class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-      <i class="bi bi-{% if user.is_member %}
-          star-fill
-        {% else %}
-          person-fill
-        {% endif %}">
-      </i>
+      <i class="bi bi-{% if user.is_member %}star-fill{% else %}person-fill{% endif %}"></i>
       {{ user.get_full_name|default:user.username }}
     </span>
     <form id="menu-logout-form" action="{% url 'logout' %}" method="post">
       {% csrf_token %}
       <ul class="dropdown-menu" id="user-menu">
         <li>
-          <a class="dropdown-item" href="{% url 'profile' %}">{% trans 'Profile' %}</a>
+          <a class="dropdown-item" href="{% url 'profile' %}"><i class="bi bi-person-circle"></i> {% trans 'Profile' %}</a>
         </li>
+        <li>
+          <a class="dropdown-item" href="{% url 'profile_edit' %}"><i class="bi bi-pencil-square"></i> {% trans 'Edit profile' %}</a>
+        </li>
+        <!--
         <li>
           <hr class="dropdown-divider" />
-        </li>
-        <li>
-          <a class="dropdown-item" href="{% url 'profile_edit' %}">{% trans 'Edit profile' %}</a>
         </li>
         <li>
           <a class="dropdown-item" href="{% url 'password_change' %}">{% trans 'Change password' %}</a>
@@ -59,20 +57,27 @@
         <li>
           <a class="dropdown-item" href="{% url 'password_reset' %}">{% trans 'Reset password' %}</a>
         </li>
+        -->
         <li>
           <hr class="dropdown-divider" />
         </li>
         <li>
-          <a class="dropdown-item" href="{% url 'logout_user' %}" _onClick="document.getElementById('menu-logout-form').submit(); return false">{% trans 'Logout' %}</a>
+          <a class="dropdown-item"
+             href="{% url 'logout_user' %}"
+             _onClick="document.getElementById('menu-logout-form').submit(); return false"
+            >
+            <i class="bi bi-box-arrow-right"></i>
+              {% trans 'Logout' %}
+          </a>
         </li>
       </ul>
     </form>
   </li>
 {% else %}
   <li class="nav-item">
-    <a class="nav-link" href="{% url 'login' %}">{% trans 'Log in' %}</a>
+    <a class="nav-link" href="{% url 'login' %}"><i class="bi bi-key-fill"></i> {% trans 'Log in' %}</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="{% url 'django_registration_register' %}">{% trans 'Sign up' %}</a>
+    <a class="nav-link" href="{% url 'django_registration_register' %}"><i class="bi bi-person-plus-fill"></i> {% trans 'Sign up' %}</a>
   </li>
 {% endif %}
