@@ -1,7 +1,7 @@
 #!/bin/sh
 # vim: ft=sh
 # @desc Config variables (common version -- stored in repository)
-# @changed 2024.12.01, 02:46
+# @changed 2025.01.03, 19:19
 
 if [ -z "$CONFIG_IMPORTED" ]; then
 
@@ -39,6 +39,7 @@ if [ -z "$CONFIG_IMPORTED" ]; then
   SORTCMD="sort"
   GREPCMD="grep"
   RMCMD="rm"
+  DATECMD="date"
   # # Override posix commands for cygwin or/and windows (may be overrided in `config-local.sh`, see `config-local.sh.TEMPLATE`)...
   if [ "$IS_CYGWIN" ]; then
       # Don't use windows' own native commands
@@ -46,6 +47,7 @@ if [ -z "$CONFIG_IMPORTED" ]; then
       which sort_ > /dev/null 2>&1 && SORTCMD="sort_"
       which grep_ > /dev/null 2>&1 && GREPCMD="grep_"
       which rm_ > /dev/null 2>&1 && RMCMD="rm_"
+      # which date_ > /dev/null 2>&1 && DATECMD="date_"
   fi
 
   scriptsPath=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")

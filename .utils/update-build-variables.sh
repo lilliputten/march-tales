@@ -1,6 +1,6 @@
 #!/bin/sh
 # @desc Update version number & build timestamps
-# @changed 2024.12.29, 17:57
+# @changed 2025.01.03, 19:19
 
 scriptsPath=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
 rootPath=`dirname "$scriptsPath"`
@@ -15,8 +15,8 @@ test -f "$scriptsPath/config.sh" && . "$scriptsPath/config.sh"
 # Read (and derive) variables from changed files...
 VERSION_PATH="$rootPath/${VERSION_FILE}"
 VERSION=`cat "$VERSION_PATH"`
-TIMESTAMP=`date -r "$VERSION_PATH" "+%Y.%m.%d %H:%M:%S %z"`
-TIMETAG=`date -r "$VERSION_PATH" "+%y%m%d-%H%M"`
+TIMESTAMP=`$DATECMD -r "$VERSION_PATH" "+%Y.%m.%d %H:%M:%S %z"`
+TIMETAG=`$DATECMD -r "$VERSION_PATH" "+%y%m%d-%H%M"`
 
 # APP_ID=`cat "$rootPath/$APP_ID_FILE"`
 
