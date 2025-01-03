@@ -16,7 +16,7 @@
           <span class="dimmed-info">[Logo]</span>
           {# <img src="{% static 'images/dds-logo/svg/Beige Logo.svg' %}" width="auto" height="50" alt="{{ settings.SITE_SHORT_NAME }} Logo" /> #}
           <span class="site-name">
-            {{ settings.SITE_NAME }} Events and Membership Portal
+            -- {{ settings.SITE_NAME }} Events and Membership Portal
           </span>
         </a>
       </span>
