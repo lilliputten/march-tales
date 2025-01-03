@@ -15,14 +15,14 @@ test -f "$rootPath/config-check.sh" && . "$rootPath/config-check.sh"
 # Console command:
 # date_ "+%Y.%m.%d-%H:%M:%S" > test.stamp && git add . -Av && git commit -am "Deploy test `cat test.stamp`" && git push && cat test.stamp
 
-TIMESTAMP=`$DATECMD "+%Y.%m.%d %H:%M:%S %z"`
+PROJECT_INFO=`cat "$rootPath/$PROJECT_INFO_FILE"`
 
-echo "Creating test deploy $TIMESTAMP" \
+echo "Creating test deploy $PROJECT_INFO" \
   && touch "$rootPath/project-version.txt" \
   && . "$scriptsPath/update-build-variables.sh" \
   && cp "$rootPath/$PROJECT_INFO_FILE" "$rootPath/.deploy.stamp" \
   && git add . -Av \
-  && git commit -am "Deploy test $TIMESTAMP" \
+  && git commit -am "Deploy test $PROJECT_INFO" \
   && git push \
   && cat .deploy.stamp \
-  && echo "Created test deploy: $TIMESTAMP"
+  && echo "Created test deploy: $PROJECT_INFO"
