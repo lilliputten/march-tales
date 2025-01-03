@@ -1,36 +1,48 @@
 {# ex: set ft=htmldjango : #}
-{% extends "base-layout.html.django" %}
+{% extends 'base-layout.html.django' %}
 
-{% block body_class %}index{% endblock body_class %}
+{% load i18n %}
+
+{% block body_class %}
+  index
+{% endblock %}
 
 {% block content %}
-{{ block.super }}
+  {{ block.super }}
 
-{% include "assets/render-messages/render-messages.django" %}
+  {% include 'assets/render-messages/render-messages.django' %}
 
-{% if user.is_authenticated and not user.is_member or not user.is_authenticated %}
-    {% include "assets/membership-splash/membership-splash-user.django" %}
-{% endif %}
+  {% if user.is_authenticated and not user.is_member or not user.is_authenticated %}
+    {% include 'assets/membership-splash/membership-splash-user.django' %}
+  {% endif %}
 
-<h2>{{ settings.SITE_NAME }} Events and Membership Portal</h2>
-<p>This web application allows you to sign up for membership in the <a href="https://{{ settings.DEFAULT_HOST }}/">{{ settings.SITE_NAME }}</a> association. {{ settings.SITE_SHORT_NAME }} hosts conferences, schools, and online seminars; the list of public events is given below. If you have questions, you can reach us at <a href="mailto:{{ settings.CONTACT_EMAIL }}">{{ settings.CONTACT_EMAIL }}</a>.</p>
-<p>We wrote this portal ourselves, and it is far from perfect. Feel free to suggest changes at <a target="_blank" class="external" href="{{ settings.GITHUB }}/issues">our issue tracker</a>.</p>
+  <h1>{% trans 'Welcome!' %}</h1>
+  <p>
+    <!--   Translation example:
+    {{ sample_text }} - {{ plural_test }} -
+     -->
+    This web application allows you to sign up for membership in the <a href="https://{{ settings.DEFAULT_HOST }}/">{{ settings.SITE_NAME }}</a> association. {{ settings.SITE_SHORT_NAME }} hosts conferences, schools, and online seminars; the list of public events is given below. If you have questions, you can reach us at <a href="mailto:{{ settings.CONTACT_EMAIL }}">{{ settings.CONTACT_EMAIL }}</a>.
+  </p>
+  <p>
+    We wrote this portal ourselves, and it is far from perfect. Feel free to suggest changes at <a target="_blank" class="external" href="{{ settings.GITHUB }}/issues">our issue tracker</a>.
+  </p>
 
-{# TODO: To show smth if there aren't any available public events? #}
+  {# TODO: To show smth if there aren't any available public events? #}
 
-{% if events %}
-  <fieldset>
-    <legend>
-      <h2 class="primary-color">Open Events</h2>
-    </legend>
-    {% if user.is_anonymous %}<p>You need to <a href="/accounts/register/">have
-      a user account</a> and be <a href="/accounts/login/">logged in</a> to
-    register for events.</p>{% endif %}
-  </fieldset>
+  {% if events %}
+    <fieldset>
+      <legend>
+        <h2 class="primary-color">Open Events</h2>
+      </legend>
+      {% if user.is_anonymous %}
+        <p>
+          You need to <a href="/accounts/register/">have a user account</a> and be <a href="/accounts/login/">logged in</a> to register for events.
+        </p>
+      {% endif %}
+    </fieldset>
 
-  {% include "assets/events-list-block/events-list-block.django" %}
-{% else %}
-  <p>No events are currently available (as not implemented yet).</p>
-{% endif %}
-
-{% endblock content %}
+    {% include 'assets/events-list-block/events-list-block.django' %}
+  {% else %}
+    <p>No events are currently available (as not implemented yet).</p>
+  {% endif %}
+{% endblock %}

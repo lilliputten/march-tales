@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Django settings for tales project.
 
@@ -9,11 +10,10 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 
-@changed 2024.12.30, 18:28
+@changed 2025.01.03, 20:54
 """
 
 import posixpath
-
 import re
 
 from core.appEnv import (
@@ -28,7 +28,6 @@ from core.appEnv import (
     ASSETS_ROOT,
     PROJECT_INFO,  # DEBUG
 )
-
 from core.appSecrets import (
     SECRET_KEY,
     REGISTRATION_SALT,
@@ -49,6 +48,8 @@ from core.djangoConfig import (
     EMAIL_HOST_USER,
     EMAIL_HOST_PASSWORD,
 )
+
+gettext = lambda s: s
 
 # # DEBUG: Show basic settings...
 # print('App started:', PROJECT_INFO)
@@ -136,6 +137,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -247,11 +249,37 @@ SERVER_EMAIL = DEFAULT_FROM_EMAIL
 # EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
 
 # Internationalization
-# https://docs.djangoproject.com/en/5.1/topics/i18n/
-LANGUAGE_CODE = 'en-us'
+# @see https://docs.djangoproject.com/en/5.1/topics/i18n/
+# @see https://docs.djangoproject.com/en/5.1/topics/i18n/translation/
+LANGUAGE_CODE = 'ru'
 TIME_ZONE = 'Europe/Moscow'   # 'UTC'
-USE_I18N = True
 USE_TZ = True
+USE_I18N = True
+USE_L10N = True
+LOCALE_PATHS = (posixpath.join(BASE_DIR, APP_NAME, 'locale'),)
+LANGUAGES = (
+    ('ru', 'Русский'),
+    # ('fr', gettext(u'Français')),
+    ('en', 'English'),
+)
+LANGUAGES_LIST = {lng: name for lng, name in list(LANGUAGES)}
+CMS_LANGUAGES = {
+    'default': {
+        'public': True,
+        'hide_untranslated': False,
+        'redirect_on_fallback': True,
+    },
+    1: [
+        {
+            'public': True,
+            'code': lng,
+            'hide_untranslated': False,
+            'name': name,
+            'redirect_on_fallback': True,
+        }
+        for lng, name in list(LANGUAGES)
+    ],
+}
 
 # @see: https://docs.djangoproject.com/en/2.0/ref/templates/builtins/#std:templatefilter-date
 DATE_FORMAT = 'Y.m.d'
@@ -368,6 +396,9 @@ PASS_VARIABLES = {
     'SITE_KEYWORDS': re.sub(r'\s*[\n\r]+\s*', ', ', SITE_KEYWORDS.strip()),
     'STATIC_URL': STATIC_URL,
     'MEDIA_URL': MEDIA_URL,
+    # i18n
+    'LANGUAGES': LANGUAGES,
+    'LANGUAGES_LIST': LANGUAGES_LIST,
 }
 
 __all__ = [

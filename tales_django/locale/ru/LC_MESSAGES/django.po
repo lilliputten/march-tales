@@ -1,0 +1,71 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-03 23:34+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: .\src\assets\page-menus\menu-main.django:10
+msgid "Admin panel"
+msgstr "Панель управления"
+
+#: .\src\assets\page-menus\menu-main.django:48
+msgid "Profile"
+msgstr "Профиль"
+
+#: .\src\assets\page-menus\menu-main.django:54
+msgid "Edit profile"
+msgstr "Редактировать профиль"
+
+#: .\src\assets\page-menus\menu-main.django:57
+msgid "Change password"
+msgstr "Сменить пароль"
+
+#: .\src\assets\page-menus\menu-main.django:60
+msgid "Reset password"
+msgstr "Сбросить пароль"
+
+#: .\src\assets\page-menus\menu-main.django:66
+msgid "Logout"
+msgstr "Выйти"
+
+#: .\src\assets\page-menus\menu-main.django:73
+msgid "Log in"
+msgstr "Войти"
+
+#: .\src\assets\page-menus\menu-main.django:76
+msgid "Sign up"
+msgstr "Регистраця"
+
+#: .\tales_django\entities\App\views\root_views.py:14
+#, python-format
+msgid "there is %(count)d object"
+msgid_plural "there are %(count)d objects"
+msgstr[0] "%(count)d объект"
+msgstr[1] "%(count)d объекта"
+msgstr[2] "%(count)d объектов"
+
+# msgstr[3] "%(count)d объектов"
+#. Translators: The sample translation string
+#: .\tales_django\entities\App\views\root_views.py:24
+msgid "Sample Message"
+msgstr "Тестовое сообщение"
+
+#: .\tales_django\templates\tales_django\index.html.django:19
+msgid "Welcome!"
+msgstr "Добро пожаловать!"
