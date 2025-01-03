@@ -1,11 +1,14 @@
 # from django.utils.translation import ugettext_lazy as _
 
 from datetime import date
+from datetime import timedelta
+
 from django.db import models
 from django.db.models import Model
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
 
+from core.helpers.files import sizeofFmt
 from core.appEnv import LOCAL
 from core.logging import getDebugLogger
 from tales_django.core.helpers.audio import getAudioTrackFolderName
@@ -21,11 +24,12 @@ class Track(Model):
         null=False,
         max_length=150,
         verbose_name='track title',
-        help_text='Required. 150 characters or fewer. Track title',
+        help_text='Required. 150 characters or fewer. The track title text.',
     )
     description = models.TextField(blank=True, null=False, max_length=512, verbose_name='Description')
     youtube_url = models.URLField(blank=True, null=False, max_length=150, verbose_name='YouTube video link url')
-    tags_list = models.TextField(blank=True, null=False, max_length=150)
+
+    tags = models.ManyToManyField('Tag', blank=True, related_name='tagged_tracks')
 
     uploadsFolder = getAudioTrackFolderName()
 
@@ -64,6 +68,14 @@ class Track(Model):
     @property
     def active(self) -> bool:
         return self.status == 'PUBLISHED'
+
+    @property
+    def duration_formatted(track):
+        return str(timedelta(seconds=track.audio_duration)) if track.audio_duration else '-'
+
+    @property
+    def size_formatted(track):
+        return sizeofFmt(track.audio_size) if track.audio_size else '-'
 
     def save(self, *args, **kwargs):
         # Try to remove the old files...

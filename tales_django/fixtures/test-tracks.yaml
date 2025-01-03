@@ -1,17 +1,38 @@
-- model: 'tales_django.track'
-  pk: 1
-  fields:
-    title: 'Sample track'
-    description: ''
-    youtube_url: ''
-    tags_list: ''
-    # Located under `media` folder
-    audio_file: 'samples/test-short.mp3'
-    preview_picture: 'samples/sample-preview.png'
-    audio_duration: 5
-    audio_size: 22535
-    track_status: 'TEST'
-    created_by: 1
-    updated_by: 1
-    created_at: '2025-01-01'
-    updated_at: '2025-01-01'
+
+  -
+    model: "tales_django.track"
+    pk: 1
+    fields:
+      title: "Sample tags"
+      description: ""
+      youtube_url: ""
+      audio_file: "samples/test-short.mp3"
+      preview_picture: "samples/gr-400x225.jpg"
+      track_status: "PUBLISHED"
+      for_members: false
+      audio_duration: 5
+      audio_size: 22535
+      created_at: "2025-01-03"
+      updated_at: "2025-01-03"
+      created_by: 1
+      updated_by: 1
+      tags:
+        - 1
+
+  -
+    model: "tales_django.tag"
+    pk: 1
+    fields:
+      text: "Test"
+      promote: true
+      tracks:
+        - 1
+
+  -
+    model: "tales_django.tag"
+    pk: 2
+    fields:
+      text: "Sample"
+      promote: false
+      tracks: []
+

@@ -2,7 +2,6 @@ from django.contrib.auth.models import AbstractUser
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 
-
 from ...Membership.models import Membership
 
 
@@ -29,7 +28,8 @@ class User(AbstractUser):
     _original_username = None
 
     # Track-related parameters
-    favorite_tracks = models.ManyToManyField('Track', related_name='favorited_users')
+    favorite_tracks = models.ManyToManyField('Track', blank=True, related_name='favorited_users')
+    playlist_tracks = models.ManyToManyField('Track', blank=True, related_name='playlisted_users')
 
     class Meta(AbstractUser.Meta):
         #  # TODO: Add correct check if email and username are the same?

@@ -7,8 +7,6 @@ utilsPath="$rootPath/.utils"
 
 # Import config variables...
 test -f "$utilsPath/config.sh" && . "$utilsPath/config.sh"
-test -f "$utilsPath/config-local.sh" && . "$utilsPath/config-local.sh"
-
 test -f "$utilsPath/check-python-env.sh" && . "$utilsPath/check-python-env.sh"
 
 DATA_FOLDER=".data"

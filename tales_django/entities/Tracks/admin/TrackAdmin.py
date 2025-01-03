@@ -14,8 +14,7 @@ from django.core.files.base import File
 from core.ffmpeg import probeDuration
 from core.helpers.files import sizeofFmt
 from core.helpers.errors import errorToString
-from core.logging import getDebugLogger, errorStyle, warningTitleStyle
-from core.logging.utils import tretiaryStyle
+from core.logging import getDebugLogger, errorStyle, warningTitleStyle, tretiaryStyle
 
 from ..models import Track
 from ..forms import TrackAdminForm
@@ -45,22 +44,24 @@ class IsPublishedFilter(SimpleListFilter):
             return queryset.filter(~Q(track_status='PUBLISHED'))
 
 
+@admin.register(Track)
 class TrackAdmin(admin.ModelAdmin):
     form = TrackAdminForm
     list_display = [
         'title',
-        'duration_formated',
-        'size_formated',
+        'duration_formatted',
+        'size_formatted',
         # 'resolved_date',
         'created_at',
         'created_by',
         'has_preview',
         'for_members',
         'is_published',
+        'tags_list',
     ]
     readonly_fields = (
-        'duration_formated',
-        'size_formated',
+        'duration_formatted',
+        'size_formatted',
         # 'audio_duration',
         # 'audio_size',
         # 'created_at',
@@ -83,28 +84,44 @@ class TrackAdmin(admin.ModelAdmin):
     def is_published(self, track):
         return track.track_status == 'PUBLISHED'
 
+    is_published.admin_order_field = 'track_status'
+
     is_published.short_description = 'Published'
     is_published.boolean = True
 
     def has_preview(self, track):
         return True if track.preview_picture else False
 
+    has_preview.admin_order_field = 'preview_picture'
+
     has_preview.short_description = 'Has preview'
     has_preview.boolean = True
+
+    def tags_list(self, track):
+        tagNames = map(lambda t: t.text, track.tags.all())
+        return ', '.join(tagNames)
+
+    tags_list.short_description = 'Tags'
 
     # def resolved_date(self, track):
     #     return track.date if track.date else track.created_at
     # resolved_date.short_description = 'Date'
 
-    def duration_formated(self, track):
-        return str(timedelta(seconds=track.audio_duration)) if track.audio_duration else '-'
+    def duration_formatted(self, track):
+        return (
+            track.duration_formatted
+        )   # str(timedelta(seconds=track.audio_duration)) if track.audio_duration else '-'
 
-    duration_formated.short_description = 'Duration'
+    duration_formatted.admin_order_field = 'audio_duration'
 
-    def size_formated(self, track):
-        return sizeofFmt(track.audio_size) if track.audio_size else '-'
+    duration_formatted.short_description = 'Duration'
 
-    size_formated.short_description = 'Size'
+    def size_formatted(self, track):
+        return track.size_formatted   # sizeofFmt(track.audio_size) if track.audio_size else '-'
+
+    size_formatted.admin_order_field = 'audio_size'
+
+    size_formatted.short_description = 'Size'
 
     def get_changeform_initial_data(self, request):
         get_data = super(TrackAdmin, self).get_changeform_initial_data(request)
@@ -137,8 +154,8 @@ class TrackAdmin(admin.ModelAdmin):
                 if not duration:
                     raise Exception('Can not determine correct audio duration.')
                 obj.audio_duration = round(duration)
-                sizeFmt = self.size_formated(obj)
-                durationFmt = self.duration_formated(obj)
+                sizeFmt = self.size_formatted(obj)
+                durationFmt = self.duration_formatted(obj)
                 msgText = f'Audio has been successfully uploaded and its data updated: size is {sizeFmt}, duration is {durationFmt}'
                 messages.add_message(request, messages.SUCCESS, msgText)
             except Exception as err:
@@ -154,6 +171,3 @@ class TrackAdmin(admin.ModelAdmin):
                 obj.audio_duration = None
                 # TODO: Prevent leaving the edit page?
         return super().save_model(request, obj, form, change)
-
-
-admin.site.register(Track, TrackAdmin)

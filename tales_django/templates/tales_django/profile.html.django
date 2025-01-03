@@ -84,7 +84,7 @@
               class="image m-2 flex-grow-1"
               style="
                 background-image: url('{% get_media_prefix %}{{ track.preview_picture }}');
-                background-size: contain;
+                background-size: cover;
                 background-position: center;
                 background-repeat: no-repeat;
               "
@@ -94,7 +94,7 @@
         <div class="card-body">
           <h5 class="card-title"><a href="#" class="card-link">{{ track.title }}</a></h5>
           <ul class="card-subtitle small list-inline mb-2">
-            {% if track.audio_duration %}
+            {% if track.duration_formated %}
               <li class="list-inline-item">
                 <span class="label text-muted">Duration:</span>
                 <span class="value">{{ track.audio_duration }}</span>
@@ -103,7 +103,7 @@
             {% if track.audio_size %}
               <li class="list-inline-item">
                 <span class="label text-muted">File size:</span>
-                <span class="value">{{ track.audio_size }}</span>
+                <span class="value">{{ track.size_formatted }}</span>
               </li>
             {% endif %}
           </ul>
