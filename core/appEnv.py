@@ -7,14 +7,22 @@ import environ
 
 BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
 PROJECT_PATH = BASE_DIR.as_posix()
-STATIC_PATH = posixpath.join(PROJECT_PATH, 'static')
-MEDIA_PATH = posixpath.join(PROJECT_PATH, 'media')
+STATIC_FOLDER = 'static'
+STATIC_ROOT = posixpath.join(PROJECT_PATH, STATIC_FOLDER)
+MEDIA_FOLDER = 'media'
+MEDIA_ROOT = posixpath.join(PROJECT_PATH, MEDIA_FOLDER)
+
+SRC_FOLDER = 'src'
+SRC_ROOT = posixpath.join(BASE_DIR, SRC_FOLDER)
+ASSETS_FOLDER = 'assets'
+ASSETS_ROOT = posixpath.join(SRC_FOLDER, ASSETS_FOLDER)
+
 # print('BASE_DIR:', BASE_DIR)
 # print('PROJECT_PATH:', PROJECT_PATH)
-# print('STATIC_PATH:', STATIC_PATH)
+# print('STATIC_ROOT:', STATIC_ROOT)
 
 PROJECT_INFO = ''
-with open(posixpath.join(STATIC_PATH, 'project-info.txt')) as fh:
+with open(posixpath.join(STATIC_ROOT, 'project-info.txt')) as fh:
     info = fh.read()
     if info:
         PROJECT_INFO = info.strip()

@@ -1,3 +1,5 @@
+# ex: set ft=gitignore :
+
 /.dependencygraph
 /.git
 /.github
@@ -25,5 +27,6 @@
 
 # Temp: Don't prettify temlates (or ensure correct prettifiying)
 */templates/**/*.html
+# !tales_django/templates/tales_django/profile_edit.html.django
 
 **/*_

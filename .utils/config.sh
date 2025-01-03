@@ -6,6 +6,8 @@
 IS_WINDOWS=`echo "${OS}" | grep -i windows`
 IS_CYGWIN=`uname | grep -i "CYGWIN"`
 
+DJANGO_APP="tales_django"
+
 APP_ID=`git ls-remote --get-url | xargs basename -s .git`
 
 # Project structure setup

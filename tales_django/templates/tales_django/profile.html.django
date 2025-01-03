@@ -6,6 +6,7 @@
 
 {% extends "base-regular.html.django" %}
 
+{% load static %}
 {% load crispy_forms_tags %}
 
 {% block title %}Profile — {{ block.super }}{% endblock title %}
@@ -15,9 +16,9 @@
 
 <fieldset>
   <legend>
-    <h1 class="page-title primary-color">Profile</h1>
+    <h1 class="page-title primary-color mt-5 mb-4">Profile</h1>
   </legend>
-  {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+  {% if error_message %}<p>{{ error_message }}</p>{% endif %}
 </fieldset>
 
 {% include "assets/render-messages/render-messages.django" %}
@@ -34,7 +35,7 @@
 {% endif %}
 
 {% if active_regs %}
-  <h3 class="primary-color">Your registrations:</h3>
+  <h2 class="primary-color mt-5 mb-4">Your registrations:</h2>
   {% include "assets/events-list-table/events-list-table.django" %}
 {% else %}
   <p class="dimmed-info">
@@ -42,12 +43,12 @@
   </p>
 {% endif %}
 
-<h3 class="primary-color">Membership:</h3>
+<h2 class="primary-color mt-5 mb-4">Membership:</h2>
 
 {% with membership=user.membership %}
 
 {% if user.is_member %}
-  <p>Member since {{ membership.started }}. Membership type: {{ membership.get_membership_type_display }}.</p>
+  <p>You're a member since {{ membership.started }}. Membership type: {{ membership.get_membership_type_display }}.</p>
 {% else %}
   <p>Not yet a {{ settings.SITE_SHORT_NAME }} member.
   <a href="{% url 'membership_application' %}">Apply for a membership</a>.</p>
@@ -65,11 +66,67 @@
 
 {% endwith %}
 
-<div>
+<!--
+  TODO:
+  - Extract tracks listings to the src snippets.
+  - Add listings for your own tracks.
+-->
+
+{% with favorite_tracks=user.favorite_tracks %}
+  {% if favorite_tracks.all.count > 0 %}
+    <h2 class="primary-color mt-5 mb-4">Favorite tracks:</h2>
+    {% for track in favorite_tracks.all %}
+      <div class="track-card card w-auto d-flex flex-row p-2 justify-content-center align-items-center">
+        {% if track.preview_picture %}
+          <div class="image-wrapper d-flex"
+               style="width: 120px; min-height: 120px;">
+            <div
+              class="image m-2 flex-grow-1"
+              style="
+                background-image: url('{% get_media_prefix %}{{ track.preview_picture }}');
+                background-size: contain;
+                background-position: center;
+                background-repeat: no-repeat;
+              "
+            ></div>
+          </div>
+        {% endif %}
+        <div class="card-body">
+          <h5 class="card-title"><a href="#" class="card-link">{{ track.title }}</a></h5>
+          <ul class="card-subtitle small list-inline mb-2">
+            {% if track.audio_duration %}
+              <li class="list-inline-item">
+                <span class="label text-muted">Duration:</span>
+                <span class="value">{{ track.audio_duration }}</span>
+              </li>
+            {% endif %}
+            {% if track.audio_size %}
+              <li class="list-inline-item">
+                <span class="label text-muted">File size:</span>
+                <span class="value">{{ track.audio_size }}</span>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+        <div class="card-actions">
+          fav
+        </div>
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+{# Buttons #}
+<div class="actions mt-5 mb-4">
   {# TODO: Put common actions toolbar here #}
   <a class="btn btn-primary" href="{% url 'profile_edit' %}">Edit profile</a>
+  {% comment %}
   <a class="btn btn-primary" href="{% url 'password_change' %}">Change password</a>
   <a class="btn btn-primary" href="{% url 'password_reset' %}">Reset password</a>
+  {% endcomment %}
 </div>
+
+<div class="spacer mt-5"></div>
+
 
 {% endblock content %}

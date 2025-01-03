@@ -30,7 +30,7 @@ def probeDuration(filename: str, **kwargs):
     rpos = s.rfind(findStr)
     if rpos == -1:
         # Nothing found: to use another method?
-        return 0
+        return None
     startPos = rpos + len(findStr)
     endPos = s.find('\n', startPos)
     subStr = s[startPos:endPos]

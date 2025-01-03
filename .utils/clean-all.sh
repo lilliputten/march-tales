@@ -1,6 +1,6 @@
 #!/bin/sh
 # @desc Clean all temp files
-# @changed 2024.12.23, 03:40
+# @changed 2025.01.02, 19:44
 
 scriptsPath=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
 rootPath=`dirname "$scriptsPath"`
@@ -13,7 +13,9 @@ test -f "$scriptsPath/config-local.sh" && . "$scriptsPath/config-local.sh"
 # NOTE: Those commands broke all the searches
 #   -not \( -name '*_' -prune \) \
 #   -not \( -name '*~' -prune \) \
-$RMCMD -Rf \
+echo "Clearing root folder..." \
+; $RMCMD -Rf \
+  __pycache__ \
   build \
   .handler-saves \
   .state-save \
@@ -22,8 +24,9 @@ $RMCMD -Rf \
   log-* \
   *.py[co] \
   .*sw[op] \
-; \
-$FINDCMD . \
+  2> /dev/null \
+; echo "Emptying temp files recursively..." \
+; $FINDCMD . \
   -not \( -name '.git' -prune \) \
   -not \( -name '.vscode' -prune \) \
   -not \( -name '.next' -prune \) \
@@ -43,6 +46,20 @@ $FINDCMD . \
     -o -name '*.log' \
     -o -name '__pycache__' \
   \) \
-  -exec $RMCMD -Rvf {} \; \
-; \
-echo OK
+  -exec $RMCMD -Rvf {} 2> /dev/null \; \
+; echo "Removing empty folders..." \
+; $FINDCMD . \( \
+  -not \( -name '.git' -prune \) \
+  -not \( -name '.vscode' -prune \) \
+  -not \( -name '.next' -prune \) \
+  -not \( -name '.venv*' -prune \) \
+  -not \( -name 'out' -prune \) \
+  -not \( -name 'build*' -prune \) \
+  -not \( -name '*UNUSED' -prune \) \
+  -not \( -name 'publish*' -prune \) \
+  -not \( -name 'node_modules' -prune \) \
+  -type d -empty \
+  \) \
+  -exec $RMCMD -Rvf {} 2> /dev/null \; \
+; echo OK
+

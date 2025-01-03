@@ -84,7 +84,7 @@ def livereload():
 
 def test():
     """
-    python manage.py test
+    python manage.py test --verbosity 2 --failfast
     """
     # NOTE: It can't run this way
     execute_from_command_line(
