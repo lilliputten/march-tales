@@ -1,11 +1,14 @@
 # from django.utils.translation import ugettext_lazy as _
 
 from datetime import date
+from datetime import timedelta
+
 from django.db import models
 from django.db.models import Model
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
 
+from core.helpers.files import sizeofFmt
 from core.appEnv import LOCAL
 from core.logging import getDebugLogger
 from tales_django.core.helpers.audio import getAudioTrackFolderName
@@ -21,11 +24,19 @@ class Track(Model):
         null=False,
         max_length=150,
         verbose_name='track title',
-        help_text='Required. 150 characters or fewer. Track title',
+        help_text='Required. 150 characters or fewer. The track title text.',
     )
-    description = models.TextField(blank=True, null=False, max_length=512, verbose_name='Description')
-    youtube_url = models.URLField(blank=True, null=False, max_length=150, verbose_name='YouTube video link url')
-    tags_list = models.TextField(blank=True, null=False, max_length=150)
+    description = models.TextField(
+        blank=True,
+        null=False,
+        max_length=512,
+        help_text='Optional description, up to 512 characters.',
+    )
+    youtube_url = models.URLField(blank=True, null=False, max_length=150, help_text='YouTube video link url')
+
+    author = models.ForeignKey('Author', blank=True, null=True, on_delete=models.DO_NOTHING)
+
+    tags = models.ManyToManyField('Tag', blank=True, related_name='tagged_tracks')
 
     uploadsFolder = getAudioTrackFolderName()
 
@@ -35,13 +46,13 @@ class Track(Model):
         blank=False,
         null=False,
     )
-    preview_picture = models.ImageField(upload_to=uploadsFolder, blank=True, null=True)
+    preview_picture = models.ImageField(upload_to=uploadsFolder, blank=True)
 
     # Track status
     TRACK_STATUS = [
         ('PUBLISHED', 'Published'),
         ('HIDDEN', 'Hidden'),
-        ('TEST', 'Test'),
+        ('TEST', 'Test'),  # DEBUG!
     ]
     DEFAULT_TRACK_STATUS = TRACK_STATUS[0][0]
     track_status = models.TextField(choices=TRACK_STATUS, default=DEFAULT_TRACK_STATUS)
@@ -54,16 +65,24 @@ class Track(Model):
 
     # Timestamps
     # created_at = models.DateField(auto_now_add=True)
-    created_at = models.DateField(default=date.today)
+    published_at = models.DateField(default=date.today)
     updated_at = models.DateField(auto_now=True)
 
     # Owner/creator
-    created_by = models.ForeignKey('User', related_name='creator', on_delete=models.DO_NOTHING)
+    published_by = models.ForeignKey('User', related_name='publisher', on_delete=models.DO_NOTHING)
     updated_by = models.ForeignKey('User', related_name='updater', on_delete=models.DO_NOTHING)
 
     @property
     def active(self) -> bool:
         return self.status == 'PUBLISHED'
+
+    @property
+    def duration_formatted(track):
+        return str(timedelta(seconds=track.audio_duration)) if track.audio_duration else '-'
+
+    @property
+    def size_formatted(track):
+        return sizeofFmt(track.audio_size) if track.audio_size else '-'
 
     def save(self, *args, **kwargs):
         # Try to remove the old files...

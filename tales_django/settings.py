@@ -26,7 +26,7 @@ from core.appEnv import (
     MEDIA_ROOT,
     SRC_ROOT,
     ASSETS_ROOT,
-    PROJECT_INFO, # DEBUG
+    PROJECT_INFO,  # DEBUG
 )
 
 from core.appSecrets import (
@@ -380,7 +380,6 @@ __all__ = [
     'EMAIL_HOST_PASSWORD',
     'DEFAULT_FROM_EMAIL',
     'SERVER_EMAIL',
-
     # Folders...
     'ASSETS_ROOT',
     'MEDIA_FOLDER',

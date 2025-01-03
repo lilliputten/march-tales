@@ -7,7 +7,6 @@ rootPath=`dirname "$scriptsPath"`
 
 # Import config variables...
 test -f "$scriptsPath/config.sh" && . "$scriptsPath/config.sh"
-test -f "$scriptsPath/config-local.sh" && . "$scriptsPath/config-local.sh"
 
 # Global system requirements...
 pip install setuptools virtualenv

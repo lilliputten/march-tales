@@ -16,7 +16,7 @@
     last_login: null
     groups: []
     user_permissions: []
-    # Test favorite tracks: see `test-tracks.yaml`
+    # Test favorite tracks: see `test-tracks.yaml`; NOTE: Should be used only with `test-tracks.yaml`
     favorite_tracks:
       - 1
 
