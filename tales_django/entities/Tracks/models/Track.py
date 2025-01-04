@@ -3,6 +3,7 @@
 from datetime import date
 from datetime import timedelta
 
+from django.utils.translation import gettext_lazy as _
 from django.db import models
 from django.db.models import Model
 from django.db.models.signals import post_delete
@@ -18,6 +19,10 @@ _logger = getDebugLogger()
 
 
 class Track(Model):
+    class Meta:
+        verbose_name = _('track')
+        verbose_name_plural = _('tracks')
+
     title = models.TextField(
         unique=False,
         blank=False,

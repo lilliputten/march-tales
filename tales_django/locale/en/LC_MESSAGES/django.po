@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-05 00:40+0300\n"
+"POT-Creation-Date: 2025-01-05 02:37+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,13 +22,13 @@ msgstr ""
 msgid "Back"
 msgstr ""
 
-#: .\src\assets\page-menus\menu-main.django:20
+#: .\src\assets\page-menus\menu-main.django:22
 #: .\tales_django\templates\tales_django\profile.html.django:13
 #: .\tales_django\templates\tales_django\profile.html.django:20
 msgid "Profile"
 msgstr ""
 
-#: .\src\assets\page-menus\menu-main.django:23
+#: .\src\assets\page-menus\menu-main.django:28
 #: .\tales_django\templates\registration\password_change_form.html:33
 #: .\tales_django\templates\tales_django\profile.html.django:122
 #: .\tales_django\templates\tales_django\profile_edit.html.django:12
@@ -36,29 +36,17 @@ msgstr ""
 msgid "Edit profile"
 msgstr ""
 
-#: .\src\assets\page-menus\menu-main.django:30
-#: .\tales_django\templates\registration\password_change_form.html:31
-#: .\tales_django\templates\tales_django\profile_edit.html.django:36
-msgid "Change password"
-msgstr ""
-
-#: .\src\assets\page-menus\menu-main.django:33
-#: .\tales_django\templates\registration\login.html:35
-#: .\tales_django\templates\tales_django\profile_edit.html.django:37
-msgid "Reset password"
-msgstr ""
-
-#: .\src\assets\page-menus\menu-main.django:45
+#: .\src\assets\page-menus\menu-main.django:40
 msgid "Logout"
 msgstr ""
 
-#: .\src\assets\page-menus\menu-main.django:55
+#: .\src\assets\page-menus\menu-main.django:50
 #: .\tales_django\templates\django_registration\registration_form.html:30
 #: .\tales_django\templates\registration\signup.html:32
 msgid "Log in"
 msgstr ""
 
-#: .\src\assets\page-menus\menu-main.django:61
+#: .\src\assets\page-menus\menu-main.django:56
 #: .\tales_django\templates\django_registration\registration_form.html:12
 #: .\tales_django\templates\django_registration\registration_form.html:16
 #: .\tales_django\templates\django_registration\registration_form.html:29
@@ -68,16 +56,20 @@ msgstr ""
 msgid "Sign up"
 msgstr ""
 
-#: .\src\assets\page-menus\menu-main.django:70
+#: .\src\assets\page-menus\menu-main.django:65
 msgid "Admin panel"
 msgstr ""
 
 #: .\src\assets\template-header\template-header.django:13
 #: .\src\assets\template-header\template-header.django:16
 #: .\tales_django\templates\base-core.html.django:22
-#: .\tales_django\templates\base-core.html.django:35
+#: .\tales_django\templates\base-core.html.django:37
 msgid "Site title"
 msgstr "The March Cat Tales"
+
+#: .\tales_django\apps.py:10
+msgid "Application"
+msgstr ""
 
 #: .\tales_django\entities\App\views\root_views.py:14
 #, python-format
@@ -91,8 +83,75 @@ msgstr[1] ""
 msgid "Sample Message"
 msgstr ""
 
+#: .\tales_django\entities\Membership\models\Membership.py:15
+msgid "membership"
+msgstr ""
+
+#: .\tales_django\entities\Membership\models\Membership.py:16
+msgid "memberships"
+msgstr ""
+
+#: .\tales_django\entities\Tracks\models\Author.py:8
+msgid "author"
+msgstr ""
+
+#: .\tales_django\entities\Tracks\models\Author.py:9
+msgid "authors"
+msgstr ""
+
+#: .\tales_django\entities\Tracks\models\Tag.py:8
+msgid "tag"
+msgstr ""
+
+#: .\tales_django\entities\Tracks\models\Tag.py:9
+msgid "tags"
+msgstr ""
+
+#: .\tales_django\entities\Tracks\models\Track.py:23
+msgid "track"
+msgstr ""
+
+#: .\tales_django\entities\Tracks\models\Track.py:24
+msgid "tracks"
+msgstr ""
+
+#: .\tales_django\templates\admin\base.html:28
+msgid "Skip to main content"
+msgstr ""
+
+#: .\tales_django\templates\admin\base.html:43
+#: .\tales_django\templates\tales_django\profile.html.django:33
+msgid "Welcome,"
+msgstr ""
+
+#: .\tales_django\templates\admin\base.html:48
+msgid "View site"
+msgstr ""
+
+#: .\tales_django\templates\admin\base.html:53
+msgid "Documentation"
+msgstr ""
+
+#: .\tales_django\templates\admin\base.html:57
+#: .\tales_django\templates\registration\password_change_form.html:31
+#: .\tales_django\templates\tales_django\profile_edit.html.django:36
+msgid "Change password"
+msgstr ""
+
+#: .\tales_django\templates\admin\base.html:61
+msgid "Log out"
+msgstr ""
+
+#: .\tales_django\templates\admin\base.html:74
+msgid "Breadcrumbs"
+msgstr ""
+
+#: .\tales_django\templates\admin\base.html:77
+msgid "Home"
+msgstr ""
+
 #: .\tales_django\templates\base-core.html.django:23
-#: .\tales_django\templates\base-core.html.django:36
+#: .\tales_django\templates\base-core.html.django:38
 msgid "Site description"
 msgstr "Listen to classic fairy tales online"
 
@@ -115,6 +174,11 @@ msgstr ""
 #: .\tales_django\templates\registration\login.html:16
 #: .\tales_django\templates\registration\login.html:31
 msgid "Login"
+msgstr ""
+
+#: .\tales_django\templates\registration\login.html:35
+#: .\tales_django\templates\tales_django\profile_edit.html.django:37
+msgid "Reset password"
 msgstr ""
 
 #: .\tales_django\templates\registration\password_change_done.html:30
@@ -232,10 +296,6 @@ msgstr ""
 
 #: .\tales_django\templates\tales_django\index.html.django:19
 msgid "Welcome!"
-msgstr ""
-
-#: .\tales_django\templates\tales_django\profile.html.django:33
-msgid "Welcome,"
 msgstr ""
 
 #: .\tales_django\templates\tales_django\profile.html.django:38

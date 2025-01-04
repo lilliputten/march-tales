@@ -1,3 +1,4 @@
+from django.utils.translation import gettext_lazy as _
 from django.db import models
 from django.db.models import Model
 
@@ -10,6 +11,10 @@ MEMBERSHIP_DATA = MembershipData()
 
 
 class Membership(Model):
+    class Meta:
+        verbose_name = _('membership')
+        verbose_name_plural = _('memberships')
+
     user = models.OneToOneField('User', on_delete=models.CASCADE)
     membership_type = models.TextField(choices=MEMBERSHIP_DATA.choices, default=MEMBERSHIP_DATA.default)
 

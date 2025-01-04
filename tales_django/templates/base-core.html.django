@@ -27,6 +27,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="index, nofollow" />
   <link href="{% static 'favicon.ico' %}" rel="icon" type="image/x-icon" />
+  <link rel="shortcut icon" href="{% static 'images/march-cat/march-cat-sq-48.jpg' %}" type="image/x-icon">
+  <link rel="icon" href="{% static 'images/march-cat/march-cat-sq-48.jpg' %}" type="image/x-icon">
 
   {% block meta_og %}
     {# Opengrap tags #}
@@ -50,41 +52,43 @@
 
   <!-- Webfonts -->
   {% if False and settings.DEBUG %}
+    <link href="{% static 'vendor/webfonts/lobster/lobster.css' %}" rel="stylesheet" type="text/css" />
     <link href="{% static 'vendor/webfonts/nunito/nunito.css' %}" rel="stylesheet" type="text/css" />
+    {% comment %}
     <link href="{% static 'vendor/webfonts/roboto/300.css' %}" rel="stylesheet" type="text/css" />
     <link href="{% static 'vendor/webfonts/roboto/400.css' %}" rel="stylesheet" type="text/css" />
     <link href="{% static 'vendor/webfonts/roboto/500.css' %}" rel="stylesheet" type="text/css" />
     <link href="{% static 'vendor/webfonts/roboto/700.css' %}" rel="stylesheet" type="text/css" />
-    {% comment %}
     {% endcomment %}
-    <link href="{% static 'vendor/webfonts/lobster/lobster.css' %}" rel="stylesheet" type="text/css" />
   {% else %}
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    {% comment %}
     <link
       rel="preload"
       href="https://fonts.gstatic.com/s/lobster/v30/neILzCirqoswsqX9zoKmMw.woff2"
-      crossorigin
       as="font"
       type="font/woff2"
+      crossorigin
     />
     <link
       rel="preload"
       href="https://fonts.gstatic.com/s/lobster/v30/neILzCirqoswsqX9zoamM5Ez.woff2"
-      crossorigin
       as="font"
       type="font/woff2"
+      crossorigin
     />
     <link
       rel="preload"
       href=" https://fonts.gstatic.com/s/nunitosans/v15/pe0TMImSLYBIv1o4X1M8ce2xCx3yop4tQpF_MeTm0lfGWVpNn64CL7U8upHZIbMV51Q42ptCp7t1R-s.woff2"
-      crossorigin
       as="font"
       type="font/woff2"
+      crossorigin
     />
-    {% with FONTURL="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Nunito+Sans:wght@400;600;700;800&family=Lobster&display=swap" %}
+    {% endcomment %}
+    {% with FONTURL="https://fonts.googleapis.com/css2?family=Lobster&family=Nunito+Sans:wght@400;600;700;800&display=swap" %}
       <link href="{{ FONTURL }}" rel="preload" as="style" crossorigin />
-      <link href="{{ FONTURL }}" rel="stylesheet" />
+      <link href="{{ FONTURL }}" rel="stylesheet" crossorigin />
     {% endwith %}
     {% comment %}
       Roboto:wght@300;400;500;700
