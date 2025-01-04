@@ -1,0 +1,2 @@
+- https://cdn.jsdelivr.net/npm/themify-icons@1.0.0/
+- https://themify.me/themify-icons

@@ -49,7 +49,7 @@
   <link rel="stylesheet" href="{% static 'libs/themify-icons/themify-icons.min.css' %}" />
 
   <!-- Webfonts -->
-  {% if True and settings.DEBUG %}
+  {% if False and settings.DEBUG %}
     <link href="{% static 'vendor/webfonts/nunito/nunito.css' %}" rel="stylesheet" type="text/css" />
     <link href="{% static 'vendor/webfonts/roboto/300.css' %}" rel="stylesheet" type="text/css" />
     <link href="{% static 'vendor/webfonts/roboto/400.css' %}" rel="stylesheet" type="text/css" />
@@ -61,6 +61,27 @@
   {% else %}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      href="https://fonts.gstatic.com/s/lobster/v30/neILzCirqoswsqX9zoKmMw.woff2"
+      crossorigin
+      as="font"
+      type="font/woff2"
+    />
+    <link
+      rel="preload"
+      href="https://fonts.gstatic.com/s/lobster/v30/neILzCirqoswsqX9zoamM5Ez.woff2"
+      crossorigin
+      as="font"
+      type="font/woff2"
+    />
+    <link
+      rel="preload"
+      href=" https://fonts.gstatic.com/s/nunitosans/v15/pe0TMImSLYBIv1o4X1M8ce2xCx3yop4tQpF_MeTm0lfGWVpNn64CL7U8upHZIbMV51Q42ptCp7t1R-s.woff2"
+      crossorigin
+      as="font"
+      type="font/woff2"
+    />
     {% with FONTURL="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Nunito+Sans:wght@400;600;700;800&family=Lobster&display=swap" %}
       <link href="{{ FONTURL }}" rel="preload" as="style" crossorigin />
       <link href="{{ FONTURL }}" rel="stylesheet" />

@@ -43,8 +43,8 @@ config.local.yml
 /db.*
 /media/*
 !/media/samples
-/static/*
-!/static/*.zip
+/static/vendor/*
+!/static/vendor/*.zip
 
 # Client files
 /test-*
