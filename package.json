@@ -65,6 +65,7 @@
     "webpack-cli": "^5.1.4"
   },
   "scripts": {
+    "TODO": "Unpack all static/vendor/*.zip files in dev mode on postinstall?",
     "prettier": "echo --Run prettier-- && prettier --write --cache . | grep -v '(unchanged)' || true",
     "stylelint": "echo --Lint styles-- && stylelint ./**/*.{css,scss,less}",
     "stylelint-fix": "echo --Lint styles-- && stylelint ./**/*.{css,scss,less} --fix",
@@ -77,7 +78,9 @@
     "django-reload-server": "echo --Run django dev server-- && poetry run python manage.py livereload",
     "dev": "echo --Run all dev servers concurrently-- && concurrently --kill-others \"pnpm watch-build\" \"pnpm django-server\" \"pnpm django-reload-server\"",
     "build": "echo --Create all assets /webpack/-- && pnpm clean-compiled && webpack",
+    "build-dev": "echo --Create all assets /webpack/-- && pnpm clean-compiled && cross-env DEV=1 webpack",
     "watch-build": "echo --Watch all assets /webpack/-- && pnpm clean-compiled && webpack --watch",
+    "watch-build-dev": "echo --Watch all assets /webpack/-- && pnpm clean-compiled && cross-env DEV=1 webpack --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   }
 }

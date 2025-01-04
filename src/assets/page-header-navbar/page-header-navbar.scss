@@ -24,7 +24,7 @@
     text-overflow: ellipsis;
     a {
       text-decoration: none;
-      transition: all $transitionTime;
+      transition: all $transitionTimeMs;
       &:hover {
         opacity: 0.85;
       }
@@ -55,7 +55,7 @@
   .nav-link {
     white-space: nowrap;
     color: #fff;
-    transition: all $transitionTime;
+    transition: all $transitionTimeMs;
     opacity: 0.85;
     &:hover {
       opacity: 1;

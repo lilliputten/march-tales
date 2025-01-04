@@ -367,11 +367,11 @@ TIMEOUT = 30 if DEBUG else 300  # Short value for cache expiration
 # TODO: Use `Site.objects.get_current().name` (via `from django.contrib.sites.models import Site`) as site title.
 SITE_NAME = 'March Tales'
 # TODO: Add proper site description and keywords...
-SITE_DESCRIPTION = 'March Tales django api and web frontend server'
-SITE_KEYWORDS = """
-march
-tales
-"""
+# SITE_DESCRIPTION = 'March Tales django api and web frontend server'
+# SITE_KEYWORDS = """
+# march
+# tales
+# """
 
 SITE_SHORT_NAME = SITE_NAME
 
@@ -389,16 +389,17 @@ PASS_VARIABLES = {
     'DEFAULT_FROM_EMAIL': DEFAULT_FROM_EMAIL,
     'CONTACT_EMAIL': DEFAULT_FROM_EMAIL,
     # NOTE: Site url and name could be taken from site data via `get_current_site`
-    'SITE_NAME': SITE_NAME,
-    'SITE_SHORT_NAME': SITE_SHORT_NAME,
-    'SITE_TITLE': SITE_NAME,
-    'SITE_DESCRIPTION': SITE_DESCRIPTION,
-    'SITE_KEYWORDS': re.sub(r'\s*[\n\r]+\s*', ', ', SITE_KEYWORDS.strip()),
+    'SITE_NAME': SITE_NAME,  # Use `{% trans 'Site title' %}
+    'SITE_SHORT_NAME': SITE_SHORT_NAME,  # Use `{% trans 'Short site title' %}
+    # 'SITE_TITLE': SITE_NAME,
+    # 'SITE_DESCRIPTION': SITE_DESCRIPTION, # Use `{% trans 'Site description' %}
+    # 'SITE_KEYWORDS': re.sub(r'\s*[\n\r]+\s*', ', ', SITE_KEYWORDS.strip()), # Use `{% trans 'Site keywords' %}
     'STATIC_URL': STATIC_URL,
     'MEDIA_URL': MEDIA_URL,
     # i18n
     'LANGUAGES': LANGUAGES,
     'LANGUAGES_LIST': LANGUAGES_LIST,
+    'LANGUAGE_CODE': LANGUAGE_CODE,
 }
 
 __all__ = [

@@ -1,3 +1,38 @@
+// @use 'variables' as *;
+@import 'variables';
+
+// Active links...
+@mixin basicActiveLinkHovered {
+  opacity: 0.75;
+}
+@mixin activeLinkUnderlined {
+  text-decoration: underline; // !important;
+  // text-decoration-skip-ink: none;
+}
+@mixin basicActiveLink {
+  button,
+  &,
+  a {
+    transition: all var(--transitionTimeMs);
+    &:hover {
+      @include basicActiveLinkHovered;
+    }
+  }
+}
+@mixin activeUnderlinedLink {
+  @include basicActiveLink;
+  &,
+  button,
+  a {
+    &:hover {
+      @include activeLinkUnderlined;
+    }
+  }
+}
+@mixin activeLink {
+  @include basicActiveLink;
+}
+
 @mixin themeBackground {
   background-image: url('/static/images/splash/curves-bg/curves-x.svg');
   background-position: center top;

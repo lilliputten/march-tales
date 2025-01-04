@@ -3,8 +3,8 @@
 
 {% block page_header %}
   {{ block.super }}
-  {#% include 'assets/page-header-navbar/page-header-navbar.django' %#}
   {% include 'assets/template-header/template-header.django' %}
+  {#% include 'assets/page-header-navbar/page-header-navbar.django' %#}
 {% endblock %}
 
 {% block content %}

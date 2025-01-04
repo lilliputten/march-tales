@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-03 23:52+0300\n"
+"POT-Creation-Date: 2025-01-05 00:40+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,37 +20,66 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: .\src\assets\page-menus\menu-main.django:10
-msgid "Admin panel"
-msgstr "Панель управления"
+#: .\src\assets\back-button\back-button.django:5
+msgid "Back"
+msgstr "Назад"
 
-#: .\src\assets\page-menus\menu-main.django:45
+#: .\src\assets\page-menus\menu-main.django:20
+#: .\tales_django\templates\tales_django\profile.html.django:13
+#: .\tales_django\templates\tales_django\profile.html.django:20
 msgid "Profile"
 msgstr "Профиль"
 
-#: .\src\assets\page-menus\menu-main.django:48
+#: .\src\assets\page-menus\menu-main.django:23
+#: .\tales_django\templates\registration\password_change_form.html:33
+#: .\tales_django\templates\tales_django\profile.html.django:122
+#: .\tales_django\templates\tales_django\profile_edit.html.django:12
+#: .\tales_django\templates\tales_django\profile_edit.html.django:19
 msgid "Edit profile"
 msgstr "Редактировать профиль"
 
-#: .\src\assets\page-menus\menu-main.django:55
+#: .\src\assets\page-menus\menu-main.django:30
+#: .\tales_django\templates\registration\password_change_form.html:31
+#: .\tales_django\templates\tales_django\profile_edit.html.django:36
 msgid "Change password"
 msgstr "Сменить пароль"
 
-#: .\src\assets\page-menus\menu-main.django:58
+#: .\src\assets\page-menus\menu-main.django:33
+#: .\tales_django\templates\registration\login.html:35
+#: .\tales_django\templates\tales_django\profile_edit.html.django:37
 msgid "Reset password"
 msgstr "Сбросить пароль"
 
-#: .\src\assets\page-menus\menu-main.django:70
+#: .\src\assets\page-menus\menu-main.django:45
 msgid "Logout"
 msgstr "Выйти"
 
-#: .\src\assets\page-menus\menu-main.django:78
+#: .\src\assets\page-menus\menu-main.django:55
+#: .\tales_django\templates\django_registration\registration_form.html:30
+#: .\tales_django\templates\registration\signup.html:32
 msgid "Log in"
 msgstr "Войти"
 
-#: .\src\assets\page-menus\menu-main.django:81
+#: .\src\assets\page-menus\menu-main.django:61
+#: .\tales_django\templates\django_registration\registration_form.html:12
+#: .\tales_django\templates\django_registration\registration_form.html:16
+#: .\tales_django\templates\django_registration\registration_form.html:29
+#: .\tales_django\templates\registration\login.html:33
+#: .\tales_django\templates\registration\signup.html:20
+#: .\tales_django\templates\registration\signup.html:31
 msgid "Sign up"
 msgstr "Регистрация"
+
+#: .\src\assets\page-menus\menu-main.django:70
+msgid "Admin panel"
+msgstr "Панель управления"
+
+#: .\src\assets\template-header\template-header.django:13
+#: .\src\assets\template-header\template-header.django:16
+#: .\tales_django\templates\base-core.html.django:22
+#: .\tales_django\templates\base-core.html.django:35
+msgid "Site title"
+msgstr "Сказки мартовского кота"
 
 #: .\tales_django\entities\App\views\root_views.py:14
 #, python-format
@@ -66,6 +95,270 @@ msgstr[2] "%(count)d объектов"
 msgid "Sample Message"
 msgstr "Тестовое сообщение"
 
+#: .\tales_django\templates\base-core.html.django:23
+#: .\tales_django\templates\base-core.html.django:36
+msgid "Site description"
+msgstr "Авторское чтение классических сказок и рассказов"
+
+#: .\tales_django\templates\base-core.html.django:24
+msgid "Site keywords"
+msgstr "сказки, истории, чтение, mp3,"
+
+#: .\tales_django\templates\registration\logged_out.html:17
+msgid "Logged out"
+msgstr "Вы вышли из системы"
+
+#: .\tales_django\templates\registration\logged_out.html:26
+msgid "Thanks for spending some quality time with the web site today."
+msgstr ""
+"Спасибо, что провели сегодня немного времени с пользой на нашем веб-сайте."
+
+#: .\tales_django\templates\registration\logged_out.html:28
+#, fuzzy
+#| msgid "Log in"
+msgid "Log in again"
+msgstr "Войти"
+
+#: .\tales_django\templates\registration\login.html:16
+#: .\tales_django\templates\registration\login.html:31
+msgid "Login"
+msgstr "Войти"
+
+#: .\tales_django\templates\registration\password_change_done.html:30
+#, python-format
+msgid ""
+"Your password was changed. Go to <a href=\"%(index_url)s\">main page</a> or "
+"to your <a href=\"%(profile_url)s\">profile</a>."
+msgstr ""
+"Ваш пароль был изменен. Перейдите на <a href=\"%(index_url)s\">главную "
+"страницу</a> илив свой <a href=\"%(profile_url)s\">профиль</a>."
+
+#: .\tales_django\templates\registration\password_change_form.html:12
+#: .\tales_django\templates\registration\password_change_form.html:18
+#, fuzzy
+#| msgid "Password reset"
+msgid "Password change"
+msgstr "Сброс пароля"
+
+#: .\tales_django\templates\registration\password_reset_complete.html:11
+#: .\tales_django\templates\registration\password_reset_complete.html:17
+#: .\tales_django\templates\registration\password_reset_done.html:11
+#: .\tales_django\templates\registration\password_reset_done.html:17
+#: .\tales_django\templates\registration\password_reset_form.html:12
+#: .\tales_django\templates\registration\password_reset_form.html:14
+msgid "Password reset"
+msgstr "Сброс пароля"
+
+#: .\tales_django\templates\registration\password_reset_complete.html:26
+msgid "Your password has been set. You may go ahead and log in now."
+msgstr "Ваш пароль установлен. Теперь вы можете войти в систему."
+
+#: .\tales_django\templates\registration\password_reset_complete.html:28
+#, python-format
+msgid ""
+"Now you can <a href=\"%(login_url)s\">log in</a> using your new password."
+msgstr ""
+"Теперь вы можете <a href=\"%(login_url)s\">войти в систему, используя свой "
+"новый пароль."
+
+#: .\tales_django\templates\registration\password_reset_confirm.html:12
+#: .\tales_django\templates\registration\password_reset_confirm.html:16
+#, fuzzy
+#| msgid "Password reset for"
+msgid "Password reset confirmation"
+msgstr "Пароль сброшен для"
+
+#: .\tales_django\templates\registration\password_reset_confirm.html:25
+msgid ""
+"Please enter your new password twice so we can verify you typed it in "
+"correctly."
+msgstr ""
+"Пожалуйста, введите свой новый пароль дважды, чтобы мы могли убедиться, что "
+"вы ввели его правильно."
+
+#: .\tales_django\templates\registration\password_reset_confirm.html:41
+#, fuzzy
+#| msgid "Change password"
+msgid "Change my password"
+msgstr "Сменить пароль"
+
+#: .\tales_django\templates\registration\password_reset_confirm.html:47
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used. Please request a new password reset."
+msgstr ""
+"Ссылка для сброса пароля была неверной, возможно, потому, что она уже "
+"использовалась. Пожалуйста, запросите новый сброс пароля."
+
+#: .\tales_django\templates\registration\password_reset_done.html:26
+msgid ""
+"We’ve emailed you instructions for setting your password, if an account "
+"exists with the email you entered. You should receive them shortly."
+msgstr ""
+"Мы отправили вам по электронной почте инструкции по установке пароля, если у "
+"вас есть учетная запись, указав указанный вами адрес электронной почты. Вы "
+"должны получить их в ближайшее время."
+
+#: .\tales_django\templates\registration\password_reset_done.html:28
+msgid ""
+"If you don’t receive an email, please make sure you’ve entered the address "
+"you registered with, and check your spam folder."
+msgstr ""
+"Если вы не получили электронное письмо, пожалуйста, убедитесь, что вы "
+"указали адрес , на который указывали при регистрации, и проверьте папку со "
+"спамом."
+
+#: .\tales_django\templates\registration\password_reset_done.html:35
+#, fuzzy, python-format
+#| msgid ""
+#| "Then <a href=\"%(login_url)s\">log in</a> and "
+#| "<ahref=\"%(profile_edit_url)s\">edit your profile</a> to change or add "
+#| "morepersonal data."
+msgid ""
+"Then <a href=\"%(login_url)s\">log in</a> and <a "
+"href=\"%(profile_edit_url)s\">edit your profile</a> to change or add more "
+"personal data."
+msgstr ""
+"Затем <a href=\"%(login_url)s\">войдите в систему</a> и <a "
+"href=\"%(profile_edit_url)s\">отредактируйте свой профиль</a>, чтобы "
+"изменить или добавить дополнительные личные данные."
+
+#: .\tales_django\templates\registration\password_reset_done.html:37
+#, python-format
+msgid "Go to your <a href=\"%(profile_url)s\">profile</a>."
+msgstr "Перейдите в свой <a href=\"%(profile_url)s\">профиль</a>."
+
+#: .\tales_django\templates\registration\password_reset_email.html:4
+msgid ""
+"You’re receiving this email because you requested a password reset for your "
+"user account at"
+msgstr ""
+"Вы получили это электронное письмо, потому что запросили сброс пароля для "
+"своей учетной записи пользователя на сайте"
+
+#: .\tales_django\templates\registration\password_reset_email.html:7
+msgid "Please go to the following page and choose a new password:"
+msgstr "Пожалуйста, перейдите на следующую страницу и выберите новый пароль:"
+
+#: .\tales_django\templates\registration\password_reset_email.html:10
+msgid "Your username, in case you’ve forgotten:"
+msgstr "Ваше имя пользователя, на случай, если вы забыли:"
+
+#: .\tales_django\templates\registration\password_reset_email.html:13
+msgid "Thanks for using our site!"
+msgstr "Thanks for using our site!"
+
+#: .\tales_django\templates\registration\password_reset_email.html:15
+msgid "The {{ site_name }} team"
+msgstr "The {{ site_name }} team"
+
+#: .\tales_django\templates\registration\password_reset_form.html:18
+msgid ""
+"Forgotten your password? Enter your email address below, and we’ll email "
+"instructions for setting a new one."
+msgstr ""
+"Забыли свой пароль? Введите свой адрес электронной почты ниже, и мы "
+"вышлемвам инструкции по установке нового."
+
+#: .\tales_django\templates\registration\password_reset_form.html:29
+#, fuzzy
+#| msgid "Reset password"
+msgid "Reset my password"
+msgstr "Сбросить пароль"
+
+#: .\tales_django\templates\registration\password_reset_subject.txt:4
+msgid "Password reset for"
+msgstr "Пароль сброшен для"
+
 #: .\tales_django\templates\tales_django\index.html.django:19
 msgid "Welcome!"
 msgstr "Добро пожаловать!"
+
+#: .\tales_django\templates\tales_django\profile.html.django:33
+#, fuzzy
+#| msgid "Welcome!"
+msgid "Welcome,"
+msgstr "Добро пожаловать!"
+
+#: .\tales_django\templates\tales_django\profile.html.django:38
+msgid "Your registrations"
+msgstr "Ваши регистрации"
+
+#: .\tales_django\templates\tales_django\profile.html.django:41
+msgid "You don't have any active registrations yet."
+msgstr "У вас еще нет активных регистраций."
+
+#: .\tales_django\templates\tales_django\profile.html.django:44
+msgid "Membership"
+msgstr "Членство"
+
+#: .\tales_django\templates\tales_django\profile.html.django:50
+#, python-format
+msgid ""
+"You’re a member since %(membership_started)s. Membership type: "
+"%(membership_type)s."
+msgstr ""
+"Вы являетесь участником сообщества с %(membership_started)s. Тип участия: "
+"%(membership_type)s."
+
+#: .\tales_django\templates\tales_django\profile.html.django:54
+#, fuzzy
+#| msgid "Not yet a member."
+msgid "Not yet a member"
+msgstr "Вы ещё не член сообщества."
+
+#: .\tales_django\templates\tales_django\profile.html.django:55
+msgid "Apply for a membership"
+msgstr "Подать заявку на членство в сообщество"
+
+#: .\tales_django\templates\tales_django\profile.html.django:62
+#, fuzzy
+#| msgid ""
+#| "You have unpaid membership, download invoice: %(invoice_download_url)s"
+msgid ""
+"You have unpaid membership, download invoice: {{ invoice_download_url }}"
+msgstr ""
+"<strong>У вас неоплаченный счет за участие.</strong> Ваше членство еще "
+"недействительно. Вы можете <a target=\"_blank\" href=\"%"
+"(invoice_download_url)s\">загрузите счет-фактуру</a> и оплатите его прямо "
+"сейчас."
+
+#: .\tales_django\templates\tales_django\profile.html.django:77
+msgid "Favorite tracks"
+msgstr "Любимые треки"
+
+#: .\tales_django\templates\tales_django\profile.html.django:99
+msgid "Duration"
+msgstr "Продолжительность"
+
+#: .\tales_django\templates\tales_django\profile.html.django:105
+msgid "File size"
+msgstr "Размер файла"
+
+#: .\tales_django\templates\tales_django\profile_edit.html.django:33
+msgid "Save"
+msgstr "Сохранить"
+
+#: .\tales_django\templates\tales_django\profile_edit.html.django:35
+msgid "Reset changes"
+msgstr "Сбросить изменния"
+
+#: .\tales_django\templates\tales_django\profile_edit.html.django:40
+msgid "Delete account"
+msgstr "Удалить акаунт"
+
+#: .\tales_django\templates\tales_django\profile_edit.html.django:51
+msgid "Delete the account?"
+msgstr "Удалить акаунт?"
+
+#: .\tales_django\templates\tales_django\profile_edit.html.django:55
+msgid "Are you sure you want to completely delete your account and all data?"
+msgstr "Вы уверены, что хотите полностью удалить свою учетную запись и все данные?"
+
+#: .\tales_django\templates\tales_django\profile_edit.html.django:58
+msgid "Close"
+msgstr "Закрыть"
+
+#: .\tales_django\templates\tales_django\profile_edit.html.django:59
+msgid "Delete"
+msgstr "Удалить"

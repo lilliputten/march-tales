@@ -3,9 +3,7 @@
 
 {% load i18n %}
 
-{% block body_class %}
-  index
-{% endblock %}
+{% block body_class %}index{% endblock %}
 
 {% block content %}
   {{ block.super }}
@@ -16,7 +14,13 @@
     {% include 'assets/membership-splash/membership-splash-user.django' %}
   {% endif %}
 
-  <h1>{% trans 'Welcome!' %}</h1>
+  <fieldset>
+    <legend>
+      <h1 class="page-title primary-color my-4">{% trans 'Welcome!' %}</h1>
+    </legend>
+    {% if error_message %}<p>{{ error_message }}</p>{% endif %}
+  </fieldset>
+
   <p>
     <!--   Translation example:
     {{ sample_text }} - {{ plural_test }} -

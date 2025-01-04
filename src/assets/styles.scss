@@ -7,6 +7,7 @@
 @import 'common/forms';
 @import 'common/customize';
 @import 'common/fonts';
+@import 'template-core';
 
 // @import 'test/test'; // DEBUG
 
@@ -15,8 +16,10 @@
 
 @import 'theme/bootstrap-theme-fixes';
 
-@import 'page-header-navbar/page-header-navbar';
+// @import 'page-header-navbar/page-header-navbar';
 @import 'page-footer-navbar/page-footer-navbar';
+
+@import 'template-header/template-header';
 
 @import 'main-page-splash/main-page-splash';
 @import 'membership-splash/membership-splash';

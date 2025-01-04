@@ -8,4 +8,10 @@ utilsPath="$rootPath/.utils"
 test -f "$utilsPath/config.sh" && . "$utilsPath/config.sh"
 test -f "$utilsPath/check-python-env.sh" && . "$utilsPath/check-python-env.sh"
 
-$PYTHON_RUNTIME manage.py makemessages --ignore ".venv" --ignore "node_modules" --ignore "static" --ignore "media" --extension html,txt,py,django --all
+$PYTHON_RUNTIME manage.py makemessages \
+  --ignore ".venv" \
+  --ignore "node_modules" \
+  --ignore "static" \
+  --ignore "media" \
+  --extension html,txt,py,django \
+  --all

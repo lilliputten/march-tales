@@ -1,14 +1,28 @@
 /**
  * @module common.scss
- * @changed 2024.03.08, 12:00
+ * @changed 2025.01.04, 23:34
  */
 
 @import '../shared';
 
+.primary-icon {
+  color: $primaryColor;
+}
+.dimmed-primary-icon {
+  @extend .primary-icon;
+  color: $primaryColor;
+}
+
 .item-label,
+.dimmed-icon,
 .dimmed-info {
   opacity: 0.5;
 }
+.dimmed-primary-icon {
+  @extend .primary-icon;
+  @extend .dimmed-icon;
+}
+
 .primary-color {
   color: $primaryColor;
 }

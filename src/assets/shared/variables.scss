@@ -7,10 +7,11 @@
 
 // Font...
 
-$defaultFontSize: 14px;
+$defaultFontSize: 16px;
+$fontSizeSmall: calc($defaultFontSize - 1px);
 
-$defaultFontFamily: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-// $defaultFontFamily: Roboto, system-ui, -apple-system, "Segoe UI", "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+$defaultFontFamily: 'Nunito Sans', 'Helvetica', 'Arial', sans-serif;
+// $defaultFontFamily: 'Nunito Sans', Roboto, system-ui, -apple-system, "Segoe UI", "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
 // Breakpoints:...
 
@@ -58,19 +59,25 @@ $primaryColorRgb: rgbComponents($primaryColor);
 
 // Misc colors...
 
-// UNUSED?
-$xdarkBlueColor: #036;
-$darkBlueColor: #047;
-$mediumBlueColor: #157;
-$moodBlueColor: #6ac;
-$extralightBlueColor: #def;
+// // UNUSED?
+// $xdarkBlueColor: #036;
+// $darkBlueColor: #047;
+// $mediumBlueColor: #157;
+// $moodBlueColor: #6ac;
+// $extralightBlueColor: #def;
 
 $darkGreenColor: #461;
 $mediumGreenColor: #9a0;
 
-$defaultTextColor: #333;
+$defaultTextColor: #555;
+$defaultTextColorDark: #333;
+$defaultTextColorLight: #777;
 
 $backgroundColor: #fff;
+$borderColor: #ebebeb;
+$blackColor: #000;
+$whiteColor: #fff;
+$lightColor: #F9F9F9;
 
 // Navbar...
 
@@ -79,7 +86,7 @@ $navbarPlusHeight: 50px;
 
 // Timeouts...
 
-$momentTime: 150ms;
-$transitionTime: 250ms;
-$animationTime: 500ms;
-$effectTime: 1000ms;
+$momentTimeMs: 150ms;
+$transitionTimeMs: 250ms;
+$animationTimeMs: 500ms;
+$effectTimeMs: 1000ms;

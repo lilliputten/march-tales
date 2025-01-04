@@ -69,7 +69,7 @@
   }
   a:not(.btn) {
     color: #fff;
-    transition: all $transitionTime;
+    transition: all $transitionTimeMs;
     text-decoration-thickness: 2px;
     text-decoration-line: underline;
     opacity: 0.8;

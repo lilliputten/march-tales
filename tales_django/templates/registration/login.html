@@ -6,13 +6,14 @@
 
 {% extends "base-regular.html.django" %}
 
+{% load i18n %}
 {% load crispy_forms_tags %}
 
 {% block title %}Login — {{ block.super }}{% endblock title %} {% block content %}
 
 <fieldset>
   <legend>
-    <h1 class="page-title primary-color">Login</h1>
+    <h1 class="page-title primary-color my-4">{% trans 'Login' %}</h1>
   </legend>
   {% if error_message %}
   <p>{{ error_message }}</p>
@@ -27,11 +28,11 @@
   {% csrf_token %} {{ form|crispy }}
 
   <div class="common-actions">
-    <input class="btn btn-primary" type="submit" value="Login" />
+    <input class="btn btn-primary" type="submit" value="{% trans 'Login' %}" />
     <a class="btn btn-link btn-outline-primary" href="{% url 'django_registration_register' %}"
-      >Sign up</a
+      >{% trans 'Sign up' %}</a
     >
-    <a class="btn btn-link btn-outline-primary" href="{% url 'password_reset' %}">Reset password</a>
+    <a class="btn btn-link btn-outline-primary" href="{% url 'password_reset' %}">{% trans 'Reset password' %}</a>
     {% include "assets/back-button/back-button.django" %}
   </div>
 
