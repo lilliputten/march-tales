@@ -3,9 +3,13 @@
 
 {% block body_class %}main{% endblock %}
 
-{% block content %}
-{{ block.super }}
+{% block beforeContent %}
+{% include "assets/template-banner/template-banner.django" %}
+{% endblock beforeContent %}
 
-{% include "assets/main-page-splash/main-page-splash.django" %}
+{% block content %}
+  {{ block.super }}
+
+  {#% include "assets/main-page-splash/main-page-splash.django" %#}
 
 {% endblock content %}

@@ -9,5 +9,7 @@ body {
   font-family: $defaultFontFamily;
   background-color: $backgroundColor;
   // Add space for fixed navar (see `static/assets/page-header-navbar/page-header-navbar.django`)
-  margin-top: $navbarMainHeight + 20px;
+  &:not(.index):not(.main) {
+    margin-top: $navbarMainHeight + 20px;
+  }
 }

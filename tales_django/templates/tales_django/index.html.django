@@ -1,5 +1,5 @@
 {# ex: set ft=htmldjango : #}
-{% extends 'base-layout.html.django' %}
+{% extends 'base-main.html.django' %}
 
 {% load i18n %}
 

@@ -1,0 +1,54 @@
+.template-banner {
+
+  &.banner {
+    background-image: url(/static/images/backgrounds/banner-bg.svg);
+    background-position: bottom center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    padding: 120px 0 100px;
+
+    .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .banner-shape-1 {
+      position: absolute;
+      left: 20%;
+      top: 25%;
+
+      .path {
+        fill: $primary-color;
+      }
+    }
+
+    .banner-shape-2 {
+      position: absolute;
+      right: 20%;
+      top: 25%;
+
+      .path {
+        fill: $primary-color;
+      }
+    }
+
+    .banner-shape-3 {
+      position: absolute;
+      right: 25%;
+      bottom: 15%;
+
+      .path {
+        fill: $primary-color;
+      }
+    }
+
+    .banner-border {
+      position: absolute;
+      bottom: -60px;
+      left: 0;
+      width: 100%;
+      stroke: $primary-color;
+    }
+  }
+}

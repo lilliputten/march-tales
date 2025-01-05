@@ -1,18 +1,6 @@
 /* stylelint-disable scss/no-global-function-names */
 @use 'sass:color';
 
-/* XXX: Is it used?
- * @function toRGB($colour) {
- *   @return rgb(red($colour), green($colour), blue($colour));
- * }
- * @function toRGBA($colour, $alpha: 1) {
- *   @return rgba(toRGB($colour), $alpha);
- * }
- * @function toRGBValues($colour) {
- *   @return red($colour) + ', ' + green($colour) + ', ' + blue($colour);
- * }
- */
-
 @function rgbComponents($color) {
   // NOTE: New format (TODO, @see https://sass-lang.com/documentation/breaking-changes/color-functions/#old-channel-functions)
   @return color.channel($color, 'red', $space: rgb), color.channel($color, 'green', $space: rgb),

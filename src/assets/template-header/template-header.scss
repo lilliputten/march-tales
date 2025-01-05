@@ -9,11 +9,11 @@ $menuItemsFontSize: $fontSizeSmall;
   // border: 1px solid red;
 
   .navbar-brand {
+    overflow: hidden;
     @media screen and (width >= $screenLgMin) {
       flex: 1;
     }
     @include basicActiveLink;
-    overflow: hidden;
     .rounded-circle-wrapper {
       border-radius: 50%;
       $smallPadding: 4px;
@@ -26,9 +26,6 @@ $menuItemsFontSize: $fontSizeSmall;
       font-size: 3.5vw;
       text-overflow: ellipsis;
       overflow: hidden;
-      @media screen and (width >= $screenSmMin) {
-        // font-size: 4vw;
-      }
       @media screen and (width >= $screenMdMin) {
         font-size: 1em;
       }
