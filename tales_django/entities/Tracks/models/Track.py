@@ -42,6 +42,7 @@ class Track(Model):
     author = models.ForeignKey('Author', blank=True, null=True, on_delete=models.DO_NOTHING)
 
     tags = models.ManyToManyField('Tag', blank=True, related_name='tagged_tracks')
+    rubrics = models.ManyToManyField('Rubric', blank=True, related_name='rubricated_tracks')
 
     uploadsFolder = getAudioTrackFolderName()
 

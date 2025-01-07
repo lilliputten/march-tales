@@ -163,7 +163,6 @@ if DEBUG:
 #  {% endif %}
 # ```
 
-
 ROOT_URLCONF = APP_NAME + '.urls'
 
 # Templates folders...

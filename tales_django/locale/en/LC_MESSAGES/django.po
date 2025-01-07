@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-05 02:37+0300\n"
+"POT-Creation-Date: 2025-01-07 22:22+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -99,6 +99,20 @@ msgstr ""
 msgid "authors"
 msgstr ""
 
+#: .\tales_django\entities\Tracks\models\Author.py:16
+#: .\tales_django\entities\Tracks\models\Rubric.py:18
+#: .\tales_django\entities\Tracks\models\Tag.py:18
+msgid "Promote on the main page"
+msgstr ""
+
+#: .\tales_django\entities\Tracks\models\Rubric.py:8
+msgid "rubric"
+msgstr ""
+
+#: .\tales_django\entities\Tracks\models\Rubric.py:9
+msgid "rubrics"
+msgstr ""
+
 #: .\tales_django\entities\Tracks\models\Tag.py:8
 msgid "tag"
 msgstr ""
@@ -113,6 +127,14 @@ msgstr ""
 
 #: .\tales_django\entities\Tracks\models\Track.py:24
 msgid "tracks"
+msgstr ""
+
+#: .\tales_django\entities\Users\admin\GroupAdmin.py:14
+msgid "group"
+msgstr ""
+
+#: .\tales_django\entities\Users\admin\GroupAdmin.py:15
+msgid "groups"
 msgstr ""
 
 #: .\tales_django\templates\admin\base.html:28

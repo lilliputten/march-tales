@@ -3,10 +3,10 @@ from django.db import models
 from django.db.models import Model
 
 
-class Tag(Model):
+class Rubric(Model):
     class Meta:
-        verbose_name = _('tag')
-        verbose_name_plural = _('tags')
+        verbose_name = _('rubric')
+        verbose_name_plural = _('rubrics')
 
     text = models.TextField(
         unique=False,
@@ -22,7 +22,7 @@ class Tag(Model):
         return self.track_set.count()
 
     # Paired (reversed) relation to tracks
-    tracks = models.ManyToManyField('Track', blank=True, through='Track_tags')
+    tracks = models.ManyToManyField('Track', blank=True, through='Track_rubrics')
 
     def __str__(self):
         return self.text

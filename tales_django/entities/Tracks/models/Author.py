@@ -13,7 +13,7 @@ class Author(Model):
 
     portrait_picture = models.ImageField(upload_to='authors', blank=True)
 
-    promote = models.BooleanField(default=False, help_text='Promote on the main page')
+    promote = models.BooleanField(default=False, help_text=_('Promote on the main page'))
 
     def __str__(self):
         return self.name
