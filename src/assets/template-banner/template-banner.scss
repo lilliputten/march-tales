@@ -1,3 +1,8 @@
+@use 'sass:color';
+
+@import '../shared';
+@import '../template-core/shared';
+
 .template-banner {
 
   &.banner {
@@ -17,7 +22,6 @@
       position: absolute;
       left: 20%;
       top: 25%;
-
       .path {
         fill: $primary-color;
       }
@@ -25,19 +29,17 @@
 
     .banner-shape-2 {
       position: absolute;
-      right: 20%;
-      top: 25%;
-
+      right: 15%;
+      top: 35%;
       .path {
-        fill: $primary-color;
+        fill: color.change($primary-color, $alpha: .1);
       }
     }
 
     .banner-shape-3 {
       position: absolute;
-      right: 25%;
-      bottom: 15%;
-
+      right: 30%;
+      bottom: 12%;
       .path {
         fill: $primary-color;
       }

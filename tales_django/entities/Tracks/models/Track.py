@@ -74,9 +74,11 @@ class Track(Model):
 
     for_members = models.BooleanField(_('for members only'), default=False)   # , verbose_name=_('for members only'))
 
+    listened_count = models.BigIntegerField(blank=True, default=0, help_text=_('Listened count'))
+
     # Properties derived from the audio track file
-    audio_duration = models.BigIntegerField(null=True, help_text='Duration (seconds)')
-    audio_size = models.BigIntegerField(null=True, help_text='File size (bytes)')
+    audio_duration = models.BigIntegerField(null=True, help_text=_('Duration (seconds)'))
+    audio_size = models.BigIntegerField(null=True, help_text=_('File size (bytes)'))
 
     # Timestamps
     # created_at = models.DateField(auto_now_add=True)

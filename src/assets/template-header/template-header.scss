@@ -49,9 +49,10 @@ $menuItemsFontSize: $fontSizeSmall;
     border-bottom: 1px solid $border-color;
     transition: 0.2s ease;
     padding: 10px 0;
-    &.nav-bg {
-      background-color: $white;
-    }
+    // &.nav-bg {
+    //   background-color: $white;
+    // }
+    background-color: color.change($white, $alpha: .7);
     @include desktop {
       background-color: $white;
     }
