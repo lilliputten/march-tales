@@ -1,0 +1,12 @@
+{# ex: set ft=htmldjango : #}
+{% extends "base-regular.html.django" %}
+
+{% block title %}Empty page demo — {{ block.super }}{% endblock title %}
+
+{% block content %}
+
+  <p>Empty page</p>
+
+  {{ block.super }}
+
+{% endblock content %}

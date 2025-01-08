@@ -13,6 +13,7 @@ from ..views import (
     index_view,
     RobotsView,
     components_demo,
+    empty_demo,
 )
 
 cache_timeout = 0 if settings.LOCAL or settings.DEBUG else 15 * 60  # in seconds: {min}*60
@@ -44,6 +45,9 @@ if settings.DEBUG:
     # Demo pages (for debug/dev purposes only)...
     root_urlpatterns.append(
         path('components-demo', components_demo, name='components_demo'),
+    )
+    root_urlpatterns.append(
+        path('empty-demo', empty_demo, name='empty_demo'),
     )
     # root_urlpatterns += patterns(
     #     '',

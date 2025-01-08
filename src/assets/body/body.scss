@@ -1,15 +1,36 @@
 /**
  * @module body
- * @changed 2024.03.08, 13:30
+ * @changed 2025.01.09, 02:53
  */
 
 @import '../shared';
 
+html {
+  // border: 1px solid blue; // DEBUG
+  display: flex;
+  min-height: 100%;
+}
+
 body {
+  // border: 1px solid red; // DEBUG
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-between;
+
   font-family: $defaultFontFamily;
   background-color: $backgroundColor;
   // Add space for fixed navar (see `static/assets/page-header-navbar/page-header-navbar.django`)
   &:not(.index):not(.main) {
     margin-top: $navbarMainHeight + 20px;
+  }
+
+  .content,
+  .container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 }
