@@ -1,0 +1,12 @@
+{# ex: set ft=htmldjango : #}
+{% load static %}
+{% load i18n %}
+
+<ul class="list-inline footer-list mb-0">
+  <li class="list-inline-item"><a href="#"><i class="ti-facebook"></i></a></li>
+  <li class="list-inline-item"><a href="#"><i class="ti-twitter-alt"></i></a></li>
+  <li class="list-inline-item"><a href="#"><i class="ti-linkedin"></i></a></li>
+  <li class="list-inline-item"><a href="#"><i class="ti-github"></i></a></li>
+  <li class="list-inline-item"><a href="#"><i class="ti-youtube"></i></a></li>
+</ul>
+
