@@ -41,13 +41,13 @@
   <div class="container py-4">
     <div class="row align-items-center d-flex flex-md-row">
       <div class="d-flex justify-content-between align-items-center flex-column flex-md-row">
-        <div class="footer-cell footer-cell-side footer-cell-left text-center text-md-start mb-4">
+        <div class="footer-cell footer-cell-side footer-cell-left footer-cell-menu text-center text-md-start">
           <ul class="list-inline footer-list mb-0 small">
-            <li class="list-inline-item"><a href="privacy-policy.html">{% trans "Privacy Policy" %}</a></li>
-            <li class="list-inline-item"><a href="terms-conditions.html">{% trans "Terms Conditions" %}</a></li>
+            <li class="list-inline-item nav-item"><a class="nav-link" href="privacy-policy.html">{% trans "Privacy Policy" %}</a></li>
+            <li class="list-inline-item nav-item"><a class="nav-link" href="terms-conditions.html">{% trans "Terms Conditions" %}</a></li>
           </ul>
         </div>
-        <div class="footer-cell footer-brand-cell text-center mb-4">
+        <div class="footer-cell footer-brand-cell text-center">
           <a href="/" class="navbar-brand d-flex justify-content-center align-items-center gap-3 order-1 font-lobster">
             <span class="rounded-circle-wrapper d-flex align-items-center">
               <img
@@ -61,7 +61,7 @@
             </span>
           </a>
         </div>
-        <div class="footer-cell footer-cell-side footer-cell-right text-md-end text-center mb-4">
+        <div class="footer-cell footer-cell-side footer-cell-right footer-cell-socials text-md-end text-center">
           <ul class="list-inline footer-list mb-0">
             <li class="list-inline-item"><a href="#"><i class="ti-facebook"></i></a></li>
             <li class="list-inline-item"><a href="#"><i class="ti-twitter-alt"></i></a></li>

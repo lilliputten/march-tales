@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-08 16:31+0300\n"
+"POT-Creation-Date: 2025-01-08 20:06+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -64,8 +64,18 @@ msgstr ""
 msgid "What Would You <br> Like To Listen Today?"
 msgstr ""
 
-#: .\src\assets\template-header\template-header.django:13
-#: .\src\assets\template-header\template-header.django:16
+#: .\src\assets\template-footer\template-footer.django:46
+msgid "Privacy Policy"
+msgstr ""
+
+#: .\src\assets\template-footer\template-footer.django:47
+msgid "Terms Conditions"
+msgstr ""
+
+#: .\src\assets\template-footer\template-footer.django:57
+#: .\src\assets\template-footer\template-footer.django:60
+#: .\src\assets\template-header\template-header.django:14
+#: .\src\assets\template-header\template-header.django:17
 #: .\tales_django\templates\base-core.html.django:22
 #: .\tales_django\templates\base-core.html.django:37
 msgid "Site title"
@@ -75,7 +85,7 @@ msgstr "The March Cat Tales"
 msgid "Application"
 msgstr ""
 
-#: .\tales_django\entities\App\views\root_views.py:14
+#: .\tales_django\entities\App\views\index_view.py:16
 #, python-format
 msgid "there is %(count)d object"
 msgid_plural "there are %(count)d objects"
@@ -83,7 +93,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. Translators: The sample translation string
-#: .\tales_django\entities\App\views\root_views.py:24
+#: .\tales_django\entities\App\views\index_view.py:28
 msgid "Sample Message"
 msgstr ""
 

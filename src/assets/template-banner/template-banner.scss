@@ -6,6 +6,7 @@
 .template-banner {
 
   &.banner {
+    // border: 2px solid red;
     background-image: url(/static/images/backgrounds/banner-bg.svg);
     background-position: bottom center;
     background-repeat: no-repeat;
@@ -45,6 +46,14 @@
       }
     }
 
+    .banner-border-top {
+      position: absolute;
+      top: -90px;
+      left: -140%;
+      width: 220%;
+      height: 300px;
+      stroke: $primary-color;
+    }
     .banner-border {
       position: absolute;
       bottom: -60px;

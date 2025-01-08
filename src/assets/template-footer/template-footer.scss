@@ -5,7 +5,6 @@
 
 .template-footer {
   &.footer {
-    @include basicActiveLink;
     padding: 60px 0 0px;
     background-image: url(/static/images/backgrounds/footer-bg.svg);
     background-position: top center;
@@ -23,9 +22,20 @@
     }
 
     .footer-brand-cell {
+      @include basicActiveLink;
       @media screen and (width < $screenMdMin) {
         order: -1;
       }
+    }
+
+    .footer-cell-menu {
+      // @include basicActiveLink;
+      a:hover {
+        color: $primaryColor;
+      }
+    }
+    .footer-cell-socials {
+      @include basicActiveLink;
     }
 
     .navbar-brand {
