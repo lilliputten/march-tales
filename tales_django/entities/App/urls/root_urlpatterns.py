@@ -4,6 +4,8 @@ from django.conf.urls.static import static
 from django.urls import include, path
 from django.views.decorators.cache import cache_page
 
+from tales_django.entities.App.views import page403, page404, page500
+
 # from translation_manager import urls as translation_urls
 
 from ..views import (
@@ -17,6 +19,8 @@ cache_timeout = 0 if settings.LOCAL or settings.DEBUG else 15 * 60  # in seconds
 root_urlpatterns = [
     # Root page
     path('', index_view, name='index'),
+    # Core?
+    # path('', include('pages.urls')),
     # Language switching
     path('i18n/', include('django.conf.urls.i18n')),
     # App-provided paths...
@@ -40,3 +44,24 @@ if settings.DEBUG:
     root_urlpatterns.append(
         path('components-demo', components_demo, name='components_demo'),
     )
+    # root_urlpatterns += patterns(
+    #     '',
+    #     # url(r'^400/$', TemplateView.as_view(template_name='400.html.django')),
+    #     url(r'^403/$', TemplateView.as_view(template_name='403.html.django')),
+    #     url(r'^404/$', 'django.views.defaults.page_not_found'),
+    #     url(r'^500/$', 'django.views.defaults.server_error'),
+    # )
+# else:
+#     handler404 = page404
+#     # handler403 = views.page403
+#     # handler404 = views.page404
+#     # handler500 = views.page500
+#
+
+# root_urlpatterns.append(
+#     path(r'^404/$', 'django.views.defaults.page_not_found')
+# )
+
+handler403 = 'tales_django.views.page403'
+handler404 = page404 # 'tales_django.views.page404'
+handler500 = 'tales_django.views.page500'

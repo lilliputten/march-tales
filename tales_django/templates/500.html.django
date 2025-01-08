@@ -1,0 +1,13 @@
+{% extends "base-layout.html.django" %}
+
+{% load i18n %}
+
+{% block title %}500{{ block.super }}{% endblock title %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-lg-12">
+            <h3>{% trans "Service is temporary unavailable" %}</h3>
+        </div>
+    </div>
+{% endblock body %}

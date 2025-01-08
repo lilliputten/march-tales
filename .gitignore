@@ -44,6 +44,7 @@ config.local.yml
 /media/*
 !/media/samples
 /static/vendor/*
+/static/CACHE
 !/static/vendor/*.zip
 
 # Client files
