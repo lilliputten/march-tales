@@ -5,12 +5,22 @@
 
 .template-footer {
   &.footer {
-    padding: 60px 0 0px;
+    padding: 150px 0 0px;
     background-image: url(/static/images/backgrounds/footer-bg.svg);
     background-position: top center;
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
+
+    .footer-border {
+      position: absolute;
+      // bottom: -60px;
+      top: 0;
+      height: 200px;
+      left: -50%;
+      width: 200%;
+      stroke: $primary-color;
+    }
 
     .delimiter {
       border-color: #000;
