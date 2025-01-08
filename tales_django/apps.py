@@ -1,7 +1,21 @@
 from django.utils.translation import gettext_lazy as _
 from django.apps import AppConfig
 
+# from translation_manager.signals import post_publish as translation_post_publish
+
+from core.logging import getDebugLogger
 from tales_django import settings
+
+
+_logger = getDebugLogger()
+
+# def restart_server():
+#     # TODO: Touch `index.wsgi`
+#     _logger.info('restart_server')
+#     pass
+
+
+# translation_post_publish.connect(restart_server, sender=None)
 
 
 class TalesConfig(AppConfig):

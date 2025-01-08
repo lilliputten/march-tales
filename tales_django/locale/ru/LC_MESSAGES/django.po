@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-07 22:22+0300\n"
+"POT-Creation-Date: 2025-01-08 04:56+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -62,6 +62,10 @@ msgstr "Регистрация"
 msgid "Admin panel"
 msgstr "Панель управления"
 
+#: .\src\assets\template-banner\template-banner.django:10
+msgid "What Would You <br> Like To Listen Today?"
+msgstr "Что бы вы хотели<br> послушать сегодня?"
+
 #: .\src\assets\template-header\template-header.django:13
 #: .\src\assets\template-header\template-header.django:16
 #: .\tales_django\templates\base-core.html.django:22
@@ -69,7 +73,7 @@ msgstr "Панель управления"
 msgid "Site title"
 msgstr "Сказки мартовского кота"
 
-#: .\tales_django\apps.py:10
+#: .\tales_django\apps.py:24
 msgid "Application"
 msgstr "Приложение"
 
@@ -94,35 +98,115 @@ msgstr "членство"
 msgid "memberships"
 msgstr "членство"
 
-#: .\tales_django\entities\Tracks\models\Author.py:8
-msgid "author"
-msgstr "автор"
+#: .\tales_django\entities\Tracks\admin\AuthorAdmin.py:34
+msgid "Name"
+msgstr "Имя"
 
-#: .\tales_django\entities\Tracks\models\Author.py:9
-msgid "authors"
-msgstr "авторы"
+#: .\tales_django\entities\Tracks\admin\AuthorAdmin.py:41
+#, fuzzy
+msgid "Has portrait"
+msgstr "С портретом"
 
-#: .\tales_django\entities\Tracks\models\Author.py:16
-#: .\tales_django\entities\Tracks\models\Rubric.py:18
-#: .\tales_django\entities\Tracks\models\Tag.py:18
-msgid "Promote on the main page"
-msgstr "Продвигать на главной странице"
+#: .\tales_django\entities\Tracks\admin\AuthorAdmin.py:56
+#, fuzzy
+msgid "Tracks count"
+msgstr "Треки"
 
-#: .\tales_django\entities\Tracks\models\Rubric.py:8
-msgid "rubric"
-msgstr "рубрика"
+#: .\tales_django\entities\Tracks\admin\RubricAdmin.py:35
+#: .\tales_django\entities\Tracks\admin\TagAdmin.py:34
+#: .\tales_django\entities\Tracks\models\Rubric.py:15
+#: .\tales_django\entities\Tracks\models\Tag.py:15
+msgid "text"
+msgstr "текст"
 
-#: .\tales_django\entities\Tracks\models\Rubric.py:9
+#: .\tales_django\entities\Tracks\admin\RubricAdmin.py:41
+#: .\tales_django\entities\Tracks\admin\TagAdmin.py:40
+#, fuzzy
+msgid "tracks count"
+msgstr "треки"
+
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:33
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:98
+#: .\tales_django\entities\Tracks\models\Track.py:68
+msgid "Published"
+msgstr "Опубликовано"
+
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:106
+msgid "has preview"
+msgstr "с превью"
+
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:113
+#: .\tales_django\entities\Tracks\models\Tag.py:11
+#: .\tales_django\entities\Tracks\models\Track.py:52
+msgid "tags"
+msgstr "теги"
+
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:119
+#: .\tales_django\entities\Tracks\models\Rubric.py:11
+#: .\tales_django\entities\Tracks\models\Track.py:53
 msgid "rubrics"
 msgstr "рубрики"
 
-#: .\tales_django\entities\Tracks\models\Tag.py:8
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:126
+#: .\tales_django\templates\tales_django\profile.html.django:99
+msgid "Duration"
+msgstr "Длительность"
+
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:133
+msgid "Size"
+msgstr "Размер"
+
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:146
+#: .\tales_django\entities\Tracks\models\Track.py:28
+#, fuzzy
+msgid "title"
+msgstr "название"
+
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:190
+msgid "Audio file has been successfully uploaded"
+msgstr "Аудио файл успешно загружен"
+
+#: .\tales_django\entities\Tracks\models\Author.py:10
+#: .\tales_django\entities\Tracks\models\Track.py:50
+msgid "author"
+msgstr "автор"
+
+#: .\tales_django\entities\Tracks\models\Author.py:11
+msgid "authors"
+msgstr "авторы"
+
+#: .\tales_django\entities\Tracks\models\Author.py:13
+msgid "name"
+msgstr "имя"
+
+#: .\tales_django\entities\Tracks\models\Author.py:14
+#: .\tales_django\entities\Tracks\models\Track.py:39
+#, fuzzy
+msgid "description"
+msgstr "описание"
+
+#: .\tales_django\entities\Tracks\models\Author.py:15
+msgid "portrait picture"
+msgstr "портрет"
+
+#: .\tales_django\entities\Tracks\models\Author.py:16
+#: .\tales_django\entities\Tracks\models\Tag.py:23
+msgid "promote"
+msgstr "продвигать"
+
+#: .\tales_django\entities\Tracks\models\Author.py:16
+#: .\tales_django\entities\Tracks\models\Rubric.py:23
+#: .\tales_django\entities\Tracks\models\Tag.py:23
+msgid "Promote on the main page"
+msgstr "Продвигать на главной странице"
+
+#: .\tales_django\entities\Tracks\models\Rubric.py:10
+msgid "rubric"
+msgstr "рубрика"
+
+#: .\tales_django\entities\Tracks\models\Tag.py:10
 msgid "tag"
 msgstr "тег"
-
-#: .\tales_django\entities\Tracks\models\Tag.py:9
-msgid "tags"
-msgstr "теги"
 
 #: .\tales_django\entities\Tracks\models\Track.py:23
 msgid "track"
@@ -132,6 +216,69 @@ msgstr "трек"
 msgid "tracks"
 msgstr "треки"
 
+#: .\tales_django\entities\Tracks\models\Track.py:34
+msgid "The track title text, required."
+msgstr "Обязательное название трека."
+
+#: .\tales_django\entities\Tracks\models\Track.py:43
+#, fuzzy
+#| msgid "Site description"
+msgid "Optional description"
+msgstr "Авторское чтение классических сказок и рассказов"
+
+#: .\tales_django\entities\Tracks\models\Track.py:47
+#, fuzzy
+msgid "youtube link"
+msgstr "Ссылка на ролик в YouTube"
+
+#: .\tales_django\entities\Tracks\models\Track.py:47
+msgid "YouTube video link url"
+msgstr "Ссылка на ролик в YouTube"
+
+#: .\tales_django\entities\Tracks\models\Track.py:59
+#, fuzzy
+msgid "Audio file"
+msgstr "Аудио файл"
+
+#: .\tales_django\entities\Tracks\models\Track.py:64
+#, fuzzy
+msgid "Preview picture"
+msgstr "Изображение предпросмотра"
+
+#: .\tales_django\entities\Tracks\models\Track.py:69
+msgid "Hidden"
+msgstr "Скрыто"
+
+#: .\tales_django\entities\Tracks\models\Track.py:70
+msgid "Test"
+msgstr "Проверка"
+
+#: .\tales_django\entities\Tracks\models\Track.py:73
+msgid "status"
+msgstr "статус"
+
+#: .\tales_django\entities\Tracks\models\Track.py:75
+msgid "for members only"
+msgstr "только для членов"
+
+#: .\tales_django\entities\Tracks\models\Track.py:83
+#, fuzzy
+msgid "published at"
+msgstr "опубликовано в"
+
+#: .\tales_django\entities\Tracks\models\Track.py:84
+msgid "updated at"
+msgstr "обновлено в"
+
+#: .\tales_django\entities\Tracks\models\Track.py:88
+#, fuzzy
+msgid "published by"
+msgstr "опубликовано пользователем"
+
+#: .\tales_django\entities\Tracks\models\Track.py:91
+msgid "updated by"
+msgstr "обновлено пользователем"
+
 #: .\tales_django\entities\Users\admin\GroupAdmin.py:14
 msgid "group"
 msgstr "группа"
@@ -139,6 +286,54 @@ msgstr "группа"
 #: .\tales_django\entities\Users\admin\GroupAdmin.py:15
 msgid "groups"
 msgstr "группы"
+
+#: .\tales_django\entities\Users\admin\UserAdmin.py:39
+msgid "Personal info"
+msgstr "Персональная информация"
+
+#: .\tales_django\entities\Users\admin\UserAdmin.py:41
+#, fuzzy
+msgid "Tracks"
+msgstr "Треки"
+
+#: .\tales_django\entities\Users\admin\UserAdmin.py:50
+msgid "Permissions"
+msgstr "Разрешения"
+
+#: .\tales_django\entities\Users\admin\UserAdmin.py:61
+msgid "Important dates"
+msgstr "Важные даты"
+
+#: .\tales_django\entities\Users\admin\UserAdmin.py:77
+msgid "Regular user"
+msgstr "Обычный пользователь"
+
+#: .\tales_django\entities\Users\admin\UserAdmin.py:82
+msgid "E-mail (username)"
+msgstr "E-mail (логин)"
+
+#: .\tales_django\entities\Users\admin\UserAdmin.py:83
+#, fuzzy
+msgid "Address"
+msgstr "Адрес"
+
+#: .\tales_django\entities\Users\models\User.py:13
+msgid "e-mail"
+msgstr "e-mail"
+
+#: .\tales_django\entities\Users\models\User.py:14
+msgid "addrress"
+msgstr "адрес"
+
+#: .\tales_django\entities\Users\models\User.py:33
+#, fuzzy
+#| msgid "Favorite tracks"
+msgid "favorite tracks"
+msgstr "избранные треки"
+
+#: .\tales_django\entities\Users\models\User.py:36
+msgid "playlist"
+msgstr "плейлист"
 
 #: .\tales_django\templates\admin\base.html:28
 msgid "Skip to main content"
@@ -156,10 +351,8 @@ msgid "View site"
 msgstr "Открыть сайт"
 
 #: .\tales_django\templates\admin\base.html:53
-#, fuzzy
-#| msgid "Duration"
 msgid "Documentation"
-msgstr "Продолжительность"
+msgstr "Документация"
 
 #: .\tales_django\templates\admin\base.html:57
 #: .\tales_django\templates\registration\password_change_form.html:31
@@ -201,9 +394,8 @@ msgstr ""
 
 #: .\tales_django\templates\registration\logged_out.html:28
 #, fuzzy
-#| msgid "Log in"
 msgid "Log in again"
-msgstr "Войти"
+msgstr "Войти снова"
 
 #: .\tales_django\templates\registration\login.html:16
 #: .\tales_django\templates\registration\login.html:31
@@ -227,7 +419,6 @@ msgstr ""
 #: .\tales_django\templates\registration\password_change_form.html:12
 #: .\tales_django\templates\registration\password_change_form.html:18
 #, fuzzy
-#| msgid "Password reset"
 msgid "Password change"
 msgstr "Сброс пароля"
 
@@ -255,7 +446,6 @@ msgstr ""
 #: .\tales_django\templates\registration\password_reset_confirm.html:12
 #: .\tales_django\templates\registration\password_reset_confirm.html:16
 #, fuzzy
-#| msgid "Password reset for"
 msgid "Password reset confirmation"
 msgstr "Пароль сброшен для"
 
@@ -301,10 +491,6 @@ msgstr ""
 
 #: .\tales_django\templates\registration\password_reset_done.html:35
 #, fuzzy, python-format
-#| msgid ""
-#| "Then <a href=\"%(login_url)s\">log in</a> and "
-#| "<ahref=\"%(profile_edit_url)s\">edit your profile</a> to change or add "
-#| "morepersonal data."
 msgid ""
 "Then <a href=\"%(login_url)s\">log in</a> and <a "
 "href=\"%(profile_edit_url)s\">edit your profile</a> to change or add more "
@@ -411,10 +597,6 @@ msgstr ""
 #: .\tales_django\templates\tales_django\profile.html.django:77
 msgid "Favorite tracks"
 msgstr "Любимые треки"
-
-#: .\tales_django\templates\tales_django\profile.html.django:99
-msgid "Duration"
-msgstr "Продолжительность"
 
 #: .\tales_django\templates\tales_django\profile.html.django:105
 msgid "File size"

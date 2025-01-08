@@ -1,7 +1,7 @@
-# from django.utils.translation import ugettext_lazy as _
-
 from datetime import date
 from datetime import timedelta
+
+from translated_fields import TranslatedField
 
 from django.utils.translation import gettext_lazy as _
 from django.db import models
@@ -9,8 +9,8 @@ from django.db.models import Model
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
 
+# from core.appEnv import LOCAL
 from core.helpers.files import sizeofFmt
-from core.appEnv import LOCAL
 from core.logging import getDebugLogger
 from tales_django.core.helpers.audio import getAudioTrackFolderName
 
@@ -23,47 +23,56 @@ class Track(Model):
         verbose_name = _('track')
         verbose_name_plural = _('tracks')
 
-    title = models.TextField(
-        unique=False,
-        blank=False,
-        null=False,
-        max_length=150,
-        verbose_name='track title',
-        help_text='Required. 150 characters or fewer. The track title text.',
+    title = TranslatedField(
+        models.TextField(
+            _('title'),
+            unique=False,
+            blank=False,
+            null=False,
+            max_length=150,
+            # verbose_name='track title',
+            help_text=_('The track title text, required.'),
+        )
     )
-    description = models.TextField(
-        blank=True,
-        null=False,
-        max_length=512,
-        help_text='Optional description, up to 512 characters.',
+    description = TranslatedField(
+        models.TextField(
+            _('description'),
+            blank=True,
+            null=False,
+            max_length=512,
+            help_text=_('Optional description'),
+        )
     )
-    youtube_url = models.URLField(blank=True, null=False, max_length=150, help_text='YouTube video link url')
+    youtube_url = models.URLField(
+        verbose_name=_('youtube link'), blank=True, null=False, max_length=150, help_text=_('YouTube video link url')
+    )
 
-    author = models.ForeignKey('Author', blank=True, null=True, on_delete=models.DO_NOTHING)
+    author = models.ForeignKey('Author', verbose_name=_('author'), blank=True, null=True, on_delete=models.DO_NOTHING)
 
-    tags = models.ManyToManyField('Tag', blank=True, related_name='tagged_tracks')
-    rubrics = models.ManyToManyField('Rubric', blank=True, related_name='rubricated_tracks')
+    tags = models.ManyToManyField('Tag', verbose_name=_('tags'), blank=True, related_name='tagged_tracks')
+    rubrics = models.ManyToManyField('Rubric', verbose_name=_('rubrics'), blank=True, related_name='rubricated_tracks')
 
     uploadsFolder = getAudioTrackFolderName()
 
     # @see https://forum.djangoproject.com/t/how-to-pass-audio-file-from-model-to-template-in-django/11661
     audio_file = models.FileField(
+        verbose_name=_('Audio file'),
         upload_to=uploadsFolder,
         blank=False,
         null=False,
     )
-    preview_picture = models.ImageField(upload_to=uploadsFolder, blank=True)
+    preview_picture = models.ImageField(upload_to=uploadsFolder, blank=True, verbose_name=_('Preview picture'))
 
     # Track status
     TRACK_STATUS = [
-        ('PUBLISHED', 'Published'),
-        ('HIDDEN', 'Hidden'),
-        ('TEST', 'Test'),  # DEBUG!
+        ('PUBLISHED', _('Published')),
+        ('HIDDEN', _('Hidden')),
+        ('TEST', _('Test')),  # DEBUG!
     ]
     DEFAULT_TRACK_STATUS = TRACK_STATUS[0][0]
-    track_status = models.TextField(choices=TRACK_STATUS, default=DEFAULT_TRACK_STATUS)
+    track_status = models.TextField(_('status'), choices=TRACK_STATUS, default=DEFAULT_TRACK_STATUS)
 
-    for_members = models.BooleanField(default=False, verbose_name='For members only')
+    for_members = models.BooleanField(_('for members only'), default=False)   # , verbose_name=_('for members only'))
 
     # Properties derived from the audio track file
     audio_duration = models.BigIntegerField(null=True, help_text='Duration (seconds)')
@@ -71,12 +80,16 @@ class Track(Model):
 
     # Timestamps
     # created_at = models.DateField(auto_now_add=True)
-    published_at = models.DateField(default=date.today)
-    updated_at = models.DateField(auto_now=True)
+    published_at = models.DateField(verbose_name=_('published at'), default=date.today)
+    updated_at = models.DateField(verbose_name=_('updated at'), auto_now=True)
 
     # Owner/creator
-    published_by = models.ForeignKey('User', related_name='publisher', on_delete=models.DO_NOTHING)
-    updated_by = models.ForeignKey('User', related_name='updater', on_delete=models.DO_NOTHING)
+    published_by = models.ForeignKey(
+        'User', verbose_name=_('published by'), related_name='publisher', on_delete=models.DO_NOTHING
+    )
+    updated_by = models.ForeignKey(
+        'User', verbose_name=_('updated by'), related_name='updater', on_delete=models.DO_NOTHING
+    )
 
     @property
     def active(self) -> bool:
@@ -106,9 +119,9 @@ class Track(Model):
 
     def __str__(self):
         items = [
-            'Track',
+            # _('Track'),
             self.title,
-            '[%d]' % self.id if LOCAL else None,
+            # '[%d]' % self.id if LOCAL else None,
         ]
         info = ' '.join(filter(None, map(str, items)))
         return info

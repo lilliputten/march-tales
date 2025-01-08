@@ -49,6 +49,8 @@ from core.djangoConfig import (
     EMAIL_HOST_PASSWORD,
 )
 
+# TRANSLATIONS_PROJECT_BASE_DIR = BASE_DIR
+
 gettext = lambda s: s
 
 # # DEBUG: Show basic settings...
@@ -127,6 +129,9 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.staticfiles',
     # Added
+    # 'modeltranslation',  # XXX: Doesn't work in django 5?
+    # 'translation_manager',
+    'translated_fields',
     'compressor',
     'crispy_forms',
     'crispy_bootstrap5',

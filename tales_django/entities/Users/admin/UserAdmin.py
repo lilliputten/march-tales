@@ -1,3 +1,4 @@
+from django.utils.translation import gettext_lazy as _
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.admin import UserAdmin
@@ -35,9 +36,9 @@ class UserAdmin(BaseUserAdmin):
 
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
-        ('Personal info', {'fields': ('first_name', 'last_name', 'address')}),
+        (_('Personal info'), {'fields': ('first_name', 'last_name', 'address')}),
         (
-            'Tracks',
+            _('Tracks'),
             {
                 'fields': (
                     'favorite_tracks',
@@ -46,7 +47,7 @@ class UserAdmin(BaseUserAdmin):
             },
         ),
         (
-            'Permissions',
+            _('Permissions'),
             {
                 'fields': (
                     'is_active',
@@ -57,7 +58,7 @@ class UserAdmin(BaseUserAdmin):
                 )
             },
         ),
-        ('Important dates', {'fields': ('last_login', 'date_joined')}),
+        (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
     )
     list_display = [
         'email',
@@ -73,12 +74,13 @@ class UserAdmin(BaseUserAdmin):
     def is_regular_user(self, user):
         return not user.is_staff and not user.is_superuser
 
-    is_regular_user.short_description = 'Regular user'
+    is_regular_user.short_description = _('Regular user')
     is_regular_user.boolean = True
 
     def get_form(self, request, obj=None, **kwargs):
         form = super().get_form(request, obj, **kwargs)
-        form.base_fields['username'].label = 'Email (username)'
+        form.base_fields['username'].label = _('E-mail (username)')
+        form.base_fields['address'].label = _('Address')
         return form
 
 

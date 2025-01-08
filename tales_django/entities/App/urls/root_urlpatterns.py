@@ -4,6 +4,8 @@ from django.conf.urls.static import static
 from django.urls import include, path
 from django.views.decorators.cache import cache_page
 
+# from translation_manager import urls as translation_urls
+
 from ..views import (
     index,
     RobotsView,
@@ -26,6 +28,10 @@ root_urlpatterns = [
         name='robots',
     ),
 ]
+
+# root_urlpatterns.append(url(r'^translations/', include(translation_urls)))
+# root_urlpatterns.append(path(r'^translations/', translation_urls.urlpatterns))
+
 
 root_urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

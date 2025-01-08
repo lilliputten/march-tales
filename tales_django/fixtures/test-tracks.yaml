@@ -3,8 +3,9 @@
     model: "tales_django.track"
     pk: 1
     fields:
-      title: "Sample track"
-      description: ""
+      title_en: "Sample track"
+      title_ru: "Тестовый трек"
+      # description: ""
       youtube_url: ""
       author: 1
       audio_file: "samples/test-short.mp3"
@@ -24,7 +25,8 @@
     model: "tales_django.tag"
     pk: 1
     fields:
-      text: "Test"
+      text_en: "Test"
+      text_ru: "Тест"
       promote: true
       tracks:
         - 1
@@ -33,7 +35,26 @@
     model: "tales_django.tag"
     pk: 2
     fields:
-      text: "Sample"
+      text_en: "Sample"
+      text_ru: "Пример"
+      promote: false
+      tracks: []
+
+    model: "tales_django.rubric"
+    pk: 1
+    fields:
+      text_en: "Tales"
+      text_ru: "Сказки"
+      promote: true
+      tracks:
+        - 1
+
+  -
+    model: "tales_django.rubric"
+    pk: 2
+    fields:
+      text_en: "Stories"
+      text_ru: "Рассказы"
       promote: false
       tracks: []
 
@@ -41,9 +62,20 @@
     model: "tales_django.author"
     pk: 1
     fields:
-      name: "Wilhelm Hauff"
-      description: ""
-      portrait_picture: "samples/wilhelm-hauff-sq-200.jpg"
+      name_en: "Wilhelm Hauff"
+      name_ru: "Вильгельм Гауф"
+      # description: ""
+      portrait_picture: "samples/author-wilhelm-hauff-sq-200.jpg"
+      promote: true
+
+  -
+    model: "tales_django.author"
+    pk: 2
+    fields:
+      name_en: "Hans Christian Andersen"
+      name_ru: "Ханс Кристиан Андерсен"
+      # description: ""
+      portrait_picture: "samples/author-andersen-sq-200.jpg"
       promote: true
 
 

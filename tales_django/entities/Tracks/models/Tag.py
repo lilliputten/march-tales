@@ -1,3 +1,5 @@
+from translated_fields import TranslatedField
+
 from django.utils.translation import gettext_lazy as _
 from django.db import models
 from django.db.models import Model
@@ -8,14 +10,17 @@ class Tag(Model):
         verbose_name = _('tag')
         verbose_name_plural = _('tags')
 
-    text = models.TextField(
-        unique=False,
-        blank=False,
-        null=False,
-        max_length=150,
+    text = TranslatedField(
+        models.TextField(
+            _('text'),
+            unique=False,
+            blank=False,
+            null=False,
+            max_length=150,
+        )
     )
 
-    promote = models.BooleanField(default=False, help_text=_('Promote on the main page'))
+    promote = models.BooleanField(_('promote'), default=False, help_text=_('Promote on the main page'))
 
     @property
     def tracks_count(self):

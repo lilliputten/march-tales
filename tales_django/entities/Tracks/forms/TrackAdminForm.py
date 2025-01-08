@@ -1,3 +1,4 @@
+from translated_fields import TranslatedFieldAdmin
 from django.forms.models import ModelForm
 
 from tales_django.core.widgets import textAreaWidget, textInputWidget
@@ -9,10 +10,9 @@ class TrackAdminForm(ModelForm):
     class Meta:
         model = Track
         widgets = {
-            'title': textInputWidget,
+            **{x: textInputWidget for x in Track.title.fields},  # 'title': textInputWidget,
+            **{x: textAreaWidget for x in Track.description.fields},  # 'description': textAreaWidget,
             'youtube_url': textInputWidget,
-            'description': textAreaWidget,
-            # 'tags_list': textAreaWidget,
             # 'audio_file': forms.FileInput(attrs={'accept': '.mp3,audio/*'}),
         }
         fields = '__all__'

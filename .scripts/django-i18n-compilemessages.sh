@@ -8,4 +8,8 @@ utilsPath="$rootPath/.utils"
 test -f "$utilsPath/config.sh" && . "$utilsPath/config.sh"
 test -f "$utilsPath/check-python-env.sh" && . "$utilsPath/check-python-env.sh"
 
-$PYTHON_RUNTIME manage.py compilemessages --ignore ".venv" --ignore "node_modules" --ignore "static" --ignore "media"
+$PYTHON_RUNTIME manage.py compilemessages \
+  --ignore ".venv*" \
+  --ignore "node_modules" \
+  --ignore "static" \
+  --ignore "media"

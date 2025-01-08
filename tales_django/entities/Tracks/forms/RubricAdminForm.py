@@ -9,6 +9,6 @@ class RubricAdminForm(ModelForm):
     class Meta:
         model = Rubric
         widgets = {
-            'text': textInputWidget,
+            **{x: textInputWidget for x in Rubric.text.fields},  # 'text': textInputWidget,
         }
         fields = '__all__'
