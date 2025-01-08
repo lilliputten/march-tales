@@ -28,6 +28,13 @@
       }
     }
 
+    .list-inline {
+      a:not(:hover) {
+        background-color: color.change(#fff, $alpha: 1);
+        border-color: transparent;
+      }
+    }
+
     .banner-shape-2 {
       position: absolute;
       right: 15%;

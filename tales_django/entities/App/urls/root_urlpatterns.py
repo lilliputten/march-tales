@@ -64,7 +64,7 @@ if settings.DEBUG:
 # )
 
 handler403 = 'tales_django.views.page403'
-handler404 = page404 # 'tales_django.views.page404'
+handler404 = page404   # 'tales_django.views.page404'
 handler500 = 'tales_django.views.page500'
 
 __all__ = [

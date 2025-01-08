@@ -4,16 +4,13 @@
 {% block page_header %}
   {{ block.super }}
   {% include 'assets/template-header/template-header.django' %}
-  {#% include 'assets/page-header-navbar/page-header-navbar.django' %#}
 {% endblock %}
 
 {% block content %}
   {{ block.super }}
-  {% comment %} {% include 'assets/test/test.django' %} {% endcomment %}
 {% endblock %}
 
 {% block page_footer %}
-  {% comment %} {% include 'assets/page-footer-navbar/page-footer-navbar.django' %} {% endcomment %}
   {% include 'assets/template-footer/template-footer.django' %}
   {{ block.super }}
 {% endblock %}

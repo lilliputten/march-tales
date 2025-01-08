@@ -50,6 +50,9 @@
 
   <link rel="stylesheet" href="{% static 'libs/themify-icons/themify-icons.min.css' %}" />
 
+  {% comment %} <link rel="stylesheet" href="{% static 'libs/slick/slick.css' %}" /> {% endcomment %}
+  {% comment %} <script src="{% static 'libs/slick/slick.min.js' %}" type="text/javascript"></script> {% endcomment %}
+
   <!-- Webfonts -->
   {% if False and settings.DEBUG %}
     <link href="{% static 'vendor/webfonts/lobster/lobster.css' %}" rel="stylesheet" type="text/css" />
@@ -116,10 +119,10 @@
   {% endblock beforeContent %}
 
   <!-- {{{ Page content container -->
-  <div class="content container" role="main">
+  {% comment %} <div class="content container" role="main"> {% endcomment %}
   {% block content %}
   {% endblock content %}
-  </div>
+  {% comment %} </div> {% endcomment %}
   <!-- }}} Page content container -->
 
   <!-- {{{ Page footer container -->

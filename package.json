@@ -82,5 +82,8 @@
     "watch-build": "echo --Watch all assets /webpack/-- && pnpm clean-compiled && webpack --watch",
     "watch-build-dev": "echo --Watch all assets /webpack/-- && pnpm clean-compiled && cross-env DEV=1 webpack --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "slick-carousel": "^1.8.1"
   }
 }

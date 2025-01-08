@@ -39,9 +39,15 @@
 }
 
 .common-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5em;
   a:not(.btn) {
     margin-left: 8px;
     margin-right: 8px;
+  }
+  .btn {
+    white-space: nowrap;
   }
 }
 
@@ -56,4 +62,17 @@
 
 .content {
   @include activeUnderlinedLink;
+}
+
+// Headings
+
+.widget-title,
+.section-title {
+  font-weight: bold;
+  font-size: 100%;
+}
+
+// Columns...
+.thumb-preview {
+  width: 100%;
 }
