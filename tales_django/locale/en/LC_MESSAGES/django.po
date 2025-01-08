@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-08 20:06+0300\n"
+"POT-Creation-Date: 2025-01-09 03:13+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,13 +22,13 @@ msgstr ""
 msgid "Back"
 msgstr ""
 
-#: .\src\assets\page-menus\menu-main.django:22
+#: .\src\assets\page-menus\menu-main.django:19
 #: .\tales_django\templates\tales_django\profile.html.django:13
 #: .\tales_django\templates\tales_django\profile.html.django:20
 msgid "Profile"
 msgstr ""
 
-#: .\src\assets\page-menus\menu-main.django:28
+#: .\src\assets\page-menus\menu-main.django:20
 #: .\tales_django\templates\registration\password_change_form.html:33
 #: .\tales_django\templates\tales_django\profile.html.django:122
 #: .\tales_django\templates\tales_django\profile_edit.html.django:12
@@ -36,50 +36,51 @@ msgstr ""
 msgid "Edit profile"
 msgstr ""
 
-#: .\src\assets\page-menus\menu-main.django:40
-msgid "Logout"
-msgstr ""
-
-#: .\src\assets\page-menus\menu-main.django:50
-#: .\tales_django\templates\django_registration\registration_form.html:30
-#: .\tales_django\templates\registration\signup.html:32
-msgid "Log in"
-msgstr ""
-
-#: .\src\assets\page-menus\menu-main.django:56
-#: .\tales_django\templates\django_registration\registration_form.html:12
-#: .\tales_django\templates\django_registration\registration_form.html:16
-#: .\tales_django\templates\django_registration\registration_form.html:29
-#: .\tales_django\templates\registration\login.html:33
-#: .\tales_django\templates\registration\signup.html:20
-#: .\tales_django\templates\registration\signup.html:31
-msgid "Sign up"
-msgstr ""
-
-#: .\src\assets\page-menus\menu-main.django:65
+#: .\src\assets\page-menus\menu-main.django:24
 msgid "Admin panel"
 msgstr ""
 
-#: .\src\assets\template-banner\template-banner.django:10
-msgid "What Would You <br> Like To Listen Today?"
+#: .\src\assets\page-menus\menu-main.django:27
+msgid "Logout"
 msgstr ""
 
-#: .\src\assets\template-footer\template-footer.django:46
-msgid "Privacy Policy"
+#: .\src\assets\page-menus\menu-main.django:32
+#: .\tales_django\templates\django_registration\registration_form.html:30
+#: .\tales_django\templates\registration\signup.html:33
+msgid "Log in"
 msgstr ""
 
-#: .\src\assets\template-footer\template-footer.django:47
-msgid "Terms Conditions"
+#: .\src\assets\page-menus\menu-main.django:33
+#: .\tales_django\templates\django_registration\registration_form.html:12
+#: .\tales_django\templates\django_registration\registration_form.html:16
+#: .\tales_django\templates\django_registration\registration_form.html:29
+#: .\tales_django\templates\registration\login.html:32
+#: .\tales_django\templates\registration\signup.html:14
+#: .\tales_django\templates\registration\signup.html:20
+#: .\tales_django\templates\registration\signup.html:32
+msgid "Sign up"
 msgstr ""
 
-#: .\src\assets\template-footer\template-footer.django:57
-#: .\src\assets\template-footer\template-footer.django:60
+#: .\src\assets\template-banner\template-banner.django:23
+msgid "What’d You Like <br> To Listen Today?"
+msgstr ""
+
+#: .\src\assets\template-footer\template-footer.django:55
+#: .\src\assets\template-footer\template-footer.django:58
 #: .\src\assets\template-header\template-header.django:14
 #: .\src\assets\template-header\template-header.django:17
 #: .\tales_django\templates\base-core.html.django:22
 #: .\tales_django\templates\base-core.html.django:37
 msgid "Site title"
 msgstr "The March Cat Tales"
+
+#: .\src\assets\template-footer\template-footer.django:64
+msgid "Privacy Policy"
+msgstr ""
+
+#: .\src\assets\template-footer\template-footer.django:65
+msgid "Terms Conditions"
+msgstr ""
 
 #: .\tales_django\apps.py:24
 msgid "Application"
@@ -344,6 +345,39 @@ msgstr ""
 msgid "playlist"
 msgstr ""
 
+#: .\tales_django\templates\403.html.django:8
+#: .\tales_django\templates\403.html.django:15
+msgid "No access rights"
+msgstr ""
+
+#: .\tales_django\templates\403.html.django:28
+msgid "You have no access right to the page"
+msgstr ""
+
+#: .\tales_django\templates\403.html.django:29
+#: .\tales_django\templates\404.html.django:29
+#: .\tales_django\templates\500.html.django:29
+#, python-format
+msgid ""
+"Go to the <a href=\"%(index_url)s\">main page</a> or to your <a "
+"href=\"%(profile_url)s\">profile</a>."
+msgstr ""
+
+#: .\tales_django\templates\404.html.django:8
+#: .\tales_django\templates\404.html.django:15
+msgid "Page not found"
+msgstr ""
+
+#: .\tales_django\templates\404.html.django:28
+msgid "The requested page is not found"
+msgstr ""
+
+#: .\tales_django\templates\500.html.django:8
+#: .\tales_django\templates\500.html.django:15
+#: .\tales_django\templates\500.html.django:28
+msgid "Service is temporary unavailable"
+msgstr ""
+
 #: .\tales_django\templates\admin\base.html:28
 msgid "Skip to main content"
 msgstr ""
@@ -400,14 +434,24 @@ msgstr ""
 msgid "Log in again"
 msgstr ""
 
-#: .\tales_django\templates\registration\login.html:16
-#: .\tales_django\templates\registration\login.html:31
+#: .\tales_django\templates\registration\login.html:8
+#: .\tales_django\templates\registration\login.html:15
+#: .\tales_django\templates\registration\login.html:30
 msgid "Login"
 msgstr ""
 
-#: .\tales_django\templates\registration\login.html:35
+#: .\tales_django\templates\registration\login.html:23
+msgid "We can’t find a user with such authorization data. Please try again."
+msgstr ""
+
+#: .\tales_django\templates\registration\login.html:34
 #: .\tales_django\templates\tales_django\profile_edit.html.django:37
 msgid "Reset password"
+msgstr ""
+
+#: .\tales_django\templates\registration\password_change_done.html:12
+#: .\tales_django\templates\registration\password_change_done.html:18
+msgid "Password has been already changed"
 msgstr ""
 
 #: .\tales_django\templates\registration\password_change_done.html:30
@@ -523,7 +567,7 @@ msgstr ""
 msgid "Password reset for"
 msgstr ""
 
-#: .\tales_django\templates\tales_django\index.html.django:19
+#: .\tales_django\templates\tales_django\index.html.django:22
 msgid "Welcome!"
 msgstr ""
 
