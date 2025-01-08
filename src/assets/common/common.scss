@@ -1,7 +1,4 @@
-/**
- * @module common.scss
- * @changed 2025.01.04, 23:34
- */
+@use 'sass:color';
 
 @import '../shared';
 
@@ -11,6 +8,17 @@
 .dimmed-primary-icon {
   @extend .primary-icon;
   color: $primaryColor;
+}
+
+.font-small {
+  font-size: 75%;
+}
+
+.basic-active-link {
+  @include basicActiveLink;
+}
+.active-link {
+  @include activeLink;
 }
 
 .item-label,
@@ -35,4 +43,13 @@
     margin-left: 8px;
     margin-right: 8px;
   }
+}
+
+// Footer & header logo rounded circle
+.rounded-circle-wrapper {
+  border-radius: 50%;
+  $smallPadding: 4px;
+  $largePadding: 8px;
+  padding: $smallPadding $smallPadding $largePadding $largePadding;
+  background-color: color.change(#777, $alpha: 0.15);
 }

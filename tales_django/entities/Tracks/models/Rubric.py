@@ -24,7 +24,7 @@ class Rubric(Model):
 
     @property
     def tracks_count(self):
-        return self.track_set.count()
+        return self.tracks.count()
 
     # Paired (reversed) relation to tracks
     tracks = models.ManyToManyField('Track', blank=True, through='Track_rubrics')

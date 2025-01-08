@@ -13,6 +13,7 @@
 {% endblock %}
 
 {% block page_footer %}
-  {% include 'assets/page-footer-navbar/page-footer-navbar.django' %}
+  {% comment %} {% include 'assets/page-footer-navbar/page-footer-navbar.django' %} {% endcomment %}
+  {% include 'assets/template-footer/template-footer.django' %}
   {{ block.super }}
 {% endblock %}

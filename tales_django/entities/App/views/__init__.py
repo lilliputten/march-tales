@@ -1,6 +1,5 @@
 from .root_views import (
     components_demo,
-    index,
 )
 from .system_views import (
     RobotsView,
@@ -8,10 +7,11 @@ from .system_views import (
     page404,
     page500,
 )
+from .index_view import index_view
 
 __all__ = [
     'components_demo',
-    'index',
+    'index_view',
     'RobotsView',
     'page403',
     'page404',

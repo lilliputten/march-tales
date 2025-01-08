@@ -6,20 +6,12 @@
 $menuItemsFontSize: $fontSizeSmall;
 
 .template-header {
-  // border: 1px solid red;
+  @include basicActiveLink;
 
   .navbar-brand {
     overflow: hidden;
     @media screen and (width >= $screenLgMin) {
       flex: 1;
-    }
-    @include basicActiveLink;
-    .rounded-circle-wrapper {
-      border-radius: 50%;
-      $smallPadding: 4px;
-      $largePadding: 8px;
-      padding: $smallPadding $smallPadding $largePadding $largePadding;
-      background-color: color.change(#777, $alpha: 0.15);
     }
     .text {
       color: $defaultTextColor;
@@ -52,7 +44,7 @@ $menuItemsFontSize: $fontSizeSmall;
     // &.nav-bg {
     //   background-color: $white;
     // }
-    background-color: color.change($white, $alpha: .7);
+    background-color: color.change($white, $alpha: .75);
     @include desktop {
       background-color: $white;
     }

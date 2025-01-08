@@ -1,6 +1,7 @@
 {# ex: set ft=htmldjango : #}
 {% load static %}
 {% load i18n %}
+
 <header class="template-header navigation fixed-top">
   <div class="container">
     <nav class="navbar navbar-expand-lg navbar-white">

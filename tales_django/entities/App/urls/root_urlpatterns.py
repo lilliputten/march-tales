@@ -7,7 +7,7 @@ from django.views.decorators.cache import cache_page
 # from translation_manager import urls as translation_urls
 
 from ..views import (
-    index,
+    index_view,
     RobotsView,
     components_demo,
 )
@@ -16,7 +16,7 @@ cache_timeout = 0 if settings.LOCAL or settings.DEBUG else 15 * 60  # in seconds
 
 root_urlpatterns = [
     # Root page
-    path('', index, name='index'),
+    path('', index_view, name='index'),
     # Language switching
     path('i18n/', include('django.conf.urls.i18n')),
     # App-provided paths...

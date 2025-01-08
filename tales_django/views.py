@@ -1,6 +1,6 @@
 from .entities.App.views import (
     components_demo,
-    index,
+    index_view,
     RobotsView,
     page403,
     page404,
@@ -15,7 +15,7 @@ from .entities.Users.views import (
 
 __all__ = [
     'components_demo',
-    'index',
+    'index_view',
     'profile',
     'logout_user_route',
     'RobotsView',
