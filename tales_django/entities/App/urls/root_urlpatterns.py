@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.contrib import admin
 from django.conf.urls.static import static
+from django.conf.urls import handler404, handler403, handler500
 from django.urls import include, path
 from django.views.decorators.cache import cache_page
 
@@ -65,3 +66,9 @@ if settings.DEBUG:
 handler403 = 'tales_django.views.page403'
 handler404 = page404 # 'tales_django.views.page404'
 handler500 = 'tales_django.views.page500'
+
+__all__ = [
+    'handler403',
+    'handler404',
+    'handler500',
+]

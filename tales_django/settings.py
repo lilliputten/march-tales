@@ -14,7 +14,6 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 import posixpath
-import re
 
 from core.appEnv import (
     BASE_DIR,
@@ -77,11 +76,11 @@ STATICFILES_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
 )
 
-# if LOCAL:
-#     # Add asset file sources to static folders in dev mode to access scss sources via django filters during dev mode time
-#     STATICFILES_DIRS += (
-#         SRC_ROOT,
-#     )
+if LOCAL:
+    # Add asset file sources to static folders in dev mode to access scss sources via django filters during dev mode time
+    STATICFILES_DIRS += (
+        SRC_ROOT,
+    )
 
 # List of finder classes that know how to find static files in
 # various locations.

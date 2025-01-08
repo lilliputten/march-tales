@@ -1,13 +1,32 @@
+{# ex: set ft=htmldjango : #}
+
 {% extends "base-layout.html.django" %}
 
+{% load static %}
 {% load i18n %}
 
-{% block title %}404{{ block.super }}{% endblock title %}
+{% block title %}404 — {% trans "Page not found" %} — {{ block.super }}{% endblock title %}
 
-{% block body %}
-    <div class="row">
-        <div class="col-lg-12">
-            <h3>{% trans "Page not found" %}</h3>
-        </div>
+{% block content %}
+
+  <fieldset>
+    <legend>
+      <h1 class="page-title primary-color my-4">{% trans "Page not found" %}</h1>
+    </legend>
+    {% if error_message %}
+    <p>{{ error_message }}</p>
+    {% endif %}
+  </fieldset>
+
+  {% include "assets/render-messages/render-messages.django" %}
+
+  <div class="row">
+    <div class="col-lg-12 content">
+      {% url 'index' as index_url %}
+      {% url 'profile' as profile_url %}
+      <p>{% trans "The requested page is not found" %}.</p>
+      <p>{% blocktranslate %}Go to the <a href="{{ index_url }}">main page</a> or to your <a href="{{ profile_url }}">profile</a>.{% endblocktranslate %}</p>
     </div>
-{% endblock body %}
+  </div>
+
+{% endblock content %}

@@ -53,3 +53,7 @@
   padding: $smallPadding $smallPadding $largePadding $largePadding;
   background-color: color.change(#777, $alpha: 0.15);
 }
+
+.content {
+  @include activeUnderlinedLink;
+}
