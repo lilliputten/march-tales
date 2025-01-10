@@ -16,6 +16,9 @@
     <form id="menu-logout-form" action="{% url 'logout' %}" method="post">
       {% csrf_token %}
       <ul class="dropdown-menu" id="user-menu">
+        <li><a class="dropdown-item disabled" href="">{% trans 'Favorites' %}</a></li>
+        <li><a class="dropdown-item disabled" href="">{% trans 'Playlist' %}</a></li>
+        <li><hr class="dropdown-divider" /></li>
         <li><a class="dropdown-item" href="{% url 'profile' %}">{% trans 'Profile' %}</a></li>
         <li><a class="dropdown-item" href="{% url 'profile_edit' %}">{% trans 'Edit profile' %}</a></li>
         <li><hr class="dropdown-divider" /></li>

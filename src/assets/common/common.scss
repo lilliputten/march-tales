@@ -21,6 +21,10 @@
   @include activeLink;
 }
 
+a.disabled {
+  opacity: 0.5;
+}
+
 .item-label,
 .dimmed-icon,
 .dimmed-info {

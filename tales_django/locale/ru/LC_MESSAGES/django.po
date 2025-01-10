@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-10 22:48+0300\n"
+"POT-Creation-Date: 2025-01-11 00:32+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,12 +25,20 @@ msgid "Back"
 msgstr "Назад"
 
 #: .\src\assets\page-menus\menu-main.django:19
+msgid "Favorites"
+msgstr "Избранное"
+
+#: .\src\assets\page-menus\menu-main.django:20
+msgid "Playlist"
+msgstr "Плейлист"
+
+#: .\src\assets\page-menus\menu-main.django:22
 #: .\tales_django\templates\tales_django\profile.html.django:13
 #: .\tales_django\templates\tales_django\profile.html.django:20
 msgid "Profile"
 msgstr "Профиль"
 
-#: .\src\assets\page-menus\menu-main.django:20
+#: .\src\assets\page-menus\menu-main.django:23
 #: .\tales_django\templates\registration\password_change_form.html:33
 #: .\tales_django\templates\tales_django\profile.html.django:122
 #: .\tales_django\templates\tales_django\profile_edit.html.django:12
@@ -38,21 +46,21 @@ msgstr "Профиль"
 msgid "Edit profile"
 msgstr "Редактировать профиль"
 
-#: .\src\assets\page-menus\menu-main.django:24
+#: .\src\assets\page-menus\menu-main.django:27
 msgid "Admin panel"
 msgstr "Панель управления"
 
-#: .\src\assets\page-menus\menu-main.django:27
+#: .\src\assets\page-menus\menu-main.django:30
 msgid "Logout"
 msgstr "Выйти"
 
-#: .\src\assets\page-menus\menu-main.django:32
+#: .\src\assets\page-menus\menu-main.django:35
 #: .\tales_django\templates\django_registration\registration_form.html:30
 #: .\tales_django\templates\registration\signup.html:33
 msgid "Log in"
 msgstr "Войти"
 
-#: .\src\assets\page-menus\menu-main.django:33
+#: .\src\assets\page-menus\menu-main.django:36
 #: .\tales_django\templates\django_registration\registration_form.html:12
 #: .\tales_django\templates\django_registration\registration_form.html:16
 #: .\tales_django\templates\django_registration\registration_form.html:29
@@ -64,8 +72,13 @@ msgid "Sign up"
 msgstr "Регистрация"
 
 #: .\src\assets\template-banner\template-banner.django:23
-msgid "What’d You Like <br> To Listen Today?"
+msgid "What’d You Like<br> To Listen Today?"
 msgstr "Что бы вы хотели<br> послушать сегодня?"
+
+#: .\src\assets\template-columns\left-column.django:7
+#: .\src\assets\template-right-blocks\right-recents-list\right-recents-list.django:7
+msgid "Recent Tracks"
+msgstr "Свежие треки"
 
 #: .\src\assets\template-footer\template-footer.django:55
 #: .\src\assets\template-footer\template-footer.django:58
@@ -82,20 +95,83 @@ msgstr "Политика конфиденциальности"
 
 #: .\src\assets\template-footer\template-footer.django:65
 msgid "Terms Conditions"
-msgstr "Соглашение"
+msgstr "Пользовательское соглашение"
 
-#: .\src\assets\template-mobile-promo\template-mobile-promo.django:9
+#: .\src\assets\template-right-blocks\right-about\right-about.django:7
+msgid "Hi, I'm March Cat!"
+msgstr "Привет, я Мартовский Кот!"
+
+#: .\src\assets\template-right-blocks\right-about\right-about.django:9
+msgid "Author description block."
+msgstr "Подробно об авторе..."
+
+#: .\src\assets\template-right-blocks\right-about\right-about.django:13
+msgid "About me"
+msgstr "Обо мне"
+
+#: .\src\assets\template-right-blocks\right-authors-list\right-authors-list.django:7
+msgid "Authors"
+msgstr "авторы"
+
+#: .\src\assets\template-right-blocks\right-membership\right-membership.django:7
+msgid "Become a Member"
+msgstr "Стать членом сообщества"
+
+#: .\src\assets\template-right-blocks\right-membership\right-membership.django:8
+msgid "Membershop description block."
+msgstr "Подробно о статсе члена сообщества и процедуре..."
+
+#: .\src\assets\template-right-blocks\right-membership\right-membership.django:9
+msgid "Obtain membership now!"
+msgstr "Получить членство!"
+
+#: .\src\assets\template-right-blocks\right-mobile-promo\right-mobile-promo.django:9
 msgid "Try the mobile app!"
 msgstr "Слушай на мобильном!"
 
-#: .\src\assets\template-mobile-promo\template-mobile-promo.django:11
-#, fuzzy
+#: .\src\assets\template-right-blocks\right-mobile-promo\right-mobile-promo.django:11
 msgid "Mobile app description."
 msgstr "Описание мобильного приложения."
 
-#: .\src\assets\template-mobile-promo\template-mobile-promo.django:12
+#: .\src\assets\template-right-blocks\right-mobile-promo\right-mobile-promo.django:12
 msgid "Get Started"
 msgstr "Попробовать!"
+
+#: .\src\assets\template-right-blocks\right-rubrics-list\right-rubrics-list.django:7
+msgid "Rubrics"
+msgstr "Разделы"
+
+#: .\src\assets\template-right-blocks\right-search\right-search.django:7
+msgid "Search for an audio"
+msgstr "Искать аудио трек"
+
+#: .\src\assets\template-right-blocks\right-search\right-search.django:15
+msgid "Type & Hit Enter..."
+msgstr "Введите запрос и нажмите Ввод..."
+
+#: .\src\assets\template-right-blocks\right-search\right-search.django:18
+msgid "Search"
+msgstr "Искать"
+
+#: .\src\assets\template-right-blocks\right-social-links\right-social-links.django:7
+msgid "Social Links"
+msgstr "Социальные сети"
+
+#: .\src\assets\template-right-blocks\right-subscribe\right-subscribe.django:7
+msgid "Never Miss A News"
+msgstr "Не пропустите новости"
+
+#: .\src\assets\template-right-blocks\right-subscribe\right-subscribe.django:10
+msgid "Your Email Address"
+msgstr "Ваш e-mail адрес"
+
+#: .\src\assets\template-right-blocks\right-subscribe\right-subscribe.django:12
+msgid "Subscribe now"
+msgstr "Подписаться"
+
+#: .\src\assets\template-right-blocks\right-tags-list\right-tags-list.django:7
+msgid "Tags"
+msgstr "Теги"
 
 #: .\tales_django\apps.py:24
 msgid "Application"
@@ -661,8 +737,6 @@ msgstr ""
 "%(membership_type)s."
 
 #: .\tales_django\templates\tales_django\profile.html.django:54
-#, fuzzy
-#| msgid "Not yet a member."
 msgid "Not yet a member"
 msgstr "Вы ещё не член сообщества."
 
@@ -684,7 +758,7 @@ msgstr ""
 
 #: .\tales_django\templates\tales_django\profile.html.django:77
 msgid "Favorite tracks"
-msgstr "Любимые треки"
+msgstr "Избранные треки"
 
 #: .\tales_django\templates\tales_django\profile.html.django:105
 msgid "File size"

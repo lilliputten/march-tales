@@ -20,7 +20,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-9 mx-auto">
-        <h1 class="mb-5 font-lobster opacity-75">{% trans 'What’d You Like <br> To Listen Today?' %}</h1>
+        <h1 class="mb-5 font-lobster opacity-75">{% trans 'What’d You Like<br> To Listen Today?' %}</h1>
         <ul class="list-inline widget-list-inline">
           {% for rubric in rubrics %}
             <li class="list-inline-item _active-link">

@@ -6,5 +6,5 @@
 <div class="right-membership widget active-link">
   <h4 class="widget-title"><span>{% trans "Become a Member" %}</span></h4>
   <p class="text-center">{% blocktrans %}Membershop description block.{% endblocktrans %}</p>
-  <a href="/membership" class="btn btn-primary mb-2">{% trans "Obtain membership now!" %}</a>
+  <a href="/membership" class="btn btn-primary btn-block">{% trans "Obtain membership now!" %}</a>
 </div>

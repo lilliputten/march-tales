@@ -3,7 +3,7 @@
 {% load i18n %}
 
 <!-- Subscribe -->
-<div class="right-subscribe widget">
+<div class="right-subscribe widget active-link">
   <h4 class="widget-title"><span>{% trans "Never Miss A News" %}</span></h4>
   <form action="#!" method="post" name="mc-embedded-subscribe-form" class="widget-search">
     {% csrf_token %}
