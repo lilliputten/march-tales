@@ -3,7 +3,7 @@
 {% load i18n %}
 
 <!-- Promotion -->
-<div class="template-mobile-promo promotion">
+<div class="right-mobile-promo promotion">
   <img src="{% static 'images/mobile-promo/vertical-mobile-promo.jpg' %}" class="img-fluid w-100" />
   <div class="promotion-content">
     <h5 class="top text-white mb-3">{% trans 'Try the mobile app!' %}</h5>
