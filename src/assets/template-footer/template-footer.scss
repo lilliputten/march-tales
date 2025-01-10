@@ -41,13 +41,13 @@
     }
 
     .footer-cell-menu {
-      // @include basicActiveLink;
+      ul {
+        list-style: none;
+        gap: .5em 1em;
+      }
       a:hover {
         color: $primaryColor;
       }
-    }
-    .footer-cell-socials {
-      @include basicActiveLink;
     }
 
     .navbar-brand {
@@ -76,7 +76,7 @@
     &-list {
       a {
         display: block;
-        color: $text-color-dark;
+        // color: $text-color-dark;
         padding: 5px;
 
         &:hover {

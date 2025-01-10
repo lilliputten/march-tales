@@ -1,0 +1,32 @@
+{# ex: set ft=htmldjango : #}
+{% load static %}
+{% load i18n %}
+
+<!-- About -->
+<div class="template-about widget widget-about">
+  <h4 class="widget-title">{% trans "Hi, I'm March Cat!" %}</h4>
+  <img class="img-fluid" src="{% static 'images/march-cat/march-cat-sq-180.jpg' %}" alt="March Cat" />
+  <p>{% blocktrans %}Author description block.{% endblocktrans %}</p>
+  <ul class="list-inline social-icons mb-3">
+    {% include 'assets/social-links/social-links.django' %}
+    <!--
+    <li class="list-inline-item">
+      <a href="#"><i class="ti-facebook"></i></a>
+    </li>
+    <li class="list-inline-item">
+      <a href="#"><i class="ti-twitter-alt"></i></a>
+    </li>
+    <li class="list-inline-item">
+      <a href="#"><i class="ti-linkedin"></i></a>
+    </li>
+    <li class="list-inline-item">
+      <a href="#"><i class="ti-github"></i></a>
+    </li>
+    <li class="list-inline-item">
+      <a href="#"><i class="ti-youtube"></i></a>
+    </li>
+    -->
+  </ul>
+  <a href="/about" class="btn btn-primary mb-2">{% trans "About me" %}</a>
+</div>
+

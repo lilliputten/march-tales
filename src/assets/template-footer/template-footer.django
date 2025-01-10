@@ -41,7 +41,7 @@
     <div class="row align-items-center d-flex flex-md-row">
       <div class="d-flex gap-1 justify-content-between align-items-center flex-column flex-md-row">
         <div class="footer-cell footer-cell-side footer-cell-left footer-cell-socials text-center text-md-start py-2">
-          <ul class="list-inline footer-list mb-0">
+          <ul class="list-inline footer-list mb-0 widget-social">
             {% include "assets/social-links/social-links.django" %}
             </ul>
         </div>
@@ -60,9 +60,9 @@
           </a>
         </div>
         <div class="footer-cell footer-cell-side footer-cell-right footer-cell-menu text-md-end text-center py-2">
-          <ul class="list-inline footer-list mb-0 small">
-            <li class="list-inline-item nav-item"><a class="nav-link" href="privacy-policy.html">{% trans "Privacy Policy" %}</a></li>
-            <li class="list-inline-item nav-item"><a class="nav-link" href="terms-conditions.html">{% trans "Terms Conditions" %}</a></li>
+          <ul class="_list-inline footer-list d-flex flex-wrap mb-0 small justify-content-md-end">
+            <li class="_list-inline-item nav-item"><a class="nav-link" href="privacy-policy.html">{% trans "Privacy Policy" %}</a></li>
+            <li class="_list-inline-item nav-item"><a class="nav-link" href="terms-conditions.html">{% trans "Terms Conditions" %}</a></li>
           </ul>
         </div>
       </div>

@@ -1,0 +1,14 @@
+{# ex: set ft=htmldjango : #}
+{% load static %}
+{% load i18n %}
+
+<!-- Search -->
+<div class="template-search widget">
+  <h4 class="widget-title"><span>{% trans "Search for an audio" %}</span></h4>
+  <form action="" class="widget-search">
+    <input class="mb-3" id="search-query" name="s" type="search" placeholder="Type & Hit Enter..." />
+    <i class="ti-search"></i>
+    <button type="submit" class="btn btn-primary btn-block">{% trans "Search" %}</button>
+  </form>
+</div>
+
