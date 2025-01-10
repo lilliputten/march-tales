@@ -102,8 +102,8 @@ msgid "Hi, I'm March Cat!"
 msgstr "Привет, я Мартовский Кот!"
 
 #: .\src\assets\template-right-blocks\right-about\right-about.django:9
-msgid "Author description block."
-msgstr "Подробно об авторе..."
+msgid "Site description block."
+msgstr "Подробно о сайте..."
 
 #: .\src\assets\template-right-blocks\right-about\right-about.django:13
 msgid "About me"
@@ -142,8 +142,8 @@ msgid "Rubrics"
 msgstr "Разделы"
 
 #: .\src\assets\template-right-blocks\right-search\right-search.django:7
-msgid "Search for an audio"
-msgstr "Искать аудио трек"
+msgid "Search for an audio or author"
+msgstr "Искать аудио или автора"
 
 #: .\src\assets\template-right-blocks\right-search\right-search.django:15
 msgid "Type & Hit Enter..."

@@ -5,6 +5,8 @@
 <!-- Tags -->
 <div class="right-tags-list widget widget-categories">
   <h4 class="widget-title"><span>{% trans "Tags" %}</span></h4>
+  {% include 'assets/common-blocks/tags-list/tags-list.django' %}
+  <!--
   <ul class="list-unstyled widget-list">
     <li>
       <a href="tags.html" class="d-flex">Creativity <small class="ms-auto">(4)</small></a>
@@ -43,5 +45,6 @@
       <a href="tags.html" class="d-flex">Wondarland <small class="ms-auto">(1)</small></a>
     </li>
   </ul>
+  -->
 </div>
 

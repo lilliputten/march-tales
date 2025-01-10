@@ -1,0 +1,16 @@
+@use 'sass:color';
+
+@import '../../shared';
+
+.authors-list {
+  @include activeUnderlinedLink;
+  a .media-body {
+    color: $defaultTextColor;
+  }
+  a:hover .media-body {
+    color: $primaryColor;
+  }
+  .name {
+    font-weight: bold;
+  }
+}

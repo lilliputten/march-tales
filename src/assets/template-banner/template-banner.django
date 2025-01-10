@@ -17,25 +17,14 @@
       stroke="#d569"
     />
   </svg>
+
+  <!-- Rubrics list -->
   <div class="container">
     <div class="row">
       <div class="col-lg-9 mx-auto">
         <h1 class="mb-5 font-lobster opacity-75">{% trans 'What’d You Like<br> To Listen Today?' %}</h1>
         <ul class="list-inline widget-list-inline">
-          {% for rubric in rubrics %}
-            <li class="list-inline-item _active-link">
-              <a href="/rubric/{{ rubric.id }}"
-                class="d-flex align-items-center gap-2 {% if rubric.tracks.count %}pe-2{% endif %}"
-              >
-                {{ rubric.text }}
-                {% if rubric.tracks.count %}
-                   <span class="rounded-pill bg-primary px-2 font-small text-white">
-                      {{ rubric.tracks.count }}
-                   </span>
-                {% endif %}
-              </a>
-            </li>
-          {% endfor %}
+          {% include 'assets/common-blocks/rubrics-list/rubrics-list.django' %}
         </ul>
       </div>
     </div>

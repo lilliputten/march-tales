@@ -4,7 +4,7 @@
 
 <!-- Search -->
 <div class="right-search widget">
-  <h4 class="widget-title"><span>{% trans "Search for an audio" %}</span></h4>
+  <h4 class="widget-title"><span>{% trans "Search for an audio or author" %}</span></h4>
   <form action="" class="widget-search active-link">
     <input
       id="search-query"

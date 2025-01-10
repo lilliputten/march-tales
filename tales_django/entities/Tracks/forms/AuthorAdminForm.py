@@ -12,5 +12,6 @@ class AuthorAdminForm(ModelForm):
             # 'name': textInputWidget,
             **{x: textInputWidget for x in Author.name.fields},  # 'name': textInputWidget,
             **{x: textAreaWidget for x in Author.description.fields},  # 'description': textInputWidget,
+            **{x: textAreaWidget for x in Author.short_description.fields},  # 'short_description': textInputWidget,
         }
         fields = '__all__'

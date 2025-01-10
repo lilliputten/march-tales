@@ -102,7 +102,7 @@ msgstr ""
 #: .\src\assets\template-right-blocks\right-about\right-about.django:9
 #, fuzzy
 #| msgid "Site description"
-msgid "Author description block."
+msgid "Site description block."
 msgstr "Listen to classic fairy tales online"
 
 #: .\src\assets\template-right-blocks\right-about\right-about.django:13
@@ -146,7 +146,7 @@ msgid "Rubrics"
 msgstr ""
 
 #: .\src\assets\template-right-blocks\right-search\right-search.django:7
-msgid "Search for an audio"
+msgid "Search for an audio or author"
 msgstr ""
 
 #: .\src\assets\template-right-blocks\right-search\right-search.django:15
