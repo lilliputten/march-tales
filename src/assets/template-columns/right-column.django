@@ -36,15 +36,7 @@
     </ul>
     <a href="about-me.html" class="btn btn-primary mb-2">About me</a>
   </div>
-  <!-- Promotion -->
-  <div class="promotion">
-    <img src="{% static 'template/promotion.jpg' %}" class="img-fluid w-100" />
-    <div class="promotion-content">
-      <h5 class="text-white mb-3">Create Stunning Website!!</h5>
-      <p class="text-white mb-4">Lorem ipsum dolor sit amet, consectetur sociis. Etiam nunc amet id dignissim. Feugiat id tempor vel sit ornare turpis posuere.</p>
-      <a href="https://themefisher.com/" class="btn btn-primary">Get Started</a>
-    </div>
-  </div>
+  {% include 'assets/template-mobile-promo/template-mobile-promo.django' %}
   <!-- authors -->
   <div class="widget widget-author">
     <h4 class="widget-title">Authors</h4>

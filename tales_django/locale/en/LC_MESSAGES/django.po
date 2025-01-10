@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-09 03:13+0300\n"
+"POT-Creation-Date: 2025-01-10 22:48+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -80,6 +80,20 @@ msgstr ""
 
 #: .\src\assets\template-footer\template-footer.django:65
 msgid "Terms Conditions"
+msgstr ""
+
+#: .\src\assets\template-mobile-promo\template-mobile-promo.django:9
+msgid "Try the mobile app!"
+msgstr ""
+
+#: .\src\assets\template-mobile-promo\template-mobile-promo.django:11
+#, fuzzy
+#| msgid "Site description"
+msgid "Mobile app description."
+msgstr "Listen to classic fairy tales online"
+
+#: .\src\assets\template-mobile-promo\template-mobile-promo.django:12
+msgid "Get Started"
 msgstr ""
 
 #: .\tales_django\apps.py:24
