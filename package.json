@@ -1,9 +1,9 @@
 {
   "name": "march-tales",
   "description": "March Tales client support",
-  "version": "0.0.8",
-  "timetag": "250109-0256",
-  "timestamp": "2025.01.09 02:56:14 +0300",
+  "version": "0.0.9",
+  "timetag": "250111-0439",
+  "timestamp": "2025.01.11 04:39:53 +0300",
   "changed": "2024.12.30, 15:41",
   "main": "index.html",
   "author": "lilliputten@gmail.com",
