@@ -14,7 +14,10 @@ def BeautifulMiddleware(get_response):
     def middleware(request):
         response = get_response(request)
         # TODO: Do this conversion only in prod mode
-        if not settings.DEBUG and response.status_code == 200 and response['content-type'].startswith('text/html'):
+        doDebug = response.status_code == 200 and response['content-type'].startswith(
+            'text/html'
+        )   # and not settings.DEBUG
+        if doDebug:
             content = response.content.decode('utf-8')
             # Remove comments
             content = re_comments.sub('', content)

@@ -8,7 +8,7 @@
 
 {% endcomment %}
 
-<ul class="small-tracks-list">
+<ul class="small-tracks-list mb-0">
   {% for track in tracks %}
     <div class="small-tracks-list-item widget-card">
       <a class="d-flex" href="/tracks/{{ track.id }}">

@@ -8,7 +8,7 @@
 
 {% endcomment %}
 
-<ul class="rubrics-list list-inline widget-list-inline widget-card">
+<ul class="rubrics-list list-inline widget-list-inline widget-card mb-0 pb-0">
   {% for rubric in rubrics %}
     <li class="list-inline-item">
       <a href="/rubric/{{ rubric.id }}"

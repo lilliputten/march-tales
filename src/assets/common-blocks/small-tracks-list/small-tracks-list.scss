@@ -3,6 +3,7 @@
 @import '../../shared';
 
 .small-tracks-list {
+  padding-left: 0;
   &-item {
     @include basicActiveLink;
     a .content {
