@@ -84,13 +84,49 @@
         }
       }
 
-      &-tag {
+      &-tags {
         margin-bottom: 0;
 
         li {
           border: 0 !important;
           padding-right: 0 !important;
           margin-bottom: 0 !important;
+          margin-right: .2em;
+
+          a {
+            display: inline-block;
+            padding: 0px 2px;
+            // border-radius: 30px;
+            // border: 1px solid $border-color;
+            color: $text-color;
+            display: inline-block;
+
+            &::before {
+              display: inline-block;
+              opacity: .5;
+              // color: $primary-color;
+              content: '#';
+              padding-right: .3em;
+            }
+
+            &:hover {
+              color: $primary-color;
+              // background-color: $primary-color;
+              // border-color: $primary-color;
+              // color: $white;
+            }
+          }
+        }
+      }
+
+      &-rubrics {
+        margin-bottom: 0;
+
+        li {
+          border: 0 !important;
+          padding-right: 0 !important;
+          margin-bottom: 0 !important;
+          margin-right: .2em;
 
           a {
             padding: 0px 8px;

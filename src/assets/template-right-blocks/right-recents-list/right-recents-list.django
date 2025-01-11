@@ -5,7 +5,8 @@
 <!-- Recent tracks -->
 <div class="right-recents-list widget">
   <h4 class="widget-title">{% trans "Recent Tracks" %}</h4>
-  <!-- post-item -->
+  {% include 'assets/common-blocks/small-tracks-list/small-tracks-list.django' %}
+  <!-- post-item
   <article class="widget-card">
     <div class="d-flex">
       <img class="card-img-sm" src="{% static 'template/post/post-10.jpg' %}" />
@@ -45,5 +46,6 @@
       </div>
     </div>
   </article>
+  -->
 </div>
 

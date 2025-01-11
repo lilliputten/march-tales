@@ -12,9 +12,11 @@
   {% for author in authors %}
     <div>
       <a class="media d-flex align-items-center" href="/authors/{{ author.id }}">
-        <span class="me-3">
-          <img class="widget-author-image" src="{% get_media_prefix %}{{ author.portrait_picture }}" />
-        </span>
+        {% if author.portrait_picture %}
+          <span class="me-3">
+            <img class="widget-author-image" src="{% get_media_prefix %}{{ author.portrait_picture }}" />
+          </span>
+        {% endif %}
         <span class="media-body d-flex flex-column gap-1">
           <span class="name"><strong>{{ author.name }}</strong></span>
           <small class="description">{{ author.short_description }}</small>

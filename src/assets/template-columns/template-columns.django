@@ -2,7 +2,7 @@
 {% load static %}
 {% load i18n %}
 
-<div class="section-sm template-columns">
+<div class="section section-sm template-columns">
   <div class="container">
     <div class="row justify-content-center">
 

@@ -61,8 +61,8 @@
         </div>
         <div class="footer-cell footer-cell-side footer-cell-right footer-cell-menu text-md-end text-center py-2">
           <ul class="_list-inline footer-list d-flex flex-wrap mb-0 small justify-content-md-end">
-            <li class="_list-inline-item nav-item"><a class="nav-link" href="privacy-policy.html">{% trans "Privacy Policy" %}</a></li>
-            <li class="_list-inline-item nav-item"><a class="nav-link" href="terms-conditions.html">{% trans "Terms Conditions" %}</a></li>
+            <li class="_list-inline-item nav-item"><a class="nav-link" href="privacy-policy">{% trans "Privacy Policy" %}</a></li>
+            <li class="_list-inline-item nav-item"><a class="nav-link" href="terms-conditions">{% trans "Terms Conditions" %}</a></li>
           </ul>
         </div>
       </div>

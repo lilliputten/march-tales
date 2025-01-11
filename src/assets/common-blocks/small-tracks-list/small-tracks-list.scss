@@ -1,0 +1,18 @@
+@use 'sass:color';
+
+@import '../../shared';
+
+.small-tracks-list {
+  &-item {
+    @include basicActiveLink;
+    a .content {
+      color: $defaultTextColor;
+    }
+    a:hover .content {
+      .title {
+        color: $primaryColor;
+        text-decoration: underline;
+      }
+    }
+  }
+}

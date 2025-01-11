@@ -4,10 +4,10 @@
 @import '../template-core/shared';
 
 .template-footer {
-  // border: 1px solid red; // DEBUG
   &.footer {
-    margin-top: 4em;
-    padding: 250px 0 0px;
+    // margin-top: 4em;
+    overflow: hidden;
+    padding: 160px 0 0px;
     background-image: url(/static/images/backgrounds/footer-bg.svg);
     background-position: top center;
     background-repeat: no-repeat;

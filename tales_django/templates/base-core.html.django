@@ -16,8 +16,10 @@
 
 {% load i18n %}
 
+{% get_current_language as LANGUAGE_CODE %}
+
 <!DOCTYPE html>
-<html lang="{{ get_current_language|default:settings.LANGUAGE_CODE }}">
+<html lang="{{ LANGUAGE_CODE|default:settings.LANGUAGE_CODE }}">
 <head>
   <title>{% block title %}{% trans 'Site title' %}{% endblock title %}</title>
   <meta name="description" content="{% block meta_description %}{% trans 'Site description' %}{% endblock meta_description %}" />
@@ -33,7 +35,7 @@
   {% block meta_og %}
     {# Opengrap tags #}
     <meta property="og:type" content="website" />
-    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale" content="{{ LANGUAGE_CODE }}" />
     <meta property="og:title" content="{% trans 'Site title' %}" />
     <meta property="og:description" content="{% trans 'Site description' %}" />
     <meta property="og:url" content="{{ settings.DEFAULT_HOST }}" />
