@@ -9,7 +9,7 @@
   {{ block.super }}
 
   {% if error_message or messages %}
-    <section class="section section-sm pb-0">
+    <section class="section section-sm">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-12 mb-5">
