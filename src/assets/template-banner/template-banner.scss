@@ -4,7 +4,6 @@
 @import '../template-core/shared';
 
 .template-banner {
-
   &.banner {
     // border: 2px solid red;
     background-image: url(/static/images/backgrounds/banner-bg.svg);
@@ -40,7 +39,7 @@
       right: 15%;
       top: 35%;
       .path {
-        fill: color.change($primary-color, $alpha: .1);
+        fill: color.change($primary-color, $alpha: 0.1);
       }
     }
 

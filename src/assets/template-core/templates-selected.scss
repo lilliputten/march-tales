@@ -1,13 +1,10 @@
-
-.test {
-  /*!KEEP*/
-}
+/* stylelint-disable scss/no-global-function-names */
 
 .card {
   @extend .shadow;
   border: 0;
   background-color: $white;
-  transition: .2s ease;
+  transition: 0.2s ease;
 
   &-body {
     padding: 25px;
@@ -16,7 +13,7 @@
   &-img-sm {
     height: 85px;
     width: 85px;
-    border-radius: .25rem;
+    border-radius: 0.25rem;
     object-fit: cover;
   }
 
@@ -70,24 +67,16 @@
         a {
           display: inline-block;
           padding: 0px 2px;
-          // border-radius: 30px;
-          // border: 1px solid $border-color;
           color: $text-color;
-          display: inline-block;
 
           &::before {
             display: inline-block;
-            opacity: .5;
-            // color: $primary-color;
+            opacity: 0.5;
             content: '#';
-            // padding-right: .3em;
           }
 
           &:hover {
             color: $primary-color;
-            // background-color: $primary-color;
-            // border-color: $primary-color;
-            // color: $white;
           }
         }
       }
@@ -117,30 +106,6 @@
         }
       }
     }
-
-    // &-tag {
-    //   margin-bottom: 0;
-    //
-    //   li {
-    //     border: 0 !important;
-    //     padding-right: 0 !important;
-    //     margin-bottom: 0 !important;
-    //
-    //     a {
-    //       padding: 0px 8px;
-    //       border-radius: 30px;
-    //       border: 1px solid $border-color;
-    //       color: $text-color;
-    //       display: inline-block;
-    //
-    //       &:hover {
-    //         background-color: $primary-color;
-    //         border-color: $primary-color;
-    //         color: $white;
-    //       }
-    //     }
-    //   }
-    // }
   }
 }
 
@@ -152,5 +117,3 @@
     color: $primary-color;
   }
 }
-
-

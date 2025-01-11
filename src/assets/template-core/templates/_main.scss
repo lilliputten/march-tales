@@ -1,3 +1,5 @@
+/* stylelint-disable scss/no-global-function-names */
+
 .banner {
   background-image: url(../images/backgrounds/banner-bg.svg);
   background-position: bottom center;
@@ -57,7 +59,7 @@
   background-size: cover;
   position: relative;
   padding: 120px 0 150px;
-  .container{
+  .container {
     position: relative;
     z-index: 1;
   }
@@ -256,7 +258,7 @@
   @extend .shadow;
   border: 0;
   background-color: $white;
-  transition: .2s ease;
+  transition: 0.2s ease;
 
   &-body {
     padding: 25px;
@@ -265,7 +267,7 @@
   &-img-sm {
     height: 85px;
     width: 85px;
-    border-radius: .25rem;
+    border-radius: 0.25rem;
     object-fit: cover;
   }
 
@@ -392,7 +394,7 @@
   width: 50px;
   line-height: 50px;
   border-radius: 50%;
-  background: rgba($color: $primary-color, $alpha: .5);
+  background: rgba($color: $primary-color, $alpha: 0.5);
   color: $white;
   border: 0;
 
@@ -485,7 +487,7 @@
     }
   }
 
-  &:nth-child(3n+3) {
+  &:nth-child(3n + 3) {
     .author-card {
       border-right-color: transparent;
 
@@ -495,7 +497,7 @@
     }
   }
 
-  &:nth-child(2n+2) {
+  &:nth-child(2n + 2) {
     @include desktop {
       .author-card {
         border-right-color: transparent;
@@ -506,7 +508,6 @@
 
 // content style
 .content {
-
   * {
     word-break: break-word;
     overflow-wrap: break-word;
@@ -553,7 +554,6 @@
         top: 8px;
       }
     }
-
   }
 
   table {
@@ -565,7 +565,7 @@
 
   table td,
   table th {
-    padding: .75rem;
+    padding: 0.75rem;
     vertical-align: top;
     margin-bottom: 0;
   }
@@ -608,9 +608,10 @@
     position: absolute;
     top: 2px;
     color: $white;
-    font-family: "themify";
+    // stylelint-disable-next-line font-family-no-missing-generic-family-keyword
+    font-family: 'themify';
     font-weight: 900;
-    content: "\e717";
+    content: '\e717';
     left: 10px;
   }
 
@@ -627,9 +628,8 @@
     left: 2rem;
   }
 
-
   .notices.tip p {
-    border-top: 30px solid #78C578;
+    border-top: 30px solid #78c578;
     background: $light;
   }
 
@@ -642,7 +642,7 @@
   }
 
   .notices.info p {
-    border-top: 30px solid #F0B37E;
+    border-top: 30px solid #f0b37e;
     background: $light;
   }
 
@@ -654,9 +654,8 @@
     left: 2rem;
   }
 
-
   .notices.warning p {
-    border-top: 30px solid #E06F6C;
+    border-top: 30px solid #e06f6c;
     background: $light;
   }
 
@@ -667,7 +666,6 @@
     color: #fff;
     left: 2rem;
   }
-
 
   blockquote {
     font-size: 20px !important;
@@ -794,7 +792,7 @@
       border-radius: 50px;
       background-color: $light;
       padding-left: 20px;
-      transition: .2s ease;
+      transition: 0.2s ease;
 
       &:focus {
         border-color: $primary-color;
@@ -860,7 +858,7 @@
 
       &::before {
         position: absolute;
-        content: "#";
+        content: '#';
         color: $primary-color;
         left: 0;
         top: 0;
@@ -1035,7 +1033,7 @@
 
   &::before {
     position: absolute;
-    content: "";
+    content: '';
     height: 100%;
     width: 100%;
     background-color: $light;
@@ -1047,7 +1045,7 @@
 
   &::after {
     position: absolute;
-    content: "";
+    content: '';
     height: 100%;
     width: 100%;
     border: 1px solid $primary-color;
@@ -1092,12 +1090,12 @@
   color: $white;
   background-color: $primary-color;
   text-align: center;
-  box-shadow: 0 0 0 5px rgba($color: $primary-color, $alpha: .7);
-  transition: .2s ease-out;
+  box-shadow: 0 0 0 5px rgba($color: $primary-color, $alpha: 0.7);
+  transition: 0.2s ease-out;
 
   &:hover {
     color: $white;
-    box-shadow: 0 0 0 10px rgba($color: $primary-color, $alpha: .7);
+    box-shadow: 0 0 0 10px rgba($color: $primary-color, $alpha: 0.7);
   }
 }
 
@@ -1132,7 +1130,7 @@
     justify-content: center;
     left: 0;
     top: 0;
-    h5{
+    h5 {
       font-size: 32px;
     }
   }
@@ -1150,7 +1148,7 @@
     margin: 0 10px;
     padding: 20px 15px;
     @include desktop {
-      border: 0
+      border: 0;
     }
     .price {
       margin-bottom: 30px;
@@ -1164,10 +1162,11 @@
     }
   }
   &:last-child {
-    .card {border: 0}
+    .card {
+      border: 0;
+    }
   }
 }
-
 
 // faq
 .nav-pills-icon {

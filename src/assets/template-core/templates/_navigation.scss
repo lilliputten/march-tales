@@ -1,6 +1,6 @@
 .navigation {
   border-bottom: 1px solid $border-color;
-  transition: .2s ease;
+  transition: 0.2s ease;
   padding: 10px 0;
   &.nav-bg {
     background-color: $white;
@@ -48,7 +48,7 @@
       }
     }
 
-    i{
+    i {
       font-size: 12px;
     }
 
@@ -60,11 +60,11 @@
       left: 15px;
       border-radius: 5px;
       background: $white;
-      transition: .2s ease;
+      transition: 0.2s ease;
       display: block;
       visibility: hidden;
       opacity: 0;
-      transform: scale(.9);
+      transform: scale(0.9);
 
       @include desktop {
         display: none;
@@ -87,7 +87,7 @@
     &-item {
       position: relative;
       color: $text-color-dark;
-      transition: .2s ease;
+      transition: 0.2s ease;
       font-size: inherit;
       padding: 8px 10px;
       border-radius: inherit;
@@ -112,17 +112,17 @@
     position: relative;
     border-radius: 5px;
     z-index: 1;
-    &:focus{
+    &:focus {
       border-color: $primary-color;
       outline: 0;
     }
-    &::placeholder{
+    &::placeholder {
       font-size: 90%;
     }
     @include desktop {
       width: 40px;
       padding-left: 30px;
-      &:focus{
+      &:focus {
         padding-left: 10px;
         width: 200px;
         position: absolute;
@@ -134,10 +134,10 @@
       }
     }
   }
-  &::before{
+  &::before {
     position: absolute;
     font-family: $icon-font;
-    content: "\e610";
+    content: '\e610';
     font-size: 15px;
     right: 13px;
     top: 50%;

@@ -28,7 +28,7 @@
       border-radius: 50px;
       background-color: $light;
       padding-left: 20px;
-      transition: .2s ease;
+      transition: 0.2s ease;
 
       &:focus {
         border-color: $primary-color;
@@ -94,7 +94,7 @@
 
       &::before {
         position: absolute;
-        content: "#";
+        content: '#';
         color: $primary-color;
         left: 0;
         top: 0;
@@ -164,5 +164,3 @@
     }
   }
 }
-
-
