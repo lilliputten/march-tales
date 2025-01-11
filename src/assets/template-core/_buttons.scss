@@ -9,7 +9,7 @@
   border: 1px solid;
   position: relative;
   z-index: 1;
-  transition: .2s ease;
+  transition: 0.2s ease;
 
   &:hover,
   &:active,
@@ -28,8 +28,9 @@
   &:hover,
   &.focus,
   &.active {
-    background: $primary-color !important;
-    border-color: $primary-color !important;
+    opacity: 1;
+    // background: $primary-color !important;
+    // border-color: $primary-color !important;
   }
 }
 

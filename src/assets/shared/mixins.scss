@@ -10,8 +10,8 @@
   // text-decoration-skip-ink: none;
 }
 @mixin basicActiveLink {
-  button,
-  a {
+  button:not(.btn-primary),
+  a:not(.btn-primary) {
     transition: all var(--transitionTimeMs);
     &:hover {
       @include basicActiveLinkHovered;
@@ -20,8 +20,8 @@
 }
 @mixin activeUnderlinedLink {
   @include basicActiveLink;
-  button,
-  a {
+  button:not(.btn-primary),
+  a:not(.btn-primary) {
     &:hover {
       @include activeLinkUnderlined;
     }
@@ -29,6 +29,25 @@
 }
 @mixin activeLink {
   @include basicActiveLink;
+}
+
+@mixin activeTextLink {
+  img {
+    transition: all var(--transitionTimeMs);
+  }
+  &:hover {
+    color: var(--primaryDarkColor);
+    text-decoration: underline;
+    img {
+      opacity: 0.85;
+    }
+  }
+}
+@mixin activeTextLinkWrapper {
+  button:not([class*='btn']),
+  a:not([class*='btn']) {
+    @include activeTextLink;
+  }
 }
 
 @mixin themeBackground {

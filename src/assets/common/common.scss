@@ -21,6 +21,13 @@
   @include activeLink;
 }
 
+.active-text-link {
+  @include activeTextLink;
+}
+.active-text-link-wrapper {
+  @include activeTextLinkWrapper;
+}
+
 a.disabled {
   opacity: 0.5;
 }
@@ -45,7 +52,7 @@ a.disabled {
 .common-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: .5em;
+  gap: 0.5em;
   a:not(.btn) {
     margin-left: 8px;
     margin-right: 8px;
@@ -65,7 +72,7 @@ a.disabled {
 }
 
 .content {
-  @include activeUnderlinedLink;
+  // @include activeUnderlinedLink;
 }
 
 // Headings

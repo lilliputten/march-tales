@@ -34,16 +34,16 @@
     }
 
     .footer-brand-cell {
-      @include basicActiveLink;
       @media screen and (width < $screenMdMin) {
         order: -1;
       }
     }
 
     .footer-cell-menu {
+      @include activeTextLinkWrapper;
       ul {
         list-style: none;
-        gap: .5em 1em;
+        gap: 0.5em 1em;
       }
       a:hover {
         color: $primaryColor;
@@ -52,6 +52,15 @@
 
     .navbar-brand {
       overflow: hidden;
+      &,
+      & img {
+        transition: all var(--transitionTimeMs);
+      }
+      &:hover {
+        img {
+          opacity: 0.85;
+        }
+      }
       @media screen and (width >= $screenLgMin) {
         flex: 1;
       }

@@ -39,7 +39,7 @@
     </section>
   {% endif %}
 
-  {% include "assets/template-columns/top-columns.django" %}
+  {#% include "assets/template-columns/top-columns.django" %#}
   {% include "assets/template-columns/template-columns.django" %}
 
 {% endblock %}

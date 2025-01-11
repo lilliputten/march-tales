@@ -3,7 +3,10 @@
 @import '../../shared';
 
 .authors-list {
-  @include activeUnderlinedLink;
+  @include activeTextLinkWrapper;
+  a {
+    // @include activeTextLink;
+  }
   a .media-body {
     color: $defaultTextColor;
   }

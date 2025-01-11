@@ -16,7 +16,7 @@
         <img class="card-img-sm" src="{% get_media_prefix %}{{ track.preview_picture}}" />
         {% endif %}
         <div class="content ms-3">
-          <h5 class="title">{{ track.title }}</h5>
+          <p class="title mb-1"><strong>{{ track.title }}</strong></p>
           <ul class="details card-meta list-inline mb-0">
             <li class="list-inline-item mb-0">
               <i class="ti-calendar"></i>{{ track.published_at }}

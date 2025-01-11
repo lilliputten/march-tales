@@ -11,7 +11,7 @@
   margin-bottom: 30px;
 
   .promotion-content {
-    @include activeLink;
+    // @include activeLink;
 
     $padding: 30px;
 
@@ -31,14 +31,15 @@
       @extend .font-supertitle;
       font-size: 32px;
     }
-    .top, .bottom {
+    .top,
+    .bottom {
       position: absolute;
       left: $padding;
       right: $padding;
     }
     .top {
       top: 15%;
-      transform: translateY(-50%)
+      transform: translateY(-50%);
     }
     .bottom {
       bottom: 5%;

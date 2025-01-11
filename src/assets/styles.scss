@@ -18,7 +18,7 @@
 
 @import 'theme/bootstrap-theme-fixes';
 
-@import 'template-columns/template-columns';
+// @import 'template-columns/template-columns';
 
 // @import 'page-header-navbar/page-header-navbar';
 // @import 'page-footer-navbar/page-footer-navbar'; // TODO: To replace
@@ -26,6 +26,8 @@
 @import 'common-blocks/rubrics-list/rubrics-list';
 @import 'common-blocks/authors-list/authors-list';
 @import 'common-blocks/small-tracks-list/small-tracks-list';
+
+@import 'track-blocks/track-controls';
 
 @import 'template-header/template-header';
 @import 'template-footer/template-footer';

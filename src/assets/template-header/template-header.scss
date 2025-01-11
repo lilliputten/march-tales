@@ -6,10 +6,19 @@
 $menuItemsFontSize: $fontSizeSmall;
 
 .template-header {
-  @include basicActiveLink;
+  // @include basicActiveLink;
 
   .navbar-brand {
     overflow: hidden;
+    &,
+    & img {
+      transition: all var(--transitionTimeMs);
+    }
+    &:hover {
+      img {
+        opacity: 0.85;
+      }
+    }
     @media screen and (width >= $screenLgMin) {
       flex: 1;
     }
@@ -44,7 +53,7 @@ $menuItemsFontSize: $fontSizeSmall;
     // &.nav-bg {
     //   background-color: $white;
     // }
-    background-color: color.change($white, $alpha: .75);
+    background-color: color.change($white, $alpha: 0.75);
     @include desktop {
       background-color: $white;
     }
@@ -68,7 +77,7 @@ $menuItemsFontSize: $fontSizeSmall;
       .nav-link {
         white-space: nowrap;
         font-size: $menuItemsFontSize;
-        @include activeLink;
+        // @include activeLink;
       }
       .nav-link.show,
       &:hover .nav-link {
