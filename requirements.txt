@@ -14,6 +14,7 @@ django-livereload-server==0.5.1 ; python_version >= "3.11" and python_version < 
 django-preferences==1.0.0 ; python_version >= "3.11" and python_version < "4.0"
 django-registration==3.4 ; python_version >= "3.11" and python_version < "4.0"
 django-timezone-field==7.0 ; python_version >= "3.11" and python_version < "4.0"
+django-translated-fields==0.13.0 ; python_version >= "3.11" and python_version < "4.0"
 django==5.1.4 ; python_version >= "3.11" and python_version < "4.0"
 idna==3.10 ; python_version >= "3.11" and python_version < "4.0"
 pillow==11.1.0 ; python_version >= "3.11" and python_version < "4.0"

@@ -1,0 +1,14 @@
+{# ex: set ft=htmldjango : #}
+{% load static %}
+{% load i18n %}
+
+<div class="section section-sm template-columns">
+  <div class="container">
+    <div class="row justify-content-center">
+
+      {% include 'assets/template-columns/left-column.django' %}
+      {% include 'assets/template-columns/right-column.django' %}
+
+    </div>
+  </div>
+</div>

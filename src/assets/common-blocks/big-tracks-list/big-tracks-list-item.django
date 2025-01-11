@@ -1,0 +1,68 @@
+{# ex: set ft=htmldjango : #}
+{% load static %}
+{% load i18n %}
+
+{% comment %}
+
+- `track` object expected as an external variable.
+
+{% endcomment %}
+
+
+<article class="card mb-4">
+  {% if track.preview_picture %}
+    <div class="thumb-preview" _style="opacity: 1; width: 610px; transform: translate3d(0px, 0px, 0px);">
+      <img src="{% get_media_prefix %}{{ track.preview_picture}}" class="card-img-top" alt="post-thumb" aria-hidden="false" tabindex="0" />
+    </div>
+  {% endif %}
+
+  <div class="card-body">
+    {# Title #}
+    <h3 class="mb-3"><a class="post-title" href="/tracks/{{ track.id }}">{{ track.title }}</a></h3>
+    {# Details #}
+    <ul class="card-meta list-inline">
+      {# Author #}
+      <li class="list-inline-item">
+        <a href="/authors/{{ track.author.id }}" class="card-meta-author">
+          {% if track.author.portrait_picture %}
+            <img src="{% get_media_prefix %}{{ track.author.portrait_picture }}" />
+          {% endif %}
+          <span>{{ track.author.name }}</span>
+        </a>
+      </li>
+      {# Duration #}
+      <li class="list-inline-item">
+        <i class="ti-timer"></i>{{ track.duration_formatted }}
+      </li>
+      {# Date #}
+      <li class="list-inline-item">
+        <i class="ti-calendar"></i>{{ track.published_at }}
+      </li>
+      {# Rubrics #}
+      <li class="track-rubrics list-inline-item">
+        <ul class="card-meta-rubrics list-inline">
+          {% for rubric in track.rubrics.all %}
+            <li class="list-inline-item">
+              <a href="/rubrics/{{ rubric.id }}">{{ rubric.text }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </li>
+      {# Tags #}
+      <li class="track-tags list-inline-item">
+        <ul class="card-meta-tags list-inline">
+          {% for tag in track.tags.all %}
+            <li class="list-inline-item">
+              <a href="/tags/{{ tag.id }}">{{ tag.text }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </li>
+    </ul>
+    {# Descriptions #}
+    <p>{{ track.description }}</p>
+    {# Actions; TODO: Add play/stop icons and a simple player functionality #}
+    <a href="/tracks/{{ track.id }}" class="btn btn-outline-primary">Read More</a>
+  </div>
+</article>
+

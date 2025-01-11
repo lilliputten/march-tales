@@ -1,46 +1,61 @@
 {# ex: set ft=htmldjango : #}
 <!--
   @module menu-main.django
-  @changed 2024.03.17, 22:32
--->
+  @changed 2025.01.03, 23:46
+ -->
 
-{% comment %}
-  <li class="nav-item"><a class="nav-link active" href="{% url 'components_demo' %}">Features</a></li>
-  {# djlint:off #}
-  <li class="nav-item"><a class="nav-link" href="/pricing">Pricing</a></li>
-  <li class="nav-item"><a class="nav-link" href="/faq">FAQ</a></li>
-  {# djlint:on #}
-{% endcomment %}
-
-<li class="nav-item"><a class="nav-link" href="{% url 'admin:index' %}">Admin panel</a></li>
+{% load i18n %}
 
 <!-- Login/logon links -->
 {% if user.is_authenticated %}
-<li class="nav-item dropdown">
-  <span class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    <i class="bi bi-{% if user.is_member %}star-fill{% else %}person-fill{% endif %}"></i> {{ user.get_full_name|default:user.username }}
-  </span>
-  <form id="menu-logout-form" action="{% url 'logout' %}" method="post">
-  {% csrf_token %}
-  <ul class="dropdown-menu" id="user-menu">
-    <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
-    <li><hr class="dropdown-divider"></li>
-    <li><a class="dropdown-item" href="{% url 'profile_edit' %}">Edit profile</a></li>
-    <li><a class="dropdown-item" href="{% url 'password_change' %}">Change password</a></li>
-    <li><a class="dropdown-item" href="{% url 'password_reset' %}">Reset password</a></li>
-    <li><hr class="dropdown-divider"></li>
-    <li><a
-      class="dropdown-item"
-      href="{% url 'logout_user' %}"
-      _onClick="document.getElementById('menu-logout-form').submit(); return false"
-    >
-      Logout
-    </a></li>
-  </ul>
-  </form>
-</li>
+  <li class="nav-item dropdown">
+    <span class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="dimmed-primary-icon ti ti-{% if user.is_member %}star{% else %}user{% endif %}"></i>
+      {{ user.get_full_name|default:user.username }}
+    </span>
+    <form id="menu-logout-form" action="{% url 'logout' %}" method="post">
+      {% csrf_token %}
+      <ul class="dropdown-menu" id="user-menu">
+        <li><a class="dropdown-item disabled" href="">{% trans 'Favorites' %}</a></li>
+        <li><a class="dropdown-item disabled" href="">{% trans 'Playlist' %}</a></li>
+        <li><hr class="dropdown-divider" /></li>
+        <li><a class="dropdown-item" href="{% url 'profile' %}">{% trans 'Profile' %}</a></li>
+        <li><a class="dropdown-item" href="{% url 'profile_edit' %}">{% trans 'Edit profile' %}</a></li>
+        <li><hr class="dropdown-divider" /></li>
+        {% if user.is_staff %}
+          <!-- Admin panel -->
+          <li><a target="_blank" class="dropdown-item" href="{% url 'admin:index' %}">{% trans 'Admin panel' %}</a></li>
+        {% endif %}
+        <li><hr class="dropdown-divider" /></li>
+        <li><a class="dropdown-item" href="{% url 'logout_user' %}">{% trans 'Logout' %}</a></li>
+      </ul>
+    </form>
+  </li>
 {% else %}
-<li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Log in</a></li>
-<li class="nav-item"><a class="nav-link" href="{% url 'django_registration_register' %}">Sign up</a></li>
+  <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">{% trans 'Log in' %}</a></li>
+  <li class="nav-item"><a class="nav-link" href="{% url 'django_registration_register' %}">{% trans 'Sign up' %}</a></li>
 {% endif %}
 
+{% comment %}
+<!-- Admin panel -->
+<li class="nav-item"><a class="nav-link" href="{% url 'admin:index' %}">{% trans 'Admin panel' %}</a></li>
+{% endcomment %}
+
+<!-- Switch language -->
+<li class="nav-item dropdown">
+  {% get_current_language as LANGUAGE_CODE %}
+  {% get_available_languages as LANGUAGES %}
+  {% get_language_info_list for LANGUAGES as languages %}
+  <span class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    {{ settings.LANGUAGES_LIST|getattr:LANGUAGE_CODE }} ({{ LANGUAGE_CODE }})
+  </span>
+  <form id="menu-language-form" action="{% url 'set_language' %}" method="post">
+    {% csrf_token %}
+    <input id="menu-language-form-value" name="language" type="hidden" value="{{ LANGUAGE_CODE }}" />
+    <ul class="dropdown-menu" id="user-menu">
+      {% for language in languages %}
+        <li><a class="dropdown-item" href="{% url 'set_language' %}" onClick="document.getElementById('menu-language-form-value').value = '{{ language.code }}'; document.getElementById('menu-language-form').submit(); return false">{{ language.name_local }} ({{ language.code }})</a></li>
+      {% endfor %}
+    </ul>
+  </form>
+</li>

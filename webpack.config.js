@@ -5,17 +5,18 @@
  *  @changed 2024.12.31, 12:59
  */
 
+const path = require('path');
+
 const webpack = require('webpack');
 
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 
-const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // const CopyPlugin = require('copy-webpack-plugin');
 // const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {
-  isLocal,
+  isDev,
   isDebug,
   projectInfo,
   outPath,
@@ -28,7 +29,7 @@ const {
 const maxAssetSize = 8 * 1024;
 
 module.exports = {
-  mode: 'production',
+  mode: isDev ? 'development' : 'production',
   // @see https://webpack.js.org/configuration/devtool/#devtool
   devtool,
   entry: [
@@ -111,6 +112,8 @@ module.exports = {
               sassOptions: {
                 // @see https://github.com/sass/node-sass#outputstyle
                 outputStyle: minimizeAssets ? 'compressed' : 'expanded',
+                // @see https://www.npmjs.com/package/node-sass-glob-importer
+                // importer: globImporter(), # Got error here as the plugin is obsolete
                 quietDeps: true,
                 /* @type {Deprecations[]}
                  */
@@ -139,7 +142,7 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.LOCAL': isLocal,
+      'process.env.DEV': isDev,
       'process.env.DEBUG': isDebug,
       'process.env.APP_VERSION': JSON.stringify(projectInfo),
     }),

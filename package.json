@@ -1,9 +1,9 @@
 {
   "name": "march-tales",
   "description": "March Tales client support",
-  "version": "0.0.8",
-  "timetag": "250103-1933",
-  "timestamp": "2025.01.03 19:33:17 +0300",
+  "version": "0.0.9",
+  "timetag": "250111-0518",
+  "timestamp": "2025.01.11 05:18:48 +0300",
   "changed": "2024.12.30, 15:41",
   "main": "index.html",
   "author": "lilliputten@gmail.com",
@@ -65,6 +65,7 @@
     "webpack-cli": "^5.1.4"
   },
   "scripts": {
+    "TODO": "Unpack all static/vendor/*.zip files in dev mode on postinstall?",
     "prettier": "echo --Run prettier-- && prettier --write --cache . | grep -v '(unchanged)' || true",
     "stylelint": "echo --Lint styles-- && stylelint ./**/*.{css,scss,less}",
     "stylelint-fix": "echo --Lint styles-- && stylelint ./**/*.{css,scss,less} --fix",
@@ -72,12 +73,17 @@
     "lint": "echo --Lint sources-- && eslint . --ext js,ts,tsx",
     "type-check": "echo --Run typescript linter-- && tsc --pretty --noEmit",
     "check-all": "echo --Run all pre-commit check-ups-- && npm-run-all prettier stylelint lint type-check && echo --All check-ups has been passed--",
-    "django-server": "echo --Run djamgo dev server-- && poetry run python manage.py runserver",
+    "django-server": "echo --Run django dev server-- && poetry run python manage.py runserver",
     "clean-compiled": "echo --Clean compiled assets-- && rimraf -I -g static/compiled/*",
-    "django-reload-server": "echo --Run djamgo dev server-- && poetry run python manage.py livereload",
+    "django-reload-server": "echo --Run django dev server-- && poetry run python manage.py livereload",
     "dev": "echo --Run all dev servers concurrently-- && concurrently --kill-others \"pnpm watch-build\" \"pnpm django-server\" \"pnpm django-reload-server\"",
     "build": "echo --Create all assets /webpack/-- && pnpm clean-compiled && webpack",
+    "build-dev": "echo --Create all assets /webpack/-- && pnpm clean-compiled && cross-env DEV=1 webpack",
     "watch-build": "echo --Watch all assets /webpack/-- && pnpm clean-compiled && webpack --watch",
+    "watch-build-dev": "echo --Watch all assets /webpack/-- && pnpm clean-compiled && cross-env DEV=1 webpack --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "slick-carousel": "^1.8.1"
   }
 }

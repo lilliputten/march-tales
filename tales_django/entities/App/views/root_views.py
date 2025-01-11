@@ -1,22 +1,12 @@
-from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest
-from django.shortcuts import redirect, render
+from django.shortcuts import render
+from django.utils.translation import gettext_lazy as _
+
+# from django.utils.translation import ngettext_lazy
 
 
-def index(request: HttpRequest):
-    # events = [obj for obj in Event.objects.filter(public=True) if obj.can_register]
-    # if request.user:
-    #     for event in events:
-    #         event.registration = event.get_active_event_registration_for_user(request.user)
-
-    return render(
-        request=request,
-        template_name='tales_django/index.html.django',
-        context={
-            'user': request.user,
-            # 'events': events,
-        },
-    )
+def empty_demo(request: HttpRequest):
+    return render(request, 'demo/empty-demo.html.django')
 
 
 def components_demo(request: HttpRequest):
@@ -24,7 +14,8 @@ def components_demo(request: HttpRequest):
 
 
 __all__ = [
-    'index',
+    # 'index',
     'profile',
     'components_demo',
+    'empty_demo',
 ]

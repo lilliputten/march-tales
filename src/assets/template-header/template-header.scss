@@ -1,0 +1,147 @@
+@use 'sass:color';
+
+@import '../shared';
+@import '../template-core/shared';
+
+$menuItemsFontSize: $fontSizeSmall;
+
+.template-header {
+  @include basicActiveLink;
+
+  .navbar-brand {
+    overflow: hidden;
+    @media screen and (width >= $screenLgMin) {
+      flex: 1;
+    }
+    .text {
+      color: $defaultTextColor;
+      font-size: 3.5vw;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      @media screen and (width >= $screenMdMin) {
+        font-size: 1em;
+      }
+    }
+    &:hover .text {
+      color: $primaryColor;
+    }
+  }
+
+  .navbar-toggler {
+    &:hover,
+    &:not(.collapsed) {
+      color: $primaryColor;
+    }
+    &:focus {
+      box-shadow: none; // 0 0 2px color.change(#999, $alpha: .5);
+    }
+  }
+
+  &.navigation {
+    border-bottom: 1px solid $border-color;
+    transition: 0.2s ease;
+    padding: 10px 0;
+    // &.nav-bg {
+    //   background-color: $white;
+    // }
+    background-color: color.change($white, $alpha: .75);
+    @include desktop {
+      background-color: $white;
+    }
+  }
+
+  .right-menu {
+    @media screen and (width <= $screenMdMax) {
+      position: absolute;
+      right: 0;
+      top: 20px;
+    }
+    // @media screen and (width < $screenSmMax) {
+    //   width: 100%;
+    //   justify-content: center;
+    // }
+  }
+
+  .navbar-menu {
+    flex-grow: 0;
+    .nav-item {
+      .nav-link {
+        white-space: nowrap;
+        font-size: $menuItemsFontSize;
+        @include activeLink;
+      }
+      .nav-link.show,
+      &:hover .nav-link {
+        color: $primaryColor;
+      }
+    }
+  }
+  .navbar {
+    padding: 0;
+    // display: flex;
+    @media screen and (width >= $screenLgMin) {
+      flex-wrap: nowrap;
+    }
+
+    .dropdown {
+      &:hover {
+        .dropdown-menu {
+          visibility: visible;
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      i {
+        font-size: 12px;
+      }
+
+      &-menu {
+        padding: 20px 15px;
+        @extend .shadow;
+        border: 0;
+        top: calc(100% - 10px);
+        left: 15px;
+        border-radius: 5px;
+        background: $white;
+        transition: 0.2s ease;
+        display: block;
+        visibility: hidden;
+        opacity: 0;
+        transform: scale(0.9);
+
+        @include desktop {
+          display: none;
+          opacity: 1;
+          visibility: visible;
+          transform: scale(1);
+          text-align: inherit;
+        }
+
+        &.show {
+          visibility: hidden;
+
+          @include desktop {
+            visibility: visible;
+            display: block;
+          }
+        }
+      }
+
+      &-item {
+        position: relative;
+        color: $text-color-dark;
+        transition: 0.2s ease;
+        // font-size: inherit;
+        font-size: $menuItemsFontSize;
+        padding: 8px 10px;
+        border-radius: inherit;
+
+        &:hover {
+          color: $primary-color !important;
+          background-color: $light;
+        }
+      }
+    }
+  }
+}

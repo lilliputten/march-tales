@@ -1,0 +1,18 @@
+{# ex: set ft=htmldjango : #}
+{% load static %}
+{% load i18n %}
+
+<!-- Subscribe -->
+<div class="right-subscribe widget active-link">
+  <h4 class="widget-title"><span>{% trans "Never Miss A News" %}</span></h4>
+  <form action="#!" method="post" name="mc-embedded-subscribe-form" class="widget-search">
+    {% csrf_token %}
+    <input class="mb-3" id="search-query" name="s" type="search" placeholder="{% trans "Your Email Address" %}" />
+    <i class="ti-email"></i>
+    <button type="submit" class="btn btn-primary btn-block" name="subscribe">{% trans "Subscribe now" %}</button>
+    <div style="position: absolute; left: -5000px;" aria-hidden="true">
+      <input type="text" name="b_463ee871f45d2d93748e77cad_a0a2c6d074" tabindex="-1" />
+    </div>
+  </form>
+</div>
+

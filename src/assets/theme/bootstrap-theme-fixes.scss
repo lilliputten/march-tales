@@ -17,6 +17,15 @@
   --bs-link-hover-color-rgb: var(--bs-link-hover-color);
   // --bs-link-hover-color-rgb: 10, 88, 202;
   // --bs-border-color: #{$primaryColor};
+  // --bs-emphasis-color: #{$primaryColor};
+  // --bs-emphasis-color-rgb: #{$primaryColorRgb};
+}
+
+.navbar {
+  --bs-navbar-brand-font-size: 2em;
+  --bs-navbar-brand-color: rgba(var(--bs-emphasis-color-rgb), 1);
+  --bs-navbar-brand-hover-color: rgba(var(--bs-emphasis-color-rgb), 1);
+  --bs-navbar-toggler-focus-width: 1px;
 }
 
 .btn-primary {

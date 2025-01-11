@@ -2,3 +2,19 @@
 {% extends "base-layout.html.django" %}
 
 {% block body_class %}regular{% endblock %}
+
+{% block page_header %}
+  {{ block.super }}
+  <div class="content container" role="main"><!-- {{{ main -->
+{% endblock page_header %}
+
+{% block content %}
+  {{ block.super }}
+{% endblock content %}
+
+{% block page_footer %}
+  <!-- /main }}} --></div>
+  {{ block.super }}
+{% endblock page_footer %}
+
+

@@ -7,8 +7,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const isLocal = getTruthy(process.env.LOCAL);
-const isDebug = getTruthy(process.env.DEBUG);
+const isDev = getTruthy(process.env.DEV);
+const isDebug = getTruthy(process.env.DEBUG) || isDev;
 
 /** Use locally served assets (only for debug mode) */
 const useLocallyServedDevAssets = true;
@@ -31,17 +31,17 @@ const scriptsAssetFile = assetsPath + 'scripts.js';
 const stylesAssetFile = assetsPath + 'styles.css';
 
 // @see https://webpack.js.org/configuration/devtool/#devtool
-const devtool = isLocal
+const devtool = isDev
   ? useInlineSourceMaps
     ? 'inline-source-map'
     : 'source-map'
   : generateSourcesForProduction
     ? 'source-map'
     : undefined;
-const minimizeAssets = !isLocal || !useLocallyServedDevAssets;
+const minimizeAssets = !isDev || !useLocallyServedDevAssets;
 
 // Info:
-console.log('LOCAL:', isLocal); // eslint-disable-line no-console
+console.log('DEV:', isDev); // eslint-disable-line no-console
 console.log('DEBUG:', isDebug); // eslint-disable-line no-console
 console.log('VERSION:', projectInfo); // eslint-disable-line no-console
 console.log('devtool:', devtool); // eslint-disable-line no-console
@@ -59,7 +59,7 @@ function getTruthy(val) {
 
 // Export parameters...
 module.exports = {
-  isLocal,
+  isDev,
   isDebug,
   projectInfo,
   outPath,

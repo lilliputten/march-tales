@@ -1,29 +1,33 @@
 {# ex: set ft=htmldjango : #}
 <!--
   @module signup.html
-  @changed 2024.03.11, 01:26
+  @changed 2025.01.04, 23:19
   @desc This template is used by embedded django auth system
   @see tales_django/templates/django_registration/registration_form.html
 -->
 
-{% extends "base-regular.html.django" %} {% load crispy_forms_tags %} {% block title %}sign up — {{
-block.super }}{% endblock %} {% block content %}
+{% extends "base-regular.html.django" %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block title %}{% trans 'Sign up' %} — {{ block.super }}{% endblock %}
+
+{% block content %}
 
 <fieldset>
   <legend>
-    <h1 class="page-title primary-color">Sign up</h1>
+    <h1 class="page-title primary-color my-4">{% trans 'Sign up' %}</h1>
   </legend>
-  {% if error_message %}
-  <p>{{ error_message }}</p>
-  {% endif %}
 </fieldset>
 
 {% include "assets/render-messages/render-messages.django" %}
 
 <form method="post">
-  {% csrf_token %} {{ form|crispy }}
-  <input class="btn btn-primary" type="submit" value="Sign up" />
-  <a class="btn btn-outline-primary" href="{% url 'login' %}">Log in</a>
+  {% csrf_token %}
+  {{ form|crispy }}
+  <input class="btn btn-primary" type="submit" value="{% trans 'Sign up' %}" />
+  <a class="btn btn-outline-primary" href="{% url 'login' %}">{% trans 'Log in' %}</a>
   <input type="hidden" name="next" value="{{ next }}" />
 </form>
 

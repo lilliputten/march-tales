@@ -1,18 +1,16 @@
 {# ex: set ft=htmldjango : #}
-{% extends "base-core.html.django" %}
+{% extends 'base-core.html.django' %}
 
 {% block page_header %}
-{{ block.super }}
-
-{% include "assets/page-header-navbar/page-header-navbar.django" %}
-{% endblock page_header %}
+  {{ block.super }}
+  {% include 'assets/template-header/template-header.django' %}
+{% endblock %}
 
 {% block content %}
-{{ block.super }}
-{% comment %} {% include "assets/test/test.django" %} {% endcomment %}
-{% endblock content %}
+  {{ block.super }}
+{% endblock %}
 
 {% block page_footer %}
-{% include "assets/page-footer-navbar/page-footer-navbar.django" %}
-{{ block.super }}
-{% endblock page_footer %}
+  {% include 'assets/template-footer/template-footer.django' %}
+  {{ block.super }}
+{% endblock %}

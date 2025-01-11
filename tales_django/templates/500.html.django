@@ -1,0 +1,32 @@
+{# ex: set ft=htmldjango : #}
+
+{% extends "base-layout.html.django" %}
+
+{% load static %}
+{% load i18n %}
+
+{% block title %}500 — {% trans "Service is temporary unavailable" %} — {{ block.super }}{% endblock title %}
+
+{% block content %}
+  <div class="content container" role="main">
+
+    <fieldset>
+      <legend>
+        <h1 class="page-title primary-color my-4">{% trans "Service is temporary unavailable" %}</h1>
+      </legend>
+    </fieldset>
+
+    {% include "assets/render-messages/render-messages.django" %}
+
+    <div class="row">
+      <div class="col-lg-12 content">
+        {% url 'index' as index_url %}
+        {% url 'profile' as profile_url %}
+        <p>{% trans "Service is temporary unavailable" %}.</p>
+        <p>{% blocktranslate %}Go to the <a href="{{ index_url }}">main page</a> or to your <a href="{{ profile_url }}">profile</a>.{% endblocktranslate %}</p>
+      </div>
+    </div>
+
+  </div>
+{% endblock content %}
+

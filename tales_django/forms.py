@@ -5,7 +5,7 @@ from .entities.Users.forms import (
     UserRegistrationForm,
 )
 from .entities.Membership.forms import MembershipForm
-from .entities.Tracks.forms import TrackAdminForm, TagAdminForm, AuthorAdminForm
+from .entities.Tracks.forms import TrackAdminForm, TagAdminForm, RubricAdminForm, AuthorAdminForm
 
 __all__ = [
     'MembershipForm',
@@ -15,5 +15,6 @@ __all__ = [
     'UserRegistrationForm',
     'TrackAdminForm',
     'TagAdminForm',
+    'RubricAdminForm',
     'AuthorAdminForm',
 ]

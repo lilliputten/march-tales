@@ -1,0 +1,7 @@
+{# ex: set ft=htmldjango : #}
+{% load static %}
+{% load i18n %}
+
+<li class="list-inline-item"><a href="https://facebook.com/march-cat" target="_blank"<i class="bi bi-facebook"></i></a></li>
+<li class="list-inline-item"><a href="https://t.me/cat_andersen" target="_blank"<i class="bi bi-telegram"></i></a></li>
+<li class="list-inline-item"><a href="https://www.youtube.com/channel/UC8fj47cN-U8F4CzRuzpvJUQ" target="_blank"<i class="bi bi-youtube"></i></a></li>

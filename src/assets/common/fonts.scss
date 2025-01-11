@@ -1,0 +1,13 @@
+.font-lobster {
+  font-family: "Lobster", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.page-title,
+.font-supertitle {
+  @extend .font-lobster;
+}
+.font-title {
+  /*!KEEP*/
+  // @extend .font-lobster;
+}

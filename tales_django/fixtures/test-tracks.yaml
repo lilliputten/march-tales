@@ -1,11 +1,35 @@
 
+  # -
+  #   model: "tales_django.track"
+  #   pk: 1
+  #   fields:
+  #     title_en: "Sample track"
+  #     title_ru: "Тестовый трек"
+  #     # description: ""
+  #     youtube_url: ""
+  #     author: 1
+  #     audio_file: "samples/test-short.mp3"
+  #     preview_picture: "samples/gr-400x225.jpg"
+  #     track_status: "PUBLISHED"
+  #     for_members: false
+  #     audio_duration: 5
+  #     audio_size: 22535
+  #     published_at: "2025-01-03"
+  #     updated_at: "2025-01-03"
+  #     published_by: 1
+  #     updated_by: 1
+  #     tags:
+  #       - 1
+
   -
     model: "tales_django.track"
     pk: 1
     fields:
-      title: "Sample track"
-      description: ""
-      youtube_url: ""
+      title_en: "Sample track"
+      title_ru: "Тестовый трек"
+      description_ru: "Мы вынуждены отталкиваться от того, что укрепление и развитие внутренней структуры предполагает независимые способы реализации поставленных обществом задач. Повседневная практика показывает, что социально-экономическое развитие требует определения и уточнения приоретизации разума над эмоциями. Господа, начало повседневной работы по формированию позиции в значительной степени обусловливает важность приоретизации разума над эмоциями."
+      description_en: "We have to start from the fact that strengthening and developing the internal structure presupposes independent ways of implementing the tasks set by society. Everyday practice shows that socio-economic development requires defining and clarifying the prioritization of reason over emotions. Gentlemen, starting the daily work of forming a position largely determines the importance of prioritizing reason over emotions."
+      youtube_url: "https://www.youtube.com/watch?v=EngW7tLk6R8"
       author: 1
       audio_file: "samples/test-short.mp3"
       preview_picture: "samples/gr-400x225.jpg"
@@ -19,12 +43,41 @@
       updated_by: 1
       tags:
         - 1
+        - 2
+      rubrics:
+        - 1
+        - 2
+
+  -
+    model: "tales_django.track"
+    pk: 2
+    fields:
+      title_ru: "Новогодняя сказка"
+      title_en: "New Year's Tale"
+      description_ru: "Глаза у него блестели так же, как в тот новогодний вечер, когда мистер Фербратер обратил внимание на его возбуждение."
+      description_en: "That evening he had the peculiar light in the eyes and the unusual vivacity which had been once noticed in him by Mr. Farebrother."
+      author: 2
+      audio_file: "samples/test-short.mp3"
+      preview_picture: "samples/ny-800x450.jpg"
+      track_status: "PUBLISHED"
+      for_members: false
+      audio_duration: 5
+      audio_size: 22535
+      published_at: "2025-01-11"
+      updated_at: "2025-01-12"
+      published_by: 1
+      updated_by: 1
+      tags:
+        - 2
+      rubrics:
+        - 2
 
   -
     model: "tales_django.tag"
     pk: 1
     fields:
-      text: "Test"
+      text_en: "Test"
+      text_ru: "Тест"
       promote: true
       tracks:
         - 1
@@ -33,7 +86,40 @@
     model: "tales_django.tag"
     pk: 2
     fields:
-      text: "Sample"
+      text_en: "Sample"
+      text_ru: "Пример"
+      promote: false
+      tracks:
+        - 1
+        - 2
+
+  -
+    model: "tales_django.rubric"
+    pk: 1
+    fields:
+      text_en: "Tales"
+      text_ru: "Сказки"
+      promote: true
+      tracks:
+        - 1
+        - 2
+
+  -
+    model: "tales_django.rubric"
+    pk: 2
+    fields:
+      text_en: "Stories"
+      text_ru: "Рассказы"
+      promote: false
+      tracks:
+        - 2
+
+  -
+    model: "tales_django.rubric"
+    pk: 3
+    fields:
+      text_en: "Something else"
+      text_ru: "Иное"
       promote: false
       tracks: []
 
@@ -41,9 +127,25 @@
     model: "tales_django.author"
     pk: 1
     fields:
-      name: "Wilhelm Hauff"
-      description: ""
-      portrait_picture: "samples/wilhelm-hauff-sq-200.jpg"
+      name_en: "Wilhelm Hauff"
+      name_ru: "Вильгельм Гауф"
+      short_description_ru: "Немецкий писатель и новеллист..."
+      short_description_en: "German novelist and short story writer..."
+      description_ru: "Вильге́льм Га́уф (Вильгельм Гауфф, нем. Wilhelm Hauff, 29 ноября 1802, Штутгарт — 18 ноября 1827, там же) — немецкий писатель и новеллист, представитель направления бидермейер в литературе, доктор философии и теологии.\n\nЛитературное наследие В. Гауфа заключается в трёх сборниках сказок, один из которых был выпущен после смерти автора его вдовой, а также в нескольких романах и поэмах, В. Гауфф входил в состав Швабских поэтов. Эти произведения навсегда вписали имя Вильгельма Гауфа в историю мировой литературы. Многие его мистические, иногда страшные, иногда грустные сказки проникнуты духом Ближнего Востока. Он один из тех немногих авторов, кто умел сделать из заурядных легенд о привидениях и бедняках, наказывающих злых богачей, шедевр — волшебные, яркие, захватывающие, запоминающиеся истории, которые и по сей день с увлечением читают как дети, так и взрослые. В Байрсброне (земля Баден-Вюртемберг) с 1997 года действует Музей сказок Вильгельма Гауфа."
+      description_en: "Wilhelm Hauff (29 November 1802 – 18 November 1827) was a German poet and novelist.\n\nHauff was born in Stuttgart, the son of August Friedrich Hauff, a secretary in the Württemberg ministry of foreign affairs, and Hedwig Wilhelmine Elsaesser Hauff. He was the second of four children.\n\nHauff lost his father when he was seven years old, and his early education was practically self-gained in the library of his maternal grandfather at Tübingen, where his mother had moved after the death of her husband. In 1818 he was sent to the Klosterschule at Blaubeuren, and in 1820 began to study at the University of Tübingen. In four years he completed his philosophical and theological studies at the Tübinger Stift."
+      portrait_picture: "samples/author-wilhelm-hauff-sq-200.jpg"
       promote: true
 
+  -
+    model: "tales_django.author"
+    pk: 2
+    fields:
+      name_en: "Hans Christian Andersen"
+      name_ru: "Ханс Кристиан Андерсен"
+      short_description_ru: "Ханс Кристиан Андерсен – всемирно известный датский писатель, автор множества сказок, чьи герои стали непременными спутниками любого детства."
+      short_description_en: "Hans Christian Andersen is a world–famous Danish writer, author of many fairy tales, whose characters have become indispensable companions of any childhood."
+      description_ru: "Ханс Кри́стиан А́ндерсен (в русском языке также распространено написание Ганс Христиа́н А́ндерсен, дат. Hans Christian Andersen, датский: [hans kʁæsdjan ˈɑnɐsn̩] (слушать)о файле; 2 апреля 1805 года, Оденсе, Датско-норвежская уния — 4 августа 1875 года, Копенгаген, Дания) — датский писатель, автор всемирно известных сказок для детей и взрослых: «Гадкий утёнок», «Новое платье короля», «Дюймовочка», «Стойкий оловянный солдатик», «Принцесса на горошине», «Оле Лукойе», «Снежная королева», «Русалочка» и многих других.\n\nАндерсен написал 3342 произведения, его работы переведены примерно на 125 языков и представляют собой незыблемые уроки добродетели и жизненной стойкости."
+      description_en: "Hans Christian Andersen (/ˈændərsən/ AN-dər-sən; Danish: [ˈhænˀs ˈkʰʁestjæn ˈɑnɐsn̩] ⓘ; 2 April 1805 – 4 August 1875) was a Danish author. Although a prolific writer of plays, travelogues, novels, and poems, he is best remembered for his literary fairy tales.\n\nAndersen's fairy tales, consisting of 156 stories across nine volumes, have been translated into more than 125 languages. They have become embedded in Western collective consciousness, accessible to children as well as presenting lessons of virtue and resilience in the face of adversity for mature readers. His most famous fairy tales include \"The Emperor's New Clothes\", \"The Little Mermaid\", \"The Nightingale\", \"The Steadfast Tin Soldier\", \"The Red Shoes\", \"The Princess and the Pea\", \"The Snow Queen\", \"The Ugly Duckling\", \"The Little Match Girl\", and \"Thumbelina.\" Andersen's stories have inspired ballets, plays, and animated and live-action films."
+      portrait_picture: "samples/author-andersen-sq-200.jpg"
+      promote: true
 

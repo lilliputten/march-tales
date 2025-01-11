@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Django settings for tales project.
 
@@ -9,12 +10,10 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 
-@changed 2024.12.30, 18:28
+@changed 2025.01.03, 20:54
 """
 
 import posixpath
-
-import re
 
 from core.appEnv import (
     BASE_DIR,
@@ -28,7 +27,6 @@ from core.appEnv import (
     ASSETS_ROOT,
     PROJECT_INFO,  # DEBUG
 )
-
 from core.appSecrets import (
     SECRET_KEY,
     REGISTRATION_SALT,
@@ -49,6 +47,10 @@ from core.djangoConfig import (
     EMAIL_HOST_USER,
     EMAIL_HOST_PASSWORD,
 )
+
+# TRANSLATIONS_PROJECT_BASE_DIR = BASE_DIR
+
+gettext = lambda s: s
 
 # # DEBUG: Show basic settings...
 # print('App started:', PROJECT_INFO)
@@ -74,11 +76,9 @@ STATICFILES_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
 )
 
-# if LOCAL:
-#     # Add asset file sources to static folders in dev mode to access scss sources via django filters during dev mode time
-#     STATICFILES_DIRS += (
-#         SRC_ROOT,
-#     )
+if LOCAL:
+    # Add asset file sources to static folders in dev mode to access scss sources via django filters during dev mode time
+    STATICFILES_DIRS += (SRC_ROOT,)
 
 # List of finder classes that know how to find static files in
 # various locations.
@@ -126,6 +126,9 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.staticfiles',
     # Added
+    # 'modeltranslation',  # XXX: Doesn't work in django 5?
+    # 'translation_manager',
+    'translated_fields',
     'compressor',
     'crispy_forms',
     'crispy_bootstrap5',
@@ -136,6 +139,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -160,7 +164,6 @@ if DEBUG:
 #  {% load livereload_tags %}
 #  {% endif %}
 # ```
-
 
 ROOT_URLCONF = APP_NAME + '.urls'
 
@@ -247,11 +250,37 @@ SERVER_EMAIL = DEFAULT_FROM_EMAIL
 # EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
 
 # Internationalization
-# https://docs.djangoproject.com/en/5.1/topics/i18n/
-LANGUAGE_CODE = 'en-us'
+# @see https://docs.djangoproject.com/en/5.1/topics/i18n/
+# @see https://docs.djangoproject.com/en/5.1/topics/i18n/translation/
+LANGUAGE_CODE = 'ru'
 TIME_ZONE = 'Europe/Moscow'   # 'UTC'
-USE_I18N = True
 USE_TZ = True
+USE_I18N = True
+USE_L10N = True
+LOCALE_PATHS = (posixpath.join(BASE_DIR, APP_NAME, 'locale'),)
+LANGUAGES = (
+    ('ru', 'Русский'),
+    # ('fr', gettext(u'Français')),
+    ('en', 'English'),
+)
+LANGUAGES_LIST = {lng: name for lng, name in list(LANGUAGES)}
+CMS_LANGUAGES = {
+    'default': {
+        'public': True,
+        'hide_untranslated': False,
+        'redirect_on_fallback': True,
+    },
+    1: [
+        {
+            'public': True,
+            'code': lng,
+            'hide_untranslated': False,
+            'name': name,
+            'redirect_on_fallback': True,
+        }
+        for lng, name in list(LANGUAGES)
+    ],
+}
 
 # @see: https://docs.djangoproject.com/en/2.0/ref/templates/builtins/#std:templatefilter-date
 DATE_FORMAT = 'Y.m.d'
@@ -339,11 +368,11 @@ TIMEOUT = 30 if DEBUG else 300  # Short value for cache expiration
 # TODO: Use `Site.objects.get_current().name` (via `from django.contrib.sites.models import Site`) as site title.
 SITE_NAME = 'March Tales'
 # TODO: Add proper site description and keywords...
-SITE_DESCRIPTION = 'March Tales django api and web frontend server'
-SITE_KEYWORDS = """
-march
-tales
-"""
+# SITE_DESCRIPTION = 'March Tales django api and web frontend server'
+# SITE_KEYWORDS = """
+# march
+# tales
+# """
 
 SITE_SHORT_NAME = SITE_NAME
 
@@ -361,13 +390,17 @@ PASS_VARIABLES = {
     'DEFAULT_FROM_EMAIL': DEFAULT_FROM_EMAIL,
     'CONTACT_EMAIL': DEFAULT_FROM_EMAIL,
     # NOTE: Site url and name could be taken from site data via `get_current_site`
-    'SITE_NAME': SITE_NAME,
-    'SITE_SHORT_NAME': SITE_SHORT_NAME,
-    'SITE_TITLE': SITE_NAME,
-    'SITE_DESCRIPTION': SITE_DESCRIPTION,
-    'SITE_KEYWORDS': re.sub(r'\s*[\n\r]+\s*', ', ', SITE_KEYWORDS.strip()),
+    'SITE_NAME': SITE_NAME,  # Use `{% trans 'Site title' %}
+    'SITE_SHORT_NAME': SITE_SHORT_NAME,  # Use `{% trans 'Short site title' %}
+    # 'SITE_TITLE': SITE_NAME,
+    # 'SITE_DESCRIPTION': SITE_DESCRIPTION, # Use `{% trans 'Site description' %}
+    # 'SITE_KEYWORDS': re.sub(r'\s*[\n\r]+\s*', ', ', SITE_KEYWORDS.strip()), # Use `{% trans 'Site keywords' %}
     'STATIC_URL': STATIC_URL,
     'MEDIA_URL': MEDIA_URL,
+    # i18n
+    'LANGUAGES': LANGUAGES,
+    'LANGUAGES_LIST': LANGUAGES_LIST,
+    'LANGUAGE_CODE': LANGUAGE_CODE,
 }
 
 __all__ = [

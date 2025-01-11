@@ -9,6 +9,6 @@ class TagAdminForm(ModelForm):
     class Meta:
         model = Tag
         widgets = {
-            'text': textInputWidget,
+            **{x: textInputWidget for x in Tag.text.fields},  # 'text': textInputWidget,
         }
         fields = '__all__'

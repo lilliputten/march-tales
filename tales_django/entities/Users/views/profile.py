@@ -2,6 +2,8 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest
 from django.shortcuts import redirect, render
 
+# from django.utils.translation import ugettext as _
+
 
 @login_required
 def profile(request: HttpRequest):

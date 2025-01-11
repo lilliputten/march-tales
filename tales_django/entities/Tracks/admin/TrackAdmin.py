@@ -1,18 +1,20 @@
-from datetime import timedelta
 import traceback
+
+from translated_fields import TranslatedFieldAdmin, to_attribute
+
+from django.utils.translation import gettext_lazy as _
+from django.utils.translation import get_language
+
 from django.contrib import admin
-from django.contrib.admin import SimpleListFilter
-from django.db.models import Q
 from django.contrib import messages
+from django.contrib.admin import SimpleListFilter
+from django.db.models import Q, F
+from django.db.models.functions import Lower
 
 from django.core.files.uploadedfile import TemporaryUploadedFile
 from django.core.files.base import File
 
-# from django.core.files.storage import default_storage
-# from django.core.files.base import ContentFile
-
 from core.ffmpeg import probeDuration
-from core.helpers.files import sizeofFmt
 from core.helpers.errors import errorToString
 from core.logging import getDebugLogger, errorStyle, warningTitleStyle, tretiaryStyle
 
@@ -28,7 +30,7 @@ class IsPublishedFilter(SimpleListFilter):
     Published tracks filter
     """
 
-    title = 'Published'
+    title = _('Published')
     parameter_name = 'is_published'
 
     def lookups(self, _, __):
@@ -45,11 +47,12 @@ class IsPublishedFilter(SimpleListFilter):
 
 
 @admin.register(Track)
-class TrackAdmin(admin.ModelAdmin):
+class TrackAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
     form = TrackAdminForm
     list_display = [
-        'title',
+        'title_translated',
         'author',
+        'rubrics_list',
         'tags_list',
         'duration_formatted',
         'size_formatted',
@@ -63,6 +66,7 @@ class TrackAdmin(admin.ModelAdmin):
     readonly_fields = (
         'duration_formatted',
         'size_formatted',
+        'listened_count',
         # 'audio_duration',
         # 'audio_size',
         # 'published_at',
@@ -82,12 +86,17 @@ class TrackAdmin(admin.ModelAdmin):
         IsPublishedFilter,
     ]
 
+    # fieldsets = [
+    #     (_('title'), {'fields': Track.title.fields}),
+    #     (_('description'), {'fields': Track.description.fields}),
+    # ]
+
     def is_published(self, track):
         return track.track_status == 'PUBLISHED'
 
     is_published.admin_order_field = 'track_status'
 
-    is_published.short_description = 'Published'
+    is_published.short_description = _('Published')
     is_published.boolean = True
 
     def has_preview(self, track):
@@ -95,34 +104,53 @@ class TrackAdmin(admin.ModelAdmin):
 
     has_preview.admin_order_field = 'preview_picture'
 
-    has_preview.short_description = 'Has preview'
+    has_preview.short_description = _('has preview')
     has_preview.boolean = True
 
     def tags_list(self, track):
         tagNames = map(lambda t: t.text, track.tags.all())
         return ', '.join(tagNames)
 
-    tags_list.short_description = 'Tags'
+    tags_list.short_description = _('tags')
 
-    # def resolved_date(self, track):
-    #     return track.date if track.date else track.published_at
-    # resolved_date.short_description = 'Date'
+    def rubrics_list(self, track):
+        rubricNames = map(lambda t: t.text, track.rubrics.all())
+        return ', '.join(rubricNames)
+
+    rubrics_list.short_description = _('rubrics')
 
     def duration_formatted(self, track):
-        return (
-            track.duration_formatted
-        )   # str(timedelta(seconds=track.audio_duration)) if track.audio_duration else '-'
+        return track.duration_formatted
 
     duration_formatted.admin_order_field = 'audio_duration'
 
-    duration_formatted.short_description = 'Duration'
+    duration_formatted.short_description = _('Duration')
 
     def size_formatted(self, track):
         return track.size_formatted   # sizeofFmt(track.audio_size) if track.audio_size else '-'
 
     size_formatted.admin_order_field = 'audio_size'
 
-    size_formatted.short_description = 'Size'
+    size_formatted.short_description = _('Size')
+
+    def get_queryset(self, request):
+        queryset = super().get_queryset(request)
+        queryset = queryset.annotate(
+            _title_translated=F('title_' + get_language()),
+        )
+        return queryset
+
+    def title_translated(self, track):
+        return track.title
+
+    title_translated.admin_order_field = Lower('_title_translated')
+    title_translated.short_description = _('title')
+
+    def get_ordering(self, request):
+        return [
+            '-published_at',
+            Lower(to_attribute('title')),
+        ]
 
     def get_changeform_initial_data(self, request):
         get_data = super(TrackAdmin, self).get_changeform_initial_data(request)
@@ -157,7 +185,13 @@ class TrackAdmin(admin.ModelAdmin):
                 obj.audio_duration = round(duration)
                 sizeFmt = self.size_formatted(obj)
                 durationFmt = self.duration_formatted(obj)
-                msgText = f'Audio has been successfully uploaded and its data updated: size is {sizeFmt}, duration is {durationFmt}'
+                # Translate...
+                msgData = {'sizeFmt': sizeFmt, 'durationFmt': durationFmt}
+                msgTmpl = _(
+                    'Audio file has been successfully uploaded'
+                    # 'Audio file has been successfully uploaded and its data updated: size is %(sizeFmt)s, duration is %(durationFmt)s'
+                )
+                msgText = msgTmpl % msgData
                 messages.add_message(request, messages.SUCCESS, msgText)
             except Exception as err:
                 errText = errorToString(err, show_stacktrace=False)

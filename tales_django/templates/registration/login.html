@@ -1,41 +1,38 @@
 {# ex: set ft=htmldjango : #}
-<!--
-  @module XXX
-  @changed 2024.03.12, 21:35
--->
 
 {% extends "base-regular.html.django" %}
 
+{% load i18n %}
 {% load crispy_forms_tags %}
 
-{% block title %}Login — {{ block.super }}{% endblock title %} {% block content %}
+{% block title %}{% trans 'Login' %} — {{ block.super }}{% endblock title %}
 
-<fieldset>
-  <legend>
-    <h1 class="page-title primary-color">Login</h1>
-  </legend>
-  {% if error_message %}
-  <p>{{ error_message }}</p>
-  {% endif %}
-</fieldset>
+{% block content %}
+{{ block.super }}
 
-{% if form.errors %}
-<p>We can't find a user with such authorization data. Please try again.</p>
-{% endif %} {% include "assets/render-messages/render-messages.django" %}
+  <fieldset>
+    <legend>
+      <h1 class="page-title primary-color my-4">{% trans 'Login' %}</h1>
+    </legend>
+  </fieldset>
 
-<form role="form" method="post" action="{% url 'login' %}">
-  {% csrf_token %} {{ form|crispy }}
+  {% if form.errors %}
+  <p>{% trans 'We can’t find a user with such authorization data. Please try again.' %}</p>
+  {% endif %} {% include "assets/render-messages/render-messages.django" %}
 
-  <div class="common-actions">
-    <input class="btn btn-primary" type="submit" value="Login" />
-    <a class="btn btn-link btn-outline-primary" href="{% url 'django_registration_register' %}"
-      >Sign up</a
-    >
-    <a class="btn btn-link btn-outline-primary" href="{% url 'password_reset' %}">Reset password</a>
-    {% include "assets/back-button/back-button.django" %}
-  </div>
+  <form role="form" method="post" action="{% url 'login' %}">
+    {% csrf_token %} {{ form|crispy }}
 
-  <input type="hidden" name="next" value="{{ next }}" />
-</form>
+    <div class="common-actions">
+      <input class="btn btn-primary" type="submit" value="{% trans 'Login' %}" />
+      <a class="btn btn-link btn-outline-primary" href="{% url 'django_registration_register' %}"
+        >{% trans 'Sign up' %}</a
+      >
+      <a class="btn btn-link btn-outline-primary" href="{% url 'password_reset' %}">{% trans 'Reset password' %}</a>
+      {% include "assets/back-button/back-button.django" %}
+    </div>
+
+    <input type="hidden" name="next" value="{{ next }}" />
+  </form>
 
 {% endblock content %}
