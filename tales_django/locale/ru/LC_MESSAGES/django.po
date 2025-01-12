@@ -126,7 +126,7 @@ msgstr "Регистрация"
 
 #: .\src\assets\template-banner\template-banner.django:25
 msgid "What’d You Like<br> To Listen Today?"
-msgstr "Что бы вы хотели<br> послушать сегодня?"
+msgstr "Что бы Вы хотели<br> послушать сегодня?"
 
 #: .\src\assets\template-columns\left-column.django:7
 #: .\src\assets\template-columns\unused-samples\left-column-sample.django:7
@@ -141,7 +141,7 @@ msgstr "Свежие треки"
 #: .\tales_django\templates\base-core.html.django:24
 #: .\tales_django\templates\base-core.html.django:39
 msgid "Site title"
-msgstr "Сказки мартовского кота"
+msgstr "Сказки Мартовского Кота"
 
 #: .\src\assets\template-footer\template-footer.django:64
 msgid "Privacy Policy"
