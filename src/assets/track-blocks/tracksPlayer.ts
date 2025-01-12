@@ -13,7 +13,6 @@ interface TSharedPlayerOptions {
 
 // Values for dataset statuses
 const TRUE = 'true';
-// const FALSE = ''; // NOTE: Using `delete` operator
 
 function ensureSharedPlayer(/* opts: TSharedPlayerOptions = {} */) {
   if (!sharedPlayerNode) {
@@ -97,13 +96,20 @@ function sharedPlayerTimeUpdate(ev: Event) {
 }
 
 function sharedPlayerPlay(_ev: Event) {
+  const dataset = currentTrackPlayer?.dataset;
   /* console.log('[sharedPlayerPlay]', {
-   *   ev,
+   *   played: dataset?.played,
+   *   currentTrackPlayer,
+   *   dataset,
+   *   _ev,
    * });
    */
-  const dataset = currentTrackPlayer?.dataset;
   if (dataset) {
     dataset.status = 'playing';
+    if (!dataset.played) {
+      dataset.played = TRUE;
+      incrementPlayedCount();
+    }
   }
 }
 
@@ -207,37 +213,37 @@ function sendIncrementPlayedCount() {
     });
 }
 
+function incrementPlayedCount() {
+  const trackPlayer = currentTrackPlayer;
+  sendIncrementPlayedCount()
+    .then(({ played_count }) => {
+      /* console.log('[tracksPlayer:incrementPlayedCount:sendIncrementPlayedCount] success', {
+       *   played_count,
+       * });
+       */
+      // Update track data...
+      const valueNode = trackPlayer.querySelector('#played_count') as HTMLElement;
+      if (played_count != null && valueNode) {
+        valueNode.innerText = quoteHtmlAttr(String(played_count));
+      }
+      // TODO: Update other instances of this track on the page?
+    })
+    .catch((err) => {
+      // eslint-disable-next-line no-console
+      console.error('[tracksPlayer:incrementPlayedCount:sendIncrementPlayedCount] error', {
+        err,
+      });
+      debugger; // eslint-disable-line no-debugger
+      commonNotify.showError(err);
+      throw err;
+    });
+}
+
 function startPlay() {
   const trackPlayer = currentTrackPlayer;
   const { dataset } = trackPlayer;
   const isLoaded = !!dataset.loaded;
   const audio = ensureSharedPlayerAudio();
-  if (!dataset.played) {
-    dataset.played = TRUE;
-    sendIncrementPlayedCount()
-      .then(({ played_count }) => {
-        /* console.log('[tracksPlayer:startPlay:sendIncrementPlayedCount] success', {
-         *   played_count,
-         * });
-         */
-        // Update track data...
-        const valueNode = trackPlayer.querySelector('#played_count') as HTMLElement;
-        if (played_count != null && valueNode) {
-          valueNode.innerText = quoteHtmlAttr(String(played_count));
-        }
-        // TODO: Update other instances of this track on the page?
-      })
-      .catch((err) => {
-        // eslint-disable-next-line no-console
-        console.error('[tracksPlayer:startPlay:sendIncrementPlayedCount] error', {
-          err,
-        });
-        debugger; // eslint-disable-line no-debugger
-        commonNotify.showError(err);
-        throw err;
-      });
-  }
-  // Play if hasn't played now...
   if (!isLoaded) {
     dataset.status = 'waiting';
     delete dataset.loaded;
@@ -256,7 +262,6 @@ function startPlay() {
 
 function trackPlayHandler(ev: MouseEvent) {
   const controlNode = ev.currentTarget as HTMLElement;
-  // const trackControlsNode = controlNode.closest('.track-controls') as HTMLElement;
   const trackPlayer = controlNode.closest('.track-player') as HTMLElement;
   if (currentTrackPlayer && currentTrackPlayer !== trackPlayer) {
     stopPreviousPlayer();
@@ -264,18 +269,17 @@ function trackPlayHandler(ev: MouseEvent) {
   const { dataset } = trackPlayer;
   const isPlaying = dataset.status === 'playing';
   const isWaiting = dataset.status === 'waiting';
-  // const isLoaded = !!dataset.loaded;
   const readyToPlay = !isWaiting && !isPlaying;
   const audio = ensureSharedPlayerAudio();
   /* console.log('[tracksPlayer:trackPlayHandler]', {
    *   // isError,
    *   isPlaying,
    *   isWaiting,
-   *   isLoaded,
+   *   // isLoaded,
    *   // isPaused,
    *   readyToPlay,
    *   controlNode,
-   *   trackControlsNode,
+   *   // trackControlsNode,
    *   trackPlayer,
    * });
    */
