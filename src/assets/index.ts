@@ -1,10 +1,9 @@
 /**
  * @desc Main entry point module (scripts)
  * @module src/assets/index.ts
- * @changed 2025.01.09, 01:29
+ * @changed 2025.01.12, 04:31
  */
 
-console.log('Root module');
+import { initTracksPlayerWrapper } from './track-blocks/tracksPlayer';
 
-// Empty root module
-// export {};
+initTracksPlayerWrapper();

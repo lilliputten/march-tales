@@ -125,7 +125,7 @@ msgid "Membershop description block."
 msgstr "Listen to classic fairy tales online"
 
 #: .\src\assets\template-right-blocks\right-membership\right-membership.django:9
-msgid "Obtain membership now!"
+msgid "Obtain membership"
 msgstr ""
 
 #: .\src\assets\template-right-blocks\right-mobile-promo\right-mobile-promo.django:9

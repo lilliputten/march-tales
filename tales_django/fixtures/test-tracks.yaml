@@ -32,12 +32,12 @@
     description_ru: 'Глаза у него блестели так же, как в тот новогодний вечер, когда мистер Фербратер обратил внимание на его возбуждение.'
     description_en: 'That evening he had the peculiar light in the eyes and the unusual vivacity which had been once noticed in him by Mr. Farebrother.'
     author: 2
-    audio_file: 'samples/test-short.mp3'
+    audio_file: 'samples/sample-with-wrong-metadata-duration.mp3'
     preview_picture: 'samples/ny-800x450.jpg'
     track_status: 'PUBLISHED'
     for_members: false
-    audio_duration: 5
-    audio_size: 22535
+    audio_duration: 167
+    audio_size: 1031154
     published_at: '2025-01-11'
     updated_at: '2025-01-12'
     published_by: 1

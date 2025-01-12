@@ -123,8 +123,8 @@ msgid "Membershop description block."
 msgstr "Подробно о статсе члена сообщества и процедуре..."
 
 #: .\src\assets\template-right-blocks\right-membership\right-membership.django:9
-msgid "Obtain membership now!"
-msgstr "Получить членство!"
+msgid "Obtain membership"
+msgstr "Получить членство"
 
 #: .\src\assets\template-right-blocks\right-mobile-promo\right-mobile-promo.django:9
 msgid "Try the mobile app!"

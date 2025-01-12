@@ -109,9 +109,9 @@ class Track(Model):
         # Try to remove the old files...
         try:
             track = Track.objects.get(id=self.id)
-            if track.audio_file and self.audio_file and track.audio_file != self.audio_file:
+            if track.audio_file and self.audio_file and track.audio_file != self.audio_file and not str(track.audio_file).startsWith('samples/'):
                 track.audio_file.delete(save=False)
-            if track.preview_picture and self.preview_picture and track.preview_picture != self.preview_picture:
+            if track.preview_picture and self.preview_picture and track.preview_picture != self.preview_picture and not str(track.preview_picture).startsWith('samples/'):
                 track.preview_picture.delete(save=False)
         except Track.DoesNotExist:
             # Do nothing when a new object is creating
