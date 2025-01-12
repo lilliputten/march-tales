@@ -22,6 +22,7 @@ def index_view(request: HttpRequest):
     # plural_test = ngettext_lazy('there is %(count)d object', 'there are %(count)d objects', count,) % {
     #     'count': count,
     # }
+    favorite_tracks = request.user.favorite_tracks if not request.user.is_anonymous else None
     tracks = Track.objects.all()
     rubrics = Rubric.objects.all()
     tags = Tag.objects.all()
@@ -31,6 +32,7 @@ def index_view(request: HttpRequest):
         template_name='tales_django/index.html.django',
         context={
             'user': request.user,
+            'favorite_tracks': favorite_tracks,
             'tracks': tracks,
             'rubrics': rubrics,
             'tags': tags,

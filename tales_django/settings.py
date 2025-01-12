@@ -133,6 +133,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'django_registration',
+    'rest_framework',
     APP_NAME,
 ]
 
@@ -194,6 +195,15 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = APP_NAME + '.wsgi.application'
+
+# @see https://www.django-rest-framework.org/
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    # 'DEFAULT_PERMISSION_CLASSES': (
+    #     'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    # ),
+}
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
@@ -327,6 +337,12 @@ LOGGING = {
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler',
         },
+        'errors': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'filename': posixpath.join(BASE_DIR, 'log-errors.log'),
+            'formatter': 'verbose',
+        },
         'django': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
@@ -342,7 +358,10 @@ LOGGING = {
     },
     'loggers': {
         'django.request': {
-            'handlers': ['mail_admins'],
+            'handlers': [
+                'errors',
+                # 'mail_admins',
+            ],
             'level': 'ERROR',
             'propagate': True,
         },

@@ -42,6 +42,8 @@ root_urlpatterns = [
 root_urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
+    # @see https://www.django-rest-framework.org/
+    path('api-auth/', include('rest_framework.urls')),
     # Demo pages (for debug/dev purposes only)...
     root_urlpatterns.append(
         path('components-demo', components_demo, name='components_demo'),
@@ -67,9 +69,9 @@ if settings.DEBUG:
 #     path(r'^404/$', 'django.views.defaults.page_not_found')
 # )
 
-handler403 = 'tales_django.views.page403'
+handler403 = page403   # 'tales_django.views.page403'
 handler404 = page404   # 'tales_django.views.page404'
-handler500 = 'tales_django.views.page500'
+handler500 = page500   # 'tales_django.views.page500'
 
 __all__ = [
     'handler403',

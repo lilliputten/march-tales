@@ -8,7 +8,6 @@
 
 {% endcomment %}
 
-
 <article
   class="big-tracks-list-item track-player card mb-4"
   data-track-id="{{ track.id }}"
@@ -34,16 +33,20 @@
           <span>{{ track.author.name }}</span>
         </a>
       </li>
+      {# Count #}
+      <li class="list-inline-item" title="{% trans 'Played count' %}">
+        <i class="ti-headphone"></i> <span id="played_count">{{ track.played_count }}</span>
+      </li>
       {# Duration #}
-      <li class="list-inline-item">
+      <li class="list-inline-item" title="{% trans 'Duration' %}">
         <i class="ti-timer"></i>{{ track.duration_formatted }}
       </li>
       {# Date #}
-      <li class="list-inline-item">
+      <li class="list-inline-item" title="{% trans 'Published at' %}">
         <i class="ti-calendar"></i>{{ track.published_at }}
       </li>
       {# Rubrics #}
-      <li class="track-rubrics list-inline-item">
+      <li class="track-rubrics list-inline-item" title="{% trans 'Rubrics' %}">
         <ul class="card-meta-rubrics list-inline">
           {% for rubric in track.rubrics.all %}
             <li class="list-inline-item">
@@ -53,7 +56,7 @@
         </ul>
       </li>
       {# Tags #}
-      <li class="track-tags list-inline-item">
+      <li class="track-tags list-inline-item" title="{% trans 'Tags' %}">
         <ul class="card-meta-tags list-inline">
           {% for tag in track.tags.all %}
             <li class="list-inline-item">
@@ -66,7 +69,11 @@
     {# Descriptions #}
     <p>{{ track.description }}</p>
     {# Actions #}
-    <div class="track-controls d-flex flex-wrap gap-1">
+    <div
+      class="track-controls d-flex flex-wrap gap-1"
+      data-track-id="{{ track.id }}"
+      {% if track in favorite_tracks.all %}data-favorite="true"{% endif %}
+    >
       <button class="track-control track-control-play big-icon btn btn-primary">
         <span class="option option-waiting"><span class="spinner-border spinner-border-sm_" role="status"></span> <span class="text">{% trans 'Loading' %}</span></span>
         <span class="option option-resume"><i class="icon bi bi-play-circle-fill"></i> <span class="text">{% trans 'Resume' %}</span></span>
@@ -74,15 +81,17 @@
         <span class="option option-playing"><i class="icon bi bi-pause-circle-fill"></i> <span class="text">{% trans 'Pause' %}</span></span>
         <span class="time">time</span>
       </button>
-      {% if user %}
-        <button class="track-control track-control-favorite btn btn-outline-primary">
-          <span class="option option-not-in-favorites"><i class="icon bi bi-heart"></i> <span class="text">{% trans 'Add to favorites' %}</span></span>
+      {% if favorite_tracks %}
+        <button data-control-id="toggleFavorite" class="track-control btn btn-outline-primary">
+          <span class="option option-not-favorite"><i class="icon bi bi-heart"></i> <span class="text">{% trans 'Add to favorites' %}</span></span>
+          <span class="option option-favorite"><i class="icon bi bi-heart-fill"></i> <span class="text">{% trans 'Remove from favorites' %}</span></span>
         </button>
-        <button class="track-control track-control-playlist btn btn-outline-primary">
+      {% endif %}
+      {% if user and request.session.session_key %}
+        <button data-control-id="togglePlaylist" class="track-control btn btn-outline-primary disabled">
           <span class="option option-not-in-playlist"><i class="icon bi bi-music-note-list"></i> <span class="text">{% trans 'Add to playlist' %}</span></span>
         </button>
       {% endif %}
     </div>
   </div>
 </article>
-

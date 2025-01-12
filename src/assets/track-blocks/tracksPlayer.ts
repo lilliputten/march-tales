@@ -1,4 +1,4 @@
-import { formatDuration } from '../helpers/CommonHelpers';
+import { formatDuration, getCookie, quoteHtmlAttr } from '../helpers/CommonHelpers';
 import { commonNotify } from '../CommonNotify/CommonNotifySingleton';
 
 const sharedPlayerContainer = document.body;
@@ -11,7 +11,7 @@ interface TSharedPlayerOptions {
   src?: string;
 }
 
-// Values for dataset ststuses
+// Values for dataset statuses
 const TRUE = 'true';
 // const FALSE = ''; // NOTE: Using `delete` operator
 
@@ -71,6 +71,7 @@ function sharedPlayerEnded(_ev: Event) {
   const dataset = currentTrackPlayer?.dataset;
   if (dataset) {
     delete dataset.status;
+    delete dataset.played;
   }
 }
 
@@ -161,12 +162,101 @@ function stopPreviousPlayer() {
     delete dataset.status;
     delete dataset.loaded;
     delete dataset.error;
+    delete dataset.played;
+  }
+}
+
+function sendIncrementPlayedCount() {
+  const { dataset } = currentTrackPlayer;
+  const { trackId } = dataset;
+  const csrfToken = getCookie('csrftoken');
+  const url = `/api/api-tracks/${trackId}/incrementPlayedCount/`;
+  /* console.log('[tracksPlayer:sendIncrementPlayedCount] start', {
+   *   url,
+   *   csrfToken,
+   *   trackId,
+   * });
+   */
+  return fetch(url, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      'X-CSRFToken': csrfToken,
+      sessionid: getCookie('sessionid'),
+    },
+    body: JSON.stringify({}),
+  })
+    .then(async (res) => {
+      const data = await res.json();
+      return [res, data];
+    })
+    .then(([res, data]: [Response, { detail?: string; played_count?: number }]) => {
+      const { ok, status } = res;
+      if (!ok) {
+        const errMsg = [`Error ${status}`, data?.detail || res.statusText]
+          .filter(Boolean)
+          .join(': ');
+        throw new Error(errMsg);
+      }
+      /* console.log('[tracksPlayer:sendIncrementPlayedCount] success', {
+       *   data,
+       * });
+       */
+      return data;
+    });
+}
+
+function startPlay() {
+  const trackPlayer = currentTrackPlayer;
+  const { dataset } = trackPlayer;
+  const isLoaded = !!dataset.loaded;
+  const audio = ensureSharedPlayerAudio();
+  if (!dataset.played) {
+    dataset.played = TRUE;
+    sendIncrementPlayedCount()
+      .then(({ played_count }) => {
+        /* console.log('[tracksPlayer:startPlay:sendIncrementPlayedCount] success', {
+         *   played_count,
+         * });
+         */
+        // Update track data...
+        const valueNode = trackPlayer.querySelector('#played_count') as HTMLElement;
+        if (played_count != null && valueNode) {
+          valueNode.innerText = quoteHtmlAttr(String(played_count));
+        }
+        // TODO: Update other instances of this track on the page?
+      })
+      .catch((err) => {
+        // eslint-disable-next-line no-console
+        console.error('[tracksPlayer:startPlay:sendIncrementPlayedCount] error', {
+          err,
+        });
+        debugger; // eslint-disable-line no-debugger
+        commonNotify.showError(err);
+        throw err;
+      });
+  }
+  // Play if hasn't played now...
+  if (!isLoaded) {
+    dataset.status = 'waiting';
+    delete dataset.loaded;
+    delete dataset.error;
+    const { trackMediaUrl } = dataset;
+    const source = createSharedPlayerSource({ src: trackMediaUrl });
+    if (!source) {
+      throw new Error('No audio source node found');
+    }
+    audio.load();
+  } else {
+    dataset.status = 'playing';
+    audio.play();
   }
 }
 
 function trackPlayHandler(ev: MouseEvent) {
   const controlNode = ev.currentTarget as HTMLElement;
-  const trackControlsNode = controlNode.closest('.track-controls') as HTMLElement;
+  // const trackControlsNode = controlNode.closest('.track-controls') as HTMLElement;
   const trackPlayer = controlNode.closest('.track-player') as HTMLElement;
   if (currentTrackPlayer && currentTrackPlayer !== trackPlayer) {
     stopPreviousPlayer();
@@ -174,7 +264,7 @@ function trackPlayHandler(ev: MouseEvent) {
   const { dataset } = trackPlayer;
   const isPlaying = dataset.status === 'playing';
   const isWaiting = dataset.status === 'waiting';
-  const isLoaded = !!dataset.loaded;
+  // const isLoaded = !!dataset.loaded;
   const readyToPlay = !isWaiting && !isPlaying;
   const audio = ensureSharedPlayerAudio();
   /* console.log('[tracksPlayer:trackPlayHandler]', {
@@ -194,22 +284,8 @@ function trackPlayHandler(ev: MouseEvent) {
     audio.pause();
     dataset.status = 'paused';
   } else if (readyToPlay) {
-    // Play if hasn't played now...
     currentTrackPlayer = trackPlayer;
-    if (!isLoaded) {
-      dataset.status = 'waiting';
-      delete dataset.loaded;
-      delete dataset.error;
-      const { trackMediaUrl } = dataset;
-      const source = createSharedPlayerSource({ src: trackMediaUrl });
-      if (!source) {
-        throw new Error('No audio source node found');
-      }
-      audio.load();
-    } else {
-      dataset.status = 'playing';
-      audio.play();
-    }
+    startPlay();
   }
 }
 
@@ -223,7 +299,7 @@ function initTrackPlayerNode(playerNode: HTMLElement) {
   if (inited || !trackMediaUrl) {
     return;
   }
-  const playControl = playerNode.querySelector('.track-controls .track-control-play');
+  const playControl = playerNode.querySelector('.track-control-play');
   playControl.addEventListener('click', trackPlayHandler);
   dataset.inited = TRUE;
 }
