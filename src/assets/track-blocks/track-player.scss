@@ -27,7 +27,7 @@
   }
   .track-control-play {
     .spinner-border {
-      $spinner-size: 1rem;
+      $spinner-size: 1.75rem;
       --bs-spinner-width: #{$spinner-size};
       --bs-spinner-height: #{$spinner-size};
       // --bs-spinner-border-width: 0.2em;
