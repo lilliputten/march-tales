@@ -1,4 +1,3 @@
-
 - model: 'tales_django.track'
   pk: 1
   fields:

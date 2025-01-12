@@ -5,6 +5,8 @@
 @import '../../../static/vendor/bootstrap-5.3.2/scss/functions';
 @import '../../../static/vendor/bootstrap-5.3.2/scss/variables';
 
+@import 'functions';
+
 // Font...
 
 $defaultFontSize: 16px;
@@ -71,6 +73,18 @@ $borderColor: #ebebeb;
 $blackColor: #000;
 $whiteColor: #fff;
 $lightColor: #f9f9f9;
+
+// Signaling colors
+
+$commonInfoColor: #09f;
+$commonErrorColor: #b00;
+$commonWarnColor: #f60;
+$commonSuccessColor: #0c3;
+
+$commonInfoColorRgb: rgbComponents($commonInfoColor);
+$commonErrorColorRgb: rgbComponents($commonErrorColor);
+$commonWarnColorRgb: rgbComponents($commonWarnColor);
+$commonSuccessColorRgb: rgbComponents($commonSuccessColor);
 
 // Navbar...
 

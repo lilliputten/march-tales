@@ -27,7 +27,10 @@
 @import 'common-blocks/authors-list/authors-list';
 @import 'common-blocks/small-tracks-list/small-tracks-list';
 
-@import 'track-blocks/track-controls';
+@import 'CommonNotify/CommonNotify';
+
+@import 'track-blocks/track-player';
+@import 'track-blocks/shared-player';
 
 @import 'template-header/template-header';
 @import 'template-footer/template-footer';

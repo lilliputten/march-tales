@@ -1,10 +1,10 @@
 {
   "name": "march-tales",
-  "description": "March Tales client support",
+  "description": "March Tales django site",
   "version": "0.0.9",
   "timetag": "250111-0518",
   "timestamp": "2025.01.11 05:18:48 +0300",
-  "changed": "2024.12.30, 15:41",
+  "changed": "2025.01.12, 02:52",
   "main": "index.html",
   "author": "lilliputten@gmail.com",
   "license": "MIT",
@@ -12,10 +12,13 @@
   "packageManager": "pnpm@9.10.0+sha512.73a29afa36a0d092ece5271de5177ecbf8318d454ecd701343131b8ebc0c1a91c487da46ab77c8e596d6acf1461e3594ced4becedf8921b074fbd8653ed7051c",
   "repository": {
     "type": "git",
-    "url": "git@github.com:lilliputten/spektropak-page.git"
+    "url": "git@github.com:lilliputten/march-tales.git"
   },
   "bugs": {
-    "url": "git@github.com:lilliputten/spektropak-page.git/issues"
+    "url": "git@github.com:lilliputten/march-tales.git/issues"
+  },
+  "unusedDependencies": {
+    "@popperjs/core": "^2.11.8"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.22.9",
@@ -75,7 +78,7 @@
     "check-all": "echo --Run all pre-commit check-ups-- && npm-run-all prettier stylelint lint type-check && echo --All check-ups has been passed--",
     "django-server": "echo --Run django dev server-- && poetry run python manage.py runserver",
     "clean-compiled": "echo --Clean compiled assets-- && rimraf -I -g static/compiled/*",
-    "django-reload-server": "echo --Run django dev server-- && poetry run python manage.py livereload",
+    "django-reload-server": "echo --Run django dev server-- && poetry run python manage.py livereload --wait 1",
     "dev": "echo --Run all dev servers concurrently-- && concurrently --kill-others \"pnpm watch-build\" \"pnpm django-server\" \"pnpm django-reload-server\"",
     "build": "echo --Create all assets /webpack/-- && pnpm clean-compiled && webpack",
     "build-dev": "echo --Create all assets /webpack/-- && pnpm clean-compiled && cross-env DEV=1 webpack",
