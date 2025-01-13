@@ -1,0 +1,7 @@
+{# ex: set ft=htmldjango : #}
+{% load static %}
+{% load i18n %}
+
+<li class="list-inline-item"><a href="https://vk.com/club227997256" target="_blank" title="VK"><i class="fa fa-vk"></i></a></li>
+<li class="list-inline-item"><a href="https://t.me/cat_andersen" target="_blank" title="Telegram"><i class="fa fa-telegram"></i></a></li>
+<li class="list-inline-item"><a href="https://youtube.com/@bibliocaty" target="_blank" title="YouTube"><i class="fa fa-youtube-play"></i></a></li>

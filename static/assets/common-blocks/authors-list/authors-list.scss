@@ -1,0 +1,19 @@
+@use 'sass:color';
+
+@import '../../shared';
+
+.authors-list {
+  @include activeTextLinkWrapper;
+  a {
+    // @include activeTextLink;
+  }
+  a .media-body {
+    color: $defaultTextColor;
+  }
+  a:hover .media-body {
+    color: $primaryColor;
+  }
+  .name {
+    font-weight: bold;
+  }
+}

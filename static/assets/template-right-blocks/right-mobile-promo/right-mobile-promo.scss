@@ -1,0 +1,48 @@
+@use 'sass:color';
+
+@import '../../shared';
+
+.right-mobile-promo {
+  border: 1px solid red;
+  border-radius: 5px;
+  overflow: hidden;
+  @extend .shadow;
+  position: relative;
+  margin-bottom: 30px;
+
+  .promotion-content {
+    // @include activeLink;
+
+    $padding: 30px;
+
+    position: absolute;
+    padding: $padding;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(24, 24, 24, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    left: 0;
+    top: 0;
+    h5 {
+      @extend .font-supertitle;
+      font-size: 32px;
+    }
+    .top,
+    .bottom {
+      position: absolute;
+      left: $padding;
+      right: $padding;
+    }
+    .top {
+      top: 15%;
+      transform: translateY(-50%);
+    }
+    .bottom {
+      bottom: 5%;
+    }
+  }
+}

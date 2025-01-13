@@ -1,0 +1,104 @@
+@use 'sass:color';
+
+@import '../shared';
+@import '../template-core/shared';
+
+.template-footer {
+  &.footer {
+    margin-top: 4em;
+    overflow: hidden;
+    padding: 160px 0 0px;
+    background-image: url(/static/images/backgrounds/footer-bg.svg);
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+
+    .footer-border {
+      position: absolute;
+      // bottom: -60px;
+      top: 0;
+      height: 200px;
+      left: -50%;
+      width: 200%;
+      stroke: $primary-color;
+    }
+
+    .delimiter {
+      border-color: #000;
+      --bs-border-color: #0002;
+    }
+
+    .footer-cell-side {
+      flex: 1;
+    }
+
+    .footer-brand-cell {
+      @media screen and (width < $screenMdMin) {
+        order: -1;
+      }
+    }
+
+    .footer-cell-menu {
+      @include activeTextLinkWrapper;
+      ul {
+        list-style: none;
+        gap: 0.5em 1em;
+      }
+      a:hover {
+        color: $primaryColor;
+      }
+    }
+
+    .navbar-brand {
+      overflow: hidden;
+      &,
+      & img {
+        transition: all var(--transitionTimeMs);
+      }
+      &:hover {
+        img {
+          opacity: 0.85;
+        }
+      }
+      @media screen and (width >= $screenLgMin) {
+        flex: 1;
+      }
+      .text {
+        color: $defaultTextColor;
+        padding-right: 10px;
+        font-size: 3.5vw;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        @media screen and (width >= $screenMdMin) {
+          font-size: 1em;
+        }
+        @media screen and (width >= $screenLgMin) {
+          font-size: 1.5em;
+        }
+      }
+      &:hover .text {
+        color: $primaryColor;
+      }
+    }
+
+    &-list {
+      a {
+        display: block;
+        // color: $text-color-dark;
+        padding: 5px;
+
+        &:hover {
+          color: $primary-color;
+        }
+      }
+    }
+
+    &-border {
+      position: absolute;
+      top: -75px;
+      width: 100%;
+      stroke: $primary-color;
+    }
+  }
+}

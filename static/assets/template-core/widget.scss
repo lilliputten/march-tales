@@ -1,0 +1,166 @@
+@import 'shared';
+
+// sidebar
+.widget {
+  margin-bottom: 30px;
+  padding: 15px;
+  border-radius: 5px;
+  border-top: 6px solid $primary-color;
+  background-color: $white;
+  @extend .shadow;
+
+  &-title {
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    color: $text-color-dark;
+    text-align: center;
+    font-size: 15px;
+    letter-spacing: 0.06em;
+  }
+
+  &-search {
+    position: relative;
+
+    input {
+      border: 1px solid transparent;
+      width: 100%;
+      height: 40px;
+      border-radius: 50px;
+      background-color: $light;
+      padding-left: 20px;
+      transition: 0.2s ease;
+
+      &:focus {
+        border-color: $primary-color;
+        outline: 0;
+      }
+
+      &::placeholder {
+        font-size: 90%;
+      }
+    }
+
+    i {
+      color: $text-color-dark;
+      position: absolute;
+      right: 15px;
+      top: 15px;
+      font-size: 12px;
+    }
+  }
+
+  &-about {
+    text-align: center;
+
+    img {
+      height: 170px;
+      width: 170px;
+      object-fit: cover;
+      border-radius: 50%;
+      display: block;
+      margin: 0 auto 10px;
+      border: 5px solid transparent;
+      box-shadow: 0 0 0 2px $primary-color;
+
+      @include desktop-lg {
+        height: 150px;
+        width: 150px;
+      }
+    }
+  }
+
+  &-author {
+    .media {
+      position: relative;
+      padding: 15px 0;
+
+      img {
+        height: 70px;
+        width: 70px;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+
+      &:not(:last-child) {
+        border-bottom: 1px solid $border-color;
+      }
+    }
+  }
+
+  &-categories {
+    a {
+      position: relative;
+      padding-left: 15px;
+
+      &::before {
+        position: absolute;
+        content: '#';
+        color: $primary-color;
+        left: 0;
+        top: 0;
+      }
+    }
+  }
+
+  &-list {
+    li {
+      &:not(:last-child) {
+        border-bottom: 1px solid $border-color;
+      }
+
+      padding: 7px 0;
+
+      a {
+        color: $text-color-dark;
+
+        &:hover {
+          color: $primary-color;
+        }
+      }
+    }
+  }
+
+  &-list-inline {
+    li {
+      margin-bottom: 10px;
+
+      a {
+        padding: 2px 15px;
+        border: 1px solid $primary-color;
+        border-radius: 30px;
+        display: block;
+        color: $text-color;
+
+        &:hover {
+          border-color: $primary-color;
+          background: $primary-color;
+          color: $white;
+        }
+      }
+    }
+  }
+
+  &-card {
+    position: relative;
+    padding: 15px 0;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid $border-color;
+    }
+  }
+
+  &-social {
+    display: flex;
+    // justify-content: space-around;
+
+    a {
+      padding: 10px;
+      font-size: 20px;
+      color: $text-color-light;
+
+      &:hover {
+        color: $primary-color;
+      }
+    }
+  }
+}

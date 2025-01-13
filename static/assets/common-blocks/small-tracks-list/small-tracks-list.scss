@@ -1,0 +1,30 @@
+@use 'sass:color';
+
+@import '../../shared';
+
+.small-tracks-list {
+  padding-left: 0;
+  &-item {
+    // @include activeTextLink;
+    a {
+      &,
+      & img {
+        transition: all var(--transitionTimeMs);
+      }
+    }
+    a .content {
+      color: $defaultTextColor;
+    }
+    a:hover {
+      .content {
+        .title {
+          color: $primaryColor;
+          text-decoration: underline;
+        }
+      }
+      img {
+        opacity: 0.75;
+      }
+    }
+  }
+}

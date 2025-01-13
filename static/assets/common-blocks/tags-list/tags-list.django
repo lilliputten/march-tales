@@ -1,0 +1,24 @@
+{# ex: set ft=htmldjango : #}
+{% load static %}
+{% load i18n %}
+
+{% comment %}
+
+- `tags` list expected as an external variable.
+
+{% endcomment %}
+
+<ul class="tags-list list-unstyled widget-list mb-0">
+  {% for tag in tags %}
+    <li>
+      <a href="/tags/{{ tag.id }}" class="d-flex">
+        {{ tag.text }}
+        {% if tag.tracks.count %}
+          <small class="ms-auto opacity-75">
+            ({{ tag.tracks.count }})
+          </small>
+        {% endif %}
+      </a>
+    </li>
+  {% endfor %}
+</ul>
