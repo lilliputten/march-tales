@@ -12,6 +12,7 @@ from django.http import HttpRequest
 from django.template.loader import render_to_string
 
 from core.helpers.errors import errorToString
+from core.helpers.utils import debugObj
 from core.logging import getDebugLogger
 
 # For django_registration related stuff, see:
@@ -74,9 +75,9 @@ def send_re_actvation_email(request: HttpRequest, user: AbstractBaseUser | Anony
     except Exception as err:
         sError = errorToString(err, show_stacktrace=False)
         sTraceback = str(traceback.format_exc())
-        debug_data = {
+        debugData = {
             'err': err,
             'traceback': sTraceback,
         }
-        logger.error('Caught error %s (re-raising): %s', sError, debug_data)
+        logger.error(f'Caught error {sError} (re-raising):\n{debugObj(debugData)}')
         raise err

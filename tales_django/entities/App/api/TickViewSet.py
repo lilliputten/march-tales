@@ -50,7 +50,7 @@ class TickApiView(views.APIView):
                 'err': err,
                 'traceback': sTraceback,
             }
-            logger.error(f'Caught error {sError} (re-raising): ' + debugObj(debugData))
+            logger.error(f'Caught error {sError} (returning in response):\n{debugObj(debugData)}')
             return JsonResponse(
                 {
                     'detail': sError,

@@ -5,6 +5,7 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import views
+from rest_framework import permissions
 
 from core.helpers.errors import errorToString
 from core.helpers.time import getTimeStamp
@@ -17,6 +18,7 @@ logger = getDebugLogger()
 
 class CheckApiView(views.APIView):
     permission_classes = [
+        permissions.BasePermission,
         # permissions.IsAuthenticated,
     ]
 
@@ -49,7 +51,7 @@ class CheckApiView(views.APIView):
                 'err': err,
                 'traceback': sTraceback,
             }
-            logger.error(f'Caught error {sError} (re-raising): ' + debugObj(debugData))
+            logger.error(f'Caught error {sError} (returning in response):\n{debugObj(debugData)}')
             return JsonResponse(
                 {
                     'detail': sError,
