@@ -4,6 +4,7 @@ from django.conf.urls.static import static
 from django.conf.urls import handler404, handler403, handler500
 from django.urls import include, path
 from django.views.decorators.cache import cache_page
+from django.utils.translation import gettext_lazy as _
 
 from .views import page403, page404, page500
 from .api import api_urlpatterns
@@ -16,6 +17,8 @@ from .views import (
 )
 
 cache_timeout = 0 if settings.LOCAL or settings.DEBUG else 15 * 60  # in seconds: {min}*60
+
+admin.site.site_header = _('Site administration')
 
 app_urlpatterns = [
     # Root page

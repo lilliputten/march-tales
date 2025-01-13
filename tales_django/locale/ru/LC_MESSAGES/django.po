@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-13 23:49+0300\n"
+"POT-Creation-Date: 2025-01-14 02:31+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -223,6 +223,16 @@ msgstr "Подписаться"
 msgid "Application"
 msgstr "Приложение"
 
+#: .\tales_django\entities\App\api\CheckViewSet.py:38
+#: .\tales_django\entities\Tracks\api\TrackViewSet.py:46
+#: .\tales_django\entities\Tracks\api\TrackViewSet.py:98
+msgid "Client session not found"
+msgstr "Не найдена клиентская сессия"
+
+#: .\tales_django\entities\App\app_urlpatterns.py:21
+msgid "Site administration"
+msgstr "Администрирование сайта"
+
 #: .\tales_django\entities\Membership\models\Membership.py:15
 msgid "membership"
 msgstr "членство"
@@ -290,14 +300,9 @@ msgstr "название"
 msgid "Audio file has been successfully uploaded"
 msgstr "Аудио файл успешно загружен"
 
-#: .\tales_django\entities\Tracks\api\TrackViewSet.py:44
+#: .\tales_django\entities\Tracks\api\TrackViewSet.py:42
 msgid "User in not authenticated"
 msgstr "Пользователь не вошёл в систему"
-
-#: .\tales_django\entities\Tracks\api\TrackViewSet.py:48
-#: .\tales_django\entities\Tracks\api\TrackViewSet.py:103
-msgid "Client session not found"
-msgstr "Не найдена клиентская сессия"
 
 #: .\tales_django\entities\Tracks\models\Author.py:10
 #: .\tales_django\entities\Tracks\models\Track.py:50
@@ -661,6 +666,7 @@ msgstr ""
 "спамом."
 
 #: .\tales_django\templates\registration\password_reset_done.html:32
+#, python-format
 msgid ""
 "Then <a href=\"%(login_url)s\">log in</a> and <a "
 "href=\"%(profile_edit_url)s\">edit your profile</a> to change or add more "

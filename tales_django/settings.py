@@ -342,7 +342,7 @@ LOGGING = {
             'filename': posixpath.join(BASE_DIR, 'log-errors.log'),
             # 'class': 'logging.FileHandler',
             'class': 'logging.handlers.RotatingFileHandler',
-            'maxBytes': 1024*1024, # MB
+            'maxBytes': 1024 * 1024,  # MB
             'backupCount': 5,
             'formatter': 'verbose',
         },
@@ -351,7 +351,7 @@ LOGGING = {
             'filename': posixpath.join(BASE_DIR, 'log-django.log'),
             # 'class': 'logging.FileHandler',
             'class': 'logging.handlers.RotatingFileHandler',
-            'maxBytes': 1024*1024, # MB
+            'maxBytes': 1024 * 1024,  # MB
             'backupCount': 5,
             'formatter': 'verbose',
         },
@@ -360,7 +360,7 @@ LOGGING = {
             'filename': posixpath.join(BASE_DIR, 'log-apps.log'),
             # 'class': 'logging.FileHandler',
             'class': 'logging.handlers.RotatingFileHandler',
-            'maxBytes': 1024*1024, # MB
+            'maxBytes': 1024 * 1024,  # MB
             'backupCount': 5,
             'formatter': 'verbose',
         },

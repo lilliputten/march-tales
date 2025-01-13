@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-13 23:49+0300\n"
+"POT-Creation-Date: 2025-01-14 02:31+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -227,6 +227,18 @@ msgstr ""
 msgid "Application"
 msgstr ""
 
+#: .\tales_django\entities\App\api\CheckViewSet.py:38
+#: .\tales_django\entities\Tracks\api\TrackViewSet.py:46
+#: .\tales_django\entities\Tracks\api\TrackViewSet.py:98
+msgid "Client session not found"
+msgstr ""
+
+#: .\tales_django\entities\App\app_urlpatterns.py:21
+#, fuzzy
+#| msgid "Site description"
+msgid "Site administration"
+msgstr "Listen to classic fairy tales online"
+
 #: .\tales_django\entities\Membership\models\Membership.py:15
 msgid "membership"
 msgstr ""
@@ -296,13 +308,8 @@ msgstr "The March Cat Tales"
 msgid "Audio file has been successfully uploaded"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\api\TrackViewSet.py:44
+#: .\tales_django\entities\Tracks\api\TrackViewSet.py:42
 msgid "User in not authenticated"
-msgstr ""
-
-#: .\tales_django\entities\Tracks\api\TrackViewSet.py:48
-#: .\tales_django\entities\Tracks\api\TrackViewSet.py:103
-msgid "Client session not found"
 msgstr ""
 
 #: .\tales_django\entities\Tracks\models\Author.py:10

@@ -20,7 +20,7 @@ class Rubric(Model):
         )
     )
 
-    promote = models.BooleanField(default=False, help_text=_('Promote on the main page'))
+    promote = models.BooleanField(_('promote'), default=False, help_text=_('Promote on the main page'))
 
     @property
     def tracks_count(self):
