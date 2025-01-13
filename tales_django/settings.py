@@ -292,10 +292,10 @@ CMS_LANGUAGES = {
     ],
 }
 
-# @see: https://docs.djangoproject.com/en/2.0/ref/templates/builtins/#std:templatefilter-date
+# @see: https://docs.djangoproject.com/en/5.1/ref/templates/builtins/#std:templatefilter-date
 DATE_FORMAT = 'Y.m.d'
 TIME_FORMAT = 'H:i'
-DATETIME_FORMAT = DATE_FORMAT + TIME_FORMAT
+DATETIME_FORMAT = DATE_FORMAT + ',' + TIME_FORMAT
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -339,20 +339,29 @@ LOGGING = {
         },
         'errors': {
             'level': 'ERROR',
-            'class': 'logging.FileHandler',
             'filename': posixpath.join(BASE_DIR, 'log-errors.log'),
+            # 'class': 'logging.FileHandler',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'maxBytes': 1024*1024, # MB
+            'backupCount': 5,
             'formatter': 'verbose',
         },
         'django': {
             'level': 'DEBUG',
-            'class': 'logging.FileHandler',
             'filename': posixpath.join(BASE_DIR, 'log-django.log'),
+            # 'class': 'logging.FileHandler',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'maxBytes': 1024*1024, # MB
+            'backupCount': 5,
             'formatter': 'verbose',
         },
         'apps': {
             'level': 'DEBUG',
-            'class': 'logging.FileHandler',
             'filename': posixpath.join(BASE_DIR, 'log-apps.log'),
+            # 'class': 'logging.FileHandler',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'maxBytes': 1024*1024, # MB
+            'backupCount': 5,
             'formatter': 'verbose',
         },
     },
