@@ -1,24 +1,22 @@
 import { commonNotify } from '../CommonNotify/CommonNotifySingleton';
-import { getCookie } from '../helpers/CommonHelpers';
+import { getCookie, quoteHtmlAttr } from '../helpers/CommonHelpers';
 
 // Values for dataset statuses
 const TRUE = 'true';
 
+function getJsText(id: string) {
+  const text = document.body.querySelector('#js-texts #' + id).innerHTML || id;
+  return quoteHtmlAttr(text).trim();
+}
+
 function sendToggleFavoriteRequest(trackId: number | string, value: boolean) {
-  const csrfToken = getCookie('csrftoken');
-  const url = `/api/api-tracks/${trackId}/toggleFavorite/`;
+  const csrftoken = getCookie('csrftoken');
+  const url = `/api/v1/tracks/${trackId}/toggle-favorite/`;
   const headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
-    'X-CSRFToken': csrfToken,
+    'X-CSRFToken': csrftoken,
   };
-  /* console.log('[tracksPlayer:sendToggleFavoriteRequest] star', {
-   *   url,
-   *   headers,
-   *   csrfToken,
-   *   trackId,
-   * });
-   */
   return fetch(url, {
     method: 'POST',
     headers,
@@ -38,40 +36,24 @@ function sendToggleFavoriteRequest(trackId: number | string, value: boolean) {
           .join(': ');
         throw new Error(errMsg);
       }
-      /* console.log('[tracksPlayer:sendToggleFavoriteRequest] success', {
-       *   data,
-       * });
-       */
       return data;
     });
 }
 
 function toggleFavorite(ev: Event) {
   const node = ev.currentTarget as HTMLElement;
-  // const { controlId } = node.dataset;
   const controlsNode = node.closest('.track-controls') as HTMLElement;
   const { dataset } = controlsNode;
   const { trackId, favorite } = dataset;
   const value = !favorite;
-  /* console.log('[toggleFavorite]', {
-   *   // controlId,
-   *   value,
-   *   favorite,
-   *   trackId,
-   *   controlsNode,
-   *   node,
-   * });
-   */
   sendToggleFavoriteRequest(trackId, value)
     .then(() => {
-      /* console.log('[trackControls:toggleFavorite:sendToggleFavoriteRequest]', {
-       *   value,
-       * });
-       */
       if (value) {
         dataset.favorite = TRUE;
+        commonNotify.showSuccess(getJsText('trackAddedToFavorites'));
       } else {
         delete dataset.favorite;
+        commonNotify.showSuccess(getJsText('trackRemovedFromFavorites'));
       }
     })
     .catch((err) => {

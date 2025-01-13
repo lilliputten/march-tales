@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-12 12:11+0300\n"
+"POT-Creation-Date: 2025-01-13 23:49+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -301,7 +301,7 @@ msgid "User in not authenticated"
 msgstr ""
 
 #: .\tales_django\entities\Tracks\api\TrackViewSet.py:48
-#: .\tales_django\entities\Tracks\api\TrackViewSet.py:100
+#: .\tales_django\entities\Tracks\api\TrackViewSet.py:103
 msgid "Client session not found"
 msgstr ""
 
@@ -700,6 +700,14 @@ msgstr ""
 
 #: .\tales_django\templates\registration\password_reset_subject.txt:4
 msgid "Password reset for"
+msgstr ""
+
+#: .\tales_django\templates\tales_django\index.html.django:12
+msgid "The track has been successfully added to favorites"
+msgstr ""
+
+#: .\tales_django\templates\tales_django\index.html.django:13
+msgid "The track has been successfully removed from favorites"
 msgstr ""
 
 #: .\tales_django\templates\tales_django\profile.html.django:37

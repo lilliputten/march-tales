@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-12 12:11+0300\n"
+"POT-Creation-Date: 2025-01-13 23:49+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -236,12 +236,10 @@ msgid "Name"
 msgstr "Имя"
 
 #: .\tales_django\entities\Tracks\admin\AuthorAdmin.py:41
-#, fuzzy
 msgid "Has portrait"
 msgstr "С портретом"
 
 #: .\tales_django\entities\Tracks\admin\AuthorAdmin.py:56
-#, fuzzy
 msgid "Tracks count"
 msgstr "Треки"
 
@@ -254,7 +252,6 @@ msgstr "текст"
 
 #: .\tales_django\entities\Tracks\admin\RubricAdmin.py:41
 #: .\tales_django\entities\Tracks\admin\TagAdmin.py:40
-#, fuzzy
 msgid "tracks count"
 msgstr "треки"
 
@@ -286,7 +283,6 @@ msgstr "Размер"
 
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:147
 #: .\tales_django\entities\Tracks\models\Track.py:28
-#, fuzzy
 msgid "title"
 msgstr "название"
 
@@ -299,7 +295,7 @@ msgid "User in not authenticated"
 msgstr "Пользователь не вошёл в систему"
 
 #: .\tales_django\entities\Tracks\api\TrackViewSet.py:48
-#: .\tales_django\entities\Tracks\api\TrackViewSet.py:100
+#: .\tales_django\entities\Tracks\api\TrackViewSet.py:103
 msgid "Client session not found"
 msgstr "Не найдена клиентская сессия"
 
@@ -317,14 +313,11 @@ msgid "name"
 msgstr "имя"
 
 #: .\tales_django\entities\Tracks\models\Author.py:15
-#, fuzzy
-#| msgid "Site description"
 msgid "short description"
-msgstr "Авторское чтение классических сказок и рассказов"
+msgstr "краткое описание"
 
 #: .\tales_django\entities\Tracks\models\Author.py:17
 #: .\tales_django\entities\Tracks\models\Track.py:39
-#, fuzzy
 msgid "description"
 msgstr "описание"
 
@@ -364,27 +357,22 @@ msgid "The track title text, required."
 msgstr "Обязательное название трека."
 
 #: .\tales_django\entities\Tracks\models\Track.py:43
-#, fuzzy
-#| msgid "Site description"
 msgid "Optional description"
-msgstr "Авторское чтение классических сказок и рассказов"
+msgstr "Опциональное описание"
 
 #: .\tales_django\entities\Tracks\models\Track.py:47
-#, fuzzy
 msgid "youtube link"
-msgstr "Ссылка на ролик в YouTube"
+msgstr "Ссылка на YouTube"
 
 #: .\tales_django\entities\Tracks\models\Track.py:47
 msgid "YouTube video link url"
 msgstr "Ссылка на ролик в YouTube"
 
 #: .\tales_django\entities\Tracks\models\Track.py:59
-#, fuzzy
 msgid "Audio file"
 msgstr "Аудио файл"
 
 #: .\tales_django\entities\Tracks\models\Track.py:64
-#, fuzzy
 msgid "Preview picture"
 msgstr "Изображение предпросмотра"
 
@@ -405,19 +393,14 @@ msgid "for members only"
 msgstr "только для членов"
 
 #: .\tales_django\entities\Tracks\models\Track.py:80
-#, fuzzy
-#| msgid "Duration"
 msgid "Duration (seconds)"
-msgstr "Длительность"
+msgstr "Длительность (сек)"
 
 #: .\tales_django\entities\Tracks\models\Track.py:81
-#, fuzzy
-#| msgid "File size"
 msgid "File size (bytes)"
-msgstr "Размер файла"
+msgstr "Размер файла (байты)"
 
 #: .\tales_django\entities\Tracks\models\Track.py:85
-#, fuzzy
 msgid "published at"
 msgstr "опубликовано в"
 
@@ -426,7 +409,6 @@ msgid "updated at"
 msgstr "обновлено в"
 
 #: .\tales_django\entities\Tracks\models\Track.py:90
-#, fuzzy
 msgid "published by"
 msgstr "опубликовано пользователем"
 
@@ -447,7 +429,6 @@ msgid "Personal info"
 msgstr "Персональная информация"
 
 #: .\tales_django\entities\Users\admin\UserAdmin.py:41
-#, fuzzy
 msgid "Tracks"
 msgstr "Треки"
 
@@ -468,7 +449,6 @@ msgid "E-mail (username)"
 msgstr "E-mail (логин)"
 
 #: .\tales_django\entities\Users\admin\UserAdmin.py:83
-#, fuzzy
 msgid "Address"
 msgstr "Адрес"
 
@@ -481,8 +461,6 @@ msgid "addrress"
 msgstr "адрес"
 
 #: .\tales_django\entities\Users\models\User.py:33
-#, fuzzy
-#| msgid "Favorite tracks"
 msgid "favorite tracks"
 msgstr "избранные треки"
 
@@ -531,10 +509,8 @@ msgstr "Перейти к основному содержанию"
 
 #: .\tales_django\templates\admin\base.html:43
 #: .\tales_django\templates\tales_django\profile.html.django:32
-#, fuzzy
-#| msgid "Welcome!"
 msgid "Welcome,"
-msgstr "Добро пожаловать!"
+msgstr "Добро пожаловать,"
 
 #: .\tales_django\templates\admin\base.html:48
 msgid "View site"
@@ -551,10 +527,8 @@ msgid "Change password"
 msgstr "Сменить пароль"
 
 #: .\tales_django\templates\admin\base.html:61
-#, fuzzy
-#| msgid "Logged out"
 msgid "Log out"
-msgstr "Вы вышли из системы"
+msgstr "Выйти из системы"
 
 #: .\tales_django\templates\admin\base.html:74
 msgid "Breadcrumbs"
@@ -583,7 +557,6 @@ msgstr ""
 "Спасибо, что провели сегодня немного времени с пользой на нашем веб-сайте."
 
 #: .\tales_django\templates\registration\logged_out.html:25
-#, fuzzy
 msgid "Log in again"
 msgstr "Войти снова"
 
@@ -606,9 +579,8 @@ msgstr "Сбросить пароль"
 
 #: .\tales_django\templates\registration\password_change_done.html:12
 #: .\tales_django\templates\registration\password_change_done.html:18
-#, fuzzy
 msgid "Password has been already changed"
-msgstr "Сброс пароля"
+msgstr "Пароль был изменен"
 
 #: .\tales_django\templates\registration\password_change_done.html:27
 #, python-format
@@ -621,9 +593,8 @@ msgstr ""
 
 #: .\tales_django\templates\registration\password_change_form.html:12
 #: .\tales_django\templates\registration\password_change_form.html:18
-#, fuzzy
 msgid "Password change"
-msgstr "Сброс пароля"
+msgstr "Изменение пароля"
 
 #: .\tales_django\templates\registration\password_reset_complete.html:11
 #: .\tales_django\templates\registration\password_reset_complete.html:17
@@ -648,9 +619,8 @@ msgstr ""
 
 #: .\tales_django\templates\registration\password_reset_confirm.html:12
 #: .\tales_django\templates\registration\password_reset_confirm.html:16
-#, fuzzy
 msgid "Password reset confirmation"
-msgstr "Пароль сброшен для"
+msgstr "Подтверждение сброса пароля"
 
 #: .\tales_django\templates\registration\password_reset_confirm.html:24
 msgid ""
@@ -661,10 +631,8 @@ msgstr ""
 "вы ввели его правильно."
 
 #: .\tales_django\templates\registration\password_reset_confirm.html:40
-#, fuzzy
-#| msgid "Change password"
 msgid "Change my password"
-msgstr "Сменить пароль"
+msgstr "Сменить мой пароль"
 
 #: .\tales_django\templates\registration\password_reset_confirm.html:46
 msgid ""
@@ -693,7 +661,6 @@ msgstr ""
 "спамом."
 
 #: .\tales_django\templates\registration\password_reset_done.html:32
-#, fuzzy, python-format
 msgid ""
 "Then <a href=\"%(login_url)s\">log in</a> and <a "
 "href=\"%(profile_edit_url)s\">edit your profile</a> to change or add more "
@@ -741,14 +708,20 @@ msgstr ""
 "вышлемвам инструкции по установке нового."
 
 #: .\tales_django\templates\registration\password_reset_form.html:29
-#, fuzzy
-#| msgid "Reset password"
 msgid "Reset my password"
-msgstr "Сбросить пароль"
+msgstr "Сбросить мой пароль"
 
 #: .\tales_django\templates\registration\password_reset_subject.txt:4
 msgid "Password reset for"
 msgstr "Пароль сброшен для"
+
+#: .\tales_django\templates\tales_django\index.html.django:12
+msgid "The track has been successfully added to favorites"
+msgstr "Трек был успешно добавлен в избранное"
+
+#: .\tales_django\templates\tales_django\index.html.django:13
+msgid "The track has been successfully removed from favorites"
+msgstr "Трек был успешно удален из избранного"
 
 #: .\tales_django\templates\tales_django\profile.html.django:37
 msgid "Your registrations"
@@ -780,9 +753,6 @@ msgid "Apply for a membership"
 msgstr "Подать заявку на членство в сообщество"
 
 #: .\tales_django\templates\tales_django\profile.html.django:61
-#, fuzzy
-#| msgid ""
-#| "You have unpaid membership, download invoice: %(invoice_download_url)s"
 msgid ""
 "You have unpaid membership, download invoice: {{ invoice_download_url }}"
 msgstr ""

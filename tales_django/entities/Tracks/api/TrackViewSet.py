@@ -2,13 +2,14 @@ import traceback
 from django.utils.translation import gettext_lazy as _
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
-from rest_framework import viewsets
 from rest_framework.decorators import action
+from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework import viewsets, status
 from rest_framework import permissions
 
 from core.helpers.errors import errorToString
+from core.helpers.utils import debugObj
 from core.logging import getDebugLogger
 
 from .track_serializers import TrackSerializer
@@ -22,35 +23,30 @@ class TrackViewSet(viewsets.ModelViewSet):
     queryset = Track.objects.all()
     serializer_class = TrackSerializer
 
-    @action(detail=True, methods=['Get'])
-    def show(self, _, pk=None):
-        queryset = Track.objects.filter(pk=pk)
-        serializer = TrackSerializer(queryset, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-    @action(methods=['post'], detail=True, permission_classes=[permissions.IsAuthenticated])
-    def toggleFavorite(self, request, pk=None):
+    @action(
+        methods=['post'],
+        url_path='toggle-favorite',
+        url_name='track-toggle-favorite',
+        detail=True,
+        permission_classes=[permissions.IsAuthenticated],
+    )
+    def toggleFavorite(self, request: Request, pk=None):
         try:
             value = request.data.get('value')
 
-            session = request.session
-            session_key = session.session_key if session else None
-            csrfToken = request.headers.get('X-CSRFToken')
-
-            user = request.user
+            session_key = request.session.session_key if request.session else None
+            csrftoken = request.headers.get('X-CSRFToken')
 
             # Check user is_authenticated?
-            if not user.is_authenticated:
+            if not request.user.is_authenticated:
                 data = {'detail': _('User in not authenticated')}
                 return JsonResponse(data, status=status.HTTP_403_FORBIDDEN, safe=False)
             # Check session or csrf?
-            if not session_key and not csrfToken:
+            if not session_key and not csrftoken:
                 data = {'detail': _('Client session not found')}
                 return JsonResponse(data, status=status.HTTP_403_FORBIDDEN, safe=False)
 
-            # print('incrementPlayedCount', session, request, pk, played_count)
-
-            favorite_tracks = user.favorite_tracks
+            favorite_tracks = request.user.favorite_tracks
             if value:
                 favorite_tracks.add(pk)
             else:
@@ -70,12 +66,11 @@ class TrackViewSet(viewsets.ModelViewSet):
         except Exception as err:
             sError = errorToString(err)
             sTraceback = str(traceback.format_exc())
-            debug_data = {
+            debugData = {
                 'err': err,
                 'traceback': sTraceback,
             }
-            logger.error('Caught error %s (re-raising): %s', sError, debug_data)
-            # raise err
+            logger.error(f'Caught error {sError} (re-raising): ' + debugObj(debugData))
             return JsonResponse(
                 {
                     'detail': sError,
@@ -84,17 +79,20 @@ class TrackViewSet(viewsets.ModelViewSet):
                 safe=False,
             )
 
-    @action(methods=['post'], detail=True, permission_classes=[permissions.BasePermission])
-    def incrementPlayedCount(self, request, pk=None):
+    @action(
+        methods=['post'],
+        url_path='increment-played-count',
+        url_name='track-increment-played-count',
+        detail=True,
+        permission_classes=[permissions.BasePermission],
+    )
+    def incrementPlayedCount(self, request: Request, pk=None):
         try:
-            # played_count = request.data.get('played_count')
-
-            session = request.session
-            session_key = session.session_key if session else None
-            csrfToken = request.headers.get('X-CSRFToken')
+            session_key = request.session.session_key if request.session else None
+            csrftoken = request.headers.get('X-CSRFToken')
 
             # Check session or csrf?
-            if not session_key and not csrfToken:
+            if not session_key and not csrftoken:
                 return JsonResponse(
                     {
                         'detail': _('Client session not found'),
@@ -102,8 +100,6 @@ class TrackViewSet(viewsets.ModelViewSet):
                     status=status.HTTP_403_FORBIDDEN,
                     safe=False,
                 )
-
-            # print('incrementPlayedCount', session, request, pk, played_count)
 
             model = get_object_or_404(Track, pk=pk)
             data = {
@@ -119,12 +115,11 @@ class TrackViewSet(viewsets.ModelViewSet):
         except Exception as err:
             sError = errorToString(err)
             sTraceback = str(traceback.format_exc())
-            debug_data = {
+            debugData = {
                 'err': err,
                 'traceback': sTraceback,
             }
-            logger.error('Caught error %s (re-raising): %s', sError, debug_data)
-            # raise err
+            logger.error(f'Caught error {sError} (re-raising): ' + debugObj(debugData))
             return JsonResponse(
                 {
                     'detail': sError,

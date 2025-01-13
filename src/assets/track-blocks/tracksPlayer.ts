@@ -60,10 +60,6 @@ function createSharedPlayerSource(opts: TSharedPlayerOptions = {}) {
 
 function sharedPlayerEnded(_ev: Event) {
   const audio = ensureSharedPlayerAudio();
-  /* console.log('[sharedPlayerEnded]', {
-   *   ev,
-   * });
-   */
   // Rewind for the next play
   audio.currentTime = 0;
   // Update status
@@ -83,27 +79,10 @@ function sharedPlayerTimeUpdate(ev: Event) {
     const durationFormatted = formatDuration(secs);
     timeNode.innerHTML = durationFormatted;
   }
-  /* console.log('[sharedPlayerTimeUpdate]', {
-   *   timeNode,
-   *   currentTime,
-   *   ev,
-   * });
-   */
-  const dataset = currentTrackPlayer?.dataset;
-  if (dataset) {
-    // dataset.status = 'playing';
-  }
 }
 
 function sharedPlayerPlay(_ev: Event) {
   const dataset = currentTrackPlayer?.dataset;
-  /* console.log('[sharedPlayerPlay]', {
-   *   played: dataset?.played,
-   *   currentTrackPlayer,
-   *   dataset,
-   *   _ev,
-   * });
-   */
   if (dataset) {
     dataset.status = 'playing';
     if (!dataset.played) {
@@ -115,10 +94,6 @@ function sharedPlayerPlay(_ev: Event) {
 
 function sharedPlayerLoaded(_ev: Event) {
   const audio = ensureSharedPlayerAudio();
-  /* console.log('[sharedPlayerLoaded]', {
-   *   ev,
-   * });
-   */
   const dataset = currentTrackPlayer?.dataset;
   if (dataset) {
     dataset.loaded = TRUE;
@@ -175,20 +150,14 @@ function stopPreviousPlayer() {
 function sendIncrementPlayedCount() {
   const { dataset } = currentTrackPlayer;
   const { trackId } = dataset;
-  const csrfToken = getCookie('csrftoken');
-  const url = `/api/api-tracks/${trackId}/incrementPlayedCount/`;
-  /* console.log('[tracksPlayer:sendIncrementPlayedCount] start', {
-   *   url,
-   *   csrfToken,
-   *   trackId,
-   * });
-   */
+  const csrftoken = getCookie('csrftoken');
+  const url = `/api/v1/tracks/${trackId}/increment-played-count/`;
   return fetch(url, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      'X-CSRFToken': csrfToken,
+      'X-CSRFToken': csrftoken,
       sessionid: getCookie('sessionid'),
     },
     body: JSON.stringify({}),
@@ -205,10 +174,6 @@ function sendIncrementPlayedCount() {
           .join(': ');
         throw new Error(errMsg);
       }
-      /* console.log('[tracksPlayer:sendIncrementPlayedCount] success', {
-       *   data,
-       * });
-       */
       return data;
     });
 }
@@ -217,10 +182,6 @@ function incrementPlayedCount() {
   const trackPlayer = currentTrackPlayer;
   sendIncrementPlayedCount()
     .then(({ played_count }) => {
-      /* console.log('[tracksPlayer:incrementPlayedCount:sendIncrementPlayedCount] success', {
-       *   played_count,
-       * });
-       */
       // Update track data...
       const valueNode = trackPlayer.querySelector('#played_count') as HTMLElement;
       if (played_count != null && valueNode) {
@@ -271,18 +232,6 @@ function trackPlayHandler(ev: MouseEvent) {
   const isWaiting = dataset.status === 'waiting';
   const readyToPlay = !isWaiting && !isPlaying;
   const audio = ensureSharedPlayerAudio();
-  /* console.log('[tracksPlayer:trackPlayHandler]', {
-   *   // isError,
-   *   isPlaying,
-   *   isWaiting,
-   *   // isLoaded,
-   *   // isPaused,
-   *   readyToPlay,
-   *   controlNode,
-   *   // trackControlsNode,
-   *   trackPlayer,
-   * });
-   */
   if (isPlaying) {
     // Pause if playing...
     audio.pause();
