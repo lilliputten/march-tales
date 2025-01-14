@@ -16,6 +16,9 @@ function sendToggleFavoriteRequest(trackId: number | string, value: boolean) {
     Accept: 'application/json',
     'Content-Type': 'application/json',
     'X-CSRFToken': csrftoken,
+    credentials: 'include',
+    Cookie: csrftoken && `csrftoken=${csrftoken}`,
+    sessionid: getCookie('sessionid'),
   };
   return fetch(url, {
     method: 'POST',

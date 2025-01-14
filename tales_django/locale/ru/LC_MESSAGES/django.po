@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-14 02:31+0300\n"
+"POT-Creation-Date: 2025-01-14 05:38+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -223,11 +223,23 @@ msgstr "Подписаться"
 msgid "Application"
 msgstr "Приложение"
 
-#: .\tales_django\entities\App\api\CheckViewSet.py:38
+#: .\tales_django\entities\App\api\CheckViewSet.py:37
+msgid "Expected POST request"
+msgstr "Ожидается POST запрос"
+
+#: .\tales_django\entities\App\api\CheckViewSet.py:55
+msgid "Failed checking CSRF token"
+msgstr "Ошибка проверки токена CSRF"
+
+#: .\tales_django\entities\App\api\CheckViewSet.py:64
 #: .\tales_django\entities\Tracks\api\TrackViewSet.py:46
 #: .\tales_django\entities\Tracks\api\TrackViewSet.py:98
 msgid "Client session not found"
 msgstr "Не найдена клиентская сессия"
+
+#: .\tales_django\entities\App\api\TickViewSet.py:31
+msgid "Expected POST or GET request"
+msgstr "Ожидается POST или GET запрос"
 
 #: .\tales_django\entities\App\app_urlpatterns.py:21
 msgid "Site administration"
@@ -331,6 +343,7 @@ msgid "portrait picture"
 msgstr "портрет"
 
 #: .\tales_django\entities\Tracks\models\Author.py:19
+#: .\tales_django\entities\Tracks\models\Rubric.py:23
 #: .\tales_django\entities\Tracks\models\Tag.py:23
 msgid "promote"
 msgstr "продвигать"

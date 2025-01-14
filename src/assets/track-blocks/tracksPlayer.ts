@@ -158,6 +158,8 @@ function sendIncrementPlayedCount() {
       Accept: 'application/json',
       'Content-Type': 'application/json',
       'X-CSRFToken': csrftoken,
+      credentials: 'include',
+      Cookie: csrftoken && `csrftoken=${csrftoken}`,
       sessionid: getCookie('sessionid'),
     },
     body: JSON.stringify({}),

@@ -12,4 +12,7 @@ $PYTHON_RUNTIME manage.py compilemessages \
   --ignore ".venv*" \
   --ignore "node_modules" \
   --ignore "static" \
-  --ignore "media"
+  --ignore "media" \
+&& touch "$rootPath/index.wsgi" \
+&& echo "Done"
+
