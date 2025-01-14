@@ -5,13 +5,12 @@ from django.utils.translation import gettext_lazy as _
 from tales_django.core.pages import get_core_app_context
 
 
-def index_view(request: HttpRequest):
-    context = get_core_app_context(request)
+def terms_view(request: HttpRequest):
     return render(
         request=request,
-        template_name='tales_django/index.html.django',
-        context=context,
+        template_name='tales_django/terms.html.django',
+        context=get_core_app_context(request),
     )
 
 
-__all__ = ['index_view']
+__all__ = ['terms_view']

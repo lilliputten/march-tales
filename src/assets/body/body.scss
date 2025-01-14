@@ -23,7 +23,7 @@ body {
   background-color: $backgroundColor;
   // Add space for fixed navar (see `static/assets/page-header-navbar/page-header-navbar.django`)
   &:not(.index):not(.main) {
-    margin-top: $navbarMainHeight + 20px;
+    margin-top: $navbarMainHeight;
   }
 
   .content,

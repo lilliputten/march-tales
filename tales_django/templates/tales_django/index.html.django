@@ -5,46 +5,22 @@
 
 {% block body_class %}index{% endblock %}
 
-{% block content %}
+{% block title %}{{ block.super }}{% endblock title %}
+
+{% comment %}
+{% block beforeContent %}
+  {# NOTE: Optionally disable banner providing a spacer instead of it. Or change a `body_class` to `regular`. #}
+  {#% include "assets/template-banner/template-banner.django" %#}
+  <div class="top-page-spacer"></div>
+{% endblock beforeContent %}
+{% endcomment %}
+
+{% block js_texts_content %}
   {{ block.super }}
+  {# TODO: Override/extend js messages #}
+{% endblock js_texts_content %}
 
-  <div id="js-texts" hidden>
-    <div id="trackAddedToFavorites">{% trans 'The track has been successfully added to favorites' %}</div>
-    <div id="trackRemovedFromFavorites">{% trans 'The track has been successfully removed from favorites' %}</div>
-  </div>
-
-  {% if error_message or messages %}
-    <section class="section section-sm">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-12 mb-5">
-
-            {% include 'assets/render-messages/render-messages.django' %}
-
-            {% comment %}
-            {% if user.is_authenticated and not user.is_member or not user.is_authenticated %}
-              {% include 'assets/membership-splash/membership-splash-user.django' %}
-            {% endif %}
-            {% endcomment %}
-
-            <fieldset>
-              {% comment %}
-              <legend>
-                <h1 class="page-title primary-color my-4">{% trans 'Welcome!' %}</h1>
-              </legend>
-              {% endcomment %}
-            </fieldset>
-
-          </div>
-          <div class="col-12">
-            <div class="border-bottom border-default"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-  {% endif %}
-
-  {#% include "assets/template-columns/top-columns.django" %#}
-  {% include "assets/template-columns/template-columns.django" %}
-
-{% endblock %}
+{% block main_column_content %}
+  {{ block.super }}
+  {# TODO: Override/extend main content #}
+{% endblock main_column_content %}

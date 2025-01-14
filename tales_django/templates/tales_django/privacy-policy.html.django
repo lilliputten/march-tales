@@ -1,0 +1,275 @@
+{# ex: set ft=htmldjango : #}
+{% extends 'base-full-column.html.django' %}
+{% load static %}
+{% load i18n %}
+
+{% block body_class %}regular{% endblock %}
+
+{% block title %} {% trans 'Privacy Policy' %} — {{ block.super }}{% endblock %}
+
+{% block beforeContent %}{% endblock %}
+
+{% block main_column_content %}
+
+  {% trans 'Privacy Policy' as title %}
+  {% include 'assets/page-title-block/page-title-block.django' %}
+
+  {% get_current_language as LANGUAGE_CODE %}
+
+  <div class="content-with-links">
+
+    {% if LANGUAGE_CODE == 'ru' %}
+
+      <p>Политика в отношении обработки персональных данных</p>
+      <h2>1. Общие положения</h2>
+          <p>Настоящая политика обработки персональных данных составлена в соответствии с требованиями Федерального закона от 27.07.2006. № 152-ФЗ «О персональных данных» (далее — Закон о персональных данных) и определяет порядок обработки персональных данных и меры по обеспечению безопасности персональных данных, предпринимаемые Сказки Мартовского Кота (далее — Оператор).</p>
+          <ul>
+              <li>1.1. Оператор ставит своей важнейшей целью и условием осуществления своей деятельности соблюдение прав и свобод человека и гражданина при обработке его персональных данных, в том числе защиты прав на неприкосновенность частной жизни, личную и семейную тайну.</li>
+              <li>1.2. Настоящая политика Оператора в отношении обработки персональных данных (далее — Политика) применяется ко всей информации, которую Оператор может получить о посетителях веб-сайта <a href="https://{{ settings.DEFAULT_HOST }}/">{{ settings.DEFAULT_HOST }}</a>.</li>
+          </ul>
+      <h2>2. Основные понятия, используемые в Политике</h2>
+          <ul>
+              <li>2.1. Автоматизированная обработка персональных данных — обработка персональных данных с помощью средств вычислительной техники.</li>
+              <li>2.2. Блокирование персональных данных — временное прекращение обработки персональных данных (за исключением случаев, если обработка необходима для уточнения персональных данных).</li>
+              <li>2.3. Веб-сайт — совокупность графических и информационных материалов, а также программ для ЭВМ и баз данных, обеспечивающих их доступность в сети интернет по сетевому адресу <a href="https://{{ settings.DEFAULT_HOST }}/">{{ settings.DEFAULT_HOST }}</a>.</li>
+              <li>2.4. Информационная система персональных данных — совокупность содержащихся в базах данных персональных данных и обеспечивающих их обработку информационных технологий и технических средств.</li>
+              <li>2.5. Обезличивание персональных данных — действия, в результате которых невозможно определить без использования дополнительной информации принадлежность персональных данных конкретному Пользователю или иному субъекту персональных данных.</li>
+              <li>2.6. Обработка персональных данных — любое действие (операция) или совокупность действий (операций), совершаемых с использованием средств автоматизации или без использования таких средств с персональными данными, включая сбор, запись, систематизацию, накопление, хранение, уточнение (обновление, изменение), извлечение, использование, передачу (распространение, предоставление, доступ), обезличивание, блокирование, удаление, уничтожение персональных данных.</li>
+              <li>2.7. Оператор — государственный орган, муниципальный орган, юридическое или физическое лицо, самостоятельно или совместно с другими лицами организующие и/или осуществляющие обработку персональных данных, а также определяющие цели обработки персональных данных, состав персональных данных, подлежащих обработке, действия (операции), совершаемые с персональными данными.</li>
+              <li>2.8. Персональные данные — любая информация, относящаяся прямо или косвенно к определенному или определяемому Пользователю веб-сайта <a href="https://{{ settings.DEFAULT_HOST }}/">{{ settings.DEFAULT_HOST }}</a>.</li>
+              <li>2.9. Персональные данные, разрешенные субъектом персональных данных для распространения, — персональные данные, доступ неограниченного круга лиц к которым предоставлен субъектом персональных данных путем дачи согласия на обработку персональных данных, разрешенных субъектом персональных данных для распространения в порядке, предусмотренном Законом о персональных данных (далее — персональные данные, разрешенные для распространения).</li>
+              <li>2.10. Пользователь — любой посетитель веб-сайта <a href="https://{{ settings.DEFAULT_HOST }}/">{{ settings.DEFAULT_HOST }}</a>.</li>
+              <li>2.11. Предоставление персональных данных — действия, направленные на раскрытие персональных данных определенному лицу или определенному кругу лиц.</li>
+              <li>2.12. Распространение персональных данных — любые действия, направленные на раскрытие персональных данных неопределенному кругу лиц (передача персональных данных) или на ознакомление с персональными данными неограниченного круга лиц, в том числе обнародование персональных данных в средствах массовой информации, размещение в информационно-телекоммуникационных сетях или предоставление доступа к персональным данным каким-либо иным способом.</li>
+              <li>2.13. Трансграничная передача персональных данных — передача персональных данных на территорию иностранного государства органу власти иностранного государства, иностранному физическому или иностранному юридическому лицу.</li>
+              <li>2.14. Уничтожение персональных данных — любые действия, в результате которых персональные данные уничтожаются безвозвратно с невозможностью дальнейшего восстановления содержания персональных данных в информационной системе персональных данных и/или уничтожаются материальные носители персональных данных.</li>
+          </ul>
+      <h2>3. Основные права и обязанности Оператора</h2>
+          <ul>
+              <li>3.1. Оператор имеет право:
+                  <ul>
+                      <li>получать от субъекта персональных данных достоверные информацию и/или документы, содержащие персональные данные;</li>
+                      <li>в случае отзыва субъектом персональных данных согласия на обработку персональных данных, а также, направления обращения с требованием о прекращении обработки персональных данных, Оператор вправе продолжить обработку персональных данных без согласия субъекта персональных данных при наличии оснований, указанных в Законе о персональных данных;</li>
+                      <li>самостоятельно определять состав и перечень мер, необходимых и достаточных для обеспечения выполнения обязанностей, предусмотренных Законом о персональных данных и принятыми в соответствии с ним нормативными правовыми актами, если иное не предусмотрено Законом о персональных данных или другими федеральными законами.</li>
+                  </ul>
+              </li>
+              <li>3.2. Оператор обязан:
+                  <ul>
+                      <li>предоставлять субъекту персональных данных по его просьбе информацию, касающуюся обработки его персональных данных;</li>
+                      <li>организовывать обработку персональных данных в порядке, установленном действующим законодательством РФ;</li>
+                      <li>отвечать на обращения и запросы субъектов персональных данных и их законных представителей в соответствии с требованиями Закона о персональных данных;</li>
+                      <li>сообщать в уполномоченный орган по защите прав субъектов персональных данных по запросу этого органа необходимую информацию в течение 10 дней с даты получения такого запроса;</li>
+                      <li>публиковать или иным образом обеспечивать неограниченный доступ к настоящей Политике в отношении обработки персональных данных;</li>
+                      <li>принимать правовые, организационные и технические меры для защиты персональных данных от неправомерного или случайного доступа к ним, уничтожения, изменения, блокирования, копирования, предоставления, распространения персональных данных, а также от иных неправомерных действий в отношении персональных данных;</li>
+                      <li>прекратить передачу (распространение, предоставление, доступ) персональных данных, прекратить обработку и уничтожить персональные данные в порядке и случаях, предусмотренных Законом о персональных данных;</li>
+                      <li>исполнять иные обязанности, предусмотренные Законом о персональных данных.</li>
+                  </ul>
+              </li>
+          </ul>
+      <h2>4. Основные права и обязанности субъектов персональных данных</h2>
+          <ul>
+              <li>4.1. Субъекты персональных данных имеют право:
+                  <ul>
+                      <li>получать информацию, касающуюся обработки его персональных данных, за исключением случаев, предусмотренных федеральными законами. Сведения предоставляются субъекту персональных данных Оператором в доступной форме, и в них не должны содержаться персональные данные, относящиеся к другим субъектам персональных данных, за исключением случаев, когда имеются законные основания для раскрытия таких персональных данных. Перечень информации и порядок ее получения установлен Законом о персональных данных;</li>
+                      <li>требовать от оператора уточнения его персональных данных, их блокирования или уничтожения в случае, если персональные данные являются неполными, устаревшими, неточными, незаконно полученными или не являются необходимыми для заявленной цели обработки, а также принимать предусмотренные законом меры по защите своих прав;</li>
+                      <li>выдвигать условие предварительного согласия при обработке персональных данных в целях продвижения на рынке товаров, работ и услуг;</li>
+                      <li>на отзыв согласия на обработку персональных данных, а также, на направление требования о прекращении обработки персональных данных;</li>
+                      <li>обжаловать в уполномоченный орган по защите прав субъектов персональных данных или в судебном порядке неправомерные действия или бездействие Оператора при обработке его персональных данных;</li>
+                      <li>на осуществление иных прав, предусмотренных законодательством РФ.</li>
+                  </ul>
+              </li>
+              <li>4.2. Субъекты персональных данных обязаны:
+                  <ul>
+                      <li>предоставлять Оператору достоверные данные о себе;</li>
+                      <li>сообщать Оператору об уточнении (обновлении, изменении) своих персональных данных.</li>
+                  </ul>
+              </li>
+              <li>4.3. Лица, передавшие Оператору недостоверные сведения о себе, либо сведения о другом субъекте персональных данных без согласия последнего, несут ответственность в соответствии с законодательством РФ.</li>
+          </ul>
+      <h2>5. Принципы обработки персональных данных</h2>
+          <ul>
+              <li>5.1. Обработка персональных данных осуществляется на законной и справедливой основе.</li>
+              <li>5.2. Обработка персональных данных ограничивается достижением конкретных, заранее определенных и законных целей. Не допускается обработка персональных данных, несовместимая с целями сбора персональных данных.</li>
+              <li>5.3. Не допускается объединение баз данных, содержащих персональные данные, обработка которых осуществляется в целях, несовместимых между собой.</li>
+              <li>5.4. Обработке подлежат только персональные данные, которые отвечают целям их обработки.</li>
+              <li>5.5. Содержание и объем обрабатываемых персональных данных соответствуют заявленным целям обработки. Не допускается избыточность обрабатываемых персональных данных по отношению к заявленным целям их обработки.</li>
+              <li>5.6. При обработке персональных данных обеспечивается точность персональных данных, их достаточность, а в необходимых случаях и актуальность по отношению к целям обработки персональных данных. Оператор принимает необходимые меры и/или обеспечивает их принятие по удалению или уточнению неполных или неточных данных.</li>
+              <li>5.7. Хранение персональных данных осуществляется в форме, позволяющей определить субъекта персональных данных, не дольше, чем этого требуют цели обработки персональных данных, если срок хранения персональных данных не установлен федеральным законом, договором, стороной которого, выгодоприобретателем или поручителем по которому является субъект персональных данных. Обрабатываемые персональные данные уничтожаются либо обезличиваются по достижении целей обработки или в случае утраты необходимости в достижении этих целей, если иное не предусмотрено федеральным законом.</li>
+          </ul>
+      <h2>6. Цели обработки персональных данных</h2>
+          <p>Цель обработки: предоставление доступа Пользователю к сервисам, информации и/или материалам, содержащимся на веб-сайте</p>
+          <ul>
+              <li>Персональные данные: электронный адрес, фамилия, имя;</li>
+              <li>Правовые основания: Федеральный закон «Об информации, информационных технологиях и о защите информации» от 27.07.2006 N 149-ФЗ;</li>
+              <li>Виды обработки персональных данных: Отправка информационных писем на адрес электронной почты.</li>
+          </ul>
+      <h2>7. Условия обработки персональных данных</h2>
+          <ul>
+              <li>7.1. Обработка персональных данных осуществляется с согласия субъекта персональных данных на обработку его персональных данных.</li>
+              <li>7.2. Обработка персональных данных необходима для достижения целей, предусмотренных международным договором Российской Федерации или законом, для осуществления возложенных законодательством Российской Федерации на оператора функций, полномочий и обязанностей.</li>
+              <li>7.3. Обработка персональных данных необходима для осуществления правосудия, исполнения судебного акта, акта другого органа или должностного лица, подлежащих исполнению в соответствии с законодательством Российской Федерации об исполнительном производстве.</li>
+              <li>7.4. Обработка персональных данных необходима для исполнения договора, стороной которого либо выгодоприобретателем или поручителем по которому является субъект персональных данных, а также для заключения договора по инициативе субъекта персональных данных или договора, по которому субъект персональных данных будет являться выгодоприобретателем или поручителем.</li>
+              <li>7.5. Обработка персональных данных необходима для осуществления прав и законных интересов оператора или третьих лиц либо для достижения общественно значимых целей при условии, что при этом не нарушаются права и свободы субъекта персональных данных.</li>
+              <li>7.6. Осуществляется обработка персональных данных, доступ неограниченного круга лиц к которым предоставлен субъектом персональных данных либо по его просьбе (далее — общедоступные персональные данные).</li>
+              <li>7.7. Осуществляется обработка персональных данных, подлежащих опубликованию или обязательному раскрытию в соответствии с федеральным законом.</li>
+          </ul>
+      <h2>8. Порядок сбора, хранения, передачи и других видов обработки персональных данных</h2>
+          <p>Безопасность персональных данных, которые обрабатываются Оператором, обеспечивается путем реализации правовых, организационных и технических мер, необходимых для выполнения в полном объеме требований действующего законодательства в области защиты персональных данных.</p>
+          <ul>
+              <li>8.1. Оператор обеспечивает сохранность персональных данных и принимает все возможные меры, исключающие доступ к персональным данным неуполномоченных лиц.</li>
+              <li>8.2. Персональные данные Пользователя никогда, ни при каких условиях не будут переданы третьим лицам, за исключением случаев, связанных с исполнением действующего законодательства либо в случае, если субъектом персональных данных дано согласие Оператору на передачу данных третьему лицу для исполнения обязательств по гражданско-правовому договору.</li>
+              <li>8.3. В случае выявления неточностей в персональных данных, Пользователь может актуализировать их самостоятельно, путем направления Оператору уведомление на адрес электронной почты Оператора <a href="mailto:{{ settings.CONTACT_EMAIL }}">{{ settings.CONTACT_EMAIL }}</a> с пометкой «Актуализация персональных данных».</li>
+              <li>8.4. Срок обработки персональных данных определяется достижением целей, для которых были собраны персональные данные, если иной срок не предусмотрен договором или действующим законодательством.</li>
+          </ul>
+          <p>Пользователь может в любой момент отозвать свое согласие на обработку персональных данных, направив Оператору уведомление посредством электронной почты на электронный адрес Оператора <a href="mailto:{{ settings.CONTACT_EMAIL }}">{{ settings.CONTACT_EMAIL }}</a> с пометкой «Отзыв согласия на обработку персональных данных».</p>
+          <ul>
+              <li>8.5. Вся информация, которая собирается сторонними сервисами, в том числе платежными системами, средствами связи и другими поставщиками услуг, хранится и обрабатывается указанными лицами (Операторами) в соответствии с их Пользовательским соглашением и Политикой конфиденциальности. Субъект персональных данных и/или с указанными документами. Оператор не несет ответственность за действия третьих лиц, в том числе указанных в настоящем пункте поставщиков услуг.</li>
+              <li>8.6. Установленные субъектом персональных данных запреты на передачу (кроме предоставления доступа), а также на обработку или условия обработки (кроме получения доступа) персональных данных, разрешенных для распространения, не действуют в случаях обработки персональных данных в государственных, общественных и иных публичных интересах, определенных законодательством РФ.</li>
+              <li>8.7. Оператор при обработке персональных данных обеспечивает конфиденциальность персональных данных.</li>
+              <li>8.8. Оператор осуществляет хранение персональных данных в форме, позволяющей определить субъекта персональных данных, не дольше, чем этого требуют цели обработки персональных данных, если срок хранения персональных данных не установлен федеральным законом, договором, стороной которого, выгодоприобретателем или поручителем по которому является субъект персональных данных.</li>
+              <li>8.9. Условием прекращения обработки персональных данных может являться достижение целей обработки персональных данных, истечение срока действия согласия субъекта персональных данных, отзыв согласия субъектом персональных данных или требование о прекращении обработки персональных данных, а также выявление неправомерной обработки персональных данных.</li>
+          </ul>
+      <h2>9. Перечень действий, производимых Оператором с полученными персональными данными</h2>
+          <ul>
+              <li>9.1. Оператор осуществляет сбор, запись, систематизацию, накопление, хранение, уточнение (обновление, изменение), извлечение, использование, передачу (распространение, предоставление, доступ), обезличивание, блокирование, удаление и уничтожение персональных данных.</li>
+              <li>9.2. Оператор осуществляет автоматизированную обработку персональных данных с получением и/или передачей полученной информации по информационно-телекоммуникационным сетям или без таковой.</li>
+          </ul>
+      <h2>10. Трансграничная передача персональных данных</h2>
+          <ul>
+              <li>10.1. Оператор до начала осуществления деятельности по трансграничной передаче персональных данных обязан уведомить уполномоченный орган по защите прав субъектов персональных данных о своем намерении осуществлять трансграничную передачу персональных данных (такое уведомление направляется отдельно от уведомления о намерении осуществлять обработку персональных данных).</li>
+              <li>10.2. Оператор до подачи вышеуказанного уведомления, обязан получить от органов власти иностранного государства, иностранных физических лиц, иностранных юридических лиц, которым планируется трансграничная передача персональных данных, соответствующие сведения.</li>
+          </ul>
+      <h2>11. Конфиденциальность персональных данных</h2>
+          <p>Оператор и иные лица, получившие доступ к персональным данным, обязаны не раскрывать третьим лицам и не распространять персональные данные без согласия субъекта персональных данных, если иное не предусмотрено федеральным законом.</p>
+      <h2>12. Заключительные положения</h2>
+          <ul>
+              <li>12.1. Пользователь может получить любые разъяснения по интересующим вопросам, касающимся обработки его персональных данных, обратившись к Оператору с помощью электронной почты <a href="mailto:{{ settings.CONTACT_EMAIL }}">{{ settings.CONTACT_EMAIL }}</a>.</li>
+              <li>12.2. В данном документе будут отражены любые изменения политики обработки персональных данных Оператором. Политика действует бессрочно до замены ее новой версией.</li>
+              <li>12.3. Актуальная версия Политики в свободном доступе расположена в сети Интернет по адресу {% url 'privacy-policy' %}.</li>
+          </ul>
+
+      <p><em>Обновлено 14 января 2025.</em></p>
+
+    {% else %}
+
+      <p><em>Last updated January 14, 2025.</em></p>
+
+      <p>This Privacy Notice for March Cat Tales (<strong>"we"</strong>, <strong>"us"</strong>, or <strong>"our"</strong>), describes how and why we might access, collect, store, use, and/or share (<strong>"process"</strong>) your personal information when you use our services (<strong>"Services"</strong>), including when you:</p>
+      <ul>
+          <li>Visit our website at <a href="https://{{ settings.DEFAULT_HOST }}/">{{ settings.DEFAULT_HOST }}</a> , or any website of ours that links to this Privacy Notice</li>
+          <li>Download and use our mobile application (March Cat Tales) , or any other application of ours that links to this Privacy Notice</li>
+          <li>Engage with us in other related ways, including any sales, marketing, or events</li>
+      </ul>
+      <p><strong>Questions or concerns?</strong> Reading this Privacy Notice will help you understand your privacy rights and choices. We are responsible for making decisions about how your personal information is processed. If you do not agree with our policies and practices, please do not use our Services. If you still have any questions or concerns, please contact us at <a href="mailto:{{ settings.CONTACT_EMAIL }}">{{ settings.CONTACT_EMAIL }}</a>.</p>
+
+      <h2>Summary of key points</h2>
+        <p><strong><em>This summary provides key points from our Privacy Notice, but you can find out more details about any of these topics by clicking the link following each key point or by using our <a href="#toc">table of contents</a> below to find the section you are looking for.</em></strong></p>
+        <p><strong>What personal information do we process?</strong> When you visit, use, or navigate our Services, we may process personal information depending on how you interact with us and the Services, the choices you make, and the products and features you use. Learn more about <a href="#personalinfo">personal information you disclose to us</a>.</p>
+        <p><strong>Do we process any sensitive personal information?</strong> Some of the information may be considered "special" or "sensitive" in certain jurisdictions, for example your racial or ethnic origins, sexual orientation, and religious beliefs. We do not process sensitive personal information.</p>
+        <p><strong>Do we collect any information from third parties?</strong> We do not collect any information from third parties.</p>
+        <p><strong>How do we process your information?</strong> We process your information to provide, improve, and administer our Services, communicate with you, for security and fraud prevention, and to comply with law. We may also process your information for other purposes with your consent. We process your information only when we have a valid legal reason to do so. Learn more about <a href="#infouse">how we process your information</a>.</p>
+        <p><strong>In what situations and with which parties do we share personal information?</strong> We may share information in specific situations and with specific third parties. Learn more about <a href="#whoshare">when and with whom we share your personal information</a>.</p>
+        <p><strong>What are your rights?</strong> Depending on where you are located geographically, the applicable privacy law may mean you have certain rights regarding your personal information. Learn more about <a href="#privacyrights">your privacy rights</a>.</p>
+        <p><strong>How do you exercise your rights?</strong> The easiest way to exercise your rights is by visiting <a href="{% url 'profile_edit' %}">edit profile page</a>, or by contacting us. We will consider and act upon any request in accordance with applicable data protection laws.</p>
+        <p>Want to learn more about what we do with any information we collect? <a href="#toc">Review the Privacy Notice in full</a>.</p>
+      <h2 id="toc">Table of contents</h2>
+        <ol>
+          <li><a href="#infocollect">What information do we collect?</a></li>
+          <li><a href="#infouse">How do we process your information?</a></li>
+          <li><a href="#whoshare">When and with whom do we share your personal information?</a></li>
+          <li><a href="#3pwebsites">What is our stance on third-party websites?</a></li>
+          <li><a href="#cookies">Do we use cookies and other tracking technologies?</a></li>
+          <li><a href="#sociallogins">How do we handle your social logins?</a></li>
+          <li><a href="#inforetain">How long do we keep your information?</a></li>
+          <li><a href="#privacyrights">What are your privacy rights?</a></li>
+          <li><a href="#DNT">Controls for do-not-track features</a></li>
+          <li><a href="#policyupdates">Do we make updates to this notice?</a></li>
+          <li><a href="#contact">How can you contact us about this notice?</a></li>
+          <li><a href="#request">How can you review, update, or delete the data we collect from you?</a></li>
+         </ol>
+      <h2 id="infocollect">1. What information do we collect?</h2>
+        <h3 id="personalinfo">Personal information you disclose to us</h3>
+        <p><strong><em>In Short:</strong> We collect personal information that you provide to us.</em></p>
+        <p>We collect personal information that you voluntarily provide to us when you register on the Services, express an interest in obtaining information about us or our products and Services, when you participate in activities on the Services, or otherwise when you contact us.</p>
+        <p><strong>Personal Information Provided by You.</strong> The personal information that we collect depends on the context of your interactions with us and the Services, the choices you make, and the products and features you use. The personal information we collect may include the following:</p>
+        <ul>
+            <li>Names;</li>
+            <li>Email addresses;</li>
+            <li>Usernames.</li>
+        </ul>
+        <p><strong>Sensitive Information.</strong> We do not process sensitive information.</p>
+        <p><strong>Social Media Login Data.</strong> We may provide you with the option to register with us using your existing social media account details, like your Facebook, X, or other social media account. If you choose to register in this way, we will collect certain profile information about you from the social media provider, as described in the section called <a href="#sociallogins">"HOW DO WE HANDLE YOUR SOCIAL LOGINS?"</a> below.</p>
+        <p><strong>Application Data.</strong> If you use our application(s), we also may collect the following information if you choose to provide us with access or permission:</p>
+        <ul>
+            <li><em>Push Notifications.</em> We may request to send you push notifications regarding your account or certain features of the application(s). If you wish to opt out from receiving these types of communications, you may turn them off in your device's settings.</li>
+        </ul>
+        <p>This information is primarily needed to maintain the security and operation of our application(s), for troubleshooting, and for our internal analytics and reporting purposes.</p>
+        <p>All personal information that you provide to us must be true, complete, and accurate, and you must notify us of any changes to such personal information.</p>
+        <h3>Information automatically collected</h3>
+        <p><strong><em>In Short:</strong>Some information — such as your Internet Protocol (IP) address and/or browser and device characteristics — is collected automatically when you visit our Services.</em></p>
+        <p>We automatically collect certain information when you visit, use, or navigate the Services. This information does not reveal your specific identity (like your name or contact information) but may include device and usage information, such as your IP address, browser and device characteristics, operating system, language preferences, referring URLs, device name, country, location, information about how and when you use our Services, and other technical information. This information is primarily needed to maintain the security and operation of our Services, and for our internal analytics and reporting purposes.</p>
+        <p>Like many businesses, we also collect information through cookies and similar technologies.</p>
+        <p>The information we collect includes:</p>
+        <ul>
+            <li><em>Log and Usage Data.</em> Log and usage data is service-related, diagnostic, usage, and performance information our servers automatically collect when you access or use our Services and which we record in log files. Depending on how you interact with us, this log data may include your IP address, device information, browser type, and settings and information about your activity in the Services (such as the date/time stamps associated with your usage, pages and files viewed, searches, and other actions you take such as which features you use), device event information (such as system activity, error reports (sometimes called "crash dumps"), and hardware settings).</li>
+        </ul>
+        <h3>Google API</h3>
+        <p>Our use of information received from Google APIs will adhere to <a href="https://developers.google.com/terms/api-services-user-data-policy" rel="noopener noreferrer" target="_blank">Google API Services User Data Policy</a>, including the <a href="https://developers.google.com/terms/api-services-user-data-policy#limited-use" rel="noopener noreferrer" target="_blank">Limited Use requirements</a>.</p>
+      <h2 id="infouse">2. How do we process your information?</h2>
+        <p><strong><em>In Short:</strong> We process your information to provide, improve, and administer our Services, communicate with you, for security and fraud prevention, and to comply with law. We may also process your information for other purposes with your consent.</em></p>
+        <p><strong>We process your personal information for a variety of reasons, depending on how you interact with our Services, including:</strong></p>
+        <ul>
+            <li><strong>To facilitate account creation and authentication and otherwise manage user accounts.</strong> We may process your information so you can create and log in to your account, as well as keep your account in working order.</li>
+            <li><strong>To deliver and facilitate delivery of services to the user.</strong> We may process your information to provide you with the requested service.</li>
+            <li><strong>To send you marketing and promotional communications.</strong> We may process the personal information you send to us for our marketing purposes, if this is in accordance with your marketing preferences. You can opt out of our marketing emails at any time. For more information, see <a href="#privacyrights">"WHAT ARE YOUR PRIVACY RIGHTS?"</a> below.</li>
+        </ul>
+      <h2 id="whoshare">3. When and with whom do we share your personal information?</h2>
+        <p><strong><em>In Short:</strong> We may share information in specific situations described in this section and/or with the following third parties.</em></p>
+        <p>We may need to share your personal information in the following situations:</p>
+        <ul>
+            <li><strong>Business Transfers.</strong> We may share or transfer your information in connection with, or during negotiations of, any merger, sale of company assets, financing, or acquisition of all or a portion of our business to another company.</li>
+            <li><strong>Offer Wall.</strong> Our application(s) may display a third-party hosted "offer wall." Such an offer wall allows third-party advertisers to offer virtual currency, gifts, or other items to users in return for the acceptance and completion of an advertisement offer. Such an offer wall may appear in our application(s) and be displayed to you based on certain data, such as your geographic area or demographic information. When you click on an offer wall, you will be brought to an external website belonging to other persons and will leave our application(s). A unique identifier, such as your user ID, will be shared with the offer wall provider in order to prevent fraud and properly credit your account with the relevant reward.</li>
+        </ul>
+      <h2 id="3pwebsites">4. What is our stance on third-party websites?</h2>
+        <p><strong><em>In Short:</strong> We are not responsible for the safety of any information that you share with third parties that we may link to or who advertise on our Services, but are not affiliated with, our Services.</em></p>
+        <p>The Services , including our offer wall, may link to third-party websites, online services, or mobile applications and/or contain advertisements from third parties that are not affiliated with us and which may link to other websites, services, or applications. Accordingly, we do not make any guarantee regarding any such third parties, and we will not be liable for any loss or damage caused by the use of such third-party websites, services, or applications. The inclusion of a link towards a third-party website, service, or application does not imply an endorsement by us. We cannot guarantee the safety and privacy of data you provide to any third-party websites. Any data collected by third parties is not covered by this Privacy Notice. We are not responsible for the content or privacy and security practices and policies of any third parties, including other websites, services, or applications that may be linked to or from the Services. You should review the policies of such third parties and contact them directly to respond to your questions.</p>
+      <h2 id="cookies">5. Do we use cookies and other tracking technologies?</h2>
+        <p><strong><em>In Short:</strong> We may use cookies and other tracking technologies to collect and store your information.</em></p>
+        <p>We may use cookies and similar tracking technologies (like web beacons and pixels) to gather information when you interact with our Services. Some online tracking technologies help us maintain the security of our Services and your account , prevent crashes, fix bugs, save your preferences, and assist with basic site functions.</p>
+        <p>We also permit third parties and service providers to use online tracking technologies on our Services for analytics and advertising, including to help manage and display advertisements, to tailor advertisements to your interests, or to send abandoned shopping cart reminders (depending on your communication preferences). The third parties and service providers use their technology to provide advertising about products and services tailored to your interests which may appear either on our Services or on other websites.</p>
+        <p>Specific information about how we use such technologies and how you can refuse certain cookies is set out in our Cookie Notice .</p>
+      <h2 id="sociallogins">6. How do we handle your social logins?</h2>
+        <p><strong><em>In Short:</strong> If you choose to register or log in to our Services using a social media account, we may have access to certain information about you.</em></p>
+        <p>Our Services offer you the ability to register and log in using your third-party social media account details (like your Facebook or X logins). Where you choose to do this, we will receive certain profile information about you from your social media provider. The profile information we receive may vary depending on the social media provider concerned, but will often include your name, email address, friends list, and profile picture, as well as other information you choose to make public on such a social media platform.</p>
+        <p>We will use the information we receive only for the purposes that are described in this Privacy Notice or that are otherwise made clear to you on the relevant Services. Please note that we do not control, and are not responsible for, other uses of your personal information by your third-party social media provider. We recommend that you review their privacy notice to understand how they collect, use, and share your personal information, and how you can set your privacy preferences on their sites and apps.</p>
+      <h2 id="inforetain">7. How long do we keep your information?</h2>
+        <p><strong><em>In Short:</em></strong> <em>We keep your information for as long as necessary to fulfill the purposes outlined in this Privacy Notice unless otherwise required by law.</em></p>
+        <p>We will only keep your personal information for as long as it is necessary for the purposes set out in this Privacy Notice, unless a longer retention period is required or permitted by law (such as tax, accounting, or other legal requirements). No purpose in this notice will require us keeping your personal information for longer than the period of time in which users have an account with us .</p>
+        <p>When we have no ongoing legitimate business need to process your personal information, we will either delete or anonymize such information, or, if this is not possible (for example, because your personal information has been stored in backup archives), then we will securely store your personal information and isolate it from any further processing until deletion is possible.</p>
+      <h2 id="privacyrights">8. What are your privacy rights?</h2>
+        <p><strong><em>In Short:</em></strong> <em>You may review, change, or terminate your account at any time, depending on your country, province, or state of residence.</em></p>
+        <p><strong><u>Withdrawing your consent:</u></strong> If we are relying on your consent to process your personal information, which may be express and/or implied consent depending on the applicable law, you have the right to withdraw your consent at any time. You can withdraw your consent at any time by contacting us by using the contact details provided in the section <a href="#contact">"HOW CAN YOU CONTACT US ABOUT THIS NOTICE?"</a> below.</p>
+        <p>However, please note that this will not affect the lawfulness of the processing before its withdrawal nor, when applicable law allows, will it affect the processing of your personal information conducted in reliance on lawful processing grounds other than consent.</p>
+        <p><strong><u>Opting out of marketing and promotional communications:</u></strong> You can unsubscribe from our marketing and promotional communications at any time by clicking on the unsubscribe link in the emails that we send, or by contacting us using the details provided in the section <a href="#contact">"HOW CAN YOU CONTACT US ABOUT THIS NOTICE?"</a> below. You will then be removed from the marketing lists. However, we may still communicate with you — for example, to send you service-related messages that are necessary for the administration and use of your account, to respond to service requests, or for other non-marketing purposes. <h3>Account Information</h3></p>
+        <p>If you would at any time like to review or change the information in your account or terminate your account, you can:</p>
+        <ul>
+            <li> Log in to your account settings and update your user account.</li>
+        </ul>
+        <p>Upon your request to terminate your account, we will deactivate or delete your account and information from our active databases. However, we may retain some information in our files to prevent fraud, troubleshoot problems, assist with any investigations, enforce our legal terms and/or comply with applicable legal requirements.</p>
+        <p><strong><u>Cookies and similar technologies:</u></strong> Most Web browsers are set to accept cookies by default. If you prefer, you can usually choose to set your browser to remove cookies and to reject cookies. If you choose to remove cookies or reject cookies, this could affect certain features or services of our Services. You may also <a href="https://aboutads.info/choices/" rel="noopener noreferrer" target="_blank">opt out of interest-based advertising by advertisers</a> on our Services.</p>
+        <p>If you have questions or comments about your privacy rights, you may email us at <a href="mailto:{{ settings.CONTACT_EMAIL }}">{{ settings.CONTACT_EMAIL }}</a> .</p>
+      <h2 id="DNT">9. Controls for do-not-track features</h2>
+        <p>Most web browsers and some mobile operating systems and mobile applications include a Do-Not-Track ("DNT") feature or setting you can activate to signal your privacy preference not to have data about your online browsing activities monitored and collected. At this stage, no uniform technology standard for recognizing and implementing DNT signals has been finalized. As such, we do not currently respond to DNT browser signals or any other mechanism that automatically communicates your choice not to be tracked online. If a standard for online tracking is adopted that we must follow in the future, we will inform you about that practice in a revised version of this Privacy Notice.</p>
+      <h2 id="policyupdates">10. Do we make updates to this notice?</h2>
+        <p><em><strong>In Short:</strong> Yes, we will update this notice as necessary to stay compliant with relevant laws.</em></p>
+        <p>We may update this Privacy Notice from time to time. The updated version will be indicated by an updated "Revised" date at the top of this Privacy Notice. If we make material changes to this Privacy Notice, we may notify you either by prominently posting a notice of such changes or by directly sending you a notification. We encourage you to review this Privacy Notice frequently to be informed of how we are protecting your information.</p>
+      <h2 id="contact">11. How can you contact us about this notice?</h2>
+        <p>If you have questions or comments about this notice, you may email us at <a href="mailto:{{ settings.CONTACT_EMAIL }}">{{ settings.CONTACT_EMAIL }}</a>.</p>
+      <h2 id="request">12. How can you review, update, or delete the data we collect from you?</h2>
+        <p>Based on the applicable laws of your country, you may have the right to request access to the personal information we collect from you, details about how we have processed it, correct inaccuracies, or delete your personal information. You may also have the right to withdraw your consent to our processing of your personal information. These rights may be limited in some circumstances by applicable law. To request to review, update, or delete your personal information, please visit <a href="{% url 'profile_edit' %}">edit profile page</a>.</p>
+
+    {% endif %}
+
+  </div>
+
+{% endblock main_column_content %}

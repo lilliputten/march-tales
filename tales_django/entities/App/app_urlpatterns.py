@@ -6,6 +6,9 @@ from django.urls import include, path
 from django.views.decorators.cache import cache_page
 from django.utils.translation import gettext_lazy as _
 
+from .views.terms_view import terms_view
+from .views.privacy_policy_view import privacy_policy_view
+
 from .views import page403, page404, page500
 from .api import api_urlpatterns
 
@@ -23,6 +26,9 @@ admin.site.site_header = _('Site administration')
 app_urlpatterns = [
     # Root page
     path('', index_view, name='index'),
+    # Secondary app pages
+    path('terms/', terms_view, name='terms'),
+    path('privacy-policy/', privacy_policy_view, name='privacy-policy'),
     # Core?
     # path('', include('pages.urls')),
     # Language switching

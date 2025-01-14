@@ -10,11 +10,9 @@
 {% block content %}
 {{ block.super }}
 
-  <fieldset>
-    <legend>
-      <h1 class="page-title primary-color my-4">{% trans 'Login' %}</h1>
-    </legend>
-  </fieldset>
+  {% trans 'Login' as title %}
+
+  {% include "assets/page-title-block/page-title-block.django" %}
 
   {% if form.errors %}
   <p>{% trans 'We can’t find a user with such authorization data. Please try again.' %}</p>
@@ -36,3 +34,4 @@
   </form>
 
 {% endblock content %}
+

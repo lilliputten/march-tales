@@ -1,0 +1,36 @@
+from django.template import Node, TemplateSyntaxError
+from django.template.defaultfilters import register
+
+class DefineNode(Node):
+    def __init__(self, var, name):
+        self.var = var
+        self.name = name
+
+    def __repr__(self):
+        return "<DefineNode>"
+
+    def render(self, context):
+        context[self.name] = self.var
+        return ''
+
+@register.tag
+def define_var_in_context(parser, token):
+    """
+    Adds a name to the context for referencing an arbitrarily defined string.
+
+    For example:
+
+        {% define "my_string" as my_string %}
+
+    Now anywhere in the template:
+
+        {{ my_string }}
+    """
+    bits = list(token.split_contents())
+    if (len(bits) != 4 or bits[2] != "as") or \
+        not (bits[1][0] in ('"', "'") and bits[1][-1] == bits[1][0]):
+        raise TemplateSyntaxError("%r expected format is '\"string\" as name'" % bits[0])
+    else:
+        value = bits[1][1:-1]
+    name = bits[3]
+    return DefineNode(value, name)

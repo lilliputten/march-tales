@@ -125,6 +125,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.staticfiles',
+    # 'django.contrib.humanize',
     # Added
     # 'modeltranslation',  # XXX: Doesn't work in django 5?
     # 'translation_manager',

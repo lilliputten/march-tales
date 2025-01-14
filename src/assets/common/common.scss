@@ -71,8 +71,8 @@ a.disabled {
   background-color: color.change(#777, $alpha: 0.15);
 }
 
-.content {
-  // @include activeTextLinkWrapper;
+.content-with-links {
+  @include activeTextLinkWrapper;
 }
 
 // Headings
@@ -86,4 +86,11 @@ a.disabled {
 // Columns...
 .thumb-preview {
   width: 100%;
+}
+
+// Content
+
+.top-page-spacer {
+  // A spacer to put instead of page banner (`template-banner.django`)
+  margin-top: 100px;
 }
