@@ -66,7 +66,7 @@ class TrackAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
     readonly_fields = (
         'duration_formatted',
         'size_formatted',
-        'listened_count',
+        'played_count',
         # 'audio_duration',
         # 'audio_size',
         # 'published_at',

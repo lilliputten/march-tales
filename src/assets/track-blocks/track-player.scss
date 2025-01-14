@@ -1,0 +1,47 @@
+@use 'sass:color';
+
+@import '../shared';
+
+.track-player {
+  .track-control {
+    &,
+    .option {
+      display: flex;
+      align-items: center;
+      gap: 1em;
+    }
+    .icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    &.big-icon {
+      $padding: 0.5em;
+      padding-top: $padding;
+      padding-bottom: $padding;
+      padding-left: $padding;
+      .icon {
+        font-size: 1.75rem;
+      }
+    }
+  }
+  .track-control-play {
+    .spinner-border {
+      $spinner-size: 1.75rem;
+      --bs-spinner-width: #{$spinner-size};
+      --bs-spinner-height: #{$spinner-size};
+      // --bs-spinner-border-width: 0.2em;
+    }
+    .time {
+      opacity: 0.5;
+      font-weight: normal;
+    }
+  }
+  &[data-status] .track-control-play .option-ready,
+  &:not([data-status='paused'], [data-status='playing']) .track-control-play .time,
+  &:not([data-status='paused']) .track-control-play .option-resume,
+  &:not([data-status='playing']) .track-control-play .option-playing,
+  &:not([data-status='waiting']) .track-control-play .option-waiting {
+    display: none;
+  }
+}

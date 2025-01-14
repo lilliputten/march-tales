@@ -25,6 +25,8 @@ rules:
   #   - severity: warning
   # max-line-length: 120
   comment-whitespace-inside: null
+  scss/comment-no-empty: null
+  scss/at-extend-no-missing-placeholder: null # scss `@extend ...`
   block-no-empty: null
   no-duplicate-selectors: null
   no-invalid-double-slash-comments: true

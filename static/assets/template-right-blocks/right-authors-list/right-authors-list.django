@@ -1,0 +1,9 @@
+{# ex: set ft=htmldjango : #}
+{% load static %}
+{% load i18n %}
+
+<!-- Authors -->
+<div class="right-authors-list widget widget-author">
+  <h4 class="widget-title">{% trans "Authors" %}</h4>
+  {% include 'assets/common-blocks/authors-list/authors-list.django' %}
+</div>

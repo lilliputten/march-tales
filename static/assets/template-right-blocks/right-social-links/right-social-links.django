@@ -1,0 +1,12 @@
+{# ex: set ft=htmldjango : #}
+{% load static %}
+{% load i18n %}
+
+<!-- Social -->
+<div class="right-social-links widget">
+  <h4 class="widget-title"><span>{% trans 'Social Links' %}</span></h4>
+  <ul class="list-inline widget-social justify-content-center">
+    {% include 'assets/common-blocks/social-links/social-links.django' %}
+  </ul>
+</div>
+

@@ -6,6 +6,7 @@ from django.http import HttpRequest
 from django.shortcuts import redirect, render
 
 from core.helpers.errors import errorToString
+from core.helpers.utils import debugObj
 from core.logging import getDebugLogger
 
 from ..forms import UpdateUserForm
@@ -62,9 +63,9 @@ def edit_user_profile(request: HttpRequest):
     except Exception as err:
         sError = errorToString(err, show_stacktrace=False)
         sTraceback = str(traceback.format_exc())
-        debug_data = {
+        debugData = {
             'err': err,
             'traceback': sTraceback,
         }
-        logger.error('Caught error %s (re-raising): %s', sError, debug_data)
+        logger.error(f'Caught error {sError} (re-raising):\n{debugObj(debugData)}')
         raise err

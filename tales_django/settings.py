@@ -133,6 +133,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'django_registration',
+    'rest_framework',
     APP_NAME,
 ]
 
@@ -194,6 +195,22 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = APP_NAME + '.wsgi.application'
+
+# @see https://www.django-rest-framework.org/
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': (
+        # 'rest_framework.permissions.AllowAny',
+        # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        # 'rest_framework.authentication.TokenAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.authentication.BasicAuthentication',
+        # 'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
@@ -282,10 +299,10 @@ CMS_LANGUAGES = {
     ],
 }
 
-# @see: https://docs.djangoproject.com/en/2.0/ref/templates/builtins/#std:templatefilter-date
+# @see: https://docs.djangoproject.com/en/5.1/ref/templates/builtins/#std:templatefilter-date
 DATE_FORMAT = 'Y.m.d'
 TIME_FORMAT = 'H:i'
-DATETIME_FORMAT = DATE_FORMAT + TIME_FORMAT
+DATETIME_FORMAT = DATE_FORMAT + ',' + TIME_FORMAT
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -327,22 +344,40 @@ LOGGING = {
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler',
         },
+        'errors': {
+            'level': 'ERROR',
+            'filename': posixpath.join(BASE_DIR, 'log-errors.log'),
+            # 'class': 'logging.FileHandler',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'maxBytes': 1024 * 1024,  # MB
+            'backupCount': 5,
+            'formatter': 'verbose',
+        },
         'django': {
             'level': 'DEBUG',
-            'class': 'logging.FileHandler',
             'filename': posixpath.join(BASE_DIR, 'log-django.log'),
+            # 'class': 'logging.FileHandler',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'maxBytes': 1024 * 1024,  # MB
+            'backupCount': 5,
             'formatter': 'verbose',
         },
         'apps': {
             'level': 'DEBUG',
-            'class': 'logging.FileHandler',
             'filename': posixpath.join(BASE_DIR, 'log-apps.log'),
+            # 'class': 'logging.FileHandler',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'maxBytes': 1024 * 1024,  # MB
+            'backupCount': 5,
             'formatter': 'verbose',
         },
     },
     'loggers': {
         'django.request': {
-            'handlers': ['mail_admins'],
+            'handlers': [
+                'errors',
+                # 'mail_admins',
+            ],
             'level': 'ERROR',
             'propagate': True,
         },

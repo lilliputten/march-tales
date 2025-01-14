@@ -1,0 +1,27 @@
+{# ex: set ft=htmldjango : #}
+{% load static %}
+{% load i18n %}
+
+{% comment %}
+
+- `authors` list expected as an external variable.
+
+{% endcomment %}
+
+<div class="authors-list _list-unstyled widget-list">
+  {% for author in authors %}
+    <div class="media align-items-center">
+      <a class="d-flex align-items-center" href="/authors/{{ author.id }}">
+        {% if author.portrait_picture %}
+          <span class="me-3">
+            <img class="widget-author-image" src="{% get_media_prefix %}{{ author.portrait_picture }}" />
+          </span>
+        {% endif %}
+        <span class="media-body d-flex flex-column gap-1">
+          <span class="name"><strong>{{ author.name }}</strong></span>
+          <small class="description">{{ author.short_description }}</small>
+        </span>
+      </a>
+    </div>
+  {% endfor %}
+  </div>

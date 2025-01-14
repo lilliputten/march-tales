@@ -1,0 +1,9 @@
+@use 'sass:color';
+
+@import '../../shared';
+
+.rubrics-list {
+  .rounded-pill {
+    background-color: color.change(#333, $alpha: 0.1);
+  }
+}

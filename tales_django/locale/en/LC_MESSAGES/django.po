@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-11 04:45+0300\n"
+"POT-Creation-Date: 2025-01-14 05:38+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,6 +20,59 @@ msgstr ""
 
 #: .\src\assets\back-button\back-button.django:5
 msgid "Back"
+msgstr ""
+
+#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:37
+#: .\tales_django\entities\Tracks\models\Track.py:77
+msgid "Played count"
+msgstr ""
+
+#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:41
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:127
+#: .\tales_django\templates\tales_django\profile.html.django:98
+msgid "Duration"
+msgstr ""
+
+#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:45
+msgid "Published at"
+msgstr ""
+
+#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:49
+#: .\src\assets\template-right-blocks\right-rubrics-list\right-rubrics-list.django:7
+msgid "Rubrics"
+msgstr ""
+
+#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:59
+#: .\src\assets\template-right-blocks\right-tags-list\right-tags-list.django:7
+msgid "Tags"
+msgstr ""
+
+#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:78
+msgid "Loading"
+msgstr ""
+
+#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:79
+msgid "Resume"
+msgstr ""
+
+#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:80
+msgid "Play"
+msgstr ""
+
+#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:81
+msgid "Pause"
+msgstr ""
+
+#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:86
+msgid "Add to favorites"
+msgstr ""
+
+#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:87
+msgid "Remove from favorites"
+msgstr ""
+
+#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:92
+msgid "Add to playlist"
 msgstr ""
 
 #: .\src\assets\page-menus\menu-main.django:19
@@ -125,7 +178,7 @@ msgid "Membershop description block."
 msgstr "Listen to classic fairy tales online"
 
 #: .\src\assets\template-right-blocks\right-membership\right-membership.django:9
-msgid "Obtain membership now!"
+msgid "Obtain membership"
 msgstr ""
 
 #: .\src\assets\template-right-blocks\right-mobile-promo\right-mobile-promo.django:9
@@ -140,10 +193,6 @@ msgstr "Listen to classic fairy tales online"
 
 #: .\src\assets\template-right-blocks\right-mobile-promo\right-mobile-promo.django:12
 msgid "Get Started"
-msgstr ""
-
-#: .\src\assets\template-right-blocks\right-rubrics-list\right-rubrics-list.django:7
-msgid "Rubrics"
 msgstr ""
 
 #: .\src\assets\template-right-blocks\right-search\right-search.django:7
@@ -174,13 +223,33 @@ msgstr ""
 msgid "Subscribe now"
 msgstr ""
 
-#: .\src\assets\template-right-blocks\right-tags-list\right-tags-list.django:7
-msgid "Tags"
-msgstr ""
-
 #: .\tales_django\apps.py:24
 msgid "Application"
 msgstr ""
+
+#: .\tales_django\entities\App\api\CheckViewSet.py:37
+msgid "Expected POST request"
+msgstr ""
+
+#: .\tales_django\entities\App\api\CheckViewSet.py:55
+msgid "Failed checking CSRF token"
+msgstr ""
+
+#: .\tales_django\entities\App\api\CheckViewSet.py:64
+#: .\tales_django\entities\Tracks\api\TrackViewSet.py:46
+#: .\tales_django\entities\Tracks\api\TrackViewSet.py:98
+msgid "Client session not found"
+msgstr ""
+
+#: .\tales_django\entities\App\api\TickViewSet.py:31
+msgid "Expected POST or GET request"
+msgstr ""
+
+#: .\tales_django\entities\App\app_urlpatterns.py:21
+#, fuzzy
+#| msgid "Site description"
+msgid "Site administration"
+msgstr "Listen to classic fairy tales online"
 
 #: .\tales_django\entities\Membership\models\Membership.py:15
 msgid "membership"
@@ -236,11 +305,6 @@ msgstr ""
 msgid "rubrics"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:127
-#: .\tales_django\templates\tales_django\profile.html.django:98
-msgid "Duration"
-msgstr ""
-
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:134
 msgid "Size"
 msgstr ""
@@ -254,6 +318,10 @@ msgstr "The March Cat Tales"
 
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:191
 msgid "Audio file has been successfully uploaded"
+msgstr ""
+
+#: .\tales_django\entities\Tracks\api\TrackViewSet.py:42
+msgid "User in not authenticated"
 msgstr ""
 
 #: .\tales_django\entities\Tracks\models\Author.py:10
@@ -287,6 +355,7 @@ msgid "portrait picture"
 msgstr ""
 
 #: .\tales_django\entities\Tracks\models\Author.py:19
+#: .\tales_django\entities\Tracks\models\Rubric.py:23
 #: .\tales_django\entities\Tracks\models\Tag.py:23
 msgid "promote"
 msgstr ""
@@ -353,10 +422,6 @@ msgstr ""
 
 #: .\tales_django\entities\Tracks\models\Track.py:75
 msgid "for members only"
-msgstr ""
-
-#: .\tales_django\entities\Tracks\models\Track.py:77
-msgid "Listened count"
 msgstr ""
 
 #: .\tales_django\entities\Tracks\models\Track.py:80
@@ -655,6 +720,14 @@ msgstr ""
 
 #: .\tales_django\templates\registration\password_reset_subject.txt:4
 msgid "Password reset for"
+msgstr ""
+
+#: .\tales_django\templates\tales_django\index.html.django:12
+msgid "The track has been successfully added to favorites"
+msgstr ""
+
+#: .\tales_django\templates\tales_django\index.html.django:13
+msgid "The track has been successfully removed from favorites"
 msgstr ""
 
 #: .\tales_django\templates\tales_django\profile.html.django:37

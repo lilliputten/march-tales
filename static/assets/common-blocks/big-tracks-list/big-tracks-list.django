@@ -1,0 +1,15 @@
+{# ex: set ft=htmldjango : #}
+{% load static %}
+{% load i18n %}
+
+{% comment %}
+
+- `tracks` list expected as an external variable.
+
+{% endcomment %}
+
+<div class="big-tracks-list">
+  {% for track in tracks %}
+    {% include 'assets/common-blocks/big-tracks-list/big-tracks-list-item.django' %}
+  {% endfor %}
+</div>

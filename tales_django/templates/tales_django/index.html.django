@@ -8,8 +8,13 @@
 {% block content %}
   {{ block.super }}
 
+  <div id="js-texts" hidden>
+    <div id="trackAddedToFavorites">{% trans 'The track has been successfully added to favorites' %}</div>
+    <div id="trackRemovedFromFavorites">{% trans 'The track has been successfully removed from favorites' %}</div>
+  </div>
+
   {% if error_message or messages %}
-    <section class="section section-sm pb-0">
+    <section class="section section-sm">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-12 mb-5">
@@ -39,7 +44,7 @@
     </section>
   {% endif %}
 
-  {% include "assets/template-columns/top-columns.django" %}
+  {#% include "assets/template-columns/top-columns.django" %#}
   {% include "assets/template-columns/template-columns.django" %}
 
 {% endblock %}
