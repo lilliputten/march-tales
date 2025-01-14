@@ -1,6 +1,6 @@
 import traceback
 
-from django.utils.translation import gettext_lazy as _
+# from django.utils.translation import gettext_lazy as _
 from django.http import JsonResponse
 from django.middleware.csrf import CsrfViewMiddleware
 from django.views.decorators.csrf import requires_csrf_token, csrf_protect, csrf_exempt
@@ -11,6 +11,7 @@ from rest_framework import status
 from rest_framework import views
 from rest_framework import permissions
 
+from core.appEnv import PROJECT_INFO
 from core.helpers.errors import errorToString
 from core.helpers.time import getTimeStamp
 from core.helpers.utils import debugObj
@@ -20,7 +21,7 @@ logger = getDebugLogger()
 
 NOOP = lambda _: _
 
-# _ = lambda _: _
+_ = lambda _: _
 
 
 def check_csrf(request):
@@ -29,7 +30,6 @@ def check_csrf(request):
     return False if reason else True
 
 
-# @csrf_protect
 @csrf_exempt   # Will send json failure response manually
 def check_api_view(request: Request):   # , *args, **kwargs):
     try:
@@ -60,14 +60,16 @@ def check_api_view(request: Request):   # , *args, **kwargs):
         #     data = {'detail': _('User in not authenticated')}
         #     return JsonResponse(data, status=status.HTTP_403_FORBIDDEN, safe=False)
         # Check session or csrf?
-        if not session_key:
-            data = {'detail': _('Client session not found')}
-            return JsonResponse(data, status=status.HTTP_403_FORBIDDEN, safe=False)
+        # if not session_key:
+        #     data = {'detail': _('Client session not found')}
+        #     return JsonResponse(data, status=status.HTTP_403_FORBIDDEN, safe=False)
 
         timestamp = getTimeStamp()
         data = {
+            'PROJECT_INFO': PROJECT_INFO,
             'timestamp': timestamp,
             'checked': True,
+            **debugData,  # DEBUG: Show debug data
         }
         return JsonResponse(data, status=status.HTTP_200_OK)
     except Exception as err:

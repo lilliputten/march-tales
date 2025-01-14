@@ -10,6 +10,7 @@ from rest_framework import status
 from rest_framework import views
 from rest_framework import permissions
 
+from core.appEnv import PROJECT_INFO
 from core.helpers.errors import errorToString
 from core.helpers.time import getTimeStamp
 from core.helpers.utils import debugObj
@@ -51,9 +52,10 @@ def tick_api_view(request: Request):   # , *args, **kwargs):
 
         timestamp = getTimeStamp()
         data = {
+            'PROJECT_INFO': PROJECT_INFO,
             'timestamp': timestamp,
             'checked': True,
-            **debugData,  # Show debug data
+            **debugData,  # DEBUG: Show debug data
         }
         return JsonResponse(data, status=status.HTTP_200_OK)
     except Exception as err:
