@@ -1,11 +1,5 @@
 {# ex: set ft=htmldjango : #}
-<!--
-  @module profile.html.django
-  @changed 2025.01.05, 00:39
--->
-
 {% extends "allauth/layouts/manage.html" %}
-{% comment %} {% extends "base-regular.html.django" %} {% endcomment %}
 
 {% load i18n %}
 {% load allauth %}

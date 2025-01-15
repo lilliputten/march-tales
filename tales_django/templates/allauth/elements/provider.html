@@ -1,6 +1,13 @@
+{# ex: set ft=htmldjango : #}
 {% load allauth %}
-<li class="list-group-item">
-    <a class="d-block w-100 link-dark link-underline link-underline-opacity-0"
-       title="{{ attrs.name }}"
-       href="{{ attrs.href }}">{{ attrs.name }}</a>
+<li class="auth-provider list-group-item">
+    <a class="btn btn-outline-light text-start d-flex align-items-center gap-3"
+      id="{{ attrs.provider_id }}"
+      title="{{ attrs.name }}"
+      href="{{ attrs.href }}"
+    >
+      {# {'name': 'Google', 'provider_id': 'google', 'href': '/accounts/google/login/?process=connect'} #}
+      <span class="auth-provider-icon" id="{{ attrs.provider_id }}"></span>
+      <span class="auth-provider-text">{{ attrs.name }}</span>
+    </a>
 </li>

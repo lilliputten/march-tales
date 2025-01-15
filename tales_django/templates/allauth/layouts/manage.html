@@ -14,12 +14,13 @@
   <h4 class="widget-title">{% trans "Account management" %}</h4>
   <ul class="p-3 nav d-flex flex-column gap-3">
 
-    {% url 'profile_edit' as profile_edit_url_ %}
-    {% if profile_edit_url_ %}
-      <li class="list-group-item nav-item">
-        <a class="btn btn-outline-primary w-100" href="{{ profile_edit_url_ }}">{% trans "Edit profile" %}</a>
-      </li>
-    {% endif %}
+    <li class="list-group-item nav-item">
+      <a class="btn btn-outline-primary w-100" href="{% url 'profile' %}">{% trans "Profile" %}</a>
+    </li>
+
+    <li class="list-group-item nav-item">
+      <a class="btn btn-outline-primary w-100" href="{% url 'profile_edit' %}">{% trans "Edit profile" %}</a>
+    </li>
 
     {% url 'account_email' as email_url_ %}
     {% if email_url_ %}
