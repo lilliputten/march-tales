@@ -41,6 +41,7 @@ config.local.yml
 # Data
 /.data*
 /db.*
+/db-backup*
 /media/*
 !/media/samples
 /static/vendor/*

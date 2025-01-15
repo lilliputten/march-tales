@@ -46,11 +46,16 @@ from core.djangoConfig import (
     DEFAULT_FROM_EMAIL,
     EMAIL_HOST_USER,
     EMAIL_HOST_PASSWORD,
+    # OAuth
+    GOOGLE_CLIENT_ID,
+    GOOGLE_CLIENT_SECRET,
+    # YANDEX_CLIENT_ID,
+    # YANDEX_CLIENT_SECRET,
 )
 
 # TRANSLATIONS_PROJECT_BASE_DIR = BASE_DIR
 
-gettext = lambda s: s
+_ = lambda s: s
 
 # # DEBUG: Show basic settings...
 # print('App started:', PROJECT_INFO)
@@ -135,6 +140,17 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     'django_registration',
     'rest_framework',
+    # allauth, @see https://docs.allauth.org/en/latest/installation/quickstart.html
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    # 'allauth.socialaccount.providers.apple',
+    # 'allauth.socialaccount.providers.auth0',
+    'allauth.socialaccount.providers.google',
+    # 'allauth.socialaccount.providers.mailru',
+    # 'allauth.socialaccount.providers.vk',
+    # 'allauth.socialaccount.providers.yandex',
+    # app
     APP_NAME,
 ]
 
@@ -147,9 +163,27 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # Added
-    APP_NAME + '.middleware.BeautifulMiddleware.BeautifulMiddleware',  # Html content prettifier
+    # allauth, @see https://docs.allauth.org/en/latest/installation/quickstart.html
+    'allauth.account.middleware.AccountMiddleware',
+    # app
+    # Html content prettifier (TODO: Requires fixes for invalid html tags formatting)
+    APP_NAME + '.middleware.BeautifulMiddleware.BeautifulMiddleware',
 ]
+
+# allauth
+# Provider specific settings
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        # For each OAuth based provider, either add a ``SocialApp``
+        # (``socialaccount`` app) containing the required client
+        # credentials, or list them here:
+        'APP': {
+            'client_id': GOOGLE_CLIENT_ID,
+            'secret': GOOGLE_CLIENT_SECRET,
+            'key': SECRET_KEY,  # ???
+        }
+    }
+}
 
 # Add livereload app...
 # @see https://pypi.org/project/django-livereload/
@@ -250,6 +284,10 @@ LOGOUT_REDIRECT_URL = 'index'
 
 AUTH_USER_MODEL = APP_NAME + '.User'
 AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+    # `allauth` specific authentication methods, such as login by email
+    'allauth.account.auth_backends.AuthenticationBackend',
     APP_NAME + '.core.app.backends.EmailBackend',  # TODO?
 ]
 
@@ -278,8 +316,8 @@ USE_L10N = True
 LOCALE_PATHS = (posixpath.join(BASE_DIR, APP_NAME, 'locale'),)
 LANGUAGES = (
     ('ru', 'Русский'),
-    # ('fr', gettext(u'Français')),
     ('en', 'English'),
+    # ('fr', _(u'Français')),
 )
 LANGUAGES_LIST = {lng: name for lng, name in list(LANGUAGES)}
 CMS_LANGUAGES = {
