@@ -42,8 +42,8 @@
   fields:
     # mN***
     password: 'pbkdf2_sha256$870000$HMKrTbktzNb6S9vrdDZrVU$iIc6EIGsGyAxTZdAFp9aB0FN7tfOkcg7Avh6+Wg0V+U='
-    username: 'lilliputten@gmail.com'
-    email: 'lilliputten@gmail.com'
+    username: 'lilliputten@yandex.ru'
+    email: 'lilliputten@yandex.ru'
     first_name: 'John'
     last_name: 'Lennon'
     is_superuser: false

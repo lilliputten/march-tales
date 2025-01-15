@@ -26,8 +26,6 @@ EMAIL_HOST_PASSWORD = appEnv.str('EMAIL_HOST_PASSWORD', '')
 
 # OAath
 
-# AUTH_SECRET="tp2Hww14uYddl8kbwPWG+3e9mYN3wDOapKwRxmqiuA8="
-
 # Google auth
 
 GOOGLE_CLIENT_ID = appEnv.str('GOOGLE_CLIENT_ID', '')

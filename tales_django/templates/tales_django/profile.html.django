@@ -12,7 +12,7 @@
 
 {% block title %}{% trans 'Profile' %} — {{ block.super }}{% endblock title %}
 
-{% block content %}
+{% block page_content %}
 {{ block.super }}
 
 <fieldset>
@@ -119,6 +119,7 @@
 <div class="actions mt-5 mb-4">
   {# TODO: Put common actions toolbar here #}
   <a class="btn btn-primary" href="{% url 'profile_edit' %}">{% trans "Edit profile" %}</a>
+  {% include "assets/back-button/back-button.django" %}
   {% comment %}
   <a class="btn btn-primary" href="{% url 'password_change' %}">{% trans "Change password" %}</a>
   <a class="btn btn-primary" href="{% url 'password_reset' %}">{% trans "Reset password" %}</a>
@@ -128,4 +129,4 @@
 <div class="spacer mt-5"></div>
 
 
-{% endblock content %}
+{% endblock page_content %}

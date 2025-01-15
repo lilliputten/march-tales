@@ -4,9 +4,11 @@
   @changed 2025.01.05, 00:39
 -->
 
-{% extends "base-regular.html.django" %}
+{% extends "allauth/layouts/manage.html" %}
+{% comment %} {% extends "base-regular.html.django" %} {% endcomment %}
 
 {% load i18n %}
+{% load allauth %}
 {% load crispy_forms_tags %}
 
 {% block title %}{% trans 'Edit profile' %} — {{ block.super }}{% endblock title %}
@@ -20,8 +22,6 @@
   </legend>
 </fieldset>
 
-{% include "assets/render-messages/render-messages.django" %}
-
 <form method="post" enctype="multipart/form-data">
   {% csrf_token %}
 
@@ -31,34 +31,14 @@
     <div class="left flex-grow-1 d-flex flex-wrap gap-1">
       <input type="submit" class="btn btn-primary" value="{% trans "Save" %}" />
       {% include "assets/back-button/back-button.django" %}
-      <button type="reset" class="btn btn-outline-primary">{% trans "Reset changes" %}</button>
-      <a class="btn btn-link btn-outline-primary" href="{% url 'password_change' %}">{% trans "Change password" %}</a>
-      <a class="btn btn-link btn-outline-primary" href="{% url 'password_reset' %}">{% trans "Reset password" %}</a>
+      <button type="reset" class="btn btn-outline-secondary">{% trans "Reset changes" %}</button>
     </div>
+    {% comment %}
     <div class="right align-self-end d-flex flex-wrap gap-1">
       <span class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">{% trans "Delete account" %}</span>
     </div>
+    {% endcomment %}
   </div>
 </form>
-
-<!-- Delete account confirmation modal -->
-<div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-labelledby="deleteAccountModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="deleteAccountModalLabel">{% trans "Delete the account?" %}</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>{% trans "Are you sure you want to completely delete your account and all data?" %}</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{% trans "Close" %}</button>
-        <a type="button" class="btn btn-danger" href="{% url 'delete_account' %}">{% trans "Delete" %}</a>
-      </div>
-    </div>
-  </div>
-</div>
 
 {% endblock content %}

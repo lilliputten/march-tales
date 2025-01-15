@@ -10,7 +10,7 @@
 
 {% block title %}{{ settings.SITE_SHORT_NAME }} Membership — {{ block.super }}{% endblock title %}
 
-{% block content %}
+{% block page_content %}
 {{ block.super }}
 
 <fieldset>
@@ -41,4 +41,4 @@ or Extraordinary Assemblies, and can vote on or even run for the board.</p>
   </div>
 </form>
 
-{% endblock content %}
+{% endblock page_content %}

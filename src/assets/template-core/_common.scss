@@ -134,13 +134,13 @@ mark {
 /* badge */
 
 .badge {
-  border-radius: 0;
-  position: absolute;
-  width: 150px;
-  transform: rotate(45deg);
-  right: -45px;
-  top: 20px;
-  text-transform: uppercase;
+  // border-radius: 0;
+  // position: absolute;
+  // width: 150px;
+  // transform: rotate(45deg);
+  // right: -45px;
+  // top: 20px;
+  // text-transform: uppercase;
   &-primary {
     background-color: $primary-color;
   }

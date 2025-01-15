@@ -6,7 +6,7 @@
 
 {% extends "base-regular.html.django" %}
 {% block title %}Activation email sent — {{ block.super }}{% endblock %}
-{% block content %}
+{% block page_content %}
 
 <fieldset>
   <legend>
@@ -25,7 +25,7 @@
   and check your spam folder.
 </p>
 
-{% endblock content %} {% comment %} **registration/registration_complete.html** Used after
+{% endblock page_content %} {% comment %} **registration/registration_complete.html** Used after
 successful completion of the registration form. This template has no context variables of its own,
 and should simply inform the user that an email containing account-activation information has been
 sent. {% endcomment %}

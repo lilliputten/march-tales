@@ -38,7 +38,7 @@ users_urlpatterns = [
         'accounts/',
         include('django_registration.backends.activation.urls'),
     ),
-    path('accounts/', include('django.contrib.auth.urls')),
     # allauth, @see https://docs.allauth.org/en/latest/installation/quickstart.html
     path('accounts/', include('allauth.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]

@@ -9,7 +9,7 @@
 {% include "assets/template-banner/template-banner.django" %}
 {% endblock beforeContent %}
 
-{% block content %}
+{% block page_content %}
   {{ block.super }}
 
   {#% include "assets/main-page-splash/main-page-splash.django" %#}
@@ -39,4 +39,4 @@
   </div>
   <!-- {{{ Full column layout -->
 
-{% endblock content %}
+{% endblock page_content %}

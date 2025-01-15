@@ -7,7 +7,7 @@
 
 {% block title %}{% trans 'Login' %} — {{ block.super }}{% endblock title %}
 
-{% block content %}
+{% block page_content %}
 {{ block.super }}
 
   {% trans 'Login' as title %}
@@ -33,5 +33,5 @@
     <input type="hidden" name="next" value="{{ next }}" />
   </form>
 
-{% endblock content %}
+{% endblock page_content %}
 

@@ -40,7 +40,7 @@ $navbarCollapseMax: $screenMdMax;
 
 // Primary color...
 
-$primaryColor: #b13; // #486;
+$primaryColor: #b26; // #486;
 $primaryLightColor: color.adjust($primaryColor, $lightness: 10%);
 $primaryLightenColor: color.adjust($primaryColor, $lightness: 20%);
 $primaryLightesetColor: color.adjust($primaryColor, $lightness: 30%);
@@ -76,9 +76,9 @@ $lightColor: #f9f9f9;
 
 // Signaling colors
 
-$commonInfoColor: #09f;
-$commonErrorColor: #b00;
-$commonWarnColor: #f60;
+$commonInfoColor: #06d;
+$commonErrorColor: #d00;
+$commonWarnColor: #fa0;
 $commonSuccessColor: #0c3;
 
 $commonInfoColorRgb: rgbComponents($commonInfoColor);

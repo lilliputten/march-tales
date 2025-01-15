@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-14 05:38+0300\n"
+"POT-Creation-Date: 2025-01-15 07:31+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -90,10 +90,11 @@ msgid "Profile"
 msgstr ""
 
 #: .\src\assets\page-menus\menu-main.django:23
+#: .\tales_django\templates\allauth\layouts\manage.html:20
 #: .\tales_django\templates\registration\password_change_form.html:30
 #: .\tales_django\templates\tales_django\profile.html.django:121
-#: .\tales_django\templates\tales_django\profile_edit.html.django:12
-#: .\tales_django\templates\tales_django\profile_edit.html.django:19
+#: .\tales_django\templates\tales_django\profile_edit.html.django:15
+#: .\tales_django\templates\tales_django\profile_edit.html.django:22
 msgid "Edit profile"
 msgstr ""
 
@@ -111,11 +112,11 @@ msgstr ""
 msgid "Log in"
 msgstr ""
 
-#: .\src\assets\page-menus\menu-main.django:36
+#: .\src\assets\page-menus\menu-main.django:38
 #: .\tales_django\templates\django_registration\registration_form.html:12
 #: .\tales_django\templates\django_registration\registration_form.html:16
 #: .\tales_django\templates\django_registration\registration_form.html:26
-#: .\tales_django\templates\registration\login.html:29
+#: .\tales_django\templates\registration\login.html:27
 #: .\tales_django\templates\registration\signup.html:14
 #: .\tales_django\templates\registration\signup.html:20
 #: .\tales_django\templates\registration\signup.html:29
@@ -129,6 +130,9 @@ msgstr ""
 #: .\src\assets\template-columns\left-column.django:7
 #: .\src\assets\template-columns\unused-samples\left-column-sample.django:7
 #: .\src\assets\template-right-blocks\right-recents-list\right-recents-list.django:7
+#: .\tales_django\templates\base-full-column.html.django:29
+#: .\tales_django\templates\base-main-columns-layout.html.django:45
+#: .\tales_django\templates\base-main.html.django:82
 msgid "Recent Tracks"
 msgstr ""
 
@@ -138,10 +142,20 @@ msgstr ""
 #: .\src\assets\template-header\template-header.django:17
 #: .\tales_django\templates\base-core.html.django:24
 #: .\tales_django\templates\base-core.html.django:39
+#: .\tales_django\templates\tales_django\terms.html.django:24
+#: .\tales_django\templates\tales_django\terms.html.django:26
+#: .\tales_django\templates\tales_django\terms.html.django:33
+#: .\tales_django\templates\tales_django\terms.html.django:34
+#: .\tales_django\templates\tales_django\terms.html.django:148
+#: .\tales_django\templates\tales_django\terms.html.django:153
 msgid "Site title"
 msgstr "The March Cat Tales"
 
 #: .\src\assets\template-footer\template-footer.django:64
+#: .\tales_django\templates\tales_django\privacy-policy.html.django:8
+#: .\tales_django\templates\tales_django\privacy-policy.html.django:14
+#: .\tales_django\templates\tales_django\terms.html.django:111
+#: .\tales_django\templates\tales_django\terms.html.django:161
 msgid "Privacy Policy"
 msgstr ""
 
@@ -227,25 +241,19 @@ msgstr ""
 msgid "Application"
 msgstr ""
 
-#: .\tales_django\entities\App\api\CheckViewSet.py:37
+#: .\tales_django\entities\App\api\check_api_view.py:37
 msgid "Expected POST request"
 msgstr ""
 
-#: .\tales_django\entities\App\api\CheckViewSet.py:55
+#: .\tales_django\entities\App\api\check_api_view.py:55
 msgid "Failed checking CSRF token"
 msgstr ""
 
-#: .\tales_django\entities\App\api\CheckViewSet.py:64
-#: .\tales_django\entities\Tracks\api\TrackViewSet.py:46
-#: .\tales_django\entities\Tracks\api\TrackViewSet.py:98
-msgid "Client session not found"
-msgstr ""
-
-#: .\tales_django\entities\App\api\TickViewSet.py:31
+#: .\tales_django\entities\App\api\tick_api_view.py:32
 msgid "Expected POST or GET request"
 msgstr ""
 
-#: .\tales_django\entities\App\app_urlpatterns.py:21
+#: .\tales_django\entities\App\app_urlpatterns.py:24
 #, fuzzy
 #| msgid "Site description"
 msgid "Site administration"
@@ -322,6 +330,11 @@ msgstr ""
 
 #: .\tales_django\entities\Tracks\api\TrackViewSet.py:42
 msgid "User in not authenticated"
+msgstr ""
+
+#: .\tales_django\entities\Tracks\api\TrackViewSet.py:46
+#: .\tales_django\entities\Tracks\api\TrackViewSet.py:98
+msgid "Client session not found"
 msgstr ""
 
 #: .\tales_django\entities\Tracks\models\Author.py:10
@@ -552,7 +565,6 @@ msgstr ""
 
 #: .\tales_django\templates\admin\base.html:57
 #: .\tales_django\templates\registration\password_change_form.html:28
-#: .\tales_django\templates\tales_django\profile_edit.html.django:35
 msgid "Change password"
 msgstr ""
 
@@ -568,6 +580,57 @@ msgstr ""
 msgid "Home"
 msgstr ""
 
+#: .\tales_django\templates\allauth\layouts\entrance.html:7
+#: .\tales_django\templates\registration\login.html:8
+#: .\tales_django\templates\registration\login.html:13
+#: .\tales_django\templates\registration\login.html:25
+msgid "Login"
+msgstr ""
+
+#: .\tales_django\templates\allauth\layouts\manage.html:8
+msgid "Manage account"
+msgstr ""
+
+#: .\tales_django\templates\allauth\layouts\manage.html:14
+msgid "Account management"
+msgstr ""
+
+#: .\tales_django\templates\allauth\layouts\manage.html:27
+msgid "Change Password"
+msgstr ""
+
+#: .\tales_django\templates\allauth\layouts\manage.html:34
+msgid "Third-Party Accounts"
+msgstr ""
+
+#: .\tales_django\templates\allauth\layouts\manage.html:41
+msgid "Two-Factor Authentication"
+msgstr ""
+
+#: .\tales_django\templates\allauth\layouts\manage.html:48
+msgid "Sessions"
+msgstr ""
+
+#: .\tales_django\templates\allauth\layouts\manage.html:53
+msgid "Delete account"
+msgstr ""
+
+#: .\tales_django\templates\allauth\layouts\manage.html:66
+msgid "Delete the account?"
+msgstr ""
+
+#: .\tales_django\templates\allauth\layouts\manage.html:70
+msgid "Are you sure you want to completely delete your account and all data?"
+msgstr ""
+
+#: .\tales_django\templates\allauth\layouts\manage.html:73
+msgid "Close"
+msgstr ""
+
+#: .\tales_django\templates\allauth\layouts\manage.html:74
+msgid "Delete"
+msgstr ""
+
 #: .\tales_django\templates\base-core.html.django:25
 #: .\tales_django\templates\base-core.html.django:40
 msgid "Site description"
@@ -576,6 +639,16 @@ msgstr "Listen to classic fairy tales online"
 #: .\tales_django\templates\base-core.html.django:26
 msgid "Site keywords"
 msgstr "tales, fairy tales, listen, mp3"
+
+#: .\tales_django\templates\base-main-columns-layout.html.django:23
+#: .\tales_django\templates\base-main.html.django:72
+msgid "The track has been successfully added to favorites"
+msgstr ""
+
+#: .\tales_django\templates\base-main-columns-layout.html.django:24
+#: .\tales_django\templates\base-main.html.django:73
+msgid "The track has been successfully removed from favorites"
+msgstr ""
 
 #: .\tales_django\templates\registration\logged_out.html:17
 msgid "Logged out"
@@ -589,18 +662,11 @@ msgstr ""
 msgid "Log in again"
 msgstr ""
 
-#: .\tales_django\templates\registration\login.html:8
-#: .\tales_django\templates\registration\login.html:15
-#: .\tales_django\templates\registration\login.html:27
-msgid "Login"
-msgstr ""
-
-#: .\tales_django\templates\registration\login.html:20
+#: .\tales_django\templates\registration\login.html:18
 msgid "We can’t find a user with such authorization data. Please try again."
 msgstr ""
 
-#: .\tales_django\templates\registration\login.html:31
-#: .\tales_django\templates\tales_django\profile_edit.html.django:36
+#: .\tales_django\templates\registration\login.html:29
 msgid "Reset password"
 msgstr ""
 
@@ -722,14 +788,6 @@ msgstr ""
 msgid "Password reset for"
 msgstr ""
 
-#: .\tales_django\templates\tales_django\index.html.django:12
-msgid "The track has been successfully added to favorites"
-msgstr ""
-
-#: .\tales_django\templates\tales_django\index.html.django:13
-msgid "The track has been successfully removed from favorites"
-msgstr ""
-
 #: .\tales_django\templates\tales_django\profile.html.django:37
 msgid "Your registrations"
 msgstr ""
@@ -776,32 +834,17 @@ msgstr ""
 msgid "File size"
 msgstr ""
 
-#: .\tales_django\templates\tales_django\profile_edit.html.django:32
+#: .\tales_django\templates\tales_django\profile_edit.html.django:33
 msgid "Save"
 msgstr ""
 
-#: .\tales_django\templates\tales_django\profile_edit.html.django:34
+#: .\tales_django\templates\tales_django\profile_edit.html.django:35
 msgid "Reset changes"
 msgstr ""
 
-#: .\tales_django\templates\tales_django\profile_edit.html.django:39
-msgid "Delete account"
-msgstr ""
-
-#: .\tales_django\templates\tales_django\profile_edit.html.django:50
-msgid "Delete the account?"
-msgstr ""
-
-#: .\tales_django\templates\tales_django\profile_edit.html.django:54
-msgid "Are you sure you want to completely delete your account and all data?"
-msgstr ""
-
-#: .\tales_django\templates\tales_django\profile_edit.html.django:57
-msgid "Close"
-msgstr ""
-
-#: .\tales_django\templates\tales_django\profile_edit.html.django:58
-msgid "Delete"
+#: .\tales_django\templates\tales_django\terms.html.django:8
+#: .\tales_django\templates\tales_django\terms.html.django:14
+msgid "Terms and conditions"
 msgstr ""
 
 #, fuzzy

@@ -3,10 +3,10 @@
 
 {% block title %}Empty page demo — {{ block.super }}{% endblock title %}
 
-{% block content %}
+{% block page_content %}
 
   <p>Empty page</p>
 
   {{ block.super }}
 
-{% endblock content %}
+{% endblock page_content %}

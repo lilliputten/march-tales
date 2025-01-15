@@ -20,6 +20,6 @@ if [ -f "$rootPath/db.sqlite3" ]; then
 fi
 
 # TODO: DELETE FROM django_migrations WHERE app = $DJANGO_APP
-"$scriptsPath/django-makemigrations.sh" \
+. "$scriptsPath/django-makemigrations.sh" \
 && echo "All migrations and database has been successfuly cleared"
 

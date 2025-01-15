@@ -165,13 +165,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # allauth, @see https://docs.allauth.org/en/latest/installation/quickstart.html
     'allauth.account.middleware.AccountMiddleware',
-    # app
-    # Html content prettifier (TODO: Requires fixes for invalid html tags formatting)
-    APP_NAME + '.middleware.BeautifulMiddleware.BeautifulMiddleware',
+    # # Html content prettifier (TODO: Requires fixes for invalid html tags formatting)
+    # APP_NAME + '.middleware.BeautifulMiddleware.BeautifulMiddleware',
 ]
 
-# allauth
-# Provider specific settings
+# allauth: Provider specific settings
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         # For each OAuth based provider, either add a ``SocialApp``
@@ -180,7 +178,7 @@ SOCIALACCOUNT_PROVIDERS = {
         'APP': {
             'client_id': GOOGLE_CLIENT_ID,
             'secret': GOOGLE_CLIENT_SECRET,
-            'key': SECRET_KEY,  # ???
+            # 'key': SECRET_KEY,  # ???
         }
     }
 }
@@ -284,14 +282,23 @@ LOGOUT_REDIRECT_URL = 'index'
 
 AUTH_USER_MODEL = APP_NAME + '.User'
 AUTHENTICATION_BACKENDS = [
-    # Needed to login by username in Django admin, regardless of `allauth`
-    'django.contrib.auth.backends.ModelBackend',
     # `allauth` specific authentication methods, such as login by email
     'allauth.account.auth_backends.AuthenticationBackend',
+
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
     APP_NAME + '.core.app.backends.EmailBackend',  # TODO?
 ]
 
+# @see https://docs.allauth.org/en/dev/account/configuration.html
 ACCOUNT_ACTIVATION_DAYS = 7  # One-week activation window
+# ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_USERNAME_REQUIRED = False
+# ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_PASSWORD_MIN_LENGTH = 8
 
 # NOTE: It's possible to store some of these parameters (`DEFAULT_FROM_EMAIL`, definitely) in the site preferences or in the `.env*` files
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

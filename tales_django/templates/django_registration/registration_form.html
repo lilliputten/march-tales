@@ -9,7 +9,7 @@
 {% load i18n %}
 {% load crispy_forms_tags %}
 
-{% block title %}{% trans 'Sign up' %} — {{ block.super }}{% endblock %} {% block content %}
+{% block title %}{% trans 'Sign up' %} — {{ block.super }}{% endblock %} {% block page_content %}
 
 <fieldset>
   <legend>
@@ -30,4 +30,4 @@
   <input type="hidden" name="next" value="{{ next }}" />
 </form>
 
-{% endblock content %}
+{% endblock page_content %}
