@@ -85,8 +85,10 @@
       "args": [
         "runserver"
       ],
-      "console": "integratedTerminal"
-    },    {
+      "console": "integratedTerminal",
+      "justMyCode": false
+    },
+    {
       "name": "Django test",
       // "type": "python",
       "type": "debugpy",

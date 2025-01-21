@@ -14,6 +14,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 import posixpath
+from corsheaders.defaults import default_headers
 
 from core.appEnv import (
     BASE_DIR,
@@ -116,6 +117,8 @@ CSRF_TRUSTED_ORIGINS = [
 if LOCAL:
     # Allow work with local server in local dev mode
     ALLOWED_HOSTS.append('localhost')
+    ALLOWED_HOSTS.append('localhost:3000')
+    CSRF_TRUSTED_ORIGINS.append('http://localhost:3000')
 
 # Application definition
 
@@ -130,7 +133,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.staticfiles',
-    # 'django.contrib.humanize',
+    'django.contrib.humanize',
     # Added
     # 'modeltranslation',  # XXX: Doesn't work in django 5?
     # 'translation_manager',
@@ -140,6 +143,7 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     'django_registration',
     'rest_framework',
+    'corsheaders',
     # allauth, @see https://docs.allauth.org/en/latest/installation/quickstart.html
     'allauth',
     'allauth.account',
@@ -147,14 +151,19 @@ INSTALLED_APPS = [
     # 'allauth.socialaccount.providers.apple',
     # 'allauth.socialaccount.providers.auth0',
     'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.dummy',
     # 'allauth.socialaccount.providers.mailru',
     # 'allauth.socialaccount.providers.vk',
     # 'allauth.socialaccount.providers.yandex',
+    'allauth.mfa',
+    'allauth.headless',
+    'allauth.usersessions',
     # app
     APP_NAME,
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
@@ -171,13 +180,17 @@ MIDDLEWARE = [
 
 # allauth: Provider specific settings
 SOCIALACCOUNT_PROVIDERS = {
+    # @see https://docs.allauth.org/en/dev/socialaccount/configuration.html
+    # @see https://allauth.org/docs/draft-api/
     'google': {
         # For each OAuth based provider, either add a ``SocialApp``
         # (``socialaccount`` app) containing the required client
         # credentials, or list them here:
+        # @see https://docs.allauth.org/en/dev/socialaccount/providers/google.html
         'APP': {
             'client_id': GOOGLE_CLIENT_ID,
             'secret': GOOGLE_CLIENT_SECRET,
+            # 'FETCH_USERINFO' : True,
             # 'key': SECRET_KEY,  # ???
         }
     }
@@ -234,7 +247,7 @@ REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': (
-        # 'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.AllowAny',
         # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -284,11 +297,9 @@ AUTH_USER_MODEL = APP_NAME + '.User'
 AUTHENTICATION_BACKENDS = [
     # `allauth` specific authentication methods, such as login by email
     'allauth.account.auth_backends.AuthenticationBackend',
-
     # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
-
-    APP_NAME + '.core.app.backends.EmailBackend',  # TODO?
+    # APP_NAME + '.core.app.backends.EmailBackend',  # TODO?
 ]
 
 # @see https://docs.allauth.org/en/dev/account/configuration.html
@@ -316,7 +327,7 @@ SERVER_EMAIL = DEFAULT_FROM_EMAIL
 # @see https://docs.djangoproject.com/en/5.1/topics/i18n/
 # @see https://docs.djangoproject.com/en/5.1/topics/i18n/translation/
 LANGUAGE_CODE = 'ru'
-TIME_ZONE = 'Europe/Moscow'   # 'UTC'
+TIME_ZONE = 'Europe/Moscow'  # 'UTC'
 USE_TZ = True
 USE_I18N = True
 USE_L10N = True
@@ -354,6 +365,29 @@ DATETIME_FORMAT = DATE_FORMAT + ',' + TIME_FORMAT
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# @see https://pypi.org/project/django-cors-headers/
+CSRF_COOKIE_SAMESITE = 'None'
+# CORS_REPLACE_HTTPS_REFERER = True # OBSOLETE!
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:3000',
+    'https://' + DEFAULT_HOST,
+]
+if LOCAL:
+    CORS_ORIGIN_WHITELIST.append('http://localhost:3000')
+CORS_ALLOW_HEADERS = [
+    *default_headers,
+    'Credentials',
+    # "X-CSRFToken",
+    'X-Session-Token',
+    'Access-Control-Allow-Headers',
+    'Access-Control-Allow-Credentials',
+    # "Content-Type",
+    # "Authorization",
+]
 
 # Logging
 
@@ -504,3 +538,8 @@ __all__ = [
     'STATIC_ROOT',
     'STATIC_URL',
 ]
+
+try:
+    from .local_settings import *  # type: ignore # noqa
+except ImportError:
+    pass

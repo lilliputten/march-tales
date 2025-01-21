@@ -16,13 +16,15 @@ function sendToggleFavoriteRequest(trackId: number | string, value: boolean) {
     Accept: 'application/json',
     'Content-Type': 'application/json',
     'X-CSRFToken': csrftoken,
-    credentials: 'include',
+    Credentials: 'include',
     Cookie: csrftoken && `csrftoken=${csrftoken}`,
-    sessionid: getCookie('sessionid'),
+    sessionid: getCookie('sessionid'), // X-Session-Token
+    // django_language=ru; content-language: ru;
   };
   return fetch(url, {
     method: 'POST',
     headers,
+    credentials: 'include',
     body: JSON.stringify({
       value,
     }),

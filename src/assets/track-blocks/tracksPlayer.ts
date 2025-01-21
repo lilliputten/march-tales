@@ -154,13 +154,14 @@ function sendIncrementPlayedCount() {
   const url = `/api/v1/tracks/${trackId}/increment-played-count/`;
   return fetch(url, {
     method: 'POST',
+    credentials: 'include',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
       'X-CSRFToken': csrftoken,
-      credentials: 'include',
+      Credentials: 'include',
       Cookie: csrftoken && `csrftoken=${csrftoken}`,
-      sessionid: getCookie('sessionid'),
+      sessionid: getCookie('sessionid'), // X-Session-Token
     },
     body: JSON.stringify({}),
   })
