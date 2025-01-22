@@ -126,7 +126,15 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    # # Unfold: https://unfoldadmin.com/docs/installation/quickstart/
+    # 'unfold',  # before django.contrib.admin
+    # 'unfold.contrib.filters',  # optional, if special filters are needed
+    # 'unfold.contrib.forms',  # optional, if special form elements are needed
+    # 'unfold.contrib.inlines',  # optional, if special inlines are needed
+    # 'unfold.contrib.import_export',  # optional, if django-import-export package is used
+    # 'unfold.contrib.guardian',  # optional, if django-guardian package is used
+    # 'unfold.contrib.simple_history',  # optional, if django-simple-history package is used
+    'django.contrib.admin',  # required
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.messages',
@@ -163,11 +171,11 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -293,10 +301,12 @@ LOGOUT_REDIRECT_URL = 'index'
 # Registration
 # @see https://django-registration.readthedocs.io
 
+DJANGO_ADMIN_FORCE_ALLAUTH = True
+
 AUTH_USER_MODEL = APP_NAME + '.User'
 AUTHENTICATION_BACKENDS = [
-    # `allauth` specific authentication methods, such as login by email
-    'allauth.account.auth_backends.AuthenticationBackend',
+    # # `allauth` specific authentication methods, such as login by email
+    # 'allauth.account.auth_backends.AuthenticationBackend',
     # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
     # APP_NAME + '.core.app.backends.EmailBackend',  # TODO?
@@ -308,7 +318,7 @@ ACCOUNT_ACTIVATION_DAYS = 7  # One-week activation window
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = False
-# ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_PASSWORD_MIN_LENGTH = 8
 
 # NOTE: It's possible to store some of these parameters (`DEFAULT_FROM_EMAIL`, definitely) in the site preferences or in the `.env*` files
@@ -368,12 +378,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # @see https://pypi.org/project/django-cors-headers/
 CSRF_COOKIE_SAMESITE = 'None'
-# CORS_REPLACE_HTTPS_REFERER = True # OBSOLETE!
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000',
     'https://' + DEFAULT_HOST,
 ]
 if LOCAL:
@@ -381,12 +389,9 @@ if LOCAL:
 CORS_ALLOW_HEADERS = [
     *default_headers,
     'Credentials',
-    # "X-CSRFToken",
     'X-Session-Token',
     'Access-Control-Allow-Headers',
     'Access-Control-Allow-Credentials',
-    # "Content-Type",
-    # "Authorization",
 ]
 
 # Logging
@@ -533,7 +538,6 @@ __all__ = [
     'MEDIA_FOLDER',
     'MEDIA_ROOT',
     'MEDIA_URL',
-    # 'SRC_ROOT',
     'STATIC_FOLDER',
     'STATIC_ROOT',
     'STATIC_URL',

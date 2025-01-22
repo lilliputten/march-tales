@@ -21,16 +21,8 @@ users_urlpatterns = [
         name='django_registration_register',
     ),
     path('profile', profile, name='profile'),
-    path(
-        'profile/edit',
-        edit_user_profile,
-        name='profile_edit',
-    ),
-    path(
-        'profile/delete',
-        delete_user_account,
-        name='delete_account',
-    ),
+    path('profile/edit', edit_user_profile, name='profile_edit'),
+    path('profile/delete', delete_user_account, name='delete_account'),
     # Stock accounts...
     # path(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/successfully_logged_out/'}),
     path('logout/', logout_user_route, name='logout_user'),

@@ -5,6 +5,7 @@ from django.conf.urls import handler404, handler403, handler500
 from django.urls import include, path
 from django.views.decorators.cache import cache_page
 from django.utils.translation import gettext_lazy as _
+from allauth.account.decorators import secure_admin_login
 
 from .views.terms_view import terms_view
 from .views.privacy_policy_view import privacy_policy_view
@@ -18,6 +19,9 @@ from .views import (
     components_demo,
     empty_demo,
 )
+
+admin.autodiscover()
+admin.site.login = secure_admin_login(admin.site.login)
 
 cache_timeout = 0 if settings.LOCAL or settings.DEBUG else 15 * 60  # in seconds: {min}*60
 
