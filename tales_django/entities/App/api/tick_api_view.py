@@ -57,7 +57,11 @@ def tick_api_view(request: Request):   # , *args, **kwargs):
             'checked': True,
             **debugData,  # DEBUG: Show debug data
         }
-        return JsonResponse(data, status=status.HTTP_200_OK)
+        response = JsonResponse(data, status=status.HTTP_200_OK)
+        # XXX: Test multiple cookies processing
+        # response.set_cookie(key='key1', value='value1', max_age=3600)
+        # response.set_cookie(key='key2', value='value2', max_age=600)
+        return response
     except Exception as err:
         sError = errorToString(err)
         sTraceback = str(traceback.format_exc())
