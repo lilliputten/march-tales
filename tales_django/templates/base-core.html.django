@@ -97,8 +97,8 @@
 
   <!-- {{{ Page content container -->
   {% comment %} <div class="content container" role="main"> {% endcomment %}
-  {% block content %}
-  {% endblock content %}
+  {% block page_content %}
+  {% endblock page_content %}
   {% comment %} </div> {% endcomment %}
   <!-- }}} Page content container -->
 

@@ -12,7 +12,7 @@
     <path
       d="M2203 213C2136.58 157.994 1942.77 -33.1996 1633.1 53.0486C1414.13 114.038 1200.92 188.208 967.765 118.127C820.12 73.7483 263.977 -143.754 0.999958 158.899"
       stroke-width="1"
-      stroke="#d569"
+      stroke="#b269"
     />
   </svg>
   <!--
@@ -61,8 +61,8 @@
         </div>
         <div class="footer-cell footer-cell-side footer-cell-right footer-cell-menu text-md-end text-center py-2">
           <ul class="_list-inline footer-list d-flex flex-wrap mb-0 small justify-content-md-end">
-            <li class="_list-inline-item nav-item"><a class="nav-link" href="privacy-policy">{% trans "Privacy Policy" %}</a></li>
-            <li class="_list-inline-item nav-item"><a class="nav-link" href="terms-conditions">{% trans "Terms Conditions" %}</a></li>
+            <li class="_list-inline-item nav-item"><a class="nav-link" href="{% url 'privacy-policy' %}">{% trans "Privacy Policy" %}</a></li>
+            <li class="_list-inline-item nav-item"><a class="nav-link" href="{% url 'terms' %}">{% trans "Terms Conditions" %}</a></li>
           </ul>
         </div>
       </div>

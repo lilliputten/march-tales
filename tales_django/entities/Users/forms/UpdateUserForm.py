@@ -6,20 +6,17 @@ class UpdateUserForm(forms.ModelForm):
     email = forms.EmailField(required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
     #  is_active = forms.CharField(widget=forms.HiddenInput(), required=False)  # ???
 
-    address = forms.CharField(
-        required=False,
-        widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5}),
-    )
+    # address = forms.CharField(
+    #     required=False,
+    #     widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5}),
+    # )
 
     class Meta:
         model = get_user_model()
         fields = [
-            #  'username',
             'email',  # Needs re-activation
             'first_name',
             'last_name',
-            'address',
-            #  'is_active',  # ???
         ]
 
     def __init__(self, *args, **kwargs):

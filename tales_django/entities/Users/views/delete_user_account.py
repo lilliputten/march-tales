@@ -19,7 +19,8 @@ logger = getDebugLogger()
 def delete_user_account(request: HttpRequest):
     try:
         user = request.user
-        user.session_set.all().delete()
+        if hasattr(user, 'session_set'):
+            user.session_set.all().delete()
         user.delete()
         logout(request)
         messages.success(request, 'Your account has been removed successfully')

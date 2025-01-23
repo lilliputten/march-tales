@@ -5,7 +5,7 @@
 -->
 {% extends "base-regular.html.django" %}
 {% block title %}Account Activated — {{ block.super }}{% endblock title %}
-{% block content %}
+{% block page_content %}
 <fieldset>
   <legend>
     <h1 class="page-title primary-color my-4">Account Activated</h1>
@@ -24,7 +24,7 @@
     <a href="{% url 'profile_edit' %}">edit it</a> to change or add more your personal data.
   {% endif %}
 </p>
-{% endblock content %}
+{% endblock page_content %}
 
 {% comment %}
 **registration/activation_complete.html** Used after successful

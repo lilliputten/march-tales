@@ -6,7 +6,7 @@
   {% include 'assets/template-header/template-header.django' %}
 {% endblock %}
 
-{% block content %}
+{% block page_content %}
   {{ block.super }}
 {% endblock %}
 

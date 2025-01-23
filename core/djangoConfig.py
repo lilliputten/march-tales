@@ -23,3 +23,15 @@ EMAIL_USE_TLS = appEnv.bool('EMAIL_USE_TLS', False)
 
 EMAIL_HOST_USER = appEnv.str('EMAIL_HOST_USER', 'tales@march.team')   # tales@march.team | goldenjeru
 EMAIL_HOST_PASSWORD = appEnv.str('EMAIL_HOST_PASSWORD', '')
+
+# OAath
+
+# Google auth
+
+GOOGLE_CLIENT_ID = appEnv.str('GOOGLE_CLIENT_ID', '')
+GOOGLE_CLIENT_SECRET = appEnv.str('GOOGLE_CLIENT_SECRET', '')
+
+# Yandex auth
+
+YANDEX_CLIENT_ID = appEnv.str('YANDEX_CLIENT_ID', '')
+YANDEX_CLIENT_SECRET = appEnv.str('YANDEX_CLIENT_SECRET', '')

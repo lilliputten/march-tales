@@ -14,6 +14,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 import posixpath
+from corsheaders.defaults import default_headers
 
 from core.appEnv import (
     BASE_DIR,
@@ -46,11 +47,16 @@ from core.djangoConfig import (
     DEFAULT_FROM_EMAIL,
     EMAIL_HOST_USER,
     EMAIL_HOST_PASSWORD,
+    # OAuth
+    GOOGLE_CLIENT_ID,
+    GOOGLE_CLIENT_SECRET,
+    # YANDEX_CLIENT_ID,
+    # YANDEX_CLIENT_SECRET,
 )
 
 # TRANSLATIONS_PROJECT_BASE_DIR = BASE_DIR
 
-gettext = lambda s: s
+_ = lambda s: s
 
 # # DEBUG: Show basic settings...
 # print('App started:', PROJECT_INFO)
@@ -110,7 +116,10 @@ CSRF_TRUSTED_ORIGINS = [
 
 if LOCAL:
     # Allow work with local server in local dev mode
+    ALLOWED_HOSTS.append('10.0.2.2') # Flutter emulator VM host
     ALLOWED_HOSTS.append('localhost')
+    ALLOWED_HOSTS.append('localhost:3000')
+    CSRF_TRUSTED_ORIGINS.append('http://localhost:3000')
 
 # Application definition
 
@@ -118,13 +127,22 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    # # Unfold: https://unfoldadmin.com/docs/installation/quickstart/
+    # 'unfold',  # before django.contrib.admin
+    # 'unfold.contrib.filters',  # optional, if special filters are needed
+    # 'unfold.contrib.forms',  # optional, if special form elements are needed
+    # 'unfold.contrib.inlines',  # optional, if special inlines are needed
+    # 'unfold.contrib.import_export',  # optional, if django-import-export package is used
+    # 'unfold.contrib.guardian',  # optional, if django-guardian package is used
+    # 'unfold.contrib.simple_history',  # optional, if django-simple-history package is used
+    'django.contrib.admin',  # required
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.messages',
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     # Added
     # 'modeltranslation',  # XXX: Doesn't work in django 5?
     # 'translation_manager',
@@ -134,6 +152,22 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     'django_registration',
     'rest_framework',
+    'corsheaders',
+    # allauth, @see https://docs.allauth.org/en/latest/installation/quickstart.html
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    # 'allauth.socialaccount.providers.apple',
+    # 'allauth.socialaccount.providers.auth0',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.dummy',
+    # 'allauth.socialaccount.providers.mailru',
+    # 'allauth.socialaccount.providers.vk',
+    # 'allauth.socialaccount.providers.yandex',
+    'allauth.mfa',
+    'allauth.headless',
+    'allauth.usersessions',
+    # app
     APP_NAME,
 ]
 
@@ -142,13 +176,34 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # Added
-    APP_NAME + '.middleware.BeautifulMiddleware.BeautifulMiddleware',  # Html content prettifier
+    # allauth, @see https://docs.allauth.org/en/latest/installation/quickstart.html
+    'allauth.account.middleware.AccountMiddleware',
+    # # Html content prettifier (TODO: Requires fixes for invalid html tags formatting)
+    # APP_NAME + '.middleware.BeautifulMiddleware.BeautifulMiddleware',
 ]
+
+# allauth: Provider specific settings
+SOCIALACCOUNT_PROVIDERS = {
+    # @see https://docs.allauth.org/en/dev/socialaccount/configuration.html
+    # @see https://allauth.org/docs/draft-api/
+    'google': {
+        # For each OAuth based provider, either add a ``SocialApp``
+        # (``socialaccount`` app) containing the required client
+        # credentials, or list them here:
+        # @see https://docs.allauth.org/en/dev/socialaccount/providers/google.html
+        'APP': {
+            'client_id': GOOGLE_CLIENT_ID,
+            'secret': GOOGLE_CLIENT_SECRET,
+            # 'FETCH_USERINFO' : True,
+            # 'key': SECRET_KEY,  # ???
+        }
+    }
+}
 
 # Add livereload app...
 # @see https://pypi.org/project/django-livereload/
@@ -201,7 +256,7 @@ REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': (
-        # 'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.AllowAny',
         # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -247,12 +302,25 @@ LOGOUT_REDIRECT_URL = 'index'
 # Registration
 # @see https://django-registration.readthedocs.io
 
+DJANGO_ADMIN_FORCE_ALLAUTH = True
+
 AUTH_USER_MODEL = APP_NAME + '.User'
 AUTHENTICATION_BACKENDS = [
-    APP_NAME + '.core.app.backends.EmailBackend',  # TODO?
+    # # `allauth` specific authentication methods, such as login by email
+    # 'allauth.account.auth_backends.AuthenticationBackend',
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+    # APP_NAME + '.core.app.backends.EmailBackend',  # TODO?
 ]
 
+# @see https://docs.allauth.org/en/dev/account/configuration.html
 ACCOUNT_ACTIVATION_DAYS = 7  # One-week activation window
+# ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_PASSWORD_MIN_LENGTH = 8
 
 # NOTE: It's possible to store some of these parameters (`DEFAULT_FROM_EMAIL`, definitely) in the site preferences or in the `.env*` files
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -270,15 +338,15 @@ SERVER_EMAIL = DEFAULT_FROM_EMAIL
 # @see https://docs.djangoproject.com/en/5.1/topics/i18n/
 # @see https://docs.djangoproject.com/en/5.1/topics/i18n/translation/
 LANGUAGE_CODE = 'ru'
-TIME_ZONE = 'Europe/Moscow'   # 'UTC'
+TIME_ZONE = 'Europe/Moscow'  # 'UTC'
 USE_TZ = True
 USE_I18N = True
 USE_L10N = True
 LOCALE_PATHS = (posixpath.join(BASE_DIR, APP_NAME, 'locale'),)
 LANGUAGES = (
     ('ru', 'Русский'),
-    # ('fr', gettext(u'Français')),
     ('en', 'English'),
+    # ('fr', _(u'Français')),
 )
 LANGUAGES_LIST = {lng: name for lng, name in list(LANGUAGES)}
 CMS_LANGUAGES = {
@@ -308,6 +376,24 @@ DATETIME_FORMAT = DATE_FORMAT + ',' + TIME_FORMAT
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# @see https://pypi.org/project/django-cors-headers/
+CSRF_COOKIE_SAMESITE = 'None'
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_WHITELIST = [
+    'https://' + DEFAULT_HOST,
+]
+if LOCAL:
+    CORS_ORIGIN_WHITELIST.append('http://localhost:3000')
+CORS_ALLOW_HEADERS = [
+    *default_headers,
+    'Credentials',
+    'X-Session-Token',
+    'Access-Control-Allow-Headers',
+    'Access-Control-Allow-Credentials',
+]
 
 # Logging
 
@@ -453,8 +539,12 @@ __all__ = [
     'MEDIA_FOLDER',
     'MEDIA_ROOT',
     'MEDIA_URL',
-    # 'SRC_ROOT',
     'STATIC_FOLDER',
     'STATIC_ROOT',
     'STATIC_URL',
 ]
+
+try:
+    from .local_settings import *  # type: ignore # noqa
+except ImportError:
+    pass

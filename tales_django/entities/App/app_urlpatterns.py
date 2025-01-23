@@ -5,6 +5,10 @@ from django.conf.urls import handler404, handler403, handler500
 from django.urls import include, path
 from django.views.decorators.cache import cache_page
 from django.utils.translation import gettext_lazy as _
+from allauth.account.decorators import secure_admin_login
+
+from .views.terms_view import terms_view
+from .views.privacy_policy_view import privacy_policy_view
 
 from .views import page403, page404, page500
 from .api import api_urlpatterns
@@ -16,6 +20,9 @@ from .views import (
     empty_demo,
 )
 
+admin.autodiscover()
+admin.site.login = secure_admin_login(admin.site.login)
+
 cache_timeout = 0 if settings.LOCAL or settings.DEBUG else 15 * 60  # in seconds: {min}*60
 
 admin.site.site_header = _('Site administration')
@@ -23,6 +30,9 @@ admin.site.site_header = _('Site administration')
 app_urlpatterns = [
     # Root page
     path('', index_view, name='index'),
+    # Secondary app pages
+    path('terms/', terms_view, name='terms'),
+    path('privacy-policy/', privacy_policy_view, name='privacy-policy'),
     # Core?
     # path('', include('pages.urls')),
     # Language switching

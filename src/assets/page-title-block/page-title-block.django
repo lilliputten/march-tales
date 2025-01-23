@@ -1,0 +1,9 @@
+{# ex: set ft=htmldjango : #}
+
+<fieldset>
+  <legend>
+    <h1 class="page-title primary-color my-4">{{ title }}</h1>
+  </legend>
+</fieldset>
+
+{% include "assets/render-messages/render-messages.django" %}

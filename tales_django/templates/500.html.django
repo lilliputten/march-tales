@@ -7,7 +7,7 @@
 
 {% block title %}500 — {% trans "Service is temporary unavailable" %} — {{ block.super }}{% endblock title %}
 
-{% block content %}
+{% block page_content %}
   <div class="content container" role="main">
 
     <fieldset>
@@ -28,5 +28,5 @@
     </div>
 
   </div>
-{% endblock content %}
+{% endblock page_content %}
 

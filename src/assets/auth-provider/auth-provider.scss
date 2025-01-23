@@ -1,0 +1,22 @@
+@import '../shared';
+
+.auth-provider {
+  a {
+    & {
+      border-color: #eee;
+    }
+    &:hover {
+      border-color: #ddd;
+    }
+  }
+  $iconSize: 32px;
+  .auth-provider-icon {
+    display: inline-block;
+    background-position: contain;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url(./icons/google.svg);
+    width: $iconSize;
+    height: $iconSize;
+  }
+}

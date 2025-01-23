@@ -1,0 +1,10 @@
+from django.conf import settings
+from django.template.defaultfilters import register
+
+@register.simple_tag(takes_context=True)
+def set_title_context(context, title):
+   # do stuff that makes result not None
+   context.update({'title': title})
+   settings.title = title
+   return title
+

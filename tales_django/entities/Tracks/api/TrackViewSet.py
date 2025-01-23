@@ -7,6 +7,7 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework import viewsets, status
 from rest_framework import permissions
+from rest_framework import pagination
 
 from core.helpers.errors import errorToString
 from core.helpers.utils import debugObj
@@ -18,10 +19,17 @@ from ..models import Track
 
 logger = getDebugLogger()
 
+class DefaultPagination(pagination.LimitOffsetPagination):
+    default_limit = 2
+    # limit = 1
+    # page_size = 2
+    # max_page_size = 2
+    # page_size_query_param = 'page_size'
 
 class TrackViewSet(viewsets.ModelViewSet):
     queryset = Track.objects.all()
     serializer_class = TrackSerializer
+    pagination_class = DefaultPagination
 
     @action(
         methods=['post'],

@@ -11,5 +11,6 @@ test -f "$utilsPath/check-python-env.sh" && . "$utilsPath/check-python-env.sh"
 # TODO: DELETE FROM django_migrations WHERE app = $DJANGO_APP
 echo "Migrate..." \
 && $PYTHON_RUNTIME manage.py migrate \
-&& echo "Done"
+&& touch "$rootPath/index.wsgi" \
+&& echo "Migrate finished"
 

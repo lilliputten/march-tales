@@ -8,9 +8,9 @@
   <div class="content container" role="main"><!-- {{{ main -->
 {% endblock page_header %}
 
-{% block content %}
+{% block page_content %}
   {{ block.super }}
-{% endblock content %}
+{% endblock page_content %}
 
 {% block page_footer %}
   <!-- /main }}} --></div>

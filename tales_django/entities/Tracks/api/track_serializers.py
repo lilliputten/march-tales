@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from ..models import Track, Tag, Author
+from ..models import Track, Tag, Rubric, Author
 
 
 class AuthorSerializer(serializers.HyperlinkedModelSerializer):
@@ -9,6 +9,15 @@ class AuthorSerializer(serializers.HyperlinkedModelSerializer):
         fields = (
             'id',
             'name',
+        )
+
+
+class RubricSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Rubric
+        fields = (
+            'id',
+            'text',
         )
 
 
@@ -24,16 +33,24 @@ class TagSerializer(serializers.HyperlinkedModelSerializer):
 # Serializers define the API representation.
 class TrackSerializer(serializers.HyperlinkedModelSerializer):
     author = AuthorSerializer(read_only=True)
+    rubrics = RubricSerializer(read_only=True, many=True)
     tags = TagSerializer(read_only=True, many=True)
 
     class Meta:
         model = Track
         fields = (
+            'id',
             'title',
+            # 'description',
+            'track_status',
             # 'author_id',
             'author',
             'tags',
+            'rubrics',
             'audio_file',
+            'audio_duration',
+            'audio_size',
+            'preview_picture',
             'for_members',
             'played_count',
             # 'favorited_users',

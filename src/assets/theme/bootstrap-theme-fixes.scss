@@ -45,6 +45,10 @@
   --bs-btn-disabled-border-color: #{$primaryColor}; // #0d6efd;
 }
 
+.btn-outline-light {
+  color: var(--defaultTextColor);
+}
+
 .btn-outline-primary {
   --bs-btn-color: #{$primaryColor}; // #0d6efd
   --bs-btn-border-color: #{$primaryColor}; // #0d6efd

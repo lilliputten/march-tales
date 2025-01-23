@@ -20,20 +20,23 @@
         <li><a class="dropdown-item disabled" href="">{% trans 'Playlist' %}</a></li>
         <li><hr class="dropdown-divider" /></li>
         <li><a class="dropdown-item" href="{% url 'profile' %}">{% trans 'Profile' %}</a></li>
-        <li><a class="dropdown-item" href="{% url 'profile_edit' %}">{% trans 'Edit profile' %}</a></li>
+        {% comment %} <li><a class="dropdown-item" href="{% url 'profile_edit' %}">{% trans 'Edit profile' %}</a></li> {% endcomment %}
         <li><hr class="dropdown-divider" /></li>
         {% if user.is_staff %}
           <!-- Admin panel -->
           <li><a target="_blank" class="dropdown-item" href="{% url 'admin:index' %}">{% trans 'Admin panel' %}</a></li>
+          <li><hr class="dropdown-divider" /></li>
         {% endif %}
-        <li><hr class="dropdown-divider" /></li>
         <li><a class="dropdown-item" href="{% url 'logout_user' %}">{% trans 'Logout' %}</a></li>
       </ul>
     </form>
   </li>
 {% else %}
-  <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">{% trans 'Log in' %}</a></li>
-  <li class="nav-item"><a class="nav-link" href="{% url 'django_registration_register' %}">{% trans 'Sign up' %}</a></li>
+  <li class="nav-item"><a class="nav-link" href="{% url 'account_login' %}">{% trans 'Log in' %}</a></li>
+  {% url 'account_signup' as signup_url_ %}
+  {% if signup_url_ %}
+    <li class="nav-item"><a class="nav-link" href="{{ signup_url_ }}">{% trans 'Sign up' %}</a></li>
+  {% endif %}
 {% endif %}
 
 {% comment %}

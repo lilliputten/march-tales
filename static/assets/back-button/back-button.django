@@ -1,5 +1,0 @@
-{# ex: set ft=htmldjango : #}
-
-{% load i18n %}
-
-<a class="btn btn-outline-primary" href="{% url 'index' %}" onClick="history.back(); return false">{% trans 'Back' %}</a>
