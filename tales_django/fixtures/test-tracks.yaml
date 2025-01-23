@@ -47,6 +47,75 @@
     rubrics:
       - 2
 
+- model: 'tales_django.track'
+  pk: 3
+  fields:
+    title_en: 'Track 3'
+    title_ru: 'Трек 3'
+    description_en: 'Description'
+    description_ru: 'Описание'
+    author: 1
+    audio_file: 'samples/test-short.mp3'
+    preview_picture: 'samples/gr-400x225.jpg'
+    track_status: 'PUBLISHED'
+    for_members: false
+    audio_duration: 5
+    audio_size: 22535
+    published_at: '2025-01-03'
+    updated_at: '2025-01-03'
+    published_by: 1
+    updated_by: 1
+    # tags:
+    #   - 1
+    # rubrics:
+    #   - 1
+
+- model: 'tales_django.track'
+  pk: 4
+  fields:
+    title_en: 'Track 4'
+    title_ru: 'Трек 4'
+    description_en: 'Description'
+    description_ru: 'Описание'
+    author: 1
+    audio_file: 'samples/test-short.mp3'
+    preview_picture: 'samples/gr-400x225.jpg'
+    track_status: 'PUBLISHED'
+    for_members: false
+    audio_duration: 5
+    audio_size: 22535
+    published_at: '2025-01-03'
+    updated_at: '2025-01-03'
+    published_by: 1
+    updated_by: 1
+    # tags:
+    #   - 1
+    # rubrics:
+    #   - 1
+
+- model: 'tales_django.track'
+  pk: 5
+  fields:
+    title_en: 'Track 5'
+    title_ru: 'Трек 5'
+    description_en: 'Description'
+    description_ru: 'Описание'
+    author: 1
+    audio_file: 'samples/test-short.mp3'
+    preview_picture: 'samples/gr-400x225.jpg'
+    track_status: 'PUBLISHED'
+    for_members: false
+    audio_duration: 5
+    audio_size: 22535
+    published_at: '2025-01-03'
+    updated_at: '2025-01-03'
+    published_by: 1
+    updated_by: 1
+    # tags:
+    #   - 1
+    # rubrics:
+    #   - 1
+
 - model: 'tales_django.tag'
   pk: 1
   fields:
