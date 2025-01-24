@@ -87,6 +87,24 @@
 </head>
 <body class="{% block body_class %}default{% endblock %}">
 
+  <!-- {{{ JS translated messages -->
+  {% block js_texts %}
+    {{ block.super }}
+    <div id="js-texts" hidden>
+      {% block js_texts_content %}
+        {{ block.super }}
+        <div id="errorLoadingAudioFile">{% trans 'Error loading audio file' %}</div>
+        <div id="noAudioNodeFound">{% trans 'No audio node found' %}</div>
+        <div id="noAudioSourceNodeFound">{% trans 'No audio source node found' %}</div>
+        <div id="fetchError">{% trans 'Fetch error' %}</div>
+        <div id="failedApiRequest">{% trans 'Failed api request' %}</div>
+        <div id="trackAddedToFavorites">{% trans 'The track has been successfully added to favorites' %}</div>
+        <div id="trackRemovedFromFavorites">{% trans 'The track has been successfully removed from favorites' %}</div>
+      {% endblock js_texts_content %}
+    </div>
+  {% endblock js_texts %}
+  <!-- }}} JS translated messages -->
+
   <!-- {{{ Page header container -->
   {% block page_header %}
   {% endblock page_header %}

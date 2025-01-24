@@ -116,7 +116,7 @@ CSRF_TRUSTED_ORIGINS = [
 
 if LOCAL:
     # Allow work with local server in local dev mode
-    ALLOWED_HOSTS.append('10.0.2.2') # Flutter emulator VM host
+    ALLOWED_HOSTS.append('10.0.2.2')   # Flutter emulator VM host
     ALLOWED_HOSTS.append('localhost')
     ALLOWED_HOSTS.append('localhost:3000')
     CSRF_TRUSTED_ORIGINS.append('http://localhost:3000')
@@ -260,9 +260,9 @@ REST_FRAMEWORK = {
         # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        # 'rest_framework.authentication.TokenAuthentication',
-        # 'rest_framework.authentication.SessionAuthentication',
-        # 'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
         # 'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
 }

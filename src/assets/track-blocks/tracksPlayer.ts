@@ -1,5 +1,7 @@
-import { formatDuration, getCookie, quoteHtmlAttr } from '../helpers/CommonHelpers';
+import { formatDuration, quoteHtmlAttr } from '../helpers/CommonHelpers';
 import { commonNotify } from '../CommonNotify/CommonNotifySingleton';
+import { sendApiRequest } from '../helpers/sendApiRequest';
+import { getJsText } from '../helpers/getJsText';
 
 const sharedPlayerContainer = document.body;
 
@@ -30,7 +32,7 @@ function ensureSharedPlayerAudio() {
   const sharedPlayer = ensureSharedPlayer();
   const audio = sharedPlayer.getElementsByTagName('audio')[0];
   if (!audio) {
-    throw new Error('No audio node found');
+    throw new Error(getJsText('noAudioNodeFound'));
   }
   return audio;
 }
@@ -105,7 +107,7 @@ function sharedPlayerLoaded(_ev: Event) {
 function sharedPlayerError(ev: Event) {
   const srcElement = ev.currentTarget as HTMLSourceElement;
   const { src, type } = srcElement;
-  const errMsg = 'Error loading audio file ' + src;
+  const errMsg = getJsText('errorLoadingAudioFile') + ' ' + src;
   const error = new Error(errMsg);
   // eslint-disable-next-line no-console
   console.error('[sharedPlayerError]', errMsg, {
@@ -150,41 +152,14 @@ function stopPreviousPlayer() {
 function sendIncrementPlayedCount() {
   const { dataset } = currentTrackPlayer;
   const { trackId } = dataset;
-  const csrftoken = getCookie('csrftoken');
   const url = `/api/v1/tracks/${trackId}/increment-played-count/`;
-  return fetch(url, {
-    method: 'POST',
-    credentials: 'include',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      'X-CSRFToken': csrftoken,
-      Credentials: 'include',
-      Cookie: csrftoken && `csrftoken=${csrftoken}`,
-      sessionid: getCookie('sessionid'), // X-Session-Token
-    },
-    body: JSON.stringify({}),
-  })
-    .then(async (res) => {
-      const data = await res.json();
-      return [res, data];
-    })
-    .then(([res, data]: [Response, { detail?: string; played_count?: number }]) => {
-      const { ok, status } = res;
-      if (!ok) {
-        const errMsg = [`Error ${status}`, data?.detail || res.statusText]
-          .filter(Boolean)
-          .join(': ');
-        throw new Error(errMsg);
-      }
-      return data;
-    });
+  return sendApiRequest(url, 'POST');
 }
 
 function incrementPlayedCount() {
   const trackPlayer = currentTrackPlayer;
   sendIncrementPlayedCount()
-    .then(({ played_count }) => {
+    .then(({ played_count }: { played_count?: number }) => {
       // Update track data...
       const valueNode = trackPlayer.querySelector('#played_count') as HTMLElement;
       if (played_count != null && valueNode) {
@@ -215,7 +190,7 @@ function startPlay() {
     const { trackMediaUrl } = dataset;
     const source = createSharedPlayerSource({ src: trackMediaUrl });
     if (!source) {
-      throw new Error('No audio source node found');
+      throw new Error(getJsText('noAudioSourceNodeFound'));
     }
     audio.load();
   } else {

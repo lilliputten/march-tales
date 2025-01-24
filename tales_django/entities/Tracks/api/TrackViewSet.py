@@ -19,6 +19,7 @@ from ..models import Track
 
 logger = getDebugLogger()
 
+
 class DefaultPagination(pagination.LimitOffsetPagination):
     default_limit = 2
     # limit = 1
@@ -26,13 +27,14 @@ class DefaultPagination(pagination.LimitOffsetPagination):
     # max_page_size = 2
     # page_size_query_param = 'page_size'
 
+
 class TrackViewSet(viewsets.ModelViewSet):
     queryset = Track.objects.all()
     serializer_class = TrackSerializer
     pagination_class = DefaultPagination
 
     @action(
-        methods=['post'],
+        methods=['post', 'get'],
         url_path='toggle-favorite',
         url_name='track-toggle-favorite',
         detail=True,
@@ -47,30 +49,27 @@ class TrackViewSet(viewsets.ModelViewSet):
 
             # Check user is_authenticated?
             if not request.user.is_authenticated:
-                data = {'detail': _('User in not authenticated')}
-                return JsonResponse(data, status=status.HTTP_403_FORBIDDEN, safe=False)
+                errorDetail = {'detail': _('User in not authenticated')}
+                return JsonResponse(errorDetail, status=status.HTTP_403_FORBIDDEN, safe=False)
             # Check session or csrf?
             if not session_key and not csrftoken:
-                data = {'detail': _('Client session not found')}
-                return JsonResponse(data, status=status.HTTP_403_FORBIDDEN, safe=False)
+                errorDetail = {'detail': _('Client session not found')}
+                return JsonResponse(errorDetail, status=status.HTTP_403_FORBIDDEN, safe=False)
+
+            track = get_object_or_404(Track, pk=pk)
 
             favorite_tracks = request.user.favorite_tracks
             if value:
-                favorite_tracks.add(pk)
+                favorite_tracks.add(track)
             else:
-                favorite_tracks.remove(pk)
+                favorite_tracks.remove(track)
 
-            model = get_object_or_404(Track, pk=pk)
-            data = {
-                'played_count': model.played_count + 1,
-            }
-            serializer = TrackSerializer(model, data=data, partial=True, context={'request': request})
+            favorite_track_ids = list(map(lambda it: it.id, favorite_tracks.all()))
 
-            if not serializer.is_valid():
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            request.user.save()
 
-            serializer.save()
-            return Response(serializer.data)
+            responseData = {'favorite_track_ids': favorite_track_ids}
+            return JsonResponse(responseData, status=status.HTTP_200_OK, safe=True)
         except Exception as err:
             sError = errorToString(err)
             sTraceback = str(traceback.format_exc())
@@ -79,13 +78,8 @@ class TrackViewSet(viewsets.ModelViewSet):
                 'traceback': sTraceback,
             }
             logger.error(f'Caught error {sError} (returning in response):\n{debugObj(debugData)}')
-            return JsonResponse(
-                {
-                    'detail': sError,
-                },
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                safe=False,
-            )
+            errorDetail = {'detail': sError}
+            return JsonResponse(errorDetail, status=status.HTTP_500_INTERNAL_SERVER_ERROR, safe=False)
 
     @action(
         methods=['post'],
@@ -101,19 +95,14 @@ class TrackViewSet(viewsets.ModelViewSet):
 
             # Check session or csrf?
             if not session_key and not csrftoken:
-                return JsonResponse(
-                    {
-                        'detail': _('Client session not found'),
-                    },
-                    status=status.HTTP_403_FORBIDDEN,
-                    safe=False,
-                )
+                errorDetail = {'detail': _('Client session not found')}
+                return JsonResponse(errorDetail, status=status.HTTP_403_FORBIDDEN, safe=False)
 
-            model = get_object_or_404(Track, pk=pk)
+            track = get_object_or_404(Track, pk=pk)
             data = {
-                'played_count': model.played_count + 1,
+                'played_count': track.played_count + 1,
             }
-            serializer = TrackSerializer(model, data=data, partial=True, context={'request': request})
+            serializer = TrackSerializer(track, data=data, partial=True, context={'request': request})
 
             if not serializer.is_valid():
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -128,10 +117,5 @@ class TrackViewSet(viewsets.ModelViewSet):
                 'traceback': sTraceback,
             }
             logger.error(f'Caught error {sError} (returning in response):\n{debugObj(debugData)}')
-            return JsonResponse(
-                {
-                    'detail': sError,
-                },
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                safe=False,
-            )
+            errorDetail = {'detail': sError}
+            return JsonResponse(errorDetail, status=status.HTTP_500_INTERNAL_SERVER_ERROR, safe=False)

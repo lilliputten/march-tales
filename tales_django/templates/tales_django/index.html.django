@@ -15,11 +15,6 @@
 {% endblock beforeContent %}
 {% endcomment %}
 
-{% block js_texts_content %}
-  {{ block.super }}
-  {# TODO: Override/extend js messages #}
-{% endblock js_texts_content %}
-
 {% block main_column_content %}
   {{ block.super }}
   {# TODO: Override/extend main content #}

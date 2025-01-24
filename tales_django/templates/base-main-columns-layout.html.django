@@ -14,19 +14,6 @@
 
   {#% include "assets/main-page-splash/main-page-splash.django" %#}
 
-  <!-- {{{ JS translated messages -->
-  {% block js_texts %}
-    {{ block.super }}
-    <div id="js-texts" hidden>
-      {% block js_texts_content %}
-        {{ block.super }}
-        <div id="trackAddedToFavorites">{% trans 'The track has been successfully added to favorites' %}</div>
-        <div id="trackRemovedFromFavorites">{% trans 'The track has been successfully removed from favorites' %}</div>
-      {% endblock js_texts_content %}
-    </div>
-  {% endblock js_texts %}
-  <!-- }}} JS translated messages -->
-
   {# Optional top promo section #}
   {#% include "assets/template-columns/top-columns.django" %#}
 

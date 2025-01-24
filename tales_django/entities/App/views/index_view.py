@@ -7,6 +7,7 @@ from tales_django.core.pages import get_core_app_context
 
 def index_view(request: HttpRequest):
     context = get_core_app_context(request)
+
     return render(
         request=request,
         template_name='tales_django/index.html.django',

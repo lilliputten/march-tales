@@ -1,48 +1,13 @@
 import { commonNotify } from '../CommonNotify/CommonNotifySingleton';
-import { getCookie, quoteHtmlAttr } from '../helpers/CommonHelpers';
+import { getJsText } from '../helpers/getJsText';
+import { sendApiRequest } from '../helpers/sendApiRequest';
 
 // Values for dataset statuses
 const TRUE = 'true';
 
-function getJsText(id: string) {
-  const text = document.body.querySelector('#js-texts #' + id).innerHTML || id;
-  return quoteHtmlAttr(text).trim();
-}
-
 function sendToggleFavoriteRequest(trackId: number | string, value: boolean) {
-  const csrftoken = getCookie('csrftoken');
   const url = `/api/v1/tracks/${trackId}/toggle-favorite/`;
-  const headers = {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-    'X-CSRFToken': csrftoken,
-    Credentials: 'include',
-    Cookie: csrftoken && `csrftoken=${csrftoken}`,
-    sessionid: getCookie('sessionid'), // X-Session-Token
-    // django_language=ru; content-language: ru;
-  };
-  return fetch(url, {
-    method: 'POST',
-    headers,
-    credentials: 'include',
-    body: JSON.stringify({
-      value,
-    }),
-  })
-    .then(async (res) => {
-      const data = await res.json();
-      return [res, data];
-    })
-    .then(([res, data]: [Response, { detail?: string }]) => {
-      const { ok, status } = res;
-      if (!ok) {
-        const errMsg = [`Error ${status}`, data?.detail || res.statusText]
-          .filter(Boolean)
-          .join(': ');
-        throw new Error(errMsg);
-      }
-      return data;
-    });
+  return sendApiRequest(url, 'POST', { value });
 }
 
 function toggleFavorite(ev: Event) {
@@ -52,7 +17,13 @@ function toggleFavorite(ev: Event) {
   const { trackId, favorite } = dataset;
   const value = !favorite;
   sendToggleFavoriteRequest(trackId, value)
-    .then(() => {
+    .then((_results: { favorite_track_ids: number[] }) => {
+      /* // DEBUG
+       * const { favorite_track_ids } = results;
+       * console.log('[trackControls:toggleFavorite]', {
+       *   favorite_track_ids,
+       * });
+       */
       if (value) {
         dataset.favorite = TRUE;
         commonNotify.showSuccess(getJsText('trackAddedToFavorites'));
