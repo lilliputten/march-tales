@@ -146,6 +146,7 @@ INSTALLED_APPS = [
     # Added
     # 'modeltranslation',  # XXX: Doesn't work in django 5?
     # 'translation_manager',
+    'django_minify_html',
     'translated_fields',
     'compressor',
     'crispy_forms',
@@ -181,6 +182,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_minify_html.middleware.MinifyHtmlMiddleware',
     # allauth, @see https://docs.allauth.org/en/latest/installation/quickstart.html
     'allauth.account.middleware.AccountMiddleware',
     # # Html content prettifier (TODO: Requires fixes for invalid html tags formatting)

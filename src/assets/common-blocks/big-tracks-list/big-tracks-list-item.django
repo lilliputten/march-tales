@@ -87,11 +87,13 @@
           <span class="option option-favorite"><i class="icon bi bi-heart-fill"></i> <span class="text">{% trans 'Remove from favorites' %}</span></span>
         </button>
       {% endif %}
+      {% comment %}
       {% if user and request.session.session_key %}
         <button data-control-id="togglePlaylist" class="track-control btn btn-outline-primary disabled">
           <span class="option option-not-in-playlist"><i class="icon bi bi-music-note-list"></i> <span class="text">{% trans 'Add to playlist' %}</span></span>
         </button>
       {% endif %}
+      {% endcomment %}
     </div>
   </div>
 </article>

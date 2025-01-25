@@ -1,0 +1,8 @@
+{# ex: set ft=htmldjango : #}
+{% load static %}
+{% load i18n %}
+
+{% with tracks=favorite_tracks has_more_tracks=True more_button_link='/favorites' %}
+  {% trans 'Show all favorite tracks' as more_button_text %}
+  {% include 'assets/common-blocks/small-tracks-list/small-tracks-list.django' %}
+{% endwith %}

@@ -4,7 +4,8 @@
 
 {% comment %}
 
-- `authors` list expected as an external variable.
+- `authors` -- Authors list expected as an external variable.
+- `has_more_authors` -- Optional: has more authors than have been passed
 
 {% endcomment %}
 
@@ -24,4 +25,11 @@
       </a>
     </div>
   {% endfor %}
-  </div>
+  {% if has_more_authors %}
+    <div class="actions d-flex flex-wrap gap-1 mt-3">
+      <a class="btn btn-light btn-block" href="/authors">
+        <i class="icon fa fa-chevron-right "></i> <span class="text">{% trans 'Show all authors' %}</span>
+      </a>
+    </div>
+  {% endif %}
+</div>

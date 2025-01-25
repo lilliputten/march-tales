@@ -18,5 +18,9 @@ class Author(Model):
     portrait_picture = models.ImageField(_('portrait picture'), upload_to='authors', blank=True)
     promote = models.BooleanField(_('promote'), default=False, help_text=_('Promote on the main page'))
 
+    @property
+    def tracks_count(self):
+        return self.tracks.count()
+
     def __str__(self):
         return self.name

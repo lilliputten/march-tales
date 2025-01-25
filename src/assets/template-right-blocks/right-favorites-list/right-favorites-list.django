@@ -1,0 +1,12 @@
+{# ex: set ft=htmldjango : #}
+{% load static %}
+{% load i18n %}
+
+<!-- Favorite tracks -->
+
+{% if favorite_tracks.count %}
+<div class="right-favorite-list widget">
+  <h4 class="widget-title">{% trans "Favorite Tracks" %}</h4>
+  {% include 'assets/template-right-blocks/right-favorites-list/right-favorites-list-wrapper.django' %}
+</div>
+{% endif %}

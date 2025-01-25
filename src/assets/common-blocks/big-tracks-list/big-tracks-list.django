@@ -4,7 +4,8 @@
 
 {% comment %}
 
-- `tracks` list expected as an external variable.
+- `tracks` -- Tracks list expected as an external variable.
+- `has_more_tracks` -- Optional: has more tracks than have been passed
 
 {% endcomment %}
 
@@ -12,4 +13,11 @@
   {% for track in tracks %}
     {% include 'assets/common-blocks/big-tracks-list/big-tracks-list-item.django' %}
   {% endfor %}
+  {% if has_more_tracks %}
+    <div class="actions d-flex flex-wrap gap-1">
+      <a class="btn btn-light btn-block" href="/tracks">
+        <i class="icon fa fa-chevron-right "></i> <span class="text">{% trans 'Show all tracks' %}</span>
+      </a>
+    </div>
+  {% endif %}
 </div>

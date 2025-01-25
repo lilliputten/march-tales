@@ -50,8 +50,8 @@
 - model: 'tales_django.track'
   pk: 3
   fields:
-    title_en: 'Track 3'
-    title_ru: 'Трек 3'
+    title_en: 'Bbb 3'
+    title_ru: 'Ббб 3'
     description_en: 'Description'
     description_ru: 'Описание'
     author: 1
@@ -84,8 +84,8 @@
     for_members: false
     audio_duration: 5
     audio_size: 22535
-    published_at: '2025-01-03'
-    updated_at: '2025-01-03'
+    published_at: '2025-01-04'
+    updated_at: '2025-01-04'
     published_by: 1
     updated_by: 1
     # tags:
@@ -107,8 +107,8 @@
     for_members: false
     audio_duration: 5
     audio_size: 22535
-    published_at: '2025-01-03'
-    updated_at: '2025-01-03'
+    published_at: '2025-01-05'
+    updated_at: '2025-01-05'
     published_by: 1
     updated_by: 1
     # tags:

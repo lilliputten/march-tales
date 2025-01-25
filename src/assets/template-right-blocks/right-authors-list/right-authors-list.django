@@ -2,6 +2,14 @@
 {% load static %}
 {% load i18n %}
 
+{% comment %}
+
+- `authors` -- Authors list expected as an external variable.
+- `has_more_authors` -- Optional: has more authors than have been passed
+
+{% endcomment %}
+
+
 <!-- Authors -->
 <div class="right-authors-list widget widget-author">
   <h4 class="widget-title">{% trans "Authors" %}</h4>

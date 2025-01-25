@@ -59,49 +59,10 @@
   - Add listings for your own tracks.
 -->
 
-{% with favorite_tracks=user.favorite_tracks %}
-  {% if favorite_tracks.all.count > 0 %}
-    <h2 class="primary-color mt-5 mb-4">{% trans "Favorite tracks" %}:</h2>
-    {% for track in favorite_tracks.all %}
-      <div class="track-card card w-auto d-flex flex-row p-2 justify-content-center align-items-center">
-        {% if track.preview_picture %}
-          <div class="image-wrapper d-flex"
-               style="width: 120px; min-height: 120px;">
-            <div
-              class="image m-2 flex-grow-1"
-              style="
-                background-image: url('{% get_media_prefix %}{{ track.preview_picture }}');
-                background-size: cover;
-                background-position: center;
-                background-repeat: no-repeat;
-              "
-            ></div>
-          </div>
-        {% endif %}
-        <div class="card-body">
-          <h5 class="card-title"><a href="#" class="card-link">{{ track.title }}</a></h5>
-          <ul class="card-subtitle small list-inline mb-2">
-            {% if track.duration_formated %}
-              <li class="list-inline-item">
-                <span class="label text-muted">{% trans "Duration" %}:</span>
-                <span class="value">{{ track.audio_duration }}</span>
-              </li>
-            {% endif %}
-            {% if track.audio_size %}
-              <li class="list-inline-item">
-                <span class="label text-muted">{% trans "File size" %}:</span>
-                <span class="value">{{ track.size_formatted }}</span>
-              </li>
-            {% endif %}
-          </ul>
-        </div>
-        <div class="card-actions">
-          fav
-        </div>
-      </div>
-    {% endfor %}
-  {% endif %}
-{% endwith %}
+{% if favorite_tracks.count %}
+  <h2 class="primary-color mt-5 mb-4">{% trans "Favorite tracks" %}:</h2>
+  {% include 'assets/template-right-blocks/right-favorites-list/right-favorites-list-wrapper.django' %}
+{% endif %}
 
 {# Buttons #}
 <div class="actions mt-5 mb-4">

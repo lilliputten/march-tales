@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-24 23:10+0300\n"
+"POT-Creation-Date: 2025-01-25 03:59+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,6 +20,10 @@ msgstr ""
 
 #: .\src\assets\back-button\back-button.django:5
 msgid "Back"
+msgstr ""
+
+#: .\src\assets\common-blocks\authors-list\authors-list.django:31
+msgid "Show all authors"
 msgstr ""
 
 #: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:37
@@ -71,8 +75,9 @@ msgstr ""
 msgid "Remove from favorites"
 msgstr ""
 
-#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:92
-msgid "Add to playlist"
+#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list.django:19
+#: .\src\assets\common-blocks\small-tracks-list\small-tracks-list.django:35
+msgid "Show all tracks"
 msgstr ""
 
 #: .\src\assets\page-menus\menu-main.django:19
@@ -168,8 +173,16 @@ msgstr "Listen to classic fairy tales online"
 msgid "About me"
 msgstr ""
 
-#: .\src\assets\template-right-blocks\right-authors-list\right-authors-list.django:7
+#: .\src\assets\template-right-blocks\right-authors-list\right-authors-list.django:15
 msgid "Authors"
+msgstr ""
+
+#: .\src\assets\template-right-blocks\right-favorites-list\right-favorites-list.django:9
+msgid "Favorite Tracks"
+msgstr ""
+
+#: .\src\assets\template-right-blocks\right-favorites-list\right-favorites-list.django:11
+msgid "Show all favorite tracks"
 msgstr ""
 
 #: .\src\assets\template-right-blocks\right-membership\right-membership.django:7
