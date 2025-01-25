@@ -1,7 +1,10 @@
 import traceback
+
 from django.utils.translation import gettext_lazy as _
+from django.utils import translation
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
+
 from rest_framework.decorators import action
 from rest_framework.request import Request
 from rest_framework.response import Response
@@ -20,18 +23,45 @@ from ..models import Track
 logger = getDebugLogger()
 
 
+defaultTracksLimit = 5
+defaultTracksOffset = 0
+
+
 class DefaultPagination(pagination.LimitOffsetPagination):
-    default_limit = 2
-    # limit = 1
-    # page_size = 2
-    # max_page_size = 2
-    # page_size_query_param = 'page_size'
+    default_limit = defaultTracksLimit
 
 
 class TrackViewSet(viewsets.ModelViewSet):
-    queryset = Track.objects.all()
+    language = translation.get_language()
+    queryset = Track.objects.order_by('-published_at', f'title_{language}').all()
     serializer_class = TrackSerializer
     pagination_class = DefaultPagination
+
+    def list(self, request):   # , *args, **kwargs):
+        limit = int(request.query_params.get('limit', defaultTracksLimit))
+        offset = int(request.query_params.get('offset', defaultTracksOffset))
+
+        # TODO: Extract sort/filter params and modify results below?
+
+        language = translation.get_language()
+        query = Track.objects.filter(track_status='PUBLISHED').order_by('-published_at', f'title_{language}')
+        subset = query.all()
+        if query or limit:
+            subset = query.all()[offset : offset + limit]
+
+        result = {
+            'count': len(query),
+            'results': TrackSerializer(subset, many=True).data,
+        }
+
+        # result.update({
+        #     'meta':{'api':'SmartTag'}
+        # })
+
+        headers = {
+            'Content-Type': 'application/json; charset=utf-8',
+        }
+        return Response(result, headers=headers, content_type='application/json; charset=utf-8')
 
     @action(
         methods=['post', 'get'],

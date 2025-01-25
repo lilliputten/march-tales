@@ -191,7 +191,7 @@ msgstr "Стать членом сообщества"
 
 #: .\src\assets\template-right-blocks\right-membership\right-membership.django:8
 msgid "Membershop description block."
-msgstr "Подробно о статсе члена сообщества и процедуре..."
+msgstr "Подробно о статусе члена сообщества и процедуре..."
 
 #: .\src\assets\template-right-blocks\right-membership\right-membership.django:9
 msgid "Obtain membership"
@@ -597,7 +597,7 @@ msgstr "Редактировать профиль"
 
 #: .\tales_django\templates\allauth\layouts\manage.html:28
 msgid "Change Email"
-msgstr "Сменить мой пароль"
+msgstr "Изменить e-mail"
 
 #: .\tales_django\templates\allauth\layouts\manage.html:36
 msgid "Change Password"

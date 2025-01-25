@@ -42,6 +42,7 @@ class TrackSerializer(serializers.HyperlinkedModelSerializer):
             'id',
             'title',
             # 'description',
+            'youtube_url',
             'track_status',
             # 'author_id',
             'author',
@@ -53,5 +54,6 @@ class TrackSerializer(serializers.HyperlinkedModelSerializer):
             'preview_picture',
             'for_members',
             'played_count',
+            'published_at',
             # 'favorited_users',
         )

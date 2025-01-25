@@ -2,4 +2,4 @@
 
 {% load i18n %}
 
-<a class="btn btn-outline-primary" href="{% url 'index' %}" onClick="history.back(); return false">{% trans 'Back' %}</a>
+<a class="btn btn-outline-primary d-flex align-items-center gap-2" href="{% url 'index' %}" onClick="history.back(); return false"><i class="icon fa fa-long-arrow-left"></i> <span class="text">{% trans 'Back' %}</span></a>

@@ -30,8 +30,8 @@ def check_csrf(request):
     return False if reason else True
 
 
-@csrf_exempt   # Will send json failure response manually
-def check_api_view(request: Request):   # , *args, **kwargs):
+@csrf_exempt  # Will send json failure response manually
+def check_api_view(request: Request):  # , *args, **kwargs):
     try:
         if request.method != 'POST':
             data = {'detail': _('Expected POST request')}
@@ -47,6 +47,7 @@ def check_api_view(request: Request):   # , *args, **kwargs):
             'headers_csrftoken': headers_csrftoken,
             'meta_csrftoken': meta_csrftoken,
             'csrftoken': csrftoken,
+            'cyrillic': 'Тест',
         }
         debugStr = debugObj(debugData)
         logger.info(f'get\n{debugStr}')
@@ -58,11 +59,11 @@ def check_api_view(request: Request):   # , *args, **kwargs):
         # # Check user is_authenticated?
         # if not request.user.is_authenticated:
         #     data = {'detail': _('User in not authenticated')}
-        #     return JsonResponse(data, status=status.HTTP_403_FORBIDDEN, safe=False)
+        #     return JsonResponse(data, status=status.HTTP_403_FORBIDDEN, safe=False, json_dumps_params={'ensure_ascii': True}, content_type="application/json; charset=utf-8")
         # Check session or csrf?
         # if not session_key:
         #     data = {'detail': _('Client session not found')}
-        #     return JsonResponse(data, status=status.HTTP_403_FORBIDDEN, safe=False)
+        #     return JsonResponse(data, status=status.HTTP_403_FORBIDDEN, safe=False, json_dumps_params={'ensure_ascii': True}, content_type="application/json; charset=utf-8")
 
         timestamp = getTimeStamp()
         data = {
@@ -71,7 +72,12 @@ def check_api_view(request: Request):   # , *args, **kwargs):
             'checked': True,
             **debugData,  # DEBUG: Show debug data
         }
-        return JsonResponse(data, status=status.HTTP_200_OK)
+        return JsonResponse(
+            data,
+            status=status.HTTP_200_OK,
+            json_dumps_params={'ensure_ascii': True},
+            content_type='application/json; charset=utf-8',
+        )
     except Exception as err:
         sError = errorToString(err)
         sTraceback = str(traceback.format_exc())
@@ -86,4 +92,6 @@ def check_api_view(request: Request):   # , *args, **kwargs):
             },
             status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             safe=False,
+            json_dumps_params={'ensure_ascii': True},
+            content_type='application/json; charset=utf-8',
         )

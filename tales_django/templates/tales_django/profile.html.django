@@ -65,9 +65,9 @@
 {% endif %}
 
 {# Buttons #}
-<div class="actions mt-5 mb-4">
+<div class="actions mt-5 mb-4 d-flex flex-wrap gap-1">
   {# TODO: Put common actions toolbar here #}
-  <a class="btn btn-primary" href="{% url 'profile_edit' %}">{% trans "Edit profile" %}</a>
+  <a class="btn btn-primary d-flex align-items-center gap-2" href="{% url 'profile_edit' %}"><i class="icon fa fa-pencil"></i> <span class="text">{% trans "Edit profile" %}</span></a>
   {% include "assets/back-button/back-button.django" %}
   {% comment %}
   <a class="btn btn-primary" href="{% url 'password_change' %}">{% trans "Change password" %}</a>

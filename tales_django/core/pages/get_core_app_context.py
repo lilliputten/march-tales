@@ -32,13 +32,17 @@ def get_core_app_context(request: HttpRequest):
     language = translation.get_language()
     logger.info(f'language: {language}')
 
-    favorite_tracks = (
-        request.user.favorite_tracks.order_by('-published_at').all() if not request.user.is_anonymous else None
-    )
+    favorite_tracks = None
+    if request.user.is_authenticated:
+        favorite_tracks = (
+            request.user.favorite_tracks
+            # .filter(track_status='PUBLISHED')
+            .order_by('-published_at').all()
+        )
 
     # TODO: Add popular tracks (show instead of recent ones?)
 
-    tracks = Track.objects.order_by('-published_at', f'title_{language}').all()
+    tracks = Track.objects.filter(track_status='PUBLISHED').order_by('-published_at', f'title_{language}').all()
 
     authors = (
         Author.objects.annotate(t_count=Count('track', distinct=True)).order_by('-t_count', f'name_{language}').all()
