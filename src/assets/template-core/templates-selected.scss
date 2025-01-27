@@ -59,7 +59,7 @@
       margin-bottom: 0;
       display: flex;
       flex-wrap: wrap;
-      gap: .25em;
+      gap: 0.25em;
 
       li {
         border: 0 !important;
@@ -76,7 +76,7 @@
             display: inline-block;
             opacity: 0.5;
             content: '#';
-            margin-right: .2em
+            margin-right: 0.2em;
           }
 
           &:hover {
@@ -90,7 +90,7 @@
       margin-bottom: 0;
       display: flex;
       flex-wrap: wrap;
-      gap: .25em;
+      gap: 0.25em;
 
       li {
         border: 0 !important;

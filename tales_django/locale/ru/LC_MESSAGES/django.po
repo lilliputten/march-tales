@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-25 03:59+0300\n"
+"POT-Creation-Date: 2025-01-27 09:46+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,7 +35,6 @@ msgstr "Счётчик прослушиваний"
 
 #: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:41
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:127
-#: .\tales_django\templates\tales_django\profile.html.django:86
 msgid "Duration"
 msgstr "Длительность"
 
@@ -78,7 +77,7 @@ msgid "Remove from favorites"
 msgstr "Удалить из избранного"
 
 #: .\src\assets\common-blocks\big-tracks-list\big-tracks-list.django:19
-#: .\src\assets\common-blocks\small-tracks-list\small-tracks-list.django:35
+#: .\src\assets\common-blocks\small-tracks-list\small-tracks-list.django:36
 msgid "Show all tracks"
 msgstr "Показать все треки"
 
@@ -177,13 +176,13 @@ msgstr "Обо мне"
 msgid "Authors"
 msgstr "авторы"
 
+#: .\src\assets\template-right-blocks\right-favorites-list\right-favorites-list-wrapper.django:6
+msgid "Show all favorite tracks"
+msgstr "Все избранные треки"
+
 #: .\src\assets\template-right-blocks\right-favorites-list\right-favorites-list.django:9
 msgid "Favorite Tracks"
 msgstr "Избранные треки"
-
-#: .\src\assets\template-right-blocks\right-favorites-list\right-favorites-list.django:11
-msgid "Show all favorite tracks"
-msgstr "Все избранные треки"
 
 #: .\src\assets\template-right-blocks\right-membership\right-membership.django:7
 msgid "Become a Member"
@@ -202,12 +201,12 @@ msgid "Try the mobile app!"
 msgstr "Слушай на мобильном!"
 
 #: .\src\assets\template-right-blocks\right-mobile-promo\right-mobile-promo.django:11
-msgid "Mobile app description."
-msgstr "Описание мобильного приложения."
+msgid "Actual version is:"
+msgstr "Актуальная версия"
 
 #: .\src\assets\template-right-blocks\right-mobile-promo\right-mobile-promo.django:12
-msgid "Get Started"
-msgstr "Попробовать!"
+msgid "Download for Android"
+msgstr "Скачать для Android"
 
 #: .\src\assets\template-right-blocks\right-search\right-search.django:7
 msgid "Search for an audio or author"
@@ -245,7 +244,7 @@ msgstr "Приложение"
 msgid "Expected POST request"
 msgstr "Ожидается POST запрос"
 
-#: .\tales_django\entities\App\api\check_api_view.py:55
+#: .\tales_django\entities\App\api\check_api_view.py:56
 msgid "Failed checking CSRF token"
 msgstr "Ошибка проверки токена CSRF"
 
@@ -324,12 +323,12 @@ msgstr "название"
 msgid "Audio file has been successfully uploaded"
 msgstr "Аудио файл успешно загружен"
 
-#: .\tales_django\entities\Tracks\api\TrackViewSet.py:52
+#: .\tales_django\entities\Tracks\api\TrackViewSet.py:82
 msgid "User in not authenticated"
 msgstr "Пользователь не авторизован"
 
-#: .\tales_django\entities\Tracks\api\TrackViewSet.py:56
-#: .\tales_django\entities\Tracks\api\TrackViewSet.py:98
+#: .\tales_django\entities\Tracks\api\TrackViewSet.py:86
+#: .\tales_django\entities\Tracks\api\TrackViewSet.py:128
 msgid "Client session not found"
 msgstr "Не найдена клиентская сессия"
 
@@ -589,7 +588,7 @@ msgstr "Управление учетной записью"
 
 #: .\tales_django\templates\allauth\layouts\manage.html:22
 #: .\tales_django\templates\registration\password_change_form.html:30
-#: .\tales_django\templates\tales_django\profile.html.django:109
+#: .\tales_django\templates\tales_django\profile.html.django:70
 #: .\tales_django\templates\tales_django\profile_edit.html.django:8
 #: .\tales_django\templates\tales_django\profile_edit.html.django:15
 msgid "Edit profile"
@@ -873,13 +872,9 @@ msgstr ""
 "(invoice_download_url)s\">загрузите счет-фактуру</a> и оплатите его прямо "
 "сейчас."
 
-#: .\tales_django\templates\tales_django\profile.html.django:64
+#: .\tales_django\templates\tales_django\profile.html.django:63
 msgid "Favorite tracks"
 msgstr "Избранные треки"
-
-#: .\tales_django\templates\tales_django\profile.html.django:92
-msgid "File size"
-msgstr "Размер файла"
 
 #: .\tales_django\templates\tales_django\profile_edit.html.django:26
 msgid "Save"
@@ -893,6 +888,15 @@ msgstr "Сбросить изменния"
 #: .\tales_django\templates\tales_django\terms.html.django:14
 msgid "Terms and conditions"
 msgstr "Пользовательское соглашение"
+
+#~ msgid "Mobile app description."
+#~ msgstr "Описание мобильного приложения."
+
+#~ msgid "Get Started"
+#~ msgstr "Попробовать!"
+
+#~ msgid "File size"
+#~ msgstr "Размер файла"
 
 #~ msgid "Add to playlist"
 #~ msgstr "Добавить в плейлист"
