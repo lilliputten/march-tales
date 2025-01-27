@@ -62,8 +62,8 @@ def get_core_app_context(request: HttpRequest):
     context = {
         'user': request.user,
         'tracks': tracks[:showTracksCount],
-        'favorite_tracks': favorite_tracks[:showFavoriteTracksCount],
-        'has_more_favorite_tracks': len(favorite_tracks) > showFavoriteTracksCount,
+        'favorite_tracks': favorite_tracks[:showFavoriteTracksCount] if favorite_tracks else None,
+        'has_more_favorite_tracks': len(favorite_tracks) > showFavoriteTracksCount if favorite_tracks else None,
         'has_more_tracks': len(tracks) > showTracksCount,
         'authors': authors[:showAuthorsCount],
         'has_more_authors': len(authors) > showAuthorsCount,
