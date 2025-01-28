@@ -385,7 +385,11 @@ DATETIME_FORMAT = DATE_FORMAT + ',' + TIME_FORMAT
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # @see https://pypi.org/project/django-cors-headers/
-CSRF_COOKIE_SAMESITE = 'None'
+
+# CSRF_COOKIE_SAMESITE = 'None' # NOTE: This setting prevent opera from sending cookies back to the server
+
+# CSRF_USE_SESSIONS = True # NOTE: Get csrftoken from session rather from cookies (needs some extra settings)
+
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
@@ -485,11 +489,11 @@ LOGGING = {
         },
     },
 }
-ADMINS = (('ME', 'lilliputten@gmail.com'),)
+ADMINS = (('admin', 'lilliputten@gmail.com'),)
 MANAGERS = ADMINS
 
 # @see: https://docs.djangoproject.com/en/2.0/ref/settings/#timeout
-TIMEOUT = 30 if DEBUG else 300  # Short value for cache expiration
+TIMEOUT = 30 if DEBUG else 300  # Short value for cache expiration in debug mode
 
 # Site config
 
