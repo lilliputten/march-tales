@@ -290,18 +290,18 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-# Use real db (MySQL) server in production mode
-if not LOCAL:
-    DATABASES['default'] = {
-        'ENGINE': DB_ENGINE,
-        'NAME': DB_NAME,
-        'USER': DB_USER,
-        'PASSWORD': DB_PASSWORD,
-        'HOST': DB_HOST,
-        'PORT': DB_PORT,
-        # 'PORT': '5432',
-        'OPTIONS': { 'init_command': 'SET storage_engine=INNODB', },
-    }
+# # Use real db (MySQL) server in production mode
+# if not LOCAL:
+#     DATABASES['default'] = {
+#         'ENGINE': DB_ENGINE,
+#         'NAME': DB_NAME,
+#         'USER': DB_USER,
+#         'PASSWORD': DB_PASSWORD,
+#         'HOST': DB_HOST,
+#         'PORT': DB_PORT,
+#         # 'PORT': '5432',
+#         'OPTIONS': { 'init_command': 'SET storage_engine=INNODB', },
+#     }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
