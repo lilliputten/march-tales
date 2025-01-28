@@ -34,7 +34,7 @@
         </a>
       </li>
       {# Count #}
-      <li class="list-inline-item" title="{% trans 'Played count' %}">
+      <li class="track-played-count list-inline-item" data-played-count="{{ track.played_count }}" title="{% trans 'Played count' %}">
         <i class="ti-headphone"></i> <span id="played_count">{{ track.played_count }}</span>
       </li>
       {# Duration #}
@@ -46,7 +46,8 @@
         <i class="ti-calendar"></i>{{ track.published_at }}
       </li>
       {# Rubrics #}
-      <li class="track-rubrics list-inline-item" title="{% trans 'Rubrics' %}">
+      {% if track.rubrics.count %}
+      <li class="track-rubrics list-inline-item" data-rubrics-count="{{ track.rubrics.count }}" title="{% trans 'Rubrics' %}">
         <ul class="card-meta-rubrics list-inline">
           {% for rubric in track.rubrics.all %}
             <li class="list-inline-item">
@@ -55,8 +56,10 @@
           {% endfor %}
         </ul>
       </li>
+      {% endif %}
       {# Tags #}
-      <li class="track-tags list-inline-item" title="{% trans 'Tags' %}">
+      {% if track.tags.count %}
+      <li class="track-tags list-inline-item" data-tags-count="{{ track.tags.count }}" title="{% trans 'Tags' %}">
         <ul class="card-meta-tags list-inline">
           {% for tag in track.tags.all %}
             <li class="list-inline-item">
@@ -65,6 +68,7 @@
           {% endfor %}
         </ul>
       </li>
+      {% endif %}
     </ul>
     {# Descriptions #}
     <p>{{ track.description }}</p>

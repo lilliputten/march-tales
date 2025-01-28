@@ -4,7 +4,7 @@
 
 <!-- Promotion -->
 <div class="right-mobile-promo promotion">
-  <img src="{% static 'images/mobile-promo/vertical-mobile-promo.jpg' %}" class="img-fluid w-100" />
+  <img src="{% static 'images/mobile-promo/vertical-mobile-promo-2.jpg' %}" class="img-fluid w-100" />
   <div class="promotion-content">
     <h5 class="top text-white mb-3">{% trans 'Try the mobile app!' %}</h5>
     <div class="bottom">
