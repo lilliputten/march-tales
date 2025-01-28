@@ -44,6 +44,13 @@ from core.appSecrets import (
 from core.djangoConfig import (
     APP_NAME,
     DEFAULT_HOST,
+    # Database setup
+    DB_ENGINE,
+    DB_NAME,
+    DB_USER,
+    DB_PASSWORD,
+    DB_HOST,
+    DB_PORT,
     # Email...
     EMAIL_HOST,
     EMAIL_PORT,
@@ -283,7 +290,18 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
+# Use real db (MySQL) server in production mode
+if not LOCAL:
+    DATABASES['default'] = {
+        'ENGINE': DB_ENGINE,
+        'NAME': DB_NAME,
+        'USER': DB_USER,
+        'PASSWORD': DB_PASSWORD,
+        'HOST': DB_HOST,
+        'PORT': DB_PORT,
+        # 'PORT': '5432',
+        'OPTIONS': { 'init_command': 'SET storage_engine=INNODB', },
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -351,10 +369,10 @@ USE_I18N = True
 USE_L10N = True
 LOCALE_PATHS = (posixpath.join(BASE_DIR, APP_NAME, 'locale'),)
 LANGUAGES = (
-    ('ru', 'Русский'),
     ('en', 'English'),
-    # ('fr', _(u'Français')),
+    ('ru', 'Русский'),
 )
+DEFAULT_LANGUAGE = LANGUAGES[0][0]
 LANGUAGES_LIST = {lng: name for lng, name in list(LANGUAGES)}
 CMS_LANGUAGES = {
     'default': {
@@ -531,6 +549,7 @@ PASS_VARIABLES = {
     'MEDIA_URL': MEDIA_URL,
     # i18n
     'LANGUAGES': LANGUAGES,
+    'DEFAULT_LANGUAGE': DEFAULT_LANGUAGE,
     'LANGUAGES_LIST': LANGUAGES_LIST,
     'LANGUAGE_CODE': LANGUAGE_CODE,
     # Uploaded mobile application:
@@ -540,6 +559,13 @@ PASS_VARIABLES = {
 }
 
 __all__ = [
+    # # Database setup
+    # 'DB_ENGINE',
+    # 'DB_NAME',
+    # 'DB_USER',
+    # 'DB_PASSWORD',
+    # 'DB_HOST',
+    # 'DB_PORT',
     # Email...
     'EMAIL_HOST',
     'EMAIL_PORT',
