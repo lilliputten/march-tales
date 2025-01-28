@@ -1,2 +1,3 @@
 # Assets situated in `/src` folder and shouldn't be copied to the static.
 assets
+downloads/apk

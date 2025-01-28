@@ -28,6 +28,11 @@ from core.appEnv import (
     ASSETS_ROOT,
     PROJECT_INFO,  # DEBUG
 )
+from core.appConfig import (
+    APK_DOWNLOAD_FILE,
+    APK_DOWNLOAD_VERSION,
+    APK_DOWNLOAD_SIZE,
+)
 from core.appSecrets import (
     SECRET_KEY,
     REGISTRATION_SALT,
@@ -524,6 +529,10 @@ PASS_VARIABLES = {
     'LANGUAGES': LANGUAGES,
     'LANGUAGES_LIST': LANGUAGES_LIST,
     'LANGUAGE_CODE': LANGUAGE_CODE,
+    # Uploaded mobile application:
+    'APK_DOWNLOAD_FILE': APK_DOWNLOAD_FILE,
+    'APK_DOWNLOAD_VERSION': APK_DOWNLOAD_VERSION,
+    'APK_DOWNLOAD_SIZE': APK_DOWNLOAD_SIZE,
 }
 
 __all__ = [
@@ -544,6 +553,10 @@ __all__ = [
     'STATIC_FOLDER',
     'STATIC_ROOT',
     'STATIC_URL',
+    # Uploaded mobile application:
+    'APK_DOWNLOAD_FILE',
+    'APK_DOWNLOAD_VERSION',
+    'APK_DOWNLOAD_SIZE',
 ]
 
 try:
