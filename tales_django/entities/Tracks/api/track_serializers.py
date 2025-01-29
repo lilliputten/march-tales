@@ -38,22 +38,26 @@ class TrackSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Track
+
         fields = (
             'id',
+            # 'active',  # ???
+            # 'duration_formatted',
             'title',
-            # 'description',
-            'youtube_url',
-            'track_status',
-            # 'author_id',
-            'author',
-            'tags',
-            'rubrics',
-            'audio_file',
             'audio_duration',
+            'audio_file',
             'audio_size',
-            'preview_picture',
+            'description',
             'for_members',
             'played_count',
+            'preview_picture',
             'published_at',
-            # 'favorited_users',
+            'published_by_id',
+            'track_status',
+            'updated_at',
+            'updated_by_id',
+            'youtube_url',
+            'author',
+            'rubrics',
+            'tags',
         )

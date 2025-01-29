@@ -1,7 +1,6 @@
 import traceback
 
 from django.utils.translation import gettext_lazy as _
-from django.utils import translation
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 
@@ -15,7 +14,8 @@ from rest_framework import pagination
 from core.helpers.errors import errorToString
 from core.helpers.utils import debugObj
 from core.logging import getDebugLogger
-from tales_django import settings
+
+from tales_django.core.model_helpers import get_currrent_django_language
 
 from .track_serializers import TrackSerializer
 
@@ -28,17 +28,12 @@ defaultTracksLimit = 5
 defaultTracksOffset = 0
 
 
-def get_language():
-    language = translation.get_language()
-    return language if language else settings.DEFAULT_LANGUAGE
-
-
 class DefaultPagination(pagination.LimitOffsetPagination):
     default_limit = defaultTracksLimit
 
 
 class TrackViewSet(viewsets.ModelViewSet):
-    language = get_language()
+    language = get_currrent_django_language()
     queryset = Track.objects.order_by('-published_at', f'title_{language}').all()
     serializer_class = TrackSerializer
     pagination_class = DefaultPagination
@@ -49,7 +44,7 @@ class TrackViewSet(viewsets.ModelViewSet):
 
         # TODO: Extract sort/filter params and modify results below?
 
-        language = get_language()
+        language = get_currrent_django_language()
         query = Track.objects.filter(track_status='PUBLISHED').order_by('-published_at', f'title_{language}')
         subset = query.all()
         if query or limit:
