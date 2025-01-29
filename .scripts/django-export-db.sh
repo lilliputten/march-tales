@@ -11,7 +11,7 @@ test -f "$utilsPath/check-python-env.sh" && . "$utilsPath/check-python-env.sh"
 
 DATA_FOLDER=".data"
 DATE_ID=`date "+%y%m%d-%H%M"`
-FILE_NAME="$DATA_FOLDER/exported-db-$DATE_ID.yaml"
+FILE_NAME="$DATA_FOLDER/exported-db-$DATE_ID.json"
 mkdir -p "$DATA_FOLDER"
-$PYTHON_RUNTIME manage.py dumpdata | json2yaml > "$FILE_NAME"
+$PYTHON_RUNTIME manage.py dumpdata > "$FILE_NAME"
 echo "See exported file: $FILE_NAME"

@@ -28,9 +28,15 @@
     li {
       margin-bottom: 10px;
 
-      &:not(:last-child) {
-        border-right: 1px solid $border-color;
-        padding-right: 8px;
+      &:not(:first-child) {
+        border-left: 1px solid $border-color;
+        padding-left: 8px;
+      }
+
+      &.track-rubrics[data-rubrics-count='0'],
+      &.track-tags[data-tags-count='0'],
+      &.track-played-count[data-played-count='0'] {
+        display: none;
       }
     }
 

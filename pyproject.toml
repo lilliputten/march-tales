@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "march-tales"
-version = "0.0.12"
+version = "0.0.13"
 description = "March Tales django api and web frontend server"
 authors = ["lilliputten <lilliputten@gmail.com>"]
 readme = "README.md"
@@ -17,7 +17,7 @@ concurrent-log-handler = "^0.9.25" # Write logs to a retating files
 beautifulsoup4 = "^4.12.3"
 colorama = "^0.4.6"
 crispy-bootstrap5 = "^2024.10"
-django = "^5.1.4"
+django = "5.0"
 django-compressor = "^4.5.1"
 django-crispy-forms = "^2.3"
 django-environ = "^0.11.2"
@@ -36,10 +36,11 @@ pillow = "^11.1.0"
 django-translated-fields = "^0.13.0"
 djangorestframework = "^3.15.2"
 # NOTE: The `django-allauth` version somehow resets after adding of a new dependecy, it should be "^65.3.1", see example line below
-# django-allauth = {extras = ["mfa", "socialaccount"], version = "0.0.12"}
-django-allauth = {extras = ["mfa", "socialaccount"], version = "0.0.12"}
+# django-allauth = {extras = ["mfa", "socialaccount"], version = "0.0.13"}
+django-allauth = {extras = ["mfa", "socialaccount"], version = "0.0.13"}
 django-cors-headers = "^4.6.0"
 django-minify-html = "^1.11.0"
+mysqlclient = "^2.2.7"
 
 [tool.poetry.group.dev.dependencies]
 blue = "^0.9.1"

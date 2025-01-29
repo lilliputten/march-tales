@@ -13,6 +13,14 @@ DEFAULT_HOST = appEnv.str('DEFAULT_HOST', 'tales.march.team')
 
 MEDIA_TRACKS_FOLDER = appEnv.str('MEDIA_TRACKS_FOLDER', 'tracks')
 
+# Database setup
+DB_ENGINE = appEnv.str('DB_ENGINE', 'django.db.backends.mysql')
+DB_NAME = appEnv.str('DB_NAME', '')
+DB_USER = appEnv.str('DB_USER', '')
+DB_PASSWORD = appEnv.str('DB_PASSWORD', '')
+DB_HOST = appEnv.str('DB_HOST', 'localhost')
+DB_PORT = appEnv.str('DB_PORT', '5432')
+
 # Email...
 
 DEFAULT_FROM_EMAIL = appEnv.str('DEFAULT_FROM_EMAIL', 'tales@' + BASE_HOST)

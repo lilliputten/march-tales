@@ -162,10 +162,15 @@ function incrementPlayedCount() {
     .then(({ played_count }: { played_count?: number }) => {
       // Update track data...
       const valueNode = trackPlayer.querySelector('#played_count') as HTMLElement;
+      // Update counter in the document...
       if (played_count != null && valueNode) {
         valueNode.innerText = quoteHtmlAttr(String(played_count));
+        const parent = valueNode.closest('.track-played-count[data-played-count]') as HTMLElement;
+        if (parent) {
+          parent.dataset.playedCount = String(played_count);
+        }
       }
-      // TODO: Update other instances of this track on the page?
+      // TODO: Update other instances of this track on the page (eg, in player, or in other track listings)?
     })
     .catch((err) => {
       // eslint-disable-next-line no-console
