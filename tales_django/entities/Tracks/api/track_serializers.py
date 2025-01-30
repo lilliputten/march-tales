@@ -9,6 +9,7 @@ class AuthorSerializer(serializers.HyperlinkedModelSerializer):
         fields = (
             'id',
             'name',
+            'portrait_picture',
         )
 
 
