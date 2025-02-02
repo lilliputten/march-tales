@@ -1,8 +1,10 @@
 import traceback
 
 from django.utils.translation import gettext_lazy as _
-from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
+
+# from django.http import JsonResponse
+# from django.views.decorators.csrf import csrf_exempt
 
 from rest_framework.decorators import action
 from rest_framework.request import Request
@@ -48,6 +50,14 @@ class TrackViewSet(viewsets.ModelViewSet):
         """
         Overrided single track retrieve method
         """
+
+        # Check session or csrf
+        if not check_csrf(request):
+            errorDetail = {'detail': _('Client session not found')}
+            return Response(
+                errorDetail, headers=default_headers, content_type=content_type, status=status.HTTP_403_FORBIDDEN
+            )
+
         instance = self.get_object()
         serializer = TrackSerializer(instance=instance)
         result = serializer.data
@@ -57,6 +67,14 @@ class TrackViewSet(viewsets.ModelViewSet):
         """
         Overrided track list retrieve method
         """
+
+        # Check session or csrf
+        if not check_csrf(request):
+            errorDetail = {'detail': _('Client session not found')}
+            return Response(
+                errorDetail, headers=default_headers, content_type=content_type, status=status.HTTP_403_FORBIDDEN
+            )
+
         limit = int(request.query_params.get('limit', defaultTracksLimit))
         offset = int(request.query_params.get('offset', defaultTracksOffset))
 
@@ -139,6 +157,7 @@ class TrackViewSet(viewsets.ModelViewSet):
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 
+    # @csrf_exempt
     @action(
         methods=['post'],
         url_path='increment-played-count',
@@ -148,10 +167,22 @@ class TrackViewSet(viewsets.ModelViewSet):
     )
     def incrementPlayedCount(self, request: Request, pk=None):
         try:
+            host = request.headers.get('Host')
+            referer = request.headers.get('Referer')
             session_key = request.session.session_key if request.session else None
             headers_csrftoken = request.headers.get('X-CSRFToken')
             meta_csrftoken = request.META.get('CSRF_COOKIE')
             csrftoken = meta_csrftoken if meta_csrftoken else headers_csrftoken
+
+            debugData = {
+                'host': host,
+                'referer': referer,
+                'session_key': session_key,
+                'headers_csrftoken': headers_csrftoken,
+                'meta_csrftoken': meta_csrftoken,
+                'csrftoken': csrftoken,
+            }
+            logger.info(f'[incrementPlayedCount]: DEBUG:\n{debugObj(debugData)}')
 
             # Check session or csrf?
             if not check_csrf(request):
