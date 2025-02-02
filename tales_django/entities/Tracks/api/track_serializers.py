@@ -4,6 +4,11 @@ from ..models import Track, Tag, Rubric, Author
 
 
 class AuthorSerializer(serializers.HyperlinkedModelSerializer):
+    portrait_picture = serializers.SerializerMethodField()
+
+    def get_portrait_picture(self, obj):
+        return obj.portrait_picture.url
+
     class Meta:
         model = Author
         fields = (
@@ -36,6 +41,16 @@ class TrackSerializer(serializers.HyperlinkedModelSerializer):
     author = AuthorSerializer(read_only=True)
     rubrics = RubricSerializer(read_only=True, many=True)
     tags = TagSerializer(read_only=True, many=True)
+
+    audio_file = serializers.SerializerMethodField()
+
+    def get_audio_file(self, obj):
+        return obj.audio_file.url
+
+    preview_picture = serializers.SerializerMethodField()
+
+    def get_preview_picture(self, obj):
+        return obj.preview_picture.url
 
     class Meta:
         model = Track

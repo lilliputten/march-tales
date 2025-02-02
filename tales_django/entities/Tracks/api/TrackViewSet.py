@@ -15,6 +15,7 @@ from core.helpers.errors import errorToString
 from core.helpers.utils import debugObj
 from core.logging import getDebugLogger
 
+from tales_django.core.helpers.check_csrf import check_csrf
 from tales_django.core.model_helpers import get_currrent_django_language
 
 from .track_serializers import TrackSerializer
@@ -27,8 +28,9 @@ logger = getDebugLogger()
 defaultTracksLimit = 5
 defaultTracksOffset = 0
 
+content_type = 'application/json; charset=utf-8'
 default_headers = {
-    'Content-Type': 'application/json; charset=utf-8',
+    # 'Content-Type': content_type,
 }
 
 
@@ -49,7 +51,7 @@ class TrackViewSet(viewsets.ModelViewSet):
         instance = self.get_object()
         serializer = TrackSerializer(instance=instance)
         result = serializer.data
-        return Response(result, headers=default_headers, content_type='application/json; charset=utf-8')
+        return Response(result, headers=default_headers, content_type=content_type)
 
     def list(self, request):
         """
@@ -75,7 +77,7 @@ class TrackViewSet(viewsets.ModelViewSet):
         #     'meta':{'api':'SmartTag'}
         # })
 
-        return Response(result, headers=default_headers, content_type='application/json; charset=utf-8')
+        return Response(result, headers=default_headers, content_type=content_type)
 
     @action(
         methods=['post', 'get'],
@@ -94,11 +96,15 @@ class TrackViewSet(viewsets.ModelViewSet):
             # Check user is_authenticated?
             if not request.user.is_authenticated:
                 errorDetail = {'detail': _('User in not authenticated')}
-                return JsonResponse(errorDetail, headers=default_headers, status=status.HTTP_403_FORBIDDEN, safe=False)
+                return Response(
+                    errorDetail, headers=default_headers, content_type=content_type, status=status.HTTP_403_FORBIDDEN
+                )
             # Check session or csrf?
             if not session_key and not csrftoken:
                 errorDetail = {'detail': _('Client session not found')}
-                return JsonResponse(errorDetail, headers=default_headers, status=status.HTTP_403_FORBIDDEN, safe=False)
+                return Response(
+                    errorDetail, headers=default_headers, content_type=content_type, status=status.HTTP_403_FORBIDDEN
+                )
 
             track = get_object_or_404(Track, pk=pk)
 
@@ -114,7 +120,9 @@ class TrackViewSet(viewsets.ModelViewSet):
 
             responseData = {'favorite_track_ids': favorite_track_ids}
 
-            return JsonResponse(responseData, headers=default_headers, status=status.HTTP_200_OK, safe=True)
+            return Response(
+                responseData, headers=default_headers, content_type=content_type, status=status.HTTP_200_OK, safe=True
+            )
         except Exception as err:
             sError = errorToString(err)
             sTraceback = str(traceback.format_exc())
@@ -124,8 +132,11 @@ class TrackViewSet(viewsets.ModelViewSet):
             }
             logger.error(f'Caught error {sError} (returning in response):\n{debugObj(debugData)}')
             errorDetail = {'detail': sError}
-            return JsonResponse(
-                errorDetail, headers=default_headers, status=status.HTTP_500_INTERNAL_SERVER_ERROR, safe=False
+            return Response(
+                errorDetail,
+                headers=default_headers,
+                content_type=content_type,
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 
     @action(
@@ -138,12 +149,16 @@ class TrackViewSet(viewsets.ModelViewSet):
     def incrementPlayedCount(self, request: Request, pk=None):
         try:
             session_key = request.session.session_key if request.session else None
-            csrftoken = request.headers.get('X-CSRFToken')
+            headers_csrftoken = request.headers.get('X-CSRFToken')
+            meta_csrftoken = request.META.get('CSRF_COOKIE')
+            csrftoken = meta_csrftoken if meta_csrftoken else headers_csrftoken
 
             # Check session or csrf?
-            if not session_key and not csrftoken:
+            if not check_csrf(request):
                 errorDetail = {'detail': _('Client session not found')}
-                return JsonResponse(errorDetail, headers=default_headers, status=status.HTTP_403_FORBIDDEN, safe=False)
+                return Response(
+                    errorDetail, headers=default_headers, content_type=content_type, status=status.HTTP_403_FORBIDDEN
+                )
 
             track = get_object_or_404(Track, pk=pk)
             data = {
@@ -152,11 +167,16 @@ class TrackViewSet(viewsets.ModelViewSet):
             serializer = TrackSerializer(track, data=data, partial=True, context={'request': request})
 
             if not serializer.is_valid():
-                return Response(serializer.errors, headers=default_headers, status=status.HTTP_400_BAD_REQUEST)
+                return Response(
+                    serializer.errors,
+                    headers=default_headers,
+                    content_type=content_type,
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
 
             serializer.save()
 
-            return Response(serializer.data, headers=default_headers)
+            return Response(serializer.data, headers=default_headers, content_type=content_type)
         except Exception as err:
             sError = errorToString(err)
             sTraceback = str(traceback.format_exc())
@@ -166,6 +186,9 @@ class TrackViewSet(viewsets.ModelViewSet):
             }
             logger.error(f'Caught error {sError} (returning in response):\n{debugObj(debugData)}')
             errorDetail = {'detail': sError}
-            return JsonResponse(
-                errorDetail, headers=default_headers, status=status.HTTP_500_INTERNAL_SERVER_ERROR, safe=False
+            return Response(
+                errorDetail,
+                headers=default_headers,
+                content_type=content_type,
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
