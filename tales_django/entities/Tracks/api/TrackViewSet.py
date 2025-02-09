@@ -139,7 +139,7 @@ class TrackViewSet(viewsets.ModelViewSet):
             responseData = {'favorite_track_ids': favorite_track_ids}
 
             return Response(
-                responseData, headers=default_headers, content_type=content_type, status=status.HTTP_200_OK, safe=True
+                responseData, headers=default_headers, content_type=content_type, status=status.HTTP_200_OK
             )
         except Exception as err:
             sError = errorToString(err)
