@@ -83,7 +83,7 @@ class Track(Model):
     played_count = models.BigIntegerField(blank=True, default=0, help_text=_('Played count'))
 
     # Properties derived from the audio track file
-    audio_duration = models.BigIntegerField(null=True, help_text=_('Duration (seconds)'))
+    audio_duration = models.FloatField(null=True, help_text=_('Duration (seconds)'))
     audio_size = models.BigIntegerField(null=True, help_text=_('File size (bytes)'))
 
     # Timestamps
@@ -105,7 +105,7 @@ class Track(Model):
 
     @property
     def duration_formatted(track):
-        return str(timedelta(seconds=track.audio_duration)) if track.audio_duration else '-'
+        return str(timedelta(seconds=round(track.audio_duration))) if track.audio_duration else '-'
 
     @property
     def size_formatted(track):
