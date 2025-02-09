@@ -55,9 +55,8 @@ config.local.yml
 
 # Auto-generated files
 /uploads
-# /log*
 *.log
-local.log.*
+/log-*
 *.lock
 /.utils/config-local.sh
 

@@ -4,11 +4,17 @@ from ..models import Track, Tag, Rubric, Author
 
 
 class AuthorSerializer(serializers.HyperlinkedModelSerializer):
+    portrait_picture = serializers.SerializerMethodField()
+
+    def get_portrait_picture(self, obj):
+        return obj.portrait_picture.url
+
     class Meta:
         model = Author
         fields = (
             'id',
             'name',
+            'portrait_picture',
         )
 
 
@@ -36,24 +42,38 @@ class TrackSerializer(serializers.HyperlinkedModelSerializer):
     rubrics = RubricSerializer(read_only=True, many=True)
     tags = TagSerializer(read_only=True, many=True)
 
+    audio_file = serializers.SerializerMethodField()
+
+    def get_audio_file(self, obj):
+        return obj.audio_file.url
+
+    preview_picture = serializers.SerializerMethodField()
+
+    def get_preview_picture(self, obj):
+        return obj.preview_picture.url
+
     class Meta:
         model = Track
+
         fields = (
             'id',
+            # 'active',  # ???
+            # 'duration_formatted',
             'title',
-            # 'description',
-            'youtube_url',
-            'track_status',
-            # 'author_id',
-            'author',
-            'tags',
-            'rubrics',
-            'audio_file',
             'audio_duration',
+            'audio_file',
             'audio_size',
-            'preview_picture',
+            'description',
             'for_members',
             'played_count',
+            'preview_picture',
             'published_at',
-            # 'favorited_users',
+            'published_by_id',
+            'track_status',
+            'updated_at',
+            'updated_by_id',
+            'youtube_url',
+            'author',
+            'rubrics',
+            'tags',
         )

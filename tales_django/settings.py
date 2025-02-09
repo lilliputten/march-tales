@@ -299,7 +299,12 @@ if not LOCAL:
         'PASSWORD': DB_PASSWORD,
         'HOST': DB_HOST,
         'PORT': DB_PORT,
-        # 'OPTIONS': { 'init_command': 'SET storage_engine=INNODB', },
+        "OPTIONS": {
+            # 'init_command': 'SET storage_engine=INNODB',
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES', innodb_strict_mode=1",
+            'charset': 'utf8mb4',
+            "autocommit": True,
+        }
     }
 
 # Password validation
@@ -372,7 +377,8 @@ LANGUAGES = (
     ('ru', 'Русский'),
 )
 DEFAULT_LANGUAGE = LANGUAGES[0][0]
-LANGUAGES_LIST = {lng: name for lng, name in list(LANGUAGES)}
+LANGUAGES_DICT = {lng: name for lng, name in list(LANGUAGES)}
+LANGUAGES_LIST = [lng[0] for lng in list(LANGUAGES)]
 CMS_LANGUAGES = {
     'default': {
         'public': True,
@@ -549,6 +555,7 @@ PASS_VARIABLES = {
     # i18n
     'LANGUAGES': LANGUAGES,
     'DEFAULT_LANGUAGE': DEFAULT_LANGUAGE,
+    'LANGUAGES_DICT': LANGUAGES_DICT,
     'LANGUAGES_LIST': LANGUAGES_LIST,
     'LANGUAGE_CODE': LANGUAGE_CODE,
     # Uploaded mobile application:

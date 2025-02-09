@@ -4,15 +4,19 @@ from datetime import timedelta
 from translated_fields import TranslatedField
 
 from django.utils.translation import gettext_lazy as _
+from django.utils import translation
 from django.db import models
 from django.db.models import Model
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
+from django.conf import settings
 
 # from core.appEnv import LOCAL
 from core.helpers.files import sizeofFmt
 from core.logging import getDebugLogger
 from tales_django.core.helpers.audio import getAudioTrackFolderName
+
+from tales_django.core.model_helpers import get_non_empty_localized_model_field_attrgetter
 
 
 _logger = getDebugLogger()
@@ -32,7 +36,8 @@ class Track(Model):
             max_length=150,
             # verbose_name='track title',
             help_text=_('The track title text, required.'),
-        )
+        ),
+        attrgetter=get_non_empty_localized_model_field_attrgetter,
     )
     description = TranslatedField(
         models.TextField(
@@ -41,7 +46,8 @@ class Track(Model):
             null=False,
             max_length=512,
             help_text=_('Optional description'),
-        )
+        ),
+        attrgetter=get_non_empty_localized_model_field_attrgetter,
     )
     youtube_url = models.URLField(
         verbose_name=_('youtube link'), blank=True, null=False, max_length=150, help_text=_('YouTube video link url')
@@ -77,7 +83,7 @@ class Track(Model):
     played_count = models.BigIntegerField(blank=True, default=0, help_text=_('Played count'))
 
     # Properties derived from the audio track file
-    audio_duration = models.BigIntegerField(null=True, help_text=_('Duration (seconds)'))
+    audio_duration = models.FloatField(null=True, help_text=_('Duration (seconds)'))
     audio_size = models.BigIntegerField(null=True, help_text=_('File size (bytes)'))
 
     # Timestamps
@@ -99,7 +105,7 @@ class Track(Model):
 
     @property
     def duration_formatted(track):
-        return str(timedelta(seconds=track.audio_duration)) if track.audio_duration else '-'
+        return str(timedelta(seconds=round(track.audio_duration))) if track.audio_duration else '-'
 
     @property
     def size_formatted(track):

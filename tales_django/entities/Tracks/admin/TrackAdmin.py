@@ -182,7 +182,7 @@ class TrackAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
                 duration = probeDuration(tempFilePath)
                 if not duration:
                     raise Exception('Can not determine correct audio duration.')
-                obj.audio_duration = round(duration)
+                obj.audio_duration = duration
                 sizeFmt = self.size_formatted(obj)
                 durationFmt = self.duration_formatted(obj)
                 # Translate...

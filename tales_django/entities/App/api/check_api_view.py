@@ -16,18 +16,13 @@ from core.helpers.errors import errorToString
 from core.helpers.time import getTimeStamp
 from core.helpers.utils import debugObj
 from core.logging import getDebugLogger
+from tales_django.core.helpers.check_csrf import check_csrf
 
 logger = getDebugLogger()
 
 NOOP = lambda _: _
 
 _ = lambda _: _
-
-
-def check_csrf(request):
-    reason = CsrfViewMiddleware(NOOP).process_view(request, None, (), {})
-    # CSRF failed if reason returned
-    return False if reason else True
 
 
 @csrf_exempt  # Will send json failure response manually

@@ -38,6 +38,8 @@ def tick_api_view(request: Request):  # , *args, **kwargs):
                 content_type='application/json; charset=utf-8',
             )
 
+        host = request.headers.get('Host')
+        referer = request.headers.get('Referer')
         session_key = request.session.session_key if request.session else None
         headers_csrftoken = request.headers.get('X-CSRFToken')
         meta_csrftoken = request.META.get('CSRF_COOKIE')
@@ -47,6 +49,12 @@ def tick_api_view(request: Request):  # , *args, **kwargs):
         response_csrftoken = csrftoken if csrftoken else get_token(request)
 
         debugData = {
+            'host': host,
+            'referer': referer,
+            'session_key': session_key,
+            'headers_csrftoken': headers_csrftoken,
+            'meta_csrftoken': meta_csrftoken,
+            'csrftoken': csrftoken,
             'session_key': session_key,
             'headers_csrftoken': headers_csrftoken,
             'meta_csrftoken': meta_csrftoken,
@@ -55,7 +63,7 @@ def tick_api_view(request: Request):  # , *args, **kwargs):
             'cyrillic': 'Тест',
         }
         debugStr = debugObj(debugData)
-        logger.info(f'get\n{debugStr}')
+        logger.info(f'[tick_api_view] get\n{debugStr}')
 
         timestamp = getTimeStamp()
         data = {
@@ -81,7 +89,7 @@ def tick_api_view(request: Request):  # , *args, **kwargs):
             'err': err,
             'traceback': sTraceback,
         }
-        logger.error(f'Caught error {sError} (returning in response):\n{debugObj(debugData)}')
+        logger.error(f'[tick_api_view] Caught error {sError} (returning in response):\n{debugObj(debugData)}')
         return JsonResponse(
             {
                 'detail': sError,

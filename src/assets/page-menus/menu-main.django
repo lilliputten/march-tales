@@ -50,7 +50,7 @@
   {% get_available_languages as LANGUAGES %}
   {% get_language_info_list for LANGUAGES as languages %}
   <span class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    {{ settings.LANGUAGES_LIST|getattr:LANGUAGE_CODE }} ({{ LANGUAGE_CODE }})
+    {{ settings.LANGUAGES_DICT|getattr:LANGUAGE_CODE }} ({{ LANGUAGE_CODE }})
   </span>
   <form id="menu-language-form" action="{% url 'set_language' %}" method="post">
     {% csrf_token %}

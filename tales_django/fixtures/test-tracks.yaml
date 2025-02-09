@@ -11,7 +11,7 @@
     preview_picture: 'samples/gr-400x225.jpg'
     track_status: 'PUBLISHED'
     for_members: false
-    audio_duration: 5
+    audio_duration: 5.387029
     audio_size: 22535
     published_at: '2025-01-03'
     updated_at: '2025-01-03'
@@ -36,7 +36,7 @@
     preview_picture: 'samples/ny-800x450.jpg'
     track_status: 'PUBLISHED'
     for_members: false
-    audio_duration: 167
+    audio_duration: 167.183673
     audio_size: 1031154
     published_at: '2025-01-11'
     updated_at: '2025-01-12'
@@ -59,7 +59,7 @@
     preview_picture: 'samples/gr-400x225.jpg'
     track_status: 'PUBLISHED'
     for_members: false
-    audio_duration: 5
+    audio_duration: 5.387029
     audio_size: 22535
     published_at: '2025-01-03'
     updated_at: '2025-01-03'
@@ -82,7 +82,7 @@
     preview_picture: 'samples/gr-400x225.jpg'
     track_status: 'PUBLISHED'
     for_members: false
-    audio_duration: 5
+    audio_duration: 5.387029
     audio_size: 22535
     published_at: '2025-01-04'
     updated_at: '2025-01-04'
@@ -105,7 +105,7 @@
     preview_picture: 'samples/gr-400x225.jpg'
     track_status: 'PUBLISHED'
     for_members: false
-    audio_duration: 5
+    audio_duration: 5.387029
     audio_size: 22535
     published_at: '2025-01-05'
     updated_at: '2025-01-05'
