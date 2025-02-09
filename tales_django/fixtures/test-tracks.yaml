@@ -116,6 +116,29 @@
     # rubrics:
     #   - 1
 
+- model: 'tales_django.track'
+  pk: 6
+  fields:
+    title_en: 'New track'
+    title_ru: 'Новый трек'
+    description_en: ''
+    description_ru: ''
+    youtube_url: ''
+    author: 1
+    audio_file: 'samples/Тест_кириллицы.mp3'
+    preview_picture: 'samples/Тест_кириллицы.png'
+    track_status: 'PUBLISHED'
+    for_members: false
+    played_count: 4
+    audio_duration: 5.387029
+    audio_size: 22535
+    published_at: '2025-02-09'
+    updated_at: '2025-02-09'
+    published_by: 1
+    updated_by: 1
+    tags: []
+    rubrics: []
+
 - model: 'tales_django.tag'
   pk: 1
   fields:

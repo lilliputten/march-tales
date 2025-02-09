@@ -13,5 +13,6 @@ DATA_FOLDER=".data"
 DATE_ID=`date "+%y%m%d-%H%M"`
 FILE_NAME="$DATA_FOLDER/exported-db-$DATE_ID.json"
 mkdir -p "$DATA_FOLDER"
-$PYTHON_RUNTIME manage.py dumpdata > "$FILE_NAME"
+$PYTHON_RUNTIME -Xutf8 manage.py dumpdata -o "$FILE_NAME"
 echo "See exported file: $FILE_NAME"
+echo "Use to convert to yaml: json2yaml $FILE_NAME > $FILE_NAME.yaml"
