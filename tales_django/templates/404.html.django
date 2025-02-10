@@ -19,11 +19,11 @@
     {% include "assets/render-messages/render-messages.django" %}
 
     <div class="row">
-      <div class="col-lg-12 content">
+      <div class="col-lg-12 content align-items-start">
         {% url 'index' as index_url %}
         {% url 'profile' as profile_url %}
         <p>{% trans "The requested page is not found" %}.</p>
-        <p>{% blocktranslate %}Go to the <a href="{{ index_url }}">main page</a> or to your <a href="{{ profile_url }}">profile</a>.{% endblocktranslate %}</p>
+        <a class="btn btn-primary mb-2" href="/">{% trans "Back to main page" %}</a>
       </div>
     </div>
 
