@@ -102,6 +102,16 @@
         "-k", "test_track_create_and_remove",
       ],
       "console": "integratedTerminal"
+    },    {
+      "name": "Django manage command",
+      // "type": "python",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "manage.py",
+      "args": [
+        "clearmedia",
+      ],
+      "console": "integratedTerminal"
     },
   ]
 }
