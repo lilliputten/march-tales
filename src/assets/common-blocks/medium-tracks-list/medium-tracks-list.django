@@ -9,9 +9,9 @@
 
 {% endcomment %}
 
-<ul class="small-tracks-list mb-0">
+<ul class="medium-tracks-list mb-0">
   {% for track in tracks %}
-    {% include 'assets/common-blocks/small-tracks-list/small-tracks-list-item.django' %}
+    {% include 'assets/common-blocks/medium-tracks-list/medium-tracks-list-item.django' %}
   {% endfor %}
   {% if has_more_tracks %}
     <div class="actions d-flex flex-wrap gap-1 mt-3">

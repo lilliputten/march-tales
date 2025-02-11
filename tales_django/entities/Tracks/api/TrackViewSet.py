@@ -1,14 +1,15 @@
 import traceback
 
+from django.http import JsonResponse
 from django.utils.translation import gettext_lazy as _
 from django.shortcuts import get_object_or_404
 
-# from django.http import JsonResponse
 # from django.views.decorators.csrf import csrf_exempt
 
 from rest_framework.decorators import action
 from rest_framework.request import Request
-from rest_framework.response import Response
+
+# from rest_framework.response import Response
 from rest_framework import viewsets, status
 from rest_framework import permissions
 from rest_framework import pagination
@@ -54,14 +55,14 @@ class TrackViewSet(viewsets.ModelViewSet):
         # Check session or csrf
         if not check_csrf(request):
             errorDetail = {'detail': _('Client session not found')}
-            return Response(
+            return JsonResponse(
                 errorDetail, headers=default_headers, content_type=content_type, status=status.HTTP_403_FORBIDDEN
             )
 
         instance = self.get_object()
         serializer = TrackSerializer(instance=instance)
         result = serializer.data
-        return Response(result, headers=default_headers, content_type=content_type)
+        return JsonResponse(result, headers=default_headers, content_type=content_type)
 
     def list(self, request):
         """
@@ -72,7 +73,7 @@ class TrackViewSet(viewsets.ModelViewSet):
             # Check session or csrf
             if not check_csrf(request):
                 errorDetail = {'detail': _('Client session not found')}
-                return Response(
+                return JsonResponse(
                     errorDetail, headers=default_headers, content_type=content_type, status=status.HTTP_403_FORBIDDEN
                 )
 
@@ -96,7 +97,7 @@ class TrackViewSet(viewsets.ModelViewSet):
             #     'meta':{'api':'SmartTag'}
             # })
 
-            return Response(result, headers=default_headers, content_type=content_type)
+            return JsonResponse(result, headers=default_headers, content_type=content_type)
         except Exception as err:
             sError = errorToString(err)
             sTraceback = str(traceback.format_exc())
@@ -106,7 +107,7 @@ class TrackViewSet(viewsets.ModelViewSet):
             }
             logger.error(f'Caught error {sError} (returning in response):\n{debugObj(debugData)}')
             errorDetail = {'detail': sError}
-            return Response(
+            return JsonResponse(
                 errorDetail,
                 headers=default_headers,
                 content_type=content_type,
@@ -141,14 +142,14 @@ class TrackViewSet(viewsets.ModelViewSet):
         # Check session or csrf?
         if not check_csrf(request):
             errorDetail = {'detail': _('Client session not found')}
-            return Response(
+            return JsonResponse(
                 errorDetail, headers=default_headers, content_type=content_type, status=status.HTTP_403_FORBIDDEN
             )
 
         ids = request.query_params.get('ids')
 
         if not ids:
-            return Response(
+            return JsonResponse(
                 {'details': _('Expected track indices list')},
                 headers=default_headers,
                 content_type=content_type,
@@ -167,7 +168,7 @@ class TrackViewSet(viewsets.ModelViewSet):
             }
             logger.error(f'{sError}:\n{debugObj(debugData)}')
             errorDetail = {'detail': sError}
-            return Response(
+            return JsonResponse(
                 errorDetail,
                 headers=default_headers,
                 content_type=content_type,
@@ -185,7 +186,8 @@ class TrackViewSet(viewsets.ModelViewSet):
             }
             logger.info(f'[list]: params:\n{debugObj(debugData)}')
 
-            language = get_currrent_django_language()
+            # language = get_currrent_django_language()
+
             # TODO: Extract sort/filter params and modify results below?
             query = Track.objects.filter(id__in=idsList, track_status='PUBLISHED')
             # .order_by('-published_at', f'title_{language}')
@@ -198,7 +200,12 @@ class TrackViewSet(viewsets.ModelViewSet):
                 'results': TrackSerializer(subset, many=True).data,
             }
 
-            return Response(result, headers=default_headers, content_type=content_type)
+            return JsonResponse(
+                result,
+                headers=default_headers,
+                content_type=content_type,
+                json_dumps_params={'ensure_ascii': True},
+            )
 
         except Exception as err:
             sError = errorToString(err)
@@ -209,7 +216,7 @@ class TrackViewSet(viewsets.ModelViewSet):
             }
             logger.error(f'Caught error {sError} (returning in response):\n{debugObj(debugData)}')
             errorDetail = {'detail': sError}
-            return Response(
+            return JsonResponse(
                 errorDetail,
                 headers=default_headers,
                 content_type=content_type,
@@ -233,13 +240,13 @@ class TrackViewSet(viewsets.ModelViewSet):
             # Check user is_authenticated?
             if not request.user.is_authenticated:
                 errorDetail = {'detail': _('User in not authenticated')}
-                return Response(
+                return JsonResponse(
                     errorDetail, headers=default_headers, content_type=content_type, status=status.HTTP_403_FORBIDDEN
                 )
             # Check session or csrf?
             if not session_key and not csrftoken:
                 errorDetail = {'detail': _('Client session not found')}
-                return Response(
+                return JsonResponse(
                     errorDetail, headers=default_headers, content_type=content_type, status=status.HTTP_403_FORBIDDEN
                 )
 
@@ -257,7 +264,9 @@ class TrackViewSet(viewsets.ModelViewSet):
 
             responseData = {'favorite_track_ids': favorite_track_ids}
 
-            return Response(responseData, headers=default_headers, content_type=content_type, status=status.HTTP_200_OK)
+            return JsonResponse(
+                responseData, headers=default_headers, content_type=content_type, status=status.HTTP_200_OK
+            )
         except Exception as err:
             sError = errorToString(err)
             sTraceback = str(traceback.format_exc())
@@ -267,7 +276,7 @@ class TrackViewSet(viewsets.ModelViewSet):
             }
             logger.error(f'Caught error {sError} (returning in response):\n{debugObj(debugData)}')
             errorDetail = {'detail': sError}
-            return Response(
+            return JsonResponse(
                 errorDetail,
                 headers=default_headers,
                 content_type=content_type,
@@ -304,7 +313,7 @@ class TrackViewSet(viewsets.ModelViewSet):
             # Check session or csrf?
             if not check_csrf(request):
                 errorDetail = {'detail': _('Client session not found')}
-                return Response(
+                return JsonResponse(
                     errorDetail, headers=default_headers, content_type=content_type, status=status.HTTP_403_FORBIDDEN
                 )
 
@@ -315,7 +324,7 @@ class TrackViewSet(viewsets.ModelViewSet):
             serializer = TrackSerializer(track, data=data, partial=True, context={'request': request})
 
             if not serializer.is_valid():
-                return Response(
+                return JsonResponse(
                     serializer.errors,
                     headers=default_headers,
                     content_type=content_type,
@@ -324,7 +333,7 @@ class TrackViewSet(viewsets.ModelViewSet):
 
             serializer.save()
 
-            return Response(serializer.data, headers=default_headers, content_type=content_type)
+            return JsonResponse(serializer.data, headers=default_headers, content_type=content_type)
         except Exception as err:
             sError = errorToString(err)
             sTraceback = str(traceback.format_exc())
@@ -334,7 +343,7 @@ class TrackViewSet(viewsets.ModelViewSet):
             }
             logger.error(f'Caught error {sError} (returning in response):\n{debugObj(debugData)}')
             errorDetail = {'detail': sError}
-            return Response(
+            return JsonResponse(
                 errorDetail,
                 headers=default_headers,
                 content_type=content_type,

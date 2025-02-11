@@ -17,6 +17,13 @@
     object-fit: cover;
   }
 
+  &-img-md {
+    height: 120px;
+    width: 120px;
+    border-radius: 0.5rem;
+    object-fit: cover;
+  }
+
   &-meta {
     display: flex;
     align-items: center;
@@ -28,9 +35,9 @@
     li {
       margin-bottom: 10px;
 
-      &:not(:first-child) {
-        border-left: 1px solid $border-color;
-        padding-left: 8px;
+      &:not(:last-child) {
+        border-right: 1px solid $border-color;
+        padding-right: 8px;
       }
 
       &.track-rubrics[data-rubrics-count='0'],

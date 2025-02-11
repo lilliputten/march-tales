@@ -1,10 +1,10 @@
 from django.utils.translation import gettext_lazy as _
+from django.conf import settings
 from django.apps import AppConfig
 
 # from translation_manager.signals import post_publish as translation_post_publish
 
 from core.logging import getDebugLogger
-from tales_django import settings
 
 
 _logger = getDebugLogger()

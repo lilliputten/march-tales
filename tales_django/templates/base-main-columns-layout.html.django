@@ -30,7 +30,10 @@
           {% block main_column_content %}
             {{ block.super }}
             <h2 class="h5 section-title">{% trans "Recent Tracks" %}</h2>
+            {% include 'assets/common-blocks/medium-tracks-list/medium-tracks-list.django' %}
+            {% comment %}
             {% include 'assets/common-blocks/big-tracks-list/big-tracks-list.django' %}
+            {% endcomment %}
           {% endblock main_column_content %}
           <!-- }}} Main content -->
 

@@ -444,6 +444,14 @@ CORS_ALLOW_HEADERS = [
 # - ERROR: Information describing a major problem that has occurred.
 # - CRITICAL: Information describing a critical problem that has occurred.
 #
+default_logger = {
+    'class': 'logging.FileHandler',
+    'formatter': 'verbose',
+}
+if not LOCAL:
+    default_logger['class'] = 'logging.handlers.RotatingFileHandler'
+    default_logger['maxBytes'] = 1024 * 1024  # MB
+    default_logger['backupCount'] = 5
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -465,31 +473,31 @@ LOGGING = {
             'class': 'django.utils.log.AdminEmailHandler',
         },
         'errors': {
+            **default_logger,
             'level': 'ERROR',
             'filename': posixpath.join(BASE_DIR, 'log-errors.log'),
-            # 'class': 'logging.FileHandler',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'maxBytes': 1024 * 1024,  # MB
-            'backupCount': 5,
-            'formatter': 'verbose',
+            # 'class': 'logging.FileHandler' if LOCAL else 'logging.handlers.RotatingFileHandler',
+            # 'maxBytes': 1024 * 1024,  # MB
+            # 'backupCount': 5,
+            # 'formatter': 'verbose',
         },
         'django': {
+            **default_logger,
             'level': 'DEBUG',
             'filename': posixpath.join(BASE_DIR, 'log-django.log'),
-            # 'class': 'logging.FileHandler',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'maxBytes': 1024 * 1024,  # MB
-            'backupCount': 5,
-            'formatter': 'verbose',
+            # 'class': 'logging.FileHandler' if LOCAL else 'logging.handlers.RotatingFileHandler',
+            # 'maxBytes': 1024 * 1024,  # MB
+            # 'backupCount': 5,
+            # 'formatter': 'verbose',
         },
         'apps': {
+            **default_logger,
             'level': 'DEBUG',
             'filename': posixpath.join(BASE_DIR, 'log-apps.log'),
-            # 'class': 'logging.FileHandler',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'maxBytes': 1024 * 1024,  # MB
-            'backupCount': 5,
-            'formatter': 'verbose',
+            # 'class': 'logging.FileHandler' if LOCAL else 'logging.handlers.RotatingFileHandler',
+            # 'maxBytes': 1024 * 1024,  # MB
+            # 'backupCount': 5,
+            # 'formatter': 'verbose',
         },
     },
     'loggers': {
