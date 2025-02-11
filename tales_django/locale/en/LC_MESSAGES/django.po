@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-10 13:46+0300\n"
+"POT-Creation-Date: 2025-02-11 15:52+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -330,14 +330,23 @@ msgid "Audio file has been successfully uploaded"
 msgstr ""
 
 #: .\tales_django\entities\Tracks\api\TrackViewSet.py:56
-#: .\tales_django\entities\Tracks\api\TrackViewSet.py:73
-#: .\tales_django\entities\Tracks\api\TrackViewSet.py:122
-#: .\tales_django\entities\Tracks\api\TrackViewSet.py:187
+#: .\tales_django\entities\Tracks\api\TrackViewSet.py:74
+#: .\tales_django\entities\Tracks\api\TrackViewSet.py:138
+#: .\tales_django\entities\Tracks\api\TrackViewSet.py:203
+#: .\tales_django\entities\Tracks\api\TracksByIds.py:47
 msgid "Client session not found"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\api\TrackViewSet.py:116
+#: .\tales_django\entities\Tracks\api\TrackViewSet.py:132
 msgid "User in not authenticated"
+msgstr ""
+
+#: .\tales_django\entities\Tracks\api\TracksByIds.py:56
+msgid "Expected track indices list"
+msgstr ""
+
+#: .\tales_django\entities\Tracks\api\TracksByIds.py:66
+msgid "Error parsing track indices list"
 msgstr ""
 
 #: .\tales_django\entities\Tracks\models\Author.py:14
@@ -526,11 +535,9 @@ msgid "You have no access right to the page"
 msgstr ""
 
 #: .\tales_django\templates\403.html.django:26
+#: .\tales_django\templates\404.html.django:26
 #: .\tales_django\templates\500.html.django:26
-#, python-format
-msgid ""
-"Go to the <a href=\"%(index_url)s\">main page</a> or to your <a "
-"href=\"%(profile_url)s\">profile</a>."
+msgid "Back to main page"
 msgstr ""
 
 #: .\tales_django\templates\404.html.django:8
@@ -540,10 +547,6 @@ msgstr ""
 
 #: .\tales_django\templates\404.html.django:25
 msgid "The requested page is not found"
-msgstr ""
-
-#: .\tales_django\templates\404.html.django:30
-msgid "Back to main page"
 msgstr ""
 
 #: .\tales_django\templates\500.html.django:8
