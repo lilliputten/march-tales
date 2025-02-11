@@ -68,34 +68,50 @@ class TrackViewSet(viewsets.ModelViewSet):
         Overrided track list retrieve method
         """
 
-        # Check session or csrf
-        if not check_csrf(request):
-            errorDetail = {'detail': _('Client session not found')}
+        try:
+            # Check session or csrf
+            if not check_csrf(request):
+                errorDetail = {'detail': _('Client session not found')}
+                return Response(
+                    errorDetail, headers=default_headers, content_type=content_type, status=status.HTTP_403_FORBIDDEN
+                )
+
+            limit = int(request.query_params.get('limit', defaultTracksLimit))
+            offset = int(request.query_params.get('offset', defaultTracksOffset))
+
+            # TODO: Extract sort/filter params and modify results below?
+
+            language = get_currrent_django_language()
+            query = Track.objects.filter(track_status='PUBLISHED').order_by('-published_at', f'title_{language}')
+            subset = query.all()
+            if offset or limit:
+                subset = query.all()[offset : offset + limit]
+
+            result = {
+                'count': len(query),
+                'results': TrackSerializer(subset, many=True).data,
+            }
+
+            # result.update({
+            #     'meta':{'api':'SmartTag'}
+            # })
+
+            return Response(result, headers=default_headers, content_type=content_type)
+        except Exception as err:
+            sError = errorToString(err)
+            sTraceback = str(traceback.format_exc())
+            debugData = {
+                'err': err,
+                'traceback': sTraceback,
+            }
+            logger.error(f'Caught error {sError} (returning in response):\n{debugObj(debugData)}')
+            errorDetail = {'detail': sError}
             return Response(
-                errorDetail, headers=default_headers, content_type=content_type, status=status.HTTP_403_FORBIDDEN
+                errorDetail,
+                headers=default_headers,
+                content_type=content_type,
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
-
-        limit = int(request.query_params.get('limit', defaultTracksLimit))
-        offset = int(request.query_params.get('offset', defaultTracksOffset))
-
-        # TODO: Extract sort/filter params and modify results below?
-
-        language = get_currrent_django_language()
-        query = Track.objects.filter(track_status='PUBLISHED').order_by('-published_at', f'title_{language}')
-        subset = query.all()
-        if query or limit:
-            subset = query.all()[offset : offset + limit]
-
-        result = {
-            'count': len(query),
-            'results': TrackSerializer(subset, many=True).data,
-        }
-
-        # result.update({
-        #     'meta':{'api':'SmartTag'}
-        # })
-
-        return Response(result, headers=default_headers, content_type=content_type)
 
     @action(
         methods=['post', 'get'],

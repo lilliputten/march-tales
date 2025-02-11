@@ -2,7 +2,7 @@ from .entities.App.app_urlpatterns import app_urlpatterns, handler404, handler40
 
 from .entities.Users.urls import users_urlpatterns
 from .entities.Membership.urls import membership_urlpatterns
-from .entities.Tracks.track_urlpatterns import track_urlpatterns
+from .entities.Tracks.urls import track_urlpatterns
 
 urlpatterns = users_urlpatterns + membership_urlpatterns + app_urlpatterns + track_urlpatterns
 
