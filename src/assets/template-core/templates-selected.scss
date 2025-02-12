@@ -11,15 +11,17 @@
   }
 
   &-img-sm {
-    height: 85px;
-    width: 85px;
+    $size: 85px;
+    height: $size;
+    width: $size;
     border-radius: 0.25rem;
     object-fit: cover;
   }
 
   &-img-md {
-    height: 120px;
-    width: 120px;
+    $size: 150px;
+    height: $size;
+    width: $size;
     border-radius: 0.5rem;
     object-fit: cover;
   }

@@ -173,7 +173,6 @@ INSTALLED_APPS = [
     # 'allauth.socialaccount.providers.apple',
     # 'allauth.socialaccount.providers.auth0',
     'allauth.socialaccount.providers.google',
-    'allauth.socialaccount.providers.dummy',
     # 'allauth.socialaccount.providers.mailru',
     # 'allauth.socialaccount.providers.vk',
     # 'allauth.socialaccount.providers.yandex',
@@ -183,6 +182,9 @@ INSTALLED_APPS = [
     # app
     APP_NAME,
 ]
+if LOCAL:
+    INSTALLED_APPS.append('allauth.socialaccount.providers.dummy')
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

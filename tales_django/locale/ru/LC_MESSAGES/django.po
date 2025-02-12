@@ -70,7 +70,7 @@ msgstr "Пауза"
 
 #: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:90
 msgid "Add to favorites"
-msgstr "Добавить в избранное"
+msgstr "В избранное"
 
 #: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:91
 msgid "Remove from favorites"

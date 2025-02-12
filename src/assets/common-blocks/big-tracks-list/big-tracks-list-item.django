@@ -9,7 +9,7 @@
 {% endcomment %}
 
 <article
-  class="big-tracks-list-item track-player card mb-4"
+  class="big-tracks-list-item card mb-4 track-player"
   data-track-id="{{ track.id }}"
   data-track-media-url="{% get_media_prefix %}{{ track.audio_file }}"
 >
@@ -26,13 +26,13 @@
     <ul class="card-meta list-inline">
       {% include "assets/common-blocks/track-details/track-details.django" %}
     </ul>
-    {# Descriptions #}
+    {# Description #}
     <p>{{ track.description }}</p>
-    {# Actions #}
+    {# {{{ Actions #}
     <div
       class="track-controls d-flex flex-wrap gap-1"
       data-track-id="{{ track.id }}"
-      {% if track in favorite_tracks.all %}data-favorite="true"{% endif %}
+      {% if track in favorite_tracks %}data-favorite="true"{% endif %}
     >
       <button class="track-control track-control-play big-icon btn btn-primary">
         <span class="option option-waiting"><span class="spinner-border spinner-border-sm_" role="status"></span> <span class="text">{% trans 'Loading' %}</span></span>
@@ -55,5 +55,6 @@
       {% endif %}
       {% endcomment %}
     </div>
+    {# Actions }}} #}
   </div>
 </article>
