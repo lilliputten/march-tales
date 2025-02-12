@@ -8,14 +8,14 @@
   <div class="promotion-content">
     <h5 class="top text-white mb-3">{% trans 'Try the mobile app!' %}</h5>
     <div class="bottom">
-      {% if settings.APK_DOWNLOAD_VERSION %}
-        <p class="text-white mb-4">{% blocktrans %}Actual version is:{% endblocktrans %} {{ settings.APK_DOWNLOAD_VERSION }}</p>
-      {% endif %}
       {% if settings.APK_DOWNLOAD_FILE %}
-        <a href="/{{ settings.APK_DOWNLOAD_FILE }}" class="btn btn-primary">
-          {% trans 'Download for Android' %} {% if settings.APK_DOWNLOAD_SIZE %}
-          ({{ settings.APK_DOWNLOAD_SIZE|filesizeformat }}){% endif %}
-        </a>
+      <a href="/{{ settings.APK_DOWNLOAD_FILE }}" class="btn btn-primary mb-4">
+        {% trans 'Download for Android' %} {% if settings.APK_DOWNLOAD_SIZE %}
+        <small class="dimmed-info">({{ settings.APK_DOWNLOAD_SIZE|filesizeformat }})</small>{% endif %}
+      </a>
+      {% endif %}
+      {% if settings.APK_DOWNLOAD_VERSION %}
+        <p class="text-white">{% blocktrans %}Actual version is:{% endblocktrans %} {{ settings.APK_DOWNLOAD_VERSION }}</p>
       {% endif %}
     </div>
   </div>
