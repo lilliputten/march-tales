@@ -1,6 +1,6 @@
 /**
  * @module styles.scss
- * @changed 2025.01.04, 01:14
+ * @changed 2025.02.13, 04:41
  */
 
 @import 'shared/variables-expose';
@@ -31,8 +31,9 @@
 @import 'CommonNotify/CommonNotify';
 
 @import 'track-blocks/track-player';
-@import 'track-blocks/track-controls';
+@import 'track-blocks/track-details';
 @import 'track-blocks/shared-player';
+@import 'track-blocks/floating-player';
 
 @import 'template-header/template-header';
 @import 'template-footer/template-footer';

@@ -89,7 +89,6 @@ class CommonNotify {
       }, 10);
     });
     // Remove node after delay...
-    /** @type {TNotifyData} */
     const notifyData: TNotifyData = { node, handler: undefined };
     const removeNotifyHandler = this.removeNotify.bind(this, notifyData);
     notifyData.handler = setTimeout(removeNotifyHandler, this.timeoutDelay);

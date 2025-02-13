@@ -4,14 +4,11 @@ from datetime import timedelta
 from translated_fields import TranslatedField
 
 from django.utils.translation import gettext_lazy as _
-from django.utils import translation
 from django.db import models
 from django.db.models import Model
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
-from django.conf import settings
 
-# from core.appEnv import LOCAL
 from core.helpers.files import sizeofFmt
 from core.logging import getDebugLogger
 from tales_django.core.helpers.audio import getAudioTrackFolderName

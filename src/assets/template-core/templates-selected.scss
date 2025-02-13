@@ -3,11 +3,21 @@
 .card {
   @extend .shadow;
   border: 0;
-  background-color: $white;
   transition: 0.2s ease;
+  &.no-bg {
+    background-color: transparent;
+    box-shadow: none !important;
+  }
 
   &-body {
     padding: 25px;
+    &.no-padding {
+      padding: 0;
+    }
+    &.no-h-padding {
+      padding-left: 0;
+      padding-right: 0;
+    }
   }
 
   &-img-sm {

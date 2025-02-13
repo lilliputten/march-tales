@@ -1,0 +1,247 @@
+import { TrackInfo, trackInfoFromJsonStr, trackInfoToJsonStr } from './TrackInfo';
+
+class LocalTrackInfoDb {
+  // End-user api
+
+  updatePlayedCount(id: number, playedCount?: number, now?: number) {
+    try {
+      const _now = now || Date.now();
+      const trackInfo = this.getOrCreate(id);
+      if (isNaN(playedCount)) {
+        trackInfo.playedCount = trackInfo.playedCount ? trackInfo.playedCount + 1 : 1;
+      } else {
+        trackInfo.playedCount = playedCount;
+      }
+      trackInfo.lastPlayed = _now;
+      trackInfo.lastUpdated = _now;
+      this.insert(trackInfo);
+      // this.updateEvents.broadcast(TracksInfoDbUpdate(trackInfo));
+      return trackInfo;
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error('[LocalTrackInfoDb:incrementPlayedCount]', err.message, {
+        err,
+        id,
+      });
+      debugger; // eslint-disable-line no-debugger
+      throw err;
+    }
+  }
+
+  updatePosition(id: number, position: number, now?: number) {
+    try {
+      const _now = now || Date.now();
+      const trackInfo = this.getOrCreate(id);
+      trackInfo.position = position;
+      trackInfo.lastPlayed = _now; // ???
+      trackInfo.lastUpdated = _now;
+      this.insert(trackInfo);
+      // this.updateEvents.broadcast(TracksInfoDbUpdate(trackInfo));
+      return trackInfo;
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error('[LocalTrackInfoDb:updatePosition]', err.message, {
+        err,
+        id,
+      });
+      debugger; // eslint-disable-line no-debugger
+      throw err;
+    }
+  }
+
+  updateFavorite(id: number, favorite: boolean, now?: number) {
+    try {
+      const _now = now || Date.now();
+      const trackInfo = this.getOrCreate(id);
+      trackInfo.favorite = favorite;
+      trackInfo.lastUpdated = _now;
+      this.insert(trackInfo);
+      this._toggleInFavoritesIndex(id, favorite);
+      // this.updateEvents.broadcast(TracksInfoDbUpdate(trackInfo));
+      return trackInfo;
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error('[LocalTrackInfoDb:setFavorite]', err.message, {
+        err,
+        id,
+      });
+      debugger; // eslint-disable-line no-debugger
+      throw err;
+    }
+  }
+
+  updateFavoritesByTrackIds(ids: number[], now?: number) {
+    const _now = now || Date.now();
+    const index = this._getIndex();
+    index.forEach((id) => {
+      const isFavorite = ids.includes(id);
+      const trackInfo = this.getOrCreate(id);
+      if (trackInfo.favorite !== isFavorite) {
+        trackInfo.favorite = isFavorite;
+        trackInfo.lastUpdated = _now;
+        this.insert(trackInfo);
+      }
+    });
+    this._setFavoritesIndex(ids);
+  }
+
+  save(trackInfo: TrackInfo, now?: number) {
+    try {
+      const _now = now || Date.now();
+      trackInfo.lastPlayed = _now; // ???
+      trackInfo.lastUpdated = _now;
+      this.insert(trackInfo);
+      // this.updateEvents.broadcast(TracksInfoDbUpdate(trackInfo));
+      // const testTrackInfo = await this.getById(id);
+      return trackInfo;
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error('[LocalTrackInfoDb:save]', err.message, {
+        err,
+        trackInfo,
+      });
+      debugger; // eslint-disable-line no-debugger
+      throw err;
+    }
+  }
+
+  // Low-level api
+
+  createNewRecord(id: number) {
+    const now = Date.now();
+    const trackInfo: TrackInfo = {
+      id: id, // track.id
+      favorite: false,
+      playedCount: 0, // track.played_count (but only for current user!).
+      position: 0, // position
+      lastUpdated: now, // DateTime.now()
+      lastPlayed: 0, // DateTime.now()
+    };
+    return trackInfo;
+  }
+
+  getOrCreate(id: number) {
+    return this.getById(id) || this.createNewRecord(id);
+  }
+
+  /// Create or update the record. (Returns inserted/updated record id.)
+  insert(trackInfo: TrackInfo) {
+    const { id } = trackInfo;
+    window.localStorage.setItem('trackInfo-' + id, trackInfoToJsonStr(trackInfo));
+    this._addToIndex(id);
+  }
+
+  getFavorites() {
+    return this.getAll().filter((it) => it.favorite);
+  }
+
+  getById(id: number) {
+    const str = window.localStorage.getItem('trackInfo-' + id);
+    if (!str) {
+      return undefined;
+    }
+    return trackInfoFromJsonStr(str);
+  }
+
+  _getFavoritesIndex() {
+    try {
+      const data = window.localStorage.getItem('trackInfoFavoritesIndex');
+      return (data ? JSON.parse(data) : []) as number[];
+    } catch (
+      _ // eslint-disable-line @typescript-eslint/no-unused-vars
+    ) {
+      return [] as number[];
+    }
+  }
+
+  _setFavoritesIndex(favoritesIndex: number[]) {
+    window.localStorage.setItem('trackInfoFavoritesIndex', JSON.stringify(favoritesIndex));
+  }
+
+  _addToFavoritesIndex(id: number) {
+    const favoritesIndex = this._getFavoritesIndex();
+    if (!favoritesIndex.includes(id)) {
+      favoritesIndex.push(id);
+      this._setFavoritesIndex(favoritesIndex);
+    }
+  }
+
+  _removeFromFavoritesIndex(id: number) {
+    const favoritesIndex = this._getFavoritesIndex();
+    if (favoritesIndex.includes(id)) {
+      this._setFavoritesIndex(favoritesIndex.filter((checkId) => id !== checkId));
+    }
+  }
+
+  _toggleInFavoritesIndex(id: number, value?: boolean) {
+    if (value) {
+      this._addToFavoritesIndex(id);
+    } else {
+      this._removeFromFavoritesIndex(id);
+    }
+  }
+
+  _getIndex() {
+    try {
+      const data = window.localStorage.getItem('trackInfoIndex');
+      return (data ? JSON.parse(data) : []) as number[];
+    } catch (
+      _ // eslint-disable-line @typescript-eslint/no-unused-vars
+    ) {
+      return [] as number[];
+    }
+  }
+
+  _setIndex(index: number[]) {
+    window.localStorage.setItem('trackInfoIndex', JSON.stringify(index));
+  }
+
+  _addToIndex(id: number) {
+    const index = this._getIndex();
+    if (!index.includes(id)) {
+      index.push(id);
+      this._setIndex(index);
+    }
+  }
+
+  _removeFromIndex(id: number) {
+    const index = this._getIndex();
+    if (index.includes(id)) {
+      this._setIndex(index.filter((checkId) => id !== checkId));
+    }
+  }
+
+  _toggleInIndex(id: number, value?: boolean) {
+    if (value) {
+      this._addToIndex(id);
+    } else {
+      this._removeFromIndex(id);
+    }
+  }
+
+  getAll() {
+    const index = this._getIndex();
+    const list: TrackInfo[] = index
+      .map((id) => {
+        return this.getById(id);
+      })
+      .filter(Boolean);
+    return list;
+  }
+
+  delete(id: number) {
+    window.localStorage.removeItem('trackInfo-' + id);
+    this._removeFromIndex(id);
+  }
+
+  clearAll() {
+    const index = this._getIndex();
+    index.forEach((id) => {
+      window.localStorage.removeItem('trackInfo-' + id);
+    });
+    this._setIndex([]);
+  }
+}
+
+// Create a singleton
+export const localTrackInfoDb = new LocalTrackInfoDb();

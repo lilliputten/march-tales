@@ -24,6 +24,6 @@ vim: ft=jsonc
     "outDir": "./static/assets/"
   },
   "files": ["src/assets/index.ts"],
-  "typeRoots": ["src/@types/**/*"],
+  "typeRoots": ["src/assets/@types/**/*"],
   "include": ["src/"]
 }

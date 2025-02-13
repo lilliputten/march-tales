@@ -39,7 +39,7 @@
   </div>
   <div class="container py-4">
     <div class="row align-items-center d-flex flex-md-row">
-      <div class="d-flex gap-1 justify-content-between align-items-center flex-column flex-md-row">
+      <div class="d-flex gap-3 justify-content-between align-items-center flex-column flex-md-row">
         <div class="footer-cell footer-cell-side footer-cell-left footer-cell-socials text-center text-md-start py-2">
           <ul class="list-inline footer-list mb-0 widget-social">
             {% include 'assets/common-blocks/social-links/social-links.django' %}

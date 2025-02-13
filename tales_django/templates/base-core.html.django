@@ -87,9 +87,22 @@
 </head>
 <body class="{% block body_class %}default{% endblock %}">
 
+  <!-- {{{ JS variables -->
+  {% block js_variables %}
+    <script>
+      {% block js_variables_content %}
+        {{ block.super }}
+        var isAuthenticated = {% if user.is_authenticated %}true{% else %}false{% endif %};
+        {% if settings.LOCAL %}var LOCAL = true;{% endif %}
+        var DEFAULT_HOST = '{{ settings.DEFAULT_HOST }}';
+        var hasFavoriteTracks = {% if favorite_tracks %}true{% else %}false{% endif %};
+      {% endblock js_variables_content %}
+    </script>
+    {% endblock js_variables %}
+  <!-- }}} JS variables -->
+
   <!-- {{{ JS translated messages -->
   {% block js_texts %}
-    {{ block.super }}
     <div id="js-texts" hidden>
       {% block js_texts_content %}
         {{ block.super }}
@@ -124,6 +137,10 @@
   {% block page_footer %}
   {% endblock page_footer %}
   <!-- }}} Page footer container -->
+
+  {% block bottommostContent %}
+  {% include "assets/track-blocks/floating-player.django" %}
+  {% endblock bottommostContent %}
 
   <!-- {{{ JS -->
 

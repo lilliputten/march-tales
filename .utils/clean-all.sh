@@ -17,6 +17,7 @@ echo "Clearing root folder..." \
   __pycache__ \
   build \
   .handler-saves \
+  node_modules/.cache \
   .state-save \
   local.log* \
   *.log \
