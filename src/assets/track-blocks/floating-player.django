@@ -1,0 +1,7 @@
+{# ex: set ft=htmldjango : #}
+{% load static %}
+{% load i18n %}
+
+<div class="floating-player">
+  floating-player
+</div>
