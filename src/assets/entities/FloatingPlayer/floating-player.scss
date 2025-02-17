@@ -100,7 +100,7 @@
       .delim {
         opacity: 0.5;
       }
-      @media (width < calc($extraInfoTreshold + 500px) {
+      @media (width < calc($extraInfoTreshold + 100px)) {
         display: none;
       }
     }

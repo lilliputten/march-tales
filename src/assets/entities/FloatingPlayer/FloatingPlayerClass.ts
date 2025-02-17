@@ -244,7 +244,9 @@ export class FloatingPlayer {
   }
 
   updateAll() {
-    this.updateTrackPosition();
+    if (this.activePlayerData) {
+      this.updateTrackPosition();
+    }
     this.updateStateInDom();
     this.updatePositionInDom();
     if (this.activePlayerData) {

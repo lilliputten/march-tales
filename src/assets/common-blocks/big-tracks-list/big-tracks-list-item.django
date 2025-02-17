@@ -14,7 +14,7 @@
   {# Duration in seconds #}
   data-track-duration="{{ track.audio_duration }}"
   {# NOTE: Using remote host for testing resumeable tracks with 206 Partial Content https headers #}
-  {% define True as USE_REMOTE_HOST %}
+  {% define False as USE_REMOTE_HOST %}
   data-track-media-url="{% if USE_REMOTE_HOST and settings.LOCAL %}https://{{ settings.DEFAULT_HOST }}{% endif %}{% get_media_prefix %}{{ track.audio_file }}"
   {% if track in favorite_tracks %}data-favorite="true"{% endif %}
   {% comment %}
