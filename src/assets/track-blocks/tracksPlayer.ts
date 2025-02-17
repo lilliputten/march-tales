@@ -60,7 +60,7 @@ function floatingPlayerUpdate(data: FloatingPlayerUpdateData) {
   if (!trackNode) {
     return;
   }
-  const isCurrent = trackNode === currentTrackPlayer;
+  // const isCurrent = trackNode === currentTrackPlayer;
   const { position, progress, status } = floatingPlayerState;
   const { dataset } = currentTrackPlayer;
   const timeNode = currentTrackPlayer.querySelector<HTMLElement>('.time');
@@ -79,7 +79,7 @@ function floatingPlayerUpdate(data: FloatingPlayerUpdateData) {
       timeNode.innerText = timeFormatted;
     }
   });
-  calculateAndUpdateTrackPosition(trackNode, position, isCurrent);
+  // calculateAndUpdateTrackPosition(trackNode, position, isCurrent); // Is it required here?
   // TODO: Update the floating player if isCurrent?
 }
 
@@ -96,12 +96,14 @@ function floatingPlayerPlay(data: FloatingPlayerUpdateData) {
   if (id !== activePlayerData.id) {
     throw new Error('Wrong active track id!');
   }
-  dataset.status = 'playing';
+  requestAnimationFrame(() => {
+    dataset.status = 'playing';
+  });
 }
 
 function floatingPlayerStop(data: FloatingPlayerUpdateData) {
   const {
-    // floatingPlayerState,
+    // floatingPlayerState, // ???
     activePlayerData,
   } = data;
   if (!currentTrackPlayer) {
@@ -112,9 +114,9 @@ function floatingPlayerStop(data: FloatingPlayerUpdateData) {
   if (id !== activePlayerData.id) {
     throw new Error('Wrong active track id!');
   }
-  if (dataset) {
+  requestAnimationFrame(() => {
     delete dataset.status;
-  }
+  });
 }
 
 function getTrackNode(id: number) {
@@ -221,11 +223,13 @@ function updateTrackFavorite(trackNode: HTMLElement, isFavorite: boolean) {
   const { favorite } = dataset;
   const isCurrentFavorite = Boolean(favorite);
   if (isFavorite !== isCurrentFavorite) {
-    if (isFavorite) {
-      dataset.favorite = TRUE;
-    } else {
-      delete dataset.favorite;
-    }
+    requestAnimationFrame(() => {
+      if (isFavorite) {
+        dataset.favorite = TRUE;
+      } else {
+        delete dataset.favorite;
+      }
+    });
   }
 }
 
