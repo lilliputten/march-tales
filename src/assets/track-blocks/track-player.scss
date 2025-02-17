@@ -161,6 +161,9 @@
     transition: all 1s;
   }
 
+  &.floating-player .track-control[data-control-id='toggleFavorite'] { // TEMP: Hide favorite toggler
+    display: none;
+  }
   // &:not([data-status='paused'], [data-status='playing']) .track-control-play .time,
   &:not([data-favorite='true']) .track-control[data-control-id='toggleFavorite'] .option-favorite,
   &[data-favorite='true'] .track-control[data-control-id='toggleFavorite'] .option-not-favorite,

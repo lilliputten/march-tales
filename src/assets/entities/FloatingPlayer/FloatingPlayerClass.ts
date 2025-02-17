@@ -9,6 +9,7 @@ import {
   saveActivePlayerData,
 } from '../ActivePlayerData/ActivePlayerData';
 import { getActivePlayerDataFromTrackNode } from '../ActivePlayerData/getActivePlayerDataFromTrackNode';
+import { sendApiRequest } from '../../helpers/sendApiRequest';
 import {
   FloatingPlayerState,
   loadFloatingPlayerState,
@@ -16,88 +17,9 @@ import {
 } from './FloatingPlayerState';
 
 import { HiddenPlayer } from './HiddenPlayer';
-
-type ErrorCallback = (error: Error | string) => void;
-// type TrackCallback = (activePlayerData: ActivePlayerData) => void;
-type UpdateCallback = (
-  floatingPlayerState: FloatingPlayerState,
-  activePlayerData: ActivePlayerData,
-) => void;
+import { FloatingPlayerCallbacks } from './FloatingPlayerCallbacks';
 
 const TRUE = 'true';
-
-// type HandlerId = 'play' | 'stop' | 'time';
-export class FloatingPlayerCallbacks {
-  onPlayStartCallbacks: UpdateCallback[] = [];
-  onPlayStopCallbacks: UpdateCallback[] = [];
-  onUpdateCallbacks: UpdateCallback[] = [];
-  onErrorCallbacks: ErrorCallback[] = [];
-  // handlers: Record<HandlerId, ErrorCallback[]> = {};
-
-  addPlayStartCallback(cb: UpdateCallback) {
-    if (cb && !this.onPlayStartCallbacks.includes(cb)) {
-      this.onPlayStartCallbacks.push(cb);
-    }
-  }
-
-  addPlayStopCallback(cb: UpdateCallback) {
-    if (cb && !this.onPlayStopCallbacks.includes(cb)) {
-      this.onPlayStopCallbacks.push(cb);
-    }
-  }
-
-  addUpdateCallback(cb: UpdateCallback) {
-    if (cb && !this.onUpdateCallbacks.includes(cb)) {
-      this.onUpdateCallbacks.push(cb);
-    }
-  }
-
-  addErrorCallback(cb: ErrorCallback) {
-    if (cb && !this.onErrorCallbacks.includes(cb)) {
-      this.onErrorCallbacks.push(cb);
-    }
-  }
-
-  invokePlayStartCallbacks(
-    floatingPlayerState: FloatingPlayerState,
-    activePlayerData?: ActivePlayerData,
-  ) {
-    if (activePlayerData) {
-      this.onPlayStartCallbacks.forEach((cb) => {
-        cb(floatingPlayerState, activePlayerData);
-      });
-    }
-  }
-
-  invokePlayStopCallbacks(
-    floatingPlayerState: FloatingPlayerState,
-    activePlayerData?: ActivePlayerData,
-  ) {
-    if (activePlayerData) {
-      this.onPlayStopCallbacks.forEach((cb) => {
-        cb(floatingPlayerState, activePlayerData);
-      });
-    }
-  }
-
-  invokeUpdateCallbacks(
-    floatingPlayerState: FloatingPlayerState,
-    activePlayerData?: ActivePlayerData,
-  ) {
-    if (activePlayerData) {
-      this.onUpdateCallbacks.forEach((cb) => {
-        cb(floatingPlayerState, activePlayerData);
-      });
-    }
-  }
-  invokeErrorCallbacks(error: Error | string) {
-    if (error) {
-      this.onErrorCallbacks.forEach((cb) => {
-        cb(error);
-      });
-    }
-  }
-}
 
 export class FloatingPlayer {
   inited = false;
@@ -107,6 +29,7 @@ export class FloatingPlayer {
   activePlayerData?: ActivePlayerData;
   state: FloatingPlayerState = {};
   domNode?: HTMLElement;
+  incrementing?: boolean;
 
   constructor() {
     this.loadActivePlayerData();
@@ -114,7 +37,7 @@ export class FloatingPlayer {
     this.initTrackDomNode();
     this.updateAll();
     // Check if it was recently playing...
-    const now = Date.now();
+    // const _now = Date.now();
     if (
       this.activePlayerData &&
       this.state.status === 'playing' &&
@@ -128,8 +51,9 @@ export class FloatingPlayer {
       });
       // TODO: Care about: `Uncaught (in promise) NotAllowedError: play() failed because the user didn't interact with the document first. https://goo.gl/xX8pDD`
       // this.playCurrentPlayer();
+
       // DEBUG: Temporarily remove the playing status
-      // delete this.state.status;
+      delete this.state.status;
     } else {
       // Reset the status
       delete this.state.status;
@@ -225,8 +149,6 @@ export class FloatingPlayer {
     this.saveFloatingPlayerState();
   }
 
-  // Hidden player...
-
   // Updaters...
 
   updateActivePlayerDataInDom() {
@@ -236,7 +158,6 @@ export class FloatingPlayer {
     titleNode.innerText = activePlayerData.title;
     const imageNode = domNode.querySelector<HTMLElement>('.image');
     imageNode.style.backgroundImage = 'url(' + activePlayerData.imageUrl + ')';
-    // TODO: Ensure hidden player, set player url
   }
 
   updateStateInDom() {
@@ -257,10 +178,6 @@ export class FloatingPlayer {
     dataset.progress = String(this.state.progress || 0);
     domNode.style.setProperty('--progress', String(this.state.progress || 0));
   }
-
-  // setAudioPosition(position: number) {
-  //   // audio.currentTime = position;
-  // }
 
   calculateProgress() {
     const activePlayerData = this.requireActivePlayerData();
@@ -325,59 +242,74 @@ export class FloatingPlayer {
     if (audio !== currAudio) {
       return;
     }
-    const source = audio.getElementsByTagName('SOURCE')[0] as HTMLSourceElement;
-    const { currentTime, readyState } = audio;
     const activePlayerData = this.requireActivePlayerData();
-    console.log('[FloatingPlayerClass:handleAudioTimeUpdate]', {
+    const {
       currentTime,
-      readyState,
-      id: activePlayerData.id,
-      activePlayerData,
-      src: source.src,
-      source,
-      thisAudio: currAudio === audio,
-      currAudio,
-      audio,
-    });
+      // readyState,
+    } = audio;
+    /* // DEBUG
+     * const source = audio.getElementsByTagName('SOURCE')[0] as HTMLSourceElement;
+     * console.log('[FloatingPlayerClass:handleAudioTimeUpdate]', {
+     *   currentTime,
+     *   readyState,
+     *   id: activePlayerData.id,
+     *   activePlayerData,
+     *   src: source.src,
+     *   source,
+     *   thisAudio: currAudio === audio,
+     *   currAudio,
+     *   audio,
+     * });
+     */
     // TODO: Check loaded status?
     if (this.state.position != currentTime) {
       this.state.position = currentTime;
+      this.saveFloatingPlayerState();
       this.updateTrackPosition();
-      this.callbacks.invokeUpdateCallbacks(this.state, activePlayerData);
+      this.callbacks.invokeUpdate({ floatingPlayerState: this.state, activePlayerData });
+      localTrackInfoDb.updatePosition(activePlayerData.id, currentTime);
     }
   }
 
-  handleAudioCanPlay(ev: Event) {
+  handleAudioCanPlay(_ev: Event) {
     if (!this.state.loaded) {
-      const audio = ev.currentTarget as HTMLAudioElement;
-      const source = audio.getElementsByTagName('SOURCE')[0] as HTMLSourceElement;
-      const src = source?.src;
-      console.log('[FloatingPlayerClass:sharedPlayerCanPlay]', {
-        src,
-        source,
-        audio,
-        ev,
-      });
+      /* // DEBUG
+       * const audio = ev.currentTarget as HTMLAudioElement;
+       * const source = audio.getElementsByTagName('SOURCE')[0] as HTMLSourceElement;
+       * const src = source?.src;
+       * console.log('[FloatingPlayerClass:sharedPlayerCanPlay]', {
+       *   src,
+       *   source,
+       *   audio,
+       *   ev,
+       * });
+       */
       this.state.loaded = true;
       delete this.state.error;
-      // this.callbacks.invokeUpdateCallbacks(this.state, this.activePlayerData);
     }
   }
 
   handleAudioPlay(_ev: Event) {
-    console.log('[FloatingPlayerClass:handleAudioPlay]');
+    // console.log('[FloatingPlayerClass:handleAudioPlay]');
     this.state.status = 'playing';
     this.updateStateInDom();
     this.saveFloatingPlayerState();
-    this.callbacks.invokePlayStartCallbacks(this.state, this.activePlayerData);
+    this.callbacks.invokePlayStart({
+      floatingPlayerState: this.state,
+      activePlayerData: this.activePlayerData,
+    });
   }
 
   handleAudioEnded(_ev: Event) {
-    console.log('[FloatingPlayerClass:handleAudioEnded]');
+    this.incrementPlayedCount();
+    // console.log('[FloatingPlayerClass:handleAudioEnded]');
     this.state.status = 'paused'; // stopped, ready?
     this.updateStateInDom();
     this.saveFloatingPlayerState();
-    this.callbacks.invokePlayStopCallbacks(this.state, this.activePlayerData);
+    this.callbacks.invokePlayStop({
+      floatingPlayerState: this.state,
+      activePlayerData: this.activePlayerData,
+    });
   }
 
   handleAudioSourceError(ev: Event) {
@@ -395,13 +327,7 @@ export class FloatingPlayer {
     debugger; // eslint-disable-line no-debugger
     commonNotify.showError(errMsg);
     this.state.error = getErrorText(error);
-    this.callbacks.invokeErrorCallbacks(error);
-    // const dataset = currentTrackPlayer?.dataset;
-    // if (dataset) {
-    //   dataset.error = errMsg;
-    //   delete dataset.loaded;
-    //   delete dataset.status;
-    // }
+    this.callbacks.invokeError(error);
   }
 
   /// Active player data
@@ -413,17 +339,15 @@ export class FloatingPlayer {
   // Core handlers...
 
   loadAudio() {
-    // const domNode = this.requireDomNode();
     const activePlayerData = this.requireActivePlayerData();
-    console.log('[FloatingPlayerClass:loadAudio]', {
-      mediaUrl: activePlayerData.mediaUrl,
-      id: activePlayerData.id,
-    });
+    /* console.log('[FloatingPlayerClass:loadAudio]', {
+     *   mediaUrl: activePlayerData.mediaUrl,
+     *   id: activePlayerData.id,
+     * });
+     */
     this.state.loaded = false;
     const source = this.hiddenPlayer.createHiddenPlayerSource({ src: activePlayerData.mediaUrl });
     source.addEventListener('error', this.handleAudioSourceError.bind(this));
-    // this.callbacks.invokeUpdateCallbacks(this.state, this.activePlayerData);
-    // this.callbacks.invokePlayStartCallbacks(this.activePlayerData);
   }
 
   isAudioPlaying() {
@@ -434,8 +358,6 @@ export class FloatingPlayer {
   }
 
   isPlaying() {
-    // TODO: Use audio node?
-    // const audio = this.requireAudio()
     return this.state.status === 'playing';
   }
 
@@ -448,7 +370,6 @@ export class FloatingPlayer {
       this.state.status = 'paused';
       this.updateStateInDom();
       this.saveFloatingPlayerState();
-      // this.callbacks.invokeUpdateCallbacks(this.state, this.activePlayerData);
     }
   }
 
@@ -460,14 +381,14 @@ export class FloatingPlayer {
     }
     if (audio.ended || this.state.position > activePlayerData.duration - 0.1) {
       // Start from the begining
-      // audio.currentTime = 0;
       this.state.position = 0;
     }
     this.updateTrackPosition();
-    this.callbacks.invokeUpdateCallbacks(this.state, this.activePlayerData);
-    // if (!this.state.loaded || !this.hasAudio() || !this.hasAudioSource) {
-    //   this.loadAudio();
-    // }
+    this.callbacks.invokeUpdate({
+      floatingPlayerState: this.state,
+      activePlayerData: this.activePlayerData,
+    });
+
     audio.currentTime = this.state.position || 0;
     audio.play();
   }
@@ -500,7 +421,7 @@ export class FloatingPlayer {
         this.state.position = position;
       }
       this.removeAudio();
-      console.log('[FloatingPlayerClass:setActivePlayerData]', activePlayerData);
+      // console.log('[FloatingPlayerClass:setActivePlayerData]', activePlayerData);
       this.activePlayerData = activePlayerData;
     }
     this.saveActivePlayerData();
@@ -522,6 +443,43 @@ export class FloatingPlayer {
     this.activePlayerData = undefined;
     this.hideFloatingPlayer();
     this.removeAudio();
+  }
+
+  // Update related data
+
+  sendIncrementPlayedCount(id: number) {
+    const url = `/api/v1/tracks/${id}/increment-played-count/`;
+    return sendApiRequest(url, 'POST');
+  }
+
+  incrementPlayedCount() {
+    const activePlayerData = this.requireActivePlayerData();
+    if (this.incrementing) {
+      return;
+    }
+    this.incrementing = true;
+    return this.sendIncrementPlayedCount(activePlayerData.id)
+      .then(({ played_count }: { played_count?: number }) => {
+        if (played_count != null) {
+          // Re-update local data with server data...
+          this.callbacks.invokeIncrement({ count: played_count, activePlayerData });
+        }
+        // TODO: Update other instances of this track on the page (eg, in player, or in other track listings)?
+      })
+      .catch((err) => {
+        // eslint-disable-next-line no-console
+        console.error('[FloatingPlayerClass:incrementPlayedCount:sendIncrementPlayedCount] error', {
+          err,
+        });
+        debugger; // eslint-disable-line no-debugger
+        commonNotify.showError(err);
+        // Increment locally (?)
+        this.callbacks.invokeIncrement({ activePlayerData });
+        throw err;
+      })
+      .finally(() => {
+        this.incrementing = false;
+      });
   }
 
   // Initilization...

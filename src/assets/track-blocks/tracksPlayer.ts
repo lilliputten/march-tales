@@ -5,81 +5,25 @@ import { getJsText } from '../helpers/getJsText';
 
 import { localTrackInfoDb } from './localTrackInfoDb';
 import { floatingPlayer } from '../entities/FloatingPlayer/floatingPlayer';
-import { ActivePlayerData } from '../entities/ActivePlayerData/ActivePlayerData';
-import { FloatingPlayerState } from '../entities/FloatingPlayer/FloatingPlayerState';
+import {
+  FloatingPlayerIncrementData,
+  FloatingPlayerUpdateData,
+} from '../entities/FloatingPlayer/FloatingPlayerCallbacks';
 
-const sharedPlayerContainer = document.body;
+// const sharedPlayerContainer = document.body;
 
 let allPlayers: NodeListOf<HTMLElement>;
-let sharedPlayerNode: HTMLElement | undefined = undefined;
+// let sharedPlayerNode: HTMLElement | undefined = undefined;
 let currentTrackPlayer: HTMLElement | undefined = undefined;
-
-interface TSharedPlayerOptions {
-  type?: string;
-  src?: string;
-}
 
 // Values for dataset statuses
 const TRUE = 'true';
 
-function ensureSharedPlayer(/* opts: TSharedPlayerOptions = {} */) {
-  if (!sharedPlayerNode) {
-    sharedPlayerNode = document.createElement('div');
-    sharedPlayerNode.classList.add('shared-player');
-    const audio = document.createElement('audio');
-    audio.addEventListener('loadeddata', sharedPlayerCanPlay);
-    sharedPlayerNode.appendChild(audio);
-    sharedPlayerContainer.appendChild(sharedPlayerNode);
-  }
-  return sharedPlayerNode;
-}
-
-function ensureSharedPlayerAudio() {
-  const sharedPlayer = ensureSharedPlayer();
-  const audio = sharedPlayer.getElementsByTagName('audio')[0];
-  if (!audio) {
-    throw new Error(getJsText('noAudioNodeFound'));
-  }
-  return audio;
-}
-
-function createSharedPlayerSource(opts: TSharedPlayerOptions = {}) {
-  // const sharedPlayer = ensureSharedPlayer();
-  const audio = ensureSharedPlayerAudio();
-  const prevSources = Array.from(audio.getElementsByTagName('source'));
-  for (const node of prevSources) {
-    node.remove();
-  }
-  audio.setAttribute('preload', 'auto');
-  const source = document.createElement('source');
-  source.setAttribute('type', opts.type || 'audio/mpeg');
-  if (opts.src) {
-    source.setAttribute('src', opts.src);
-  }
-  // @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/loadeddata_event
-  audio.addEventListener('canplay', sharedPlayerCanPlay);
-  audio.addEventListener('loadeddata', sharedPlayerCanPlay);
-  audio.addEventListener('playing', sharedPlayerPlay);
-  audio.addEventListener('timeupdate', sharedPlayerTimeUpdate);
-  audio.addEventListener('ended', sharedPlayerEnded);
-  source.addEventListener('error', sharedPlayerError);
-  audio.appendChild(source);
-  return source;
-}
-
-// REMOVE
-function sharedPlayerEnded(_ev: Event) {
-  if (!currentTrackPlayer) {
-    throw new Error('No current track player node!');
-  }
-  const dataset = currentTrackPlayer?.dataset;
-  if (dataset) {
-    delete dataset.status;
-  }
-  incrementPlayedCount();
-}
-
-function updateTrackPosition(trackNode: HTMLElement, position: number, isCurrent?: boolean) {
+function calculateAndUpdateTrackPosition(
+  trackNode: HTMLElement,
+  position: number,
+  isCurrent?: boolean,
+) {
   const timeNode = trackNode.querySelector('.time');
   const { dataset } = trackNode;
   const { trackId, trackDuration } = dataset;
@@ -97,20 +41,6 @@ function updateTrackPosition(trackNode: HTMLElement, position: number, isCurrent
   }
   const ratio = position / duration;
   const progress = Math.round(ratio * 100);
-  /* console.log('[tracksPlayer:updateTrackPosition]', {
-   *   id,
-   *   position,
-   *   progress,
-   *   ratio,
-   *   duration,
-   *   timeMs,
-   *   timeFormatted,
-   *   timeNode,
-   *   dataset,
-   *   trackNode,
-   *   isCurrent,
-   * });
-   */
   dataset.position = String(position);
   dataset.progress = String(progress);
   trackNode.style.setProperty('--progress', String(progress));
@@ -123,96 +53,8 @@ function updateTrackPosition(trackNode: HTMLElement, position: number, isCurrent
   }
 }
 
-function updatePlayback(position: number) {
-  if (!currentTrackPlayer) {
-    return;
-  }
-  updateTrackPosition(currentTrackPlayer, position, true);
-}
-
-function sharedPlayerTimeUpdate(ev: Event) {
-  if (!currentTrackPlayer) {
-    return;
-  }
-  const audio = ev.currentTarget as HTMLAudioElement;
-  const { currentTime } = audio;
-  const dataset = currentTrackPlayer.dataset;
-  const loaded = Boolean(dataset.loaded);
-  if (loaded) {
-    /* // DEBUG
-     * const { type, eventPhase } = ev;
-     * const position = Number(dataset.position || '');
-     * const readyState = audio.readyState;
-     * console.log('[tracksPlayer:sharedPlayerTimeUpdate]', {
-     *   readyState,
-     *   position,
-     *   loaded,
-     *   currentTime,
-     *   audio,
-     *   type,
-     *   eventPhase,
-     *   ev,
-     *   dataset,
-     * });
-     */
-    updatePlayback(currentTime);
-  }
-}
-
-// REMOVE
-function sharedPlayerPlay(_ev: Event) {
-  if (!currentTrackPlayer) {
-    throw new Error('No current track player node!');
-  }
-  const { dataset } = currentTrackPlayer;
-  dataset.status = 'playing';
-  // floatingPlayer.showFloatingPlayer(currentTrackPlayer);
-}
-
-function floatingPlayerPlay(
-  _floatingPlayerState: FloatingPlayerState,
-  activePlayerData: ActivePlayerData,
-) {
-  if (!currentTrackPlayer) {
-    throw new Error('No current track player node!');
-  }
-  const { dataset } = currentTrackPlayer;
-  const id = Number(dataset.trackId);
-  if (id !== activePlayerData.id) {
-    throw new Error('Wrong active track id!');
-  }
-  dataset.status = 'playing';
-  // floatingPlayer.showFloatingPlayer(currentTrackPlayer);
-}
-
-function floatingPlayerStop(
-  _floatingPlayerState: FloatingPlayerState,
-  activePlayerData: ActivePlayerData,
-) {
-  if (!currentTrackPlayer) {
-    throw new Error('No current track player node!');
-  }
-  const { dataset } = currentTrackPlayer;
-  const id = Number(dataset.trackId);
-  if (id !== activePlayerData.id) {
-    throw new Error('Wrong active track id!');
-  }
-  if (dataset) {
-    delete dataset.status;
-  }
-  incrementPlayedCount();
-}
-
-function getTrackNode(id: number) {
-  const players = Array.from(allPlayers);
-  const trackNode = players.find((it) => Number(it.dataset.trackId) === id);
-  return trackNode;
-}
-
-function floatingPlayerUpdate(
-  floatingPlayerState: FloatingPlayerState,
-  activePlayerData: ActivePlayerData,
-) {
+function floatingPlayerUpdate(data: FloatingPlayerUpdateData) {
+  const { floatingPlayerState, activePlayerData } = data;
   const { id } = activePlayerData;
   let trackNode = currentTrackPlayer;
   if (!trackNode || Number(trackNode.dataset.trackId) !== id) {
@@ -227,141 +69,66 @@ function floatingPlayerUpdate(
   const timeNode = currentTrackPlayer.querySelector('.time');
   const timeMs = Math.floor(position * 1000);
   const timeFormatted = formatDuration(timeMs);
-  console.log('[tracksPlayer:floatingPlayerUpdate]', {
-    id,
-    status,
-    position,
-    progress,
-    timeMs,
-    timeFormatted,
-    timeNode,
-    dataset,
-    currentTrackPlayer,
-    isCurrent,
-  });
   if (status) {
     dataset.status = status;
   } else {
     delete dataset.status;
   }
-  // if (id === 5 && position > 6) {
-  //   debugger;
-  // }
   dataset.position = String(position);
   dataset.progress = String(progress);
+  calculateAndUpdateTrackPosition(trackNode, position, isCurrent);
   currentTrackPlayer.style.setProperty('--progress', String(progress));
   if (timeNode) {
     timeNode.innerHTML = timeFormatted;
   }
-  localTrackInfoDb.updatePosition(id, position);
   if (isCurrent) {
     // TODO: Update the floating player if isCurrent
   }
 }
 
-function updateAudioPosition(trackNode: HTMLElement, isCurrent: boolean = true) {
-  const audio = ensureSharedPlayerAudio();
-  const dataset = trackNode.dataset;
-  const duration = parseFloat((dataset.trackDuration || '0').replace(',', '.'));
-  let position = parseFloat((dataset.position || '0').replace(',', '.'));
-  /* console.log('[tracksPlayer:updateAudioPosition]', {
-   *   readyState: audio.readyState,
-   *   currentTime: audio.currentTime,
-   *   position,
-   *   duration,
-   *   dataset,
-   *   audio,
-   *   // source,
-   * });
-   */
-  if (/* !audio.seekable || */ position >= duration - 0.1) {
-    position = 0;
-    updateTrackPosition(trackNode, position, isCurrent);
-    dataset.position = '0';
-    dataset.progress = '0';
-    audio.currentTime = 0;
-  } else {
-    audio.currentTime = position;
-  }
-}
-
-function audioPlay(trackNode: HTMLElement, isCurrent: boolean = true) {
-  const audio = ensureSharedPlayerAudio();
-  /* // DEBUG
-   * const dataset = trackNode.dataset;
-   * dataset.status = 'playing';
-   * const duration = parseFloat(dataset.trackDuration.replace(',', '.'));
-   * const position = Number(dataset.position || '');
-   * console.log('[tracksPlayer:audioPlay]', {
-   *   duration,
-   *   position,
-   *   dataset,
-   *   audio,
-   *   // source,
-   * });
-   */
-  updateAudioPosition(trackNode, isCurrent);
-  audio.play();
-}
-
-function sharedPlayerCanPlay(_ev: Event) {
+function floatingPlayerPlay(data: FloatingPlayerUpdateData) {
+  const {
+    // floatingPlayerState,
+    activePlayerData,
+  } = data;
   if (!currentTrackPlayer) {
     throw new Error('No current track player node!');
   }
-  const dataset = currentTrackPlayer.dataset;
-  const isLoaded = !!dataset.loaded;
-  if (!isLoaded) {
-    dataset.loaded = TRUE;
-    delete dataset.error;
-    /* // DEBUG
-     * const audio = ensureSharedPlayerAudio();
-     * const readyState = audio.readyState;
-     * console.log('[tracksPlayer:sharedPlayerCanPlay]', {
-     *   readyState,
-     *   currentTime: audio.currentTime,
-     *   dataset,
-     *   audio,
-     * });
-     */
-    // Start playback if all is ok...
-    audioPlay(currentTrackPlayer, true);
+  const { dataset } = currentTrackPlayer;
+  const id = Number(dataset.trackId);
+  if (id !== activePlayerData.id) {
+    throw new Error('Wrong active track id!');
   }
+  dataset.status = 'playing';
+  // floatingPlayer.showFloatingPlayer(currentTrackPlayer);
 }
 
-function sharedPlayerError(ev: Event) {
-  const srcElement = ev.currentTarget as HTMLSourceElement;
-  const { src, type } = srcElement;
-  const errMsg = getJsText('errorLoadingAudioFile') + ' ' + src;
-  const error = new Error(errMsg);
-  // eslint-disable-next-line no-console
-  console.error('[sharedPlayerError]', errMsg, {
-    error,
-    currentTrackPlayer,
-    src,
-    type,
-    ev,
-  });
-  debugger; // eslint-disable-line no-debugger
-  commonNotify.showError(errMsg);
-  const dataset = currentTrackPlayer?.dataset;
+function floatingPlayerStop(data: FloatingPlayerUpdateData) {
+  const {
+    // floatingPlayerState,
+    activePlayerData,
+  } = data;
+  if (!currentTrackPlayer) {
+    throw new Error('No current track player node!');
+  }
+  const { dataset } = currentTrackPlayer;
+  const id = Number(dataset.trackId);
+  if (id !== activePlayerData.id) {
+    throw new Error('Wrong active track id!');
+  }
   if (dataset) {
-    dataset.error = errMsg;
-    delete dataset.loaded;
     delete dataset.status;
   }
+  // incrementPlayedCount();
 }
 
-function isAudioPlaying(audio: HTMLAudioElement) {
-  return !!audio && audio.currentTime > 0 && !audio.paused && !audio.ended && audio.readyState > 2;
+function getTrackNode(id: number) {
+  const players = Array.from(allPlayers);
+  const trackNode = players.find((it) => Number(it.dataset.trackId) === id);
+  return trackNode;
 }
 
 function stopPreviousPlayer() {
-  if (sharedPlayerNode) {
-    const audio = sharedPlayerNode.getElementsByTagName('audio')[0];
-    if (audio && isAudioPlaying(audio)) {
-      audio.pause();
-    }
-  }
   if (currentTrackPlayer) {
     currentTrackPlayer.classList.toggle('current', false);
     const { dataset } = currentTrackPlayer;
@@ -369,13 +136,6 @@ function stopPreviousPlayer() {
     delete dataset.loaded;
     delete dataset.error;
   }
-}
-
-function sendIncrementPlayedCount() {
-  const { dataset } = currentTrackPlayer;
-  const { trackId } = dataset;
-  const url = `/api/v1/tracks/${trackId}/increment-played-count/`;
-  return sendApiRequest(url, 'POST');
 }
 
 function updateTrackPlayedCount(trackNode: HTMLElement, playedCount?: number, isCurrent?: boolean) {
@@ -403,64 +163,16 @@ function updateTrackPlayedCount(trackNode: HTMLElement, playedCount?: number, is
   }
 }
 
-function incrementPlayedCount() {
-  if (!currentTrackPlayer) {
-    throw new Error('No current track player node!');
-  }
-  const trackNode = currentTrackPlayer;
-  const { dataset } = trackNode;
-  if (dataset.incrementing) {
-    return;
-  }
-  dataset.incrementing = TRUE;
-  updateTrackPlayedCount(trackNode, undefined, true);
-  if (!window.isAuthenticated) {
-    delete dataset.incrementing;
-    return;
-  }
-  return sendIncrementPlayedCount()
-    .then(({ played_count }: { played_count?: number }) => {
-      if (played_count != null) {
-        // Re-update local data with server data...
-        updateTrackPlayedCount(trackNode, played_count, true);
-      }
-      // TODO: Update other instances of this track on the page (eg, in player, or in other track listings)?
-    })
-    .catch((err) => {
-      // eslint-disable-next-line no-console
-      console.error('[tracksPlayer:incrementPlayedCount:sendIncrementPlayedCount] error', {
-        err,
-      });
-      debugger; // eslint-disable-line no-debugger
-      commonNotify.showError(err);
-      throw err;
-    })
-    .finally(() => {
-      delete dataset.incrementing;
-    });
-}
-
-function startPlay() {
-  if (!currentTrackPlayer) {
-    throw new Error('No current track player node!');
-  }
-  const { dataset } = currentTrackPlayer;
-  const isLoaded = !!dataset.loaded;
-  const audio = ensureSharedPlayerAudio();
-  if (!isLoaded) {
-    dataset.status = 'waiting';
-    delete dataset.loaded;
-    delete dataset.error;
-    const { trackMediaUrl } = dataset;
-    const source = createSharedPlayerSource({ src: trackMediaUrl });
-    if (!source) {
-      throw new Error(getJsText('noAudioSourceNodeFound'));
-    }
-    updateAudioPosition(currentTrackPlayer, true);
-    // see `sharedPlayerLoaded`, `sharedPlayerCanPlay` handlers
-    audio.load();
-  } else {
-    audioPlay(currentTrackPlayer, true);
+function updateIncrementCallback(data: FloatingPlayerIncrementData) {
+  const {
+    count,
+    // floatingPlayerState,
+    activePlayerData,
+  } = data;
+  const trackNode = getTrackNode(activePlayerData.id);
+  const isCurrent = trackNode === currentTrackPlayer;
+  if (trackNode) {
+    updateTrackPlayedCount(trackNode, count, isCurrent);
   }
 }
 
@@ -586,11 +298,11 @@ function initTrackPlayerNode(trackNode: HTMLElement) {
     currentTrackPlayer = trackNode;
     trackNode.classList.toggle('current', true);
     // dataset.status = floatingPlayer.state.status;
-    floatingPlayerUpdate(floatingPlayer.state, activePlayerData);
+    floatingPlayerUpdate({ floatingPlayerState: floatingPlayer.state, activePlayerData });
   } else if (trackInfo) {
     const position = trackInfo.position;
     if (position) {
-      updateTrackPosition(trackNode, position, false);
+      calculateAndUpdateTrackPosition(trackNode, position, false);
     }
   }
   if (trackInfo) {
@@ -624,4 +336,6 @@ export function initTracksPlayerWrapper(domNode: HTMLElement = document.body) {
   floatingPlayer.callbacks.addPlayStartCallback(floatingPlayerPlay);
   floatingPlayer.callbacks.addPlayStopCallback(floatingPlayerStop);
   floatingPlayer.callbacks.addUpdateCallback(floatingPlayerUpdate);
+  floatingPlayer.callbacks.addIncrementCallback(updateIncrementCallback);
+  // TODO: Add toggle favorite callback
 }

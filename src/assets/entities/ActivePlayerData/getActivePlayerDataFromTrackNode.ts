@@ -17,22 +17,6 @@ export function getActivePlayerDataFromTrackNode(trackNode: HTMLElement) {
     imageUrl,
     mediaUrl,
     duration,
-    // position,
-    // status,
   };
-  // const link = titleNode?.getAttribute('href');
-  console.log('[getActivePlayerDataFromTrackNode]', {
-    activePlayerData,
-    id, // 6
-    duration, // 17.972245
-    mediaUrl,
-    imageUrl, // "/media/samples/Тест_кириллицы.png"
-    trackNode, // article.big-tracks-list-item.card.no-bg.mb-4.track-player.current
-    title, // "Новый трек"
-    // status,
-    // trackNode,
-    // dataset,
-  });
-  // TODO: Store in the local storage the last status (playing, paused etc) and last activity time
   return activePlayerData;
 }
