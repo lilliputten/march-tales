@@ -4,7 +4,9 @@ import { sendApiRequest } from '../helpers/sendApiRequest';
 import { getJsText } from '../helpers/getJsText';
 
 import { localTrackInfoDb } from './localTrackInfoDb';
-import { showFloatingPlayer } from './floatingPlayer';
+import { floatingPlayer } from '../entities/FloatingPlayer/floatingPlayer';
+import { ActivePlayerData } from '../entities/ActivePlayerData/ActivePlayerData';
+import { FloatingPlayerState } from '../entities/FloatingPlayer/FloatingPlayerState';
 
 const sharedPlayerContainer = document.body;
 
@@ -65,6 +67,7 @@ function createSharedPlayerSource(opts: TSharedPlayerOptions = {}) {
   return source;
 }
 
+// REMOVE
 function sharedPlayerEnded(_ev: Event) {
   if (!currentTrackPlayer) {
     throw new Error('No current track player node!');
@@ -156,20 +159,111 @@ function sharedPlayerTimeUpdate(ev: Event) {
   }
 }
 
+// REMOVE
 function sharedPlayerPlay(_ev: Event) {
   if (!currentTrackPlayer) {
     throw new Error('No current track player node!');
   }
   const { dataset } = currentTrackPlayer;
   dataset.status = 'playing';
-  showFloatingPlayer(currentTrackPlayer);
+  // floatingPlayer.showFloatingPlayer(currentTrackPlayer);
+}
+
+function floatingPlayerPlay(
+  _floatingPlayerState: FloatingPlayerState,
+  activePlayerData: ActivePlayerData,
+) {
+  if (!currentTrackPlayer) {
+    throw new Error('No current track player node!');
+  }
+  const { dataset } = currentTrackPlayer;
+  const id = Number(dataset.trackId);
+  if (id !== activePlayerData.id) {
+    throw new Error('Wrong active track id!');
+  }
+  dataset.status = 'playing';
+  // floatingPlayer.showFloatingPlayer(currentTrackPlayer);
+}
+
+function floatingPlayerStop(
+  _floatingPlayerState: FloatingPlayerState,
+  activePlayerData: ActivePlayerData,
+) {
+  if (!currentTrackPlayer) {
+    throw new Error('No current track player node!');
+  }
+  const { dataset } = currentTrackPlayer;
+  const id = Number(dataset.trackId);
+  if (id !== activePlayerData.id) {
+    throw new Error('Wrong active track id!');
+  }
+  if (dataset) {
+    delete dataset.status;
+  }
+  incrementPlayedCount();
+}
+
+function getTrackNode(id: number) {
+  const players = Array.from(allPlayers);
+  const trackNode = players.find((it) => Number(it.dataset.trackId) === id);
+  return trackNode;
+}
+
+function floatingPlayerUpdate(
+  floatingPlayerState: FloatingPlayerState,
+  activePlayerData: ActivePlayerData,
+) {
+  const { id } = activePlayerData;
+  let trackNode = currentTrackPlayer;
+  if (!trackNode || Number(trackNode.dataset.trackId) !== id) {
+    trackNode = getTrackNode(id);
+  }
+  if (!trackNode) {
+    return;
+  }
+  const isCurrent = trackNode === currentTrackPlayer;
+  const { position, progress, status } = floatingPlayerState;
+  const { dataset } = currentTrackPlayer;
+  const timeNode = currentTrackPlayer.querySelector('.time');
+  const timeMs = Math.floor(position * 1000);
+  const timeFormatted = formatDuration(timeMs);
+  console.log('[tracksPlayer:floatingPlayerUpdate]', {
+    id,
+    status,
+    position,
+    progress,
+    timeMs,
+    timeFormatted,
+    timeNode,
+    dataset,
+    currentTrackPlayer,
+    isCurrent,
+  });
+  if (status) {
+    dataset.status = status;
+  } else {
+    delete dataset.status;
+  }
+  // if (id === 5 && position > 6) {
+  //   debugger;
+  // }
+  dataset.position = String(position);
+  dataset.progress = String(progress);
+  currentTrackPlayer.style.setProperty('--progress', String(progress));
+  if (timeNode) {
+    timeNode.innerHTML = timeFormatted;
+  }
+  localTrackInfoDb.updatePosition(id, position);
+  if (isCurrent) {
+    // TODO: Update the floating player if isCurrent
+  }
 }
 
 function updateAudioPosition(trackNode: HTMLElement, isCurrent: boolean = true) {
   const audio = ensureSharedPlayerAudio();
   const dataset = trackNode.dataset;
-  const duration = parseFloat(dataset.trackDuration.replace(',', '.'));
-  let position = Number(dataset.position || '');
+  const duration = parseFloat((dataset.trackDuration || '0').replace(',', '.'));
+  let position = parseFloat((dataset.position || '0').replace(',', '.'));
   /* console.log('[tracksPlayer:updateAudioPosition]', {
    *   readyState: audio.readyState,
    *   currentTime: audio.currentTime,
@@ -374,23 +468,36 @@ function startPlay() {
 function trackPlayHandler(ev: MouseEvent) {
   const controlNode = ev.currentTarget as HTMLElement;
   const trackNode = controlNode.closest('.track-player') as HTMLElement;
+  // Reset previous player
   if (currentTrackPlayer && currentTrackPlayer !== trackNode) {
     stopPreviousPlayer();
   }
   const { dataset } = trackNode;
-  const isPlaying = dataset.status === 'playing';
-  const isWaiting = dataset.status === 'waiting';
-  const readyToPlay = !isWaiting && !isPlaying;
-  const audio = ensureSharedPlayerAudio();
-  if (isPlaying) {
-    // Pause if playing...
-    audio.pause();
-    dataset.status = 'paused';
-  } else if (readyToPlay) {
-    currentTrackPlayer = trackNode;
-    window.localStorage.setItem('currentTrackId', String(dataset.trackId));
-    trackNode.classList.toggle('current', true);
-    startPlay();
+  const id = Number(dataset.trackId);
+
+  const playingId = floatingPlayer.getActiveTrackId();
+  const isFloatingPlaying = floatingPlayer.isPlaying();
+  if (isFloatingPlaying) {
+    // Pause playback
+    floatingPlayer.pauseCurrentPlayer();
+    if (playingId === id) {
+      // Return -- just pause current track
+      return;
+    }
+  }
+
+  // Clear all tracks active status?
+  trackNode.classList.toggle('current', true);
+  currentTrackPlayer = trackNode;
+
+  const position = parseFloat((dataset.position || '0').replace(',', '.'));
+  floatingPlayer.setActiveTrack(trackNode, position);
+
+  floatingPlayer.playCurrentPlayer();
+
+  // Show floating player if has been hidden
+  if (!isFloatingPlaying) {
+    floatingPlayer.showFloatingPlayer();
   }
 }
 
@@ -463,7 +570,7 @@ function toggleFavorite(ev: Event) {
 }
 
 function initTrackPlayerNode(trackNode: HTMLElement) {
-  const currentTrackId = Number(window.localStorage.getItem('currentTrackId') || '');
+  const activePlayerData = floatingPlayer.activePlayerData;
   const { dataset } = trackNode;
   const {
     inited,
@@ -474,31 +581,24 @@ function initTrackPlayerNode(trackNode: HTMLElement) {
   if (!id || inited || !trackMediaUrl) {
     return;
   }
-  const isCurrent = id === currentTrackId;
   const trackInfo = localTrackInfoDb.getById(id);
-  /* console.log('[tracksPlayer:initTrackPlayerNode]', {
-   *   id,
-   *   position,
-   *   trackInfo,
-   *   isCurrent,
-   *   currentTrackId,
-   *   trackNode,
-   * });
-   */
-  if (trackInfo) {
-    if (trackInfo.position) {
-      updateTrackPosition(trackNode, trackInfo.position, isCurrent);
+  if (activePlayerData && activePlayerData.id == id) {
+    currentTrackPlayer = trackNode;
+    trackNode.classList.toggle('current', true);
+    // dataset.status = floatingPlayer.state.status;
+    floatingPlayerUpdate(floatingPlayer.state, activePlayerData);
+  } else if (trackInfo) {
+    const position = trackInfo.position;
+    if (position) {
+      updateTrackPosition(trackNode, position, false);
     }
+  }
+  if (trackInfo) {
     if (!window.isAuthenticated) {
       if (trackInfo?.favorite) {
         updateTrackFavorite(trackNode, trackInfo.favorite);
       }
     }
-  }
-  if (isCurrent) {
-    currentTrackPlayer = trackNode;
-    trackNode.classList.toggle('current', true);
-    dataset.status = 'paused';
   }
   const controls = trackNode.querySelectorAll<HTMLElement>('.track-control');
   controls.forEach((node) => {
@@ -521,4 +621,7 @@ function initTrackPlayerNode(trackNode: HTMLElement) {
 export function initTracksPlayerWrapper(domNode: HTMLElement = document.body) {
   allPlayers = domNode.querySelectorAll<HTMLElement>('.track-player[data-track-media-url]');
   allPlayers.forEach(initTrackPlayerNode);
+  floatingPlayer.callbacks.addPlayStartCallback(floatingPlayerPlay);
+  floatingPlayer.callbacks.addPlayStopCallback(floatingPlayerStop);
+  floatingPlayer.callbacks.addUpdateCallback(floatingPlayerUpdate);
 }

@@ -139,7 +139,7 @@
   <!-- }}} Page footer container -->
 
   {% block bottommostContent %}
-  {% include "assets/track-blocks/floating-player.django" %}
+  {% include "assets/entities/FloatingPlayer/floating-player.django" %}
   {% endblock bottommostContent %}
 
   <!-- {{{ JS -->

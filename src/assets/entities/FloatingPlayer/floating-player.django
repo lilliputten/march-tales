@@ -1,0 +1,35 @@
+{# ex: set ft=htmldjango : #}
+{% load static %}
+{% load i18n %}
+
+<div class="floating-player track-player">
+  <div class="image"></div>
+  <div class="title"></div>
+  {# {{{ Actions #}
+  <div
+    class="track-controls d-flex flex-wrap gap-1"
+    {% comment %} data-track-id="{{ track.id }}" {% endcomment %}
+    {% comment %} {% if track in favorite_tracks %}data-favorite="true"{% endif %} {% endcomment %}
+  >
+    <button data-control-id="toggleFavorite" class="track-control btn">
+      <span class="option option-not-favorite" title="{% trans 'Add to favorites' %}"><i class="icon favorite bi bi-heart"></i><!-- <span class="text">{% trans 'Add to favorites' %}</span>--></span>
+      <span class="option option-favorite" title="{% trans 'Remove from favorites' %}"><i class="icon favorite bi bi-heart-fill"></i><!-- <span class="text">{% trans 'Remove from favorites' %}</span>--></span>
+    </button>
+    <button data-control-id="play" class="track-control track-control-play big-icon btn">
+      <svg
+        class="circular-progress"
+      >
+        <circle class="bg"></circle>
+        <circle class="fg"></circle>
+      </svg>
+      <span class="option option-waiting" title="{% trans 'Loading' %}"><span class="spinner-border" role="status"></span><!--  <span class="text">{% trans 'Loading' %}</span> --></span>
+      <span class="option option-resume" title="{% trans 'Resume' %}"><i class="icon play bi bi-play-fill"></i><!--  <span class="text">{% trans 'Resume' %}</span> --></span>
+      <span class="option option-ready" title="{% trans 'Play' %}"><i class="icon bi play bi-play-fill"></i><!--  <span class="text">{% trans 'Play' %}</span> --></span>
+      <span class="option option-playing" title="{% trans 'Pause' %}"><i class="icon pause bi bi-pause-fill"></i><!--  <span class="text">{% trans 'Pause' %}</span> --></span>
+      <!--
+      <span class="time">time</span>
+      -->
+    </button>
+  </div>
+  {# Actions }}} #}
+</div>
