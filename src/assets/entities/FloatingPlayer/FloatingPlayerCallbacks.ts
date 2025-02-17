@@ -10,8 +10,18 @@ export interface FloatingPlayerIncrementData {
   // floatingPlayerState: FloatingPlayerState;
   activePlayerData: ActivePlayerData;
 }
+export interface FloatingPlayerFavoritesData {
+  favorites: number[];
+}
+export interface FloatingPlayerFavoriteData {
+  id: number;
+  favorite: boolean;
+  // activePlayerData: ActivePlayerData;
+}
 type UpdateCallback = (data: FloatingPlayerUpdateData) => void;
 type IncrementCallback = (data: FloatingPlayerIncrementData) => void;
+type FavoritesCallback = (data: FloatingPlayerFavoritesData) => void;
+type FavoriteCallback = (data: FloatingPlayerFavoriteData) => void;
 type ErrorCallback = (error: Error | string) => void;
 
 // type HandlerId = 'play' | 'stop' | 'time';
@@ -20,6 +30,8 @@ export class FloatingPlayerCallbacks {
   onPlayStopCallbacks: UpdateCallback[] = [];
   onUpdateCallbacks: UpdateCallback[] = [];
   onIncrementCallbacks: IncrementCallback[] = [];
+  onFavoritesCallbacks: FavoritesCallback[] = [];
+  onFavoriteCallbacks: FavoriteCallback[] = [];
   onErrorCallbacks: ErrorCallback[] = [];
 
   // handlers: Record<HandlerId, ErrorCallback[]> = {};
@@ -45,6 +57,18 @@ export class FloatingPlayerCallbacks {
   addIncrementCallback(cb: IncrementCallback) {
     if (cb && !this.onIncrementCallbacks.includes(cb)) {
       this.onIncrementCallbacks.push(cb);
+    }
+  }
+
+  addFavoriteCallback(cb: FavoriteCallback) {
+    if (cb && !this.onFavoriteCallbacks.includes(cb)) {
+      this.onFavoriteCallbacks.push(cb);
+    }
+  }
+
+  addFavoritesCallback(cb: FavoritesCallback) {
+    if (cb && !this.onFavoritesCallbacks.includes(cb)) {
+      this.onFavoritesCallbacks.push(cb);
     }
   }
 
@@ -87,6 +111,19 @@ export class FloatingPlayerCallbacks {
       });
     }
   }
+
+  invokeFavorite(data: FloatingPlayerFavoriteData) {
+    this.onFavoriteCallbacks.forEach((cb) => {
+      cb(data);
+    });
+  }
+
+  invokeFavorites(data: FloatingPlayerFavoritesData) {
+    this.onFavoritesCallbacks.forEach((cb) => {
+      cb(data);
+    });
+  }
+
   invokeError(error: Error | string) {
     if (error) {
       this.onErrorCallbacks.forEach((cb) => {

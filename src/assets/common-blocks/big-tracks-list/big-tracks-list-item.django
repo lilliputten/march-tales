@@ -45,7 +45,7 @@
     <div class="track-details-controls">
       {# {{{ Actions #}
       <div
-        class="track-controls d-flex flex-wrap gap-1"
+        class="track-controls d-flex gap-1"
         {% comment %} data-track-id="{{ track.id }}" {% endcomment %}
         {% comment %} {% if track in favorite_tracks %}data-favorite="true"{% endif %} {% endcomment %}
       >

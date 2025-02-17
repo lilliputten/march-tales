@@ -1,11 +1,10 @@
 import { formatDuration, quoteHtmlAttr } from '../helpers/CommonHelpers';
-import { commonNotify } from '../CommonNotify/CommonNotifySingleton';
-import { sendApiRequest } from '../helpers/sendApiRequest';
-import { getJsText } from '../helpers/getJsText';
 
 import { localTrackInfoDb } from './localTrackInfoDb';
 import { floatingPlayer } from '../entities/FloatingPlayer/floatingPlayer';
 import {
+  FloatingPlayerFavoriteData,
+  FloatingPlayerFavoritesData,
   FloatingPlayerIncrementData,
   FloatingPlayerUpdateData,
 } from '../entities/FloatingPlayer/FloatingPlayerCallbacks';
@@ -213,11 +212,6 @@ function trackPlayHandler(ev: MouseEvent) {
   }
 }
 
-function sendToggleFavoriteRequest(trackId: number | string, value: boolean) {
-  const url = `/api/v1/tracks/${trackId}/toggle-favorite/`;
-  return sendApiRequest(url, 'POST', { value });
-}
-
 function updateTrackFavorite(trackNode: HTMLElement, isFavorite: boolean) {
   const { dataset } = trackNode;
   const { favorite } = dataset;
@@ -231,54 +225,21 @@ function updateTrackFavorite(trackNode: HTMLElement, isFavorite: boolean) {
   }
 }
 
-function updateFavoritesByTrackIds(ids: number[]) {
-  localTrackInfoDb.updateFavoritesByTrackIds(ids);
+function updateSingleFavoriteCallback({ id, favorite }: FloatingPlayerFavoriteData) {
+  const trackNode = getTrackNode(id);
+  if (trackNode) {
+    updateTrackFavorite(trackNode, favorite);
+  }
+}
+
+function updateFavoritesCallback({ favorites }: FloatingPlayerFavoritesData) {
   allPlayers.forEach((trackNode) => {
     const { dataset } = trackNode;
     const { trackId } = dataset;
     const id = Number(trackId);
-    const isFavorite = ids.includes(id);
+    const isFavorite = favorites.includes(id);
     updateTrackFavorite(trackNode, isFavorite);
   });
-}
-
-function toggleFavorite(ev: Event) {
-  const node = ev.currentTarget as HTMLElement;
-  const trackNode = node.closest<HTMLElement>('.track-player');
-  const { dataset } = trackNode;
-  const { trackId, favorite } = dataset;
-  const id = Number(trackId);
-  if (!id) {
-    throw new Error('No current track id!');
-  }
-  const nextFavorite = !favorite;
-  localTrackInfoDb.updateFavorite(id, nextFavorite);
-  if (nextFavorite) {
-    dataset.favorite = TRUE;
-  } else {
-    delete dataset.favorite;
-  }
-  if (window.isAuthenticated) {
-    sendToggleFavoriteRequest(trackId, nextFavorite)
-      .then((results: { favorite_track_ids: number[] }) => {
-        const { favorite_track_ids } = results;
-        /* console.log('[trackControls:toggleFavorite]', {
-         *   favorite_track_ids,
-         * });
-         */
-        updateFavoritesByTrackIds(favorite_track_ids);
-        const msgId = nextFavorite ? 'trackAddedToFavorites' : 'trackRemovedFromFavorites';
-        commonNotify.showSuccess(getJsText(msgId));
-      })
-      .catch((err) => {
-        // eslint-disable-next-line no-console
-        console.error('[tracksPlayer:toggleFavorite:sendToggleFavoriteRequest] error', {
-          err,
-        });
-        debugger; // eslint-disable-line no-debugger
-        commonNotify.showError(err);
-      });
-  }
 }
 
 function initTrackPlayerNode(trackNode: HTMLElement) {
@@ -293,23 +254,24 @@ function initTrackPlayerNode(trackNode: HTMLElement) {
   if (!id || inited || !trackMediaUrl) {
     return;
   }
-  const trackInfo = localTrackInfoDb.getById(id);
+  const trackInfo = localTrackInfoDb.getOrCreate(id); // getById(id);
   if (activePlayerData && activePlayerData.id == id) {
     currentTrackPlayer = trackNode;
     trackNode.classList.toggle('current', true);
-    // dataset.status = floatingPlayer.state.status;
     floatingPlayerUpdate({ floatingPlayerState: floatingPlayer.state, activePlayerData });
-  } else if (trackInfo) {
-    const position = trackInfo.position;
-    if (position) {
-      calculateAndUpdateTrackPosition(trackNode, position, false);
+    // // ???
+    // trackInfo.position = floatingPlayer.state.position;
+    // trackInfo.favorite = activePlayerData.favorite;
+    // localTrackInfoDb.insert(trackInfo);
+  } else {
+    // TODO: Update local data (favorite, playedCount) form track node dataset?
+    if (trackInfo.position) {
+      calculateAndUpdateTrackPosition(trackNode, trackInfo.position, false);
     }
   }
-  if (trackInfo) {
-    if (!window.isAuthenticated) {
-      if (trackInfo?.favorite) {
-        updateTrackFavorite(trackNode, trackInfo.favorite);
-      }
+  if (!window.isAuthenticated) {
+    if (trackInfo?.favorite) {
+      updateTrackFavorite(trackNode, trackInfo.favorite);
     }
   }
   const controls = trackNode.querySelectorAll<HTMLElement>('.track-control');
@@ -320,7 +282,7 @@ function initTrackPlayerNode(trackNode: HTMLElement) {
       return;
     }
     if (controlId === 'toggleFavorite') {
-      node.addEventListener('click', toggleFavorite);
+      node.addEventListener('click', () => floatingPlayer.toggleFavoriteById(id));
     }
     if (controlId === 'play') {
       node.addEventListener('click', trackPlayHandler);
@@ -337,5 +299,6 @@ export function initTracksPlayerWrapper(domNode: HTMLElement = document.body) {
   floatingPlayer.callbacks.addPlayStopCallback(floatingPlayerStop);
   floatingPlayer.callbacks.addUpdateCallback(floatingPlayerUpdate);
   floatingPlayer.callbacks.addIncrementCallback(updateIncrementCallback);
-  // TODO: Add toggle favorite callback
+  floatingPlayer.callbacks.addFavoritesCallback(updateFavoritesCallback);
+  floatingPlayer.callbacks.addFavoriteCallback(updateSingleFavoriteCallback);
 }

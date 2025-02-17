@@ -4,6 +4,7 @@ export interface ActivePlayerData {
   imageUrl: string;
   mediaUrl: string;
   duration: number;
+  favorite: boolean;
   // position: number;
   // status?: string;
 }

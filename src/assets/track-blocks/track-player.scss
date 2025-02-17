@@ -5,7 +5,7 @@
 
 .track-player {
   $trackControlSize: 44px;
-  $circularProgressExtra: 2px;
+  $circularProgressExtra: 1px;
   $circularProgressOffset: $circularProgressExtra + 1;
   $circularProgressSize: $trackControlSize + $circularProgressExtra * 2;
   a:hover {
@@ -21,17 +21,19 @@
       color: $primaryDarkColor;
     }
   }
+  &.floating-player {
+    .card-meta,
+    .post-title {
+      color: #fff;
+    }
+    a:hover {
+      color: #fff;
+    }
+  }
   .track-control {
-    // border: 1px dashed gray; // DEBUG
-    // .option,
     & {
-      // display: flex;
-      // align-items: center;
-      // justify-content: center;
-      // gap: 1em;
       margin: $circularProgressExtra;
       display: block;
-      // box-sizing: border-box;
       width: $trackControlSize;
       height: $trackControlSize;
       position: relative;
@@ -60,28 +62,50 @@
       color: $primaryColor;
       transition: all $transitionTimeMs;
     }
+    border: 1px solid transparent;
+    &.no-circle {
+      border-width: 0;
+    }
     &:hover {
       .icon,
       .spinner-border,
       & {
-        // opacity: 0.8;
         color: $primaryDarkColor;
       }
     }
+    &:not(.no-circle):hover {
+      border-color: $primaryColor;
+      // box-shadow: 0 0 0 1px $primaryDarkColor !important;
+    }
   }
-  .track-control {
-    border: 1px solid transparent;
+  &.floating-player .track-control {
+    .icon,
+    .spinner-border,
+    & {
+      color: #fff;
+    }
     &:hover {
-      // border-color: $primaryDarkColor;
-      box-shadow: 0 0 0 1px $primaryDarkColor !important;
-      // box-shadow: none !important;
+      .icon,
+      .spinner-border,
+      & {
+        color: #ccc;
+      }
+    }
+    &:not(.no-circle):hover {
+      // box-shadow: 0 0 0 1px #ccc !important;
     }
   }
   .track-control-play {
+    // background-color: green;
     border: 1px solid $primaryColor;
     &:hover {
       border-color: $primaryDarkColor;
-      box-shadow: 0 0 0 1px $primaryDarkColor !important;
+      // box-shadow: 0 0 0 1px $primaryDarkColor !important;
+    }
+  }
+  &.floating-player {
+    .track-control-play {
+      border-color: #fff;
     }
   }
   .icon {
@@ -97,13 +121,6 @@
       padding-left: 3px;
     }
   }
-  &[data-progress] .track-control-play {
-    &:hover {
-      .circular-progress circle.fg {
-        stroke: $primaryDarkColor;
-      }
-    }
-  }
   &[data-status='playing'] {
     .circular-progress circle.fg {
       transition: stroke-dasharray 0.5s;
@@ -117,12 +134,17 @@
     --bs-spinner-height: #{$spinner-size};
     // --bs-spinner-border-width: 0.2em;
   }
+  &.floating-player {
+    .spinner-border {
+      color: #fff;
+    }
+  }
   .circular-progress {
     pointer-events: none;
     --extra: #{$circularProgressExtra};
     --size: #{$circularProgressSize};
     --half-size: calc(var(--size) / 2);
-    --stroke-width: 5px;
+    --stroke-width: 3px;
     --radius: calc((var(--size) - var(--stroke-width)) / 2);
     --circumference: calc(var(--radius) * pi * 2);
     --dash: calc((var(--progress) * var(--circumference)) / 100);
@@ -136,11 +158,10 @@
       cy: var(--half-size);
       r: var(--radius);
       fill: none;
-      stroke-linecap: round;
+      // stroke-linecap: round;
       stroke-width: 1px;
       &.bg {
         display: none;
-        stroke: red;
       }
       &.fg {
         stroke-width: var(--stroke-width);
@@ -149,6 +170,29 @@
         stroke-dasharray: var(--dash) calc(var(--circumference) - var(--dash));
         // transition: stroke-dasharray 0.5s;
         stroke: $primaryColor;
+      }
+    }
+  }
+  &.floating-player {
+    .circular-progress {
+      circle {
+        &.fg {
+          stroke: #fff;
+        }
+      }
+    }
+  }
+  &[data-progress] .track-control-play {
+    &:hover {
+      .circular-progress circle.fg {
+        stroke: $primaryDarkColor;
+      }
+    }
+  }
+  &.floating-player[data-progress] .track-control-play {
+    &:hover {
+      .circular-progress circle.fg {
+        stroke: #ccc;
       }
     }
   }
@@ -161,10 +205,6 @@
     transition: all 1s;
   }
 
-  &.floating-player .track-control[data-control-id='toggleFavorite'] { // TEMP: Hide favorite toggler
-    display: none;
-  }
-  // &:not([data-status='paused'], [data-status='playing']) .track-control-play .time,
   &:not([data-favorite='true']) .track-control[data-control-id='toggleFavorite'] .option-favorite,
   &[data-favorite='true'] .track-control[data-control-id='toggleFavorite'] .option-not-favorite,
   &[data-status]:not([data-status='ready']) .track-control-play .option-ready,

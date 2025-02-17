@@ -1,20 +1,61 @@
-// @use 'sass:color';
-// @use 'sass:math';
+@use 'sass:color';
+@use 'sass:math';
 
 @import '../../shared';
 
-$floatingPlayerHeight: 80px;
-
 .floating-player {
+  $floatingPlayerHeight: 70px;
+  $padding: 10px;
+  $cellHeight: $floatingPlayerHeight - $padding * 2;
+  background-color: #fff;
+  background-color: $primaryColor;
+  // box-shadow: inset 0 0 100px #8886;
+  // background-color: #8882;
   z-index: 99;
-  body:not(.withPlayer) & {
-    display: none;
-  }
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
   height: $floatingPlayerHeight;
-  background-color: #fff;
-  border-top: 1px solid $primaryColor;
+  padding: $padding;
+  border-top: 1px solid $primaryDarkenColor;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  .imageWrapper,
+  .image {
+    display: block;
+    height: $cellHeight;
+    width: calc($cellHeight * 1.7);
+  }
+  .image {
+    border-radius: 5px;
+    background-position: contain;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  .titleWrapper {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .title {
+    display: block;
+    max-height: $cellHeight;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #fff;
+    line-height: 1.2;
+  }
+  .trackLink {
+    transition: all $transitionTimeMs;
+    &:hover {
+      opacity: 0.85;
+    }
+  }
+  body:not(.withPlayer) & {
+    display: none;
+  }
 }

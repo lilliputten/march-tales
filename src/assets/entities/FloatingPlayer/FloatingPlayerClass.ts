@@ -19,6 +19,8 @@ import {
 import { HiddenPlayer } from './HiddenPlayer';
 import { FloatingPlayerCallbacks } from './FloatingPlayerCallbacks';
 
+// TODO: Update track title on the language change?
+
 const TRUE = 'true';
 
 export class FloatingPlayer {
@@ -30,6 +32,7 @@ export class FloatingPlayer {
   state: FloatingPlayerState = {};
   domNode?: HTMLElement;
   incrementing?: boolean;
+  toggling: Record<number, boolean> = {};
 
   constructor() {
     this.loadActivePlayerData();
@@ -37,26 +40,32 @@ export class FloatingPlayer {
     this.initTrackDomNode();
     this.updateAll();
     // Check if it was recently playing...
-    // const _now = Date.now();
-    if (
-      this.activePlayerData &&
-      this.state.status === 'playing' &&
-      this.state.lastTimestamp
-      // && this.state.lastTimestamp > now - 5000
-    ) {
-      // TODO: Then resume playback...
-      console.log('[FloatingPlayerClass:constructor] Start play', {
-        activePlayerData: this.activePlayerData,
-        state: this.state,
-      });
-      // TODO: Care about: `Uncaught (in promise) NotAllowedError: play() failed because the user didn't interact with the document first. https://goo.gl/xX8pDD`
-      // this.playCurrentPlayer();
+    const now = Date.now();
+    if (this.activePlayerData) {
+      this.ensureAudioLoaded();
+      if (
+        this.state.status === 'playing' &&
+        this.state.lastTimestamp &&
+        this.state.lastTimestamp > now - 5000
+      ) {
+        // TODO: Then resume playback...
+        console.log('[FloatingPlayerClass:constructor] Start play', {
+          activePlayerData: this.activePlayerData,
+          state: this.state,
+        });
+        // TODO: Care about: `Uncaught (in promise) NotAllowedError: play() failed because the user didn't interact with the document first. https://goo.gl/xX8pDD`
+        try {
+          this.playCurrentPlayer();
+        } catch (err) {
+          debugger;
+        }
 
-      // DEBUG: Temporarily remove the playing status
-      delete this.state.status;
-    } else {
-      // Reset the status
-      delete this.state.status;
+        // DEBUG: Temporarily remove the playing status
+        // delete this.state.status;
+      } else {
+        // Reset the status
+        delete this.state.status;
+      }
     }
   }
 
@@ -154,10 +163,21 @@ export class FloatingPlayer {
   updateActivePlayerDataInDom() {
     const domNode = this.requireDomNode();
     const activePlayerData = this.requireActivePlayerData();
+    const id = activePlayerData.id;
     const titleNode = domNode.querySelector<HTMLElement>('.title');
     titleNode.innerText = activePlayerData.title;
     const imageNode = domNode.querySelector<HTMLElement>('.image');
     imageNode.style.backgroundImage = 'url(' + activePlayerData.imageUrl + ')';
+    const { dataset } = domNode;
+    if (activePlayerData.favorite) {
+      dataset.favorite = TRUE;
+    } else {
+      delete dataset.favorite;
+    }
+    const links = domNode.querySelectorAll<HTMLLinkElement>('.trackLink');
+    links.forEach((it) => {
+      it.setAttribute('href', `/tracks/${id}`);
+    });
   }
 
   updateStateInDom() {
@@ -312,22 +332,34 @@ export class FloatingPlayer {
     });
   }
 
+  handleError(err: Error | string) {
+    // eslint-disable-next-line no-console
+    console.error('[FloatingPlayerClass:handleError]', {
+      err,
+    });
+    debugger; // eslint-disable-line no-debugger
+    this.state.error = getErrorText(err);
+    this.updateStateInDom();
+    commonNotify.showError(err);
+    this.callbacks.invokeError(err);
+  }
   handleAudioSourceError(ev: Event) {
     const srcElement = ev.currentTarget as HTMLSourceElement;
     const { src, type } = srcElement;
-    const errMsg = getJsText('errorLoadingAudioFile') + ' ' + src;
+    const errMsg = getJsText('errorLoadingAudioFile') + ' ' + src + (type ? `( ${type})` : '');
     const error = new Error(errMsg);
-    // eslint-disable-next-line no-console
-    console.error('[FloatingPlayerClass:handleAudioSourceError]', errMsg, {
-      error,
-      src,
-      type,
-      ev,
-    });
-    debugger; // eslint-disable-line no-debugger
-    commonNotify.showError(errMsg);
-    this.state.error = getErrorText(error);
-    this.callbacks.invokeError(error);
+    this.handleError(error);
+    // // eslint-disable-next-line no-console
+    // console.error('[FloatingPlayerClass:handleAudioSourceError]', errMsg, {
+    //   error,
+    //   src,
+    //   type,
+    //   ev,
+    // });
+    // debugger; // eslint-disable-line no-debugger
+    // commonNotify.showError(errMsg);
+    // this.state.error = getErrorText(error);
+    // this.callbacks.invokeError(error);
   }
 
   /// Active player data
@@ -382,6 +414,7 @@ export class FloatingPlayer {
     if (audio.ended || this.state.position > activePlayerData.duration - 0.1) {
       // Start from the begining
       this.state.position = 0;
+      audio.load();
     }
     this.updateTrackPosition();
     this.callbacks.invokeUpdate({
@@ -390,7 +423,16 @@ export class FloatingPlayer {
     });
 
     audio.currentTime = this.state.position || 0;
-    audio.play();
+    const result = audio.play();
+    result.catch((err) => {
+      if (err.name === 'NotAllowedError') {
+        //  play() failed because the user didn't interact with the document first. -> Just cancel
+        this.state.status = undefined;
+        this.updateStateInDom();
+      } else {
+        this.handleError(err);
+      }
+    });
   }
 
   /** Play button click handler */
@@ -482,20 +524,80 @@ export class FloatingPlayer {
       });
   }
 
+  sendToggleFavoriteRequest(id: number, value: boolean) {
+    const url = `/api/v1/tracks/${id}/toggle-favorite/`;
+    return sendApiRequest(url, 'POST', { value });
+  }
+
+  toggleFavorite() {
+    const activePlayerData = this.requireActivePlayerData();
+    const id = activePlayerData.id;
+    this.toggleFavoriteById(id);
+  }
+
+  toggleFavoriteById(id: number) {
+    if (this.toggling[id]) {
+      return;
+    }
+    const activePlayerData = this.activePlayerData;
+    const isCurrent = id === activePlayerData?.id;
+    const trackInfo = localTrackInfoDb.getById(id);
+    const favorite = !trackInfo.favorite;
+    localTrackInfoDb.updateFavorite(id, favorite);
+    if (isCurrent) {
+      activePlayerData.favorite = favorite;
+      this.updateActivePlayerDataInDom();
+      this.saveActivePlayerData();
+    }
+    this.callbacks.invokeFavorite({ id, favorite });
+    if (window.isAuthenticated) {
+      this.toggling[id] = true;
+      this.sendToggleFavoriteRequest(id, favorite)
+        .then((results: { favorite_track_ids: number[] }) => {
+          const { favorite_track_ids } = results;
+          /* console.log('[trackControls:toggleFavorite]', {
+           *   favorite_track_ids,
+           * });
+           */
+          localTrackInfoDb.updateFavoritesByTrackIds(favorite_track_ids);
+          this.callbacks.invokeFavorites({
+            favorites: favorite_track_ids,
+          });
+          const msgId = favorite ? 'trackAddedToFavorites' : 'trackRemovedFromFavorites';
+          commonNotify.showSuccess(getJsText(msgId));
+        })
+        .catch((err) => {
+          // eslint-disable-next-line no-console
+          console.error('[tracksPlayer:toggleFavorite:sendToggleFavoriteRequest] error', {
+            err,
+          });
+          debugger; // eslint-disable-line no-debugger
+          commonNotify.showError(err);
+        })
+        .finally(() => {
+          this.toggling[id] = false;
+        });
+    }
+  }
+
   // Initilization...
 
   initTrackDomNode() {
     const domNode = this.requireDomNode();
-    const controls = domNode.querySelectorAll<HTMLElement>('.track-control');
+    const hideButton = domNode.querySelector<HTMLButtonElement>('.track-control-hide');
+    if (hideButton) {
+      hideButton.addEventListener('click', this.hideFloatingPlayer.bind(this));
+    }
+    const controls = domNode.querySelectorAll<HTMLButtonElement>('.track-control');
     controls.forEach((node) => {
       const { dataset } = node;
       const { inited, controlId } = dataset;
       if (inited) {
         return;
       }
-      // if (controlId === 'toggleFavorite') {
-      //   node.addEventListener('click', toggleFavorite);
-      // }
+      if (controlId === 'toggleFavorite') {
+        node.addEventListener('click', this.toggleFavorite.bind(this));
+      }
       if (controlId === 'play') {
         node.addEventListener('click', this.trackPlayHandler.bind(this));
       }

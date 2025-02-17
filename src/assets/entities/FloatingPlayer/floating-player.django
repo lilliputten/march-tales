@@ -3,11 +3,11 @@
 {% load i18n %}
 
 <div class="floating-player track-player">
-  <div class="image"></div>
-  <div class="title"></div>
+  <div class="imageWrapper"><a href="" class="image trackLink"></a></div>
+  <div class="titleWrapper"><a href="" class="title trackLink"></a></div>
   {# {{{ Actions #}
   <div
-    class="track-controls d-flex flex-wrap gap-1"
+    class="track-controls d-flex gap-1"
     {% comment %} data-track-id="{{ track.id }}" {% endcomment %}
     {% comment %} {% if track in favorite_tracks %}data-favorite="true"{% endif %} {% endcomment %}
   >
@@ -29,6 +29,9 @@
       <!--
       <span class="time">time</span>
       -->
+    </button>
+    <button data-control-id="hide" class="track-control no-circle track-control-hide big-icon btn">
+      <span class="option option-hide" title="{% trans 'Hide' %}"><i class="icon hide bi bi-x-lg"></i></span>
     </button>
   </div>
   {# Actions }}} #}
