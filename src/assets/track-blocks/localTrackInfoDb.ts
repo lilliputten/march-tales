@@ -183,8 +183,8 @@ class LocalTrackInfoDb {
 
   _getIndex() {
     try {
-      const data = window.localStorage.getItem('trackInfoIndex');
-      return (data ? JSON.parse(data) : []) as number[];
+      const str = window.localStorage.getItem('trackInfoIndex');
+      return (str ? str.split(',').map((v) => (v ? Number(v) : 0)) : []) as number[];
     } catch (
       _ // eslint-disable-line @typescript-eslint/no-unused-vars
     ) {
@@ -193,7 +193,7 @@ class LocalTrackInfoDb {
   }
 
   _setIndex(index: number[]) {
-    window.localStorage.setItem('trackInfoIndex', JSON.stringify(index));
+    window.localStorage.setItem('trackInfoIndex', index.join(','));
   }
 
   _addToIndex(id: number) {

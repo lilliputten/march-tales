@@ -1,3 +1,5 @@
+import { floatToStr } from '../../helpers/floatToStr';
+
 export interface ActivePlayerData {
   id: number;
   title: string;
@@ -5,18 +7,50 @@ export interface ActivePlayerData {
   mediaUrl: string;
   duration: number;
   favorite: boolean;
-  // position: number;
-  // status?: string;
 }
 
 const storageActivePlayerDataId = 'ActivePlayerData';
 
-function convertActivePlayerDataToJsonStr(data: ActivePlayerData) {
-  return JSON.stringify(data);
+function convertActivePlayerDataFromJsonStr(str: string) {
+  if (!str) {
+    return undefined;
+  }
+  try {
+    const raw = JSON.parse(str);
+    // const list = str.split(',');
+    const {
+      // Keep the order!
+      id,
+      title,
+      imageUrl,
+      mediaUrl,
+      duration,
+      favorite,
+    } = raw;
+    const data: ActivePlayerData = {
+      // Keep the order!
+      id: id ? Number(id) : 0,
+      title: title ? String(title) : '',
+      imageUrl: imageUrl ? String(imageUrl) : '',
+      mediaUrl: mediaUrl ? String(mediaUrl) : '',
+      duration: duration ? Number(duration) : 0,
+      favorite: Boolean(favorite),
+    };
+    return data;
+  } catch (
+    err // eslint-disable-line @typescript-eslint/no-unused-vars
+  ) {
+    // eslint-disable-next-line no-console
+    console.warn('[ActivePlayerData:storageActivePlayerDataId] Parse error', {
+      str,
+      err,
+    });
+    return undefined;
+  }
 }
 
-function convertActivePlayerDataFromJsonStr(str: string) {
-  return str ? (JSON.parse(str) as ActivePlayerData) : undefined;
+function convertActivePlayerDataToJsonStr(data: ActivePlayerData) {
+  return JSON.stringify(data);
 }
 
 export function saveActivePlayerData(data?: ActivePlayerData) {
