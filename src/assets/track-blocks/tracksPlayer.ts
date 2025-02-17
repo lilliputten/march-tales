@@ -202,6 +202,11 @@ function trackPlayHandler(ev: MouseEvent) {
 
   // Clear all tracks active status?
   requestAnimationFrame(() => {
+    allPlayers.forEach((it) => {
+      if (it !== trackNode && it.classList.contains('current')) {
+        it.classList.toggle('current', false);
+      }
+    });
     trackNode.classList.toggle('current', true);
   });
 
