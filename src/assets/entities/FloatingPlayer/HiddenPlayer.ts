@@ -1,5 +1,3 @@
-import { getJsText } from '../../helpers/getJsText';
-
 interface THiddenPlayerOptions {
   type?: string;
   src?: string;

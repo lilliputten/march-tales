@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-17 08:05+0300\n"
+"POT-Creation-Date: 2025-02-17 23:55+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,37 +28,37 @@ msgstr ""
 
 #: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:57
 #: .\src\assets\common-blocks\medium-tracks-list\medium-tracks-list-item.django:45
-#: .\src\assets\entities\FloatingPlayer\floating-player.django:17
+#: .\src\assets\entities\FloatingPlayer\floating-player.django:28
 msgid "Add to favorites"
 msgstr ""
 
 #: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:58
 #: .\src\assets\common-blocks\medium-tracks-list\medium-tracks-list-item.django:46
-#: .\src\assets\entities\FloatingPlayer\floating-player.django:18
+#: .\src\assets\entities\FloatingPlayer\floating-player.django:29
 msgid "Remove from favorites"
 msgstr ""
 
 #: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:67
 #: .\src\assets\common-blocks\medium-tracks-list\medium-tracks-list-item.django:37
-#: .\src\assets\entities\FloatingPlayer\floating-player.django:27
+#: .\src\assets\entities\FloatingPlayer\floating-player.django:41
 msgid "Loading"
 msgstr ""
 
 #: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:68
 #: .\src\assets\common-blocks\medium-tracks-list\medium-tracks-list-item.django:38
-#: .\src\assets\entities\FloatingPlayer\floating-player.django:28
+#: .\src\assets\entities\FloatingPlayer\floating-player.django:42
 msgid "Resume"
 msgstr ""
 
 #: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:69
 #: .\src\assets\common-blocks\medium-tracks-list\medium-tracks-list-item.django:39
-#: .\src\assets\entities\FloatingPlayer\floating-player.django:29
+#: .\src\assets\entities\FloatingPlayer\floating-player.django:43
 msgid "Play"
 msgstr ""
 
 #: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:70
 #: .\src\assets\common-blocks\medium-tracks-list\medium-tracks-list-item.django:40
-#: .\src\assets\entities\FloatingPlayer\floating-player.django:30
+#: .\src\assets\entities\FloatingPlayer\floating-player.django:44
 msgid "Pause"
 msgstr ""
 
@@ -92,7 +92,15 @@ msgstr ""
 msgid "Tags"
 msgstr ""
 
-#: .\src\assets\entities\FloatingPlayer\floating-player.django:36
+#: .\src\assets\entities\FloatingPlayer\floating-player.django:32
+msgid "Rewind"
+msgstr ""
+
+#: .\src\assets\entities\FloatingPlayer\floating-player.django:50
+msgid "Fast forward"
+msgstr ""
+
+#: .\src\assets\entities\FloatingPlayer\floating-player.django:53
 msgid "Hide"
 msgstr ""
 

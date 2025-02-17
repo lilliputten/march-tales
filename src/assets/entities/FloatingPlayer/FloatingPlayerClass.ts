@@ -10,6 +10,7 @@ import {
 } from '../ActivePlayerData/ActivePlayerData';
 import { getActivePlayerDataFromTrackNode } from '../ActivePlayerData/getActivePlayerDataFromTrackNode';
 import { sendApiRequest } from '../../helpers/sendApiRequest';
+import { floatToStr } from '../../helpers/floatToStr';
 import {
   FloatingPlayerState,
   loadFloatingPlayerState,
@@ -23,6 +24,9 @@ import { FloatingPlayerCallbacks } from './FloatingPlayerCallbacks';
 
 const TRUE = 'true';
 
+/** A value of forward/backward seek step */
+const seekTimeSec = 1;
+
 export class FloatingPlayer {
   inited = false;
   callbacks = new FloatingPlayerCallbacks();
@@ -33,11 +37,12 @@ export class FloatingPlayer {
   domNode?: HTMLElement;
   incrementing?: boolean;
   toggling: Record<number, boolean> = {};
+  seeking = false;
 
   constructor() {
     this.loadActivePlayerData();
     this.loadFloatingPlayerState();
-    this.initTrackDomNode();
+    this.initDomNode();
     this.updateAll();
     // Check if it was recently playing...
     const now = Date.now();
@@ -49,19 +54,13 @@ export class FloatingPlayer {
         this.state.lastTimestamp > now - 5000
       ) {
         // TODO: Then resume playback...
-        console.log('[FloatingPlayerClass:constructor] Start play', {
-          activePlayerData: this.activePlayerData,
-          state: this.state,
-        });
+        /* console.log('[FloatingPlayerClass:constructor] Start play', {
+         *   activePlayerData: this.activePlayerData,
+         *   state: this.state,
+         * });
+         */
         // TODO: Care about: `Uncaught (in promise) NotAllowedError: play() failed because the user didn't interact with the document first. https://goo.gl/xX8pDD`
-        try {
-          this.playCurrentPlayer();
-        } catch (err) {
-          debugger;
-        }
-
-        // DEBUG: Temporarily remove the playing status
-        // delete this.state.status;
+        this.playCurrentPlayer();
       } else {
         // Reset the status
         delete this.state.status;
@@ -165,38 +164,48 @@ export class FloatingPlayer {
     const activePlayerData = this.requireActivePlayerData();
     const id = activePlayerData.id;
     const titleNode = domNode.querySelector<HTMLElement>('.title');
-    titleNode.innerText = activePlayerData.title;
+    const durationNode = domNode.querySelector<HTMLElement>('.duration');
     const imageNode = domNode.querySelector<HTMLElement>('.image');
-    imageNode.style.backgroundImage = 'url(' + activePlayerData.imageUrl + ')';
     const { dataset } = domNode;
-    if (activePlayerData.favorite) {
-      dataset.favorite = TRUE;
-    } else {
-      delete dataset.favorite;
-    }
-    const links = domNode.querySelectorAll<HTMLLinkElement>('.trackLink');
-    links.forEach((it) => {
-      it.setAttribute('href', `/tracks/${id}`);
+    requestAnimationFrame(() => {
+      titleNode.innerText = activePlayerData.title;
+      durationNode.innerText = formatDuration(Math.floor(activePlayerData.duration * 1000));
+      imageNode.style.backgroundImage = 'url(' + activePlayerData.imageUrl + ')';
+      if (activePlayerData.favorite) {
+        dataset.favorite = TRUE;
+      } else {
+        delete dataset.favorite;
+      }
+      const links = domNode.querySelectorAll<HTMLLinkElement>('.trackLink');
+      links.forEach((it) => {
+        it.setAttribute('href', `/tracks/${id}`);
+      });
     });
   }
 
   updateStateInDom() {
     const domNode = this.requireDomNode();
     const { dataset } = domNode;
-    if (this.state.status) {
-      dataset.status = this.state.status;
-    } else {
-      delete dataset.status;
-    }
-    document.body.classList.toggle('withPlayer', !!this.state.visible);
+    requestAnimationFrame(() => {
+      if (this.state.status) {
+        dataset.status = this.state.status;
+      } else {
+        delete dataset.status;
+      }
+      document.body.classList.toggle('withPlayer', !!this.state.visible);
+    });
   }
 
   updatePositionInDom() {
     const domNode = this.requireDomNode();
+    const seekBarNode = domNode.querySelector<HTMLInputElement>('.seekBar');
     const { dataset } = domNode;
-    dataset.position = String(this.state.position || 0);
-    dataset.progress = String(this.state.progress || 0);
-    domNode.style.setProperty('--progress', String(this.state.progress || 0));
+    requestAnimationFrame(() => {
+      dataset.position = floatToStr(this.state.position);
+      dataset.progress = floatToStr(this.state.progress);
+      domNode.style.setProperty('--progress', dataset.progress);
+      seekBarNode.value = dataset.progress;
+    });
   }
 
   calculateProgress() {
@@ -213,40 +222,29 @@ export class FloatingPlayer {
       throw error;
     }
     const ratio = position / duration;
-    const progress = Math.round(ratio * 100);
+    const progress = Math.min(100, ratio * 100);
     return progress;
   }
 
   updateTrackPosition() {
     const domNode = this.requireDomNode();
-    const timeNode = domNode.querySelector('.time');
+    const timeNode = domNode.querySelector<HTMLElement>('.time');
     const activePlayerData = this.requireActivePlayerData();
     const { position } = this.state;
     const { id } = activePlayerData;
     const progress = this.calculateProgress();
-    /* console.log('[FloatingPlayerClass:updateTrackPosition]', {
-     *   id,
-     *   position,
-     *   progress,
-     *   ratio,
-     *   duration,
-     *   timeNode,
-     *   dataset,
-     *   domNode,
-     * });
-     */
     this.state.progress = progress;
     this.updatePositionInDom();
     if (timeNode) {
-      timeNode.innerHTML = formatDuration(Math.floor(position * 1000));
+      requestAnimationFrame(() => {
+        timeNode.innerText = formatDuration(Math.floor(position * 1000));
+      });
     }
     localTrackInfoDb.updatePosition(id, position);
   }
 
-  // TODO: Update position
-  // TODO: Update status
-
   updateAll() {
+    this.updateTrackPosition();
     this.updateStateInDom();
     this.updatePositionInDom();
     if (this.activePlayerData) {
@@ -257,6 +255,9 @@ export class FloatingPlayer {
   // Audio handlers...
 
   handleAudioTimeUpdate(ev: Event) {
+    if (this.seeking) {
+      return;
+    }
     const currAudio = this.audio;
     const audio = ev.currentTarget as HTMLAudioElement;
     if (audio !== currAudio) {
@@ -265,7 +266,7 @@ export class FloatingPlayer {
     const activePlayerData = this.requireActivePlayerData();
     const {
       currentTime,
-      // readyState,
+      // readyState, // DEBUG
     } = audio;
     /* // DEBUG
      * const source = audio.getElementsByTagName('SOURCE')[0] as HTMLSourceElement;
@@ -284,8 +285,8 @@ export class FloatingPlayer {
     // TODO: Check loaded status?
     if (this.state.position != currentTime) {
       this.state.position = currentTime;
-      this.saveFloatingPlayerState();
       this.updateTrackPosition();
+      this.saveFloatingPlayerState();
       this.callbacks.invokeUpdate({ floatingPlayerState: this.state, activePlayerData });
       localTrackInfoDb.updatePosition(activePlayerData.id, currentTime);
     }
@@ -293,24 +294,12 @@ export class FloatingPlayer {
 
   handleAudioCanPlay(_ev: Event) {
     if (!this.state.loaded) {
-      /* // DEBUG
-       * const audio = ev.currentTarget as HTMLAudioElement;
-       * const source = audio.getElementsByTagName('SOURCE')[0] as HTMLSourceElement;
-       * const src = source?.src;
-       * console.log('[FloatingPlayerClass:sharedPlayerCanPlay]', {
-       *   src,
-       *   source,
-       *   audio,
-       *   ev,
-       * });
-       */
       this.state.loaded = true;
       delete this.state.error;
     }
   }
 
   handleAudioPlay(_ev: Event) {
-    // console.log('[FloatingPlayerClass:handleAudioPlay]');
     this.state.status = 'playing';
     this.updateStateInDom();
     this.saveFloatingPlayerState();
@@ -322,7 +311,6 @@ export class FloatingPlayer {
 
   handleAudioEnded(_ev: Event) {
     this.incrementPlayedCount();
-    // console.log('[FloatingPlayerClass:handleAudioEnded]');
     this.state.status = 'paused'; // stopped, ready?
     this.updateStateInDom();
     this.saveFloatingPlayerState();
@@ -333,33 +321,28 @@ export class FloatingPlayer {
   }
 
   handleError(err: Error | string) {
+    const errName = err instanceof Error && err.name;
     // eslint-disable-next-line no-console
     console.error('[FloatingPlayerClass:handleError]', {
       err,
     });
+    if (errName === 'AbortError') {
+      // NOTE: Do nothing on abort
+      return;
+    }
     debugger; // eslint-disable-line no-debugger
     this.state.error = getErrorText(err);
     this.updateStateInDom();
     commonNotify.showError(err);
     this.callbacks.invokeError(err);
   }
+
   handleAudioSourceError(ev: Event) {
     const srcElement = ev.currentTarget as HTMLSourceElement;
     const { src, type } = srcElement;
     const errMsg = getJsText('errorLoadingAudioFile') + ' ' + src + (type ? `( ${type})` : '');
     const error = new Error(errMsg);
     this.handleError(error);
-    // // eslint-disable-next-line no-console
-    // console.error('[FloatingPlayerClass:handleAudioSourceError]', errMsg, {
-    //   error,
-    //   src,
-    //   type,
-    //   ev,
-    // });
-    // debugger; // eslint-disable-line no-debugger
-    // commonNotify.showError(errMsg);
-    // this.state.error = getErrorText(error);
-    // this.callbacks.invokeError(error);
   }
 
   /// Active player data
@@ -372,11 +355,6 @@ export class FloatingPlayer {
 
   loadAudio() {
     const activePlayerData = this.requireActivePlayerData();
-    /* console.log('[FloatingPlayerClass:loadAudio]', {
-     *   mediaUrl: activePlayerData.mediaUrl,
-     *   id: activePlayerData.id,
-     * });
-     */
     this.state.loaded = false;
     const source = this.hiddenPlayer.createHiddenPlayerSource({ src: activePlayerData.mediaUrl });
     source.addEventListener('error', this.handleAudioSourceError.bind(this));
@@ -463,7 +441,6 @@ export class FloatingPlayer {
         this.state.position = position;
       }
       this.removeAudio();
-      // console.log('[FloatingPlayerClass:setActivePlayerData]', activePlayerData);
       this.activePlayerData = activePlayerData;
     }
     this.saveActivePlayerData();
@@ -474,11 +451,6 @@ export class FloatingPlayer {
   setActiveTrack(trackNode: HTMLElement, position?: number) {
     const activePlayerData = getActivePlayerDataFromTrackNode(trackNode);
     this.setActivePlayerData(activePlayerData, position);
-  }
-
-  setPosition(position?: number) {
-    this.state.position = position;
-    // ???
   }
 
   clearActiveData() {
@@ -555,10 +527,6 @@ export class FloatingPlayer {
       this.sendToggleFavoriteRequest(id, favorite)
         .then((results: { favorite_track_ids: number[] }) => {
           const { favorite_track_ids } = results;
-          /* console.log('[trackControls:toggleFavorite]', {
-           *   favorite_track_ids,
-           * });
-           */
           localTrackInfoDb.updateFavoritesByTrackIds(favorite_track_ids);
           this.callbacks.invokeFavorites({
             favorites: favorite_track_ids,
@@ -568,7 +536,7 @@ export class FloatingPlayer {
         })
         .catch((err) => {
           // eslint-disable-next-line no-console
-          console.error('[tracksPlayer:toggleFavorite:sendToggleFavoriteRequest] error', {
+          console.error('[FloatingPlayerClass:toggleFavoriteById] error', {
             err,
           });
           debugger; // eslint-disable-line no-debugger
@@ -580,10 +548,55 @@ export class FloatingPlayer {
     }
   }
 
+  seekPosition(position: number) {
+    this.seeking = true;
+    const audio = this.requireAudio();
+    audio.currentTime = position || 0;
+    this.state.position = position;
+    this.updateTrackPosition();
+    this.saveFloatingPlayerState();
+    const activePlayerData = this.requireActivePlayerData();
+    this.callbacks.invokeUpdate({ floatingPlayerState: this.state, activePlayerData });
+    setTimeout(() => {
+      this.seeking = false;
+    }, 150);
+  }
+
+  seekRewind() {
+    const position = Math.max(0, this.state.position - seekTimeSec);
+    this.seekPosition(position);
+  }
+
+  seekForward() {
+    const activePlayerData = this.requireActivePlayerData();
+    const { duration } = activePlayerData;
+    const position = Math.min(duration, this.state.position + seekTimeSec);
+    this.seekPosition(position);
+  }
+
+  seekBarHandle(ev: Event) {
+    const activePlayerData = this.requireActivePlayerData();
+    const { duration } = activePlayerData;
+    if (!duration) {
+      return;
+    }
+    const node = ev.currentTarget as HTMLInputElement;
+    const value = Number(node.value);
+    const position = (value * duration) / 100;
+    this.seekPosition(position);
+    if (!this.isPlaying()) {
+      this.playCurrentPlayer();
+    }
+  }
+
   // Initilization...
 
-  initTrackDomNode() {
+  initDomNode() {
     const domNode = this.requireDomNode();
+    const seekBarNode = domNode.querySelector<HTMLInputElement>('.seekBar');
+    if (seekBarNode) {
+      seekBarNode.addEventListener('input', this.seekBarHandle.bind(this));
+    }
     const hideButton = domNode.querySelector<HTMLButtonElement>('.track-control-hide');
     if (hideButton) {
       hideButton.addEventListener('click', this.hideFloatingPlayer.bind(this));
@@ -594,6 +607,12 @@ export class FloatingPlayer {
       const { inited, controlId } = dataset;
       if (inited) {
         return;
+      }
+      if (controlId === 'rewind') {
+        node.addEventListener('click', this.seekRewind.bind(this));
+      }
+      if (controlId === 'forward') {
+        node.addEventListener('click', this.seekForward.bind(this));
       }
       if (controlId === 'toggleFavorite') {
         node.addEventListener('click', this.toggleFavorite.bind(this));

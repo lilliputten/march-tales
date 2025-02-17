@@ -3,36 +3,54 @@
 {% load i18n %}
 
 <div class="floating-player track-player">
-  <div class="imageWrapper"><a href="" class="image trackLink"></a></div>
-  <div class="titleWrapper"><a href="" class="title trackLink"></a></div>
-  {# {{{ Actions #}
-  <div
-    class="track-controls d-flex gap-1"
-    {% comment %} data-track-id="{{ track.id }}" {% endcomment %}
-    {% comment %} {% if track in favorite_tracks %}data-favorite="true"{% endif %} {% endcomment %}
-  >
-    <button data-control-id="toggleFavorite" class="track-control btn">
-      <span class="option option-not-favorite" title="{% trans 'Add to favorites' %}"><i class="icon favorite bi bi-heart"></i><!-- <span class="text">{% trans 'Add to favorites' %}</span>--></span>
-      <span class="option option-favorite" title="{% trans 'Remove from favorites' %}"><i class="icon favorite bi bi-heart-fill"></i><!-- <span class="text">{% trans 'Remove from favorites' %}</span>--></span>
-    </button>
-    <button data-control-id="play" class="track-control track-control-play big-icon btn">
-      <svg
-        class="circular-progress"
-      >
-        <circle class="bg"></circle>
-        <circle class="fg"></circle>
-      </svg>
-      <span class="option option-waiting" title="{% trans 'Loading' %}"><span class="spinner-border" role="status"></span><!--  <span class="text">{% trans 'Loading' %}</span> --></span>
-      <span class="option option-resume" title="{% trans 'Resume' %}"><i class="icon play bi bi-play-fill"></i><!--  <span class="text">{% trans 'Resume' %}</span> --></span>
-      <span class="option option-ready" title="{% trans 'Play' %}"><i class="icon bi play bi-play-fill"></i><!--  <span class="text">{% trans 'Play' %}</span> --></span>
-      <span class="option option-playing" title="{% trans 'Pause' %}"><i class="icon pause bi bi-pause-fill"></i><!--  <span class="text">{% trans 'Pause' %}</span> --></span>
-      <!--
-      <span class="time">time</span>
-      -->
-    </button>
-    <button data-control-id="hide" class="track-control no-circle track-control-hide big-icon btn">
-      <span class="option option-hide" title="{% trans 'Hide' %}"><i class="icon hide bi bi-x-lg"></i></span>
-    </button>
+  <div class="seekBarBox">
+    <input type="range" class="seekBar" id="seekBar" name="seekBar" min="0" max="100" value="0" />
   </div>
-  {# Actions }}} #}
+  <div class="mainRow">
+    <div class="imageWrapper"><a href="" class="image trackLink"></a></div>
+    <div class="textWrapper">
+      <a href="" class="title trackLink"></a>
+      <div class="timeWrapper">
+        <span class="time">00:00</span>
+        <span class="delim"> / </span>
+        <span class="duration">00:00</span>
+      </div>
+    </div>
+    {# {{{ Actions #}
+    <div
+      class="track-controls d-flex gap-1"
+      {% comment %} data-track-id="{{ track.id }}" {% endcomment %}
+      {% comment %} {% if track in favorite_tracks %}data-favorite="true"{% endif %} {% endcomment %}
+    >
+      <button data-control-id="toggleFavorite" class="track-control btn">
+        <span class="option option-not-favorite" title="{% trans 'Add to favorites' %}"><i class="icon favorite bi bi-heart"></i><!-- <span class="text">{% trans 'Add to favorites' %}</span>--></span>
+        <span class="option option-favorite" title="{% trans 'Remove from favorites' %}"><i class="icon favorite bi bi-heart-fill"></i><!-- <span class="text">{% trans 'Remove from favorites' %}</span>--></span>
+      </button>
+      <button data-control-id="rewind" class="track-control btn">
+        <span class="option" title="{% trans 'Rewind' %}"><i class="icon rewind bi bi-chevron-left"></i></span>
+      </button>
+      <button data-control-id="play" class="track-control track-control-play big-icon btn">
+        <svg
+          class="circular-progress"
+        >
+          <circle class="bg"></circle>
+          <circle class="fg"></circle>
+        </svg>
+        <span class="option option-waiting" title="{% trans 'Loading' %}"><span class="spinner-border" role="status"></span><!--  <span class="text">{% trans 'Loading' %}</span> --></span>
+        <span class="option option-resume" title="{% trans 'Resume' %}"><i class="icon play bi bi-play-fill"></i><!--  <span class="text">{% trans 'Resume' %}</span> --></span>
+        <span class="option option-ready" title="{% trans 'Play' %}"><i class="icon bi play bi-play-fill"></i><!--  <span class="text">{% trans 'Play' %}</span> --></span>
+        <span class="option option-playing" title="{% trans 'Pause' %}"><i class="icon pause bi bi-pause-fill"></i><!--  <span class="text">{% trans 'Pause' %}</span> --></span>
+        <!--
+        <span class="time">time</span>
+        -->
+      </button>
+      <button data-control-id="forward" class="track-control btn">
+        <span class="option" title="{% trans 'Fast forward' %}"><i class="icon forward bi bi-chevron-right"></i></span>
+      </button>
+      <button data-control-id="hide" class="track-control no-circle track-control-hide big-icon btn">
+        <span class="option option-hide" title="{% trans 'Hide' %}"><i class="icon hide bi bi-x-lg"></i></span>
+      </button>
+    </div>
+    {# Actions }}} #}
+  </div>
 </div>

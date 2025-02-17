@@ -8,6 +8,9 @@
   $circularProgressExtra: 1px;
   $circularProgressOffset: $circularProgressExtra + 1;
   $circularProgressSize: $trackControlSize + $circularProgressExtra * 2;
+  &:not(.current, .floating-player)[data-progress='100'] {
+    opacity: 0.5;
+  }
   a:hover {
     // color: $primaryDarkColor;
     text-decoration: underline;
@@ -38,6 +41,7 @@
       height: $trackControlSize;
       position: relative;
       padding: 0;
+      border: 1px solid transparent;
     }
     .option {
       flex: 1;
@@ -62,7 +66,6 @@
       color: $primaryColor;
       transition: all $transitionTimeMs;
     }
-    border: 1px solid transparent;
     &.no-circle {
       border-width: 0;
     }
@@ -73,7 +76,7 @@
         color: $primaryDarkColor;
       }
     }
-    &:not(.no-circle):hover {
+    &:hover {
       border-color: $primaryColor;
       // box-shadow: 0 0 0 1px $primaryDarkColor !important;
     }
@@ -123,7 +126,9 @@
   }
   &[data-status='playing'] {
     .circular-progress circle.fg {
-      transition: stroke-dasharray 0.5s;
+      transition:
+        color $transitionTimeMs,
+        stroke-dasharray 0.5s;
     }
   }
 
@@ -168,7 +173,7 @@
         transform: rotate(-90deg);
         transform-origin: var(--half-size) var(--half-size);
         stroke-dasharray: var(--dash) calc(var(--circumference) - var(--dash));
-        // transition: stroke-dasharray 0.5s;
+        transition: color $transitionTimeMs;
         stroke: $primaryColor;
       }
     }
@@ -195,11 +200,6 @@
         stroke: #ccc;
       }
     }
-  }
-  .time {
-    display: none;
-    opacity: 0.5;
-    font-weight: normal;
   }
   .option {
     transition: all 1s;
