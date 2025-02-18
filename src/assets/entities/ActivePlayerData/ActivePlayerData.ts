@@ -1,5 +1,3 @@
-import { floatToStr } from '../../helpers/floatToStr';
-
 export interface ActivePlayerData {
   id: number;
   title: string;

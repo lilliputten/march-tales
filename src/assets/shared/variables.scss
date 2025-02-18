@@ -13,7 +13,6 @@ $defaultFontSize: 16px;
 $fontSizeSmall: calc($defaultFontSize - 1px);
 
 $defaultFontFamily: 'Nunito Sans', 'Helvetica', 'Arial', sans-serif;
-// $defaultFontFamily: 'Nunito Sans', Roboto, system-ui, -apple-system, "Segoe UI", "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
 // Breakpoints:...
 
@@ -35,29 +34,19 @@ $screenXlMax: map.get($grid-breakpoints, 'xxl'); // 1400px
 $navbarCollapse: $screenLgMin;
 $navbarCollapseMax: $screenMdMax;
 
-// $collapseWidth: $screenMdMin; // $grid-float-breakpoint; // =@screen-sm-min=768px ? =@screen-md-min=992px
-// $midbarCollapse: $collapseWidth;
-
 // Primary color...
 
 $primaryColor: #b26; // #486;
-$primaryLightColor: color.adjust($primaryColor, $lightness: 10%);
-$primaryLightenColor: color.adjust($primaryColor, $lightness: 20%);
-$primaryLightesetColor: color.adjust($primaryColor, $lightness: 30%);
-$primaryDarkColor: color.adjust($primaryColor, $lightness: -10%);
-$primaryDarkenColor: color.adjust($primaryColor, $lightness: -20%);
-$primaryDarkestColor: color.adjust($primaryColor, $lightness: -30%);
+$primaryLightColor: cleanRgb(color.adjust($primaryColor, $lightness: 10%));
+$primaryLightenColor: cleanRgb(color.adjust($primaryColor, $lightness: 20%));
+$primaryLightesetColor: cleanRgb(color.adjust($primaryColor, $lightness: 30%));
+$primaryDarkColor: cleanRgb(color.adjust($primaryColor, $lightness: -10%));
+$primaryDarkenColor: cleanRgb(color.adjust($primaryColor, $lightness: -20%));
+$primaryDarkestColor: cleanRgb(color.adjust($primaryColor, $lightness: -30%));
 
 $primaryColorRgb: rgbComponents($primaryColor);
 
 // Misc colors...
-
-// // UNUSED?
-// $xdarkBlueColor: #036;
-// $darkBlueColor: #047;
-// $mediumBlueColor: #157;
-// $moodBlueColor: #6ac;
-// $extralightBlueColor: #def;
 
 $darkGreenColor: #461;
 $mediumGreenColor: #9a0;

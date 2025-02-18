@@ -1,10 +1,20 @@
 // stylelint-disable scss/no-global-function-names
 @use 'sass:color';
+@use 'sass:math';
 
 @function rgbComponents($color) {
   // NOTE: New format (TODO, @see https://sass-lang.com/documentation/breaking-changes/color-functions/#old-channel-functions)
-  @return color.channel($color, 'red', $space: rgb), color.channel($color, 'green', $space: rgb),
-    color.channel($color, 'blue', $space: rgb);
+  @return math.round(color.channel($color, 'red', $space: rgb)),
+    math.round(color.channel($color, 'green', $space: rgb)),
+    math.round(color.channel($color, 'blue', $space: rgb));
   // Old format (pre SASS v.1.80?)
   // @return color.red($color) color.green($color) color.blue($color);
+}
+
+@function cleanRgb($rgb) {
+  // Remove decimals from automatically generated colors, like following (primaryLightColor): `rgb(218.3846153846, 53.6153846154, 126.8461538462)`
+  $redValue: math.round(color.channel($rgb, 'red', $space: rgb));
+  $greenValue: math.round(color.channel($rgb, 'green', $space: rgb));
+  $blueValue: math.round(color.channel($rgb, 'blue', $space: rgb));
+  @return rgb($redValue, $greenValue, $blueValue);
 }
