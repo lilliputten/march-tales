@@ -19,6 +19,9 @@
     background-color: $primaryColor;
     padding-top: $seekSmallHeight;
     border-top: 2px solid $primaryDarkenColor;
+    body:not(.withPlayer) & {
+      display: none;
+    }
   }
   .seekBarBox {
     position: absolute;
@@ -128,9 +131,6 @@
       &:hover {
         opacity: 0.85;
       }
-    }
-    body:not(.withPlayer) & {
-      display: none;
     }
   }
 }
