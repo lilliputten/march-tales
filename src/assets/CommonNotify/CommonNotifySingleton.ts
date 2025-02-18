@@ -20,7 +20,7 @@ interface TNotifyData {
 
 // Define module...
 class CommonNotify {
-  notifyRoot: HTMLDivElement = undefined;
+  notifyRoot?: HTMLDivElement;
 
   timeoutDelay = 3000;
 
@@ -39,7 +39,7 @@ class CommonNotify {
     setTimeout(() => {
       // ...And remove node (TODO: Check if node still exists in dom tree)...
       try {
-        this.notifyRoot.removeChild(node);
+        this.notifyRoot?.removeChild(node);
       } catch (
         _e // eslint-disable-line @typescript-eslint/no-unused-vars
       ) {
@@ -81,7 +81,7 @@ class CommonNotify {
     nodeText.classList.add('text');
     nodeText.innerHTML = content;
     node.appendChild(nodeText);
-    this.notifyRoot.appendChild(node);
+    this.notifyRoot?.appendChild(node);
     // Play appearing animation...
     window.requestAnimationFrame(() => {
       setTimeout(() => {

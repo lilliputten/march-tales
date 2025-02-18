@@ -7,7 +7,7 @@ class LocalTrackInfoDb {
     try {
       const _now = now || Date.now();
       const trackInfo = this.getOrCreate(id);
-      if (isNaN(playedCount)) {
+      if (playedCount == undefined || isNaN(playedCount)) {
         trackInfo.playedCount = trackInfo.playedCount ? trackInfo.playedCount + 1 : 1;
       } else {
         trackInfo.playedCount = playedCount;
@@ -225,7 +225,7 @@ class LocalTrackInfoDb {
       .map((id) => {
         return this.getById(id);
       })
-      .filter(Boolean);
+      .filter(Boolean) as TrackInfo[];
     return list;
   }
 

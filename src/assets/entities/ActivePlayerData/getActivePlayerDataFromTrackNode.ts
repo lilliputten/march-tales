@@ -7,11 +7,11 @@ export function getActivePlayerDataFromTrackNode(trackNode: HTMLElement) {
   // const status = dataset.status;
   const duration = parseFloat((dataset.trackDuration || '0').replace(',', '.'));
   // const position = parseFloat((dataset.position || '0').replace(',', '.'));
-  const mediaUrl = dataset.trackMediaUrl;
+  const mediaUrl = dataset.trackMediaUrl || '';
   const imageNode = trackNode.querySelector<HTMLImageElement>('img.card-img');
-  const imageUrl = imageNode?.getAttribute('src');
+  const imageUrl = imageNode?.getAttribute('src') || '';
   const titleNode = trackNode.querySelector<HTMLElement>('.post-title');
-  const title = titleNode?.innerHTML;
+  const title = titleNode?.innerHTML || '';
   const activePlayerData: ActivePlayerData = {
     id,
     title,

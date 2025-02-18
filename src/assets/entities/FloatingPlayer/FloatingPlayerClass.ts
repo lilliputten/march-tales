@@ -34,7 +34,7 @@ export class FloatingPlayer {
   hiddenPlayer: HiddenPlayer = new HiddenPlayer();
   activePlayerData?: ActivePlayerData;
   state: FloatingPlayerState = {};
-  domNode?: HTMLElement;
+  domNode?: HTMLElement | null;
   incrementing?: boolean;
   toggling: Record<number, boolean> = {};
   seeking = false;
@@ -96,7 +96,7 @@ export class FloatingPlayer {
   requireDomNode() {
     if (!this.domNode) {
       this.domNode = document.querySelector<HTMLElement>('.floating-player');
-      this.hiddenPlayer.setParentDomNode(this.domNode);
+      this.hiddenPlayer.setParentDomNode(this.domNode!);
     }
     // TODO: Ensure created dom node?
     if (!this.domNode) {
@@ -168,9 +168,9 @@ export class FloatingPlayer {
     const imageNode = domNode.querySelector<HTMLElement>('.image');
     const { dataset } = domNode;
     requestAnimationFrame(() => {
-      titleNode.innerText = activePlayerData.title;
-      durationNode.innerText = formatDuration(Math.floor(activePlayerData.duration * 1000));
-      imageNode.style.backgroundImage = 'url(' + activePlayerData.imageUrl + ')';
+      titleNode!.innerText = activePlayerData.title;
+      durationNode!.innerText = formatDuration(Math.floor(activePlayerData.duration * 1000));
+      imageNode!.style.backgroundImage = 'url(' + activePlayerData.imageUrl + ')';
       if (activePlayerData.favorite) {
         dataset.favorite = TRUE;
       } else {
@@ -204,13 +204,13 @@ export class FloatingPlayer {
       dataset.position = floatToStr(this.state.position);
       dataset.progress = floatToStr(this.state.progress);
       domNode.style.setProperty('--progress', dataset.progress);
-      seekBarNode.value = dataset.progress;
+      seekBarNode!.value = dataset.progress;
     });
   }
 
   calculateProgress() {
     const activePlayerData = this.requireActivePlayerData();
-    const { position } = this.state;
+    const { position = 0 } = this.state;
     const { id, duration } = activePlayerData;
     if (!duration) {
       const error = new Error(`No duration provided for a track: ${id}`);
@@ -230,7 +230,7 @@ export class FloatingPlayer {
     const domNode = this.requireDomNode();
     const timeNode = domNode.querySelector<HTMLElement>('.time');
     const activePlayerData = this.requireActivePlayerData();
-    const { position } = this.state;
+    const { position = 0 } = this.state;
     const { id } = activePlayerData;
     const progress = this.calculateProgress();
     this.state.progress = progress;
@@ -302,23 +302,25 @@ export class FloatingPlayer {
   }
 
   handleAudioPlay(_ev: Event) {
+    const activePlayerData = this.requireActivePlayerData();
     this.state.status = 'playing';
     this.updateStateInDom();
     this.saveFloatingPlayerState();
     this.callbacks.invokePlayStart({
       floatingPlayerState: this.state,
-      activePlayerData: this.activePlayerData,
+      activePlayerData,
     });
   }
 
   handleAudioEnded(_ev: Event) {
+    const activePlayerData = this.requireActivePlayerData();
     this.incrementPlayedCount();
     this.state.status = 'paused'; // stopped, ready?
     this.updateStateInDom();
     this.saveFloatingPlayerState();
     this.callbacks.invokePlayStop({
       floatingPlayerState: this.state,
-      activePlayerData: this.activePlayerData,
+      activePlayerData,
     });
   }
 
@@ -391,7 +393,10 @@ export class FloatingPlayer {
     if (this.isAudioPlaying()) {
       return;
     }
-    if (audio.ended || this.state.position > activePlayerData.duration - 0.1) {
+    if (
+      audio.ended ||
+      (this.state.position && this.state.position > activePlayerData.duration - 0.1)
+    ) {
       // Start from the begining
       this.state.position = 0;
       audio.load();
@@ -399,7 +404,7 @@ export class FloatingPlayer {
     this.updateTrackPosition();
     this.callbacks.invokeUpdate({
       floatingPlayerState: this.state,
-      activePlayerData: this.activePlayerData,
+      activePlayerData,
     });
 
     audio.currentTime = this.state.position || 0;
@@ -435,7 +440,7 @@ export class FloatingPlayer {
 
   setActivePlayerData(activePlayerData: ActivePlayerData, position?: number) {
     if (this.activePlayerData?.id !== activePlayerData.id) {
-      if (this.activePlayerData && this.isPlaying) {
+      if (this.activePlayerData && this.isPlaying()) {
         this.pauseCurrentPlayer();
       }
       this.state.loaded = false;
@@ -565,14 +570,14 @@ export class FloatingPlayer {
   }
 
   seekRewind() {
-    const position = Math.max(0, this.state.position - seekTimeSec);
+    const position = Math.max(0, (this.state.position || 0) - seekTimeSec);
     this.seekPosition(position);
   }
 
   seekForward() {
     const activePlayerData = this.requireActivePlayerData();
     const { duration } = activePlayerData;
-    const position = Math.min(duration, this.state.position + seekTimeSec);
+    const position = Math.min(duration, (this.state.position || 0) + seekTimeSec);
     this.seekPosition(position);
   }
 

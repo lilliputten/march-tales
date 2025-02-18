@@ -29,7 +29,7 @@ export function compareArrays(a1, a2) {
  */
 export function getErrorText(error) {
   if (!error) {
-    return;
+    return '';
   }
   if (Array.isArray(error)) {
     return error.map(this.getErrorText.bind(this)).join('\n');

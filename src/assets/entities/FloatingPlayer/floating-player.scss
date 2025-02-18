@@ -18,7 +18,7 @@
     right: 0;
     background-color: $primaryColor;
     padding-top: $seekSmallHeight;
-    border-top: 2px solid $primaryDarkenColor;
+    border-top: 2px solid #fff; // $primaryDarkenColor;
     body:not(.withPlayer) & {
       display: none;
     }
@@ -29,7 +29,7 @@
     right: $padding;
     top: -$seekHalfHeight;
     height: $seekHeight;
-    color: $primaryColor;
+    // color: #fff; // $primaryColor;
     display: flex;
     align-items: center;
   }
@@ -38,7 +38,7 @@
     width: 100%;
     appearance: none;
     -webkit-appearance: none;
-    background: transparent;
+    background-color: transparent;
     cursor: pointer;
     height: 1px;
     @mixin thumbStyles {

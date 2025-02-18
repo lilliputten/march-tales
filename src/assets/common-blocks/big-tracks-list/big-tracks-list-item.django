@@ -14,10 +14,11 @@
   {# Duration in seconds #}
   data-track-duration="{{ track.audio_duration }}"
   {# NOTE: Using remote host for testing resumeable tracks with 206 Partial Content https headers #}
-  {% define True as USE_REMOTE_HOST %}
+  {% define False as USE_REMOTE_HOST %}
   data-track-media-url="{% if USE_REMOTE_HOST and settings.LOCAL %}https://{{ settings.DEFAULT_HOST }}{% endif %}{% get_media_prefix %}{{ track.audio_file }}"
   {% if track in favorite_tracks %}data-favorite="true"{% endif %}
   {% comment %}
+    Possible runtime dynamic values:
     data-status="ready"
     data-progress="50"
     style="--progress: 0"
@@ -50,8 +51,8 @@
         {% comment %} {% if track in favorite_tracks %}data-favorite="true"{% endif %} {% endcomment %}
       >
         <button data-control-id="toggleFavorite" class="track-control btn">
-          <span class="option option-not-favorite" title="{% trans 'Add to favorites' %}"><i class="icon favorite bi bi-heart"></i><!-- <span class="text">{% trans 'Add to favorites' %}</span>--></span>
-          <span class="option option-favorite" title="{% trans 'Remove from favorites' %}"><i class="icon favorite bi bi-heart-fill"></i><!-- <span class="text">{% trans 'Remove from favorites' %}</span>--></span>
+          <span class="option option-not-favorite" title="{% trans 'Add to favorites' %}"><i class="icon favorite bi bi-heart"></i></span>
+          <span class="option option-favorite" title="{% trans 'Remove from favorites' %}"><i class="icon favorite bi bi-heart-fill"></i></span>
         </button>
         <button data-control-id="play" class="track-control track-control-play big-icon btn">
           <svg
@@ -60,13 +61,13 @@
             <circle class="bg"></circle>
             <circle class="fg"></circle>
           </svg>
-          <span class="option option-waiting" title="{% trans 'Loading' %}"><span class="spinner-border" role="status"></span><!--  <span class="text">{% trans 'Loading' %}</span> --></span>
-          <span class="option option-resume" title="{% trans 'Resume' %}"><i class="icon play bi bi-play-fill"></i><!--  <span class="text">{% trans 'Resume' %}</span> --></span>
-          <span class="option option-ready" title="{% trans 'Play' %}"><i class="icon bi play bi-play-fill"></i><!--  <span class="text">{% trans 'Play' %}</span> --></span>
-          <span class="option option-playing" title="{% trans 'Pause' %}"><i class="icon pause bi bi-pause-fill"></i><!--  <span class="text">{% trans 'Pause' %}</span> --></span>
-          <!--
+          <span class="option option-waiting" title="{% trans 'Loading' %}"><span class="spinner-border" role="status"></span></span>
+          <span class="option option-resume" title="{% trans 'Resume' %}"><i class="icon play bi bi-play-fill"></i></span>
+          <span class="option option-ready" title="{% trans 'Play' %}"><i class="icon bi play bi-play-fill"></i></span>
+          <span class="option option-playing" title="{% trans 'Pause' %}"><i class="icon pause bi bi-pause-fill"></i></span>
+          {% comment %}
           <span class="time">time</span>
-          -->
+          {% comment %}
         </button>
       </div>
       {# Actions }}} #}

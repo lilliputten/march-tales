@@ -9,6 +9,7 @@ import {
   FloatingPlayerUpdateData,
 } from '../entities/FloatingPlayer/FloatingPlayerCallbacks';
 import { floatToStr } from '../helpers/floatToStr';
+import { TrackInfo } from './TrackInfo';
 
 let allPlayers: NodeListOf<HTMLElement>;
 let currentTrackPlayer: HTMLElement | undefined = undefined;
@@ -27,7 +28,7 @@ function calculateAndUpdateTrackPosition(
   const timeMs = Math.floor(position * 1000);
   const timeFormatted = formatDuration(timeMs);
   const id = Number(trackId);
-  const duration = parseFloat(trackDuration.replace(',', '.'));
+  const duration = trackDuration ? parseFloat(trackDuration.replace(',', '.')) : 0;
   if (!duration) {
     const error = new Error(`No duration provided for a track: ${id}`);
     // eslint-disable-next-line no-console
@@ -48,6 +49,7 @@ function calculateAndUpdateTrackPosition(
   });
   localTrackInfoDb.updatePosition(id, position);
   // TODO: Update the floating player if isCurrent?
+  return { position, duration, progress };
 }
 
 function floatingPlayerUpdate(data: FloatingPlayerUpdateData) {
@@ -61,9 +63,9 @@ function floatingPlayerUpdate(data: FloatingPlayerUpdateData) {
     return;
   }
   // const isCurrent = trackNode === currentTrackPlayer;
-  const { position, progress, status } = floatingPlayerState;
-  const { dataset } = currentTrackPlayer;
-  const timeNode = currentTrackPlayer.querySelector<HTMLElement>('.time');
+  const { position = 0, progress = 0, status } = floatingPlayerState;
+  const { dataset } = trackNode;
+  const timeNode = trackNode.querySelector<HTMLElement>('.time');
   const timeMs = Math.floor(position * 1000);
   const timeFormatted = formatDuration(timeMs);
   requestAnimationFrame(() => {
@@ -74,7 +76,7 @@ function floatingPlayerUpdate(data: FloatingPlayerUpdateData) {
     }
     dataset.position = floatToStr(position);
     dataset.progress = floatToStr(progress);
-    currentTrackPlayer.style.setProperty('--progress', dataset.progress);
+    trackNode.style.setProperty('--progress', dataset.progress);
     if (timeNode) {
       timeNode.innerText = timeFormatted;
     }
@@ -129,7 +131,7 @@ function stopPreviousPlayer() {
   if (currentTrackPlayer) {
     const { dataset } = currentTrackPlayer;
     requestAnimationFrame(() => {
-      currentTrackPlayer.classList.toggle('current', false);
+      currentTrackPlayer!.classList.toggle('current', false);
       delete dataset.status;
       delete dataset.loaded;
       delete dataset.error;
@@ -255,6 +257,14 @@ function updateFavoritesCallback({ favorites }: FloatingPlayerFavoritesData) {
   });
 }
 
+// function updateTrackDataFromDataset(
+//   trackInfo: TrackInfo,
+//   dataset: DOMStringMap,
+//   activePlayerData?: ActivePlayerData,
+// ) {
+//   ///
+// }
+
 function initTrackPlayerNode(trackNode: HTMLElement) {
   const activePlayerData = floatingPlayer.activePlayerData;
   const { dataset } = trackNode;
@@ -267,24 +277,55 @@ function initTrackPlayerNode(trackNode: HTMLElement) {
   if (!id || inited || !trackMediaUrl) {
     return;
   }
-  const trackInfo = localTrackInfoDb.getOrCreate(id); // getById(id);
-  if (activePlayerData && activePlayerData.id == id) {
+  const hasServerData = window.isAuthenticated;
+  const isCurrent = activePlayerData?.id == id;
+  const trackInfo: TrackInfo | undefined = localTrackInfoDb.getById(id);
+  if (trackInfo) {
+    if (!hasServerData) {
+      // If no server data then update favorite from the local db
+      if (trackInfo?.favorite) {
+        updateTrackFavorite(trackNode, trackInfo.favorite);
+      }
+    }
+    const {
+      duration,
+      // position,
+      // progress,
+    } = calculateAndUpdateTrackPosition(trackNode, trackInfo.position || 0, isCurrent);
+    const playedCount = Number(
+      trackNode.querySelector<HTMLElement>('.track-played-count')?.dataset.playedCount || '0',
+    );
+    const favorite = Boolean(dataset.favorite);
+    // Update the local db date...
+    if (activePlayerData) {
+      activePlayerData.favorite = favorite;
+      activePlayerData.duration = duration;
+    }
+    /* TODO: Update local data (favorite, playedCount) from track node dataset?
+     * - id
+     * - favorite
+     * - lastPlayed
+     * - lastUpdated
+     * - playedCount
+     * - position
+     */
+    if (playedCount !== trackInfo.playedCount || favorite !== trackInfo.favorite) {
+      trackInfo.playedCount = playedCount;
+      trackInfo.favorite = favorite;
+      localTrackInfoDb.save(trackInfo);
+    }
+  }
+  if (isCurrent) {
+    activePlayerData.title = activePlayerData.title =
+      trackNode.querySelector<HTMLElement>('.post-title')?.innerText || '';
     currentTrackPlayer = trackNode;
     requestAnimationFrame(() => {
       trackNode.classList.toggle('current', true);
     });
     floatingPlayerUpdate({ floatingPlayerState: floatingPlayer.state, activePlayerData });
-  } else {
-    // TODO: Update local data (favorite, playedCount) from track node dataset?
-    if (trackInfo.position) {
-      calculateAndUpdateTrackPosition(trackNode, trackInfo.position, false);
-    }
   }
-  if (!window.isAuthenticated) {
-    if (trackInfo?.favorite) {
-      updateTrackFavorite(trackNode, trackInfo.favorite);
-    }
-  }
+
+  // Set controls' handlers
   const controls = trackNode.querySelectorAll<HTMLElement>('.track-control');
   controls.forEach((node) => {
     const { dataset } = node;

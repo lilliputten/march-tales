@@ -14,7 +14,7 @@ export interface FloatingPlayerState {
 
 const storageFloatingPlayerStateId = 'FloatingPlayerState';
 
-function convertFloatingPlayerStateFromJsonStr(str: string) {
+function convertFloatingPlayerStateFromJsonStr(str?: string | null) {
   if (!str) {
     return {};
   }

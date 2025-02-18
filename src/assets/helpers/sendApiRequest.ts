@@ -2,40 +2,29 @@ import { getCookie } from '../helpers/CommonHelpers';
 import * as CommonHelpers from '../helpers/CommonHelpers';
 import { getJsText } from './getJsText';
 
-export function sendApiRequest(
-  url: string,
-  method: string = 'GET',
-  requestData: unknown = undefined,
-) {
+export function sendApiRequest(url: string, method: string = 'GET', requestData?: unknown) {
   const csrftoken = getCookie('csrftoken');
   // const sessionId = getCookie('sessionid');
   // const url = `/api/v1/tracks/${trackId}/toggle-favorite/`;
   const headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
-    'X-CSRFToken': csrftoken,
+    'X-CSRFToken': csrftoken || '',
     // Credentials: 'include',
     // Cookie: csrftoken && `csrftoken=${csrftoken}`,
     // 'X-Session-Token': sessionId, // X-Session-Token
     // 'Accept-Language': 'ru', // django_language=ru; content-language: ru;
   };
-  /* console.log('[sendApiRequest] start', {
-   *   url,
-   *   method,
-   *   requestData,
-   *   headers,
-   * });
-   */
   return fetch(url, {
     method,
     headers,
     credentials: 'include',
-    body: requestData && JSON.stringify(requestData),
+    body: requestData ? JSON.stringify(requestData) : null,
   })
     .then(async (res) => {
       const { ok, status, statusText } = res;
       // TODO: Check is it json?
-      let data: unknown & { detail?: string };
+      let data: (unknown & { detail?: string }) | undefined = undefined;
       try {
         data = await res.json();
       } catch (
@@ -62,14 +51,6 @@ export function sendApiRequest(
         debugger; // eslint-disable-line no-debugger
         throw new Error(errMsg);
       }
-      /* console.log('[sendApiRequest] Got json', {
-       *   data,
-       *   url,
-       *   requestData,
-       *   method,
-       *   headers,
-       * });
-       */
       return data as unknown;
     })
     .catch((err) => {

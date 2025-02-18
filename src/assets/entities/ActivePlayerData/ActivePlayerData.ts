@@ -9,7 +9,7 @@ export interface ActivePlayerData {
 
 const storageActivePlayerDataId = 'ActivePlayerData';
 
-function convertActivePlayerDataFromJsonStr(str: string) {
+function convertActivePlayerDataFromJsonStr(str?: string | null) {
   if (!str) {
     return undefined;
   }
