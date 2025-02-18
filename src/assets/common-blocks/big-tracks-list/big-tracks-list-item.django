@@ -67,7 +67,7 @@
           <span class="option option-playing" title="{% trans 'Pause' %}"><i class="icon pause bi bi-pause-fill"></i></span>
           {% comment %}
           <span class="time">time</span>
-          {% comment %}
+          {% endcomment %}
         </button>
       </div>
       {# Actions }}} #}
