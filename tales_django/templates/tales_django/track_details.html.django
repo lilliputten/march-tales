@@ -25,7 +25,11 @@
   </ol>
 </nav>
 
+<fieldset><legend><h1 class="page-title primary-color my-4">{{ track.title }}</h1></legend></fieldset>
+
+{% comment %}
 <h2 class="h5 section-title">{{ track.title }}</h2>
+{% endcomment %}
 
 {% with show_details=True %}
 {% include "assets/common-blocks/big-tracks-list/big-tracks-list-item.django" %}
