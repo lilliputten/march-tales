@@ -1,6 +1,6 @@
 /**
  * @module styles.scss
- * @changed 2025.02.13, 04:41
+ * @changed 2025.02.18, 22:13
  */
 
 @import 'shared/variables-expose';
@@ -8,6 +8,7 @@
 @import 'common/common';
 @import 'common/forms';
 @import 'common/customize';
+@import 'common/content-columns';
 @import 'common/fonts';
 @import 'template-core';
 
@@ -43,8 +44,4 @@
 @import 'template-banner/template-banner';
 @import 'template-right-blocks/right-mobile-promo/right-mobile-promo';
 
-// @import 'main-page-splash/main-page-splash'; // UNUSED? // TODO: To replace
 @import 'membership-splash/membership-splash'; // TODO: To replace
-
-// @import 'events-list-table/events-list-table';
-// @import 'events-list-block/events-list-block';

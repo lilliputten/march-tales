@@ -10,19 +10,21 @@
   // text-decoration-skip-ink: none;
 }
 @mixin basicActiveLink {
-  button:not(.btn-primary),
-  a:not(.btn-primary) {
-    transition: all var(--transitionTimeMs);
-    &:hover {
-      @include basicActiveLinkHovered;
+  button,
+  a {
+    &:not([class*='btn']) {
+      transition: all var(--transitionTimeMs);
+      &:hover {
+        @include basicActiveLinkHovered;
+      }
     }
   }
 }
 @mixin activeUnderlinedLink {
   @include basicActiveLink;
-  button:not(.btn-primary),
-  a:not(.btn-primary) {
-    &:hover {
+  button,
+  a {
+    &:not([class*='btn']):hover {
       @include activeLinkUnderlined;
     }
   }
@@ -44,9 +46,11 @@
   }
 }
 @mixin activeTextLinkWrapper {
-  button:not([class*='btn']),
-  a:not([class*='btn']) {
-    @include activeTextLink;
+  button,
+  a {
+    &:not([class*='btn']) {
+      @include activeTextLink;
+    }
   }
 }
 

@@ -10,8 +10,7 @@ export function getActivePlayerDataFromTrackNode(trackNode: HTMLElement) {
   const mediaUrl = dataset.trackMediaUrl || '';
   const imageNode = trackNode.querySelector<HTMLImageElement>('img.card-img');
   const imageUrl = imageNode?.getAttribute('src') || '';
-  const titleNode = trackNode.querySelector<HTMLElement>('.post-title');
-  const title = titleNode?.innerHTML || '';
+  const title = dataset.trackTitle || '';
   const activePlayerData: ActivePlayerData = {
     id,
     title,

@@ -32,19 +32,19 @@ admin.site.site_header = _('Site administration')
 
 app_urlpatterns = [
     # Root page
-    path('', index_view, name='index'),
+    path(r'', index_view, name='index'),
     # Secondary app pages
-    path('terms/', terms_view, name='terms'),
-    path('privacy-policy/', privacy_policy_view, name='privacy-policy'),
+    path(r'terms/', terms_view, name='terms'),
+    path(r'privacy-policy/', privacy_policy_view, name='privacy-policy'),
     # Core?
     # path('', include('pages.urls')),
     # Language switching
-    path('i18n/', include('django.conf.urls.i18n')),
+    path(r'i18n/', include('django.conf.urls.i18n')),
     # App-provided paths...
-    path('admin/', admin.site.urls, name='admin'),
+    path(r'admin/', admin.site.urls, name='admin'),
     # Service pages...
     path(
-        'robots.txt',
+        r'robots.txt',
         cache_page(cache_timeout)(RobotsView.as_view()),
         name='robots',
     ),

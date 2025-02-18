@@ -12,9 +12,7 @@
 {% block page_content %}
   {{ block.super }}
 
-  {#% include "assets/main-page-splash/main-page-splash.django" %#}
-
-  {# Optional top promo section #}
+  {# SAMPLE: Optional top promo section #}
   {#% include "assets/template-columns/top-columns.django" %#}
 
   <!-- {{{ Template columns layout -->

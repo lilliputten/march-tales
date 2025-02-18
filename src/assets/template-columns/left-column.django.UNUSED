@@ -4,7 +4,7 @@
 
 <div class="left-column col-lg-8 mb-5 mb-lg-0">
 
-  <h2 class="h5 section-title">{% trans "Recent Tracks" %}</h2>
+  <h2 class="h5 section-title">XXX {% trans "Recent Tracks" %}</h2>
 
   {% include 'assets/common-blocks/big-tracks-list/big-tracks-list.django' %}
 

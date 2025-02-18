@@ -3,7 +3,8 @@
 {% load static %}
 {% load i18n %}
 
-{% block body_class %}index _withPlayer{% endblock %}
+{# NOTE: There is a `withPlayer` class possible for the floating player control. #}
+{% block body_class %}index{% endblock %}
 
 {% block title %}{{ block.super }}{% endblock title %}
 

@@ -1,5 +1,5 @@
-from .get_core_app_context import get_core_app_context
+from .get_tracks_list_context import get_tracks_list_context
 
 __all__ = [
-    'get_core_app_context',
+    'get_tracks_list_context',
 ]

@@ -1,0 +1,36 @@
+{# ex: set ft=htmldjango : #}
+{% extends 'base-main-columns-layout.html.django' %}
+{% load static %}
+{% load i18n %}
+
+{# NOTE: There is a `withPlayer` class possible for the floating player control. #}
+{% block body_class %}track_details{% endblock %}
+
+{% block title %}{{ track.title }} — {{ block.super }}{% endblock title %}
+
+{% comment %}
+- track_id: Track id
+- track: Track object is expected
+{% endcomment %}
+
+{% block main_column_content %}
+
+<nav aria-label="breadcrumb" class="active-text-link-wrapper">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">{% trans 'Main page' %}</a></li>
+    <li class="breadcrumb-item"><a href="/tracks">{% trans 'Tracks' %}</a></li>
+    <!--
+    <li class="breadcrumb-item active" aria-current="page">{{ track.title }}</li>
+    -->
+  </ol>
+</nav>
+
+<h2 class="h5 section-title">{{ track.title }}</h2>
+
+{% with show_details=True %}
+{% include "assets/common-blocks/big-tracks-list/big-tracks-list-item.django" %}
+{% endwith %}
+
+{# TODO: Show an info about the author etc? #}
+
+{% endblock main_column_content %}

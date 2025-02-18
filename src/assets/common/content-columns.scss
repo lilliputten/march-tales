@@ -1,0 +1,13 @@
+@use 'sass:color';
+
+@import '../shared';
+@import '../template-core/shared';
+
+.template-banner + .section-sm.template-columns {
+  // NOTE: Decrease padding for the first content block
+  padding-top: 3em;
+}
+
+.main-column {
+  margin-top: $mainColumnTopMargin;
+}

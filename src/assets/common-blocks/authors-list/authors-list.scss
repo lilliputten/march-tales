@@ -4,9 +4,6 @@
 
 .authors-list {
   @include activeTextLinkWrapper;
-  a {
-    // @include activeTextLink;
-  }
   a .media-body {
     color: $defaultTextColor;
   }

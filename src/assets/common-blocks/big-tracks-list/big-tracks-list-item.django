@@ -13,6 +13,7 @@
   data-track-id="{{ track.id }}"
   {# Duration in seconds #}
   data-track-duration="{{ track.audio_duration }}"
+  data-track-title="{{ track.title|escape }}"
   {# NOTE: Using remote host for testing resumeable tracks with 206 Partial Content https headers #}
   {% define False as USE_REMOTE_HOST %}
   data-track-media-url="{% if USE_REMOTE_HOST and settings.LOCAL %}https://{{ settings.DEFAULT_HOST }}{% endif %}{% get_media_prefix %}{{ track.audio_file }}"
@@ -32,16 +33,18 @@
 
   <div class="card-body track-details no-h-padding">
     <div class="track-details-main">
-      {# Title #}
+      {# Title (if not details: then it'll be show at the top #}
+      {% if not show_details %}
       <h5 class="mb-3"><a class="post-title active-text-link" href="/tracks/{{ track.id }}">{{ track.title }}</a></h5>
+      {% endif %}
+      {# Description: if details #}
+      {% if show_details %}
+      <p>{{ track.description }}</p>
+      {% endif %}
       {# Details #}
       <ul class="card-meta list-inline">
         {% include "assets/common-blocks/track-details/track-details.django" %}
       </ul>
-      {% comment %}
-      {# Description #}
-      <p>{{ track.description }}</p>
-      {% endcomment %}
     </div>
     <div class="track-details-controls">
       {# {{{ Actions #}

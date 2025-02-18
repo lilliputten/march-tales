@@ -1,5 +1,7 @@
 // stylelint-disable scss/no-global-function-names
 
+@import '../shared';
+
 body {
   background-color: $body-color;
   overflow-x: hidden;
@@ -191,7 +193,7 @@ mark {
 }
 
 .sidebar-home {
-  margin-top: 47px;
+  margin-top: $mainColumnTopMargin;
 
   @include desktop {
     margin-top: 0;
