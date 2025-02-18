@@ -1,6 +1,6 @@
 /**
  * @module styles.scss
- * @changed 2025.01.04, 01:14
+ * @changed 2025.02.13, 04:41
  */
 
 @import 'shared/variables-expose';
@@ -26,12 +26,14 @@
 @import 'common-blocks/rubrics-list/rubrics-list';
 @import 'common-blocks/authors-list/authors-list';
 @import 'common-blocks/small-tracks-list/small-tracks-list';
+@import 'common-blocks/medium-tracks-list/medium-tracks-list';
 
 @import 'CommonNotify/CommonNotify';
 
 @import 'track-blocks/track-player';
-@import 'track-blocks/track-controls';
+@import 'track-blocks/track-details';
 @import 'track-blocks/shared-player';
+@import 'entities/FloatingPlayer/floating-player';
 
 @import 'template-header/template-header';
 @import 'template-footer/template-footer';

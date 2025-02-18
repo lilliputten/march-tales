@@ -7,7 +7,11 @@
   &.footer {
     margin-top: 4em;
     overflow: hidden;
-    padding: 160px 0 0px;
+    padding-top: 160px;
+    // Space for floating player
+    body.withPlayer & {
+      padding-bottom: $floatingPlayerHeight;
+    }
     background-image: url(/static/images/backgrounds/footer-bg.svg);
     background-position: top center;
     background-repeat: no-repeat;
@@ -44,9 +48,17 @@
       ul {
         list-style: none;
         gap: 0.5em 1em;
+        padding-left: 0;
+        line-height: 1.3;
       }
       a:hover {
         color: $primaryColor;
+      }
+      @media screen and (width < $screenMdMin) {
+        margin: 0 auto;
+        ul {
+          justify-content: center;
+        }
       }
     }
 

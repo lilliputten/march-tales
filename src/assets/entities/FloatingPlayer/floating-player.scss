@@ -1,0 +1,136 @@
+@use 'sass:color';
+@use 'sass:math';
+
+@import '../../shared';
+
+.floating-player {
+  $seekHeight: 20px;
+  $seekHalfHeight: calc($seekHeight / 2);
+  $seekSmallHeight: calc($seekHeight / 4);
+  $mainRowHeight: $floatingPlayerHeight - $seekHalfHeight;
+  $padding: 10px;
+  $cellHeight: $mainRowHeight - $padding * 2;
+  & {
+    z-index: 99;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: $primaryColor;
+    padding-top: $seekSmallHeight;
+    border-top: 2px solid #fff; // $primaryDarkenColor;
+    body:not(.withPlayer) & {
+      display: none;
+    }
+  }
+  .seekBarBox {
+    position: absolute;
+    left: $padding;
+    right: $padding;
+    top: -$seekHalfHeight;
+    height: $seekHeight;
+    // color: #fff; // $primaryColor;
+    display: flex;
+    align-items: center;
+  }
+  .seekBar {
+    flex: 1;
+    width: 100%;
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: transparent;
+    cursor: pointer;
+    height: 1px;
+    @mixin thumbStyles {
+      $thumbBorderSize: 2px;
+      $thumbBgColor: $primaryColor;
+      $thumbBorderColor: #fff;
+      $thumbSize: 16px;
+      border: 0px solid transparent;
+      background-color: $thumbBgColor;
+      box-shadow: 0 0 0 $thumbBorderSize $thumbBorderColor;
+      height: $thumbSize;
+      width: $thumbSize;
+      border-radius: $thumbSize;
+      cursor: pointer;
+      transition: all $transitionTimeMs;
+      &:hover {
+        background-color: $primaryDarkColor;
+        box-shadow: 0 0 0 calc($thumbBorderSize + 1px) $thumbBorderColor;
+      }
+    }
+    &::-webkit-slider-thumb {
+      appearance: none;
+      -webkit-appearance: none;
+      @include thumbStyles;
+    }
+    &::-moz-range-thumb {
+      @include thumbStyles;
+    }
+  }
+  .mainRow {
+    height: $mainRowHeight;
+    padding: $padding;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    $extraInfoTreshold: 400px;
+    @media (width < $extraInfoTreshold) {
+      justify-content: center;
+    }
+    .imageWrapper {
+      // Allow to hide image
+      overflow: hidden;
+      border-radius: 5px;
+      @media (width < $extraInfoTreshold) {
+        display: none;
+      }
+    }
+    .image {
+      display: block;
+      height: $cellHeight;
+      width: calc($cellHeight * 1.7);
+      border-radius: 5px;
+      background-position: contain;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+    .textWrapper {
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      .delim {
+        opacity: 0.5;
+      }
+      @media (width < calc($extraInfoTreshold + 100px)) {
+        display: none;
+      }
+    }
+    .title {
+      display: block;
+      max-height: $cellHeight;
+      flex: 1;
+      color: #fff;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 1.2;
+      white-space: nowrap;
+      margin-bottom: 2px;
+    }
+    .timeWrapper {
+      color: #fff;
+      font-size: 70%;
+      opacity: 0.5;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .trackLink {
+      transition: all $transitionTimeMs;
+      &:hover {
+        opacity: 0.85;
+      }
+    }
+  }
+}

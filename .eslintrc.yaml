@@ -100,7 +100,7 @@ overrides:
       '@typescript-eslint/no-extraneous-class':
         - 'error'
         - allowStaticOnly: true
-      '@typescript-eslint/no-non-null-assertion': 'warn'
+      # '@typescript-eslint/no-non-null-assertion': 'warn'
       # '@typescript-eslint/no-unnecessary-qualifier': 'error' # Requires parserOptions.project (very slow)
       '@typescript-eslint/no-useless-constructor': 'error'
       '@typescript-eslint/prefer-for-of': 'warn'

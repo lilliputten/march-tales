@@ -1,7 +1,10 @@
+import math
+
 from django.http import HttpRequest
 from django.utils import translation
 from django.db.models import Count
 
+from core.helpers.utils import debugObj
 from core.logging import getDebugLogger
 
 from tales_django.models import Track
@@ -9,9 +12,12 @@ from tales_django.models import Rubric
 from tales_django.models import Tag
 from tales_django.models import Author
 
-showAuthorsCount = 3
-showTracksCount = 3
-showFavoriteTracksCount = showTracksCount
+
+tracks_limit = 10
+# tracks_offset = 0
+
+show_authors_count = 3
+show_favorite_tracks_count = tracks_limit
 
 logger = getDebugLogger()
 
@@ -30,8 +36,8 @@ def get_core_app_context(request: HttpRequest):
     # }
 
     language = translation.get_language()
-    logger.info(f'language: {language}')
 
+    # Favorite tracks...
     favorite_tracks = None
     if request.user.is_authenticated:
         favorite_tracks = (
@@ -42,8 +48,25 @@ def get_core_app_context(request: HttpRequest):
 
     # TODO: Add popular tracks (show instead of recent ones?)
 
+    # Tracks...
+    tracks_offset = int(request.GET.get('tracks_offset', 0))
     tracks = Track.objects.filter(track_status='PUBLISHED').order_by('-published_at', f'title_{language}').all()
+    tracks_end = tracks_offset + tracks_limit
+    tracks_set = tracks[tracks_offset:tracks_end]
+    tracks_count = len(tracks)
+    has_prev_tracks = tracks_offset > 0
+    has_next_tracks = tracks_count > tracks_end
+    tracks_page_no = math.floor(tracks_offset / tracks_limit) + 1
+    tracks_pages_count = math.ceil(tracks_count / tracks_limit)
 
+    debugData = {
+        'language': language,
+        'tracks_offset': tracks_offset,
+    }
+    debugStr = debugObj(debugData)
+    logger.info(f'get_core_app_context\n{debugStr}')
+
+    # Authors...
     authors = (
         Author.objects.annotate(t_count=Count('track', distinct=True)).order_by('-t_count', f'name_{language}').all()
     )
@@ -60,13 +83,24 @@ def get_core_app_context(request: HttpRequest):
         .all()
     )
     context = {
+        # User...
         'user': request.user,
-        'tracks': tracks[:showTracksCount],
-        'favorite_tracks': favorite_tracks[:showFavoriteTracksCount] if favorite_tracks else None,
-        'has_more_favorite_tracks': len(favorite_tracks) > showFavoriteTracksCount if favorite_tracks else None,
-        'has_more_tracks': len(tracks) > showTracksCount,
-        'authors': authors[:showAuthorsCount],
-        'has_more_authors': len(authors) > showAuthorsCount,
+        # Tracks...
+        'tracks': tracks_set,
+        'tracks_count': tracks_count,
+        'tracks_offset': tracks_offset,
+        'tracks_limit': tracks_limit,
+        'has_prev_tracks': has_prev_tracks,
+        'has_next_tracks': has_next_tracks,
+        'tracks_page_no': tracks_page_no,
+        'tracks_pages_count': tracks_pages_count,
+        # Favorite tracks...
+        'favorite_tracks': favorite_tracks[:show_favorite_tracks_count] if favorite_tracks else None,
+        'has_more_favorite_tracks': len(favorite_tracks) > show_favorite_tracks_count if favorite_tracks else None,
+        # Authors...
+        'authors': authors[:show_authors_count],
+        'has_more_authors': len(authors) > show_authors_count,
+        # Other...
         'rubrics': rubrics,
         'tags': tags,
         # # Translation examples...

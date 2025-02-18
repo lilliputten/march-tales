@@ -9,95 +9,68 @@
 {% endcomment %}
 
 <article
-  class="big-tracks-list-item track-player card mb-4"
+  class="big-tracks-list-item card no-bg mb-4 track-player"
   data-track-id="{{ track.id }}"
-  data-track-media-url="{% get_media_prefix %}{{ track.audio_file }}"
+  {# Duration in seconds #}
+  data-track-duration="{{ track.audio_duration }}"
+  {# NOTE: Using remote host for testing resumeable tracks with 206 Partial Content https headers #}
+  {% define False as USE_REMOTE_HOST %}
+  data-track-media-url="{% if USE_REMOTE_HOST and settings.LOCAL %}https://{{ settings.DEFAULT_HOST }}{% endif %}{% get_media_prefix %}{{ track.audio_file }}"
+  {% if track in favorite_tracks %}data-favorite="true"{% endif %}
+  {% comment %}
+    Possible runtime dynamic values:
+    data-status="ready"
+    data-progress="50"
+    style="--progress: 0"
+  {% endcomment %}
 >
   {% if track.preview_picture %}
     <div class="thumb-preview" _style="opacity: 1; width: 610px; transform: translate3d(0px, 0px, 0px);">
-      <img src="{% get_media_prefix %}{{ track.preview_picture }}" class="card-img-top" alt="post-thumb" aria-hidden="false" tabindex="0" />
+      <img src="{% get_media_prefix %}{{ track.preview_picture }}" class="card-img" alt="post-thumb" aria-hidden="false" tabindex="0" />
     </div>
   {% endif %}
 
-  <div class="card-body">
-    {# Title #}
-    <h5 class="mb-3"><a class="post-title active-text-link" href="/tracks/{{ track.id }}">{{ track.title }}</a></h5>
-    {# Details #}
-    <ul class="card-meta list-inline">
-      {# Author #}
-      <li class="list-inline-item">
-        <a href="/authors/{{ track.author.id }}" class="card-meta-author">
-          {% if track.author.portrait_picture %}
-            <img src="{% get_media_prefix %}{{ track.author.portrait_picture }}" />
-          {% endif %}
-          <span>{{ track.author.name }}</span>
-        </a>
-      </li>
-      {# Count #}
-      <li class="track-played-count list-inline-item" data-played-count="{{ track.played_count }}" title="{% trans 'Played count' %}">
-        <i class="ti-headphone"></i> <span id="played_count">{{ track.played_count }}</span>
-      </li>
-      {# Duration #}
-      <li class="list-inline-item" title="{% trans 'Duration' %}">
-        <i class="ti-timer"></i>{{ track.duration_formatted }}
-      </li>
-      {# Date #}
-      <li class="list-inline-item" title="{% trans 'Published at' %}">
-        <i class="ti-calendar"></i>{{ track.published_at }}
-      </li>
-      {# Rubrics #}
-      {% if track.rubrics.count %}
-      <li class="track-rubrics list-inline-item" data-rubrics-count="{{ track.rubrics.count }}" title="{% trans 'Rubrics' %}">
-        <ul class="card-meta-rubrics list-inline">
-          {% for rubric in track.rubrics.all %}
-            <li class="list-inline-item">
-              <a href="/rubrics/{{ rubric.id }}">{{ rubric.text }}</a>
-            </li>
-          {% endfor %}
-        </ul>
-      </li>
-      {% endif %}
-      {# Tags #}
-      {% if track.tags.count %}
-      <li class="track-tags list-inline-item" data-tags-count="{{ track.tags.count }}" title="{% trans 'Tags' %}">
-        <ul class="card-meta-tags list-inline">
-          {% for tag in track.tags.all %}
-            <li class="list-inline-item">
-              <a href="/tags/{{ tag.id }}">{{ tag.text }}</a>
-            </li>
-          {% endfor %}
-        </ul>
-      </li>
-      {% endif %}
-    </ul>
-    {# Descriptions #}
-    <p>{{ track.description }}</p>
-    {# Actions #}
-    <div
-      class="track-controls d-flex flex-wrap gap-1"
-      data-track-id="{{ track.id }}"
-      {% if track in favorite_tracks.all %}data-favorite="true"{% endif %}
-    >
-      <button class="track-control track-control-play big-icon btn btn-primary">
-        <span class="option option-waiting"><span class="spinner-border spinner-border-sm_" role="status"></span> <span class="text">{% trans 'Loading' %}</span></span>
-        <span class="option option-resume"><i class="icon bi bi-play-circle-fill"></i> <span class="text">{% trans 'Resume' %}</span></span>
-        <span class="option option-ready"><i class="icon bi bi-play-circle-fill"></i> <span class="text">{% trans 'Play' %}</span></span>
-        <span class="option option-playing"><i class="icon bi bi-pause-circle-fill"></i> <span class="text">{% trans 'Pause' %}</span></span>
-        <span class="time">time</span>
-      </button>
-      {% if favorite_tracks %}
-        <button data-control-id="toggleFavorite" class="track-control btn btn-outline-primary">
-          <span class="option option-not-favorite"><i class="icon bi bi-heart"></i> <span class="text">{% trans 'Add to favorites' %}</span></span>
-          <span class="option option-favorite"><i class="icon bi bi-heart-fill"></i> <span class="text">{% trans 'Remove from favorites' %}</span></span>
-        </button>
-      {% endif %}
+  <div class="card-body track-details no-h-padding">
+    <div class="track-details-main">
+      {# Title #}
+      <h5 class="mb-3"><a class="post-title active-text-link" href="/tracks/{{ track.id }}">{{ track.title }}</a></h5>
+      {# Details #}
+      <ul class="card-meta list-inline">
+        {% include "assets/common-blocks/track-details/track-details.django" %}
+      </ul>
       {% comment %}
-      {% if user and request.session.session_key %}
-        <button data-control-id="togglePlaylist" class="track-control btn btn-outline-primary disabled">
-          <span class="option option-not-in-playlist"><i class="icon bi bi-music-note-list"></i> <span class="text">{% trans 'Add to playlist' %}</span></span>
-        </button>
-      {% endif %}
+      {# Description #}
+      <p>{{ track.description }}</p>
       {% endcomment %}
+    </div>
+    <div class="track-details-controls">
+      {# {{{ Actions #}
+      <div
+        class="track-controls d-flex gap-1"
+        {% comment %} data-track-id="{{ track.id }}" {% endcomment %}
+        {% comment %} {% if track in favorite_tracks %}data-favorite="true"{% endif %} {% endcomment %}
+      >
+        <button data-control-id="toggleFavorite" class="track-control btn">
+          <span class="option option-not-favorite" title="{% trans 'Add to favorites' %}"><i class="icon favorite bi bi-heart"></i></span>
+          <span class="option option-favorite" title="{% trans 'Remove from favorites' %}"><i class="icon favorite bi bi-heart-fill"></i></span>
+        </button>
+        <button data-control-id="play" class="track-control track-control-play big-icon btn">
+          <svg
+            class="circular-progress"
+          >
+            <circle class="bg"></circle>
+            <circle class="fg"></circle>
+          </svg>
+          <span class="option option-waiting" title="{% trans 'Loading' %}"><span class="spinner-border" role="status"></span></span>
+          <span class="option option-resume" title="{% trans 'Resume' %}"><i class="icon play bi bi-play-fill"></i></span>
+          <span class="option option-ready" title="{% trans 'Play' %}"><i class="icon bi play bi-play-fill"></i></span>
+          <span class="option option-playing" title="{% trans 'Pause' %}"><i class="icon pause bi bi-pause-fill"></i></span>
+          {% comment %}
+          <span class="time">time</span>
+          {% comment %}
+        </button>
+      </div>
+      {# Actions }}} #}
     </div>
   </div>
 </article>

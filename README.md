@@ -9,7 +9,7 @@ March Tales django api and web frontend server.
 
 ## Build info (auto-generated)
 
-- Project info: march-tales v.0.0.16 / 2025.02.11 16:51:22 +0300
+- Project info: march-tales v.0.0.18 / 2025.02.18 19:48:14 +0300
 
 ## Resources
 

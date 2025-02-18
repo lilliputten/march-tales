@@ -1,3 +1,6 @@
+# from django.contrib.staticfiles.views import serve
+# from rest_framework import status
+
 from django.conf import settings
 from django.contrib import admin
 from django.conf.urls.static import static
@@ -52,6 +55,9 @@ app_urlpatterns += api_urlpatterns
 # app_urlpatterns.append(url(r'^translations/', include(translation_urls)))
 # app_urlpatterns.append(path(r'^translations/', translation_urls.urlpatterns))
 
+# NOTE: Try to serve a 206 Partial Content for media files on the local dev server (it doesnt (it doesn't work)
+# if settings.LOCAL:
+#     app_urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT, view=serve_partial_media)
 app_urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:

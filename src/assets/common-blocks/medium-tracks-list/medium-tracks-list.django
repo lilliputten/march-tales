@@ -1,0 +1,23 @@
+{# ex: set ft=htmldjango : #}
+{% load static %}
+{% load i18n %}
+
+{% comment %}
+
+- `tracks` -- Tracks list expected as an external variable.
+- `has_more_tracks` -- Does it have more thracks than passed (to display 'show all' button)
+
+{% endcomment %}
+
+<ul class="medium-tracks-list mb-0">
+  {% for track in tracks %}
+    {% include 'assets/common-blocks/medium-tracks-list/medium-tracks-list-item.django' %}
+  {% endfor %}
+  {% if has_more_tracks %}
+    <div class="actions d-flex flex-wrap gap-1 mt-3">
+      <a class="btn btn-light btn-block" href="{{ more_button_link|default:'/tracks' }}">
+        <i class="icon fa fa-chevron-right "></i> <span class="text">{{ more_button_text|default:_('Show all tracks') }}</span>
+      </a>
+    </div>
+  {% endif %}
+</ul>

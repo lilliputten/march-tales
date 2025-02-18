@@ -3,7 +3,7 @@
 {% load static %}
 {% load i18n %}
 
-{% block body_class %}index{% endblock %}
+{% block body_class %}index _withPlayer{% endblock %}
 
 {% block title %}{{ block.super }}{% endblock title %}
 

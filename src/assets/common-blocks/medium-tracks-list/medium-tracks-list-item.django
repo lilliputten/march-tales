@@ -1,0 +1,60 @@
+{# ex: set ft=htmldjango : #}
+{% load static %}
+{% load i18n %}
+
+{% comment %}
+
+- `track` -- Tracks object expected as an external variable.
+
+{% endcomment %}
+
+<div
+  class="medium-tracks-list-item _card mb-4 track-player"
+  data-track-id="{{ track.id }}"
+  data-track-media-url="{% get_media_prefix %}{{ track.audio_file }}"
+ >
+  <div class="d-flex">
+    {% if track.preview_picture %}
+    <a class="img-link" href="/tracks/{{ track.id }}">
+      <img class="card-img-md" src="{% get_media_prefix %}{{ track.preview_picture}}" />
+    </a>
+    {% endif %}
+    <div class="content ms-3">
+      {# Title #}
+      <h5 class="mb-3"><a class="post-title active-text-link" href="/tracks/{{ track.id }}">{{ track.title }}</a></h5>
+      <ul class="details card-meta list-inline mb-0">
+        {% include "assets/common-blocks/track-details/track-details.django" %}
+      </ul>
+      {# Description #}
+      <p>{{ track.description }}</p>
+      {# {{{ Actions #}
+      <div
+        class="track-controls d-flex flex-wrap gap-1"
+        data-track-id="{{ track.id }}"
+        {% if track in favorite_tracks %}data-favorite="true"{% endif %}
+      >
+        <button class="track-control track-control-play big-icon btn btn-primary">
+          <span class="option option-waiting"><span class="spinner-border spinner-border-sm_" role="status"></span> <span class="text">{% trans 'Loading' %}</span></span>
+          <span class="option option-resume"><i class="icon bi bi-play-circle-fill"></i> <span class="text">{% trans 'Resume' %}</span></span>
+          <span class="option option-ready"><i class="icon bi bi-play-circle-fill"></i> <span class="text">{% trans 'Play' %}</span></span>
+          <span class="option option-playing"><i class="icon bi bi-pause-circle-fill"></i> <span class="text">{% trans 'Pause' %}</span></span>
+          <span class="time">time</span>
+        </button>
+        {% if favorite_tracks %}
+          <button data-control-id="toggleFavorite" class="track-control btn btn-outline-primary btn-round-icon">
+            <span class="option option-not-favorite" title="{% trans 'Add to favorites' %}"><i class="icon bi bi-heart"></i><!-- <span class="text">{% trans 'Add to favorites' %}</span>--></span>
+            <span class="option option-favorite" title="{% trans 'Remove from favorites' %}"><i class="icon bi bi-heart-fill"></i><!-- <span class="text">{% trans 'Remove from favorites' %}</span>--></span>
+          </button>
+        {% endif %}
+        {% comment %}
+        {% if user and request.session.session_key %}
+          <button data-control-id="togglePlaylist" class="track-control btn btn-outline-primary disabled">
+            <span class="option option-not-in-playlist"><i class="icon bi bi-music-note-list"></i> <span class="text">{% trans 'Add to playlist' %}</span></span>
+          </button>
+        {% endif %}
+        {% endcomment %}
+      </div>
+      {# Actions }}} #}
+    </div>
+  </div>
+</div>

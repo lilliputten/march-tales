@@ -2,7 +2,7 @@
 
 /** @module Webpack config
  *  @since 2024.10.07, 00:00
- *  @changed 2024.12.31, 12:59
+ *  @changed 2025.02.18, 03:04
  */
 
 const path = require('path');
@@ -185,5 +185,9 @@ module.exports = {
     path: path.resolve(__dirname, outPath),
     // @see https://webpack.js.org/configuration/output/#outputassetmodulefilename
     assetModuleFilename: `extracted/[name]-[hash][ext][query]`,
+  },
+  stats: {
+    // Enable `@debug` and `@warn` messages from scss modules
+    loggingDebug: ['sass-loader'],
   },
 };

@@ -2,14 +2,71 @@
 {% load static %}
 {% load i18n %}
 
-<ul class="pagination justify-content-center">
-  <li class="page-item page-item active">
-    <a href="#!" class="page-link">1</a>
-  </li>
-  <li class="page-item">
-    <a href="#!" class="page-link">2</a>
-  </li>
-  <li class="page-item">
-    <a href="#!" class="page-link">»</a>
-  </li>
+
+{% if count > limit %}
+
+{% with pages_count=count|math_divide:limit|math_ceil page_idx=offset|math_divide:limit|math_floor %}
+{% define 2 as PAGINATION_RADIUS %}
+{% with pages_start=page_idx|math_sub:PAGINATION_RADIUS|math_max:0 pages_end=page_idx|add:PAGINATION_RADIUS|add:1|math_min:pages_count %}
+
+{% comment %}
+<p>
+tracks: {{ tracks }}
+</p>
+<pre>** DEBUG:
+
+  count: {{ count }}
+  offset: {{ offset }}
+  limit: {{ limit }}
+
+  pages_count: {{ pages_count }}
+  page_idx: {{ page_idx }}
+
+  pages_start: {{ pages_start }}
+  pages_end: {{ pages_end }}
+
+  {% if page_idx > 0 %}has_prev_pages{% endif %}
+  {% if page_idx < pages_count|math_sub:1 %}has_next_pages{% endif %}
+
+  <!--
+  url: {% url_with_param request.get_full_path "tracks_offset" pages_end|math_sub:1 %}
+  {% if offset > 0 %}has_prev_items{% endif %}
+  {% if count > offset|add:limit %}has_next_items{% endif %}
+  -->
+</pre>
+{% endcomment %}
+
+<ul class="pagination justify-content-center pt-4 mt-4">
+  {% if pages_start > 0 %}
+    {# Has prev pages #}
+    <li class="page-item">
+      {% define pages_start|math_sub:1|math_mult:limit as offset_idx %}
+      <a href="{% url_with_param request.get_full_path offset_param_name offset_idx %}" class="page-link"><i class="icon fa fa-chevron-left"></i></a>
+    </li>
+  {% endif %}
+  {% for idx in pages_start|math_range:pages_end %}
+    {# page #}
+    {% if idx == page_idx %}
+      <li class="page-item page-item active">
+        <span class="page-link">{{ idx|add:1 }}</span>
+      </li>
+    {% else %}
+      <li class="page-item page-item">
+        {% define idx|math_mult:limit as offset_idx %}
+        <a href="{% url_with_param request.get_full_path offset_param_name offset_idx %}" class="page-link">{{ idx|add:1 }}</a>
+      </li>
+    {% endif %}
+  {% endfor %}
+  {% if pages_end < pages_count %}
+    <li class="page-item">
+        {% define pages_end|math_mult:limit as offset_idx %}
+      <a href="{% url_with_param request.get_full_path offset_param_name offset_idx %}" class="page-link"><i class="icon fa fa-chevron-right"></i></a>
+    </li>
+  {% endif %}
+
 </ul>
+
+{% endwith %}
+{% endwith %}
+
+{% endif %}

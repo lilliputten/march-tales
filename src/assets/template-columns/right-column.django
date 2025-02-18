@@ -3,13 +3,13 @@
 {% load i18n %}
 
 {% include 'assets/template-right-blocks/right-about/right-about.django' %}
-{% include 'assets/template-right-blocks/right-search/right-search.django' %}
+{% comment %} {% include 'assets/template-right-blocks/right-search/right-search.django' %} {% endcomment %}
 {% include 'assets/template-right-blocks/right-mobile-promo/right-mobile-promo.django' %}
 {% include 'assets/template-right-blocks/right-authors-list/right-authors-list.django' %}
-{% include 'assets/template-right-blocks/right-membership/right-membership.django' %}
+{% comment %} {% include 'assets/template-right-blocks/right-membership/right-membership.django' %} {% endcomment %}
 {% include 'assets/template-right-blocks/right-rubrics-list/right-rubrics-list.django' %}
-{% include 'assets/template-right-blocks/right-subscribe/right-subscribe.django' %}
+{% comment %} {% include 'assets/template-right-blocks/right-subscribe/right-subscribe.django' %} {% endcomment %}
 {% include 'assets/template-right-blocks/right-tags-list/right-tags-list.django' %}
 {% include 'assets/template-right-blocks/right-favorites-list/right-favorites-list.django' %}
-{% include 'assets/template-right-blocks/right-recents-list/right-recents-list.django' %}
+{% comment %} {% include 'assets/template-right-blocks/right-recents-list/right-recents-list.django' %} {% endcomment %}
 {% include 'assets/template-right-blocks/right-social-links/right-social-links.django' %}

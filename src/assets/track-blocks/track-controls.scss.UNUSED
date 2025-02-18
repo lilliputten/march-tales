@@ -1,0 +1,10 @@
+@use 'sass:color';
+
+@import '../shared';
+
+.track-controls {
+  // &:not([data-favorite='true']) .track-control[data-control-id='toggleFavorite'] .option-favorite,
+  // &[data-favorite='true'] .track-control[data-control-id='toggleFavorite'] .option-not-favorite {
+  //   display: none;
+  // }
+}

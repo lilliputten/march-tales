@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-11 15:52+0300\n"
+"POT-Creation-Date: 2025-02-17 23:55+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,57 +26,82 @@ msgstr ""
 msgid "Show all authors"
 msgstr ""
 
-#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:37
-#: .\tales_django\entities\Tracks\models\Track.py:83
+#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:57
+#: .\src\assets\common-blocks\medium-tracks-list\medium-tracks-list-item.django:45
+#: .\src\assets\entities\FloatingPlayer\floating-player.django:28
+msgid "Add to favorites"
+msgstr ""
+
+#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:58
+#: .\src\assets\common-blocks\medium-tracks-list\medium-tracks-list-item.django:46
+#: .\src\assets\entities\FloatingPlayer\floating-player.django:29
+msgid "Remove from favorites"
+msgstr ""
+
+#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:67
+#: .\src\assets\common-blocks\medium-tracks-list\medium-tracks-list-item.django:37
+#: .\src\assets\entities\FloatingPlayer\floating-player.django:41
+msgid "Loading"
+msgstr ""
+
+#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:68
+#: .\src\assets\common-blocks\medium-tracks-list\medium-tracks-list-item.django:38
+#: .\src\assets\entities\FloatingPlayer\floating-player.django:42
+msgid "Resume"
+msgstr ""
+
+#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:69
+#: .\src\assets\common-blocks\medium-tracks-list\medium-tracks-list-item.django:39
+#: .\src\assets\entities\FloatingPlayer\floating-player.django:43
+msgid "Play"
+msgstr ""
+
+#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:70
+#: .\src\assets\common-blocks\medium-tracks-list\medium-tracks-list-item.django:40
+#: .\src\assets\entities\FloatingPlayer\floating-player.django:44
+msgid "Pause"
+msgstr ""
+
+#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list.django:19
+#: .\src\assets\common-blocks\medium-tracks-list\medium-tracks-list.django:19
+#: .\src\assets\common-blocks\small-tracks-list\small-tracks-list.django:19
+msgid "Show all tracks"
+msgstr ""
+
+#: .\src\assets\common-blocks\track-details\track-details.django:21
+#: .\tales_django\entities\Tracks\models\Track.py:80
 msgid "Played count"
 msgstr ""
 
-#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:41
+#: .\src\assets\common-blocks\track-details\track-details.django:25
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:127
 msgid "Duration"
 msgstr ""
 
-#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:45
+#: .\src\assets\common-blocks\track-details\track-details.django:29
 msgid "Published at"
 msgstr ""
 
-#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:50
+#: .\src\assets\common-blocks\track-details\track-details.django:34
 #: .\src\assets\template-right-blocks\right-rubrics-list\right-rubrics-list.django:7
 msgid "Rubrics"
 msgstr ""
 
-#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:62
+#: .\src\assets\common-blocks\track-details\track-details.django:46
 #: .\src\assets\template-right-blocks\right-tags-list\right-tags-list.django:7
 msgid "Tags"
 msgstr ""
 
-#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:82
-msgid "Loading"
+#: .\src\assets\entities\FloatingPlayer\floating-player.django:32
+msgid "Rewind"
 msgstr ""
 
-#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:83
-msgid "Resume"
+#: .\src\assets\entities\FloatingPlayer\floating-player.django:50
+msgid "Fast forward"
 msgstr ""
 
-#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:84
-msgid "Play"
-msgstr ""
-
-#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:85
-msgid "Pause"
-msgstr ""
-
-#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:90
-msgid "Add to favorites"
-msgstr ""
-
-#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:91
-msgid "Remove from favorites"
-msgstr ""
-
-#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list.django:19
-#: .\src\assets\common-blocks\small-tracks-list\small-tracks-list.django:36
-msgid "Show all tracks"
+#: .\src\assets\entities\FloatingPlayer\floating-player.django:53
+msgid "Hide"
 msgstr ""
 
 #: .\src\assets\page-menus\menu-main.django:19
@@ -202,12 +227,12 @@ msgstr ""
 msgid "Try the mobile app!"
 msgstr ""
 
-#: .\src\assets\template-right-blocks\right-mobile-promo\right-mobile-promo.django:12
-msgid "Actual version is:"
+#: .\src\assets\template-right-blocks\right-mobile-promo\right-mobile-promo.django:13
+msgid "Download for Android"
 msgstr ""
 
-#: .\src\assets\template-right-blocks\right-mobile-promo\right-mobile-promo.django:16
-msgid "Download for Android"
+#: .\src\assets\template-right-blocks\right-mobile-promo\right-mobile-promo.django:18
+msgid "Actual version is:"
 msgstr ""
 
 #: .\src\assets\template-right-blocks\right-search\right-search.django:7
@@ -250,11 +275,11 @@ msgstr ""
 msgid "Failed checking CSRF token"
 msgstr ""
 
-#: .\tales_django\entities\App\api\tick_api_view.py:32
+#: .\tales_django\entities\App\api\tick_api_view.py:30
 msgid "Expected POST or GET request"
 msgstr ""
 
-#: .\tales_django\entities\App\app_urlpatterns.py:28
+#: .\tales_django\entities\App\app_urlpatterns.py:31
 #, fuzzy
 #| msgid "Site description"
 msgid "Site administration"
@@ -294,7 +319,7 @@ msgstr ""
 
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:33
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:99
-#: .\tales_django\entities\Tracks\models\Track.py:74
+#: .\tales_django\entities\Tracks\models\Track.py:71
 msgid "Published"
 msgstr ""
 
@@ -304,13 +329,13 @@ msgstr ""
 
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:114
 #: .\tales_django\entities\Tracks\models\Tag.py:13
-#: .\tales_django\entities\Tracks\models\Track.py:58
+#: .\tales_django\entities\Tracks\models\Track.py:55
 msgid "tags"
 msgstr ""
 
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:120
 #: .\tales_django\entities\Tracks\models\Rubric.py:13
-#: .\tales_django\entities\Tracks\models\Track.py:59
+#: .\tales_django\entities\Tracks\models\Track.py:56
 msgid "rubrics"
 msgstr ""
 
@@ -319,7 +344,7 @@ msgid "Size"
 msgstr ""
 
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:147
-#: .\tales_django\entities\Tracks\models\Track.py:32
+#: .\tales_django\entities\Tracks\models\Track.py:29
 #, fuzzy
 #| msgid "Site title"
 msgid "title"
@@ -329,28 +354,28 @@ msgstr "The March Cat Tales"
 msgid "Audio file has been successfully uploaded"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\api\TrackViewSet.py:56
-#: .\tales_django\entities\Tracks\api\TrackViewSet.py:74
-#: .\tales_django\entities\Tracks\api\TrackViewSet.py:138
-#: .\tales_django\entities\Tracks\api\TrackViewSet.py:203
-#: .\tales_django\entities\Tracks\api\TracksByIds.py:47
+#: .\tales_django\entities\Tracks\api\TrackViewSet.py:57
+#: .\tales_django\entities\Tracks\api\TrackViewSet.py:75
+#: .\tales_django\entities\Tracks\api\TrackViewSet.py:144
+#: .\tales_django\entities\Tracks\api\TrackViewSet.py:248
+#: .\tales_django\entities\Tracks\api\TrackViewSet.py:315
 msgid "Client session not found"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\api\TrackViewSet.py:132
-msgid "User in not authenticated"
-msgstr ""
-
-#: .\tales_django\entities\Tracks\api\TracksByIds.py:56
+#: .\tales_django\entities\Tracks\api\TrackViewSet.py:153
 msgid "Expected track indices list"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\api\TracksByIds.py:66
+#: .\tales_django\entities\Tracks\api\TrackViewSet.py:163
 msgid "Error parsing track indices list"
 msgstr ""
 
+#: .\tales_django\entities\Tracks\api\TrackViewSet.py:242
+msgid "User in not authenticated"
+msgstr ""
+
 #: .\tales_django\entities\Tracks\models\Author.py:14
-#: .\tales_django\entities\Tracks\models\Track.py:56
+#: .\tales_django\entities\Tracks\models\Track.py:53
 msgid "author"
 msgstr ""
 
@@ -369,7 +394,7 @@ msgid "short description"
 msgstr "Listen to classic fairy tales online"
 
 #: .\tales_django\entities\Tracks\models\Author.py:26
-#: .\tales_django\entities\Tracks\models\Track.py:44
+#: .\tales_django\entities\Tracks\models\Track.py:41
 #, fuzzy
 #| msgid "Site description"
 msgid "description"
@@ -399,77 +424,77 @@ msgstr ""
 msgid "tag"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\models\Track.py:27
+#: .\tales_django\entities\Tracks\models\Track.py:24
 msgid "track"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\models\Track.py:28
+#: .\tales_django\entities\Tracks\models\Track.py:25
 msgid "tracks"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\models\Track.py:38
+#: .\tales_django\entities\Tracks\models\Track.py:35
 msgid "The track title text, required."
 msgstr ""
 
-#: .\tales_django\entities\Tracks\models\Track.py:48
+#: .\tales_django\entities\Tracks\models\Track.py:45
 #, fuzzy
 #| msgid "Site description"
 msgid "Optional description"
 msgstr "Listen to classic fairy tales online"
 
-#: .\tales_django\entities\Tracks\models\Track.py:53
+#: .\tales_django\entities\Tracks\models\Track.py:50
 msgid "youtube link"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\models\Track.py:53
+#: .\tales_django\entities\Tracks\models\Track.py:50
 msgid "YouTube video link url"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\models\Track.py:65
+#: .\tales_django\entities\Tracks\models\Track.py:62
 msgid "Audio file"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\models\Track.py:70
+#: .\tales_django\entities\Tracks\models\Track.py:67
 msgid "Preview picture"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\models\Track.py:75
+#: .\tales_django\entities\Tracks\models\Track.py:72
 msgid "Hidden"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\models\Track.py:76
+#: .\tales_django\entities\Tracks\models\Track.py:73
 msgid "Test"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\models\Track.py:79
+#: .\tales_django\entities\Tracks\models\Track.py:76
 msgid "status"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\models\Track.py:81
+#: .\tales_django\entities\Tracks\models\Track.py:78
 msgid "for members only"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\models\Track.py:86
+#: .\tales_django\entities\Tracks\models\Track.py:83
 msgid "Duration (seconds)"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\models\Track.py:87
+#: .\tales_django\entities\Tracks\models\Track.py:84
 msgid "File size (bytes)"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\models\Track.py:91
+#: .\tales_django\entities\Tracks\models\Track.py:88
 msgid "published at"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\models\Track.py:92
+#: .\tales_django\entities\Tracks\models\Track.py:89
 msgid "updated at"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\models\Track.py:96
+#: .\tales_django\entities\Tracks\models\Track.py:93
 msgid "published by"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\models\Track.py:99
+#: .\tales_django\entities\Tracks\models\Track.py:96
 msgid "updated by"
 msgstr ""
 
@@ -661,31 +686,31 @@ msgstr "Listen to classic fairy tales online"
 msgid "Site keywords"
 msgstr "tales, fairy tales, listen, mp3"
 
-#: .\tales_django\templates\base-core.html.django:98
+#: .\tales_django\templates\base-core.html.django:111
 msgid "Error loading audio file"
 msgstr ""
 
-#: .\tales_django\templates\base-core.html.django:99
+#: .\tales_django\templates\base-core.html.django:112
 msgid "No audio node found"
 msgstr ""
 
-#: .\tales_django\templates\base-core.html.django:100
+#: .\tales_django\templates\base-core.html.django:113
 msgid "No audio source node found"
 msgstr ""
 
-#: .\tales_django\templates\base-core.html.django:101
+#: .\tales_django\templates\base-core.html.django:114
 msgid "Fetch error"
 msgstr ""
 
-#: .\tales_django\templates\base-core.html.django:102
+#: .\tales_django\templates\base-core.html.django:115
 msgid "Failed api request"
 msgstr ""
 
-#: .\tales_django\templates\base-core.html.django:103
+#: .\tales_django\templates\base-core.html.django:116
 msgid "The track has been successfully added to favorites"
 msgstr ""
 
-#: .\tales_django\templates\base-core.html.django:104
+#: .\tales_django\templates\base-core.html.django:117
 msgid "The track has been successfully removed from favorites"
 msgstr ""
 

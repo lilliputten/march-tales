@@ -3,12 +3,10 @@ import traceback
 # from django.utils.translation import gettext_lazy as _
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt, get_token
+from django.conf import settings
 
 from rest_framework.request import Request
-from rest_framework.response import Response
 from rest_framework import status
-from rest_framework import views
-from rest_framework import permissions
 
 from core.appEnv import PROJECT_INFO
 from core.helpers.errors import errorToString
@@ -67,7 +65,9 @@ def tick_api_view(request: Request):  # , *args, **kwargs):
 
         timestamp = getTimeStamp()
         data = {
-            'PROJECT_INFO': PROJECT_INFO,
+            'PROJECT_INFO': PROJECT_INFO,  # TODO: Remoe it later in favor of below `projectInfo`
+            'projectInfo': PROJECT_INFO,
+            'androidAppVersion': settings.APK_DOWNLOAD_VERSION,
             'timestamp': timestamp,
             'checked': True,
             **debugData,  # DEBUG: Show debug data

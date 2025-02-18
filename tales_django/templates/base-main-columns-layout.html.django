@@ -30,7 +30,14 @@
           {% block main_column_content %}
             {{ block.super }}
             <h2 class="h5 section-title">{% trans "Recent Tracks" %}</h2>
+            {% comment %}
+            <h3>DEMO: Medium cards</h3>
+            {% include 'assets/common-blocks/medium-tracks-list/medium-tracks-list.django' %}
+            {% endcomment %}
             {% include 'assets/common-blocks/big-tracks-list/big-tracks-list.django' %}
+            {% with count=tracks_count offset=tracks_offset limit=tracks_limit offset_param_name="tracks_offset" %}
+            {% include "assets/template-columns/pagination.django" %}
+            {% endwith %}
           {% endblock main_column_content %}
           <!-- }}} Main content -->
 

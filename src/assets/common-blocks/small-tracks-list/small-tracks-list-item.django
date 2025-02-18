@@ -1,0 +1,28 @@
+{# ex: set ft=htmldjango : #}
+{% load static %}
+{% load i18n %}
+
+{% comment %}
+
+- `track` -- Tracks object expected as an external variable.
+
+{% endcomment %}
+
+<div class="small-tracks-list-item widget-card">
+  <a class="d-flex" href="/tracks/{{ track.id }}">
+    {% if track.preview_picture %}
+    <img class="card-img-sm" src="{% get_media_prefix %}{{ track.preview_picture}}" />
+    {% endif %}
+    <div class="content ms-3">
+      <p class="title mb-1"><strong>{{ track.title }}</strong></p>
+      <ul class="details card-meta list-inline mb-0">
+        <li class="list-inline-item mb-0">
+          <i class="ti-calendar"></i>{{ track.published_at }}
+        </li>
+        <li class="list-inline-item mb-0">
+          <i class="ti-timer"></i>{{ track.duration_formatted }}
+        </li>
+      </ul>
+    </div>
+  </a>
+</div>

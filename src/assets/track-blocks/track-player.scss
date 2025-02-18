@@ -1,47 +1,219 @@
 @use 'sass:color';
+@use 'sass:math';
 
 @import '../shared';
 
 .track-player {
+  $trackControlSize: 44px;
+  $circularProgressExtra: 1px;
+  $circularProgressOffset: $circularProgressExtra + 1;
+  $circularProgressSize: $trackControlSize + $circularProgressExtra * 2;
+  &:not(.current, .floating-player)[data-progress='100'] {
+    opacity: 0.5;
+  }
+  a:hover {
+    // color: $primaryDarkColor;
+    text-decoration: underline;
+  }
+  &.current {
+    .card-meta,
+    .post-title {
+      color: $primaryColor;
+    }
+    a:hover {
+      color: $primaryDarkColor;
+    }
+  }
+  &.floating-player {
+    .card-meta,
+    .post-title {
+      color: #fff;
+    }
+    a:hover {
+      color: #fff;
+    }
+  }
   .track-control {
-    &,
+    & {
+      margin: $circularProgressExtra;
+      display: block;
+      width: $trackControlSize;
+      height: $trackControlSize;
+      position: relative;
+      padding: 0;
+      border: 1px solid transparent;
+    }
     .option {
+      flex: 1;
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 0;
       display: flex;
       align-items: center;
-      gap: 1em;
+      justify-content: center;
     }
     .icon {
       display: flex;
       justify-content: center;
       align-items: center;
+      font-size: 1.25rem;
     }
-    &.big-icon {
-      $padding: 0.5em;
-      padding-top: $padding;
-      padding-bottom: $padding;
-      padding-left: $padding;
-      .icon {
-        font-size: 1.75rem;
+    .icon,
+    .spinner-border,
+    & {
+      color: $primaryColor;
+      transition: all $transitionTimeMs;
+    }
+    &.no-circle {
+      border-width: 0;
+    }
+    &:hover {
+      .icon,
+      .spinner-border,
+      & {
+        color: $primaryDarkColor;
       }
+    }
+    &:hover {
+      border-color: $primaryColor;
+      // box-shadow: 0 0 0 1px $primaryDarkColor !important;
+    }
+  }
+  &.floating-player .track-control {
+    .icon,
+    .spinner-border,
+    & {
+      color: #fff;
+    }
+    &:hover {
+      .icon,
+      .spinner-border,
+      & {
+        color: #ccc;
+      }
+    }
+    &:not(.no-circle):hover {
+      // box-shadow: 0 0 0 1px #ccc !important;
     }
   }
   .track-control-play {
-    .spinner-border {
-      $spinner-size: 1.75rem;
-      --bs-spinner-width: #{$spinner-size};
-      --bs-spinner-height: #{$spinner-size};
-      // --bs-spinner-border-width: 0.2em;
-    }
-    .time {
-      opacity: 0.5;
-      font-weight: normal;
+    // background-color: green;
+    border: 1px solid $primaryColor;
+    &:hover {
+      border-color: $primaryDarkColor;
+      // box-shadow: 0 0 0 1px $primaryDarkColor !important;
     }
   }
-  &[data-status] .track-control-play .option-ready,
-  &:not([data-status='paused'], [data-status='playing']) .track-control-play .time,
+  &.floating-player {
+    .track-control-play {
+      border-color: #fff;
+    }
+  }
+  .icon {
+    font-size: 1.5rem;
+    &.favorite {
+      padding-top: 5px;
+    }
+    &.pause {
+      font-size: 1.75rem;
+    }
+    &.play {
+      font-size: 2rem;
+      padding-left: 3px;
+    }
+  }
+  &[data-status='playing'] {
+    .circular-progress circle.fg {
+      transition:
+        color $transitionTimeMs,
+        stroke-dasharray 0.5s;
+    }
+  }
+
+  .spinner-border {
+    color: $primaryColor;
+    $spinner-size: 1.75rem;
+    --bs-spinner-width: #{$spinner-size};
+    --bs-spinner-height: #{$spinner-size};
+    // --bs-spinner-border-width: 0.2em;
+  }
+  &.floating-player {
+    .spinner-border {
+      color: #fff;
+    }
+  }
+  .circular-progress {
+    pointer-events: none;
+    --extra: #{$circularProgressExtra};
+    --size: #{$circularProgressSize};
+    --half-size: calc(var(--size) / 2);
+    --stroke-width: 3px;
+    --radius: calc((var(--size) - var(--stroke-width)) / 2);
+    --circumference: calc(var(--radius) * pi * 2);
+    --dash: calc((var(--progress) * var(--circumference)) / 100);
+    position: absolute;
+    left: -$circularProgressOffset;
+    top: -$circularProgressOffset;
+    width: var(--size);
+    height: var(--size);
+    circle {
+      cx: var(--half-size);
+      cy: var(--half-size);
+      r: var(--radius);
+      fill: none;
+      // stroke-linecap: round;
+      stroke-width: 1px;
+      &.bg {
+        display: none;
+      }
+      &.fg {
+        stroke-width: var(--stroke-width);
+        transform: rotate(-90deg);
+        transform-origin: var(--half-size) var(--half-size);
+        stroke-dasharray: var(--dash) calc(var(--circumference) - var(--dash));
+        transition: color $transitionTimeMs;
+        stroke: $primaryColor;
+      }
+    }
+  }
+  &.floating-player {
+    .circular-progress {
+      circle {
+        &.fg {
+          stroke: #fff;
+        }
+      }
+    }
+  }
+  &[data-progress] .track-control-play {
+    &:hover {
+      .circular-progress circle.fg {
+        stroke: $primaryDarkColor;
+      }
+    }
+  }
+  &.floating-player[data-progress] .track-control-play {
+    &:hover {
+      .circular-progress circle.fg {
+        stroke: #ccc;
+      }
+    }
+  }
+  .option {
+    transition: all 1s;
+  }
+
+  &:not([data-favorite='true']) .track-control[data-control-id='toggleFavorite'] .option-favorite,
+  &[data-favorite='true'] .track-control[data-control-id='toggleFavorite'] .option-not-favorite,
+  &[data-status]:not([data-status='ready']) .track-control-play .option-ready,
   &:not([data-status='paused']) .track-control-play .option-resume,
   &:not([data-status='playing']) .track-control-play .option-playing,
+  &:not([data-progress]) .track-control-play .circular-progress,
+  // &[data-status='waiting'] .track-control-play .circular-progress,
   &:not([data-status='waiting']) .track-control-play .option-waiting {
-    display: none;
+    // display: none;
+    opacity: 0;
   }
 }

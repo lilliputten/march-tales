@@ -3,21 +3,40 @@
 .card {
   @extend .shadow;
   border: 0;
-  background-color: $white;
   transition: 0.2s ease;
+  &.no-bg {
+    background-color: transparent;
+    box-shadow: none !important;
+  }
 
   &-body {
     padding: 25px;
+    &.no-padding {
+      padding: 0;
+    }
+    &.no-h-padding {
+      padding-left: 0;
+      padding-right: 0;
+    }
   }
 
   &-img-sm {
-    height: 85px;
-    width: 85px;
+    $size: 85px;
+    height: $size;
+    width: $size;
     border-radius: 0.25rem;
     object-fit: cover;
   }
 
-  &-meta {
+  &-img-md {
+    $size: 150px;
+    height: $size;
+    width: $size;
+    border-radius: 0.5rem;
+    object-fit: cover;
+  }
+
+  & &-meta {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
@@ -28,9 +47,9 @@
     li {
       margin-bottom: 10px;
 
-      &:not(:first-child) {
-        border-left: 1px solid $border-color;
-        padding-left: 8px;
+      &:not(:last-child) {
+        border-right: 1px solid $border-color;
+        padding-right: 8px;
       }
 
       &.track-rubrics[data-rubrics-count='0'],

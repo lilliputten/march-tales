@@ -83,7 +83,8 @@
       "request": "launch",
       "program": "manage.py",
       "args": [
-        "runserver"
+        "runserver",
+        // "--nostatic",
       ],
       "console": "integratedTerminal",
       "justMyCode": false
