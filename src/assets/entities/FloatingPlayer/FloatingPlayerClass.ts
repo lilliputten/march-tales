@@ -516,7 +516,7 @@ export class FloatingPlayer {
     const activePlayerData = this.activePlayerData;
     const isCurrent = id === activePlayerData?.id;
     const trackInfo = localTrackInfoDb.getById(id);
-    const favorite = !trackInfo.favorite;
+    const favorite = !trackInfo?.favorite;
     localTrackInfoDb.updateFavorite(id, favorite);
     if (isCurrent) {
       activePlayerData.favorite = favorite;

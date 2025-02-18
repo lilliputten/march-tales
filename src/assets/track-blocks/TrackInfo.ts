@@ -9,7 +9,7 @@ export interface TrackInfo {
   lastPlayed: number; // DateTime.now().millisecondsSinceEpoch <-> DateTime.fromMillisecondsSinceEpoch(ms)
 }
 
-export function trackInfoFromJsonStr(str: string) {
+export function trackInfoFromJsonStr(str: string): TrackInfo | undefined {
   if (!str) {
     return undefined;
   }
@@ -21,8 +21,8 @@ export function trackInfoFromJsonStr(str: string) {
       favorite,
       playedCount,
       position,
-      lastUpdated,
-      lastPlayed,
+      lastUpdated, // Timestamp
+      lastPlayed, // Timestamp
     ] = list;
     const data: TrackInfo = {
       // Keep the order!
@@ -30,14 +30,9 @@ export function trackInfoFromJsonStr(str: string) {
       favorite: Boolean(favorite),
       playedCount: playedCount ? Number(playedCount) : 0,
       position: position ? Number(position) : 0,
-      lastUpdated: lastUpdated ? Number(lastUpdated) : 0,
-      lastPlayed: lastPlayed ? Number(lastPlayed) : 0,
+      lastUpdated: lastUpdated ? Number(lastUpdated) * 1000 : 0, // Timestamp
+      lastPlayed: lastPlayed ? Number(lastPlayed) * 1000 : 0, // Timestamp
     };
-    /* console.log('[TrackInfo:trackInfoFromJsonStr]', {
-     *   str,
-     *   data,
-     * });
-     */
     return data;
   } catch (
     err // eslint-disable-line @typescript-eslint/no-unused-vars
@@ -67,8 +62,8 @@ export function trackInfoToJsonStr(trackInfo: TrackInfo) {
     favorite ? Number(favorite) : undefined,
     playedCount ? Number(playedCount) : undefined,
     position ? floatToStr(position) : undefined, // Use fixed decimal presentation for floats
-    lastUpdated ? Number(lastUpdated) : undefined,
-    lastPlayed ? Number(lastPlayed) : undefined,
+    lastUpdated ? Math.round(lastUpdated / 1000) : undefined, // Timestamp
+    lastPlayed ? Math.round(lastPlayed / 1000) : undefined, // Timestamp
   ];
   return list.join(',').replace(/,+$/, '');
 }

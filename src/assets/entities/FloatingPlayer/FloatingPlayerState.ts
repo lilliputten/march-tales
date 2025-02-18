@@ -3,7 +3,7 @@ import { floatToStr } from '../../helpers/floatToStr';
 type Status = 'playing' | 'paused' | 'waiting';
 
 export interface FloatingPlayerState {
-  lastTimestamp?: number;
+  lastTimestamp?: number; // Timestamp
   visible?: boolean;
   loaded?: boolean;
   status?: Status | undefined;
@@ -30,7 +30,7 @@ function convertFloatingPlayerStateFromJsonStr(str: string) {
     ] = list;
     const data: FloatingPlayerState = {
       // Keep the order!
-      lastTimestamp: lastTimestamp ? Number(lastTimestamp) : undefined,
+      lastTimestamp: lastTimestamp ? Number(lastTimestamp) * 1000 : undefined, // Timestamp
       visible: visible ? Boolean(visible) : undefined,
       status: status ? (String(status) as Status) : undefined,
       position: position ? Number(position) : undefined,
@@ -60,7 +60,7 @@ function convertFloatingPlayerStateToJsonStr(data: FloatingPlayerState) {
   } = data;
   const list = [
     // Keep the order!
-    lastTimestamp ? Number(lastTimestamp) : undefined,
+    lastTimestamp ? Math.round(lastTimestamp / 1000) : undefined, // Timestamp
     visible ? Number(visible) : undefined, // Boolean
     status ? status : undefined,
     position ? floatToStr(position) : undefined,

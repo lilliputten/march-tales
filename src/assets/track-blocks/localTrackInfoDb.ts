@@ -135,7 +135,7 @@ class LocalTrackInfoDb {
     return this.getAll().filter((it) => it.favorite);
   }
 
-  getById(id: number) {
+  getById(id: number): TrackInfo | undefined {
     const str = window.localStorage.getItem('trackInfo-' + id);
     if (!str) {
       return undefined;

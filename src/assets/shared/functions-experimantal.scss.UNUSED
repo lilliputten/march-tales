@@ -1,0 +1,184 @@
+// stylelint-disable scss/no-global-function-names, scss/operator-no-unspaced, scss/at-if-no-null, scss/operator-no-newline-after
+@use 'sass:color';
+@use 'sass:string';
+@use 'sass:math';
+
+@function rgbToHex($rgb) {
+  // NOTE: It's impossible to convert a (unquoted or quoted) string to a color
+  // @see https://sass-lang.com/documentation/modules/color/#ie-hex-str
+  // Converts color to an `#AARRGGBB` form
+  $xhex: color.ie-hex-str($rgb);
+  $hexColor: string.to-lower-case(str-slice($xhex, 4, 4 + 6));
+  @return '#' + $hexColor;
+}
+
+@function cleanRgb($rgb) {
+  $redValue: color.red($rgb);
+  $greenValue: color.green($rgb);
+  $blueValue: color.blue($rgb);
+  @return rgb($redValue, $greenValue, $blueValue);
+}
+
+// convert string to number
+@function toNumber($value) {
+  @if type-of($value) == 'number' {
+    @return $value;
+  } @else if type-of($value) != 'string' {
+    @error 'Value for `toNumber` should be a number or a string.';
+  }
+
+  $result: 0;
+  $digits: 0;
+  $minus: str-slice($value, 1, 1) == '-';
+  $numbers: (
+    '0': 0,
+    '1': 1,
+    '2': 2,
+    '3': 3,
+    '4': 4,
+    '5': 5,
+    '6': 6,
+    '7': 7,
+    '8': 8,
+    '9': 9,
+  );
+
+  @for $i from if($minus, 2, 1) through str-length($value) {
+    $character: str-slice($value, $i, $i);
+
+    @if (index(map-keys($numbers), $character) or $character == '.') {
+      @if $character == '.' {
+        $digits: 1;
+      } @else if $digits == 0 {
+        $result: $result * 10 + map-get($numbers, $character);
+      } @else {
+        $digits: $digits * 10;
+        $result: $result + map-get($numbers, $character) / $digits;
+      }
+    }
+  }
+
+  @return if($minus, -$result, $result);
+}
+
+@function decimalRound($number, $digits: 0, $mode: round) {
+  $n: 1;
+  // $number must be a number
+  @if type-of($number) != number {
+    @warn '#{ $number } is not a number.';
+    @return $number;
+  }
+  // $digits must be a unitless number
+  @if type-of($digits) != number {
+    @warn '#{ $digits } is not a number.';
+    @return $number;
+  } @else if not unitless($digits) {
+    @warn '#{ $digits } has a unit.';
+    @return $number;
+  }
+  @if $digits > 0 {
+    @for $i from 1 through $digits {
+      $n: $n * 10;
+    }
+  }
+  @if $mode == round {
+    @return calc(round($number * $n) / $n);
+  } @else if $mode == ceil {
+    @return calc(ceil($number * $n) / $n);
+  } @else if $mode == floor {
+    @return calc(floor($number * $n) / $n);
+  } @else {
+    @warn '#{ $mode } is undefined keyword.';
+    @return $number;
+  }
+}
+
+@function rgbaToHex($rgba) {
+  $colorCode: ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f');
+
+  // 255 / 100 = 2.55
+  // 10 / 16 = 0.625
+
+  $alpha: alpha($rgba);
+
+  // ============================================= RED ================================
+  $redStr: ''+ (red($rgba) / 16);
+
+  $index: str-index($redStr, '.');
+  // add decimal number incase it does not have and update index
+  @if $index == null {
+    $redStr: $redStr + '.0';
+    $index: str-index($redStr, '.');
+  }
+
+  // @debug $redStr '========================================================';
+
+  $redInteger: toNumber(str-slice($redStr, 0, $index - 1));
+  $redDecimal: decimalRound(toNumber(str-slice($redStr, $index + 1, $index + 1)) / 0.625);
+
+  // ============================================= GREEN ============================
+  $greenStr: ''+ (green($rgba) / 16);
+
+  $index: str-index($greenStr, '.');
+  // add decimal number incase it does not have and
+  @if $index == null {
+    $greenStr: $greenStr + '.0';
+    $index: str-index($greenStr, '.');
+  }
+
+  $greenInteger: toNumber(str-slice($greenStr, 0, $index - 1));
+  $greenDecimal: decimalRound(toNumber(str-slice($greenStr, $index + 1, $index + 1)) / 0.625);
+
+  // ============================================= BLUE ============================
+  $blueStr: ''+ (blue($rgba) / 16);
+
+  $index: str-index($blueStr, '.');
+  // add decimal number incase it does not have and
+  @if $index == null {
+    $blueStr: $blueStr + '.0';
+    $index: str-index($blueStr, '.');
+  }
+
+  $blueInteger: toNumber(str-slice($blueStr, 0, $index - 1));
+  $blueDecimal: decimalRound(toNumber(str-slice($blueStr, $index + 1, $index + 1)) / 0.625);
+
+  // if interger is 16 sent decimal should be 0
+
+  //@debug 'blue: '+ $blueStr +'  interter: '+ $blueInteger +' decimal: '+ $blueDecimal;
+  // $blue:  blue($rgba) / 2.55;
+
+  // ============================================= ALPHA ============================
+  $alphaStr: '' + decimalRound((($alpha * 100) * 2.55) /16);
+
+  $index: str-index($alphaStr, '.');
+
+  @if $index == null {
+    $alphaStr: $alphaStr + '.0';
+    $index: str-index($alphaStr, '.');
+  }
+
+  //@debug 'alphaStr: '+ decimalRound(toNumber($alphaStr))  ;
+
+  $alphaInteger: '' + toNumber(str-slice($alphaStr, 0, $index - 1));
+
+  $index: str-index($alphaInteger, '.');
+  @if $index == null {
+    $alphaInteger: $alphaInteger + '.0';
+    $index: str-index($alphaInteger, '.');
+  }
+  $alphaInteger: toNumber(str-slice($alphaStr, 0, $index - 1));
+
+  $alphaDecimal: toNumber(
+    str-slice('' + toNumber(str-slice($alphaStr, $index + 1, str-length($alphaStr))) / 0.625, 0, 2)
+  );
+
+  // @debug 'Integer: ==== '+$alphaInteger;
+  // @debug 'Decimal: ==== '+$alphaDecimal;
+
+  @return unquote(
+    '#' + nth($colorCode, $redInteger + 1) + nth($colorCode, $redDecimal + 1) +
+      nth($colorCode, $greenInteger + 1) + nth($colorCode, $greenDecimal + 1) +
+      nth($colorCode, $blueInteger + 1) + nth($colorCode, $blueDecimal + 1) +
+      nth($colorCode, $alphaInteger + 1) + nth($colorCode, $alphaDecimal + 1)
+  );
+}
