@@ -1,0 +1,15 @@
+{# ex: set ft=htmldjango : #}
+{% load static %}
+{% load i18n %}
+
+{% comment %}
+
+- `authors` -- Authors list expected as an external variable.
+
+{% endcomment %}
+
+<div class="big-authors-list widget-list pt-2">
+  {% for author in authors %}
+    {% include 'assets/common-blocks/big-authors-list/big-authors-list-item.django' %}
+  {% endfor %}
+</div>

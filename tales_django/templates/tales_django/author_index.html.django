@@ -1,0 +1,34 @@
+{# ex: set ft=htmldjango : #}
+{% extends 'base-main-columns-layout.html.django' %}
+{% load static %}
+{% load i18n %}
+
+{% block body_class %}author_list{% endblock %}
+
+{% block title %}{% trans 'Authors list' %} — {{ block.super }}{% endblock title %}
+
+{% comment %}
+Expected:
+- authors: Authors list
+{% endcomment %}
+
+{% block main_column_content %}
+
+<nav aria-label="breadcrumb" class="active-text-link-wrapper">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">{% trans 'Main page' %}</a></li>
+    <!--
+    <li class="breadcrumb-item"><a href="/authors">{% trans 'Authors' %}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ author.title }}</li>
+    -->
+  </ol>
+</nav>
+
+<h1 class="page-title primary-color my-4">{% trans 'Authors list' %}</h1>
+
+{% include 'assets/common-blocks/big-authors-list/big-authors-list.django' %}
+{% with count=authors_count offset=authors_offset limit=authors_limit offset_param_name="authors_offset" %}
+{% include "assets/template-columns/pagination.django" %}
+{% endwith %}
+
+{% endblock main_column_content %}

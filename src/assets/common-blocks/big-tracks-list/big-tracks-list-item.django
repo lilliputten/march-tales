@@ -1,6 +1,7 @@
 {# ex: set ft=htmldjango : #}
 {% load static %}
 {% load i18n %}
+{% load markdownify %}
 
 {% comment %}
 
@@ -39,7 +40,7 @@
       {% endif %}
       {# Description: if details #}
       {% if show_details %}
-      <p>{{ track.description }}</p>
+      <div>{{ track.description|markdownify }}</div>
       {% endif %}
       {# Details #}
       <ul class="card-meta list-inline">

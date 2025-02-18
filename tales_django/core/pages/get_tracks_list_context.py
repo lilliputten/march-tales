@@ -1,38 +1,22 @@
-import math
-
 from django.http import HttpRequest
 from django.utils import translation
-from django.db.models import Count
 
 from core.helpers.utils import debugObj
 from core.logging import getDebugLogger
 
 from tales_django.models import Track
-from tales_django.models import Rubric
-from tales_django.models import Tag
-from tales_django.models import Author
-
-from .get_common_context import get_common_context
 
 
 tracks_limit = 10
-# tracks_offset = 0
-
-show_authors_count = 3
-show_favorite_tracks_count = tracks_limit
 
 logger = getDebugLogger()
 
 
 def get_tracks_list_context(request: HttpRequest):
 
-    common_context = get_common_context(request)
-
     language = translation.get_language()
 
-    # Tracks...
-
-    # Expected params:
+    # Will produce params:
     # 1. For data display (eg, for `src/assets/common-blocks/big-tracks-list/big-tracks-list.django`):
     # - tracks
     # 2. For pagination (`src/assets/template-columns/pagination.django`):
@@ -60,7 +44,6 @@ def get_tracks_list_context(request: HttpRequest):
     logger.info(f'get_tracks_list_context\n{debugStr}')
 
     context = {
-        **common_context,
         # Tracks...
         'tracks': tracks_set,
         'tracks_count': tracks_count,

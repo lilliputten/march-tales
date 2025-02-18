@@ -12,6 +12,6 @@
 
 <!-- Authors -->
 <div class="right-authors-list widget widget-author">
-  <h4 class="widget-title">{% trans "Authors" %}</h4>
+  <h4 class="widget-title"><a href="/authors/">{% trans "Authors" %}</a></h4>
   {% include 'assets/common-blocks/authors-list/authors-list.django' %}
 </div>

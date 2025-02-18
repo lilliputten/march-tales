@@ -33,7 +33,8 @@ admin.site.site_header = _('Site administration')
 app_urlpatterns = [
     # Root page
     path(r'', index_view, name='index'),
-    # Secondary app pages
+    path(r'tracks/', index_view, name='tracks'),  # TODO: Create dedicated view in tracks.
+    # Secondary & static pages
     path(r'terms/', terms_view, name='terms'),
     path(r'privacy-policy/', privacy_policy_view, name='privacy-policy'),
     # Core?

@@ -1,6 +1,7 @@
 {# ex: set ft=htmldjango : #}
 {% load static %}
 {% load i18n %}
+{% load markdownify %}
 
 {% comment %}
 
@@ -26,7 +27,7 @@
         {% include "assets/common-blocks/track-details/track-details.django" %}
       </ul>
       {# Description #}
-      <p>{{ track.description }}</p>
+      <div>{{ track.description|markdownify }}</div>
       {# {{{ Actions #}
       <div
         class="track-controls d-flex flex-wrap gap-1"

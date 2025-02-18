@@ -1,0 +1,33 @@
+{# ex: set ft=htmldjango : #}
+{% load static %}
+{% load i18n %}
+{% load markdownify %}
+
+{% comment %}
+
+Expected:
+
+- `author` -- Author object
+
+{% endcomment %}
+
+<div
+  class="author-card card no-bg"
+  data-author-id="{{ author.id }}"
+>
+  <div class="d-flex gap-4 align-items-start">
+    {% if author.portrait_picture %}
+      <span class="me-2">
+        <img class="widget-author-image" src="{% get_media_prefix %}{{ author.portrait_picture }}" />
+      </span>
+    {% endif %}
+    <div class="card-body no-padding d-flex gap-4 flex-column">
+      {# Description #}
+      <div class="descr">{{ author.description|markdownify }}</div>
+      {# Details #}
+      <ul class="author-details card-meta list-inline">
+        {% include "assets/common-blocks/author-details/author-details.django" %}
+      </ul>
+    </div>
+  </div>
+</div>

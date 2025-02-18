@@ -180,12 +180,13 @@ INSTALLED_APPS = [
     'allauth.mfa',
     'allauth.headless',
     'allauth.usersessions',
+    # Other...
+    'markdownify.apps.MarkdownifyConfig',
     # app
     APP_NAME,
 ]
 if LOCAL:
     INSTALLED_APPS.append('allauth.socialaccount.providers.dummy')
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -203,6 +204,25 @@ MIDDLEWARE = [
     # # Html content prettifier (TODO: Requires fixes for invalid html tags formatting)
     # APP_NAME + '.middleware.BeautifulMiddleware.BeautifulMiddleware',
 ]
+
+MARKDOWNIFY = {
+    'default': {
+        'WHITELIST_TAGS': [
+            'a',
+            'p',
+            'h1',
+        ]
+    },
+    'alternative': {
+        'WHITELIST_TAGS': [
+            'a',
+            'p',
+        ],
+        'MARKDOWN_EXTENSIONS': [
+            'markdown.extensions.fenced_code',
+        ],
+    },
+}
 
 # allauth: Provider specific settings
 SOCIALACCOUNT_PROVIDERS = {
