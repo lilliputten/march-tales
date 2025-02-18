@@ -3,7 +3,7 @@
 @import '../shared';
 @import '../template-core/shared';
 
-.template-banner + .section-sm.template-columns {
+.template-columns.section-sm {
   // NOTE: Decrease padding for the first content block
   padding-top: 3em;
 }
