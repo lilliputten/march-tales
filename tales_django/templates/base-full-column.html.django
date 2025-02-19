@@ -3,6 +3,8 @@
 {% load static %}
 {% load i18n %}
 
+{# NOTE: This template used for plain text pages, like terms & policy #}
+
 {% block body_class %}main{% endblock %}
 
 {% block beforeContent %}

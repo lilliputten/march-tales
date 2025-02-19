@@ -1,0 +1,26 @@
+@use 'sass:color';
+
+@import '../../shared';
+
+.big-tags-list-item {
+  .text {
+    font-weight: bold;
+  }
+  .count {
+    opacity: 0.5;
+    display: inline-block;
+    font-size: 90%;
+    margin-left: 0.5em;
+  }
+  a {
+    @include activeTextLink;
+    color: $defaultTextColor;
+    &:hover {
+      &,
+      span {
+        color: $primaryDarkColor;
+        opacity: 1;
+      }
+    }
+  }
+}

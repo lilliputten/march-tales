@@ -4,6 +4,8 @@
 
 {% comment %}
 
+Expected:
+
 - `track` object expected as an external variable.
 
 {% endcomment %}

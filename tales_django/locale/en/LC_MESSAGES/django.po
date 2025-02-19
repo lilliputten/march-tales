@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-17 23:55+0300\n"
+"POT-Creation-Date: 2025-02-19 23:46+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,42 +22,47 @@ msgstr ""
 msgid "Back"
 msgstr ""
 
+#: .\src\assets\common-blocks\author-details\author-details.django:16
+#: .\tales_django\entities\Tracks\admin\AuthorAdmin.py:56
+msgid "Tracks count"
+msgstr ""
+
 #: .\src\assets\common-blocks\authors-list\authors-list.django:31
 msgid "Show all authors"
 msgstr ""
 
-#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:57
-#: .\src\assets\common-blocks\medium-tracks-list\medium-tracks-list-item.django:45
+#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:61
+#: .\src\assets\common-blocks\medium-tracks-list\medium-tracks-list-item.django:46
 #: .\src\assets\entities\FloatingPlayer\floating-player.django:28
 msgid "Add to favorites"
 msgstr ""
 
-#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:58
-#: .\src\assets\common-blocks\medium-tracks-list\medium-tracks-list-item.django:46
+#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:62
+#: .\src\assets\common-blocks\medium-tracks-list\medium-tracks-list-item.django:47
 #: .\src\assets\entities\FloatingPlayer\floating-player.django:29
 msgid "Remove from favorites"
 msgstr ""
 
-#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:67
-#: .\src\assets\common-blocks\medium-tracks-list\medium-tracks-list-item.django:37
+#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:71
+#: .\src\assets\common-blocks\medium-tracks-list\medium-tracks-list-item.django:38
 #: .\src\assets\entities\FloatingPlayer\floating-player.django:41
 msgid "Loading"
 msgstr ""
 
-#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:68
-#: .\src\assets\common-blocks\medium-tracks-list\medium-tracks-list-item.django:38
+#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:72
+#: .\src\assets\common-blocks\medium-tracks-list\medium-tracks-list-item.django:39
 #: .\src\assets\entities\FloatingPlayer\floating-player.django:42
 msgid "Resume"
 msgstr ""
 
-#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:69
-#: .\src\assets\common-blocks\medium-tracks-list\medium-tracks-list-item.django:39
+#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:73
+#: .\src\assets\common-blocks\medium-tracks-list\medium-tracks-list-item.django:40
 #: .\src\assets\entities\FloatingPlayer\floating-player.django:43
 msgid "Play"
 msgstr ""
 
-#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:70
-#: .\src\assets\common-blocks\medium-tracks-list\medium-tracks-list-item.django:40
+#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:74
+#: .\src\assets\common-blocks\medium-tracks-list\medium-tracks-list-item.django:41
 #: .\src\assets\entities\FloatingPlayer\floating-player.django:44
 msgid "Pause"
 msgstr ""
@@ -68,27 +73,31 @@ msgstr ""
 msgid "Show all tracks"
 msgstr ""
 
-#: .\src\assets\common-blocks\track-details\track-details.django:21
+#: .\src\assets\common-blocks\track-details\track-details.django:23
 #: .\tales_django\entities\Tracks\models\Track.py:80
 msgid "Played count"
 msgstr ""
 
-#: .\src\assets\common-blocks\track-details\track-details.django:25
+#: .\src\assets\common-blocks\track-details\track-details.django:27
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:127
 msgid "Duration"
 msgstr ""
 
-#: .\src\assets\common-blocks\track-details\track-details.django:29
+#: .\src\assets\common-blocks\track-details\track-details.django:31
 msgid "Published at"
 msgstr ""
 
-#: .\src\assets\common-blocks\track-details\track-details.django:34
+#: .\src\assets\common-blocks\track-details\track-details.django:36
 #: .\src\assets\template-right-blocks\right-rubrics-list\right-rubrics-list.django:7
+#: .\tales_django\templates\tales_django\rubric_details.html.django:21
+#: .\tales_django\templates\tales_django\rubric_index.html.django:21
 msgid "Rubrics"
 msgstr ""
 
-#: .\src\assets\common-blocks\track-details\track-details.django:46
+#: .\src\assets\common-blocks\track-details\track-details.django:48
 #: .\src\assets\template-right-blocks\right-tags-list\right-tags-list.django:7
+#: .\tales_django\templates\tales_django\tag_details.html.django:21
+#: .\tales_django\templates\tales_django\tag_index.html.django:21
 msgid "Tags"
 msgstr ""
 
@@ -147,15 +156,6 @@ msgstr ""
 msgid "What’d You Like<br> To Listen Today?"
 msgstr ""
 
-#: .\src\assets\template-columns\left-column.django:7
-#: .\src\assets\template-columns\unused-samples\left-column-sample.django:7
-#: .\src\assets\template-right-blocks\right-recents-list\right-recents-list.django:7
-#: .\tales_django\templates\base-full-column.html.django:29
-#: .\tales_django\templates\base-main-columns-layout.html.django:32
-#: .\tales_django\templates\base-main.html.django:69
-msgid "Recent Tracks"
-msgstr ""
-
 #: .\src\assets\template-footer\template-footer.django:55
 #: .\src\assets\template-footer\template-footer.django:58
 #: .\src\assets\template-header\template-header.django:14
@@ -194,10 +194,16 @@ msgid "Site description block."
 msgstr "Listen to classic fairy tales online"
 
 #: .\src\assets\template-right-blocks\right-about\right-about.django:13
-msgid "About me"
+#: .\tales_django\templates\tales_django\about.html.django:8
+#: .\tales_django\templates\tales_django\about.html.django:20
+#: .\tales_django\templates\tales_django\about.html.django:24
+#: .\tales_django\templates\tales_django\about.html.django:26
+msgid "About the project"
 msgstr ""
 
 #: .\src\assets\template-right-blocks\right-authors-list\right-authors-list.django:15
+#: .\tales_django\templates\tales_django\author_details.html.django:21
+#: .\tales_django\templates\tales_django\author_index.html.django:21
 msgid "Authors"
 msgstr ""
 
@@ -233,6 +239,12 @@ msgstr ""
 
 #: .\src\assets\template-right-blocks\right-mobile-promo\right-mobile-promo.django:18
 msgid "Actual version is:"
+msgstr ""
+
+#: .\src\assets\template-right-blocks\right-recents-list\right-recents-list.django:7
+#: .\tales_django\templates\base-full-column.html.django:31
+#: .\tales_django\templates\base-main-columns-layout.html.django:30
+msgid "Recent Tracks"
 msgstr ""
 
 #: .\src\assets\template-right-blocks\right-search\right-search.django:7
@@ -279,7 +291,7 @@ msgstr ""
 msgid "Expected POST or GET request"
 msgstr ""
 
-#: .\tales_django\entities\App\app_urlpatterns.py:31
+#: .\tales_django\entities\App\app_urlpatterns.py:32
 #, fuzzy
 #| msgid "Site description"
 msgid "Site administration"
@@ -299,10 +311,6 @@ msgstr ""
 
 #: .\tales_django\entities\Tracks\admin\AuthorAdmin.py:41
 msgid "Has portrait"
-msgstr ""
-
-#: .\tales_django\entities\Tracks\admin\AuthorAdmin.py:56
-msgid "Tracks count"
 msgstr ""
 
 #: .\tales_django\entities\Tracks\admin\RubricAdmin.py:35
@@ -511,6 +519,7 @@ msgid "Personal info"
 msgstr ""
 
 #: .\tales_django\entities\Users\admin\UserAdmin.py:40
+#: .\tales_django\templates\tales_django\track_details.html.django:21
 msgid "Tracks"
 msgstr ""
 
@@ -852,6 +861,29 @@ msgstr ""
 msgid "Password reset for"
 msgstr ""
 
+#: .\tales_django\templates\tales_django\about.html.django:19
+#: .\tales_django\templates\tales_django\author_details.html.django:20
+#: .\tales_django\templates\tales_django\author_index.html.django:19
+#: .\tales_django\templates\tales_django\rubric_details.html.django:20
+#: .\tales_django\templates\tales_django\rubric_index.html.django:19
+#: .\tales_django\templates\tales_django\tag_details.html.django:20
+#: .\tales_django\templates\tales_django\tag_index.html.django:19
+#: .\tales_django\templates\tales_django\track_details.html.django:20
+msgid "Main page"
+msgstr ""
+
+#: .\tales_django\templates\tales_django\about.html.django:28
+#: .\tales_django\templates\tales_django\author_details.html.django:36
+#: .\tales_django\templates\tales_django\rubric_details.html.django:39
+#: .\tales_django\templates\tales_django\tag_details.html.django:37
+msgid "Tracks List"
+msgstr ""
+
+#: .\tales_django\templates\tales_django\author_index.html.django:8
+#: .\tales_django\templates\tales_django\author_index.html.django:27
+msgid "Authors list"
+msgstr ""
+
 #: .\tales_django\templates\tales_django\profile.html.django:25
 msgid "Your registrations"
 msgstr ""
@@ -900,6 +932,16 @@ msgstr ""
 
 #: .\tales_django\templates\tales_django\profile_edit.html.django:28
 msgid "Reset changes"
+msgstr ""
+
+#: .\tales_django\templates\tales_django\rubric_index.html.django:8
+#: .\tales_django\templates\tales_django\rubric_index.html.django:27
+msgid "Rubrics list"
+msgstr ""
+
+#: .\tales_django\templates\tales_django\tag_index.html.django:8
+#: .\tales_django\templates\tales_django\tag_index.html.django:27
+msgid "Tags list"
 msgstr ""
 
 #: .\tales_django\templates\tales_django\terms.html.django:8

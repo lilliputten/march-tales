@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest
 from django.shortcuts import redirect, render
 
-from tales_django.core.pages import get_core_app_context
+from tales_django.core.pages import get_common_context, get_tracks_list_context
 
 # from django.utils.translation import ugettext as _
 
@@ -12,7 +12,10 @@ def profile(request: HttpRequest):
     if not request.user.is_authenticated:
         return redirect('index')
 
-    context = get_core_app_context(request)
+    context = {
+        **get_common_context(request),
+        **get_tracks_list_context(request),
+    }
 
     return render(
         request=request,

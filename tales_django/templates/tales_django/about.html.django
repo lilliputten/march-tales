@@ -1,0 +1,38 @@
+{# ex: set ft=htmldjango : #}
+{% extends 'base-main-columns-layout.html.django' %}
+{% load static %}
+{% load i18n %}
+
+{% block body_class %}rubric_list{% endblock %}
+
+{% block title %}{% trans 'About the project' %} — {{ block.super }}{% endblock title %}
+
+{% comment %}
+Expected:
+- rubrics: Rubrics list
+{% endcomment %}
+
+{% block main_column_content %}
+
+<nav aria-label="breadcrumb" class="active-text-link-wrapper">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">{% trans 'Main page' %}</a></li>
+    <li class="breadcrumb-item active">{% trans 'About the project' %}</li>
+  </ol>
+</nav>
+
+<h1 class="page-title primary-color my-4">{% trans 'About the project' %}</h1>
+
+<p>{% trans 'About the project' %}.........</p>
+
+<h2 class="h5 section-title mt-4">{% trans "Tracks List" %}</h2>
+
+{# Show tracks list (crsp context is required) #}
+{% include 'assets/common-blocks/big-tracks-list/big-tracks-list.django' %}
+
+{# Show tracks pagination #}
+{% with count=tracks_count offset=tracks_offset limit=tracks_limit offset_param_name="tracks_offset" %}
+{% include "assets/template-columns/pagination.django" %}
+{% endwith %}
+
+{% endblock main_column_content %}

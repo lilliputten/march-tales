@@ -1,0 +1,19 @@
+@use 'sass:color';
+
+@import '../shared';
+@import '../template-core/shared';
+
+.template-columns.section-sm {
+  // NOTE: Decrease padding for the first content block
+  padding-top: 1em; // 3em;
+  // body.regular & {
+  //   padding-top: 0;
+  // }
+}
+
+.main-column {
+  margin-top: $mainColumnTopMargin;
+  body.regular & {
+    margin-top: 0;
+  }
+}

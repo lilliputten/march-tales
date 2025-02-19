@@ -4,7 +4,7 @@
 
 <!-- Categories -->
 <div class="right-rubrics-list widget">
-  <h4 class="widget-title"><span>{% trans "Rubrics" %}</span></h4>
+  <h4 class="widget-title"><a href="/rubrics/">{% trans "Rubrics" %}</a></h4>
   {% include 'assets/common-blocks/rubrics-list/rubrics-list.django' %}
 </div>
 

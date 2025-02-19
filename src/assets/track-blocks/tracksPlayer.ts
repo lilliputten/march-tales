@@ -316,8 +316,7 @@ function initTrackPlayerNode(trackNode: HTMLElement) {
     }
   }
   if (isCurrent) {
-    activePlayerData.title = activePlayerData.title =
-      trackNode.querySelector<HTMLElement>('.post-title')?.innerText || '';
+    activePlayerData.title = dataset.trackTitle || '';
     currentTrackPlayer = trackNode;
     requestAnimationFrame(() => {
       trackNode.classList.toggle('current', true);

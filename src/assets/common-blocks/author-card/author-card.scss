@@ -1,0 +1,27 @@
+@use 'sass:color';
+
+@import '../../shared';
+
+.author-card {
+  @include activeTextLinkWrapper;
+  $imgSize: 200px;
+  .name,
+  .descr {
+    // margin-bottom: 0;
+  }
+  img {
+    width: $imgSize;
+    height: $imgSize;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  a .media-body {
+    color: $defaultTextColor;
+  }
+  a:hover .media-body {
+    color: $primaryColor;
+  }
+  .name {
+    font-weight: bold;
+  }
+}

@@ -1,0 +1,47 @@
+{# ex: set ft=htmldjango : #}
+{% extends 'base-main-columns-layout.html.django' %}
+{% load static %}
+{% load i18n %}
+
+{% block body_class %}tag_details{% endblock %}
+
+{% block title %}{{ tag.text }} — {{ block.super }}{% endblock title %}
+
+{% comment %}
+Expected:
+- tag_id: Tag id
+- tag: Tag object is expected
+{% endcomment %}
+
+{% block main_column_content %}
+
+<nav aria-label="breadcrumb" class="active-text-link-wrapper">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">{% trans 'Main page' %}</a></li>
+    <li class="breadcrumb-item"><a href="/tags">{% trans 'Tags' %}</a></li>
+    <!--
+    <li class="breadcrumb-item active" aria-current="page">{{ tag.text }}</li>
+    -->
+  </ol>
+</nav>
+
+<h1 class="page-title primary-color my-4">{{ tag.text }}</h1>
+
+{% comment %}
+{# TODO: Show tag details card? #}
+{% with show_details=True %}
+{% include "assets/common-blocks/tag-card/tag-card.django" %}
+{% endwith %}
+{% endcomment %}{# Show the list of tags' tracks #}
+
+<h2 class="h5 section-title mt-4">{% trans "Tracks List" %}</h2>
+
+{% with tracks=tag_tracks %}
+{% include 'assets/common-blocks/big-tracks-list/big-tracks-list.django' %}
+{% endwith %}
+
+{% with count=tag_tracks_count offset=tag_tracks_offset limit=tag_tracks_limit offset_param_name="tag_tracks_offset" %}
+{% include "assets/template-columns/pagination.django" %}
+{% endwith %}
+
+{% endblock main_column_content %}

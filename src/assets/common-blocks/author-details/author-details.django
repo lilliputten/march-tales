@@ -1,0 +1,18 @@
+{# ex: set ft=htmldjango : #}
+{% load static %}
+{% load i18n %}
+
+{% comment %}
+
+Expected:
+
+- `author` object expected as an external variable.
+
+See `track-details` block for example of stylizing other fields.
+
+{% endcomment %}
+
+{# Tracks count #}
+<li class="author-tracks-count list-inline-item" title="{% trans 'Tracks count' %}">
+  <i class="ti-headphone"></i> <span id="tracks_count">{{ author.track_set.all|length }}</span>
+</li>

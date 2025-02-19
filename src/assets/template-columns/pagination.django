@@ -5,6 +5,7 @@
 
 {% if count > limit %}
 
+{# Calculate required derived params... #}
 {% with pages_count=count|math_divide:limit|math_ceil page_idx=offset|math_divide:limit|math_floor %}
 {% define 2 as PAGINATION_RADIUS %}
 {% with pages_start=page_idx|math_sub:PAGINATION_RADIUS|math_max:0 pages_end=page_idx|add:PAGINATION_RADIUS|add:1|math_min:pages_count %}
@@ -38,7 +39,7 @@ tracks: {{ tracks }}
 
 <ul class="pagination justify-content-center pt-4 mt-4">
   {% if pages_start > 0 %}
-    {# Has prev pages #}
+    {# Has prev pages? #}
     <li class="page-item">
       {% define pages_start|math_sub:1|math_mult:limit as offset_idx %}
       <a href="{% url_with_param request.get_full_path offset_param_name offset_idx %}" class="page-link"><i class="icon fa fa-chevron-left"></i></a>
@@ -57,6 +58,7 @@ tracks: {{ tracks }}
       </li>
     {% endif %}
   {% endfor %}
+  {# Has more pages? #}
   {% if pages_end < pages_count %}
     <li class="page-item">
         {% define pages_end|math_mult:limit as offset_idx %}

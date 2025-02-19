@@ -18,6 +18,10 @@
       padding-left: 0;
       padding-right: 0;
     }
+    &.no-v-padding {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
   }
 
   &-img-sm {

@@ -4,7 +4,7 @@
 
 <!-- Tags -->
 <div class="right-tags-list widget widget-categories">
-  <h4 class="widget-title"><span>{% trans "Tags" %}</span></h4>
+  <h4 class="widget-title"><a href="/tags/">{% trans "Tags" %}</a></h4>
   {% include 'assets/common-blocks/tags-list/tags-list.django' %}
   <!--
   <ul class="list-unstyled widget-list">

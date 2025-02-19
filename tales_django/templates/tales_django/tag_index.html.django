@@ -1,0 +1,35 @@
+{# ex: set ft=htmldjango : #}
+{% extends 'base-main-columns-layout.html.django' %}
+{% load static %}
+{% load i18n %}
+
+{% block body_class %}tag_list{% endblock %}
+
+{% block title %}{% trans 'Tags list' %} — {{ block.super }}{% endblock title %}
+
+{% comment %}
+Expected:
+- tags: Tags list
+{% endcomment %}
+
+{% block main_column_content %}
+
+<nav aria-label="breadcrumb" class="active-text-link-wrapper">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">{% trans 'Main page' %}</a></li>
+    <!--
+    <li class="breadcrumb-item"><a href="/tags">{% trans 'Tags' %}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ tag.title }}</li>
+    -->
+  </ol>
+</nav>
+
+<h1 class="page-title primary-color my-4">{% trans 'Tags list' %}</h1>
+
+{% include 'assets/common-blocks/big-tags-list/big-tags-list.django' %}
+
+{% with count=tags_count offset=tags_offset limit=tags_limit offset_param_name="tags_offset" %}
+{% include "assets/template-columns/pagination.django" %}
+{% endwith %}
+
+{% endblock main_column_content %}

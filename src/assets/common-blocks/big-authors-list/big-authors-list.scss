@@ -1,0 +1,35 @@
+@use 'sass:color';
+
+@import '../../shared';
+
+.big-authors-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
+.big-authors-list-item {
+  @include basicActiveLink;
+  $imgSize: 120px;
+  & a:hover {
+    .name,
+    .descr {
+      text-decoration: underline;
+    }
+  }
+  img {
+    width: $imgSize;
+    height: $imgSize;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  a .media-body {
+    color: $defaultTextColor;
+  }
+  a:hover .media-body {
+    color: $primaryColor;
+  }
+  .name {
+    font-weight: bold;
+  }
+}
