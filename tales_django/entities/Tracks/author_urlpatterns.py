@@ -1,4 +1,4 @@
-from django.urls import path, include
+from django.urls import path
 
 from .views import author_index_view, author_details_view
 

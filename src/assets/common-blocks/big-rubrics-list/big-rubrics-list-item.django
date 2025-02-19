@@ -1,0 +1,23 @@
+{# ex: set ft=htmldjango : #}
+{% load static %}
+{% load i18n %}
+
+{% comment %}
+
+Expected:
+
+- `rubric` -- Rubric object
+
+{% endcomment %}
+
+<div
+  class="big-rubrics-list-item card no-bg"
+  data-rubric-id="{{ rubric.id }}"
+>
+  <a href="/rubrics/{{ rubric.id }}">
+    <h5 class="title">
+      <span class="text">{{ rubric.text }}</span>
+      <span class="count">({{ rubric.tracks.all|length }})</span>
+    </h5>
+  </a>
+</div>

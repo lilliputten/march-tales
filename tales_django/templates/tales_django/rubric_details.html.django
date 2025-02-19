@@ -1,0 +1,49 @@
+{# ex: set ft=htmldjango : #}
+{% extends 'base-main-columns-layout.html.django' %}
+{% load static %}
+{% load i18n %}
+
+{% block body_class %}rubric_details{% endblock %}
+
+{% block title %}{{ rubric.text }} — {{ block.super }}{% endblock title %}
+
+{% comment %}
+Expected:
+- rubric_id: Rubric id
+- rubric: Rubric object is expected
+{% endcomment %}
+
+{% block main_column_content %}
+
+<nav aria-label="breadcrumb" class="active-text-link-wrapper">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">{% trans 'Main page' %}</a></li>
+    <li class="breadcrumb-item"><a href="/rubrics">{% trans 'Rubrics' %}</a></li>
+    <!--
+    <li class="breadcrumb-item active" aria-current="page">{{ rubric.text }}</li>
+    -->
+  </ol>
+</nav>
+
+<h1 class="page-title primary-color my-4">{{ rubric.text }}</h1>
+
+{% comment %}
+{# TODO: Show rubric details card? #}
+{% with show_details=True %}
+{% include "assets/common-blocks/rubric-card/rubric-card.django" %}
+{% endwith %}
+{% endcomment %}
+
+{# Show the list of rubrics' tracks #}
+
+<h2 class="h5 section-title mt-4">{% trans "Tracks List" %}</h2>
+
+{% with tracks=rubric_tracks %}
+{% include 'assets/common-blocks/big-tracks-list/big-tracks-list.django' %}
+{% endwith %}
+
+{% with count=rubric_tracks_count offset=rubric_tracks_offset limit=rubric_tracks_limit offset_param_name="rubric_tracks_offset" %}
+{% include "assets/template-columns/pagination.django" %}
+{% endwith %}
+
+{% endblock main_column_content %}

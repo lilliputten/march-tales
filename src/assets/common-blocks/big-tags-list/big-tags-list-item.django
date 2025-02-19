@@ -1,0 +1,23 @@
+{# ex: set ft=htmldjango : #}
+{% load static %}
+{% load i18n %}
+
+{% comment %}
+
+Expected:
+
+- `tag` -- Rubric object
+
+{% endcomment %}
+
+<div
+  class="big-tags-list-item card no-bg"
+  data-tag-id="{{ tag.id }}"
+>
+  <a href="/tags/{{ tag.id }}">
+    <h5 class="title">
+      <span class="text">{{ tag.text }}</span>
+      <span class="count">({{ tag.tracks.all|length }})</span>
+    </h5>
+  </a>
+</div>

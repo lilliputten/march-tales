@@ -860,7 +860,7 @@ msgid "Main page"
 msgstr ""
 
 #: .\tales_django\templates\tales_django\author_details.html.django:36
-msgid "Track List"
+msgid "Tracks List"
 msgstr ""
 
 #: .\tales_django\templates\tales_django\author_index.html.django:8

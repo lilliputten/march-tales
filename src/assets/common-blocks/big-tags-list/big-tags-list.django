@@ -1,0 +1,15 @@
+{# ex: set ft=htmldjango : #}
+{% load static %}
+{% load i18n %}
+
+{% comment %}
+
+- `tags` -- Rubrics list expected as an external variable.
+
+{% endcomment %}
+
+<div class="big-tags-list pt-2 d-flex flex-column gap-3">
+  {% for tag in tags %}
+    {% include 'assets/common-blocks/big-tags-list/big-tags-list-item.django' %}
+  {% endfor %}
+</div>

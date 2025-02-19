@@ -1,6 +1,6 @@
 /**
  * @module styles.scss
- * @changed 2025.02.19, 01:50
+ * @changed 2025.02.19, 23:32
  */
 
 @import 'shared/variables-expose';
@@ -23,6 +23,9 @@
 @import 'common-blocks/medium-tracks-list/medium-tracks-list';
 @import 'common-blocks/big-authors-list/big-authors-list';
 @import 'common-blocks/author-card/author-card';
+
+@import 'common-blocks/big-rubrics-list/big-rubrics-list';
+@import 'common-blocks/big-tags-list/big-tags-list';
 
 @import 'CommonNotify/CommonNotify';
 

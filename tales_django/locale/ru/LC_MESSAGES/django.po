@@ -873,7 +873,7 @@ msgid "Main page"
 msgstr "Главная страница"
 
 #: .\tales_django\templates\tales_django\author_details.html.django:36
-msgid "Track List"
+msgid "Tracks List"
 msgstr "Список треков"
 
 #: .\tales_django\templates\tales_django\author_index.html.django:8
