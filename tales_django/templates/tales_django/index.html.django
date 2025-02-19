@@ -19,4 +19,5 @@
 {% block main_column_content %}
   {{ block.super }}
   {# TODO: Override/extend main content #}
+  {# See `tales_django/templates/base-main-columns-layout.html.django` #}
 {% endblock main_column_content %}

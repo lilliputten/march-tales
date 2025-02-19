@@ -10,6 +10,6 @@
   <ul class="list-inline social-icons mb-3">
     {% include 'assets/common-blocks/social-links/social-links.django' %}
   </ul>
-  <a href="/about" class="btn btn-primary mb-2">{% trans "About me" %}</a>
+  <a href="/about" class="btn btn-primary mb-2">{% trans "About the project" %}</a>
 </div>
 

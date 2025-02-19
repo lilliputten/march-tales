@@ -10,6 +10,7 @@ from django.views.decorators.cache import cache_page
 from django.utils.translation import gettext_lazy as _
 from allauth.account.decorators import secure_admin_login
 
+from .views.about_view import about_view
 from .views.terms_view import terms_view
 from .views.privacy_policy_view import privacy_policy_view
 
@@ -35,6 +36,7 @@ app_urlpatterns = [
     path(r'', index_view, name='index'),
     path(r'tracks/', index_view, name='tracks'),  # TODO: Create dedicated view in tracks.
     # Secondary & static pages
+    path(r'about/', about_view, name='about'),
     path(r'terms/', terms_view, name='terms'),
     path(r'privacy-policy/', privacy_policy_view, name='privacy-policy'),
     # Core?
