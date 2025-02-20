@@ -17,7 +17,7 @@
   <div class="d-flex">
     {% if track.preview_picture %}
     <a class="img-link" href="/tracks/{{ track.id }}">
-      <img class="card-img-md" src="{% get_media_prefix %}{{ track.preview_picture}}" />
+      <img class="card-img-md" src="{% get_media_prefix %}{{ track.preview_picture}}" loading="lazy" />
     </a>
     {% endif %}
     <div class="content ms-3">

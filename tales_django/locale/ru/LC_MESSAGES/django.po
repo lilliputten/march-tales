@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-20 17:11+0300\n"
+"POT-Creation-Date: 2025-02-20 20:25+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,6 +32,11 @@ msgstr "Треки"
 #: .\src\assets\common-blocks\authors-list\authors-list.django:31
 msgid "Show all authors"
 msgstr "Все авторы"
+
+#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:32
+#: .\src\assets\common-blocks\small-tracks-list\small-tracks-list-item.django:14
+msgid "Track cover image"
+msgstr "Обложка трека"
 
 #: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:61
 #: .\src\assets\common-blocks\medium-tracks-list\medium-tracks-list-item.django:46
@@ -92,14 +97,14 @@ msgstr "Опубликовано в"
 #: .\src\assets\common-blocks\track-details\track-details.django:36
 #: .\src\assets\template-right-blocks\right-rubrics-list\right-rubrics-list.django:7
 #: .\tales_django\templates\tales_django\rubric_details.html.django:21
-#: .\tales_django\templates\tales_django\rubric_index.html.django:21
+#: .\tales_django\templates\tales_django\rubric_index.html.django:20
 msgid "Rubrics"
 msgstr "Разделы"
 
 #: .\src\assets\common-blocks\track-details\track-details.django:48
 #: .\src\assets\template-right-blocks\right-tags-list\right-tags-list.django:7
 #: .\tales_django\templates\tales_django\tag_details.html.django:21
-#: .\tales_django\templates\tales_django\tag_index.html.django:21
+#: .\tales_django\templates\tales_django\tag_index.html.django:20
 msgid "Tags"
 msgstr "Теги"
 
@@ -191,20 +196,27 @@ msgstr "Пользовательское соглашение"
 msgid "Hi, I'm March Cat!"
 msgstr "Привет, я Мартовский Кот!"
 
+#: .\src\assets\template-right-blocks\right-about\right-about.django:8
+msgid "The March Cat"
+msgstr "Мартовский Кот"
+
 #: .\src\assets\template-right-blocks\right-about\right-about.django:9
 msgid "Site description block."
-msgstr "Я с большим удовольствием занимаюсь озвучиванием сказок. Это мое хобби, которое позволяет делиться волшебными историями с теми, кто любит мечтать и погружаться в мир фантазии."
+msgstr ""
+"Я с большим удовольствием занимаюсь озвучиванием сказок. Это мое хобби, "
+"которое позволяет делиться волшебными историями с теми, кто любит мечтать и "
+"погружаться в мир фантазии."
 
 #: .\src\assets\template-right-blocks\right-about\right-about.django:13
 #: .\tales_django\templates\tales_django\about.html.django:9
-#: .\tales_django\templates\tales_django\about.html.django:21
-#: .\tales_django\templates\tales_django\about.html.django:25
+#: .\tales_django\templates\tales_django\about.html.django:16
+#: .\tales_django\templates\tales_django\about.html.django:20
 msgid "About the project"
 msgstr "О проекте"
 
 #: .\src\assets\template-right-blocks\right-authors-list\right-authors-list.django:15
 #: .\tales_django\templates\tales_django\author_details.html.django:36
-#: .\tales_django\templates\tales_django\author_index.html.django:21
+#: .\tales_django\templates\tales_django\author_index.html.django:20
 msgid "Authors"
 msgstr "Авторы"
 
@@ -875,7 +887,7 @@ msgstr "Сбросить мой пароль"
 msgid "Password reset for"
 msgstr "Пароль сброшен для"
 
-#: .\tales_django\templates\tales_django\about.html.django:20
+#: .\tales_django\templates\tales_django\about.html.django:15
 #: .\tales_django\templates\tales_django\author_details.html.django:35
 #: .\tales_django\templates\tales_django\author_index.html.django:19
 #: .\tales_django\templates\tales_django\rubric_details.html.django:20
@@ -886,15 +898,15 @@ msgstr "Пароль сброшен для"
 msgid "Main page"
 msgstr "Главная страница"
 
-#: .\tales_django\templates\tales_django\about.html.django:31
-#: .\tales_django\templates\tales_django\author_details.html.django:51
+#: .\tales_django\templates\tales_django\about.html.django:33
+#: .\tales_django\templates\tales_django\author_details.html.django:49
 #: .\tales_django\templates\tales_django\rubric_details.html.django:39
-#: .\tales_django\templates\tales_django\tag_details.html.django:37
+#: .\tales_django\templates\tales_django\tag_details.html.django:35
 msgid "Tracks List"
 msgstr "Список треков"
 
 #: .\tales_django\templates\tales_django\author_index.html.django:8
-#: .\tales_django\templates\tales_django\author_index.html.django:27
+#: .\tales_django\templates\tales_django\author_index.html.django:24
 msgid "Authors list"
 msgstr "Авторы"
 
@@ -949,12 +961,12 @@ msgid "Reset changes"
 msgstr "Сбросить изменния"
 
 #: .\tales_django\templates\tales_django\rubric_index.html.django:8
-#: .\tales_django\templates\tales_django\rubric_index.html.django:27
+#: .\tales_django\templates\tales_django\rubric_index.html.django:24
 msgid "Rubrics list"
 msgstr "Список разделов"
 
 #: .\tales_django\templates\tales_django\tag_index.html.django:8
-#: .\tales_django\templates\tales_django\tag_index.html.django:27
+#: .\tales_django\templates\tales_django\tag_index.html.django:24
 msgid "Tags list"
 msgstr "Список тегов"
 

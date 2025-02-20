@@ -5,7 +5,7 @@
 <!-- About -->
 <div class="right-about widget widget-about active-link">
   <h4 class="font-supertitle mt-2 mb-4">{% trans "Hi, I'm March Cat!" %}</h4>
-  <img class="img-fluid" src="{% static 'images/march-cat/march-cat-sq-180.jpg' %}" alt="March Cat" />
+  <img class="img-fluid" src="{% static 'images/march-cat/march-cat-sq-180.jpg' %}" alt="{% trans 'The March Cat' %}" loading="lazy" />
   <p>{% blocktranslate %}Site description block.{% endblocktranslate %}</p>
   <ul class="list-inline social-icons mb-3">
     {% include 'assets/common-blocks/social-links/social-links.django' %}

@@ -14,7 +14,7 @@ Expected:
 <li class="list-inline-item">
   <a href="/authors/{{ track.author.id }}" class="card-meta-author">
     {% if track.author.portrait_picture %}
-      <img src="{% get_media_prefix %}{{ track.author.portrait_picture }}" />
+      <img src="{% get_media_prefix %}{{ track.author.portrait_picture }}" loading="lazy" />
     {% endif %}
     <span>{{ track.author.name }}</span>
   </a>

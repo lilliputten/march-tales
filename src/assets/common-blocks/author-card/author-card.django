@@ -18,7 +18,7 @@ Expected:
   <div class="d-flex flex-column flex-lg-row gap-4 align-items-start">
     {% if author.portrait_picture %}
       <span class="me-2">
-        <img class="widget-author-image" src="{% get_media_prefix %}{{ author.portrait_picture }}" />
+        <img class="widget-author-image" src="{% get_media_prefix %}{{ author.portrait_picture }}" loading="lazy" />
       </span>
     {% endif %}
     <div class="card-body no-padding d-flex gap-4 flex-column">
