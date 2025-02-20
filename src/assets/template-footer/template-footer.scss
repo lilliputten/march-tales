@@ -9,7 +9,7 @@
     overflow: hidden;
     padding-top: 160px;
     // Space for floating player
-    body.withPlayer & {
+    body.with-player & {
       padding-bottom: $floatingPlayerHeight;
     }
     background-image: url(/static/images/backgrounds/footer-bg.svg);

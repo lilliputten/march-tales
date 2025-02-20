@@ -3,7 +3,7 @@
 {% load static %}
 {% load i18n %}
 
-{% block body_class %}tag_list{% endblock %}
+{{ block.super }} endblock %}
 
 {% block title %}{% trans 'Tags list' %} — {{ block.super }}{% endblock title %}
 

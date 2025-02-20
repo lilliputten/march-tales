@@ -3,7 +3,7 @@
 {% load static %}
 {% load i18n %}
 
-{% block body_class %}rubric_details{% endblock %}
+{% block body_class %}rubric_details {{ block.super }}{% endblock %}
 
 {% block title %}{{ rubric.text }} — {{ block.super }}{% endblock title %}
 

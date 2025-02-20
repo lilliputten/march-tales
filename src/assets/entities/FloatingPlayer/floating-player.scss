@@ -19,7 +19,7 @@
     background-color: $primaryColor;
     padding-top: $seekSmallHeight;
     border-top: 2px solid #fff; // $primaryDarkenColor;
-    body:not(.withPlayer) & {
+    body:not(.with-player) & {
       display: none;
     }
   }

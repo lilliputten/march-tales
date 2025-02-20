@@ -85,7 +85,7 @@
 
   <!-- CSS }}} -->
 </head>
-<body class="{% block body_class %}default{% endblock %}">
+<body class="{% block body_class %}base-core{% endblock %}">
 
   <!-- {{{ JS variables -->
   {% block js_variables %}
