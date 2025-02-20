@@ -2,6 +2,7 @@
 {% extends 'base-main-columns-layout.html.django' %}
 {% load static %}
 {% load i18n %}
+{% load markdownify %}
 
 {% block body_class %}rubric_list {{ block.super }}{% endblock %}
 
@@ -23,7 +24,16 @@ Expected:
 
 <h1 class="page-title primary-color my-4">{% trans 'About the project' %}</h1>
 
-<p>{% trans 'About the project' %}.........</p>
+<div class="text-content">
+
+{% get_current_language as LANGUAGE %}
+{% with TEMPLATE='content/about-'|add:LANGUAGE|add:'.md' %}
+{% autoescape off %}
+{% include_md TEMPLATE %}
+{% endautoescape %}
+{% endwith %}
+
+</div>
 
 <h2 class="h5 section-title mt-4">{% trans "Tracks List" %}</h2>
 

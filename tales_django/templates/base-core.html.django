@@ -1,8 +1,8 @@
 {# ex: set ft=htmldjango : #}
 <!--
 - Html template
-- Version: 1.0.3
-- Last changes timestamp: 2024.04.08 13:55 +0700
+- Version: 0.0.21
+- Last changes timestamp: 2025.02.20 17:49:12 +0300
 - Generated: {% now "Y.m.d H:i:s O" %}
 -->
 
@@ -33,16 +33,16 @@
   <link rel="icon" href="{% static 'images/march-cat/march-cat-sq-48.jpg' %}" type="image/x-icon">
 
   {% block meta_og %}
-    {# Opengrap tags #}
+    {# Opengraph tags #}
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="{{ LANGUAGE_CODE }}" />
     <meta property="og:title" content="{% trans 'Site title' %}" />
     <meta property="og:description" content="{% trans 'Site description' %}" />
-    <meta property="og:url" content="{{ settings.DEFAULT_HOST }}" />
-    <meta property="og:image" content="{% static 'images/og-splash/splash-1200x630.jpg' %}" />
+    <meta property="og:url" content="{{ request.build_absolute_uri }}" />
+    <meta property="og:image" content="{{request.scheme}}://{{request.get_host}}{% static 'images/og-splash/splash-1200x630.jpg' %}" />
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="twitter:image" content="{% static 'images/og-splash/splash-320x.jpg' %}" />
+    <meta property="twitter:image" content="{{request.scheme}}://{{request.get_host}}{% static 'images/og-splash/splash-320x.jpg' %}" />
   {% endblock %}
 
   <!-- {{{ CSS -->

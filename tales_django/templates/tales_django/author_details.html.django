@@ -2,10 +2,25 @@
 {% extends 'base-main-columns-layout.html.django' %}
 {% load static %}
 {% load i18n %}
+{% load markdownify %}
 
 {% block body_class %}author_details {{ block.super }}{% endblock %}
 
 {% block title %}{{ author.name }} — {{ block.super }}{% endblock title %}
+{% block meta_description %}{{ author.short_description|markdownify|striptags }}{% endblock meta_description %}
+{% block meta_keywords %}{{ author.name }}, {{ block.super }}{% endblock meta_keywords %}
+
+{% block meta_og %}
+  {# Opengraph tags #}
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="{{ LANGUAGE_CODE }}" />
+  <meta property="og:title" content="{{ author.name }} — {% trans 'Site title' %}" />
+  <meta property="og:description" content="{{ author.short_description|markdownify|striptags }}" />
+  <meta property="og:url" content="{{ request.build_absolute_uri }}" />
+  <meta property="og:image" content="{{request.scheme}}://{{request.get_host}}{% get_media_prefix %}{{ author.preview_picture }}" />
+  <meta property="twitter:image" content="{{request.scheme}}://{{request.get_host}}{% get_media_prefix %}{{ author.preview_picture }}" />
+{% endblock %}
+
 
 {% comment %}
 Expected:
