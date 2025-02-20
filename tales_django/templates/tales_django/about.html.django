@@ -4,14 +4,9 @@
 {% load i18n %}
 {% load markdownify %}
 
-{% block body_class %}rubric_list {{ block.super }}{% endblock %}
+{% block body_class %}about {{ block.super }}{% endblock %}
 
 {% block title %}{% trans 'About the project' %} — {{ block.super }}{% endblock title %}
-
-{% comment %}
-Expected:
-- rubrics: Rubrics list
-{% endcomment %}
 
 {% block main_column_content %}
 
