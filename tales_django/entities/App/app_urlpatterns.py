@@ -5,10 +5,11 @@ from django.conf import settings
 from django.contrib import admin
 from django.conf.urls.static import static
 from django.conf.urls import handler404, handler403, handler500
-from django.urls import include, path
+from django.urls import include, path, re_path
 from django.views.decorators.cache import cache_page
 from django.utils.translation import gettext_lazy as _
 from allauth.account.decorators import secure_admin_login
+from django.views.generic import RedirectView
 
 from .views.about_view import about_view
 from .views.terms_view import terms_view
@@ -51,6 +52,7 @@ app_urlpatterns = [
         cache_page(cache_timeout)(RobotsView.as_view()),
         name='robots',
     ),
+    re_path(r'^favicon\.ico$', RedirectView.as_view(url='/static/favicon.ico', permanent=True)),
 ]
 
 app_urlpatterns += api_urlpatterns

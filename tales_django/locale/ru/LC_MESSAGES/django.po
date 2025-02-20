@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-19 23:46+0300\n"
+"POT-Creation-Date: 2025-02-20 17:11+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -164,12 +164,14 @@ msgstr "Что бы Вы хотели<br> послушать сегодня?"
 #: .\src\assets\template-header\template-header.django:17
 #: .\tales_django\templates\base-core.html.django:24
 #: .\tales_django\templates\base-core.html.django:39
+#: .\tales_django\templates\tales_django\author_details.html.django:17
 #: .\tales_django\templates\tales_django\terms.html.django:24
 #: .\tales_django\templates\tales_django\terms.html.django:26
 #: .\tales_django\templates\tales_django\terms.html.django:33
 #: .\tales_django\templates\tales_django\terms.html.django:34
 #: .\tales_django\templates\tales_django\terms.html.django:148
 #: .\tales_django\templates\tales_django\terms.html.django:153
+#: .\tales_django\templates\tales_django\track_details.html.django:17
 msgid "Site title"
 msgstr "Сказки Мартовского Кота"
 
@@ -194,15 +196,14 @@ msgid "Site description block."
 msgstr "Подробно о сайте..."
 
 #: .\src\assets\template-right-blocks\right-about\right-about.django:13
-#: .\tales_django\templates\tales_django\about.html.django:8
-#: .\tales_django\templates\tales_django\about.html.django:20
-#: .\tales_django\templates\tales_django\about.html.django:24
-#: .\tales_django\templates\tales_django\about.html.django:26
+#: .\tales_django\templates\tales_django\about.html.django:9
+#: .\tales_django\templates\tales_django\about.html.django:21
+#: .\tales_django\templates\tales_django\about.html.django:25
 msgid "About the project"
 msgstr "О проекте"
 
 #: .\src\assets\template-right-blocks\right-authors-list\right-authors-list.django:15
-#: .\tales_django\templates\tales_django\author_details.html.django:21
+#: .\tales_django\templates\tales_django\author_details.html.django:36
 #: .\tales_django\templates\tales_django\author_index.html.django:21
 msgid "Authors"
 msgstr "Авторы"
@@ -289,7 +290,7 @@ msgstr "Ошибка проверки токена CSRF"
 msgid "Expected POST or GET request"
 msgstr "Ожидается POST или GET запрос"
 
-#: .\tales_django\entities\App\app_urlpatterns.py:32
+#: .\tales_django\entities\App\app_urlpatterns.py:33
 msgid "Site administration"
 msgstr "Администрирование сайта"
 
@@ -507,7 +508,7 @@ msgid "Personal info"
 msgstr "Персональная информация"
 
 #: .\tales_django\entities\Users\admin\UserAdmin.py:40
-#: .\tales_django\templates\tales_django\track_details.html.django:21
+#: .\tales_django\templates\tales_django\track_details.html.django:34
 msgid "Tracks"
 msgstr "Треки"
 
@@ -682,33 +683,33 @@ msgstr "Авторское чтение классических сказок и
 
 #: .\tales_django\templates\base-core.html.django:26
 msgid "Site keywords"
-msgstr "сказки, истории, чтение, mp3,"
+msgstr "Мартовский Кот, Сказки, Истории, Чтение, mp3"
 
-#: .\tales_django\templates\base-core.html.django:111
+#: .\tales_django\templates\base-core.html.django:112
 msgid "Error loading audio file"
 msgstr "Ошибка при загрузке аудиофайла"
 
-#: .\tales_django\templates\base-core.html.django:112
+#: .\tales_django\templates\base-core.html.django:113
 msgid "No audio node found"
 msgstr "Страница не найдена"
 
-#: .\tales_django\templates\base-core.html.django:113
+#: .\tales_django\templates\base-core.html.django:114
 msgid "No audio source node found"
 msgstr "Узел источника звука не найден"
 
-#: .\tales_django\templates\base-core.html.django:114
+#: .\tales_django\templates\base-core.html.django:115
 msgid "Fetch error"
 msgstr "Ошибка получения данных"
 
-#: .\tales_django\templates\base-core.html.django:115
+#: .\tales_django\templates\base-core.html.django:116
 msgid "Failed api request"
 msgstr "Ошибка запроса данных с сервера"
 
-#: .\tales_django\templates\base-core.html.django:116
+#: .\tales_django\templates\base-core.html.django:117
 msgid "The track has been successfully added to favorites"
 msgstr "Трек был успешно добавлен в избранное"
 
-#: .\tales_django\templates\base-core.html.django:117
+#: .\tales_django\templates\base-core.html.django:118
 msgid "The track has been successfully removed from favorites"
 msgstr "Трек был успешно удален из избранного"
 
@@ -874,19 +875,19 @@ msgstr "Сбросить мой пароль"
 msgid "Password reset for"
 msgstr "Пароль сброшен для"
 
-#: .\tales_django\templates\tales_django\about.html.django:19
-#: .\tales_django\templates\tales_django\author_details.html.django:20
+#: .\tales_django\templates\tales_django\about.html.django:20
+#: .\tales_django\templates\tales_django\author_details.html.django:35
 #: .\tales_django\templates\tales_django\author_index.html.django:19
 #: .\tales_django\templates\tales_django\rubric_details.html.django:20
 #: .\tales_django\templates\tales_django\rubric_index.html.django:19
 #: .\tales_django\templates\tales_django\tag_details.html.django:20
 #: .\tales_django\templates\tales_django\tag_index.html.django:19
-#: .\tales_django\templates\tales_django\track_details.html.django:20
+#: .\tales_django\templates\tales_django\track_details.html.django:33
 msgid "Main page"
 msgstr "Главная страница"
 
-#: .\tales_django\templates\tales_django\about.html.django:28
-#: .\tales_django\templates\tales_django\author_details.html.django:36
+#: .\tales_django\templates\tales_django\about.html.django:31
+#: .\tales_django\templates\tales_django\author_details.html.django:51
 #: .\tales_django\templates\tales_django\rubric_details.html.django:39
 #: .\tales_django\templates\tales_django\tag_details.html.django:37
 msgid "Tracks List"
