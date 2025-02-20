@@ -1,4 +1,4 @@
-Welcome! I'm a March Cat, and I take great pleasure in dubbing fairy tales. This is my hobby, which allows me to share magical stories with those who like to dream and immerse themselves in the world of fantasy.
+Welcome! I'm The March Cat, and I take great pleasure in dubbing fairy tales. This is my hobby, which allows me to share magical stories with those who like to dream and immerse themselves in the world of fantasy.
 
 ### About myself
 
