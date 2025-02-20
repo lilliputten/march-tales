@@ -3,7 +3,7 @@
 
 {% load i18n allauth %}
 
-{% block body_class %}regular{% endblock %}
+{% block body_class %}regular {{ block.super }}{% endblock %}
 
 {% block title %}{% trans 'Manage account' %} — {{ block.super }}{% endblock %}
 

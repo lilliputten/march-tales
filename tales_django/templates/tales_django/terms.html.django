@@ -3,7 +3,7 @@
 {% load static %}
 {% load i18n %}
 
-{% block body_class %}regular{% endblock %}
+{% block body_class %}regular {{ block.super }}{% endblock %}
 
 {% block title %} {% trans 'Terms and conditions' %} — {{ block.super }}{% endblock %}
 

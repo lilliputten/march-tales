@@ -3,7 +3,7 @@
 {% load static %}
 {% load i18n %}
 
-{% block body_class %}main{% endblock %}
+{% block body_class %}with-header {{ block.super }}{% endblock %}
 
 {% block beforeContent %}
 {% include "assets/template-banner/template-banner.django" %}

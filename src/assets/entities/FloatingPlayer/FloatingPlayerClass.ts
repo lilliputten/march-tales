@@ -192,7 +192,7 @@ export class FloatingPlayer {
       } else {
         delete dataset.status;
       }
-      document.body.classList.toggle('withPlayer', !!this.state.visible);
+      document.body.classList.toggle('with-player', !!this.state.visible);
     });
   }
 

@@ -3,7 +3,7 @@
 {% load static %}
 {% load i18n %}
 
-{% block body_class %}author_details{% endblock %}
+{% block body_class %}author_details {{ block.super }}{% endblock %}
 
 {% block title %}{{ author.name }} — {{ block.super }}{% endblock title %}
 

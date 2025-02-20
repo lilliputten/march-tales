@@ -5,7 +5,7 @@
 
 {# NOTE: This template used for plain text pages, like terms & policy #}
 
-{% block body_class %}main{% endblock %}
+{% block body_class %}base-full-column {{ block.super }}{% endblock %}
 
 {% block beforeContent %}
 {% include "assets/template-banner/template-banner.django" %}
