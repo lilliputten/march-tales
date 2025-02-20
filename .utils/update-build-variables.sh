@@ -96,7 +96,7 @@ UPDATE_FILE() {
       | sed "s/\(timestamp\s*=\)\s*\".*\"/\1\"$TIMESTAMP\"/" \
       | sed "s/\(timetag\s*=\)\s*\".*\"/\1\"$TIMETAG\"/" \
     > $FILE || exit 1
-  else # MD, other free format files...
+  else # Other free format files (md, django, etc)...
     cat $FILE.bak \
       | sed "s/\(Project info:\) .*$/\1 $PROJECT_INFO_REP/" \
       | sed "s/\(Version:\) .*$/\1 $VERSION/" \
@@ -115,3 +115,4 @@ UPDATE_FILE "$prjPath/pyproject.toml"
 UPDATE_FILE "$prjPath/package-lock.json"
 UPDATE_FILE "$prjPath/README.md"
 UPDATE_FILE "$prjPath/public/index.html"
+UPDATE_FILE "$prjPath/tales_django/templates/base-core.html.django"

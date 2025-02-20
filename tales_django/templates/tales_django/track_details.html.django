@@ -2,10 +2,24 @@
 {% extends 'base-main-columns-layout.html.django' %}
 {% load static %}
 {% load i18n %}
+{% load markdownify %}
 
 {% block body_class %}track_details {{ block.super }}{% endblock %}
 
 {% block title %}{{ track.title }} — {{ block.super }}{% endblock title %}
+
+{% block meta_keywords %}{{ track.tags }} {{ block.super }}{% endblock meta_keywords %}
+
+{% block meta_og %}
+  {# Opengraph tags #}
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="{{ LANGUAGE_CODE }}" />
+  <meta property="og:title" content="{{ track.title }}" />
+  <meta property="og:description" content="{{ track.description|markdownify }}" />
+  <meta property="og:url" content="{{ request.build_absolute_uri }}" />
+  <meta property="og:image" content="{{request.scheme}}://{{request.get_host}}{% get_media_prefix %}{{ track.preview_picture }}" />
+  <meta property="twitter:image" content="{{request.scheme}}://{{request.get_host}}{% get_media_prefix %}{{ track.preview_picture }}" />
+{% endblock %}
 
 {% comment %}
 - track_id: Track id
