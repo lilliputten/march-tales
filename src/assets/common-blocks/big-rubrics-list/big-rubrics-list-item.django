@@ -10,14 +10,12 @@ Expected:
 
 {% endcomment %}
 
-<div
-  class="big-rubrics-list-item card no-bg"
+<li
+  class="big-rubrics-list-item"
   data-rubric-id="{{ rubric.id }}"
 >
   <a href="/rubrics/{{ rubric.id }}">
-    <h5 class="title">
-      <span class="text">{{ rubric.text }}</span>
-      <span class="count">({{ rubric.tracks.all|length }})</span>
-    </h5>
+    <span class="text">{{ rubric.text }}</span>
+    <span class="count">({{ rubric.tracks.all|length }})</span>
   </a>
-</div>
+</li>

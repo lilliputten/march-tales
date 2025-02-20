@@ -10,14 +10,12 @@ Expected:
 
 {% endcomment %}
 
-<div
-  class="big-tags-list-item card no-bg"
+<li
+  class="big-tags-list-item"
   data-tag-id="{{ tag.id }}"
 >
   <a href="/tags/{{ tag.id }}">
-    <h5 class="title">
-      <span class="text">{{ tag.text }}</span>
-      <span class="count">({{ tag.tracks.all|length }})</span>
-    </h5>
+    <span class="text">{{ tag.text }}</span>
+    <span class="count">({{ tag.tracks.all|length }})</span>
   </a>
-</div>
+</li>

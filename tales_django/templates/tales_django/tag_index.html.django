@@ -17,10 +17,7 @@ Expected:
 <nav aria-label="breadcrumb" class="active-text-link-wrapper">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/">{% trans 'Main page' %}</a></li>
-    <!--
-    <li class="breadcrumb-item"><a href="/tags">{% trans 'Tags' %}</a></li>
-    <li class="breadcrumb-item active" aria-current="page">{{ tag.title }}</li>
-    -->
+    <li class="breadcrumb-item active" aria-current="page">{% trans 'Tags' %}</li>
   </ol>
 </nav>
 

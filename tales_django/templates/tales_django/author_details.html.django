@@ -34,9 +34,7 @@ Expected:
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/">{% trans 'Main page' %}</a></li>
     <li class="breadcrumb-item"><a href="/authors">{% trans 'Authors' %}</a></li>
-    <!--
     <li class="breadcrumb-item active" aria-current="page">{{ author.name }}</li>
-    -->
   </ol>
 </nav>
 

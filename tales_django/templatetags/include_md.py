@@ -10,6 +10,7 @@ from core.logging import getDebugLogger
 
 logger = getDebugLogger()
 
+
 @register.simple_tag(takes_context=True)
 def include_md(context, template_name):
     try:

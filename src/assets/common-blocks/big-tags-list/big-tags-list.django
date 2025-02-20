@@ -8,8 +8,8 @@
 
 {% endcomment %}
 
-<div class="big-tags-list pt-2 d-flex flex-column gap-3">
+<ul class="big-tags-list list-unstyled pt-2 d-flex flex-column gap-3">
   {% for tag in tags %}
     {% include 'assets/common-blocks/big-tags-list/big-tags-list-item.django' %}
   {% endfor %}
-</div>
+</ul>

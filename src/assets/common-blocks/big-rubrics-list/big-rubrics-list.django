@@ -8,8 +8,8 @@
 
 {% endcomment %}
 
-<div class="big-rubrics-list pt-2 d-flex flex-column gap-3">
+<ul class="big-tags-list list-unstyled pt-2 d-flex flex-column gap-3">
   {% for rubric in rubrics %}
     {% include 'assets/common-blocks/big-rubrics-list/big-rubrics-list-item.django' %}
   {% endfor %}
-</div>
+</ul>

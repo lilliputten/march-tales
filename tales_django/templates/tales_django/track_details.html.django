@@ -32,9 +32,7 @@
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/">{% trans 'Main page' %}</a></li>
     <li class="breadcrumb-item"><a href="/tracks">{% trans 'Tracks' %}</a></li>
-    <!--
     <li class="breadcrumb-item active" aria-current="page">{{ track.title }}</li>
-    -->
   </ol>
 </nav>
 
