@@ -97,3 +97,12 @@ a.disabled {
   // A spacer to put instead of page banner (`template-banner.django`)
   margin-top: 100px;
 }
+
+a.external {
+  .icon-external {
+    display: inline-block;
+    padding-left: 0.25em;
+    font-size: 85%;
+    // opacity: 0.5;
+  }
+}

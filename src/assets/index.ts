@@ -7,8 +7,10 @@
 import { checkProjectVersion } from './checkProjectVersion';
 import { initTracksPlayerWrapper } from './track-blocks/tracksPlayer';
 import { initFloatingPlayer } from './entities/FloatingPlayer/floatingPlayer';
+import { processTextContent } from './processTextContent';
 
 checkProjectVersion();
+processTextContent();
 
 initTracksPlayerWrapper();
 initFloatingPlayer();

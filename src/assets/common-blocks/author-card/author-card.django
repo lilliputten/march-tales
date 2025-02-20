@@ -23,7 +23,7 @@ Expected:
     {% endif %}
     <div class="card-body no-padding d-flex gap-4 flex-column">
       {# Description #}
-      <div class="descr">{{ author.description|markdownify }}</div>
+      <div class="descr text-content">{{ author.description|markdownify }}</div>
       {# Details #}
       <ul class="author-details card-meta list-inline">
         {% include "assets/common-blocks/author-details/author-details.django" %}

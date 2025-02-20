@@ -40,7 +40,7 @@
       {% endif %}
       {# Description: if details #}
       {% if show_details %}
-      <div>{{ track.description|markdownify }}</div>
+      <div class="text-content">{{ track.description|markdownify }}</div>
       {% endif %}
       {# Details #}
       <ul class="card-meta list-inline">
