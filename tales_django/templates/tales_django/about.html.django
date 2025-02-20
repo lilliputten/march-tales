@@ -24,7 +24,7 @@ Expected:
 
 <h1 class="page-title primary-color my-4">{% trans 'About the project' %}</h1>
 
-<div class="text-content">
+<div class="text-content pb-2">
 
 {% get_current_language as LANGUAGE %}
 {% with TEMPLATE='content/about-'|add:LANGUAGE|add:'.md' %}

@@ -1,4 +1,4 @@
-Welcome! I'm The March Cat, and I take great pleasure in dubbing fairy tales. This is my hobby, which allows me to share magical stories with those who like to dream and immerse themselves in the world of fantasy.
+Welcome! I'm a March Cat, and I take great pleasure in dubbing fairy tales. This is my hobby, which allows me to share magical stories with those who like to dream and immerse themselves in the world of fantasy.
 
 ### About myself
 
@@ -6,7 +6,7 @@ I'm not a professional actor or broadcaster, but I genuinely love fairy tales an
 
 ### What can you find on my page
 
-Here you will find audio fairy tales for children and adults, which I voice with my soul. In addition, I try to share interesting information about the authors of fairy tales and their works.
+Here you will find audio fairy tales and short stories for children and adults. In addition, I try to share interesting information about the authors of fairy tales and their works.
 
 To make my fairy tales more accessible, we have created:
 
@@ -15,8 +15,9 @@ To make my fairy tales more accessible, we have created:
 - **This website**, where all my works are collected in a convenient format.
 
 - On [**YouTube**](https://youtube.com/@bibliocaty) you will find the full versions of my audio tales.
+
 - On the page in [**VKontakte**](https://vk.com/club227997256) and in [**Telegram**](https://t.me/cat_andersen) I'm sharing new stories, announcements and interesting facts about fairy tales.
 
 ### Conclusion
 
-I'm glad you took a look at my page! I hope my voiced fairy tales will give you cozy evenings and inspire you to new dreams. Subscribe, listen and share your impressions — together we will make the world a little more magical!
+Thank you for visiting my page! I hope my audio stories will give you cozy evenings and inspire you to new dreams. Subscribe, listen and share your impressions — together we will make the world a little more magical!
