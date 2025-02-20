@@ -8,7 +8,7 @@
 
 {% endcomment %}
 
-<div class="big-authors-list widget-list pt-2">
+<div class="big-authors-list d-flex flex-column gap-4 pt-2">
   {% for author in authors %}
     {% include 'assets/common-blocks/big-authors-list/big-authors-list-item.django' %}
   {% endfor %}

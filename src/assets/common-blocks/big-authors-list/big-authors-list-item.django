@@ -14,7 +14,7 @@ Expected:
   class="big-authors-list-item card no-bg"
   data-author-id="{{ author.id }}"
 >
-  <a class="d-flex gap-4 align-items-start" href="/authors/{{ author.id }}">
+  <a class="d-flex flex-column flex-sm-row gap-4 align-items-start" href="/authors/{{ author.id }}">
     {% if author.portrait_picture %}
       <span class="me-2">
         <img class="widget-author-image" src="{% get_media_prefix %}{{ author.portrait_picture }}" />

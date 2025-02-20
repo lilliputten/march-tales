@@ -2,12 +2,6 @@
 
 @import '../../shared';
 
-.big-authors-list {
-  display: flex;
-  flex-direction: column;
-  gap: 2em;
-}
-
 .big-authors-list-item {
   @include basicActiveLink;
   $imgSize: 120px;
