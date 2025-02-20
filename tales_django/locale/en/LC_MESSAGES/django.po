@@ -190,10 +190,8 @@ msgid "Hi, I'm March Cat!"
 msgstr ""
 
 #: .\src\assets\template-right-blocks\right-about\right-about.django:9
-#, fuzzy
-#| msgid "Site description"
 msgid "Site description block."
-msgstr "Listen to classic fairy tales online"
+msgstr "I take great pleasure in dubbing fairy tales. This is my hobby, which allows me to share magical stories with those who like to dream and immerse themselves in the world of fantasy."
 
 #: .\src\assets\template-right-blocks\right-about\right-about.django:13
 #: .\tales_django\templates\tales_django\about.html.django:9

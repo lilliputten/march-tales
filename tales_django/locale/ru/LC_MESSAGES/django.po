@@ -193,7 +193,7 @@ msgstr "Привет, я Мартовский Кот!"
 
 #: .\src\assets\template-right-blocks\right-about\right-about.django:9
 msgid "Site description block."
-msgstr "Подробно о сайте..."
+msgstr "Я с большим удовольствием занимаюсь озвучиванием сказок. Это мое хобби, которое позволяет делиться волшебными историями с теми, кто любит мечтать и погружаться в мир фантазии."
 
 #: .\src\assets\template-right-blocks\right-about\right-about.django:13
 #: .\tales_django\templates\tales_django\about.html.django:9
