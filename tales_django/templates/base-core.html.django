@@ -92,6 +92,7 @@
     <script>
       {% block js_variables_content %}
         {{ block.super }}
+        var projectInfo = '{{ settings.PROJECT_INFO }}';
         var isAuthenticated = {% if user.is_authenticated %}true{% else %}false{% endif %};
         {% if settings.LOCAL %}var LOCAL = true;{% endif %}
         var DEFAULT_HOST = '{{ settings.DEFAULT_HOST }}';
