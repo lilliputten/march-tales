@@ -7,10 +7,11 @@
 {% load i18n %}
 
 <!-- Favorites -->
-<li class="nav-item">
+<li class="nav-item favorites-menu-item">
   <a class="nav-link" href="{% url 'favorites' %}">
     <i class="icon dimmed-primary-icon ti ti-heart"></i>
     {% trans 'Favorites' %}
+    <small class="dimmed-info">(<span class="favorites-count">{{ favorites|length }}</span>)</small>
   </a>
 </li>
 

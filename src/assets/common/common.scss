@@ -106,3 +106,8 @@ a.external {
     // opacity: 0.5;
   }
 }
+
+// Main menu & favorites
+body:not(.has-favorites) .favorites-menu-item {
+  display: none;
+}
