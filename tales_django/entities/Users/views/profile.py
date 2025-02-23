@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest
 from django.shortcuts import redirect, render
 
-from tales_django.core.pages import get_common_context, get_tracks_list_context
+from tales_django.core.pages import get_common_context, get_favorites_list_context, get_tracks_list_context
 
 # from django.utils.translation import ugettext as _
 
@@ -15,6 +15,7 @@ def profile(request: HttpRequest):
     context = {
         **get_common_context(request),
         **get_tracks_list_context(request),
+        **get_favorites_list_context(request),
     }
 
     return render(

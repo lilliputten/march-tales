@@ -5,6 +5,7 @@ from .rubric_index_view import rubric_index_view
 from .rubric_details_view import rubric_details_view
 from .tag_index_view import tag_index_view
 from .tag_details_view import tag_details_view
+from .favorites_view import favorites_view
 
 __all__ = [
     'track_details_view',
@@ -14,4 +15,5 @@ __all__ = [
     'rubric_details_view',
     'tag_index_view',
     'tag_details_view',
+    'favorites_view',
 ]

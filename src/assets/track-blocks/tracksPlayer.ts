@@ -295,7 +295,7 @@ function initTrackPlayerNode(trackNode: HTMLElement) {
     const playedCount = Number(
       trackNode.querySelector<HTMLElement>('.track-played-count')?.dataset.playedCount || '0',
     );
-    const favorite = Boolean(dataset.favorite);
+    const favorite = hasServerData ? Boolean(dataset.favorite) : !!trackInfo?.favorite;
     // Update the local db date...
     if (activePlayerData) {
       activePlayerData.favorite = favorite;

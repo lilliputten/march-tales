@@ -1,4 +1,5 @@
 import { floatToStr } from '../helpers/floatToStr';
+import { packDelim } from '../constatns/packDelim';
 
 export interface TrackInfo {
   id: number; // track.id
@@ -9,12 +10,14 @@ export interface TrackInfo {
   lastPlayed: number; // DateTime.now().millisecondsSinceEpoch <-> DateTime.fromMillisecondsSinceEpoch(ms)
 }
 
+const finalPackDelimReg = new RegExp(packDelim + '+$');
+
 export function trackInfoFromJsonStr(str: string): TrackInfo | undefined {
   if (!str) {
     return undefined;
   }
   try {
-    const list = str.split(',');
+    const list = str.split(packDelim);
     const [
       // Keep the order!
       id,
@@ -65,5 +68,5 @@ export function trackInfoToJsonStr(trackInfo: TrackInfo) {
     lastUpdated ? Math.round(lastUpdated / 1000) : undefined, // Timestamp
     lastPlayed ? Math.round(lastPlayed / 1000) : undefined, // Timestamp
   ];
-  return list.join(',').replace(/,+$/, '');
+  return list.join(packDelim).replace(finalPackDelimReg, '');
 }

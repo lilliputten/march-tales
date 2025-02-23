@@ -1,0 +1,10 @@
+@use 'sass:color';
+
+@import '../shared';
+
+.side-menu {
+  @include activeTextLinkWrapper;
+  a {
+    color: $defaultTextColor;
+  }
+}

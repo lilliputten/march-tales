@@ -1,6 +1,6 @@
 /**
  * @module styles.scss
- * @changed 2025.02.19, 23:32
+ * @changed 2025.02.23, 21:54
  */
 
 @import 'shared/variables-expose';
@@ -17,6 +17,8 @@
 
 @import 'theme/bootstrap-theme-fixes';
 
+@import 'page-menus/side-menu';
+
 @import 'common-blocks/rubrics-list/rubrics-list';
 @import 'common-blocks/authors-list/authors-list';
 @import 'common-blocks/small-tracks-list/small-tracks-list';
@@ -24,6 +26,7 @@
 @import 'common-blocks/big-authors-list/big-authors-list';
 @import 'common-blocks/author-card/author-card';
 
+@import 'common-blocks/big-tracks-list/big-tracks-list';
 @import 'common-blocks/big-rubrics-list/big-rubrics-list';
 @import 'common-blocks/big-tags-list/big-tags-list';
 

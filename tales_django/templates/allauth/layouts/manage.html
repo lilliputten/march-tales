@@ -1,9 +1,9 @@
 {# ex: set ft=htmldjango : #}
-{% extends 'base-main-columns-layout.html.django' %}
+{% extends 'base-main-columns.html.django' %}
 
 {% load i18n allauth %}
 
-{% block body_class %}regular {{ block.super }}{% endblock %}
+{% block body_class %}manage {{ block.super }}{% endblock %}
 
 {% block title %}{% trans 'Manage account' %} — {{ block.super }}{% endblock %}
 
@@ -12,56 +12,38 @@
 {% block right_column_content %}
 <div class="widget widget-author">
   <h4 class="widget-title">{% trans "Account management" %}</h4>
-  <ul class="p-3 nav d-flex flex-column gap-3">
+  <ul class="side-menu p-3 nav d-flex flex-column gap-2">
 
-    <li class="list-group-item nav-item">
-      <a class="btn btn-outline-primary w-100" href="{% url 'profile' %}">{% trans "Profile" %}</a>
-    </li>
+    <li><a href="{% url 'profile' %}">{% trans "Profile" %}</a></li>
 
-    <li class="list-group-item nav-item">
-      <a class="btn btn-outline-primary w-100" href="{% url 'profile_edit' %}">{% trans "Edit profile" %}</a>
-    </li>
+    <li><a href="{% url 'profile_edit' %}">{% trans "Edit profile" %}</a></li>
 
     {% url 'account_email' as email_url_ %}
     {% if email_url_ %}
-      <li class="list-group-item nav-item">
-        <a class="btn btn-outline-primary w-100" href="{{ email_url_ }}">{% trans "Change Email" %}</a>
-      </li>
+      <li><a href="{{ email_url_ }}">{% trans "Change Email" %}</a></li>
     {% endif %}
-
 
     {% url 'account_change_password' as change_password_url_ %}
     {% if change_password_url_ %}
-      <li class="list-group-item nav-item">
-        <a class="btn btn-outline-primary w-100" href="{{ change_password_url_ }}">{% trans "Change Password" %}</a>
-      </li>
+      <li><a href="{{ change_password_url_ }}">{% trans "Change Password" %}</a></li>
     {% endif %}
 
     {% url 'socialaccount_connections' as connections_url_ %}
     {% if connections_url_ %}
-      <li class="list-group-item nav-item">
-        <a class="btn btn-outline-primary w-100" href="{{ connections_url_ }}">{% trans "Third-Party Accounts" %}</a>
-      </li>
+      <li><a href="{{ connections_url_ }}">{% trans "Third-Party Accounts" %}</a></li>
     {% endif %}
 
     {% url 'mfa_index' as mfa_index_url_ %}
     {% if mfa_index_url_ %}
-      <li class="list-group-item nav-item">
-        <a class="btn btn-outline-primary w-100" href="{{ mfa_index_url_ }}">{% trans "Two-Factor Authentication" %}</a>
-      </li>
+      <li><a href="{{ mfa_index_url_ }}">{% trans "Two-Factor Authentication" %}</a></li>
     {% endif %}
 
     {% url 'usersessions_list' as usersessions_list_url_ %}
     {% if usersessions_list_url_ %}
-      <li class="list-group-item nav-item">
-        <a class="btn btn-outline-primary w-100" href="{{ usersessions_list_url_ }}">{% trans "Sessions" %}</a>
-      </li>
+      <li><a href="{{ usersessions_list_url_ }}">{% trans "Sessions" %}</a></li>
     {% endif %}
 
-    <li class="list-group-item nav-item">
-      <span class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">{% trans "Delete account" %}</span>
-    </li>
-
+    <li><a data-bs-toggle="modal" data-bs-target="#deleteAccountModal">{% trans "Delete account" %}</a></li>
 
   </ul>
 </div>

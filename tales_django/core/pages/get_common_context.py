@@ -29,14 +29,21 @@ def get_common_context(request: HttpRequest):
 
     language = translation.get_language()
 
-    # Favorite tracks...
-    favorite_tracks = None
-    if request.user.is_authenticated:
-        favorite_tracks = (
-            request.user.favorite_tracks
-            # .filter(track_status='PUBLISHED')
-            .order_by('-published_at').all()
-        )
+    # # Favorite tracks...
+    # # NOTE: Implemented in the dedicated context
+    # # @see `tales_django/core/pages/get_favorites_list_context.py`
+    # favorite_tracks = None
+    # if request.user.is_authenticated:
+    #     favorite_tracks = (
+    #         request.user.favorite_tracks
+    #         # .filter(track_status='PUBLISHED')
+    #         .order_by('-published_at').all()
+    #     )
+    # else:
+    #     favorites_cookie = request.COOKIES.get('favorites')
+    #     if favorites_cookie is not None and favorites_cookie:
+    #         list_str = favorites_cookie.split(',')
+    #         list = filter(None, map(int, list_str))
 
     # Authors...
     authors = (
@@ -57,9 +64,11 @@ def get_common_context(request: HttpRequest):
     context = {
         # User...
         'user': request.user,
-        # Favorite tracks...
-        'favorite_tracks': favorite_tracks[:show_favorite_tracks_count] if favorite_tracks else None,
-        'has_more_favorite_tracks': len(favorite_tracks) > show_favorite_tracks_count if favorite_tracks else None,
+        # # Favorite tracks...
+        # # NOTE: Implemented in the dedicated context
+        # # @see `tales_django/core/pages/get_favorites_list_context.py`
+        # 'favorite_tracks': favorite_tracks[:show_favorite_tracks_count] if favorite_tracks else None,
+        # 'has_more_favorite_tracks': len(favorite_tracks) > show_favorite_tracks_count if favorite_tracks else None,
         # Authors...
         'authors': authors[:show_authors_count],
         'has_more_authors': len(authors) > show_authors_count,

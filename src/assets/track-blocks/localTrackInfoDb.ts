@@ -1,4 +1,6 @@
 import { TrackInfo, trackInfoFromJsonStr, trackInfoToJsonStr } from './TrackInfo';
+import { setCookie } from '../helpers/CommonHelpers';
+import { packDelim } from '../constatns/packDelim';
 
 class LocalTrackInfoDb {
   // End-user api
@@ -55,6 +57,12 @@ class LocalTrackInfoDb {
       const trackInfo = this.getOrCreate(id);
       trackInfo.favorite = favorite;
       trackInfo.lastUpdated = _now;
+      /* console.log('[localTrackInfoDb:updateFavorite]', {
+       *   id,
+       *   favorite,
+       *   trackInfo,
+       * });
+       */
       this.insert(trackInfo);
       this._toggleInFavoritesIndex(id, favorite);
       // this.updateEvents.broadcast(TracksInfoDbUpdate(trackInfo));
@@ -82,6 +90,10 @@ class LocalTrackInfoDb {
         this.insert(trackInfo);
       }
     });
+    /* console.log('[localTrackInfoDb:updateFavoritesByTrackIds]', {
+     *   ids,
+     * });
+     */
     this._setFavoritesIndex(ids);
   }
 
@@ -127,7 +139,14 @@ class LocalTrackInfoDb {
   /// Create or update the record. (Returns inserted/updated record id.)
   insert(trackInfo: TrackInfo) {
     const { id } = trackInfo;
-    window.localStorage.setItem('trackInfo-' + id, trackInfoToJsonStr(trackInfo));
+    const str = trackInfoToJsonStr(trackInfo);
+    /* console.log('[localTrackInfoDb:insert]', {
+     *   id,
+     *   str,
+     *   trackInfo,
+     * });
+     */
+    window.localStorage.setItem('ti-' + id, str);
     this._addToIndex(id);
   }
 
@@ -136,7 +155,7 @@ class LocalTrackInfoDb {
   }
 
   getById(id: number): TrackInfo | undefined {
-    const str = window.localStorage.getItem('trackInfo-' + id);
+    const str = window.localStorage.getItem('ti-' + id);
     if (!str) {
       return undefined;
     }
@@ -145,8 +164,15 @@ class LocalTrackInfoDb {
 
   _getFavoritesIndex() {
     try {
-      const data = window.localStorage.getItem('trackInfoFavoritesIndex');
-      return (data ? JSON.parse(data) : []) as number[];
+      const str = window.localStorage.getItem('favorites');
+      if (!str) {
+        return [] as number[];
+      }
+      const list = str
+        .split(packDelim)
+        .map(Number)
+        .filter((n) => !isNaN(n)) as number[];
+      return list;
     } catch (
       _ // eslint-disable-line @typescript-eslint/no-unused-vars
     ) {
@@ -155,7 +181,19 @@ class LocalTrackInfoDb {
   }
 
   _setFavoritesIndex(favoritesIndex: number[]) {
-    window.localStorage.setItem('trackInfoFavoritesIndex', JSON.stringify(favoritesIndex));
+    const list = favoritesIndex.filter((n) => !isNaN(n)).filter(Boolean);
+    const str = list.join(packDelim);
+    window.localStorage.setItem('favorites', str);
+    // Update cookie value and document status
+    const favoritesCount = list.length;
+    const hasFavorites = !!favoritesCount;
+    document.body.classList.toggle('has-favorites', hasFavorites);
+    // Update count texts
+    document.querySelectorAll<HTMLElement>('.favorites-count').forEach((node) => {
+      node.innerText = String(favoritesCount);
+    });
+    // Update cookie
+    setCookie('favorites', str);
   }
 
   _addToFavoritesIndex(id: number) {
@@ -183,8 +221,8 @@ class LocalTrackInfoDb {
 
   _getIndex() {
     try {
-      const str = window.localStorage.getItem('trackInfoIndex');
-      return (str ? str.split(',').map((v) => (v ? Number(v) : 0)) : []) as number[];
+      const str = window.localStorage.getItem('ti-index');
+      return (str ? str.split(packDelim).map((v) => (v ? Number(v) : 0)) : []) as number[];
     } catch (
       _ // eslint-disable-line @typescript-eslint/no-unused-vars
     ) {
@@ -193,7 +231,7 @@ class LocalTrackInfoDb {
   }
 
   _setIndex(index: number[]) {
-    window.localStorage.setItem('trackInfoIndex', index.join(','));
+    window.localStorage.setItem('ti-index', index.join(packDelim));
   }
 
   _addToIndex(id: number) {
@@ -230,14 +268,14 @@ class LocalTrackInfoDb {
   }
 
   delete(id: number) {
-    window.localStorage.removeItem('trackInfo-' + id);
+    window.localStorage.removeItem('ti-' + id);
     this._removeFromIndex(id);
   }
 
   clearAll() {
     const index = this._getIndex();
     index.forEach((id) => {
-      window.localStorage.removeItem('trackInfo-' + id);
+      window.localStorage.removeItem('ti-' + id);
     });
     this._setIndex([]);
   }

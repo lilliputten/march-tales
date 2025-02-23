@@ -1,5 +1,5 @@
 {# ex: set ft=htmldjango : #}
-{% extends 'base-main-columns-layout.html.django' %}
+{% extends 'base-main-columns-with-header.html.django' %}
 {% load static %}
 {% load i18n %}
 
@@ -32,7 +32,7 @@ Expected:
 {% endwith %}
 {% endcomment %}{# Show the list of tags' tracks #}
 
-<h2 class="h5 section-title mt-4">{% trans "Tracks List" %}</h2>
+<h2 class="h5 section-title mt-4">{% trans "Tracks List" %} (<span class="tag_tracks-count">{{ tag_tracks|length }}</span>)</h2>
 
 {% with tracks=tag_tracks %}
 {% include 'assets/common-blocks/big-tracks-list/big-tracks-list.django' %}
