@@ -37,7 +37,7 @@ or Extraordinary Assemblies, and can vote on or even run for the board.</p>
 
   <div class="common-actions">
     <input class="btn btn-primary" type="submit" value="Submit" />
-    {% include "assets/back-button/back-button.django" %}
+    {% include "assets/buttons/back-button.django" %}
   </div>
 </form>
 

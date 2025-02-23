@@ -24,7 +24,7 @@
   <div class="common-actions d-flex flex-wrap gap-1">
     <div class="left flex-grow-1 d-flex flex-wrap gap-1">
       <input type="submit" class="btn btn-primary" value="{% trans "Save" %}" />
-      {% include "assets/back-button/back-button.django" %}
+      {% include "assets/buttons/back-button.django" %}
       <button type="reset" class="btn btn-outline-secondary d-flex align-items-center gap-2"><i class="icon fa fa-refresh"></i> <span class="text">{% trans "Reset changes" %}</span></button>
     </div>
     {% comment %}

@@ -1,0 +1,18 @@
+@use 'sass:color';
+
+@import '../../shared';
+
+.big-tracks-list {
+  &:not(.favorites) .no-favorites-message,
+  body.has-favorites & .no-favorites-message {
+    display: none;
+  }
+  .no-favorites-message {
+    opacity: 0.5;
+  }
+  &.favorites {
+    .big-tracks-list-item:not([data-favorite='true']) {
+      display: none;
+    }
+  }
+}

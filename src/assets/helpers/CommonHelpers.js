@@ -448,7 +448,7 @@ export function getCookie(cookieId) {
 /**
  * @param {string} id
  * @param {string} val
- * @param {number} maxAgeSecs -- Seconds of expire period
+ * @param {number} [maxAgeSecs] -- Seconds of expire period
  */
 export function setCookie(id, val, maxAgeSecs) {
   const cookieVal = [id, val || ''].map(encodeURIComponent).join('=');

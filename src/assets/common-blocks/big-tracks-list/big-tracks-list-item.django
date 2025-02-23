@@ -18,7 +18,7 @@
   {# NOTE: Using remote host for testing resumeable tracks with 206 Partial Content https headers #}
   {% define False as USE_REMOTE_HOST %}
   data-track-media-url="{% if USE_REMOTE_HOST and settings.LOCAL %}https://{{ settings.DEFAULT_HOST }}{% endif %}{% get_media_prefix %}{{ track.audio_file }}"
-  {% if track in favorite_tracks %}data-favorite="true"{% endif %}
+  {% if track in favorites %}data-favorite="true"{% endif %}
   {% comment %}
     Possible runtime dynamic values:
     data-status="ready"
@@ -36,7 +36,7 @@
     <div class="track-details-main">
       {# Title (if not details: then it'll be show at the top #}
       {% if not show_details %}
-      <h5 class="mb-3"><a class="post-title active-text-link" href="/tracks/{{ track.id }}">{{ track.title }}</a></h5>
+      <h5 class="mb-3"><a class="post-title active-text-link" href="{% if request.path|str_starts:"/favorites" %}/favorites{% else %}/tracks{% endif %}/{{ track.id }}">{{ track.title }}</a></h5>
       {% endif %}
       {# Description: if details #}
       {% if show_details %}

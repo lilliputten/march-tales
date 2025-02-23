@@ -1,0 +1,8 @@
+{# ex: set ft=htmldjango : #}
+
+{% load i18n %}
+
+<a class="btn btn-outline-primary d-flex align-items-center gap-2" href="{% url 'index' %}">
+  <i class="icon fa fa-home"></i>
+  <span class="text">{% trans 'To main page' %}</span>
+</a>

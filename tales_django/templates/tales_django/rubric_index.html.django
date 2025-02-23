@@ -1,5 +1,5 @@
 {# ex: set ft=htmldjango : #}
-{% extends 'base-main-columns-layout.html.django' %}
+{% extends 'base-main-columns-with-header.html.django' %}
 {% load static %}
 {% load i18n %}
 
@@ -21,7 +21,7 @@ Expected:
   </ol>
 </nav>
 
-<h1 class="page-title primary-color my-4">{% trans 'Rubrics list' %}</h1>
+<h1 class="page-title primary-color my-4">{% trans 'Rubrics list' %} {#(<span class="rubrics-count">{{ rubrics|length }}</span>)#}</h1>
 
 {% include 'assets/common-blocks/big-rubrics-list/big-rubrics-list.django' %}
 
