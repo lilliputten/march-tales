@@ -92,6 +92,10 @@ $menuItemsFontSize: $fontSizeSmall;
       flex-wrap: nowrap;
     }
 
+    .icon {
+      font-size: 12px;
+    }
+
     .dropdown {
       &:hover {
         .dropdown-menu {
@@ -99,10 +103,6 @@ $menuItemsFontSize: $fontSizeSmall;
           opacity: 1;
           transform: scale(1);
         }
-      }
-
-      i {
-        font-size: 12px;
       }
 
       &-menu {

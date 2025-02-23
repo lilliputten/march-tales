@@ -2,7 +2,7 @@ from django.http import HttpRequest
 from django.shortcuts import get_object_or_404, render
 
 from core.logging import getDebugLogger
-from tales_django.core.pages import get_common_context, get_tracks_list_context
+from tales_django.core.pages import get_common_context, get_favorites_list_context, get_tracks_list_context
 from tales_django.entities.Tracks.models import Track
 
 
@@ -16,6 +16,7 @@ def track_details_view(request: HttpRequest, track_id):
     context = {
         **get_common_context(request),
         **get_tracks_list_context(request),
+        **get_favorites_list_context(request),
         'track_id': track_id,
         'track': track,
     }

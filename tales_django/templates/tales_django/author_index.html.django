@@ -1,5 +1,5 @@
 {# ex: set ft=htmldjango : #}
-{% extends 'base-main-columns-layout.html.django' %}
+{% extends 'base-main-columns-with-header.html.django' %}
 {% load static %}
 {% load i18n %}
 

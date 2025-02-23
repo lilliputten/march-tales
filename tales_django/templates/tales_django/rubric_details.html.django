@@ -1,5 +1,5 @@
 {# ex: set ft=htmldjango : #}
-{% extends 'base-main-columns-layout.html.django' %}
+{% extends 'base-main-columns-with-header.html.django' %}
 {% load static %}
 {% load i18n %}
 
@@ -36,7 +36,7 @@ Expected:
 
 {# Show the list of rubrics' tracks #}
 
-<h2 class="h5 section-title mt-4">{% trans "Tracks List" %}</h2>
+<h2 class="h5 section-title mt-4">{% trans "Tracks List" %} (<span class="rubric_tracks-count">{{ rubric_tracks|length }}</span>)</h2>
 
 {% with tracks=rubric_tracks %}
 {% include 'assets/common-blocks/big-tracks-list/big-tracks-list.django' %}

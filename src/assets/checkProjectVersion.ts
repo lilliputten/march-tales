@@ -23,16 +23,22 @@ export function checkProjectVersion() {
   if (newInfo && newInfo !== oldInfo) {
     const oldVersion = getMinorVersionFromProjectInfo(oldInfo);
     const newVersion = getMinorVersionFromProjectInfo(newInfo);
-    if (oldVersion !== newVersion) {
+    if (newVersion !== oldVersion) {
       // TODO: To clear some stored data etc?
       // eslint-disable-next-line no-console
-      console.warn('[checkProjectVersion] Project version has changed', {
-        oldInfo,
-        newInfo,
-        oldVersion,
+      console.warn(
+        '[checkProjectVersion] Project version has changed',
         newVersion,
-      });
-      debugger; // eslint-disable-line no-debugger
+        '<->',
+        oldVersion,
+        {
+          oldInfo,
+          newInfo,
+          oldVersion,
+          newVersion,
+        },
+      );
+      // debugger; // eslint-disable-line no-debugger
     }
     window.localStorage.setItem('projectInfo', newInfo);
   }

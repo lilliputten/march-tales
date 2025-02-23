@@ -1,0 +1,11 @@
+{# ex: set ft=htmldjango : #}
+{% extends "base-main-columns.html.django" %}
+{% load static %}
+{% load i18n %}
+
+{% block body_class %}base-main-columns-with-header with-header {{ block.super }}{% endblock %}
+
+{% block beforeContent %}
+{% include "assets/template-banner/template-banner.django" %}
+{{ block.super }}
+{% endblock beforeContent %}

@@ -68,8 +68,9 @@
 <div class="actions mt-5 mb-4 d-flex flex-wrap gap-1">
   {# TODO: Put common actions toolbar here #}
   <a class="btn btn-primary d-flex align-items-center gap-2" href="{% url 'profile_edit' %}"><i class="icon fa fa-pencil"></i> <span class="text">{% trans "Edit profile" %}</span></a>
-  {% include "assets/back-button/back-button.django" %}
+  {% include "assets/buttons/main-page-button.django" %}
   {% comment %}
+  {% include "assets/buttons/back-button.django" %}
   <a class="btn btn-primary" href="{% url 'password_change' %}">{% trans "Change password" %}</a>
   <a class="btn btn-primary" href="{% url 'password_reset' %}">{% trans "Reset password" %}</a>
   {% endcomment %}

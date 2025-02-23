@@ -1,8 +1,8 @@
 {# ex: set ft=htmldjango : #}
 <!--
 - Html template
-- Version: 0.0.21
-- Last changes timestamp: 2025.02.20 21:36:43 +0300
+- Version: 0.0.22
+- Last changes timestamp: 2025.02.23 22:36:37 +0300
 - Generated: {% now "Y.m.d H:i:s O" %}
 -->
 
@@ -85,7 +85,7 @@
 
   <!-- CSS }}} -->
 </head>
-<body class="{% block body_class %}base-core{% endblock %}">
+<body class="{% block body_class %}base-core{%if favorites.all %} has-favorites{% endif %}{% endblock %}">
 
   <!-- {{{ JS variables -->
   {% block js_variables %}

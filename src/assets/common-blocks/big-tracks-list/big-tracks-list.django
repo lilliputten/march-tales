@@ -9,7 +9,7 @@
 
 {% endcomment %}
 
-<div class="big-tracks-list">
+<div class="big-tracks-list{% if request.path|str_starts:"/favorites" %} favorites{% endif %}">
   {% for track in tracks %}
     {% include 'assets/common-blocks/big-tracks-list/big-tracks-list-item.django' %}
   {% endfor %}
@@ -20,4 +20,7 @@
       </a>
     </div>
   {% endif %}
+  <div class="no-favorites-message">
+    {% trans 'No favorite tracks' %}
+  </div>
 </div>
