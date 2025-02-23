@@ -43,8 +43,8 @@ def get_favorites_list_context(request: HttpRequest):
             )
 
     favorites_end = favorites_offset + favorites_limit
-    favorites_set = favorites[favorites_offset:favorites_end]
-    favorites_count = len(favorites)
+    favorites_set = favorites[favorites_offset:favorites_end] if favorites is not None and favorites else None
+    favorites_count = len(favorites) if favorites is not None and favorites else 0
 
     debugData = {
         'language': language,
