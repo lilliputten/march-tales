@@ -1,5 +1,5 @@
 import { TrackInfo, trackInfoFromJsonStr, trackInfoToJsonStr } from './TrackInfo';
-import { getCookie, setCookie } from '../helpers/CommonHelpers';
+import { setCookie } from '../helpers/CommonHelpers';
 import { packDelim } from '../constants/packDelim';
 import { acceptedCookiesId } from '../constants/acceptedCookiesId';
 
@@ -58,12 +58,6 @@ class LocalTrackInfoDb {
       const trackInfo = this.getOrCreate(id);
       trackInfo.favorite = favorite;
       trackInfo.lastUpdated = _now;
-      /* console.log('[localTrackInfoDb:updateFavorite]', {
-       *   id,
-       *   favorite,
-       *   trackInfo,
-       * });
-       */
       this.insert(trackInfo);
       this._toggleInFavoritesIndex(id, favorite);
       // this.updateEvents.broadcast(TracksInfoDbUpdate(trackInfo));
@@ -91,10 +85,6 @@ class LocalTrackInfoDb {
         this.insert(trackInfo);
       }
     });
-    /* console.log('[localTrackInfoDb:updateFavoritesByTrackIds]', {
-     *   ids,
-     * });
-     */
     this._setFavoritesIndex(ids);
   }
 
@@ -141,12 +131,6 @@ class LocalTrackInfoDb {
   insert(trackInfo: TrackInfo) {
     const { id } = trackInfo;
     const str = trackInfoToJsonStr(trackInfo);
-    /* console.log('[localTrackInfoDb:insert]', {
-     *   id,
-     *   str,
-     *   trackInfo,
-     * });
-     */
     window.localStorage.setItem('ti-' + id, str);
     this._addToIndex(id);
   }
@@ -194,7 +178,7 @@ class LocalTrackInfoDb {
       node.innerText = String(favoritesCount);
     });
     // Update cookie
-    if (getCookie(acceptedCookiesId)) {
+    if (window.localStorage.getItem(acceptedCookiesId)) {
       setCookie('favorites', str);
     }
   }

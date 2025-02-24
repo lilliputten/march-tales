@@ -455,6 +455,7 @@ export function setCookie(id, val, maxAgeSecs) {
   const parts = [
     // prettier-ignore
     cookieVal,
+    'path=/',
   ];
   if (maxAgeSecs) {
     parts.push('max-age=' + maxAgeSecs);
