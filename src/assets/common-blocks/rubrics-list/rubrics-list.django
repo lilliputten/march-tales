@@ -11,7 +11,7 @@
 <ul class="rubrics-list list-inline widget-list-inline widget-card mb-0 pb-0">
   {% for rubric in rubrics %}
     <li class="list-inline-item">
-      <a href="/rubrics/{{ rubric.id }}"
+      <a href="/rubrics/{{ rubric.id }}/"
         class="d-flex align-items-center gap-2 {% if rubric.tracks.count %}pe-2{% endif %}"
       >
         {{ rubric.text }}

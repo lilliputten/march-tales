@@ -4,8 +4,6 @@ import { getJsText } from './getJsText';
 
 export function sendApiRequest(url: string, method: string = 'GET', requestData?: unknown) {
   const csrftoken = getCookie('csrftoken');
-  // const sessionId = getCookie('sessionid');
-  // const url = `/api/v1/tracks/${trackId}/toggle-favorite/`;
   const headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json',

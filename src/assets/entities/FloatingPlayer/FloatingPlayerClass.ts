@@ -178,7 +178,7 @@ export class FloatingPlayer {
       }
       const links = domNode.querySelectorAll<HTMLLinkElement>('.trackLink');
       links.forEach((it) => {
-        it.setAttribute('href', `/tracks/${id}`);
+        it.setAttribute('href', `/tracks/${id}/`);
       });
     });
   }

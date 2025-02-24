@@ -14,7 +14,7 @@ Expected:
   class="big-rubrics-list-item"
   data-rubric-id="{{ rubric.id }}"
 >
-  <a href="/rubrics/{{ rubric.id }}">
+  <a href="/rubrics/{{ rubric.id }}/">
     <span class="text">{{ rubric.text }}</span>
     <span class="count">({{ rubric.tracks.all|length }})</span>
   </a>

@@ -14,7 +14,7 @@ Expected:
   class="big-tags-list-item"
   data-tag-id="{{ tag.id }}"
 >
-  <a href="/tags/{{ tag.id }}">
+  <a href="/tags/{{ tag.id }}/">
     <span class="text">{{ tag.text }}</span>
     <span class="count">({{ tag.tracks.all|length }})</span>
   </a>

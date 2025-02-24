@@ -16,13 +16,13 @@
  >
   <div class="d-flex">
     {% if track.preview_picture %}
-    <a class="img-link" href="/tracks/{{ track.id }}">
+    <a class="img-link" href="/tracks/{{ track.id }}/">
       <img class="card-img-md" src="{% get_media_prefix %}{{ track.preview_picture}}" loading="lazy" />
     </a>
     {% endif %}
     <div class="content ms-3">
       {# Title #}
-      <h5 class="mb-3"><a class="post-title active-text-link" href="/tracks/{{ track.id }}">{{ track.title }}</a></h5>
+      <h5 class="mb-3"><a class="post-title active-text-link" href="/tracks/{{ track.id }}/">{{ track.title }}</a></h5>
       <ul class="details card-meta list-inline mb-0">
         {% include "assets/common-blocks/track-details/track-details.django" %}
       </ul>

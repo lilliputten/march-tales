@@ -36,7 +36,7 @@
     <div class="track-details-main">
       {# Title (if not details: then it'll be show at the top #}
       {% if not show_details %}
-      <h5 class="mb-3"><a class="post-title active-text-link" href="{% if request.path|str_starts:"/favorites" %}/favorites{% else %}/tracks{% endif %}/{{ track.id }}">{{ track.title }}</a></h5>
+      <h5 class="mb-3"><a class="post-title active-text-link" href="{% if request.path|str_starts:"/favorites" %}/favorites{% else %}/tracks{% endif %}/{{ track.id }}/">{{ track.title }}</a></h5>
       {% endif %}
       {# Description: if details #}
       {% if show_details %}

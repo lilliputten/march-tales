@@ -16,7 +16,7 @@
   <meta property="og:locale" content="{{ LANGUAGE_CODE }}" />
   <meta property="og:title" content="{{ track.title }} — {% trans 'Site title' %}" />
   <meta property="og:description" content="{{ track.description|markdownify|striptags }}" />
-  <meta property="og:url" content="{{request.scheme}}://{{request.get_host}}/tracks/{{ track.id }}" />
+  <meta property="og:url" content="{{request.scheme}}://{{request.get_host}}/tracks/{{ track.id }}/" />
   {% comment %}
   <meta property="og:url" content="{{ request.build_absolute_uri }}" />
   {% endcomment %}
@@ -36,9 +36,9 @@
     <li class="breadcrumb-item"><a href="/">{% trans 'Main page' %}</a></li>
     <li class="breadcrumb-item">
       {% if request.path|str_starts:"/favorites" %}
-        <a href="/favorites">{% trans 'Favorites' %}</a>
+        <a href="/favorites/">{% trans 'Favorites' %}</a>
       {% else %}
-        <a href="/tracks">{% trans 'Tracks' %}</a>
+        <a href="/tracks/">{% trans 'Tracks' %}</a>
       {% endif %}
     </li>
     <li class="breadcrumb-item active" aria-current="page">{{ track.title }}</li>
