@@ -1,0 +1,17 @@
+{# ex: set ft=htmldjango : #}
+{% load static %}
+{% load i18n %}
+
+<div class="cookies-banner">
+  <div class="icon-wrapper">
+    <i class="icon ti ti-alert"></i>
+  </div>
+  <div class="text">
+    {% blocktranslate %}Our website uses cookies. By clicking “Accept”, you agree to the storage of cookies on your device to improve website navigation, analyze website usage and improve marketing. By clicking “Reject”, you agree to use only basic system cookies. Please leave the site if you do not want to use cookies at all.{% endblocktranslate %}
+  </div>
+  <div class="actions">
+    <button class="btn btn-primary" id="Accept">{% trans "Accept" %}</button>
+    <button class="btn btn-primary" id="Reject">{% trans "Reject" %}</button>
+  </div>
+</div>
+

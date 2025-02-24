@@ -1,0 +1,45 @@
+@use 'sass:color';
+
+@import '../shared';
+
+.cookies-banner {
+  $treshold: $screenMdMin;
+  z-index: 999;
+  background-color: #666;
+  color: #fff;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  body.no-cookies-banner & {
+    display: none;
+  }
+  @media (width <= $treshold) {
+    flex-direction: column;
+  }
+  .icon-wrapper {
+    font-size: 2em;
+    padding-right: 5px;
+    // color: $primaryColor;
+    @media (width <= $treshold) {
+      display: none;
+    }
+  }
+  .text {
+    flex: 1;
+    @media (width <= $treshold) {
+      text-align: center;
+    }
+  }
+  .actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    flex-wrap: wrap;
+  }
+}

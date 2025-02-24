@@ -1,8 +1,6 @@
 import traceback
-import markdown
 
 from django.template.defaultfilters import register
-from django.template.loader import render_to_string
 
 from core.helpers.errors import errorToString
 from core.helpers.utils import debugObj
@@ -12,10 +10,10 @@ logger = getDebugLogger()
 
 
 @register.simple_tag(takes_context=True)
-def include_md(context, template_name):
+def get_cookie(context, name):
     try:
-        template = render_to_string(template_name)
-        result = markdown.markdown(template)
+        request = context['request']
+        result = request.COOKIES.get(name)
         return result
     except Exception as err:
         sError = errorToString(err)
@@ -24,4 +22,4 @@ def include_md(context, template_name):
             'err': err,
             'traceback': sTraceback,
         }
-        logger.error(f'[include_md] Caught error {sError} (returning in response):\n{debugObj(debugData)}')
+        logger.error(f'[get_cookie] Caught error {sError} (returning in response):\n{debugObj(debugData)}')

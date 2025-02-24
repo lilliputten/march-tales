@@ -12,6 +12,12 @@
     body.with-player & {
       padding-bottom: $floatingPlayerHeight;
     }
+    body:not(.no-cookies-banner) & {
+      margin-bottom: 72px;
+    }
+    body.no-cookies-banner & {
+      margin-bottom: 0 !important;
+    }
     background-image: url(/static/images/backgrounds/footer-bg.svg);
     background-position: top center;
     background-repeat: no-repeat;

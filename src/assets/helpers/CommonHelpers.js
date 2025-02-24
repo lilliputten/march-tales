@@ -462,3 +462,11 @@ export function setCookie(id, val, maxAgeSecs) {
   const fullCookie = parts.filter(Boolean).join(';');
   document.cookie = fullCookie;
 }
+
+export function deleteAllCookies() {
+  document.cookie.split(';').forEach((cookie) => {
+    const eqPos = cookie.indexOf('=');
+    const name = eqPos > -1 ? cookie.substring(0, eqPos) : cookie;
+    document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT';
+  });
+}

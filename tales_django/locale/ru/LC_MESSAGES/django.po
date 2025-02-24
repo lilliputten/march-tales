@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-23 22:16+0300\n"
+"POT-Creation-Date: 2025-02-25 00:04+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -116,6 +116,28 @@ msgstr "Разделы"
 msgid "Tags"
 msgstr "Теги"
 
+#: .\src\assets\cookies-banner\cookies-banner.html.django:10
+msgid ""
+"Our website uses cookies. By clicking “Accept”, you agree to the storage of "
+"cookies on your device to improve website navigation, analyze website usage "
+"and improve marketing. By clicking “Reject”, you agree to use only basic "
+"system cookies. Please leave the site if you do not want to use cookies at "
+"all."
+msgstr ""
+"Наш сайт использует файлы cookie. Нажав «Принять», вы соглашаетесь "
+"на сохранение файлов cookie на вашем устройстве для улучшения навигации по "
+"сайту, анализа использования сайта и улучшения маркетинга. Нажав «Отклонить», "
+"вы соглашаетесь использовать только основные системные файлы cookie. "
+"Пожалуйста, покиньте сайт, если Вы вообще не хотите использовать cookies."
+
+#: .\src\assets\cookies-banner\cookies-banner.html.django:13
+msgid "Accept"
+msgstr "Принять"
+
+#: .\src\assets\cookies-banner\cookies-banner.html.django:14
+msgid "Reject"
+msgstr "Отклонить"
+
 #: .\src\assets\entities\FloatingPlayer\floating-player.django:32
 msgid "Rewind"
 msgstr "Перемотка назад"
@@ -129,37 +151,38 @@ msgid "Hide"
 msgstr "Спрятать"
 
 #: .\src\assets\page-menus\menu-main.django:13
-#: .\src\assets\page-menus\menu-main.django:27
+#: .\src\assets\page-menus\menu-main.django:28
 #: .\tales_django\templates\tales_django\favorites.html.django:25
+#: .\tales_django\templates\tales_django\favorites.html.django:33
 #: .\tales_django\templates\tales_django\track_details.html.django:40
 msgid "Favorites"
 msgstr "Избранное"
 
-#: .\src\assets\page-menus\menu-main.django:28
+#: .\src\assets\page-menus\menu-main.django:29
 msgid "Playlist"
 msgstr "Плейлист"
 
-#: .\src\assets\page-menus\menu-main.django:30
+#: .\src\assets\page-menus\menu-main.django:31
 #: .\tales_django\templates\allauth\layouts\manage.html:17
 #: .\tales_django\templates\tales_django\profile.html.django:9
 msgid "Profile"
 msgstr "Профиль"
 
-#: .\src\assets\page-menus\menu-main.django:36
+#: .\src\assets\page-menus\menu-main.django:37
 msgid "Admin panel"
 msgstr "Панель управления"
 
-#: .\src\assets\page-menus\menu-main.django:39
+#: .\src\assets\page-menus\menu-main.django:40
 msgid "Logout"
 msgstr "Выйти"
 
-#: .\src\assets\page-menus\menu-main.django:46
+#: .\src\assets\page-menus\menu-main.django:47
 #: .\tales_django\templates\django_registration\registration_form.html:27
 #: .\tales_django\templates\registration\signup.html:30
 msgid "Log in"
 msgstr "Войти"
 
-#: .\src\assets\page-menus\menu-main.django:52
+#: .\src\assets\page-menus\menu-main.django:53
 #: .\tales_django\templates\django_registration\registration_form.html:12
 #: .\tales_django\templates\django_registration\registration_form.html:16
 #: .\tales_django\templates\django_registration\registration_form.html:26
@@ -222,6 +245,7 @@ msgstr ""
 #: .\tales_django\templates\tales_django\about.html.django:9
 #: .\tales_django\templates\tales_django\about.html.django:16
 #: .\tales_django\templates\tales_django\about.html.django:20
+#: .\tales_django\templates\tales_django\cookies-agreement.html.django:16
 msgid "About the project"
 msgstr "О проекте"
 
@@ -265,7 +289,7 @@ msgstr "Актуальная версия"
 
 #: .\src\assets\template-right-blocks\right-recents-list\right-recents-list.django:7
 #: .\tales_django\templates\base-full-column.html.django:31
-#: .\tales_django\templates\tales_django\index.html.django:34
+#: .\tales_django\templates\tales_django\index.html.django:35
 msgid "Recent Tracks"
 msgstr "Свежие треки"
 
@@ -313,7 +337,7 @@ msgstr "Ошибка проверки токена CSRF"
 msgid "Expected POST or GET request"
 msgstr "Ожидается POST или GET запрос"
 
-#: .\tales_django\entities\App\app_urlpatterns.py:33
+#: .\tales_django\entities\App\app_urlpatterns.py:38
 msgid "Site administration"
 msgstr "Администрирование сайта"
 
@@ -709,31 +733,31 @@ msgstr "Авторское чтение классических сказок и
 msgid "Site keywords"
 msgstr "Мартовский Кот, Сказки, Истории, Чтение, mp3"
 
-#: .\tales_django\templates\base-core.html.django:112
+#: .\tales_django\templates\base-core.html.django:113
 msgid "Error loading audio file"
 msgstr "Ошибка при загрузке аудиофайла"
 
-#: .\tales_django\templates\base-core.html.django:113
+#: .\tales_django\templates\base-core.html.django:114
 msgid "No audio node found"
 msgstr "Страница не найдена"
 
-#: .\tales_django\templates\base-core.html.django:114
+#: .\tales_django\templates\base-core.html.django:115
 msgid "No audio source node found"
 msgstr "Узел источника звука не найден"
 
-#: .\tales_django\templates\base-core.html.django:115
+#: .\tales_django\templates\base-core.html.django:116
 msgid "Fetch error"
 msgstr "Ошибка получения данных"
 
-#: .\tales_django\templates\base-core.html.django:116
+#: .\tales_django\templates\base-core.html.django:117
 msgid "Failed api request"
 msgstr "Ошибка запроса данных с сервера"
 
-#: .\tales_django\templates\base-core.html.django:117
+#: .\tales_django\templates\base-core.html.django:118
 msgid "The track has been successfully added to favorites"
 msgstr "Трек был успешно добавлен в избранное"
 
-#: .\tales_django\templates\base-core.html.django:118
+#: .\tales_django\templates\base-core.html.django:119
 msgid "The track has been successfully removed from favorites"
 msgstr "Трек был успешно удален из избранного"
 
@@ -902,6 +926,7 @@ msgstr "Пароль сброшен для"
 #: .\tales_django\templates\tales_django\about.html.django:15
 #: .\tales_django\templates\tales_django\author_details.html.django:35
 #: .\tales_django\templates\tales_django\author_index.html.django:19
+#: .\tales_django\templates\tales_django\cookies-agreement.html.django:15
 #: .\tales_django\templates\tales_django\favorites.html.django:22
 #: .\tales_django\templates\tales_django\index.html.django:25
 #: .\tales_django\templates\tales_django\rubric_details.html.django:20
@@ -914,6 +939,7 @@ msgstr "Главная страница"
 
 #: .\tales_django\templates\tales_django\about.html.django:33
 #: .\tales_django\templates\tales_django\author_details.html.django:49
+#: .\tales_django\templates\tales_django\cookies-agreement.html.django:33
 #: .\tales_django\templates\tales_django\rubric_details.html.django:39
 #: .\tales_django\templates\tales_django\tag_details.html.django:35
 msgid "Tracks List"
@@ -924,11 +950,12 @@ msgstr "Список треков"
 msgid "Authors list"
 msgstr "Авторы"
 
-#: .\tales_django\templates\tales_django\favorites.html.django:33
-#: .\tales_django\templates\tales_django\profile.html.django:63
-msgid "Favorite tracks"
-msgstr "Избранные треки"
+#: .\tales_django\templates\tales_django\cookies-agreement.html.django:9
+#: .\tales_django\templates\tales_django\cookies-agreement.html.django:20
+msgid "Cookie Usage Agreement"
+msgstr "Соглашение об использовании файлов cookie"
 
+#: .\tales_django\templates\tales_django\favorites.html.django:35
 #: .\tales_django\templates\tales_django\index.html.django:26
 #: .\tales_django\templates\tales_django\index.html.django:30
 msgid "Tracks list"
@@ -971,6 +998,10 @@ msgstr ""
 "недействительно. Вы можете <a target=\"_blank\" href=\"%"
 "(invoice_download_url)s\">загрузите счет-фактуру</a> и оплатите его прямо "
 "сейчас."
+
+#: .\tales_django\templates\tales_django\profile.html.django:63
+msgid "Favorite tracks"
+msgstr "Избранные треки"
 
 #: .\tales_django\templates\tales_django\profile_edit.html.django:26
 msgid "Save"

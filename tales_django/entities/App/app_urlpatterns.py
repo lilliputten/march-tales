@@ -11,15 +11,20 @@ from django.utils.translation import gettext_lazy as _
 from allauth.account.decorators import secure_admin_login
 from django.views.generic import RedirectView
 
-from .views.about_view import about_view
-from .views.terms_view import terms_view
-from .views.privacy_policy_view import privacy_policy_view
+# from .views.about_view import about_view
+# from tales_django.entities.App.views import cookies_agreement_view
+# from .views.terms_view import terms_view
+# from .views.privacy_policy_view import privacy_policy_view
 
 from .views import page403, page404, page500
 from .api import api_urlpatterns
 
 from .views import (
     index_view,
+    about_view,
+    cookies_agreement_view,
+    terms_view,
+    privacy_policy_view,
     RobotsView,
     components_demo,
     empty_demo,
@@ -39,6 +44,7 @@ app_urlpatterns = [
     # Secondary & static pages
     path(r'about/', about_view, name='about'),
     path(r'terms/', terms_view, name='terms'),
+    path(r'cookies-agreement/', cookies_agreement_view, name='cookies-agreement'),
     path(r'privacy-policy/', privacy_policy_view, name='privacy-policy'),
     # Core?
     # path('', include('pages.urls')),

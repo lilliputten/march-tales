@@ -1,8 +1,8 @@
 {# ex: set ft=htmldjango : #}
 <!--
 - Html template
-- Version: 0.0.22
-- Last changes timestamp: 2025.02.24 21:06:26 +0300
+- Version: 0.0.23
+- Last changes timestamp: 2025.02.25 00:09:11 +0300
 - Generated: {% now "Y.m.d H:i:s O" %}
 -->
 
@@ -85,7 +85,8 @@
 
   <!-- CSS }}} -->
 </head>
-<body class="{% block body_class %}base-core{%if favorites_count %} has-favorites{% endif %}{% endblock %}">
+{% get_cookie "cookies" as cookies %}
+<body class="{% block body_class %}base-core {% if cookies or cookies == "" %} no-cookies-banner{% endif %}{%if favorites_count %} has-favorites{% endif %}{% endblock %}">
 
   <!-- {{{ JS variables -->
   {% block js_variables %}
@@ -128,6 +129,7 @@
   {% endblock beforeContent %}
 
   <!-- {{{ Page content container -->
+
   {% comment %} <div class="content container" role="main"> {% endcomment %}
   {% block page_content %}
   {% endblock page_content %}
@@ -142,6 +144,11 @@
   {% block bottommostContent %}
   {% include "assets/entities/FloatingPlayer/floating-player.django" %}
   {% endblock bottommostContent %}
+
+  {% if not cookies and cookies != "" %}
+    {# See `with-cookies-banner` body class and modules `cookies-banner.*` #}
+    {% include "assets/cookies-banner/cookies-banner.html.django" %}
+  {% endif %}
 
   <!-- {{{ JS -->
 

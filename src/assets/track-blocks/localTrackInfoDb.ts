@@ -1,6 +1,7 @@
 import { TrackInfo, trackInfoFromJsonStr, trackInfoToJsonStr } from './TrackInfo';
-import { setCookie } from '../helpers/CommonHelpers';
-import { packDelim } from '../constatns/packDelim';
+import { getCookie, setCookie } from '../helpers/CommonHelpers';
+import { packDelim } from '../constants/packDelim';
+import { acceptedCookiesId } from '../constants/acceptedCookiesId';
 
 class LocalTrackInfoDb {
   // End-user api
@@ -193,7 +194,9 @@ class LocalTrackInfoDb {
       node.innerText = String(favoritesCount);
     });
     // Update cookie
-    setCookie('favorites', str);
+    if (getCookie(acceptedCookiesId)) {
+      setCookie('favorites', str);
+    }
   }
 
   _addToFavoritesIndex(id: number) {

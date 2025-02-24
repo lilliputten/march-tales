@@ -1,5 +1,5 @@
 import { floatToStr } from '../helpers/floatToStr';
-import { packDelim } from '../constatns/packDelim';
+import { packDelim } from '../constants/packDelim';
 
 export interface TrackInfo {
   id: number; // track.id
