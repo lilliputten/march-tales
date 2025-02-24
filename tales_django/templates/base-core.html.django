@@ -85,7 +85,7 @@
 
   <!-- CSS }}} -->
 </head>
-<body class="{% block body_class %}base-core{%if favorites.all %} has-favorites{% endif %}{% endblock %}">
+<body class="{% block body_class %}base-core{%if favorites_count %} has-favorites{% endif %}{% endblock %}">
 
   <!-- {{{ JS variables -->
   {% block js_variables %}
