@@ -8,8 +8,8 @@ from tales_django.core.pages import get_common_context, get_favorites_list_conte
 def index_view(request: HttpRequest):
     context = {
         **get_common_context(request),
-        **get_tracks_list_context(request),
         **get_favorites_list_context(request),
+        **get_tracks_list_context(request),
     }
 
     return render(

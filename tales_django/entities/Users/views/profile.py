@@ -14,8 +14,8 @@ def profile(request: HttpRequest):
 
     context = {
         **get_common_context(request),
-        **get_tracks_list_context(request),
         **get_favorites_list_context(request),
+        **get_tracks_list_context(request),
     }
 
     return render(

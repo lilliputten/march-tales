@@ -2,7 +2,7 @@ from django.http import HttpRequest
 from django.shortcuts import get_object_or_404, render
 
 from core.logging import getDebugLogger
-from tales_django.core.pages import get_tag_tracks_list_context, get_common_context
+from tales_django.core.pages import get_favorites_list_context, get_tag_tracks_list_context, get_common_context
 from tales_django.entities.Tracks.models import Tag
 
 
@@ -16,7 +16,7 @@ def tag_details_view(request: HttpRequest, tag_id):
     # TODO: Use get_generic_context (without tags list)?
     context = {
         **get_common_context(request),
-        # NOTE: It's possible to use `track_set` data from ahthors query item to produce the tracks list (requires check)
+        **get_favorites_list_context(request),
         **get_tag_tracks_list_context(request, tag_id),
         'tag_id': tag_id,
         'tag': tag,
