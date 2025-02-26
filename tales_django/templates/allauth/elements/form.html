@@ -1,14 +1,25 @@
 {% load allauth %}
+{% load i18n %}
+
+{% get_cookie "mobile_auth" as mobile_auth %}
+{% define True as is_mobile_auth %}
+
 {% for err in attrs.form.non_field_errors %}<div role="alert" class="alert alert-danger">{{ err }}</div>{% endfor %}
-<form class="{% block form_class %}{% if not attrs.no_visible_fields %}mb-4 card{% endif %}{% endblock %}"
+<form id="allauth-form" class="d-flex gap-2 {% block form_class %}{% if not attrs.no_visible_fields %}mb-4 card{% endif %}{% endblock %}"
       method="{{ attrs.method }}"
       action="{{ attrs.action }}">
-    {% if not attrs.no_visible_fields %}<div class="card-body pt-3">{% endif %}
-        {% slot body %}
-        {% endslot %}
-        {% if not attrs.no_visible_fields %}</div>{% endif %}
-    {% if not attrs.no_visible_fields %}<div class="card-footer d-flex flex-wrap align-items-center gap-2 bg-transparent">{% endif %}
-        {% slot actions %}
-        {% endslot %}
-        {% if not attrs.no_visible_fields %}</div>{% endif %}
+    {% if not attrs.no_visible_fields %}<div class="card-body p-0 py-3">{% endif %}
+      {% slot body %}
+      {% endslot %}
+    {% if not attrs.no_visible_fields %}</div>{% endif %}
+  {% if not attrs.no_visible_fields %}<div class="card-footer d-flex flex-wrap align-items-center gap-2 bg-transparent">{% endif %}
+    {% slot actions %}
+    {% endslot %}
+    {% if is_mobile_auth %}
+      <a class="btn btn-outline-primary d-flex align-items-center gap-2" href="{% url 'index' %}" onClick="window.open('app://close'); window.close(); return false">
+        <i class="icon fa fa-times"></i>
+        <span class="text">{% trans 'Close' %}</span>
+      </a>
+    {% endif %}
+    {% if not attrs.no_visible_fields %}</div>{% endif %}
 </form>

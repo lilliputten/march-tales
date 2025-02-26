@@ -86,7 +86,14 @@
   <!-- CSS }}} -->
 </head>
 {% get_cookie "cookies" as cookies %}
-<body class="{% block body_class %}base-core {% if cookies or cookies == "" %} no-cookies-banner{% endif %}{%if favorites_count %} has-favorites{% endif %}{% endblock %}">
+{% get_cookie "mobile_auth" as mobile_auth %}
+{% define True as is_mobile_auth %}
+<body class="{% block body_class %}
+  base-core
+  {% if cookies or cookies == "" %}no-cookies-banner{% endif %}
+  {% if favorites_count %}has-favorites{% endif %}
+  {% if is_mobile_auth %}mobile-auth{% endif %}
+{% endblock %}">
 
   <!-- {{{ JS variables -->
   {% block js_variables %}
@@ -126,29 +133,26 @@
   <!-- }}} Page header container -->
 
   {% block beforeContent %}
+  <p>XXX: {{ is_mobile_auth }}</p>
   {% endblock beforeContent %}
 
   <!-- {{{ Page content container -->
-
-  {% comment %} <div class="content container" role="main"> {% endcomment %}
   {% block page_content %}
   {% endblock page_content %}
-  {% comment %} </div> {% endcomment %}
   <!-- }}} Page content container -->
 
   <!-- {{{ Page footer container -->
   {% block page_footer %}
+    {% include "assets/entities/FloatingPlayer/floating-player.django" %}
   {% endblock page_footer %}
   <!-- }}} Page footer container -->
 
   {% block bottommostContent %}
-  {% include "assets/entities/FloatingPlayer/floating-player.django" %}
+    {% if not cookies and cookies != "" %}
+      {# See `with-cookies-banner` body class and modules `cookies-banner.*` #}
+      {% include "assets/cookies-banner/cookies-banner.html.django" %}
+    {% endif %}
   {% endblock bottommostContent %}
-
-  {% if not cookies and cookies != "" %}
-    {# See `with-cookies-banner` body class and modules `cookies-banner.*` #}
-    {% include "assets/cookies-banner/cookies-banner.html.django" %}
-  {% endif %}
 
   <!-- {{{ JS -->
 

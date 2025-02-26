@@ -22,8 +22,8 @@
               {% endelement %}
             {% endfor %}
           {% endif %}
-          <div class="bg-white shadow rounded-4">
-            <div id="content" class="p-5">
+          <div class="{% if not is_mobile_auth %}bg-white shadow rounded-4{% endif %}">
+            <div id="content" class="{% if not is_mobile_auth %}p-5{% endif %}">
               {% block content %}{% endblock %}
             </div>
           </div>

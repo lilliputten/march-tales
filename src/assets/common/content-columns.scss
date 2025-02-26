@@ -12,7 +12,9 @@
 }
 
 .main-column {
-  margin-top: $mainColumnTopMargin;
+  body:not(.mobile-auth) & {
+    margin-top: $mainColumnTopMargin;
+  }
   body.regular & {
     margin-top: 0;
   }

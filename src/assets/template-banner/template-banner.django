@@ -2,7 +2,7 @@
 {% load static %}
 {% load i18n %}
 
-<!-- start of banner -->
+{% if not is_mobile_auth %}
 <div class="template-banner banner text-center">
   <svg
     class="banner-border-top"
@@ -89,4 +89,4 @@
     />
   </svg>
 </div>
-<!-- end of banner -->
+{% endif %}

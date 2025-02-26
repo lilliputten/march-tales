@@ -16,10 +16,13 @@
 
   {% if form.errors %}
   <p>{% trans 'We can’t find a user with such authorization data. Please try again.' %}</p>
-  {% endif %} {% include "assets/render-messages/render-messages.django" %}
+  {% endif %}
+
+  {% include "assets/render-messages/render-messages.django" %}
 
   <form role="form" method="post" action="{% url 'login' %}">
-    {% csrf_token %} {{ form|crispy }}
+    {% csrf_token %}
+    {{ form|crispy }}
 
     <div class="common-actions">
       <input class="btn btn-primary" type="submit" value="{% trans 'Login' %}" />
