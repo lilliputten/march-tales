@@ -88,7 +88,7 @@
 {% get_cookie "cookies" as cookies %}
 {% get_cookie "mobile_auth" as mobile_auth %}
 {% if mobile_auth %}{% define True as is_mobile_auth %}{% endif %}
-{# {% define True as is_mobile_auth %} #}
+{% comment %} {% define True as is_mobile_auth %} {% endcomment %}
 <body class="{% block body_class %}
   base-core
   {% if cookies or cookies == "" %}no-cookies-banner{% endif %}
@@ -134,8 +134,13 @@
   <!-- }}} Page header container -->
 
   {% block beforeContent %}
-  <p>is_mobile_auth: {{ is_mobile_auth }}</p>
   {% endblock beforeContent %}
+
+<!-- XXX DEBUG
+django_language: "{{ django_language }}"
+mobile_auth: "{{ mobile_auth }}"
+is_mobile_auth: {{ is_mobile_auth }}
+-->
 
   <!-- {{{ Page content container -->
   {% block page_content %}

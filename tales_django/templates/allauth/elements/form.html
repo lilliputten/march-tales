@@ -2,14 +2,6 @@
 {% load allauth %}
 {% load i18n %}
 
-{# {% get_cookie "mobile_auth" as mobile_auth %} #}
-{# {% define True as is_mobile_auth %} #}
-{# {% if mobile_auth %}{% define True as is_mobile_auth %}{% endif %} #}
-
----
-mobile_auth: "{{ mobile_auth }}"
-is_mobile_auth: {{ is_mobile_auth }}
-
 {% for err in attrs.form.non_field_errors %}<div role="alert" class="alert alert-danger">{{ err }}</div>{% endfor %}
 <form id="allauth-form" class="d-flex gap-2 flex-column {% block form_class %}{% if not attrs.no_visible_fields %}mb-4 card{% endif %}{% endblock %}"
       method="{{ attrs.method }}"
@@ -22,10 +14,14 @@ is_mobile_auth: {{ is_mobile_auth }}
     {% slot actions %}
     {% endslot %}
     {% if is_mobile_auth %}
-      <a class="btn btn-outline-primary d-flex align-items-center gap-2" href="{% url 'index' %}" onClick="window.open('app://close'); window.close(); return false">
+    {% endif %}
+      <a
+        class="for-mobile-auth-only btn btn-outline-primary d-flex align-items-center gap-2"
+        href="app://close"
+        {% comment %}onClick="window.close(); return false"{% endcomment %}
+      >
         <i class="icon fa fa-times"></i>
         <span class="text">{% trans 'Close' %}</span>
       </a>
-    {% endif %}
     {% if True or not attrs.no_visible_fields %}</div>{% endif %}
 </form>

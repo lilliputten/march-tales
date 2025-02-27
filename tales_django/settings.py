@@ -348,11 +348,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LOGIN_REDIRECT_URL = 'login-success'
+LOGIN_REDIRECT_URL = 'login_success'
 LOGOUT_REDIRECT_URL = 'index'
 
 # Registration
 # @see https://django-registration.readthedocs.io
+# @see https://docs.allauth.org/en/dev/account/configuration.html
 
 DJANGO_ADMIN_FORCE_ALLAUTH = True
 
@@ -373,6 +374,8 @@ ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_PASSWORD_MIN_LENGTH = 8
+
+ACCOUNT_LOGIN_METHODS = {'email'}
 
 # NOTE: It's possible to store some of these parameters (`DEFAULT_FROM_EMAIL`, definitely) in the site preferences or in the `.env*` files
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -433,8 +436,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # @see https://pypi.org/project/django-cors-headers/
 
 # CSRF_COOKIE_SAMESITE = 'None' # NOTE: This setting prevent opera from sending cookies back to the server
+CSRF_COOKIE_SAMESITE = 'Lax'
+SESSION_COOKIE_SAMESITE = 'Lax'
 
 # CSRF_USE_SESSIONS = True # NOTE: Get csrftoken from session rather from cookies (needs some extra settings)
+
+CSRF_COOKIE_HTTPONLY = False  # False since we will grab it via universal-cookies
+SESSION_COOKIE_HTTPONLY = False
+
+CSRF_COOKIE_SECURE = not DEBUG
+SESSION_COOKIE_SECURE = not DEBUG
 
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ORIGIN_ALLOW_ALL = True

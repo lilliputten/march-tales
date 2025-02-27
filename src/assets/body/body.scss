@@ -6,18 +6,25 @@
 @import '../shared';
 
 html {
-  // border: 1px solid blue; // DEBUG
   display: flex;
   min-height: 100%;
 }
 
 body {
-  // border: 1px solid red; // DEBUG
-  display: flex;
-  min-height: 100%;
-  flex-direction: column;
-  flex: 1;
-  justify-content: space-between;
+  &:not(.mobile-auth) {
+    display: flex;
+    min-height: 100%;
+    flex-direction: column;
+    flex: 1;
+    justify-content: space-between;
+    .content,
+    .container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
 
   font-family: $defaultFontFamily;
   background-color: $backgroundColor;
@@ -25,12 +32,10 @@ body {
   &:not(.with-header):not(.mobile-auth) {
     margin-top: $navbarMainHeight;
   }
+}
 
-  .content,
-  .container {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.for-mobile-auth-only {
+  body:not(.mobile-auth) & {
+    display: none !important;
   }
 }

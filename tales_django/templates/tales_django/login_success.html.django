@@ -22,14 +22,20 @@
   </h1>
 {% endif %}
 
-mobile_auth: "{{ mobile_auth }}"
-is_mobile_auth: {{ is_mobile_auth }}
+<!--
+  mobile_auth: "{{ mobile_auth }}"
+  is_mobile_auth: {{ is_mobile_auth }}
+-->
 
 {# Buttons #}
 <div class="actions mt-5 mb-4 d-flex flex-wrap gap-1">
   {# TODO: Put common actions toolbar here #}
   {% if is_mobile_auth %}
-    <a class="btn btn-outline-primary d-flex align-items-center gap-2" href="{% url 'index' %}" onClick="window.open('app://close'); window.close(); return false">
+    <a
+      class="for-mobile-auth-only btn btn-outline-primary d-flex align-items-center gap-2"
+      href="app://close"
+      {% comment %}onClick="window.close(); return false"{% endcomment %}
+    >
       <i class="icon fa fa-times"></i>
       <span class="text">{% trans 'Close' %}</span>
     </a>

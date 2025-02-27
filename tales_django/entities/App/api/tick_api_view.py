@@ -36,6 +36,8 @@ def tick_api_view(request: Request):  # , *args, **kwargs):
                 content_type='application/json; charset=utf-8',
             )
 
+        user = request.user
+        is_authenticated = user.is_authenticated
         host = request.headers.get('Host')
         referer = request.headers.get('Referer')
         session_key = request.session.session_key if request.session else None
@@ -53,12 +55,9 @@ def tick_api_view(request: Request):  # , *args, **kwargs):
             'headers_csrftoken': headers_csrftoken,
             'meta_csrftoken': meta_csrftoken,
             'csrftoken': csrftoken,
-            'session_key': session_key,
-            'headers_csrftoken': headers_csrftoken,
-            'meta_csrftoken': meta_csrftoken,
-            'csrftoken': csrftoken,
             'response_csrftoken': response_csrftoken,
-            'cyrillic': 'Тест',
+            # 'cyrillic': 'Тест',
+            # 'user': user,
         }
         debugStr = debugObj(debugData)
         logger.info(f'[tick_api_view] get\n{debugStr}')
@@ -69,6 +68,10 @@ def tick_api_view(request: Request):  # , *args, **kwargs):
             'projectInfo': PROJECT_INFO,
             'androidAppVersion': settings.APK_DOWNLOAD_VERSION,
             'timestamp': timestamp,
+            'is_authenticated': is_authenticated,
+            'user_id': user.id if is_authenticated else None,
+            'user_name': user.get_name_or_email() if is_authenticated else None,
+            'user_email': user.email if is_authenticated else None,  # TODO: Remove it later in favor of `user_id`
             'checked': True,
             **debugData,  # DEBUG: Show debug data
         }
