@@ -348,7 +348,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LOGIN_REDIRECT_URL = 'profile'
+LOGIN_REDIRECT_URL = 'login-success'
 LOGOUT_REDIRECT_URL = 'index'
 
 # Registration

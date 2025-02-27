@@ -13,12 +13,13 @@
 
 {% if user.is_authenticated %}
   {# DEMO: Show a greetings or other info? #}
-  <p
+  <h1
+    class="h1 primary-color font-supertitle"
     data-user-email="{{ user.email }}"
     data-user-last-login="{{ user.last_login }}"
   >
   {% trans "Welcome," %} {{ user.get_full_name|default:user.username }}.
-  </p>
+  </h1>
 {% endif %}
 
 {% if active_regs %}
@@ -59,10 +60,11 @@
   - Add listings for your own tracks.
 -->
 
-{% if favorite_tracks.count %}
+{% if favorites_count %}
   <h2 class="primary-color mt-5 mb-4">{% trans "Favorite tracks" %}:</h2>
   {% include 'assets/template-right-blocks/right-favorites-list/right-favorites-list-wrapper.django' %}
 {% endif %}
+
 
 {# Buttons #}
 <div class="actions mt-5 mb-4 d-flex flex-wrap gap-1">

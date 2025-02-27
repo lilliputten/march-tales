@@ -10,65 +10,70 @@
 {% block beforeContent %}{% endblock %}
 
 {% block right_column_content %}
-<div class="widget">
-  <h4 class="widget-title">{% trans "Account management" %}</h4>
-  <ul class="side-menu p-3 nav d-flex flex-column gap-2">
 
-    <li><a href="{% url 'profile' %}">{% trans "Profile" %}</a></li>
+  {% if not is_mobile_auth %}
 
-    <li><a href="{% url 'profile_edit' %}">{% trans "Edit profile" %}</a></li>
+    <div class="widget">
+      <h4 class="widget-title">{% trans "Account management" %}</h4>
+      <ul class="side-menu p-3 nav d-flex flex-column gap-2">
 
-    {% url 'account_email' as email_url_ %}
-    {% if email_url_ %}
-      <li><a href="{{ email_url_ }}">{% trans "Change Email" %}</a></li>
-    {% endif %}
+        <li><a href="{% url 'profile' %}">{% trans "Profile" %}</a></li>
 
-    {% url 'account_change_password' as change_password_url_ %}
-    {% if change_password_url_ %}
-      <li><a href="{{ change_password_url_ }}">{% trans "Change Password" %}</a></li>
-    {% endif %}
+        <li><a href="{% url 'profile_edit' %}">{% trans "Edit profile" %}</a></li>
 
-    {% url 'socialaccount_connections' as connections_url_ %}
-    {% if connections_url_ %}
-      <li><a href="{{ connections_url_ }}">{% trans "Third-Party Accounts" %}</a></li>
-    {% endif %}
+        {% url 'account_email' as email_url_ %}
+        {% if email_url_ %}
+          <li><a href="{{ email_url_ }}">{% trans "Change Email" %}</a></li>
+        {% endif %}
 
-    {% url 'mfa_index' as mfa_index_url_ %}
-    {% if mfa_index_url_ %}
-      <li><a href="{{ mfa_index_url_ }}">{% trans "Two-Factor Authentication" %}</a></li>
-    {% endif %}
+        {% url 'account_change_password' as change_password_url_ %}
+        {% if change_password_url_ %}
+          <li><a href="{{ change_password_url_ }}">{% trans "Change Password" %}</a></li>
+        {% endif %}
 
-    {% url 'usersessions_list' as usersessions_list_url_ %}
-    {% if usersessions_list_url_ %}
-      <li><a href="{{ usersessions_list_url_ }}">{% trans "Sessions" %}</a></li>
-    {% endif %}
+        {% url 'socialaccount_connections' as connections_url_ %}
+        {% if connections_url_ %}
+          <li><a href="{{ connections_url_ }}">{% trans "Third-Party Accounts" %}</a></li>
+        {% endif %}
 
-    <li><a href="{% url 'logout_user' %}">{% trans 'Logout' %}</a></li>
+        {% url 'mfa_index' as mfa_index_url_ %}
+        {% if mfa_index_url_ %}
+          <li><a href="{{ mfa_index_url_ }}">{% trans "Two-Factor Authentication" %}</a></li>
+        {% endif %}
 
-    <li><a data-bs-toggle="modal" data-bs-target="#deleteAccountModal">{% trans "Delete account" %}</a></li>
+        {% url 'usersessions_list' as usersessions_list_url_ %}
+        {% if usersessions_list_url_ %}
+          <li><a href="{{ usersessions_list_url_ }}">{% trans "Sessions" %}</a></li>
+        {% endif %}
 
-  </ul>
-</div>
+        <li><a href="{% url 'logout_user' %}">{% trans 'Logout' %}</a></li>
 
-<!-- Delete account confirmation modal -->
-<div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-labelledby="deleteAccountModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="deleteAccountModalLabel">{% trans "Delete the account?" %}</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>{% trans "Are you sure you want to completely delete your account and all data?" %}</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{% trans "Close" %}</button>
-        <a type="button" class="btn btn-danger" href="{% url 'delete_account' %}">{% trans "Delete" %}</a>
+        <li><a data-bs-toggle="modal" data-bs-target="#deleteAccountModal">{% trans "Delete account" %}</a></li>
+
+      </ul>
+    </div>
+
+    <!-- Delete account confirmation modal -->
+    <div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-labelledby="deleteAccountModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteAccountModalLabel">{% trans "Delete the account?" %}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>{% trans "Are you sure you want to completely delete your account and all data?" %}</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{% trans "Close" %}</button>
+            <a type="button" class="btn btn-danger" href="{% url 'delete_account' %}">{% trans "Delete" %}</a>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+
+  {% endif %}
 
 {% endblock right_column_content %}
 

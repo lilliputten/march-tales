@@ -1,18 +1,24 @@
+{# ex: set ft=htmldjango : #}
 {% load allauth %}
 {% load i18n %}
 
-{% get_cookie "mobile_auth" as mobile_auth %}
-{% define True as is_mobile_auth %}
+{# {% get_cookie "mobile_auth" as mobile_auth %} #}
+{# {% define True as is_mobile_auth %} #}
+{# {% if mobile_auth %}{% define True as is_mobile_auth %}{% endif %} #}
+
+---
+mobile_auth: "{{ mobile_auth }}"
+is_mobile_auth: {{ is_mobile_auth }}
 
 {% for err in attrs.form.non_field_errors %}<div role="alert" class="alert alert-danger">{{ err }}</div>{% endfor %}
-<form id="allauth-form" class="d-flex gap-2 {% block form_class %}{% if not attrs.no_visible_fields %}mb-4 card{% endif %}{% endblock %}"
+<form id="allauth-form" class="d-flex gap-2 flex-column {% block form_class %}{% if not attrs.no_visible_fields %}mb-4 card{% endif %}{% endblock %}"
       method="{{ attrs.method }}"
       action="{{ attrs.action }}">
     {% if not attrs.no_visible_fields %}<div class="card-body p-0 py-3">{% endif %}
       {% slot body %}
       {% endslot %}
     {% if not attrs.no_visible_fields %}</div>{% endif %}
-  {% if not attrs.no_visible_fields %}<div class="card-footer d-flex flex-wrap align-items-center gap-2 bg-transparent">{% endif %}
+  {% if True or not attrs.no_visible_fields %}<div class="card-footer d-flex flex-wrap align-items-center gap-2 bg-transparent">{% endif %}
     {% slot actions %}
     {% endslot %}
     {% if is_mobile_auth %}
@@ -21,5 +27,5 @@
         <span class="text">{% trans 'Close' %}</span>
       </a>
     {% endif %}
-    {% if not attrs.no_visible_fields %}</div>{% endif %}
+    {% if True or not attrs.no_visible_fields %}</div>{% endif %}
 </form>
