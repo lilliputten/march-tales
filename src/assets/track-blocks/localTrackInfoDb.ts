@@ -3,6 +3,8 @@ import { setCookie } from '../helpers/CommonHelpers';
 import { packDelim } from '../constants/packDelim';
 import { acceptedCookiesId } from '../constants/acceptedCookiesId';
 
+/* TODO: Use `new CustomEvent` to broadcast events */
+
 class LocalTrackInfoDb {
   // End-user api
 

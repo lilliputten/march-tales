@@ -1,3 +1,4 @@
+from .login_success import login_success
 from .profile import profile
 from .edit_user_profile import edit_user_profile
 from .logout_user_route import logout_user_route
@@ -6,6 +7,7 @@ from .delete_user_account import delete_user_account
 
 __all__ = [
     'profile',
+    'login_success',
     'edit_user_profile',
     'logout_user_route',
     'UserRegistrationView',

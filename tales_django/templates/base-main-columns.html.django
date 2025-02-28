@@ -8,6 +8,13 @@
 {% block page_content %}
   {{ block.super }}
 
+<!--
+XXX DEBUG
+django_language: "{{ django_language }}"
+mobile_auth: "{{ mobile_auth }}"
+is_mobile_auth: {{ is_mobile_auth }}
+-->
+
   {# SAMPLE: Optional top promo section #}
   {#% include "assets/template-columns/top-columns.django" %#}
 
@@ -18,7 +25,7 @@
       <div class="row justify-content-center">
 
         <!-- {{{ Main column -->
-        <div class="main-column col-lg-8 mb-5 mb-lg-0">
+        <div class="main-column {% if not is_mobile_auth %}col-lg-8 mb-5 mb-lg-0{% else %}mt-5{% endif %}">
 
           <!-- {{{ Main content -->
           {% block main_column_content %}
@@ -44,12 +51,14 @@
         <!-- }}} Main column -->
 
         <!-- {{{ Right column -->
+        {% if not is_mobile_auth %}
         <aside class="col-lg-4 sidebar-home">
           {% block right_column_content %}
             {{ block.super }}
             {% include 'assets/template-columns/right-column.django' %}
           {% endblock right_column_content %}
         </aside>
+        {% endif %}
         <!-- }}} Right column -->
 
       </div>

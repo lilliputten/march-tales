@@ -72,6 +72,18 @@ class User(AbstractUser):
         info = '  '.join(filter(None, map(str, items)))
         return info
 
+    def get_name_or_email(self):
+        items = [
+            self.first_name,
+            self.last_name,
+        ]
+        name = '  '.join(filter(None, map(str, items)))
+        if not name:
+            name = self.username
+        if not name:
+            name = self.email
+        return name
+
     @property
     def full_name_with_email(self):
         return self.get_full_name_with_email()

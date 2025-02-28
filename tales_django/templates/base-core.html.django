@@ -1,8 +1,8 @@
 {# ex: set ft=htmldjango : #}
 <!--
 - Html template
-- Version: 0.0.23
-- Last changes timestamp: 2025.02.25 13:27:59 +0300
+- Version: 0.0.24
+- Last changes timestamp: 2025.02.28 17:45:39 +0300
 - Generated: {% now "Y.m.d H:i:s O" %}
 -->
 
@@ -86,7 +86,15 @@
   <!-- CSS }}} -->
 </head>
 {% get_cookie "cookies" as cookies %}
-<body class="{% block body_class %}base-core {% if cookies or cookies == "" %} no-cookies-banner{% endif %}{%if favorites_count %} has-favorites{% endif %}{% endblock %}">
+{% get_cookie "mobile_auth" as mobile_auth %}
+{% if mobile_auth %}{% define True as is_mobile_auth %}{% endif %}
+{% comment %} {% define True as is_mobile_auth %} {% endcomment %}
+<body class="{% block body_class %}
+  base-core
+  {% if cookies or cookies == "" %}no-cookies-banner{% endif %}
+  {% if favorites_count %}has-favorites{% endif %}
+  {% if is_mobile_auth %}mobile-auth{% endif %}
+{% endblock %}">
 
   <!-- {{{ JS variables -->
   {% block js_variables %}
@@ -128,27 +136,29 @@
   {% block beforeContent %}
   {% endblock beforeContent %}
 
-  <!-- {{{ Page content container -->
+<!-- XXX DEBUG
+django_language: "{{ django_language }}"
+mobile_auth: "{{ mobile_auth }}"
+is_mobile_auth: {{ is_mobile_auth }}
+-->
 
-  {% comment %} <div class="content container" role="main"> {% endcomment %}
+  <!-- {{{ Page content container -->
   {% block page_content %}
   {% endblock page_content %}
-  {% comment %} </div> {% endcomment %}
   <!-- }}} Page content container -->
 
   <!-- {{{ Page footer container -->
   {% block page_footer %}
+    {% include "assets/entities/FloatingPlayer/floating-player.django" %}
   {% endblock page_footer %}
   <!-- }}} Page footer container -->
 
   {% block bottommostContent %}
-  {% include "assets/entities/FloatingPlayer/floating-player.django" %}
+    {% if not cookies and cookies != "" %}
+      {# See `with-cookies-banner` body class and modules `cookies-banner.*` #}
+      {% include "assets/cookies-banner/cookies-banner.html.django" %}
+    {% endif %}
   {% endblock bottommostContent %}
-
-  {% if not cookies and cookies != "" %}
-    {# See `with-cookies-banner` body class and modules `cookies-banner.*` #}
-    {% include "assets/cookies-banner/cookies-banner.html.django" %}
-  {% endif %}
 
   <!-- {{{ JS -->
 

@@ -1,0 +1,53 @@
+{# ex: set ft=htmldjango : #}
+{% extends "allauth/layouts/manage.html" %}
+
+{% load i18n %}
+{% load allauth %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}{% trans 'Successful login' %} — {{ block.super }}{% endblock title %}
+
+{% block content %}
+{{ block.super }}
+
+{% if user.is_authenticated %}
+  {# DEMO: Show a greetings or other info? #}
+  <h1
+    class="h1 primary-color font-supertitle"
+    data-user-email="{{ user.email }}"
+    data-user-last-login="{{ user.last_login }}"
+  >
+  {% trans "Welcome," %} {{ user.get_full_name|default:user.username }}.
+  </h1>
+{% endif %}
+
+<!--
+  mobile_auth: "{{ mobile_auth }}"
+  is_mobile_auth: {{ is_mobile_auth }}
+-->
+
+{# Buttons #}
+<div class="actions mt-5 mb-4 d-flex flex-wrap gap-1">
+  {# TODO: Put common actions toolbar here #}
+  {% if is_mobile_auth %}
+    <a
+      class="for-mobile-auth-only btn btn-outline-primary d-flex align-items-center gap-2"
+      href="app://close"
+      {% comment %}onClick="window.close(); return false"{% endcomment %}
+    >
+      <i class="icon fa fa-times"></i>
+      <span class="text">{% trans 'Close' %}</span>
+    </a>
+  {% else %}
+    <a class="btn btn-primary d-flex align-items-center gap-2" href="{% url 'profile_edit' %}"><i class="icon fa fa-pencil"></i> <span class="text">{% trans "Edit profile" %}</span></a>
+    {% include "assets/buttons/main-page-button.django" %}
+  {% endif %}
+  {% comment %}
+  {% include "assets/buttons/back-button.django" %}
+  <a class="btn btn-primary" href="{% url 'password_change' %}">{% trans "Change password" %}</a>
+  <a class="btn btn-primary" href="{% url 'password_reset' %}">{% trans "Reset password" %}</a>
+  {% endcomment %}
+</div>
+
+{% endblock content %}

@@ -12,9 +12,12 @@ logger = getDebugLogger()
 @register.simple_tag(takes_context=True)
 def get_cookie(context, name):
     try:
-        request = context['request']
-        result = request.COOKIES.get(name)
-        return result
+        if 'request' in context:
+            request = context['request']
+            result = request.COOKIES.get(name)
+            return result
+        else:
+            return None
     except Exception as err:
         sError = errorToString(err)
         sTraceback = str(traceback.format_exc())
@@ -23,3 +26,4 @@ def get_cookie(context, name):
             'traceback': sTraceback,
         }
         logger.error(f'[get_cookie] Caught error {sError} (returning in response):\n{debugObj(debugData)}')
+        return None

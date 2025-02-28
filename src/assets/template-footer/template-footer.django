@@ -2,6 +2,7 @@
 {% load static %}
 {% load i18n %}
 
+{% if not is_mobile_auth %}
 <footer class="template-footer footer">
   <svg
     class="footer-border"
@@ -71,3 +72,4 @@
   <div>
   </div>
 </footer>
+{% endif %}
