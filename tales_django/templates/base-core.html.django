@@ -154,7 +154,7 @@ is_mobile_auth: {{ is_mobile_auth }}
   <!-- }}} Page footer container -->
 
   {% block bottommostContent %}
-    {% if not cookies and cookies != "" %}
+    {% if not cookies and cookies != "" and not is_mobile_auth %}
       {# See `with-cookies-banner` body class and modules `cookies-banner.*` #}
       {% include "assets/cookies-banner/cookies-banner.html.django" %}
     {% endif %}
