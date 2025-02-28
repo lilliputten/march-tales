@@ -1,26 +1,17 @@
 import traceback
 
-# from django.utils.translation import gettext_lazy as _
 from django.http import JsonResponse
-
-# from django.middleware.csrf import CsrfViewMiddleware
 from django.views.decorators.csrf import csrf_exempt
 
 from rest_framework.request import Request
-
-# from rest_framework.response import Response
 from rest_framework import status
 
-# from rest_framework import views
-# from rest_framework import permissions
-
-from core.appEnv import PROJECT_INFO
 from core.helpers.errors import errorToString
-from core.helpers.time import getTimeStamp
 from core.helpers.utils import debugObj
 from core.logging import getDebugLogger
 
 from tales_django.core.helpers.check_csrf import check_csrf
+from tales_django.core.pages.get_favorites_list_context import get_favorites_ids
 
 logger = getDebugLogger()
 
@@ -28,23 +19,20 @@ _ = lambda _: _
 
 
 @csrf_exempt  # Will send json failure response manually
-def check_api_view(request: Request):  # , *args, **kwargs):
+def favorites_ids_api_view(request: Request):
     try:
-        if request.method != 'POST':
-            data = {'detail': _('Expected POST request')}
-            return JsonResponse(data, status=status.HTTP_403_FORBIDDEN, safe=False)
-
-        session_key = request.session.session_key if request.session else None
-        headers_csrftoken = request.headers.get('X-CSRFToken')
-        meta_csrftoken = request.META.get('CSRF_COOKIE')
-        csrftoken = meta_csrftoken if meta_csrftoken else headers_csrftoken
+        if request.method != 'POST' and request.method != 'GET':
+            data = {'detail': _('Expected POST or GET request')}
+            return JsonResponse(
+                data,
+                status=status.HTTP_403_FORBIDDEN,
+                safe=False,
+                json_dumps_params={'ensure_ascii': True},
+                content_type='application/json; charset=utf-8',
+            )
 
         debugData = {
-            'session_key': session_key,
-            'headers_csrftoken': headers_csrftoken,
-            'meta_csrftoken': meta_csrftoken,
-            'csrftoken': csrftoken,
-            'cyrillic': 'Тест',
+            'is_authenticated': request.user.is_authenticated,
         }
         debugStr = debugObj(debugData)
         logger.info(f'get\n{debugStr}')
@@ -57,16 +45,11 @@ def check_api_view(request: Request):  # , *args, **kwargs):
         # if not request.user.is_authenticated:
         #     data = {'detail': _('User in not authenticated')}
         #     return JsonResponse(data, status=status.HTTP_403_FORBIDDEN, safe=False, json_dumps_params={'ensure_ascii': True}, content_type="application/json; charset=utf-8")
-        # Check session or csrf?
-        # if not session_key:
-        #     data = {'detail': _('Client session not found')}
-        #     return JsonResponse(data, status=status.HTTP_403_FORBIDDEN, safe=False, json_dumps_params={'ensure_ascii': True}, content_type="application/json; charset=utf-8")
 
-        timestamp = getTimeStamp()
+        ids = get_favorites_ids(request)
+
         data = {
-            'PROJECT_INFO': PROJECT_INFO,
-            'timestamp': timestamp,
-            'checked': True,
+            'ids': list(ids) if ids else [],
             **debugData,  # DEBUG: Show debug data
         }
         return JsonResponse(
