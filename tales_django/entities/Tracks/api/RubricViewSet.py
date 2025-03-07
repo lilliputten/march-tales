@@ -13,15 +13,15 @@ from core.logging import getDebugLogger
 from tales_django.core.helpers.check_csrf import check_csrf
 from tales_django.core.model_helpers import get_currrent_django_language
 
-from .author_serializers import AuthorSerializer
+from .rubric_serializers import RubricSerializer
 
-from ..models import Author
+from ..models import Rubric, Author
 
 logger = getDebugLogger()
 
 
-defaultAuthorsLimit = 5
-defaultAuthorsOffset = 0
+defaultRubricsLimit = 5
+defaultRubricsOffset = 0
 
 content_type = 'application/json; charset=utf-8'
 default_headers = {
@@ -30,19 +30,19 @@ default_headers = {
 
 
 class DefaultPagination(pagination.LimitOffsetPagination):
-    default_limit = defaultAuthorsLimit
+    default_limit = defaultRubricsLimit
 
 
 # NOTE: No `viewsets.ModelViewSet` -- we don't use modification methods, only our custom `retrieve` and `list` (see below)
-class AuthorViewSet(viewsets.GenericViewSet):
+class RubricViewSet(viewsets.GenericViewSet):
     language = get_currrent_django_language()
-    queryset = Author.objects.order_by(f'name_{language}').all()
-    # serializer_class = AuthorSerializer
+    queryset = Rubric.objects.order_by(f'text_{language}').all()
+    serializer_class = RubricSerializer
     pagination_class = DefaultPagination
 
     def retrieve(self, request, *args, **kwargs):
         """
-        Overrided single author retrieve method
+        Overrided single rubric retrieve method
         """
 
         # Check session or csrf
@@ -53,7 +53,7 @@ class AuthorViewSet(viewsets.GenericViewSet):
             )
 
         instance = self.get_object()
-        serializer = AuthorSerializer(instance=instance)
+        serializer = RubricSerializer(instance=instance)
         result = serializer.data
         return JsonResponse(result, headers=default_headers, content_type=content_type)
 
@@ -70,20 +70,20 @@ class AuthorViewSet(viewsets.GenericViewSet):
                     errorDetail, headers=default_headers, content_type=content_type, status=status.HTTP_403_FORBIDDEN
                 )
 
-            limit = int(request.query_params.get('limit', defaultAuthorsLimit))
-            offset = int(request.query_params.get('offset', defaultAuthorsOffset))
+            limit = int(request.query_params.get('limit', defaultRubricsLimit))
+            offset = int(request.query_params.get('offset', defaultRubricsOffset))
 
             # TODO: Extract sort/filter params and modify results below?
 
             language = get_currrent_django_language()
-            query = Author.objects.order_by(f'name_{language}')
+            query = Rubric.objects.order_by(f'text_{language}')
             subset = query.all()
             if offset or limit:
                 subset = query.all()[offset : offset + limit]
 
             result = {
                 'count': len(query),
-                'results': AuthorSerializer(subset, many=True).data,
+                'results': RubricSerializer(subset, many=True).data,
             }
 
             return JsonResponse(result, headers=default_headers, content_type=content_type)
