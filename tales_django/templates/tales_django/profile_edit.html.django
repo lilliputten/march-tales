@@ -27,11 +27,6 @@
       {% include "assets/buttons/back-button.django" %}
       <button type="reset" class="btn btn-outline-secondary d-flex align-items-center gap-2"><i class="icon fa fa-refresh"></i> <span class="text">{% trans "Reset changes" %}</span></button>
     </div>
-    {% comment %}
-    <div class="right align-self-end d-flex flex-wrap gap-1">
-      <span class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">{% trans "Delete account" %}</span>
-    </div>
-    {% endcomment %}
   </div>
 </form>
 

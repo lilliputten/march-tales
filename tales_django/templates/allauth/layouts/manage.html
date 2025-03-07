@@ -46,6 +46,12 @@
           <li><a href="{{ usersessions_list_url_ }}">{% trans "Sessions" %}</a></li>
         {% endif %}
 
+        {% if user.is_staff %}
+          <!-- Admin panel -->
+          <li><a class="dropdown-item" href="{% url 'admin:index' %}">{% trans 'Admin panel' %}</a></li>
+          <li><hr class="dropdown-divider" /></li>
+        {% endif %}
+
         <li><a href="{% url 'logout_user' %}">{% trans 'Logout' %}</a></li>
 
         <li><a data-bs-toggle="modal" data-bs-target="#deleteAccountModal">{% trans "Delete account" %}</a></li>

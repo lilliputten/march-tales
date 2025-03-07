@@ -41,7 +41,8 @@ class DefaultPagination(pagination.LimitOffsetPagination):
     default_limit = defaultTracksLimit
 
 
-class TrackViewSet(viewsets.ModelViewSet):
+# NOTE: No `viewsets.ModelViewSet` -- we don't use modification methods, only our custom `retrieve` and `list` (see below)
+class TrackViewSet(viewsets.GenericViewSet):
     language = get_currrent_django_language()
     queryset = Track.objects.order_by('-published_at', f'title_{language}').all()
     serializer_class = TrackSerializer
