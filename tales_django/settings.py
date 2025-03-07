@@ -26,7 +26,8 @@ from core.appEnv import (
     MEDIA_ROOT,
     SRC_ROOT,
     ASSETS_ROOT,
-    PROJECT_INFO,  # DEBUG
+    PROJECT_INFO,
+    PROJECT_VERSION,
 )
 from core.appConfig import (
     APK_DOWNLOAD_FILE,
@@ -69,17 +70,6 @@ from core.djangoConfig import (
 # TRANSLATIONS_PROJECT_BASE_DIR = BASE_DIR
 
 _ = lambda s: s
-
-# # DEBUG: Show basic settings...
-# print('App started:', PROJECT_INFO)
-# print('EMAIL_HOST:', EMAIL_HOST)
-# print('EMAIL_PORT:', EMAIL_PORT)
-# print('EMAIL_USE_TLS:', EMAIL_USE_TLS)
-# print('EMAIL_USE_SSL:', EMAIL_USE_SSL)
-# print('DEFAULT_FROM_EMAIL:', DEFAULT_FROM_EMAIL)
-# print('EMAIL_HOST_USER:', EMAIL_HOST_USER)
-# print('EMAIL_HOST_PASSWORD:', EMAIL_HOST_PASSWORD)
-# print('REGISTRATION_SALT:', REGISTRATION_SALT)
 
 # Define default site id for `sites.models`
 SITE_ID = 1
@@ -578,6 +568,7 @@ PASS_VARIABLES = {
     'DEBUG': DEBUG,  # Pass django debug flag to the code (from environment)
     'LOCAL': LOCAL,  # Local dev server mode (from the environment)
     'PROJECT_INFO': PROJECT_INFO,
+    'PROJECT_VERSION': PROJECT_VERSION,
     'DEFAULT_HOST': DEFAULT_HOST,
     'GITHUB': 'https://github.com/lilliputten/march-tales',
     'SECRET_KEY': SECRET_KEY,

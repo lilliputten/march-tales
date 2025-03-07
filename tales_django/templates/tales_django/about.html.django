@@ -28,6 +28,13 @@
 {% endautoescape %}
 {% endwith %}
 
+<h3>{% trans "Версии" %}</h3>
+
+<ul>
+  <li>{% trans "Версия сервера" %}: {{ settings.PROJECT_VERSION }}</li>
+  <li>{% trans "Версия мобильного приложения" %}: {{ settings.APK_DOWNLOAD_VERSION }}</li>
+</ul>
+
 </div>
 
 <h2 class="h5 section-title mt-4">{% trans "Tracks List" %}</h2>
