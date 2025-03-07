@@ -1,8 +1,8 @@
 {# ex: set ft=htmldjango : #}
 <!--
 - Html template
-- Version: 0.0.24
-- Last changes timestamp: 2025.03.01 02:07:18 +0300
+- Version: 0.0.25
+- Last changes timestamp: 2025.03.08 00:58:27 +0300
 - Generated: {% now "Y.m.d H:i:s O" %}
 -->
 
