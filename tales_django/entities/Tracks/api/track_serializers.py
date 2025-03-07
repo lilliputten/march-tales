@@ -2,38 +2,7 @@ from rest_framework import serializers
 
 from ..models import Track, Tag, Rubric, Author
 
-
-class AuthorSerializer(serializers.HyperlinkedModelSerializer):
-    portrait_picture = serializers.SerializerMethodField()
-
-    def get_portrait_picture(self, obj):
-        return obj.portrait_picture.url
-
-    class Meta:
-        model = Author
-        fields = (
-            'id',
-            'name',
-            'portrait_picture',
-        )
-
-
-class RubricSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Rubric
-        fields = (
-            'id',
-            'text',
-        )
-
-
-class TagSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Tag
-        fields = (
-            'id',
-            'text',
-        )
+from .basic_plain_serializers import AuthorSerializer, RubricSerializer, TagSerializer
 
 
 # Serializers define the API representation.
@@ -42,12 +11,12 @@ class TrackSerializer(serializers.HyperlinkedModelSerializer):
     rubrics = RubricSerializer(read_only=True, many=True)
     tags = TagSerializer(read_only=True, many=True)
 
-    audio_file = serializers.SerializerMethodField()
+    audio_file = serializers.SerializerMethodField('get_audio_file')
 
     def get_audio_file(self, obj):
         return obj.audio_file.url
 
-    preview_picture = serializers.SerializerMethodField()
+    preview_picture = serializers.SerializerMethodField('get_preview_picture')
 
     def get_preview_picture(self, obj):
         return obj.preview_picture.url
