@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
 
 import os
+import re
 import pathlib
 import posixpath
 import environ
@@ -22,10 +23,12 @@ ASSETS_ROOT = posixpath.join(SRC_FOLDER, ASSETS_FOLDER)
 # print('STATIC_ROOT:', STATIC_ROOT)
 
 PROJECT_INFO = ''
+PROJECT_VERSION = ''
 with open(posixpath.join(STATIC_ROOT, 'project-info.txt')) as fh:
     info = fh.read()
     if info:
         PROJECT_INFO = info.strip()
+        PROJECT_VERSION = re.sub(r'^.*v\.([0-9.]+).*$', r'\1', PROJECT_INFO)
 
 appEnv = environ.FileAwareEnv(
     # @see local `.dev` file and example in `.dev.SAMPLE`

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-25 00:04+0300\n"
+"POT-Creation-Date: 2025-03-08 01:14+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -124,11 +124,12 @@ msgid ""
 "system cookies. Please leave the site if you do not want to use cookies at "
 "all."
 msgstr ""
-"Наш сайт использует файлы cookie. Нажав «Принять», вы соглашаетесь "
-"на сохранение файлов cookie на вашем устройстве для улучшения навигации по "
-"сайту, анализа использования сайта и улучшения маркетинга. Нажав «Отклонить», "
-"вы соглашаетесь использовать только основные системные файлы cookie. "
-"Пожалуйста, покиньте сайт, если Вы вообще не хотите использовать cookies."
+"Наш сайт использует файлы cookie. Нажав «Принять», вы соглашаетесь на "
+"сохранение файлов cookie на вашем устройстве для улучшения навигации по "
+"сайту, анализа использования сайта и улучшения маркетинга. Нажав "
+"«Отклонить», вы соглашаетесь использовать только основные системные файлы "
+"cookie. Пожалуйста, покиньте сайт, если Вы вообще не хотите использовать "
+"cookies."
 
 #: .\src\assets\cookies-banner\cookies-banner.html.django:13
 msgid "Accept"
@@ -152,8 +153,8 @@ msgstr "Спрятать"
 
 #: .\src\assets\page-menus\menu-main.django:13
 #: .\src\assets\page-menus\menu-main.django:28
-#: .\tales_django\templates\tales_django\favorites.html.django:25
-#: .\tales_django\templates\tales_django\favorites.html.django:33
+#: .\tales_django\templates\tales_django\favorites.html.django:35
+#: .\tales_django\templates\tales_django\favorites.html.django:43
 #: .\tales_django\templates\tales_django\track_details.html.django:40
 msgid "Favorites"
 msgstr "Избранное"
@@ -163,16 +164,18 @@ msgid "Playlist"
 msgstr "Плейлист"
 
 #: .\src\assets\page-menus\menu-main.django:31
-#: .\tales_django\templates\allauth\layouts\manage.html:17
+#: .\tales_django\templates\allauth\layouts\manage.html:20
 #: .\tales_django\templates\tales_django\profile.html.django:9
 msgid "Profile"
 msgstr "Профиль"
 
 #: .\src\assets\page-menus\menu-main.django:37
+#: .\tales_django\templates\allauth\layouts\manage.html:51
 msgid "Admin panel"
 msgstr "Панель управления"
 
 #: .\src\assets\page-menus\menu-main.django:40
+#: .\tales_django\templates\allauth\layouts\manage.html:55
 msgid "Logout"
 msgstr "Выйти"
 
@@ -186,7 +189,7 @@ msgstr "Войти"
 #: .\tales_django\templates\django_registration\registration_form.html:12
 #: .\tales_django\templates\django_registration\registration_form.html:16
 #: .\tales_django\templates\django_registration\registration_form.html:26
-#: .\tales_django\templates\registration\login.html:27
+#: .\tales_django\templates\registration\login.html:30
 #: .\tales_django\templates\registration\signup.html:14
 #: .\tales_django\templates\registration\signup.html:20
 #: .\tales_django\templates\registration\signup.html:29
@@ -197,10 +200,10 @@ msgstr "Регистрация"
 msgid "What’d You Like<br> To Listen Today?"
 msgstr "Что бы Вы хотели<br> послушать сегодня?"
 
-#: .\src\assets\template-footer\template-footer.django:55
-#: .\src\assets\template-footer\template-footer.django:58
-#: .\src\assets\template-header\template-header.django:14
-#: .\src\assets\template-header\template-header.django:17
+#: .\src\assets\template-footer\template-footer.django:56
+#: .\src\assets\template-footer\template-footer.django:59
+#: .\src\assets\template-header\template-header.django:15
+#: .\src\assets\template-header\template-header.django:18
 #: .\tales_django\templates\base-core.html.django:24
 #: .\tales_django\templates\base-core.html.django:39
 #: .\tales_django\templates\tales_django\author_details.html.django:17
@@ -214,7 +217,7 @@ msgstr "Что бы Вы хотели<br> послушать сегодня?"
 msgid "Site title"
 msgstr "Сказки Мартовского Кота"
 
-#: .\src\assets\template-footer\template-footer.django:64
+#: .\src\assets\template-footer\template-footer.django:65
 #: .\tales_django\templates\tales_django\privacy-policy.html.django:8
 #: .\tales_django\templates\tales_django\privacy-policy.html.django:14
 #: .\tales_django\templates\tales_django\terms.html.django:111
@@ -222,7 +225,7 @@ msgstr "Сказки Мартовского Кота"
 msgid "Privacy Policy"
 msgstr "Политика конфиденциальности"
 
-#: .\src\assets\template-footer\template-footer.django:65
+#: .\src\assets\template-footer\template-footer.django:66
 msgid "Terms Conditions"
 msgstr "Пользовательское соглашение"
 
@@ -325,14 +328,17 @@ msgstr "Подписаться"
 msgid "Application"
 msgstr "Приложение"
 
-#: .\tales_django\entities\App\api\check_api_view.py:32
+#: .\tales_django\entities\App\api\check_api_view.py:34
 msgid "Expected POST request"
 msgstr "Ожидается POST запрос"
 
-#: .\tales_django\entities\App\api\check_api_view.py:51
+#: .\tales_django\entities\App\api\check_api_view.py:53
+#: .\tales_django\entities\App\api\favorites_ids_api_view.py:41
 msgid "Failed checking CSRF token"
 msgstr "Ошибка проверки токена CSRF"
 
+#: .\tales_django\entities\App\api\favorites_ids_api_view.py:25
+#: .\tales_django\entities\App\api\logout_api_view.py:30
 #: .\tales_django\entities\App\api\tick_api_view.py:30
 msgid "Expected POST or GET request"
 msgstr "Ожидается POST или GET запрос"
@@ -404,23 +410,29 @@ msgstr "название"
 msgid "Audio file has been successfully uploaded"
 msgstr "Аудио файл успешно загружен"
 
-#: .\tales_django\entities\Tracks\api\TrackViewSet.py:57
-#: .\tales_django\entities\Tracks\api\TrackViewSet.py:75
-#: .\tales_django\entities\Tracks\api\TrackViewSet.py:144
-#: .\tales_django\entities\Tracks\api\TrackViewSet.py:248
-#: .\tales_django\entities\Tracks\api\TrackViewSet.py:315
+#: .\tales_django\entities\Tracks\api\AuthorViewSet.py:50
+#: .\tales_django\entities\Tracks\api\AuthorViewSet.py:68
+#: .\tales_django\entities\Tracks\api\RubricViewSet.py:50
+#: .\tales_django\entities\Tracks\api\RubricViewSet.py:68
+#: .\tales_django\entities\Tracks\api\TagViewSet.py:50
+#: .\tales_django\entities\Tracks\api\TagViewSet.py:68
+#: .\tales_django\entities\Tracks\api\TrackViewSet.py:58
+#: .\tales_django\entities\Tracks\api\TrackViewSet.py:76
+#: .\tales_django\entities\Tracks\api\TrackViewSet.py:145
+#: .\tales_django\entities\Tracks\api\TrackViewSet.py:249
+#: .\tales_django\entities\Tracks\api\TrackViewSet.py:316
 msgid "Client session not found"
 msgstr "Не найдена клиентская сессия"
 
-#: .\tales_django\entities\Tracks\api\TrackViewSet.py:153
+#: .\tales_django\entities\Tracks\api\TrackViewSet.py:154
 msgid "Expected track indices list"
 msgstr "Ожидается список индексов треков"
 
-#: .\tales_django\entities\Tracks\api\TrackViewSet.py:163
+#: .\tales_django\entities\Tracks\api\TrackViewSet.py:164
 msgid "Error parsing track indices list"
 msgstr "Неверный формат списка индексов треков"
 
-#: .\tales_django\entities\Tracks\api\TrackViewSet.py:242
+#: .\tales_django\entities\Tracks\api\TrackViewSet.py:243
 msgid "User in not authenticated"
 msgstr "Пользователь не авторизован"
 
@@ -555,7 +567,7 @@ msgid "Personal info"
 msgstr "Персональная информация"
 
 #: .\tales_django\entities\Users\admin\UserAdmin.py:40
-#: .\tales_django\templates\tales_django\favorites.html.django:27
+#: .\tales_django\templates\tales_django\favorites.html.django:37
 #: .\tales_django\templates\tales_django\track_details.html.django:42
 msgid "Tracks"
 msgstr "Треки"
@@ -631,7 +643,8 @@ msgid "Skip to main content"
 msgstr "Перейти к основному содержанию"
 
 #: .\tales_django\templates\admin\base.html:43
-#: .\tales_django\templates\tales_django\profile.html.django:20
+#: .\tales_django\templates\tales_django\login_success.html.django:21
+#: .\tales_django\templates\tales_django\profile.html.django:21
 msgid "Welcome,"
 msgstr "Добро пожаловать,"
 
@@ -660,10 +673,16 @@ msgstr "Путь документа"
 msgid "Home"
 msgstr "Главная"
 
+#: .\tales_django\templates\allauth\elements\form.html:25
+#: .\tales_django\templates\allauth\layouts\manage.html:75
+#: .\tales_django\templates\tales_django\login_success.html.django:41
+msgid "Close"
+msgstr "Закрыть"
+
 #: .\tales_django\templates\allauth\layouts\entrance.html:7
 #: .\tales_django\templates\registration\login.html:8
 #: .\tales_django\templates\registration\login.html:13
-#: .\tales_django\templates\registration\login.html:25
+#: .\tales_django\templates\registration\login.html:28
 msgid "Login"
 msgstr "Войти"
 
@@ -671,56 +690,53 @@ msgstr "Войти"
 msgid "Manage account"
 msgstr "Управление аккаунтом"
 
-#: .\tales_django\templates\allauth\layouts\manage.html:14
+#: .\tales_django\templates\allauth\layouts\manage.html:17
 msgid "Account management"
 msgstr "Управление учетной записью"
 
-#: .\tales_django\templates\allauth\layouts\manage.html:19
+#: .\tales_django\templates\allauth\layouts\manage.html:22
 #: .\tales_django\templates\registration\password_change_form.html:30
-#: .\tales_django\templates\tales_django\profile.html.django:70
+#: .\tales_django\templates\tales_django\login_success.html.django:44
+#: .\tales_django\templates\tales_django\profile.html.django:72
 #: .\tales_django\templates\tales_django\profile_edit.html.django:8
 #: .\tales_django\templates\tales_django\profile_edit.html.django:15
 msgid "Edit profile"
 msgstr "Редактировать профиль"
 
-#: .\tales_django\templates\allauth\layouts\manage.html:23
+#: .\tales_django\templates\allauth\layouts\manage.html:26
 msgid "Change Email"
 msgstr "Изменить e-mail"
 
-#: .\tales_django\templates\allauth\layouts\manage.html:28
+#: .\tales_django\templates\allauth\layouts\manage.html:31
 msgid "Change Password"
 msgstr "Сменить пароль"
 
-#: .\tales_django\templates\allauth\layouts\manage.html:33
+#: .\tales_django\templates\allauth\layouts\manage.html:36
 msgid "Third-Party Accounts"
 msgstr "Сторонние сервисы"
 
-#: .\tales_django\templates\allauth\layouts\manage.html:38
+#: .\tales_django\templates\allauth\layouts\manage.html:41
 msgid "Two-Factor Authentication"
 msgstr "Двухфакторная аутентификация"
 
-#: .\tales_django\templates\allauth\layouts\manage.html:43
+#: .\tales_django\templates\allauth\layouts\manage.html:46
 msgid "Sessions"
 msgstr "Сессии"
 
-#: .\tales_django\templates\allauth\layouts\manage.html:46
+#: .\tales_django\templates\allauth\layouts\manage.html:57
 msgid "Delete account"
 msgstr "Удалить аккаунт"
 
-#: .\tales_django\templates\allauth\layouts\manage.html:57
+#: .\tales_django\templates\allauth\layouts\manage.html:68
 msgid "Delete the account?"
 msgstr "Удалить аккаунт?"
 
-#: .\tales_django\templates\allauth\layouts\manage.html:61
+#: .\tales_django\templates\allauth\layouts\manage.html:72
 msgid "Are you sure you want to completely delete your account and all data?"
 msgstr ""
 "Вы уверены, что хотите полностью удалить свою учетную запись и все данные?"
 
-#: .\tales_django\templates\allauth\layouts\manage.html:64
-msgid "Close"
-msgstr "Закрыть"
-
-#: .\tales_django\templates\allauth\layouts\manage.html:65
+#: .\tales_django\templates\allauth\layouts\manage.html:76
 msgid "Delete"
 msgstr "Удалить"
 
@@ -733,31 +749,31 @@ msgstr "Авторское чтение классических сказок и
 msgid "Site keywords"
 msgstr "Мартовский Кот, Сказки, Истории, Чтение, mp3"
 
-#: .\tales_django\templates\base-core.html.django:113
+#: .\tales_django\templates\base-core.html.django:122
 msgid "Error loading audio file"
 msgstr "Ошибка при загрузке аудиофайла"
 
-#: .\tales_django\templates\base-core.html.django:114
+#: .\tales_django\templates\base-core.html.django:123
 msgid "No audio node found"
 msgstr "Страница не найдена"
 
-#: .\tales_django\templates\base-core.html.django:115
+#: .\tales_django\templates\base-core.html.django:124
 msgid "No audio source node found"
 msgstr "Узел источника звука не найден"
 
-#: .\tales_django\templates\base-core.html.django:116
+#: .\tales_django\templates\base-core.html.django:125
 msgid "Fetch error"
 msgstr "Ошибка получения данных"
 
-#: .\tales_django\templates\base-core.html.django:117
+#: .\tales_django\templates\base-core.html.django:126
 msgid "Failed api request"
 msgstr "Ошибка запроса данных с сервера"
 
-#: .\tales_django\templates\base-core.html.django:118
+#: .\tales_django\templates\base-core.html.django:127
 msgid "The track has been successfully added to favorites"
 msgstr "Трек был успешно добавлен в избранное"
 
-#: .\tales_django\templates\base-core.html.django:119
+#: .\tales_django\templates\base-core.html.django:128
 msgid "The track has been successfully removed from favorites"
 msgstr "Трек был успешно удален из избранного"
 
@@ -780,7 +796,7 @@ msgstr ""
 "Мы не можем найти пользователя с такими данными авторизации. Пожалуйста, "
 "попробуйте снова."
 
-#: .\tales_django\templates\registration\login.html:29
+#: .\tales_django\templates\registration\login.html:32
 msgid "Reset password"
 msgstr "Сбросить пароль"
 
@@ -927,7 +943,7 @@ msgstr "Пароль сброшен для"
 #: .\tales_django\templates\tales_django\author_details.html.django:35
 #: .\tales_django\templates\tales_django\author_index.html.django:19
 #: .\tales_django\templates\tales_django\cookies-agreement.html.django:15
-#: .\tales_django\templates\tales_django\favorites.html.django:22
+#: .\tales_django\templates\tales_django\favorites.html.django:32
 #: .\tales_django\templates\tales_django\index.html.django:25
 #: .\tales_django\templates\tales_django\rubric_details.html.django:20
 #: .\tales_django\templates\tales_django\rubric_index.html.django:19
@@ -937,7 +953,19 @@ msgstr "Пароль сброшен для"
 msgid "Main page"
 msgstr "Главная страница"
 
-#: .\tales_django\templates\tales_django\about.html.django:33
+#: .\tales_django\templates\tales_django\about.html.django:31
+msgid "Версии"
+msgstr "Versions"
+
+#: .\tales_django\templates\tales_django\about.html.django:34
+msgid "Версия сервера"
+msgstr "Server version"
+
+#: .\tales_django\templates\tales_django\about.html.django:35
+msgid "Версия мобильного приложения"
+msgstr "Mobile applicaiton version"
+
+#: .\tales_django\templates\tales_django\about.html.django:40
 #: .\tales_django\templates\tales_django\author_details.html.django:49
 #: .\tales_django\templates\tales_django\cookies-agreement.html.django:33
 #: .\tales_django\templates\tales_django\rubric_details.html.django:39
@@ -955,25 +983,29 @@ msgstr "Авторы"
 msgid "Cookie Usage Agreement"
 msgstr "Соглашение об использовании файлов cookie"
 
-#: .\tales_django\templates\tales_django\favorites.html.django:35
+#: .\tales_django\templates\tales_django\favorites.html.django:45
 #: .\tales_django\templates\tales_django\index.html.django:26
 #: .\tales_django\templates\tales_django\index.html.django:30
 msgid "Tracks list"
 msgstr "Список треков"
 
-#: .\tales_django\templates\tales_django\profile.html.django:25
+#: .\tales_django\templates\tales_django\login_success.html.django:9
+msgid "Successful login"
+msgstr "Успешный вход"
+
+#: .\tales_django\templates\tales_django\profile.html.django:26
 msgid "Your registrations"
 msgstr "Ваши регистрации"
 
-#: .\tales_django\templates\tales_django\profile.html.django:28
+#: .\tales_django\templates\tales_django\profile.html.django:29
 msgid "You don't have any active registrations yet."
 msgstr "У вас еще нет активных регистраций."
 
-#: .\tales_django\templates\tales_django\profile.html.django:31
+#: .\tales_django\templates\tales_django\profile.html.django:32
 msgid "Membership"
 msgstr "Членство"
 
-#: .\tales_django\templates\tales_django\profile.html.django:37
+#: .\tales_django\templates\tales_django\profile.html.django:38
 #, python-format
 msgid ""
 "You’re a member since %(membership_started)s. Membership type: "
@@ -982,15 +1014,15 @@ msgstr ""
 "Вы являетесь участником сообщества с %(membership_started)s. Тип участия: "
 "%(membership_type)s."
 
-#: .\tales_django\templates\tales_django\profile.html.django:41
+#: .\tales_django\templates\tales_django\profile.html.django:42
 msgid "Not yet a member"
 msgstr "Вы ещё не член сообщества."
 
-#: .\tales_django\templates\tales_django\profile.html.django:42
+#: .\tales_django\templates\tales_django\profile.html.django:43
 msgid "Apply for a membership"
 msgstr "Подать заявку на членство в сообщество"
 
-#: .\tales_django\templates\tales_django\profile.html.django:49
+#: .\tales_django\templates\tales_django\profile.html.django:50
 msgid ""
 "You have unpaid membership, download invoice: {{ invoice_download_url }}"
 msgstr ""
@@ -999,7 +1031,7 @@ msgstr ""
 "(invoice_download_url)s\">загрузите счет-фактуру</a> и оплатите его прямо "
 "сейчас."
 
-#: .\tales_django\templates\tales_django\profile.html.django:63
+#: .\tales_django\templates\tales_django\profile.html.django:64
 msgid "Favorite tracks"
 msgstr "Избранные треки"
 
