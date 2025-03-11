@@ -138,7 +138,7 @@ class TrackViewSet(viewsets.GenericViewSet):
             'meta_csrftoken': meta_csrftoken,
             'csrftoken': csrftoken,
         }
-        logger.info(f'[incrementPlayedCount]: DEBUG:\n{debugObj(debugData)}')
+        logger.info(f'[byIds]: DEBUG:\n{debugObj(debugData)}')
 
         # Check session or csrf?
         if not check_csrf(request):
@@ -252,6 +252,12 @@ class TrackViewSet(viewsets.GenericViewSet):
                 )
 
             track = get_object_or_404(Track, pk=pk)
+
+            debugData = {
+                'value': value,
+                'track.id': track.id,
+            }
+            logger.info(f'[toggleFavorite]: params:\n{debugObj(debugData)}')
 
             favorite_tracks = request.user.favorite_tracks
             if value:
