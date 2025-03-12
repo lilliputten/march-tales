@@ -89,6 +89,12 @@ a.disabled {
 // Columns...
 .thumb-preview {
   width: 100%;
+  a {
+    transition: all var(--transitionTimeMs);
+    &:hover {
+      opacity: 0.8;
+    }
+  }
 }
 
 // Content

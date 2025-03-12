@@ -7,6 +7,8 @@
 
 - `track` object expected as an external variable.
 
+track_url: {% if request.path|str_starts:"/favorites" %}/favorites{% else %}/tracks{% endif %}/{{ track.id }}/
+
 {% endcomment %}
 
 <article
@@ -27,8 +29,14 @@
   {% endcomment %}
 >
   {% if track.preview_picture %}
-    <div class="thumb-preview" _style="opacity: 1; width: 610px; transform: translate3d(0px, 0px, 0px);">
-      <img src="{% get_media_prefix %}{{ track.preview_picture }}" class="card-img" alt="{% trans 'Track cover image' %}" aria-hidden="false" tabindex="0" loading="lazy" />
+    <div class="thumb-preview">
+      {% if not show_details %}
+      <a class="thumb-link" href="{% if request.path|str_starts:"/favorites" %}/favorites{% else %}/tracks{% endif %}/{{ track.id }}/">
+      {% endif %}
+        <img src="{% get_media_prefix %}{{ track.preview_picture }}" class="card-img" alt="{% trans 'Track cover image' %}" aria-hidden="false" tabindex="0" loading="lazy" />
+      {% if not show_details %}
+      </a>
+      {% endif %}
     </div>
   {% endif %}
 

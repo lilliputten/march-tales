@@ -19,11 +19,11 @@ class Author(Model):
         attrgetter=get_non_empty_localized_model_field_attrgetter,
     )
     short_description = TranslatedField(
-        models.TextField(_('short description'), blank=True, null=False, max_length=256),
+        models.TextField(_('short description'), blank=True, null=False, max_length=512),
         attrgetter=get_non_empty_localized_model_field_attrgetter,
     )
     description = TranslatedField(
-        models.TextField(_('description'), blank=True, null=False, max_length=1024),
+        models.TextField(_('description'), blank=True, null=False, max_length=4096),
         attrgetter=get_non_empty_localized_model_field_attrgetter,
     )
     portrait_picture = models.ImageField(_('portrait picture'), upload_to='authors', blank=True)

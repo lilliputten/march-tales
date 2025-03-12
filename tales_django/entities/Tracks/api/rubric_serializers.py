@@ -12,7 +12,11 @@ class RubricSerializer(serializers.HyperlinkedModelSerializer):
 
     def get_track_ids(self, obj):
         language = get_currrent_django_language()
-        tracks = Track.objects.filter(track_status='PUBLISHED', rubric__id=obj.id).distinct().order_by('-published_at', f'title_{language}')
+        tracks = (
+            Track.objects.filter(track_status='PUBLISHED', rubric__id=obj.id)
+            .distinct()
+            .order_by('-published_at', f'title_{language}')
+        )
         # tracks = Track.objects.filter(track_status='PUBLISHED', rubric__id=obj.id)
         return list(map(lambda t: t.id, tracks))
 
