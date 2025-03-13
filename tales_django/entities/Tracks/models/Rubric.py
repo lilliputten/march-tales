@@ -18,7 +18,7 @@ class Rubric(Model):
             unique=False,
             blank=False,
             null=False,
-            max_length=150,
+            max_length=256,
         ),
         attrgetter=get_non_empty_localized_model_field_attrgetter,
     )

@@ -30,7 +30,7 @@ class Track(Model):
             unique=False,
             blank=False,
             null=False,
-            max_length=250,
+            max_length=256,
             # verbose_name='track title',
             help_text=_('The track title text, required.'),
         ),
@@ -41,13 +41,13 @@ class Track(Model):
             _('description'),
             blank=True,
             null=False,
-            max_length=4096,
+            max_length=1024,
             help_text=_('Optional description'),
         ),
         attrgetter=get_non_empty_localized_model_field_attrgetter,
     )
     youtube_url = models.URLField(
-        verbose_name=_('youtube link'), blank=True, null=False, max_length=150, help_text=_('YouTube video link url')
+        verbose_name=_('youtube link'), blank=True, null=False, max_length=64, help_text=_('YouTube video link url')
     )
 
     author = models.ForeignKey('Author', verbose_name=_('author'), blank=True, null=True, on_delete=models.DO_NOTHING)

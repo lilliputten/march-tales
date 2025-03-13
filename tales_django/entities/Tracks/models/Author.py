@@ -15,7 +15,7 @@ class Author(Model):
         verbose_name_plural = _('authors')
 
     name = TranslatedField(
-        models.TextField(_('name'), blank=False, max_length=150),
+        models.TextField(_('name'), blank=False, max_length=256),
         attrgetter=get_non_empty_localized_model_field_attrgetter,
     )
     short_description = TranslatedField(
@@ -23,7 +23,7 @@ class Author(Model):
         attrgetter=get_non_empty_localized_model_field_attrgetter,
     )
     description = TranslatedField(
-        models.TextField(_('description'), blank=True, null=False, max_length=4096),
+        models.TextField(_('description'), blank=True, null=False, max_length=1024),
         attrgetter=get_non_empty_localized_model_field_attrgetter,
     )
     portrait_picture = models.ImageField(_('portrait picture'), upload_to='authors', blank=True)

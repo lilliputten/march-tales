@@ -398,10 +398,10 @@ USE_I18N = True
 USE_L10N = True
 LOCALE_PATHS = (posixpath.join(BASE_DIR, APP_NAME, 'locale'),)
 LANGUAGES = (
-    ('en', 'English'),
     ('ru', 'Русский'),
+    ('en', 'English'),
 )
-DEFAULT_LANGUAGE = LANGUAGES[0][0]
+DEFAULT_LANGUAGE = 'en' # LANGUAGES[0][0]
 LANGUAGES_DICT = {lng: name for lng, name in list(LANGUAGES)}
 LANGUAGES_LIST = [lng[0] for lng in list(LANGUAGES)]
 CMS_LANGUAGES = {
