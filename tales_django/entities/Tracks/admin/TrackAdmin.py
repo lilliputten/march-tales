@@ -1,6 +1,5 @@
 import traceback
 
-from django.utils import translation
 from translated_fields import TranslatedFieldAdmin, to_attribute
 
 from django.utils.translation import gettext_lazy as _
@@ -8,12 +7,13 @@ from django.utils.translation import get_language
 
 from django.contrib import admin
 from django.contrib import messages
-from django.contrib.admin import SimpleListFilter
 from django.db.models import Q, F
 from django.db.models.functions import Lower
 
 from django.core.files.uploadedfile import TemporaryUploadedFile
 from django.core.files.base import File
+
+from unfold.admin import ModelAdmin as UnfoldModelAdmin
 
 from core.ffmpeg import probeDuration
 from core.helpers.errors import errorToString
@@ -26,7 +26,7 @@ from ..forms import TrackAdminForm
 _logger = getDebugLogger()
 
 
-class IsPublishedFilter(SimpleListFilter):
+class IsPublishedFilter(admin.SimpleListFilter):
     """
     Published tracks filter
     """
@@ -47,9 +47,30 @@ class IsPublishedFilter(SimpleListFilter):
             return queryset.filter(~Q(track_status='PUBLISHED'))
 
 
+@admin.action(description=_('Mark as published'))
+def mark_published_action(modeladmin, request, queryset):
+    queryset.update(track_status='PUBLISHED')
+
+
+@admin.action(description=_('Mark as hidden'))
+def mark_hidden_action(modeladmin, request, queryset):
+    queryset.update(track_status='HIDDEN')
+
+
+@admin.action(description=_('Mark as test'))
+def mark_test_action(modeladmin, request, queryset):
+    queryset.update(track_status='TEST')
+
+
 @admin.register(Track)
-class TrackAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
+# class TrackAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
+class TrackAdmin(TranslatedFieldAdmin, UnfoldModelAdmin):   # admin.ModelAdmin):
     form = TrackAdminForm
+    actions = [
+        mark_published_action,
+        mark_hidden_action,
+        mark_test_action,
+    ]
     list_display = [
         'title_translated',
         'author',

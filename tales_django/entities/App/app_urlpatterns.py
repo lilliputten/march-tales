@@ -11,6 +11,8 @@ from django.utils.translation import gettext_lazy as _
 from allauth.account.decorators import secure_admin_login
 from django.views.generic import RedirectView
 
+from tales_django.sites import unfold_admin_site
+
 # from .views.about_view import about_view
 # from tales_django.entities.App.views import cookies_agreement_view
 # from .views.terms_view import terms_view
@@ -52,6 +54,7 @@ app_urlpatterns = [
     path(r'i18n/', include('django.conf.urls.i18n')),
     # App-provided paths...
     path(r'admin/', admin.site.urls, name='admin'),
+    path(r'unfold-admin/', unfold_admin_site.urls), # <-- Unfold admin
     # Service pages...
     path(
         r'robots.txt',

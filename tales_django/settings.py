@@ -130,7 +130,10 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 INSTALLED_APPS = [
-    # # Unfold: https://unfoldadmin.com/docs/installation/quickstart/
+    # Unfold:
+    # @see https://unfoldadmin.com/docs/installation/quickstart/
+    # @see https://unfoldadmin.com/blog/migrating-django-admin-unfold/
+    'unfold.apps.BasicAppConfig',
     # 'unfold',  # before django.contrib.admin
     # 'unfold.contrib.filters',  # optional, if special filters are needed
     # 'unfold.contrib.forms',  # optional, if special form elements are needed
@@ -173,6 +176,7 @@ INSTALLED_APPS = [
     # Other...
     'markdownify.apps.MarkdownifyConfig',
     # app
+    # APP_NAME + '.apps.TalesConfig',
     APP_NAME,
 ]
 if LOCAL:
@@ -194,6 +198,10 @@ MIDDLEWARE = [
     # # Html content prettifier (TODO: Requires fixes for invalid html tags formatting)
     # APP_NAME + '.middleware.BeautifulMiddleware.BeautifulMiddleware',
 ]
+
+UNFOLD = {
+    "DASHBOARD_CALLBACK": "tales_django.unfold.dashboard_callback",
+}
 
 MARKDOWNIFY = {
     'default': {
@@ -401,7 +409,7 @@ LANGUAGES = (
     ('ru', 'Русский'),
     ('en', 'English'),
 )
-DEFAULT_LANGUAGE = 'en' # LANGUAGES[0][0]
+DEFAULT_LANGUAGE = 'en'   # LANGUAGES[0][0]
 LANGUAGES_DICT = {lng: name for lng, name in list(LANGUAGES)}
 LANGUAGES_LIST = [lng[0] for lng in list(LANGUAGES)]
 CMS_LANGUAGES = {

@@ -1,6 +1,6 @@
 #!/bin/sh
 # @desc Update version number & build timestamps
-# @changed 2025.01.03, 19:19
+# @changed 2025.03.13, 22:11
 
 scriptsPath=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
 rootPath=`dirname "$scriptsPath"`
@@ -73,9 +73,9 @@ UPDATE_FILE() {
     > $FILE || exit 1
   elif [ "$EXT" = "toml" -o "$EXT" = "gradle" ]; then # Python
     cat $FILE.bak \
-      | sed "s/\(version\s*=\s*\)\([\"']\).*\2/\1\2$VERSION\2/" \
-      | sed "s/\(timestamp\s*=\s*\)\([\"']\).*\2/\1\2$TIMESTAMP\2/" \
-      | sed "s/\(timetag\s*=\s*\)\([\"']\).*\2/\1\2$TIMETAG\2/" \
+      | sed "s/\(^\s*version\s*=\s*\)\([\"']\).*\2/\1\2$VERSION\2/" \
+      | sed "s/\(^\s*timestamp\s*=\s*\)\([\"']\).*\2/\1\2$TIMESTAMP\2/" \
+      | sed "s/\(^\s*timetag\s*=\s*\)\([\"']\).*\2/\1\2$TIMETAG\2/" \
     > $FILE || exit 1
   elif [ "$EXT" = "py" ]; then # Python
     cat $FILE.bak \
