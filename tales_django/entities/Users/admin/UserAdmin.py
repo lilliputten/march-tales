@@ -19,8 +19,8 @@ class IsRegularUserFilter(SimpleListFilter):
 
     def lookups(self, request, model_admin):
         return (
-            ('1', 'Yes'),
-            ('0', 'No'),
+            ('1', _('Yes')),
+            ('0', _('No')),
         )
 
     def queryset(self, _request, queryset):

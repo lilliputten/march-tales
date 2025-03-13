@@ -6,8 +6,6 @@ from django.contrib import admin
 from django.db.models import Count, F
 from django.db.models.functions import Lower
 
-# from django.db.models.functions import Concat
-
 from ..models import Author
 from ..forms import AuthorAdminForm
 
@@ -21,6 +19,14 @@ class AuthorAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
         'promote',
         'tracks_count',
         'has_portrait',
+    ]
+    search_fields = [
+        'name_en',
+        'name_ru',
+        # 'short_description_en',
+        # 'short_description_ru',
+        # 'description_en',
+        # 'description_ru',
     ]
     # fieldsets = [
     #     (_('Name'), {'fields': Author.name.fields}),

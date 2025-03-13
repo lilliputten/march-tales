@@ -9,12 +9,12 @@ from tales_django.core.model_helpers import get_non_empty_localized_model_field_
 
 class Tag(Model):
     class Meta:
-        verbose_name = _('tag')
-        verbose_name_plural = _('tags')
+        verbose_name = _('Tag')
+        verbose_name_plural = _('Tags')
 
     text = TranslatedField(
         models.TextField(
-            _('text'),
+            _('Text'),
             unique=False,
             blank=False,
             null=False,
@@ -23,7 +23,7 @@ class Tag(Model):
         attrgetter=get_non_empty_localized_model_field_attrgetter,
     )
 
-    promote = models.BooleanField(_('promote'), default=False, help_text=_('Promote on the main page'))
+    promote = models.BooleanField(_('Promote'), default=False, help_text=_('Promote on the main page'))
 
     @property
     def tracks_count(self):

@@ -19,6 +19,10 @@ class RubricAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
         'promote',
         'rubricated_tracks_count',
     ]
+    search_fields = [
+        'text_en',
+        'text_ru',
+    ]
 
     def get_queryset(self, request):
         queryset = super().get_queryset(request)

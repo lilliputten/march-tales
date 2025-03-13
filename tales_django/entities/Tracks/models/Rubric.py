@@ -9,12 +9,12 @@ from tales_django.core.model_helpers import get_non_empty_localized_model_field_
 
 class Rubric(Model):
     class Meta:
-        verbose_name = _('rubric')
-        verbose_name_plural = _('rubrics')
+        verbose_name = _('Rubric')
+        verbose_name_plural = _('Rubrics')
 
     text = TranslatedField(
         models.TextField(
-            _('text'),
+            _('Text'),
             unique=False,
             blank=False,
             null=False,
@@ -23,7 +23,7 @@ class Rubric(Model):
         attrgetter=get_non_empty_localized_model_field_attrgetter,
     )
 
-    promote = models.BooleanField(_('promote'), default=False, help_text=_('Promote on the main page'))
+    promote = models.BooleanField(_('Promote'), default=False, help_text=_('Promote on the main page'))
 
     @property
     def tracks_count(self):

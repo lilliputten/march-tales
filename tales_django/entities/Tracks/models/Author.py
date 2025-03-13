@@ -11,23 +11,23 @@ from tales_django.core.model_helpers import (
 
 class Author(Model):
     class Meta:
-        verbose_name = _('author')
-        verbose_name_plural = _('authors')
+        verbose_name = _('Author')
+        verbose_name_plural = _('Authors')
 
     name = TranslatedField(
-        models.TextField(_('name'), blank=False, max_length=256),
+        models.TextField(_('Name'), blank=False, max_length=256),
         attrgetter=get_non_empty_localized_model_field_attrgetter,
     )
     short_description = TranslatedField(
-        models.TextField(_('short description'), blank=True, null=False, max_length=512),
+        models.TextField(_('Short description'), blank=True, null=False, max_length=512),
         attrgetter=get_non_empty_localized_model_field_attrgetter,
     )
     description = TranslatedField(
-        models.TextField(_('description'), blank=True, null=False, max_length=1024),
+        models.TextField(_('Description'), blank=True, null=False, max_length=1024),
         attrgetter=get_non_empty_localized_model_field_attrgetter,
     )
-    portrait_picture = models.ImageField(_('portrait picture'), upload_to='authors', blank=True)
-    promote = models.BooleanField(_('promote'), default=False, help_text=_('Promote on the main page'))
+    portrait_picture = models.ImageField(_('Portrait picture'), upload_to='authors', blank=True)
+    promote = models.BooleanField(_('Promote'), default=False, help_text=_('Promote on the main page'))
 
     @property
     def tracks_count(self):

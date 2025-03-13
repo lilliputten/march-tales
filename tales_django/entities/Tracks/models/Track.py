@@ -21,12 +21,12 @@ _logger = getDebugLogger()
 
 class Track(Model):
     class Meta:
-        verbose_name = _('track')
-        verbose_name_plural = _('tracks')
+        verbose_name = _('Track')
+        verbose_name_plural = _('Tracks')
 
     title = TranslatedField(
         models.TextField(
-            _('title'),
+            _('Title'),
             unique=False,
             blank=False,
             null=False,
@@ -38,7 +38,7 @@ class Track(Model):
     )
     description = TranslatedField(
         models.TextField(
-            _('description'),
+            _('Description'),
             blank=True,
             null=False,
             max_length=1024,
@@ -47,13 +47,13 @@ class Track(Model):
         attrgetter=get_non_empty_localized_model_field_attrgetter,
     )
     youtube_url = models.URLField(
-        verbose_name=_('youtube link'), blank=True, null=False, max_length=64, help_text=_('YouTube video link url')
+        verbose_name=_('Youtube link'), blank=True, null=False, max_length=64, help_text=_('YouTube video link url')
     )
 
-    author = models.ForeignKey('Author', verbose_name=_('author'), blank=True, null=True, on_delete=models.DO_NOTHING)
+    author = models.ForeignKey('Author', verbose_name=_('Author'), blank=True, null=True, on_delete=models.DO_NOTHING)
 
-    tags = models.ManyToManyField('Tag', verbose_name=_('tags'), blank=True, related_name='tagged_tracks')
-    rubrics = models.ManyToManyField('Rubric', verbose_name=_('rubrics'), blank=True, related_name='rubricated_tracks')
+    tags = models.ManyToManyField('Tag', verbose_name=_('Tags'), blank=True, related_name='tagged_tracks')
+    rubrics = models.ManyToManyField('Rubric', verbose_name=_('Rubrics'), blank=True, related_name='rubricated_tracks')
 
     uploadsFolder = getAudioTrackFolderName()
 
@@ -73,9 +73,9 @@ class Track(Model):
         ('TEST', _('Test')),  # DEBUG!
     ]
     DEFAULT_TRACK_STATUS = TRACK_STATUS[0][0]
-    track_status = models.TextField(_('status'), choices=TRACK_STATUS, default=DEFAULT_TRACK_STATUS)
+    track_status = models.TextField(_('Status'), choices=TRACK_STATUS, default=DEFAULT_TRACK_STATUS)
 
-    for_members = models.BooleanField(_('for members only'), default=False)   # , verbose_name=_('for members only'))
+    for_members = models.BooleanField(_('For members only'), default=False)   # , verbose_name=_('For members only'))
 
     played_count = models.BigIntegerField(blank=True, default=0, help_text=_('Played count'))
 
@@ -85,15 +85,15 @@ class Track(Model):
 
     # Timestamps
     # created_at = models.DateField(auto_now_add=True)
-    published_at = models.DateField(verbose_name=_('published at'), default=date.today)
-    updated_at = models.DateField(verbose_name=_('updated at'), auto_now=True)
+    published_at = models.DateField(verbose_name=_('Published at'), default=date.today)
+    updated_at = models.DateField(verbose_name=_('Updated at'), auto_now=True)
 
     # Owner/creator
     published_by = models.ForeignKey(
-        'User', verbose_name=_('published by'), related_name='publisher', on_delete=models.DO_NOTHING
+        'User', verbose_name=_('Published by'), related_name='publisher', on_delete=models.DO_NOTHING
     )
     updated_by = models.ForeignKey(
-        'User', verbose_name=_('updated by'), related_name='updater', on_delete=models.DO_NOTHING
+        'User', verbose_name=_('Updated by'), related_name='updater', on_delete=models.DO_NOTHING
     )
 
     @property

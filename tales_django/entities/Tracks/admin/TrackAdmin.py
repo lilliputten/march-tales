@@ -1,5 +1,6 @@
 import traceback
 
+from django.utils import translation
 from translated_fields import TranslatedFieldAdmin, to_attribute
 
 from django.utils.translation import gettext_lazy as _
@@ -33,10 +34,10 @@ class IsPublishedFilter(SimpleListFilter):
     title = _('Published')
     parameter_name = 'is_published'
 
-    def lookups(self, _, __):
+    def lookups(self, request, model_admin):
         return (
-            ('1', 'Yes'),
-            ('0', 'No'),
+            ('1', _('Yes')),
+            ('0', _('No')),
         )
 
     def queryset(self, _, queryset):
@@ -57,11 +58,15 @@ class TrackAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
         'duration_formatted',
         'size_formatted',
         # 'resolved_date',
-        'published_at',
-        'published_by',
-        'has_preview',
-        'for_members',
         'is_published',
+        'published_at',
+        # 'published_by',
+        # 'has_preview',
+        # 'for_members',
+    ]
+    search_fields = [
+        'title_en',
+        'title_ru',
     ]
     readonly_fields = (
         'duration_formatted',
@@ -84,6 +89,10 @@ class TrackAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
     )
     list_filter = [
         IsPublishedFilter,
+        'published_at',
+        'author',
+        'rubrics',
+        'tags',
     ]
 
     # fieldsets = [
