@@ -133,7 +133,7 @@ INSTALLED_APPS = [
     # Unfold:
     # @see https://unfoldadmin.com/docs/installation/quickstart/
     # @see https://unfoldadmin.com/blog/migrating-django-admin-unfold/
-    'unfold.apps.BasicAppConfig',
+    # 'unfold.apps.BasicAppConfig',
     # 'unfold',  # before django.contrib.admin
     # 'unfold.contrib.filters',  # optional, if special filters are needed
     # 'unfold.contrib.forms',  # optional, if special form elements are needed

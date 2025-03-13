@@ -63,8 +63,7 @@ def mark_test_action(modeladmin, request, queryset):
 
 
 @admin.register(Track)
-# class TrackAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
-class TrackAdmin(TranslatedFieldAdmin, UnfoldModelAdmin):   # admin.ModelAdmin):
+class TrackAdmin(TranslatedFieldAdmin, admin.ModelAdmin): # UnfoldModelAdmin
     form = TrackAdminForm
     actions = [
         mark_published_action,
