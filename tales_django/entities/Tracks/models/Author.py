@@ -26,7 +26,7 @@ class Author(Model):
         models.TextField(_('Description'), blank=True, null=False, max_length=1024),
         attrgetter=get_non_empty_localized_model_field_attrgetter,
     )
-    portrait_picture = models.ImageField(_('Portrait picture'), upload_to='authors', blank=True)
+    portrait_picture = models.ImageField(_('Portrait picture'), upload_to='authors', blank=False, null=False)
     promote = models.BooleanField(_('Promote'), default=False, help_text=_('Promote on the main page'))
 
     @property

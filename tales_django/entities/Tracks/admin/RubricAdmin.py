@@ -16,9 +16,23 @@ from ..models import Rubric
 # from ..forms import RubricAdminForm
 
 
+@admin.action(description=_('Promote'))
+def promote_action(modeladmin, request, queryset):
+    queryset.update(promote=True)
+
+
+@admin.action(description=_('No promote'))
+def no_promote_action(modeladmin, request, queryset):
+    queryset.update(promote=False)
+
+
 @admin.register(Rubric, site=unfold_admin_site)
 class RubricAdmin(TranslatedFieldAdmin, UnfoldModelAdmin):
     # form = RubricAdminForm
+    actions = [
+        promote_action,
+        no_promote_action,
+    ]
     list_display = [
         'text_translated',
         'promote',

@@ -64,7 +64,9 @@ class Track(Model):
         blank=False,
         null=False,
     )
-    preview_picture = models.ImageField(upload_to=uploadsFolder, blank=False, null=False, verbose_name=_('Preview picture'))
+    preview_picture = models.ImageField(
+        upload_to=uploadsFolder, blank=False, null=False, verbose_name=_('Preview picture')
+    )
 
     # Track status
     TRACK_STATUS = [
@@ -77,7 +79,9 @@ class Track(Model):
 
     for_members = models.BooleanField(_('For members only'), default=False)   # , verbose_name=_('For members only'))
 
-    played_count = models.BigIntegerField(blank=True, default=0, help_text=_('Played count'), verbose_name=_('Played count'))
+    played_count = models.BigIntegerField(
+        blank=True, default=0, help_text=_('Played count'), verbose_name=_('Played count')
+    )
 
     # Properties derived from the audio track file
     audio_duration = models.FloatField(null=True, help_text=_('Duration (seconds)'))

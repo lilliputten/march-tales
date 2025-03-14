@@ -15,11 +15,23 @@ from ..models import Author
 # from ..forms import AuthorAdminForm
 
 
-# @admin.register(Author)
-# class AuthorAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
+@admin.action(description=_('Promote'))
+def promote_action(modeladmin, request, queryset):
+    queryset.update(promote=True)
+
+
+@admin.action(description=_('No promote'))
+def no_promote_action(modeladmin, request, queryset):
+    queryset.update(promote=False)
+
+
 @admin.register(Author, site=unfold_admin_site)
 class AuthorAdmin(TranslatedFieldAdmin, UnfoldModelAdmin):
     # form = AuthorAdminForm
+    actions = [
+        promote_action,
+        no_promote_action,
+    ]
     list_display = [
         'name_translated',
         # 'name',
