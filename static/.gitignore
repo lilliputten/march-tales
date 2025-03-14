@@ -12,6 +12,5 @@ samples
 # project root)
 downloads/apk
 
-# Possible gathered from (unused) django admin (unfold admin is used recently)
-
-admin
+# Possibly gathered from (unused) django admin (unfold admin is used recently)
+# admin

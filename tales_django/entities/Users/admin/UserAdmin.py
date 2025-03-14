@@ -5,6 +5,8 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 # from django.contrib.auth.admin import UserAdmin
 from django.db.models import Q
 
+from import_export.admin import ExportActionModelAdmin, ImportExportModelAdmin
+from unfold.contrib.import_export.forms import ExportForm, ImportForm
 from translated_fields import TranslatedFieldAdmin
 
 from unfold.admin import ModelAdmin as UnfoldModelAdmin
@@ -36,7 +38,9 @@ class IsAdministratorFilter(admin.SimpleListFilter):
 
 
 @admin.register(User, site=unfold_admin_site)
-class UserAdmin(BaseUserAdmin, TranslatedFieldAdmin, UnfoldModelAdmin):
+class UserAdmin(BaseUserAdmin, TranslatedFieldAdmin, ImportExportModelAdmin, ExportActionModelAdmin, UnfoldModelAdmin):
+    import_form_class = ImportForm
+    export_form_class = ExportForm
 
     fieldsets = (
         (None, {'fields': ('username', 'password')}),

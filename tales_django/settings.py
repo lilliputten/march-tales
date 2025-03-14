@@ -204,6 +204,8 @@ MIDDLEWARE = [
     APP_NAME + '.middleware.CurrentRequestMiddleware.CurrentRequestMiddleware',
 ]
 
+IMPORT_EXPORT_USE_TRANSACTIONS = True
+
 UNFOLD = {
     # @see https://unfoldadmin.com/docs/configuration/settings/
     'SITE_TITLE': _('Administration'),

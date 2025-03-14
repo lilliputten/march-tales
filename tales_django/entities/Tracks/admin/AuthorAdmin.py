@@ -1,3 +1,5 @@
+from import_export.admin import ExportActionModelAdmin, ImportExportModelAdmin
+from unfold.contrib.import_export.forms import ExportForm, ImportForm
 from translated_fields import TranslatedFieldAdmin, to_attribute
 
 from django.utils.translation import get_language
@@ -26,8 +28,10 @@ def no_promote_action(modeladmin, request, queryset):
 
 
 @admin.register(Author, site=unfold_admin_site)
-class AuthorAdmin(TranslatedFieldAdmin, UnfoldModelAdmin):
-    # form = AuthorAdminForm
+class AuthorAdmin(TranslatedFieldAdmin, ImportExportModelAdmin, ExportActionModelAdmin, UnfoldModelAdmin):
+    import_form_class = ImportForm
+    export_form_class = ExportForm
+
     actions = [
         promote_action,
         no_promote_action,

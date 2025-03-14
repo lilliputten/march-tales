@@ -2,6 +2,10 @@ import traceback
 
 from translated_fields import TranslatedFieldAdmin, to_attribute
 
+from unfold.admin import ModelAdmin as UnfoldModelAdmin
+from import_export.admin import ExportActionModelAdmin, ImportExportModelAdmin
+from unfold.contrib.import_export.forms import ExportForm, ImportForm   # , SelectableFieldsExportForm
+
 from django.utils.translation import gettext_lazy as _
 from django.utils.translation import get_language
 
@@ -14,9 +18,6 @@ from django.db.models.functions import Lower
 from django.core.files.uploadedfile import TemporaryUploadedFile
 from django.core.files.base import File
 
-from unfold.admin import ModelAdmin as UnfoldModelAdmin
-
-from tales_django.core.model_helpers import get_currrent_django_language
 from tales_django.sites import unfold_admin_site
 
 from core.ffmpeg import probeDuration
@@ -76,7 +77,10 @@ def no_promote_action(modeladmin, request, queryset):
 
 
 @admin.register(Track, site=unfold_admin_site)
-class TrackAdmin(TranslatedFieldAdmin, UnfoldModelAdmin):
+class TrackAdmin(TranslatedFieldAdmin, ImportExportModelAdmin, ExportActionModelAdmin, UnfoldModelAdmin):
+    import_form_class = ImportForm
+    export_form_class = ExportForm
+    # export_form_class = SelectableFieldsExportForm
 
     fieldsets = (
         (

@@ -446,7 +446,7 @@ msgstr "Описание"
 
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:101
 msgid "Media"
-msgstr "Мкдиа"
+msgstr "Медиа"
 
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:111
 msgid "Attributes"
@@ -927,7 +927,7 @@ msgstr "Выбрать запись"
 
 #: .\tales_django\templates\custom-translations.django:20
 msgid "Select all rows"
-msgstr "Выбрат все записи"
+msgstr "Выбрать все записи"
 
 #: .\tales_django\templates\registration\logged_out.html:17
 msgid "Logged out"

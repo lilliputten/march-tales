@@ -1,3 +1,5 @@
+from import_export.admin import ExportActionModelAdmin, ImportExportModelAdmin
+from unfold.contrib.import_export.forms import ExportForm, ImportForm
 from translated_fields import TranslatedFieldAdmin, to_attribute
 
 from django.utils.translation import gettext_lazy as _
@@ -12,8 +14,6 @@ from tales_django.sites import unfold_admin_site
 
 from ..models import Tag
 
-# from ..forms import TagAdminForm
-
 
 @admin.action(description=_('Promote'))
 def promote_action(modeladmin, request, queryset):
@@ -26,8 +26,10 @@ def no_promote_action(modeladmin, request, queryset):
 
 
 @admin.register(Tag, site=unfold_admin_site)
-class TagAdmin(TranslatedFieldAdmin, UnfoldModelAdmin):
-    # form = TagAdminForm
+class TagAdmin(TranslatedFieldAdmin, ImportExportModelAdmin, ExportActionModelAdmin, UnfoldModelAdmin):
+    import_form_class = ImportForm
+    export_form_class = ExportForm
+
     actions = [
         promote_action,
         no_promote_action,
