@@ -43,6 +43,7 @@ mysqlclient = "^2.2.7"
 pyright = "^1.1.393"
 django-markdownify = "^0.9.5"
 django-unfold = "^0.51.0"
+django-import-export = "^4.3.7"
 
 [tool.poetry.group.dev.dependencies]
 blue = "^0.9.1"
