@@ -101,7 +101,7 @@ msgstr "Длительность"
 #: .\src\assets\common-blocks\track-details\track-details.django:31
 #: .\tales_django\entities\Tracks\models\Track.py:88
 msgid "Published at"
-msgstr "Опубликовано в"
+msgstr "Дата публикации"
 
 #: .\src\assets\common-blocks\track-details\track-details.django:36
 #: .\src\assets\template-right-blocks\right-rubrics-list\right-rubrics-list.django:7
@@ -566,7 +566,7 @@ msgstr "Размер файла (байты)"
 
 #: .\tales_django\entities\Tracks\models\Track.py:89
 msgid "Updated at"
-msgstr "Обновлено в"
+msgstr "Дата обновления"
 
 #: .\tales_django\entities\Tracks\models\Track.py:93
 msgid "Published by"

@@ -48,7 +48,7 @@
 
         {% if user.is_staff %}
           <!-- Admin panel -->
-          <li><a class="dropdown-item" href="{% url 'unfold-admin:tales_django_track_changelist' %}">{% trans 'Admin panel' %}</a></li>
+          <li><a class="dropdown-item" target="_blank" href="{% url 'unfold-admin:tales_django_track_changelist' %}?is_published=1">{% trans 'Admin panel' %}</a></li>
           <li><hr class="dropdown-divider" /></li>
         {% endif %}
 

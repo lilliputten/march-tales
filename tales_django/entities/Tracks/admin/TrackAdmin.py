@@ -1,5 +1,6 @@
 import traceback
 
+from django.urls import reverse
 from translated_fields import TranslatedFieldAdmin, to_attribute
 
 # from modeltranslation.admin import TabbedTranslationAdmin
@@ -11,6 +12,7 @@ from django.utils.translation import get_language
 from django.contrib.admin import SimpleListFilter
 from django.contrib import admin
 from django.contrib import messages
+from django.db import models
 from django.db.models import Q, F
 from django.db.models.functions import Lower
 
@@ -71,7 +73,9 @@ def mark_test_action(modeladmin, request, queryset):
 
 @admin.register(Track, site=unfold_admin_site)
 class TrackAdmin(TranslatedFieldAdmin, UnfoldModelAdmin):
+
     # form = TrackAdminForm
+
     actions = [
         mark_published_action,
         mark_hidden_action,
@@ -87,6 +91,7 @@ class TrackAdmin(TranslatedFieldAdmin, UnfoldModelAdmin):
         # 'resolved_date',
         'is_published',
         'published_at',
+        'updated_at',
         # 'published_by',
         # 'has_preview',
         # 'for_members',
