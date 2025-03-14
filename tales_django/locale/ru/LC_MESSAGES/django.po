@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-14 05:22+0300\n"
+"POT-Creation-Date: 2025-03-14 05:31+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -811,6 +811,26 @@ msgstr "Трек был успешно удален из избранного"
 #: .\tales_django\templates\custom-translations.django:5
 msgid "Select action"
 msgstr "Выбрать действие"
+
+#: .\tales_django\templates\custom-translations.django:6
+msgid "Search apps and models..."
+msgstr "Искать приложения..."
+
+#: .\tales_django\templates\custom-translations.django:7
+msgid "All applications"
+msgstr "Все приложения"
+
+#: .\tales_django\templates\custom-translations.django:8
+msgid "Dark"
+msgstr "Тёмная"
+
+#: .\tales_django\templates\custom-translations.django:9
+msgid "Light"
+msgstr "Светлая"
+
+#: .\tales_django\templates\custom-translations.django:10
+msgid "System"
+msgstr "Системная"
 
 #: .\tales_django\templates\registration\logged_out.html:17
 msgid "Logged out"

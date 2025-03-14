@@ -3,3 +3,8 @@
 {% load i18n %}
 
 {% trans 'Select action' %}
+{% trans 'Search apps and models...' %}
+{% trans 'All applications' %}
+{% trans 'Dark' %}
+{% trans 'Light' %}
+{% trans 'System' %}

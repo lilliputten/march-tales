@@ -208,13 +208,13 @@ UNFOLD = {
     'SITE_TITLE': _('Administration'),
     'SITE_HEADER': _('Administration'),
     'SITE_SYMBOL': 'speed',
-    'SITE_ICON': lambda _: static('images/march-cat/ic_launcher_round_png.png'),
+    'SITE_ICON': lambda _: static('images/march-cat/ic_launcher.png'),
     'SITE_FAVICONS': [
         {
             'rel': 'icon',
             'sizes': '32x32',
             'type': 'image/svg+xml',
-            'href': lambda _: static('images/march-cat/ic_launcher_round_png.png'),
+            'href': lambda _: static('images/march-cat/ic_launcher.png'),
         },
     ],
     'SHOW_LANGUAGES': True,
