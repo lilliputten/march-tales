@@ -41,6 +41,8 @@ See `poetry-scripts` and `pyproject.toml` `[tool.poetry.scripts]` sectionfor ref
 - `django_runserver`
 - `django_livereload`
 
+Don't forget to export requirements (from the poetry project a to plain `requirements.txt` file) after dependencies updates.
+
 ### Webpack-based forntend part
 
 Use pnpm commands (see `package.json`, `scripts` section`):

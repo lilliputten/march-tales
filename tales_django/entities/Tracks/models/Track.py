@@ -75,7 +75,7 @@ class Track(Model):
         ('TEST', _('Test')),  # DEBUG!
     ]
     DEFAULT_TRACK_STATUS = TRACK_STATUS[0][0]
-    track_status = models.TextField(_('Status'), choices=TRACK_STATUS, default=DEFAULT_TRACK_STATUS)
+    track_status = models.TextField(_('Status'), choices=TRACK_STATUS, default=DEFAULT_TRACK_STATUS, help_text=_('Only published tracks will be shown'))
 
     promote = models.BooleanField(_('Promote'), default=False, help_text=_('Promote on the main page'))
 

@@ -1,22 +1,13 @@
 import traceback
 
-# from django.urls import reverse
 from translated_fields import TranslatedFieldAdmin, to_attribute
-
-# from translated_fields import TranslatedField, to_attribute
-
-# from .get_currrent_django_language import get_currrent_django_language
-# from modeltranslation.admin import TabbedTranslationAdmin
-# from translated_fields import TranslatedFieldAdmin
 
 from django.utils.translation import gettext_lazy as _
 from django.utils.translation import get_language
 
-# from django.contrib.admin import SimpleListFilter
 from django.contrib import admin
 from django.contrib import messages
 
-# from django.db import models
 from django.db.models import Q, F
 from django.db.models.functions import Lower
 
@@ -87,7 +78,6 @@ def no_promote_action(modeladmin, request, queryset):
 @admin.register(Track, site=unfold_admin_site)
 class TrackAdmin(TranslatedFieldAdmin, UnfoldModelAdmin):
 
-    # language = get_currrent_django_language()
     fieldsets = (
         (
             _('Title'),
@@ -201,9 +191,9 @@ class TrackAdmin(TranslatedFieldAdmin, UnfoldModelAdmin):
     )
     exclude = (
         # 'published_by',
-        'updated_by',
         # 'published_at',
-        'updated_at',
+        # 'updated_by',
+        # 'updated_at',
         'audio_duration',
         'audio_size',
     )
@@ -218,12 +208,6 @@ class TrackAdmin(TranslatedFieldAdmin, UnfoldModelAdmin):
         'tags',
         # 'played_count',
     ]
-
-    # fieldsets = [
-    #     (_('Title'), {'fields': Track.title.fields}),
-    #     (_('Description'), {'fields': Track.description.fields}),
-    #     # Requires excplicit list of all the other fields...
-    # ]
 
     def is_published(self, track):
         return track.track_status == 'PUBLISHED'
