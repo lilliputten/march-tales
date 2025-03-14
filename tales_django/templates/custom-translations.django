@@ -8,3 +8,10 @@
 {% trans 'Dark' %}
 {% trans 'Light' %}
 {% trans 'System' %}
+{% trans 'Run' %}
+{% trans 'No results found' %}
+{% trans 'This page yielded into no results. Create a new item or reset your filters.' %}
+{% trans 'Reset filters' %}
+{% trans 'Select value' %}
+{% trans 'Choose file to upload' %}
+{% trans 'Please correct the errors below.' %}

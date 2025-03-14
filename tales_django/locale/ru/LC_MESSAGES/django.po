@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-14 05:31+0300\n"
+"POT-Creation-Date: 2025-03-14 07:08+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -94,7 +94,7 @@ msgid "Played count"
 msgstr "Счётчик прослушиваний"
 
 #: .\src\assets\common-blocks\track-details\track-details.django:27
-#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:162
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:167
 msgid "Duration"
 msgstr "Длительность"
 
@@ -105,10 +105,10 @@ msgstr "Опубликовано в"
 
 #: .\src\assets\common-blocks\track-details\track-details.django:36
 #: .\src\assets\template-right-blocks\right-rubrics-list\right-rubrics-list.django:7
-#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:155
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:160
 #: .\tales_django\entities\Tracks\models\Rubric.py:13
 #: .\tales_django\entities\Tracks\models\Track.py:56
-#: .\tales_django\settings.py:241
+#: .\tales_django\settings.py:242
 #: .\tales_django\templates\tales_django\rubric_details.html.django:21
 #: .\tales_django\templates\tales_django\rubric_index.html.django:20
 msgid "Rubrics"
@@ -116,10 +116,10 @@ msgstr "Разделы"
 
 #: .\src\assets\common-blocks\track-details\track-details.django:48
 #: .\src\assets\template-right-blocks\right-tags-list\right-tags-list.django:7
-#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:149
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:154
 #: .\tales_django\entities\Tracks\models\Tag.py:13
 #: .\tales_django\entities\Tracks\models\Track.py:55
-#: .\tales_django\settings.py:246
+#: .\tales_django\settings.py:247
 #: .\tales_django\templates\tales_django\tag_details.html.django:21
 #: .\tales_django\templates\tales_django\tag_index.html.django:20
 msgid "Tags"
@@ -263,7 +263,7 @@ msgstr "О проекте"
 
 #: .\src\assets\template-right-blocks\right-authors-list\right-authors-list.django:15
 #: .\tales_django\entities\Tracks\models\Author.py:15
-#: .\tales_django\settings.py:236
+#: .\tales_django\settings.py:237
 #: .\tales_django\templates\tales_django\author_details.html.django:36
 #: .\tales_django\templates\tales_django\author_index.html.django:20
 msgid "Authors"
@@ -385,48 +385,48 @@ msgstr "текст"
 msgid "tracks count"
 msgstr "треки"
 
-#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:40
-#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:134
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:41
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:139
 #: .\tales_django\entities\Tracks\models\Track.py:71
 msgid "Published"
 msgstr "Опубликовано"
 
-#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:45
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:46
 #: .\tales_django\entities\Users\admin\UserAdmin.py:28
 msgid "True"
 msgstr "Да"
 
-#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:46
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:47
 #: .\tales_django\entities\Users\admin\UserAdmin.py:29
 msgid "False"
 msgstr "Нет"
 
-#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:56
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:57
 msgid "Mark as published"
 msgstr "Пометить опубликованным"
 
-#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:61
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:62
 msgid "Mark as hidden"
 msgstr "Пометить скрытым"
 
-#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:66
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:67
 msgid "Mark as test"
 msgstr "Пометить для тестов"
 
-#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:142
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:147
 msgid "Has preview"
 msgstr "С превью"
 
-#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:169
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:174
 msgid "Size"
 msgstr "Размер"
 
-#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:182
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:187
 #: .\tales_django\entities\Tracks\models\Track.py:29
 msgid "Title"
 msgstr "Название"
 
-#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:226
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:231
 msgid "Audio file has been successfully uploaded"
 msgstr "Аудио файл успешно загружен"
 
@@ -505,7 +505,7 @@ msgstr "Треки"
 
 #: .\tales_django\entities\Tracks\models\Track.py:25
 #: .\tales_django\entities\Users\admin\UserAdmin.py:49
-#: .\tales_django\settings.py:231
+#: .\tales_django\settings.py:232
 #: .\tales_django\templates\tales_django\favorites.html.django:37
 #: .\tales_django\templates\tales_django\track_details.html.django:42
 msgid "Tracks"
@@ -619,23 +619,23 @@ msgstr "избранные треки"
 msgid "playlist"
 msgstr "плейлист"
 
-#: .\tales_django\settings.py:208 .\tales_django\settings.py:209
+#: .\tales_django\settings.py:209 .\tales_django\settings.py:210
 msgid "Administration"
 msgstr "Администрирование"
 
-#: .\tales_django\settings.py:226
+#: .\tales_django\settings.py:227
 msgid "Content"
 msgstr "Контент"
 
-#: .\tales_django\settings.py:253
+#: .\tales_django\settings.py:254
 msgid "Manage"
 msgstr "Управление"
 
-#: .\tales_django\settings.py:258
+#: .\tales_django\settings.py:259
 msgid "Dashboard"
 msgstr "Панель управления"
 
-#: .\tales_django\settings.py:265
+#: .\tales_django\settings.py:266
 msgid "Users"
 msgstr "Пользователи"
 
@@ -832,14 +832,44 @@ msgstr "Светлая"
 msgid "System"
 msgstr "Системная"
 
+#: .\tales_django\templates\custom-translations.django:11
+msgid "Run"
+msgstr "Выполнить"
+
+#: .\tales_django\templates\custom-translations.django:12
+msgid "No results found"
+msgstr "Ничего не найдено"
+
+#: .\tales_django\templates\custom-translations.django:13
+msgid ""
+"This page yielded into no results. Create a new item or reset your filters."
+msgstr ""
+"На этой странице ничего не найдено. Создайте новый элемент или сбросьте "
+"фильтры."
+
+#: .\tales_django\templates\custom-translations.django:14
+msgid "Reset filters"
+msgstr "Сбросить фильтры"
+
+#: .\tales_django\templates\custom-translations.django:15
+msgid "Select value"
+msgstr "Выбрать"
+
+#: .\tales_django\templates\custom-translations.django:16
+msgid "Choose file to upload"
+msgstr "Выбрать файл"
+
+#: .\tales_django\templates\custom-translations.django:17
+msgid "Please correct the errors below."
+msgstr "Пожалуйста, исправьте указанные ниже ошибки."
+
 #: .\tales_django\templates\registration\logged_out.html:17
 msgid "Logged out"
 msgstr "Вы вышли из системы"
 
 #: .\tales_django\templates\registration\logged_out.html:23
 msgid "Thanks for spending some quality time with the web site today."
-msgstr ""
-"Спасибо, что провели сегодня немного времени с пользой на нашем веб-сайте."
+msgstr "Спасибо, что провели немного времени с нами."
 
 #: .\tales_django\templates\registration\logged_out.html:25
 msgid "Log in again"
