@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-14 07:48+0300\n"
+"POT-Creation-Date: 2025-03-14 08:53+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -89,26 +89,26 @@ msgid "No favorite tracks"
 msgstr "Нет избранных треков"
 
 #: .\src\assets\common-blocks\track-details\track-details.django:23
-#: .\tales_django\entities\Tracks\models\Track.py:80
+#: .\tales_django\entities\Tracks\models\Track.py:83
 msgid "Played count"
 msgstr "Счётчик прослушиваний"
 
 #: .\src\assets\common-blocks\track-details\track-details.django:27
-#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:167
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:172
 msgid "Duration"
 msgstr "Длительность"
 
 #: .\src\assets\common-blocks\track-details\track-details.django:31
-#: .\tales_django\entities\Tracks\models\Track.py:88
+#: .\tales_django\entities\Tracks\models\Track.py:92
 msgid "Published at"
 msgstr "Дата публикации"
 
 #: .\src\assets\common-blocks\track-details\track-details.django:36
 #: .\src\assets\template-right-blocks\right-rubrics-list\right-rubrics-list.django:7
-#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:160
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:165
 #: .\tales_django\entities\Tracks\models\Rubric.py:13
 #: .\tales_django\entities\Tracks\models\Track.py:56
-#: .\tales_django\settings.py:242
+#: .\tales_django\settings.py:243
 #: .\tales_django\templates\tales_django\rubric_details.html.django:21
 #: .\tales_django\templates\tales_django\rubric_index.html.django:20
 msgid "Rubrics"
@@ -116,10 +116,10 @@ msgstr "Разделы"
 
 #: .\src\assets\common-blocks\track-details\track-details.django:48
 #: .\src\assets\template-right-blocks\right-tags-list\right-tags-list.django:7
-#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:154
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:159
 #: .\tales_django\entities\Tracks\models\Tag.py:13
 #: .\tales_django\entities\Tracks\models\Track.py:55
-#: .\tales_django\settings.py:247
+#: .\tales_django\settings.py:248
 #: .\tales_django\templates\tales_django\tag_details.html.django:21
 #: .\tales_django\templates\tales_django\tag_index.html.django:20
 msgid "Tags"
@@ -263,7 +263,7 @@ msgstr "О проекте"
 
 #: .\src\assets\template-right-blocks\right-authors-list\right-authors-list.django:15
 #: .\tales_django\entities\Tracks\models\Author.py:15
-#: .\tales_django\settings.py:237
+#: .\tales_django\settings.py:238
 #: .\tales_django\templates\tales_django\author_details.html.django:36
 #: .\tales_django\templates\tales_django\author_index.html.django:20
 msgid "Authors"
@@ -366,14 +366,18 @@ msgstr "членство"
 msgid "memberships"
 msgstr "членство"
 
-#: .\tales_django\entities\Tracks\admin\AuthorAdmin.py:17
+#: .\tales_django\entities\Tracks\admin\AuthorAdmin.py:18
+#: .\tales_django\entities\Tracks\admin\RubricAdmin.py:19
+#: .\tales_django\entities\Tracks\admin\TagAdmin.py:18
 #: .\tales_django\entities\Tracks\models\Author.py:30
 #: .\tales_django\entities\Tracks\models\Rubric.py:26
 #: .\tales_django\entities\Tracks\models\Tag.py:26
 msgid "Promote"
 msgstr "Продвигать"
 
-#: .\tales_django\entities\Tracks\admin\AuthorAdmin.py:22
+#: .\tales_django\entities\Tracks\admin\AuthorAdmin.py:23
+#: .\tales_django\entities\Tracks\admin\RubricAdmin.py:24
+#: .\tales_django\entities\Tracks\admin\TagAdmin.py:23
 msgid "No promote"
 msgstr "Не продвигать"
 
@@ -386,58 +390,58 @@ msgstr "Имя"
 msgid "Has portrait"
 msgstr "С портретом"
 
-#: .\tales_django\entities\Tracks\admin\RubricAdmin.py:44
-#: .\tales_django\entities\Tracks\admin\TagAdmin.py:45
+#: .\tales_django\entities\Tracks\admin\RubricAdmin.py:58
+#: .\tales_django\entities\Tracks\admin\TagAdmin.py:57
 msgid "text"
 msgstr "текст"
 
-#: .\tales_django\entities\Tracks\admin\RubricAdmin.py:50
-#: .\tales_django\entities\Tracks\admin\TagAdmin.py:51
+#: .\tales_django\entities\Tracks\admin\RubricAdmin.py:64
+#: .\tales_django\entities\Tracks\admin\TagAdmin.py:63
 msgid "tracks count"
 msgstr "треки"
 
-#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:41
-#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:139
-#: .\tales_django\entities\Tracks\models\Track.py:71
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:43
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:144
+#: .\tales_django\entities\Tracks\models\Track.py:73
 msgid "Published"
 msgstr "Опубликовано"
 
-#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:46
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:48
 #: .\tales_django\entities\Users\admin\UserAdmin.py:28
 msgid "True"
 msgstr "Да"
 
-#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:47
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:49
 #: .\tales_django\entities\Users\admin\UserAdmin.py:29
 msgid "False"
 msgstr "Нет"
 
-#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:57
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:59
 msgid "Mark as published"
 msgstr "Пометить опубликованным"
 
-#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:62
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:64
 msgid "Mark as hidden"
 msgstr "Пометить скрытым"
 
-#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:67
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:69
 msgid "Mark as test"
 msgstr "Пометить для тестов"
 
-#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:147
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:152
 msgid "Has preview"
 msgstr "С превью"
 
-#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:174
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:179
 msgid "Size"
 msgstr "Размер"
 
-#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:187
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:192
 #: .\tales_django\entities\Tracks\models\Track.py:29
 msgid "Title"
 msgstr "Название"
 
-#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:231
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:236
 msgid "Audio file has been successfully uploaded"
 msgstr "Аудио файл успешно загружен"
 
@@ -536,43 +540,43 @@ msgstr "Ссылка на ролик в YouTube"
 msgid "Audio file"
 msgstr "Аудио файл"
 
-#: .\tales_django\entities\Tracks\models\Track.py:67
+#: .\tales_django\entities\Tracks\models\Track.py:68
 msgid "Preview picture"
 msgstr "Изображение предпросмотра"
 
-#: .\tales_django\entities\Tracks\models\Track.py:72
+#: .\tales_django\entities\Tracks\models\Track.py:74
 msgid "Hidden"
 msgstr "Скрыто"
 
-#: .\tales_django\entities\Tracks\models\Track.py:73
+#: .\tales_django\entities\Tracks\models\Track.py:75
 msgid "Test"
 msgstr "Проверка"
 
-#: .\tales_django\entities\Tracks\models\Track.py:76
+#: .\tales_django\entities\Tracks\models\Track.py:78
 msgid "Status"
 msgstr "Статус"
 
-#: .\tales_django\entities\Tracks\models\Track.py:78
+#: .\tales_django\entities\Tracks\models\Track.py:80
 msgid "For members only"
 msgstr "Только для членов"
 
-#: .\tales_django\entities\Tracks\models\Track.py:83
+#: .\tales_django\entities\Tracks\models\Track.py:87
 msgid "Duration (seconds)"
 msgstr "Длительность (сек)"
 
-#: .\tales_django\entities\Tracks\models\Track.py:84
+#: .\tales_django\entities\Tracks\models\Track.py:88
 msgid "File size (bytes)"
 msgstr "Размер файла (байты)"
 
-#: .\tales_django\entities\Tracks\models\Track.py:89
+#: .\tales_django\entities\Tracks\models\Track.py:93
 msgid "Updated at"
 msgstr "Дата обновления"
 
-#: .\tales_django\entities\Tracks\models\Track.py:93
+#: .\tales_django\entities\Tracks\models\Track.py:97
 msgid "Published by"
 msgstr "Опубликовано пользователем"
 
-#: .\tales_django\entities\Tracks\models\Track.py:96
+#: .\tales_django\entities\Tracks\models\Track.py:100
 msgid "Updated by"
 msgstr "Обновлено пользователем"
 
@@ -632,15 +636,15 @@ msgstr "Администрирование"
 msgid "Content"
 msgstr "Контент"
 
-#: .\tales_django\settings.py:254
+#: .\tales_django\settings.py:255
 msgid "Manage"
 msgstr "Управление"
 
-#: .\tales_django\settings.py:259
+#: .\tales_django\settings.py:260
 msgid "Dashboard"
 msgstr "Панель управления"
 
-#: .\tales_django\settings.py:266
+#: .\tales_django\settings.py:267
 msgid "Users"
 msgstr "Пользователи"
 
@@ -867,6 +871,10 @@ msgstr "Выбрать файл"
 #: .\tales_django\templates\custom-translations.django:17
 msgid "Please correct the errors below."
 msgstr "Пожалуйста, исправьте указанные ниже ошибки."
+
+#: .\tales_django\templates\custom-translations.django:18
+msgid "Type to search"
+msgstr "Введите текст для поиска"
 
 #: .\tales_django\templates\registration\logged_out.html:17
 msgid "Logged out"

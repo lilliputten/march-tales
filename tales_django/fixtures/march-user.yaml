@@ -1,0 +1,18 @@
+# @changed 2025.03.14, 08:49
+
+- model: tales_django.user
+  pk: 2
+  fields:
+    # mN***
+    password: 'pbkdf2_sha256$870000$HMKrTbktzNb6S9vrdDZrVU$iIc6EIGsGyAxTZdAFp9aB0FN7tfOkcg7Avh6+Wg0V+U='
+    username: 'c_march@mail.ru'
+    email: 'c_march@mail.ru'
+    first_name: 'Cat'
+    last_name: 'March'
+    is_superuser: true
+    is_staff: true
+    is_active: true
+    date_joined: '2024-12-30T18:30:47.819Z'
+    last_login: null
+    groups: []
+    user_permissions: []

@@ -15,3 +15,4 @@
 {% trans 'Select value' %}
 {% trans 'Choose file to upload' %}
 {% trans 'Please correct the errors below.' %}
+{% trans 'Type to search' %}
