@@ -1,0 +1,5 @@
+{# ex: set ft=htmldjango : #}
+
+{% load i18n %}
+
+{% trans 'Select action' %}
