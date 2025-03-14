@@ -177,6 +177,8 @@ INSTALLED_APPS = [
     'allauth.headless',
     'allauth.usersessions',
     # Other...
+    # Filters, see: https://django-filter.readthedocs.io/en/stable/guide/usage.html https://django-filter.readthedocs.io/en/latest/guide/rest_framework.html
+    # 'django_filters',
     'import_export',
     'markdownify.apps.MarkdownifyConfig',
     # app
@@ -203,6 +205,22 @@ MIDDLEWARE = [
     # APP_NAME + '.middleware.BeautifulMiddleware.BeautifulMiddleware',
     APP_NAME + '.middleware.CurrentRequestMiddleware.CurrentRequestMiddleware',
 ]
+
+# Add livereload app...
+# @see https://pypi.org/project/django-livereload/
+# @see https://github.com/tjwalch/django-livereload-server
+# Run the reload server with a command: `python manage.py livereload src static`
+INSTALLED_APPS.insert(0, 'livereload')
+if DEBUG:
+    MIDDLEWARE.insert(0, 'livereload.middleware.LiveReloadScript')
+    # MIDDLEWARE.append('livereload.middleware.LiveReloadScript')
+# TODO: Do we actually need livereload in production? I remember some issues with it. Can we completely remove it from production?
+# There is already present the check in the `tales_django/templates/base-core.html.django` template:
+# ```
+#  {% if settings.DEBUG %}
+#  {% load livereload_tags %}
+#  {% endif %}
+# ```
 
 IMPORT_EXPORT_USE_TRANSACTIONS = True
 
@@ -274,13 +292,13 @@ UNFOLD = {
             },
         ],
     },
-    # "SITE_DROPDOWN": [
-    #     {
-    #         "icon": "diamond",
-    #         "title": _("My site"),
-    #         "link": "https://example.com",
-    #     },
-    # ],
+    'SITE_DROPDOWN': [
+        {
+            'icon': 'home',
+            'title': _('Open site'),
+            'link': '/',
+        },
+    ],
     'EXTENSIONS': {
         'modeltranslation': {
             'flags': {
@@ -356,22 +374,6 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-# Add livereload app...
-# @see https://pypi.org/project/django-livereload/
-# @see https://github.com/tjwalch/django-livereload-server
-# Run the reload server with a command: `python manage.py livereload src static`
-INSTALLED_APPS.insert(0, 'livereload')
-if DEBUG:
-    MIDDLEWARE.insert(0, 'livereload.middleware.LiveReloadScript')
-    # MIDDLEWARE.append('livereload.middleware.LiveReloadScript')
-# TODO: Do we actually need livereload in production? I remember some issues with it. Can we completely remove it from production?
-# There is already present the check in the `tales_django/templates/base-core.html.django` template:
-# ```
-#  {% if settings.DEBUG %}
-#  {% load livereload_tags %}
-#  {% endif %}
-# ```
-
 ROOT_URLCONF = APP_NAME + '.urls'
 
 # Templates folders...
@@ -421,6 +423,13 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
         # 'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+    # # Filters, see also `django_filters` record in `INSTALLED_APPS` and `django-filter` dependency in `pyproject.toml`,
+    # 'DEFAULT_FILTER_BACKENDS': [
+    #     # @see https://www.django-rest-framework.org/api-guide/filtering/#setting-filter-backends
+    #     # @see https://django-filter.readthedocs.io/en/stable/guide/usage.html
+    #     # @see https://django-filter.readthedocs.io/en/latest/guide/rest_framework.html
+    #     'django_filters.rest_framework.DjangoFilterBackend',
+    # ],
 }
 
 # Database

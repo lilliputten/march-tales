@@ -4,15 +4,11 @@ from django.http import JsonResponse
 from django.utils.translation import gettext_lazy as _
 from django.shortcuts import get_object_or_404
 
-# from django.views.decorators.csrf import csrf_exempt
-
 from rest_framework.decorators import action
 from rest_framework.request import Request
 
-# from rest_framework.response import Response
 from rest_framework import viewsets, status
 from rest_framework import permissions
-from rest_framework import pagination
 
 from core.helpers.errors import errorToString
 from core.helpers.utils import debugObj
@@ -21,24 +17,15 @@ from core.logging import getDebugLogger
 from tales_django.core.helpers.check_csrf import check_csrf
 from tales_django.core.model_helpers import get_currrent_django_language
 
-from .track_serializers import TrackSerializer
-
 from ..models import Track
 
+from .common_constants import content_type, default_headers
+from .track_constants import default_tracks_limit, default_tracks_offset
+from .track_filters import DefaultPagination, get_track_filter_kwargs, get_track_order_args
+from .track_serializers import TrackSerializer
+
+
 logger = getDebugLogger()
-
-
-defaultTracksLimit = 5
-defaultTracksOffset = 0
-
-content_type = 'application/json; charset=utf-8'
-default_headers = {
-    # 'Content-Type': content_type,
-}
-
-
-class DefaultPagination(pagination.LimitOffsetPagination):
-    default_limit = defaultTracksLimit
 
 
 # NOTE: No `viewsets.ModelViewSet` -- we don't use modification methods, only our custom `retrieve` and `list` (see below)
@@ -78,15 +65,20 @@ class TrackViewSet(viewsets.GenericViewSet):
                     errorDetail, headers=default_headers, content_type=content_type, status=status.HTTP_403_FORBIDDEN
                 )
 
-            limit = int(request.query_params.get('limit', defaultTracksLimit))
-            offset = int(request.query_params.get('offset', defaultTracksOffset))
+            limit = int(request.query_params.get('limit', default_tracks_limit))
+            offset = int(request.query_params.get('offset', default_tracks_offset))
 
             # TODO: Extract sort/filter params and modify results below?
+            filter = request.query_params.get('filter')
+            logger.info(f'[TrackViewSet:list] filter={filter}')
 
-            language = get_currrent_django_language()
-            query = Track.objects.filter(track_status='PUBLISHED').order_by('-published_at', f'title_{language}')
+            filter_args = get_track_filter_kwargs(request)
+            order_args = get_track_order_args(request)
+
+            # query = Track.objects.filter(track_status='PUBLISHED').order_by('-published_at', f'title_{language}')
+            query = Track.objects.filter(**filter_args).order_by(*order_args)
             subset = query.all()
-            if offset or limit:
+            if limit:
                 subset = query.all()[offset : offset + limit]
 
             result = {
@@ -177,8 +169,8 @@ class TrackViewSet(viewsets.GenericViewSet):
             )
 
         try:
-            limit = int(request.query_params.get('limit', defaultTracksLimit))
-            offset = int(request.query_params.get('offset', defaultTracksOffset))
+            limit = int(request.query_params.get('limit', default_tracks_limit))
+            offset = int(request.query_params.get('offset', default_tracks_offset))
 
             debugData = {
                 'idsList': idsList,
@@ -193,7 +185,7 @@ class TrackViewSet(viewsets.GenericViewSet):
             query = Track.objects.filter(id__in=idsList, track_status='PUBLISHED')
             # .order_by('-published_at', f'title_{language}')
             subset = query.all()
-            if offset or limit:
+            if limit:
                 subset = query.all()[offset : offset + limit]
 
             result = {

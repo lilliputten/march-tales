@@ -55,7 +55,7 @@ class TagSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Tag
 
-        fields = (
+        fields = [
             'id',
             'text',
             'promote',
@@ -66,4 +66,4 @@ class TagSerializer(serializers.HyperlinkedModelSerializer):
             'authors',
             'rubric_ids',
             'rubrics',
-        )
+        ]
