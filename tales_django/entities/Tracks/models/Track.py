@@ -84,7 +84,9 @@ class Track(Model):
     )
 
     played_count = models.BigIntegerField(
-        blank=True, default=0, verbose_name=_('Played count'),
+        blank=True,
+        default=0,
+        verbose_name=_('Played count'),
     )
 
     # Properties derived from the audio track file

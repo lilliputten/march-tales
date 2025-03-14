@@ -2,6 +2,7 @@ import traceback
 
 # from django.urls import reverse
 from translated_fields import TranslatedFieldAdmin, to_attribute
+
 # from translated_fields import TranslatedField, to_attribute
 
 # from .get_currrent_django_language import get_currrent_django_language
@@ -88,42 +89,77 @@ class TrackAdmin(TranslatedFieldAdmin, UnfoldModelAdmin):
 
     # language = get_currrent_django_language()
     fieldsets = (
-        (_('Title'), {'fields': (
-            'title_ru',
-            'title_en',
-        )}),
-        (_('Description'), {'fields': (
-            'description_ru',
-            'description_en',
-        )}),
-        (_('Media'), {'fields': (
-            # 'youtube_url',
-            'audio_file',
-            'preview_picture',
-        )}),
-        (_('Attributes'), {'fields': (
-            'author',
-            'tags',
-            'rubrics',
-        )}),
-        (_('Status'), {'fields': (
-            'track_status',
-            'promote',
-            'for_members',
-        )}),
-        (_('Publication'), {'fields': (
-            'published_at',
-            'published_by',
-        )}),
-        (_('Information'), {'fields': (
-            'played_count',
-            # 'audio_duration',
-            # 'audio_size',
-            'duration_formatted',
-            'size_formatted',
-            # 'updated_at',
-            # 'updated_by',
-        )}),
+        (
+            _('Title'),
+            {
+                'fields': (
+                    'title_ru',
+                    'title_en',
+                )
+            },
+        ),
+        (
+            _('Description'),
+            {
+                'fields': (
+                    'description_ru',
+                    'description_en',
+                )
+            },
+        ),
+        (
+            _('Media'),
+            {
+                'fields': (
+                    # 'youtube_url',
+                    'audio_file',
+                    'preview_picture',
+                )
+            },
+        ),
+        (
+            _('Attributes'),
+            {
+                'fields': (
+                    'author',
+                    'tags',
+                    'rubrics',
+                )
+            },
+        ),
+        (
+            _('Status'),
+            {
+                'fields': (
+                    'track_status',
+                    'promote',
+                    'for_members',
+                )
+            },
+        ),
+        (
+            _('Publication'),
+            {
+                'fields': (
+                    'published_at',
+                    'published_by',
+                )
+            },
+        ),
+        (
+            _('Information'),
+            {
+                'fields': (
+                    'played_count',
+                    # 'audio_duration',
+                    # 'audio_size',
+                    'duration_formatted',
+                    'size_formatted',
+                    # 'updated_at',
+                    # 'updated_by',
+                )
+            },
+        ),
     )
 
     actions = [

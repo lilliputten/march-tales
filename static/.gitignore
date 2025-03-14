@@ -1,3 +1,17 @@
 # Assets situated in `/src` folder and shouldn't be copied to the static.
+
+# Possibly collectable from the `src` folder:
+
 assets
+samples
+
+# Separetly uploaded android application and build report to load during
+# initialization (see `APK_JSON_FILE`, by default `output-metadata.json` and
+# `*.apk` files are located under `static/downloads/apk`, they shoud be
+# collected from `build/app/outputs/apk/release` folder under the flutter
+# project root)
 downloads/apk
+
+# Possible gathered from (unused) django admin (unfold admin is used recently)
+
+admin

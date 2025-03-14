@@ -1,6 +1,6 @@
 <!--
- @since 2024.12.29, 19:24
- @changed 2024.12.30, 18:20
+ @since 2025.03.14, 22:00
+ @changed 2025.03.14, 22:00
 -->
 
 # march-tales
@@ -9,7 +9,7 @@ March Tales django api and web frontend server.
 
 ## Build info (auto-generated)
 
-- Project info: march-tales v.0.0.27 / 2025.03.14 04:56:26 +0300
+- Project info: march-tales v.0.0.27 / 2025.03.14 22:06:07 +0300
 
 ## Resources
 
@@ -20,6 +20,13 @@ Web page: https://tales.march.team
 Django admin: https://tales.march.team/admin
 
 ## Project maintenance
+
+### Installation
+
+For development:
+
+- Unpack all the zip archives under `static/vendor` folder first.
+- Create mock (or copy from real flutter project) mobile application artifacts under `static/downloads/apk` folder. These should be `output-metadata.json` and `*.apk` files, by default. (See sample fake files in the folder.)
 
 ### Python server (Django)
 
