@@ -151,13 +151,12 @@ class Track(Model):
         super(Track, self).save(*args, **kwargs)
 
     def __str__(self):
-        items = [
-            # _('Track'),
-            self.title,
-            # '[%d]' % self.id if LOCAL else None,
-        ]
-        info = ' '.join(filter(None, map(str, items)))
-        return info
+        # items = [
+        #     self.title,
+        #     # '[%d]' % self.id if LOCAL else None,
+        # ]
+        # info = ' '.join(filter(None, map(str, items)))
+        return f'Track(id={self.id}, title={self.title})'
 
 
 @receiver(post_delete, sender=Track)

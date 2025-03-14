@@ -23,7 +23,7 @@ class AuthorSerializer(serializers.HyperlinkedModelSerializer):
             .order_by('-published_at', f'title_{language}')
         )
         # tracks = Track.objects.filter(track_status='PUBLISHED', author__id=obj.id)
-        return list(map(lambda t: t.id, tracks))
+        return list(map(lambda it: it.id, tracks))
 
     rubrics = serializers.SerializerMethodField('get_rubrics')
 
@@ -31,9 +31,14 @@ class AuthorSerializer(serializers.HyperlinkedModelSerializer):
         language = get_currrent_django_language()
         track_ids = self.get_track_ids(obj)
         rubrics = Rubric.objects.filter(tracks__id__in=track_ids).distinct().order_by(f'text_{language}')
-        # rubrics = Rubric.objects.filter(tracks__id__in=track_ids)
         serializer = RubricSerializer(rubrics, read_only=True, many=True)
         return serializer.data
+
+    rubric_ids = serializers.SerializerMethodField('get_rubric_ids')
+
+    def get_rubric_ids(self, obj):
+        rubrics_data = self.get_rubrics(obj)
+        return list(map(lambda it: it['id'], rubrics_data))
 
     tags = serializers.SerializerMethodField('get_tags')
 
@@ -44,6 +49,12 @@ class AuthorSerializer(serializers.HyperlinkedModelSerializer):
         # tags = Tag.objects.filter(tracks__id__in=track_ids)
         serializer = TagSerializer(tags, read_only=True, many=True)
         return serializer.data
+
+    tag_ids = serializers.SerializerMethodField('get_tag_ids')
+
+    def get_tag_ids(self, obj):
+        tags_data = self.get_tags(obj)
+        return list(map(lambda it: it['id'], tags_data))
 
     # DEMO: Full serialized tracks example
     # tracks = serializers.SerializerMethodField('get_tracks')
@@ -68,6 +79,9 @@ class AuthorSerializer(serializers.HyperlinkedModelSerializer):
             'promote',
             # Related data...
             'track_ids',
+            # TODO: Use ids istead of fully serialized objects
+            'rubric_ids',
             'rubrics',
+            'tag_ids',
             'tags',
         )

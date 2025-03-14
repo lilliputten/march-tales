@@ -30,6 +30,12 @@ class RubricSerializer(serializers.HyperlinkedModelSerializer):
         serializer = AuthorSerializer(authors, read_only=True, many=True)
         return serializer.data
 
+    author_ids = serializers.SerializerMethodField('get_author_ids')
+
+    def get_author_ids(self, obj):
+        authors_data = self.get_authors(obj)
+        return list(map(lambda it: it['id'], authors_data))
+
     tags = serializers.SerializerMethodField('get_tags')
 
     def get_tags(self, obj):
@@ -40,6 +46,12 @@ class RubricSerializer(serializers.HyperlinkedModelSerializer):
         serializer = TagSerializer(tags, read_only=True, many=True)
         return serializer.data
 
+    tag_ids = serializers.SerializerMethodField('get_tag_ids')
+
+    def get_tag_ids(self, obj):
+        tags_data = self.get_tags(obj)
+        return list(map(lambda it: it['id'], tags_data))
+
     class Meta:
         model = Rubric
 
@@ -49,6 +61,9 @@ class RubricSerializer(serializers.HyperlinkedModelSerializer):
             'promote',
             # Related data...
             'track_ids',
+            # TODO: Use ids istead of fully serialized objects
+            'author_ids',
             'authors',
+            'tag_ids',
             'tags',
         )

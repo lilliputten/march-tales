@@ -30,6 +30,12 @@ class TagSerializer(serializers.HyperlinkedModelSerializer):
         serializer = AuthorSerializer(authors, read_only=True, many=True)
         return serializer.data
 
+    author_ids = serializers.SerializerMethodField('get_author_ids')
+
+    def get_author_ids(self, obj):
+        authors_data = self.get_authors(obj)
+        return list(map(lambda it: it['id'], authors_data))
+
     rubrics = serializers.SerializerMethodField('get_rubrics')
 
     def get_rubrics(self, obj):
@@ -40,6 +46,12 @@ class TagSerializer(serializers.HyperlinkedModelSerializer):
         serializer = RubricSerializer(rubrics, read_only=True, many=True)
         return serializer.data
 
+    rubric_ids = serializers.SerializerMethodField('get_rubric_ids')
+
+    def get_rubric_ids(self, obj):
+        rubrics_data = self.get_rubrics(obj)
+        return list(map(lambda it: it['id'], rubrics_data))
+
     class Meta:
         model = Tag
 
@@ -49,6 +61,9 @@ class TagSerializer(serializers.HyperlinkedModelSerializer):
             'promote',
             # Related data...
             'track_ids',
+            # TODO: Use ids istead of fully serialized objects
+            'author_ids',
             'authors',
+            'rubric_ids',
             'rubrics',
         )

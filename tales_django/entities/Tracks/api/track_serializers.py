@@ -21,6 +21,16 @@ class TrackSerializer(serializers.HyperlinkedModelSerializer):
     def get_preview_picture(self, obj):
         return obj.preview_picture.url
 
+    rubric_ids = serializers.SerializerMethodField('get_rubric_ids')
+
+    def get_rubric_ids(self, obj):
+        return list(map(lambda it: it.id, obj.rubrics.all()))
+
+    tag_ids = serializers.SerializerMethodField('get_tag_ids')
+
+    def get_tag_ids(self, obj):
+        return list(map(lambda it: it.id, obj.tags.all()))
+
     class Meta:
         model = Track
 
@@ -33,6 +43,7 @@ class TrackSerializer(serializers.HyperlinkedModelSerializer):
             'audio_file',
             'audio_size',
             'description',
+            'promote',
             'for_members',
             'played_count',
             'preview_picture',
@@ -43,6 +54,9 @@ class TrackSerializer(serializers.HyperlinkedModelSerializer):
             'updated_by_id',
             'youtube_url',
             'author',
+            # TODO: Use ids istead of fully serialized objects
+            'rubric_ids',
             'rubrics',
+            'tag_ids',
             'tags',
         )

@@ -116,7 +116,7 @@ class TrackViewSet(viewsets.GenericViewSet):
             )
 
     @action(
-        methods=['get', 'post'],
+        methods=['get'],
         url_path='by-ids',
         url_name='track-by-ids',
         detail=False,
