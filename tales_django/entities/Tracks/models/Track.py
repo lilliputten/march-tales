@@ -50,7 +50,7 @@ class Track(Model):
         verbose_name=_('Youtube link'), blank=True, null=False, max_length=64, help_text=_('YouTube video link url')
     )
 
-    author = models.ForeignKey('Author', verbose_name=_('Author'), blank=True, null=True, on_delete=models.DO_NOTHING)
+    author = models.ForeignKey('Author', verbose_name=_('Author'), blank=False, null=False, on_delete=models.DO_NOTHING)
 
     tags = models.ManyToManyField('Tag', verbose_name=_('Tags'), blank=True, related_name='tagged_tracks')
     rubrics = models.ManyToManyField('Rubric', verbose_name=_('Rubrics'), blank=True, related_name='rubricated_tracks')
@@ -64,7 +64,7 @@ class Track(Model):
         blank=False,
         null=False,
     )
-    preview_picture = models.ImageField(upload_to=uploadsFolder, blank=True, verbose_name=_('Preview picture'))
+    preview_picture = models.ImageField(upload_to=uploadsFolder, blank=False, null=False, verbose_name=_('Preview picture'))
 
     # Track status
     TRACK_STATUS = [
