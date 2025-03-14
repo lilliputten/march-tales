@@ -84,12 +84,12 @@ class Track(Model):
     )
 
     played_count = models.BigIntegerField(
-        blank=True, default=0, help_text=_('Played count'), verbose_name=_('Played count')
+        blank=True, default=0, verbose_name=_('Played count'),
     )
 
     # Properties derived from the audio track file
-    audio_duration = models.FloatField(null=True, help_text=_('Duration (seconds)'))
-    audio_size = models.BigIntegerField(null=True, help_text=_('File size (bytes)'))
+    audio_duration = models.FloatField(null=True, verbose_name=_('Duration (seconds)'))
+    audio_size = models.BigIntegerField(null=True, verbose_name=_('File size (bytes)'))
 
     # Timestamps
     # created_at = models.DateField(auto_now_add=True)

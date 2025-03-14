@@ -2,7 +2,9 @@ import traceback
 
 # from django.urls import reverse
 from translated_fields import TranslatedFieldAdmin, to_attribute
+# from translated_fields import TranslatedField, to_attribute
 
+# from .get_currrent_django_language import get_currrent_django_language
 # from modeltranslation.admin import TabbedTranslationAdmin
 # from translated_fields import TranslatedFieldAdmin
 
@@ -22,6 +24,7 @@ from django.core.files.base import File
 
 from unfold.admin import ModelAdmin as UnfoldModelAdmin
 
+from tales_django.core.model_helpers import get_currrent_django_language
 from tales_django.sites import unfold_admin_site
 
 from core.ffmpeg import probeDuration
@@ -82,6 +85,46 @@ def no_promote_action(modeladmin, request, queryset):
 
 @admin.register(Track, site=unfold_admin_site)
 class TrackAdmin(TranslatedFieldAdmin, UnfoldModelAdmin):
+
+    # language = get_currrent_django_language()
+    fieldsets = (
+        (_('Title'), {'fields': (
+            'title_ru',
+            'title_en',
+        )}),
+        (_('Description'), {'fields': (
+            'description_ru',
+            'description_en',
+        )}),
+        (_('Media'), {'fields': (
+            # 'youtube_url',
+            'audio_file',
+            'preview_picture',
+        )}),
+        (_('Attributes'), {'fields': (
+            'author',
+            'tags',
+            'rubrics',
+        )}),
+        (_('Status'), {'fields': (
+            'track_status',
+            'promote',
+            'for_members',
+        )}),
+        (_('Publication'), {'fields': (
+            'published_at',
+            'published_by',
+        )}),
+        (_('Information'), {'fields': (
+            'played_count',
+            # 'audio_duration',
+            # 'audio_size',
+            'duration_formatted',
+            'size_formatted',
+            # 'updated_at',
+            # 'updated_by',
+        )}),
+    )
 
     actions = [
         mark_published_action,
