@@ -7,13 +7,18 @@ from django.contrib import admin
 from django.db.models import Count, F
 from django.db.models.functions import Lower
 
+from unfold.admin import ModelAdmin as UnfoldModelAdmin
+
+from tales_django.sites import unfold_admin_site
+
 from ..models import Rubric
-from ..forms import RubricAdminForm
+
+# from ..forms import RubricAdminForm
 
 
-@admin.register(Rubric)
-class RubricAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
-    form = RubricAdminForm
+@admin.register(Rubric, site=unfold_admin_site)
+class RubricAdmin(TranslatedFieldAdmin, UnfoldModelAdmin):
+    # form = RubricAdminForm
     list_display = [
         'text_translated',
         'promote',

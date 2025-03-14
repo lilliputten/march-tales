@@ -13,5 +13,6 @@ $PYTHON_RUNTIME manage.py makemessages \
   --ignore "node_modules" \
   --ignore "static" \
   --ignore "media" \
+  --ignore "tales_django/templates/admin" \
   --extension html,txt,py,django \
   --all

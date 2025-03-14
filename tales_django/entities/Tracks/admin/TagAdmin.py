@@ -6,13 +6,20 @@ from django.contrib import admin
 from django.db.models import Count, F
 from django.db.models.functions import Lower
 
+from unfold.admin import ModelAdmin as UnfoldModelAdmin
+
+from tales_django.sites import unfold_admin_site
+
 from ..models import Tag
-from ..forms import TagAdminForm
+
+# from ..forms import TagAdminForm
 
 
-@admin.register(Tag)
-class TagAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
-    form = TagAdminForm
+# @admin.register(Tag)
+# class TagAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
+@admin.register(Tag, site=unfold_admin_site)
+class TagAdmin(TranslatedFieldAdmin, UnfoldModelAdmin):
+    # form = TagAdminForm
     list_display = [
         'text_translated',
         'promote',

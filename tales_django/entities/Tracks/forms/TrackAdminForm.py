@@ -1,4 +1,4 @@
-from translated_fields import TranslatedFieldAdmin
+# from translated_fields import TranslatedFieldAdmin
 from django.forms.models import ModelForm
 
 from tales_django.core.widgets import textAreaWidget, textInputWidget, largeTextAreaWidget

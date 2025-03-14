@@ -10,11 +10,14 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 
-@changed 2025.01.03, 20:54
+@changed 2025.03.14, 02:23
 """
 
 import posixpath
+from django.templatetags.static import static
+from django.utils.translation import gettext_lazy as _
 from corsheaders.defaults import default_headers
+from unfold.sites import reverse_lazy
 
 from core.appEnv import (
     BASE_DIR,
@@ -69,7 +72,7 @@ from core.djangoConfig import (
 
 # TRANSLATIONS_PROJECT_BASE_DIR = BASE_DIR
 
-_ = lambda s: s
+# _ = lambda s: s
 
 # Define default site id for `sites.models`
 SITE_ID = 1
@@ -133,7 +136,7 @@ INSTALLED_APPS = [
     # Unfold:
     # @see https://unfoldadmin.com/docs/installation/quickstart/
     # @see https://unfoldadmin.com/blog/migrating-django-admin-unfold/
-    # 'unfold.apps.BasicAppConfig',
+    'unfold.apps.BasicAppConfig',
     # 'unfold',  # before django.contrib.admin
     # 'unfold.contrib.filters',  # optional, if special filters are needed
     # 'unfold.contrib.forms',  # optional, if special form elements are needed
@@ -197,10 +200,107 @@ MIDDLEWARE = [
     'allauth.account.middleware.AccountMiddleware',
     # # Html content prettifier (TODO: Requires fixes for invalid html tags formatting)
     # APP_NAME + '.middleware.BeautifulMiddleware.BeautifulMiddleware',
+    APP_NAME + '.middleware.CurrentRequestMiddleware.CurrentRequestMiddleware',
 ]
 
 UNFOLD = {
-    "DASHBOARD_CALLBACK": "tales_django.unfold.dashboard_callback",
+    # @see https://unfoldadmin.com/docs/configuration/settings/
+    'SITE_TITLE': _('Administration'),
+    'SITE_HEADER': _('Administration'),
+    'SITE_SYMBOL': 'speed',
+    'SITE_ICON': lambda _: static('images/march-cat/ic_launcher_round_png.png'),
+    'SITE_FAVICONS': [
+        {
+            'rel': 'icon',
+            'sizes': '32x32',
+            'type': 'image/svg+xml',
+            'href': lambda _: static('images/march-cat/ic_launcher_round_png.png'),
+        },
+    ],
+    'SHOW_LANGUAGES': True,
+    'SIDEBAR': {
+        'show_search': True,
+        'show_all_applications': True,
+        'navigation': [
+            {
+                'title': _('Content'),
+                'separator': True,
+                'collapsible': True,
+                'items': [
+                    {
+                        'title': _('Tracks'),
+                        'icon': 'headphones',
+                        'link': reverse_lazy('unfold-admin:tales_django_track_changelist'),
+                    },
+                    {
+                        'title': _('Authors'),
+                        'icon': 'people',
+                        'link': reverse_lazy('unfold-admin:tales_django_author_changelist'),
+                    },
+                    {
+                        'title': _('Rubrics'),
+                        'icon': 'shelves',
+                        'link': reverse_lazy('unfold-admin:tales_django_rubric_changelist'),
+                    },
+                    {
+                        'title': _('Tags'),
+                        'icon': 'sell',
+                        'link': reverse_lazy('unfold-admin:tales_django_tag_changelist'),
+                    },
+                ],
+            },
+            {
+                'title': _('Manage'),
+                'separator': True,
+                'collapsible': True,
+                'items': [
+                    {
+                        'title': _('Dashboard'),
+                        'icon': 'dashboard',  # Supported icon set: https://fonts.google.com/icons
+                        'link': reverse_lazy('unfold-admin:index'),
+                        # 'badge': 'sample_app.badge_callback',
+                        'permission': lambda request: request.user.is_superuser,
+                    },
+                    {
+                        'title': _('Users'),
+                        'icon': 'account_circle',
+                        'link': reverse_lazy('unfold-admin:tales_django_user_changelist'),
+                    },
+                ],
+            },
+        ],
+    },
+    # "SITE_DROPDOWN": [
+    #     {
+    #         "icon": "diamond",
+    #         "title": _("My site"),
+    #         "link": "https://example.com",
+    #     },
+    # ],
+    'EXTENSIONS': {
+        'modeltranslation': {
+            'flags': {
+                'en': '(EN)',  # '🇺🇸',
+                'ru': '(RU)',  # '🇷🇺',
+            },
+        },
+    },
+    'DASHBOARD_CALLBACK': 'tales_django.unfold.dashboard_callback',
+    'COLORS': {
+        'primary': {
+            # '50': '250 245 255',
+            # '100': '243 232 255',
+            '200': '234 140 182',
+            '300': '226 97 154',
+            '400': '218 54 127',
+            '500': '187 34 102',  # '168 85 247',
+            '600': '144 26 78',
+            '700': '101 18 55',
+            '800': '58 10 31',
+            # '900': '88 28 135',
+            # '950': '59 7 100',
+        },
+    },
 }
 
 MARKDOWNIFY = {
@@ -281,6 +381,11 @@ TEMPLATES = [
         'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
+            # 'loaders': [
+            #     'django.template.loaders.filesystem.Loader',
+            #     # APP_NAME + '.loaders.UnfoldAdminLoader', # unfold template loader
+            #     'django.template.loaders.app_directories.Loader',
+            # ],
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',

@@ -53,8 +53,8 @@ app_urlpatterns = [
     # Language switching
     path(r'i18n/', include('django.conf.urls.i18n')),
     # App-provided paths...
-    path(r'admin/', admin.site.urls, name='admin'),
-    path(r'unfold-admin/', unfold_admin_site.urls), # <-- Unfold admin
+    path(r'admin/', admin.site.urls, name='unfold-admin'),
+    path(r'unfold-admin/', unfold_admin_site.urls),  # <-- Unfold admin
     # Service pages...
     path(
         r'robots.txt',

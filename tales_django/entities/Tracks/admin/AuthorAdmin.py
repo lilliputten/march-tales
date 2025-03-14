@@ -6,13 +6,20 @@ from django.contrib import admin
 from django.db.models import Count, F
 from django.db.models.functions import Lower
 
+from unfold.admin import ModelAdmin as UnfoldModelAdmin
+
+from tales_django.sites import unfold_admin_site
+
 from ..models import Author
-from ..forms import AuthorAdminForm
+
+# from ..forms import AuthorAdminForm
 
 
-@admin.register(Author)
-class AuthorAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
-    form = AuthorAdminForm
+# @admin.register(Author)
+# class AuthorAdmin(TranslatedFieldAdmin, admin.ModelAdmin):
+@admin.register(Author, site=unfold_admin_site)
+class AuthorAdmin(TranslatedFieldAdmin, UnfoldModelAdmin):
+    # form = AuthorAdminForm
     list_display = [
         'name_translated',
         # 'name',

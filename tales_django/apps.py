@@ -1,6 +1,7 @@
 from django.utils.translation import gettext_lazy as _
 from django.conf import settings
 from django.apps import AppConfig
+
 # from django.contrib.admin.apps import AdminConfig
 
 # from translation_manager.signals import post_publish as translation_post_publish
@@ -19,9 +20,9 @@ _logger = getDebugLogger()
 # translation_post_publish.connect(restart_server, sender=None)
 
 
-
 # class AdminConfig(AdminConfig):
 #     default_site = 'tales_django.admin.AppAdminSite'
+
 
 class TalesConfig(AppConfig):
     # default_site = 'tales_django.admin.AppAdminSite'

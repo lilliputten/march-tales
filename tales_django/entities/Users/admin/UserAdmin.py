@@ -1,10 +1,17 @@
 from django.utils.translation import gettext_lazy as _
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from django.contrib.auth.admin import UserAdmin
+
+# from django.contrib.auth.admin import UserAdmin
 from django.db.models import Q
 
-from ..forms import UserAdminForm
+from translated_fields import TranslatedFieldAdmin
+
+from unfold.admin import ModelAdmin as UnfoldModelAdmin
+
+from tales_django.sites import unfold_admin_site
+
+# from ..forms import UserAdminForm
 from ..models import User
 
 
@@ -18,8 +25,8 @@ class IsRegularUserFilter(admin.SimpleListFilter):
 
     def lookups(self, request, model_admin):
         return (
-            ('1', _('Yes')),
-            ('0', _('No')),
+            ('1', _('True')),
+            ('0', _('False')),
         )
 
     def queryset(self, _request, queryset):
@@ -29,8 +36,11 @@ class IsRegularUserFilter(admin.SimpleListFilter):
             return queryset.filter(~Q(is_staff=False, is_superuser=False))
 
 
-class UserAdmin(BaseUserAdmin):
-    form = UserAdminForm
+# admin.site.register(User, UserAdmin)
+# class UserAdmin(BaseUserAdmin):
+@admin.register(User, site=unfold_admin_site)
+class UserAdmin(BaseUserAdmin, TranslatedFieldAdmin, UnfoldModelAdmin):
+    # form = UserAdminForm
 
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
@@ -80,6 +90,3 @@ class UserAdmin(BaseUserAdmin):
         form.base_fields['username'].label = _('E-mail (username)')
         form.base_fields['address'].label = _('Address')
         return form
-
-
-admin.site.register(User, UserAdmin)
