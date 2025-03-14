@@ -50,6 +50,8 @@ class Track(Model):
         verbose_name=_('Youtube link'), blank=True, null=False, max_length=64, help_text=_('YouTube video link url')
     )
 
+    promote = models.BooleanField(_('Promote'), default=False, help_text=_('Promote on the main page'))
+
     author = models.ForeignKey('Author', verbose_name=_('Author'), blank=False, null=False, on_delete=models.DO_NOTHING)
 
     tags = models.ManyToManyField('Tag', verbose_name=_('Tags'), blank=True, related_name='tagged_tracks')

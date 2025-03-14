@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-14 08:53+0300\n"
+"POT-Creation-Date: 2025-03-14 20:03+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -89,7 +89,7 @@ msgid "No favorite tracks"
 msgstr "Нет избранных треков"
 
 #: .\src\assets\common-blocks\track-details\track-details.django:23
-#: .\tales_django\entities\Tracks\models\Track.py:83
+#: .\tales_django\entities\Tracks\models\Track.py:85
 msgid "Played count"
 msgstr "Счётчик прослушиваний"
 
@@ -99,7 +99,7 @@ msgid "Duration"
 msgstr "Длительность"
 
 #: .\src\assets\common-blocks\track-details\track-details.django:31
-#: .\tales_django\entities\Tracks\models\Track.py:92
+#: .\tales_django\entities\Tracks\models\Track.py:94
 msgid "Published at"
 msgstr "Дата публикации"
 
@@ -107,7 +107,7 @@ msgstr "Дата публикации"
 #: .\src\assets\template-right-blocks\right-rubrics-list\right-rubrics-list.django:7
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:165
 #: .\tales_django\entities\Tracks\models\Rubric.py:13
-#: .\tales_django\entities\Tracks\models\Track.py:56
+#: .\tales_django\entities\Tracks\models\Track.py:58
 #: .\tales_django\settings.py:243
 #: .\tales_django\templates\tales_django\rubric_details.html.django:21
 #: .\tales_django\templates\tales_django\rubric_index.html.django:20
@@ -118,7 +118,7 @@ msgstr "Разделы"
 #: .\src\assets\template-right-blocks\right-tags-list\right-tags-list.django:7
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:159
 #: .\tales_django\entities\Tracks\models\Tag.py:13
-#: .\tales_django\entities\Tracks\models\Track.py:55
+#: .\tales_django\entities\Tracks\models\Track.py:57
 #: .\tales_django\settings.py:248
 #: .\tales_django\templates\tales_django\tag_details.html.django:21
 #: .\tales_django\templates\tales_django\tag_index.html.django:20
@@ -169,6 +169,7 @@ msgid "Favorites"
 msgstr "Избранное"
 
 #: .\src\assets\page-menus\menu-main.django:29
+#: .\tales_django\entities\Users\models\User.py:36
 msgid "Playlist"
 msgstr "Плейлист"
 
@@ -372,6 +373,7 @@ msgstr "членство"
 #: .\tales_django\entities\Tracks\models\Author.py:30
 #: .\tales_django\entities\Tracks\models\Rubric.py:26
 #: .\tales_django\entities\Tracks\models\Tag.py:26
+#: .\tales_django\entities\Tracks\models\Track.py:53
 msgid "Promote"
 msgstr "Продвигать"
 
@@ -402,7 +404,7 @@ msgstr "треки"
 
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:43
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:144
-#: .\tales_django\entities\Tracks\models\Track.py:73
+#: .\tales_django\entities\Tracks\models\Track.py:75
 msgid "Published"
 msgstr "Опубликовано"
 
@@ -472,7 +474,7 @@ msgid "User in not authenticated"
 msgstr "Пользователь не авторизован"
 
 #: .\tales_django\entities\Tracks\models\Author.py:14
-#: .\tales_django\entities\Tracks\models\Track.py:53
+#: .\tales_django\entities\Tracks\models\Track.py:55
 msgid "Author"
 msgstr "Авторы"
 
@@ -492,6 +494,7 @@ msgstr "Портрет"
 #: .\tales_django\entities\Tracks\models\Author.py:30
 #: .\tales_django\entities\Tracks\models\Rubric.py:26
 #: .\tales_django\entities\Tracks\models\Tag.py:26
+#: .\tales_django\entities\Tracks\models\Track.py:53
 msgid "Promote on the main page"
 msgstr "Продвигать на главной странице"
 
@@ -536,47 +539,47 @@ msgstr "Ссылка на YouTube"
 msgid "YouTube video link url"
 msgstr "Ссылка на ролик в YouTube"
 
-#: .\tales_django\entities\Tracks\models\Track.py:62
+#: .\tales_django\entities\Tracks\models\Track.py:64
 msgid "Audio file"
 msgstr "Аудио файл"
 
-#: .\tales_django\entities\Tracks\models\Track.py:68
+#: .\tales_django\entities\Tracks\models\Track.py:70
 msgid "Preview picture"
 msgstr "Изображение предпросмотра"
 
-#: .\tales_django\entities\Tracks\models\Track.py:74
+#: .\tales_django\entities\Tracks\models\Track.py:76
 msgid "Hidden"
 msgstr "Скрыто"
 
-#: .\tales_django\entities\Tracks\models\Track.py:75
+#: .\tales_django\entities\Tracks\models\Track.py:77
 msgid "Test"
 msgstr "Проверка"
 
-#: .\tales_django\entities\Tracks\models\Track.py:78
+#: .\tales_django\entities\Tracks\models\Track.py:80
 msgid "Status"
 msgstr "Статус"
 
-#: .\tales_django\entities\Tracks\models\Track.py:80
+#: .\tales_django\entities\Tracks\models\Track.py:82
 msgid "For members only"
 msgstr "Только для членов"
 
-#: .\tales_django\entities\Tracks\models\Track.py:87
+#: .\tales_django\entities\Tracks\models\Track.py:89
 msgid "Duration (seconds)"
 msgstr "Длительность (сек)"
 
-#: .\tales_django\entities\Tracks\models\Track.py:88
+#: .\tales_django\entities\Tracks\models\Track.py:90
 msgid "File size (bytes)"
 msgstr "Размер файла (байты)"
 
-#: .\tales_django\entities\Tracks\models\Track.py:93
+#: .\tales_django\entities\Tracks\models\Track.py:95
 msgid "Updated at"
 msgstr "Дата обновления"
 
-#: .\tales_django\entities\Tracks\models\Track.py:97
+#: .\tales_django\entities\Tracks\models\Track.py:99
 msgid "Published by"
 msgstr "Опубликовано пользователем"
 
-#: .\tales_django\entities\Tracks\models\Track.py:100
+#: .\tales_django\entities\Tracks\models\Track.py:102
 msgid "Updated by"
 msgstr "Обновлено пользователем"
 
@@ -613,20 +616,25 @@ msgid "Address"
 msgstr "Адрес"
 
 #: .\tales_django\entities\Users\models\User.py:13
-msgid "e-mail"
-msgstr "e-mail"
+msgid "E-mail"
+msgstr "E-mail"
 
 #: .\tales_django\entities\Users\models\User.py:14
-msgid "addrress"
-msgstr "адрес"
+msgid "Addrress"
+msgstr "Адрес"
 
 #: .\tales_django\entities\Users\models\User.py:33
-msgid "favorite tracks"
-msgstr "избранные треки"
+#: .\tales_django\templates\tales_django\profile.html.django:64
+msgid "Favorite tracks"
+msgstr "Избранные треки"
 
-#: .\tales_django\entities\Users\models\User.py:36
-msgid "playlist"
-msgstr "плейлист"
+#: .\tales_django\entities\Users\models\User.py:39
+msgid "Allow notifications"
+msgstr "Разрешить уведомления"
+
+#: .\tales_django\entities\Users\models\User.py:39
+msgid "Receive notifications via email and in the mobile application"
+msgstr "Получать уведомления по электронной почте и в мобильном приложении"
 
 #: .\tales_django\settings.py:209 .\tales_django\settings.py:210
 msgid "Administration"
@@ -1128,10 +1136,6 @@ msgstr ""
 "недействительно. Вы можете <a target=\"_blank\" href=\"%"
 "(invoice_download_url)s\">загрузите счет-фактуру</a> и оплатите его прямо "
 "сейчас."
-
-#: .\tales_django\templates\tales_django\profile.html.django:64
-msgid "Favorite tracks"
-msgstr "Избранные треки"
 
 #: .\tales_django\templates\tales_django\profile_edit.html.django:26
 msgid "Save"

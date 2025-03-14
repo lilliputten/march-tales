@@ -10,8 +10,8 @@ class User(AbstractUser):
     # NOTE: It seems to be imposible to completely remove the `username` because it's used in django_registration
     # username = None
 
-    email = models.EmailField(_('e-mail'), unique=True)
-    address = models.TextField(_('addrress'), blank=True, default='')
+    email = models.EmailField(_('E-mail'), unique=True)
+    address = models.TextField(_('Addrress'), blank=True, default='')
 
     # NOTE: Using the email field for the username is incompatible with `django_registration`:
     # @see https://django-registration.readthedocs.io/en/3.4/custom-user.html#compatibility-of-the-built-in-workflows-with-custom-user-models
@@ -30,11 +30,13 @@ class User(AbstractUser):
 
     # Track-related parameters
     favorite_tracks = models.ManyToManyField(
-        'Track', blank=True, related_name='favorited_users', verbose_name=_('favorite tracks')
+        'Track', blank=True, related_name='favorited_users', verbose_name=_('Favorite tracks')
     )
     playlist_tracks = models.ManyToManyField(
-        'Track', blank=True, related_name='playlisted_users', verbose_name=_('playlist')
+        'Track', blank=True, related_name='playlisted_users', verbose_name=_('Playlist')
     )
+
+    allow_notifications = models.BooleanField(_('Allow notifications'), default=False, help_text=_('Receive notifications via email and in the mobile application'))
 
     class Meta(AbstractUser.Meta):
         #  # TODO: Add correct check if email and username are the same?

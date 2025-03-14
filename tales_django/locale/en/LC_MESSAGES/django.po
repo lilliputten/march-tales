@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-14 08:53+0300\n"
+"POT-Creation-Date: 2025-03-14 20:03+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -87,7 +87,7 @@ msgid "No favorite tracks"
 msgstr ""
 
 #: .\src\assets\common-blocks\track-details\track-details.django:23
-#: .\tales_django\entities\Tracks\models\Track.py:83
+#: .\tales_django\entities\Tracks\models\Track.py:85
 msgid "Played count"
 msgstr ""
 
@@ -97,7 +97,7 @@ msgid "Duration"
 msgstr ""
 
 #: .\src\assets\common-blocks\track-details\track-details.django:31
-#: .\tales_django\entities\Tracks\models\Track.py:92
+#: .\tales_django\entities\Tracks\models\Track.py:94
 msgid "Published at"
 msgstr ""
 
@@ -105,7 +105,7 @@ msgstr ""
 #: .\src\assets\template-right-blocks\right-rubrics-list\right-rubrics-list.django:7
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:165
 #: .\tales_django\entities\Tracks\models\Rubric.py:13
-#: .\tales_django\entities\Tracks\models\Track.py:56
+#: .\tales_django\entities\Tracks\models\Track.py:58
 #: .\tales_django\settings.py:243
 #: .\tales_django\templates\tales_django\rubric_details.html.django:21
 #: .\tales_django\templates\tales_django\rubric_index.html.django:20
@@ -116,7 +116,7 @@ msgstr ""
 #: .\src\assets\template-right-blocks\right-tags-list\right-tags-list.django:7
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:159
 #: .\tales_django\entities\Tracks\models\Tag.py:13
-#: .\tales_django\entities\Tracks\models\Track.py:55
+#: .\tales_django\entities\Tracks\models\Track.py:57
 #: .\tales_django\settings.py:248
 #: .\tales_django\templates\tales_django\tag_details.html.django:21
 #: .\tales_django\templates\tales_django\tag_index.html.django:20
@@ -161,6 +161,7 @@ msgid "Favorites"
 msgstr ""
 
 #: .\src\assets\page-menus\menu-main.django:29
+#: .\tales_django\entities\Users\models\User.py:36
 msgid "Playlist"
 msgstr ""
 
@@ -368,6 +369,7 @@ msgstr ""
 #: .\tales_django\entities\Tracks\models\Author.py:30
 #: .\tales_django\entities\Tracks\models\Rubric.py:26
 #: .\tales_django\entities\Tracks\models\Tag.py:26
+#: .\tales_django\entities\Tracks\models\Track.py:53
 msgid "Promote"
 msgstr ""
 
@@ -398,7 +400,7 @@ msgstr ""
 
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:43
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:144
-#: .\tales_django\entities\Tracks\models\Track.py:73
+#: .\tales_django\entities\Tracks\models\Track.py:75
 msgid "Published"
 msgstr ""
 
@@ -470,7 +472,7 @@ msgid "User in not authenticated"
 msgstr ""
 
 #: .\tales_django\entities\Tracks\models\Author.py:14
-#: .\tales_django\entities\Tracks\models\Track.py:53
+#: .\tales_django\entities\Tracks\models\Track.py:55
 msgid "Author"
 msgstr ""
 
@@ -494,6 +496,7 @@ msgstr ""
 #: .\tales_django\entities\Tracks\models\Author.py:30
 #: .\tales_django\entities\Tracks\models\Rubric.py:26
 #: .\tales_django\entities\Tracks\models\Tag.py:26
+#: .\tales_django\entities\Tracks\models\Track.py:53
 msgid "Promote on the main page"
 msgstr ""
 
@@ -540,47 +543,47 @@ msgstr ""
 msgid "YouTube video link url"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\models\Track.py:62
+#: .\tales_django\entities\Tracks\models\Track.py:64
 msgid "Audio file"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\models\Track.py:68
+#: .\tales_django\entities\Tracks\models\Track.py:70
 msgid "Preview picture"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\models\Track.py:74
+#: .\tales_django\entities\Tracks\models\Track.py:76
 msgid "Hidden"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\models\Track.py:75
+#: .\tales_django\entities\Tracks\models\Track.py:77
 msgid "Test"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\models\Track.py:78
+#: .\tales_django\entities\Tracks\models\Track.py:80
 msgid "Status"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\models\Track.py:80
+#: .\tales_django\entities\Tracks\models\Track.py:82
 msgid "For members only"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\models\Track.py:87
+#: .\tales_django\entities\Tracks\models\Track.py:89
 msgid "Duration (seconds)"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\models\Track.py:88
+#: .\tales_django\entities\Tracks\models\Track.py:90
 msgid "File size (bytes)"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\models\Track.py:93
+#: .\tales_django\entities\Tracks\models\Track.py:95
 msgid "Updated at"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\models\Track.py:97
+#: .\tales_django\entities\Tracks\models\Track.py:99
 msgid "Published by"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\models\Track.py:100
+#: .\tales_django\entities\Tracks\models\Track.py:102
 msgid "Updated by"
 msgstr ""
 
@@ -617,19 +620,24 @@ msgid "Address"
 msgstr ""
 
 #: .\tales_django\entities\Users\models\User.py:13
-msgid "e-mail"
+msgid "E-mail"
 msgstr ""
 
 #: .\tales_django\entities\Users\models\User.py:14
-msgid "addrress"
+msgid "Addrress"
 msgstr ""
 
 #: .\tales_django\entities\Users\models\User.py:33
-msgid "favorite tracks"
+#: .\tales_django\templates\tales_django\profile.html.django:64
+msgid "Favorite tracks"
 msgstr ""
 
-#: .\tales_django\entities\Users\models\User.py:36
-msgid "playlist"
+#: .\tales_django\entities\Users\models\User.py:39
+msgid "Allow notifications"
+msgstr ""
+
+#: .\tales_django\entities\Users\models\User.py:39
+msgid "Receive notifications via email and in the mobile application"
 msgstr ""
 
 #: .\tales_django\settings.py:209 .\tales_django\settings.py:210
@@ -1108,10 +1116,6 @@ msgstr ""
 "<strong>You have unpaid membership invoice.</strong> Your membership isn't "
 "valid yet. You can <a target=\"_blank\" href=\"%"
 "(invoice_download_url)s\">download an invoice</a> to pay for it now."
-
-#: .\tales_django\templates\tales_django\profile.html.django:64
-msgid "Favorite tracks"
-msgstr ""
 
 #: .\tales_django\templates\tales_django\profile_edit.html.django:26
 msgid "Save"
