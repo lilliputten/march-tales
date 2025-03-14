@@ -50,8 +50,6 @@ class Track(Model):
         verbose_name=_('Youtube link'), blank=True, null=False, max_length=64, help_text=_('YouTube video link url')
     )
 
-    promote = models.BooleanField(_('Promote'), default=False, help_text=_('Promote on the main page'))
-
     author = models.ForeignKey('Author', verbose_name=_('Author'), blank=False, null=False, on_delete=models.DO_NOTHING)
 
     tags = models.ManyToManyField('Tag', verbose_name=_('Tags'), blank=True, related_name='tagged_tracks')
@@ -79,7 +77,11 @@ class Track(Model):
     DEFAULT_TRACK_STATUS = TRACK_STATUS[0][0]
     track_status = models.TextField(_('Status'), choices=TRACK_STATUS, default=DEFAULT_TRACK_STATUS)
 
-    for_members = models.BooleanField(_('For members only'), default=False)   # , verbose_name=_('For members only'))
+    promote = models.BooleanField(_('Promote'), default=False, help_text=_('Promote on the main page'))
+
+    for_members = models.BooleanField(
+        _('For members only'), default=False, help_text=_('Show only for privileged members')
+    )
 
     played_count = models.BigIntegerField(
         blank=True, default=0, help_text=_('Played count'), verbose_name=_('Played count')

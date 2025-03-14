@@ -36,7 +36,11 @@ class User(AbstractUser):
         'Track', blank=True, related_name='playlisted_users', verbose_name=_('Playlist')
     )
 
-    allow_notifications = models.BooleanField(_('Allow notifications'), default=False, help_text=_('Receive notifications via email and in the mobile application'))
+    allow_notifications = models.BooleanField(
+        _('Allow notifications'),
+        default=False,
+        help_text=_('Receive notifications via email and in the mobile application'),
+    )
 
     class Meta(AbstractUser.Meta):
         #  # TODO: Add correct check if email and username are the same?

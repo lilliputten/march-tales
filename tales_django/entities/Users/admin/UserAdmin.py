@@ -11,17 +11,16 @@ from unfold.admin import ModelAdmin as UnfoldModelAdmin
 
 from tales_django.sites import unfold_admin_site
 
-# from ..forms import UserAdminForm
 from ..models import User
 
 
-class IsRegularUserFilter(admin.SimpleListFilter):
+class IsAdministratorFilter(admin.SimpleListFilter):
     """
     Regular user custom combined filter
     """
 
-    title = 'Is regular user'
-    parameter_name = 'is_regular_user'
+    title = _('Is administrator')
+    parameter_name = 'is_administrator'
 
     def lookups(self, request, model_admin):
         return (
@@ -36,11 +35,8 @@ class IsRegularUserFilter(admin.SimpleListFilter):
             return queryset.filter(~Q(is_staff=False, is_superuser=False))
 
 
-# admin.site.register(User, UserAdmin)
-# class UserAdmin(BaseUserAdmin):
 @admin.register(User, site=unfold_admin_site)
 class UserAdmin(BaseUserAdmin, TranslatedFieldAdmin, UnfoldModelAdmin):
-    # form = UserAdminForm
 
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
@@ -50,7 +46,7 @@ class UserAdmin(BaseUserAdmin, TranslatedFieldAdmin, UnfoldModelAdmin):
             {
                 'fields': (
                     'favorite_tracks',
-                    'playlist_tracks',
+                    # 'playlist_tracks',
                 )
             },
         ),
@@ -58,6 +54,7 @@ class UserAdmin(BaseUserAdmin, TranslatedFieldAdmin, UnfoldModelAdmin):
             _('Permissions'),
             {
                 'fields': (
+                    'allow_notifications',
                     'is_active',
                     'is_staff',
                     'is_superuser',
@@ -66,21 +63,36 @@ class UserAdmin(BaseUserAdmin, TranslatedFieldAdmin, UnfoldModelAdmin):
                 )
             },
         ),
-        (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
+        (_('Dates'), {'fields': ('last_login', 'date_joined')}),
     )
+
     list_display = [
         'email',
         'first_name',
         'last_name',
         'is_active',
-        'is_regular_user',
+        'is_administrator',
+        'allow_notifications',
+    ]
+    search_fields = [
+        'email',
+        'first_name',
+        'last_name',
     ]
     list_filter = [
-        IsRegularUserFilter,
+        IsAdministratorFilter,
+        'allow_notifications',
+        # 'is_administrator',
     ]
+
+    def is_administrator(self, user):
+        return user.is_staff or user.is_superuser
 
     def is_regular_user(self, user):
         return not user.is_staff and not user.is_superuser
+
+    is_administrator.short_description = _('Administrator')
+    is_administrator.boolean = True
 
     is_regular_user.short_description = _('Regular user')
     is_regular_user.boolean = True

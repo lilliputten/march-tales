@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-14 20:03+0300\n"
+"POT-Creation-Date: 2025-03-14 21:08+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -94,7 +94,7 @@ msgid "Played count"
 msgstr "Счётчик прослушиваний"
 
 #: .\src\assets\common-blocks\track-details\track-details.django:27
-#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:172
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:182
 msgid "Duration"
 msgstr "Длительность"
 
@@ -105,9 +105,9 @@ msgstr "Дата публикации"
 
 #: .\src\assets\common-blocks\track-details\track-details.django:36
 #: .\src\assets\template-right-blocks\right-rubrics-list\right-rubrics-list.django:7
-#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:165
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:175
 #: .\tales_django\entities\Tracks\models\Rubric.py:13
-#: .\tales_django\entities\Tracks\models\Track.py:58
+#: .\tales_django\entities\Tracks\models\Track.py:56
 #: .\tales_django\settings.py:243
 #: .\tales_django\templates\tales_django\rubric_details.html.django:21
 #: .\tales_django\templates\tales_django\rubric_index.html.django:20
@@ -116,9 +116,9 @@ msgstr "Разделы"
 
 #: .\src\assets\common-blocks\track-details\track-details.django:48
 #: .\src\assets\template-right-blocks\right-tags-list\right-tags-list.django:7
-#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:159
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:169
 #: .\tales_django\entities\Tracks\models\Tag.py:13
-#: .\tales_django\entities\Tracks\models\Track.py:57
+#: .\tales_django\entities\Tracks\models\Track.py:55
 #: .\tales_django\settings.py:248
 #: .\tales_django\templates\tales_django\tag_details.html.django:21
 #: .\tales_django\templates\tales_django\tag_index.html.django:20
@@ -370,16 +370,18 @@ msgstr "членство"
 #: .\tales_django\entities\Tracks\admin\AuthorAdmin.py:18
 #: .\tales_django\entities\Tracks\admin\RubricAdmin.py:19
 #: .\tales_django\entities\Tracks\admin\TagAdmin.py:18
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:73
 #: .\tales_django\entities\Tracks\models\Author.py:30
 #: .\tales_django\entities\Tracks\models\Rubric.py:26
 #: .\tales_django\entities\Tracks\models\Tag.py:26
-#: .\tales_django\entities\Tracks\models\Track.py:53
+#: .\tales_django\entities\Tracks\models\Track.py:80
 msgid "Promote"
 msgstr "Продвигать"
 
 #: .\tales_django\entities\Tracks\admin\AuthorAdmin.py:23
 #: .\tales_django\entities\Tracks\admin\RubricAdmin.py:24
 #: .\tales_django\entities\Tracks\admin\TagAdmin.py:23
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:78
 msgid "No promote"
 msgstr "Не продвигать"
 
@@ -402,48 +404,48 @@ msgstr "текст"
 msgid "tracks count"
 msgstr "треки"
 
-#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:43
-#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:144
-#: .\tales_django\entities\Tracks\models\Track.py:75
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:42
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:154
+#: .\tales_django\entities\Tracks\models\Track.py:73
 msgid "Published"
 msgstr "Опубликовано"
 
-#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:48
-#: .\tales_django\entities\Users\admin\UserAdmin.py:28
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:47
+#: .\tales_django\entities\Users\admin\UserAdmin.py:27
 msgid "True"
 msgstr "Да"
 
-#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:49
-#: .\tales_django\entities\Users\admin\UserAdmin.py:29
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:48
+#: .\tales_django\entities\Users\admin\UserAdmin.py:28
 msgid "False"
 msgstr "Нет"
 
-#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:59
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:58
 msgid "Mark as published"
 msgstr "Пометить опубликованным"
 
-#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:64
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:63
 msgid "Mark as hidden"
 msgstr "Пометить скрытым"
 
-#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:69
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:68
 msgid "Mark as test"
 msgstr "Пометить для тестов"
 
-#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:152
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:162
 msgid "Has preview"
 msgstr "С превью"
 
-#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:179
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:189
 msgid "Size"
 msgstr "Размер"
 
-#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:192
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:202
 #: .\tales_django\entities\Tracks\models\Track.py:29
 msgid "Title"
 msgstr "Название"
 
-#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:236
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:246
 msgid "Audio file has been successfully uploaded"
 msgstr "Аудио файл успешно загружен"
 
@@ -474,7 +476,7 @@ msgid "User in not authenticated"
 msgstr "Пользователь не авторизован"
 
 #: .\tales_django\entities\Tracks\models\Author.py:14
-#: .\tales_django\entities\Tracks\models\Track.py:55
+#: .\tales_django\entities\Tracks\models\Track.py:53
 msgid "Author"
 msgstr "Авторы"
 
@@ -494,7 +496,7 @@ msgstr "Портрет"
 #: .\tales_django\entities\Tracks\models\Author.py:30
 #: .\tales_django\entities\Tracks\models\Rubric.py:26
 #: .\tales_django\entities\Tracks\models\Tag.py:26
-#: .\tales_django\entities\Tracks\models\Track.py:53
+#: .\tales_django\entities\Tracks\models\Track.py:80
 msgid "Promote on the main page"
 msgstr "Продвигать на главной странице"
 
@@ -516,7 +518,7 @@ msgid "Track"
 msgstr "Треки"
 
 #: .\tales_django\entities\Tracks\models\Track.py:25
-#: .\tales_django\entities\Users\admin\UserAdmin.py:49
+#: .\tales_django\entities\Users\admin\UserAdmin.py:45
 #: .\tales_django\settings.py:232
 #: .\tales_django\templates\tales_django\favorites.html.django:37
 #: .\tales_django\templates\tales_django\track_details.html.django:42
@@ -539,29 +541,33 @@ msgstr "Ссылка на YouTube"
 msgid "YouTube video link url"
 msgstr "Ссылка на ролик в YouTube"
 
-#: .\tales_django\entities\Tracks\models\Track.py:64
+#: .\tales_django\entities\Tracks\models\Track.py:62
 msgid "Audio file"
 msgstr "Аудио файл"
 
-#: .\tales_django\entities\Tracks\models\Track.py:70
+#: .\tales_django\entities\Tracks\models\Track.py:68
 msgid "Preview picture"
 msgstr "Изображение предпросмотра"
 
-#: .\tales_django\entities\Tracks\models\Track.py:76
+#: .\tales_django\entities\Tracks\models\Track.py:74
 msgid "Hidden"
 msgstr "Скрыто"
 
-#: .\tales_django\entities\Tracks\models\Track.py:77
+#: .\tales_django\entities\Tracks\models\Track.py:75
 msgid "Test"
 msgstr "Проверка"
 
-#: .\tales_django\entities\Tracks\models\Track.py:80
+#: .\tales_django\entities\Tracks\models\Track.py:78
 msgid "Status"
 msgstr "Статус"
 
 #: .\tales_django\entities\Tracks\models\Track.py:82
 msgid "For members only"
 msgstr "Только для членов"
+
+#: .\tales_django\entities\Tracks\models\Track.py:82
+msgid "Show only for privileged members"
+msgstr "Показывать только для привилегированных пользователей"
 
 #: .\tales_django\entities\Tracks\models\Track.py:89
 msgid "Duration (seconds)"
@@ -584,34 +590,42 @@ msgid "Updated by"
 msgstr "Обновлено пользователем"
 
 #: .\tales_django\entities\Users\admin\GroupAdmin.py:20
-msgid "group"
-msgstr "группа"
+msgid "Group"
+msgstr "Группа"
 
 #: .\tales_django\entities\Users\admin\GroupAdmin.py:21
-msgid "groups"
-msgstr "группы"
+msgid "Groups"
+msgstr "Группы"
 
-#: .\tales_django\entities\Users\admin\UserAdmin.py:47
+#: .\tales_django\entities\Users\admin\UserAdmin.py:22
+msgid "Is administrator"
+msgstr "Является администриратором"
+
+#: .\tales_django\entities\Users\admin\UserAdmin.py:43
 msgid "Personal info"
 msgstr "Персональная информация"
 
-#: .\tales_django\entities\Users\admin\UserAdmin.py:58
+#: .\tales_django\entities\Users\admin\UserAdmin.py:54
 msgid "Permissions"
 msgstr "Разрешения"
 
-#: .\tales_django\entities\Users\admin\UserAdmin.py:69
-msgid "Important dates"
-msgstr "Важные даты"
+#: .\tales_django\entities\Users\admin\UserAdmin.py:66
+msgid "Dates"
+msgstr "Даты"
 
-#: .\tales_django\entities\Users\admin\UserAdmin.py:85
+#: .\tales_django\entities\Users\admin\UserAdmin.py:93
+msgid "Administrator"
+msgstr "Администратор"
+
+#: .\tales_django\entities\Users\admin\UserAdmin.py:96
 msgid "Regular user"
 msgstr "Обычный пользователь"
 
-#: .\tales_django\entities\Users\admin\UserAdmin.py:90
+#: .\tales_django\entities\Users\admin\UserAdmin.py:101
 msgid "E-mail (username)"
 msgstr "E-mail (логин)"
 
-#: .\tales_django\entities\Users\admin\UserAdmin.py:91
+#: .\tales_django\entities\Users\admin\UserAdmin.py:102
 msgid "Address"
 msgstr "Адрес"
 
@@ -628,11 +642,11 @@ msgstr "Адрес"
 msgid "Favorite tracks"
 msgstr "Избранные треки"
 
-#: .\tales_django\entities\Users\models\User.py:39
+#: .\tales_django\entities\Users\models\User.py:40
 msgid "Allow notifications"
 msgstr "Разрешить уведомления"
 
-#: .\tales_django\entities\Users\models\User.py:39
+#: .\tales_django\entities\Users\models\User.py:42
 msgid "Receive notifications via email and in the mobile application"
 msgstr "Получать уведомления по электронной почте и в мобильном приложении"
 
@@ -883,6 +897,14 @@ msgstr "Пожалуйста, исправьте указанные ниже о�
 #: .\tales_django\templates\custom-translations.django:18
 msgid "Type to search"
 msgstr "Введите текст для поиска"
+
+#: .\tales_django\templates\custom-translations.django:19
+msgid "Select Record"
+msgstr "Выбрать запись"
+
+#: .\tales_django\templates\custom-translations.django:20
+msgid "Select all rows"
+msgstr "Выбрат все записи"
 
 #: .\tales_django\templates\registration\logged_out.html:17
 msgid "Logged out"
@@ -1159,3 +1181,6 @@ msgstr "Список тегов"
 #: .\tales_django\templates\tales_django\terms.html.django:14
 msgid "Terms and conditions"
 msgstr "Пользовательское соглашение"
+
+#~ msgid "Important dates"
+#~ msgstr "Важные даты"

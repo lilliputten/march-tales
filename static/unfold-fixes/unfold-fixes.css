@@ -1,0 +1,7 @@
+textarea.vLargeTextField {
+    max-width: 42rem !important;
+    height: 8em;
+}
+.readonly {
+    opacity: 0.25;
+}

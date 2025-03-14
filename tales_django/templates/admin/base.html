@@ -60,3 +60,9 @@
         </div>
     </div>
 {% endblock %}
+
+{# XXX 2025.03.14, 20:52 -- Added style fixes #}
+{% block extrastyle %}
+    {{ block.super }}
+    <link href="/static/unfold-fixes/unfold-fixes.css" rel="stylesheet">
+{% endblock %}

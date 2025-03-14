@@ -1,6 +1,6 @@
 import traceback
 
-from django.urls import reverse
+# from django.urls import reverse
 from translated_fields import TranslatedFieldAdmin, to_attribute
 
 # from modeltranslation.admin import TabbedTranslationAdmin
@@ -9,10 +9,11 @@ from translated_fields import TranslatedFieldAdmin, to_attribute
 from django.utils.translation import gettext_lazy as _
 from django.utils.translation import get_language
 
-from django.contrib.admin import SimpleListFilter
+# from django.contrib.admin import SimpleListFilter
 from django.contrib import admin
 from django.contrib import messages
-from django.db import models
+
+# from django.db import models
 from django.db.models import Q, F
 from django.db.models.functions import Lower
 
@@ -28,8 +29,6 @@ from core.helpers.errors import errorToString
 from core.logging import getDebugLogger, errorStyle, warningTitleStyle, tretiaryStyle
 
 from ..models import Track
-
-# from ..forms import TrackAdminForm
 
 
 _logger = getDebugLogger()
@@ -71,15 +70,25 @@ def mark_test_action(modeladmin, request, queryset):
     queryset.update(track_status='TEST')
 
 
+@admin.action(description=_('Promote'))
+def promote_action(modeladmin, request, queryset):
+    queryset.update(promote=True)
+
+
+@admin.action(description=_('No promote'))
+def no_promote_action(modeladmin, request, queryset):
+    queryset.update(promote=False)
+
+
 @admin.register(Track, site=unfold_admin_site)
 class TrackAdmin(TranslatedFieldAdmin, UnfoldModelAdmin):
-
-    # form = TrackAdminForm
 
     actions = [
         mark_published_action,
         mark_hidden_action,
         mark_test_action,
+        promote_action,
+        no_promote_action,
     ]
     list_display = [
         'title_translated',
@@ -88,7 +97,7 @@ class TrackAdmin(TranslatedFieldAdmin, UnfoldModelAdmin):
         'tags_list',
         'duration_formatted',
         'size_formatted',
-        # 'resolved_date',
+        'promote',
         'is_published',
         'published_at',
         'updated_at',
@@ -122,6 +131,7 @@ class TrackAdmin(TranslatedFieldAdmin, UnfoldModelAdmin):
     list_filter = [
         IsPublishedFilter,
         'track_status',
+        'promote',
         'published_at',
         'updated_at',
         'author',
