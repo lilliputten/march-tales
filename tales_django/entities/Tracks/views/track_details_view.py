@@ -5,6 +5,7 @@ from django.utils.translation import activate
 
 from core.helpers.utils import debugObj
 from core.logging import getDebugLogger
+from tales_django.core.model_helpers import get_valid_language
 from tales_django.core.pages import get_common_context, get_favorites_list_context, get_tracks_list_context
 from tales_django.entities.Tracks.models import Track
 
@@ -16,8 +17,8 @@ def track_details_view(request: HttpRequest, track_id):
 
     # TODO: Fetch and set language from telegram request and set it for the response. Find telegram language parameter.
     current_language = request.LANGUAGE_CODE
-    required_locale = request.headers.get('Accept-Language')   # current_language
-    set_language = True
+    required_locale = get_valid_language(request.headers.get('Accept-Language'))   # current_language
+    set_language = False
     debugData = {
         'required_locale': required_locale,
         'current_language': current_language,
