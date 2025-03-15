@@ -32,8 +32,8 @@ def get_track_order_args(request: Request):
             '-published': '-published_at',
         }
         default_order_args = [
-            'published_at',
-            Lower(f'title_{language}').desc(),
+            predefined_order_values['-published'],
+            predefined_order_values['title'],
         ]
         order = request.query_params.getlist('order')
         if not order or not len(order):
