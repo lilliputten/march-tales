@@ -531,7 +531,7 @@ LANGUAGES = (
     ('ru', 'Русский'),
     ('en', 'English'),
 )
-DEFAULT_LANGUAGE = 'en'   # LANGUAGES[0][0]
+DEFAULT_LANGUAGE = LANGUAGES[0][0]
 LANGUAGES_DICT = {lng: name for lng, name in list(LANGUAGES)}
 LANGUAGES_LIST = [lng[0] for lng in list(LANGUAGES)]
 CMS_LANGUAGES = {

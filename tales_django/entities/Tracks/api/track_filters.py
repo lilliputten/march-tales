@@ -64,6 +64,8 @@ def get_track_filter_kwargs(request: Request):
     - filter=author_id:1 - Get tracks for particular author id
     - filter=track_status:PUBLISHED filter=status:PUBLISHED filter=published -- Only published tracks (default and always presented filter)
     - filter=ids:2,5 filter=id__in:2,5 -- Limit results by those track indices
+
+    NOTE: It's possible to use Q-notation too, see `get_search_filter_args` for example
     """
     try:
         language = get_current_language()
@@ -118,18 +120,23 @@ def get_search_filter_args(request: Request):
     Checks only for `search` parameters and adds values = the existed args map:
 
     - search=The%20legend
+
+    NOTE: Case-insensitive search (icontains etc) works only for myqsql, not for sqlite.
     """
     try:
-        # language = get_current_language()
         # Check if has `search` parameter
         search = request.query_params.get('search')
         args = []
         if search:
             logger.info(f'[track_filters:get_track_filter_kwargs] search={search}')
-            # query = Q(**{f'title_{language}__icontains': search})
-            query = Q(**{f'title_ru__icontains': search}) | Q(**{f'title_en__icontains': search})
+            # Search in all the titles and tags...
+            query = (
+                Q(**{f'title_ru__icontains': search})
+                | Q(**{f'title_en__icontains': search})
+                | Q(**{f'tag__text_ru__icontains': search})
+                | Q(**{f'tag__text_en__icontains': search})
+            )
             args.append(query)
-            # kwargs[f'title_{language}__icontains'] = search
         return args
     except Exception as err:
         # sError = errorToString(err)
