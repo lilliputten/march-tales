@@ -10,7 +10,7 @@ from rest_framework import pagination
 from core.helpers.utils import debugObj
 from core.logging import getDebugLogger
 
-from tales_django.core.model_helpers import get_currrent_django_language
+from tales_django.core.model_helpers import get_current_language
 
 from .track_constants import default_tracks_limit
 from .common_constants import filter_delimiter
@@ -24,7 +24,7 @@ class DefaultPagination(pagination.LimitOffsetPagination):
 
 def get_track_order_args(request: Request):
     try:
-        language = get_currrent_django_language()
+        language = get_current_language()
         predefined_order_values = {
             'title': Lower(f'title_{language}'),
             '-title': Lower(f'title_{language}').desc(),
@@ -58,7 +58,7 @@ def get_track_order_args(request: Request):
 
 def get_track_filter_kwargs(request: Request):
     try:
-        language = get_currrent_django_language()
+        language = get_current_language()
         predefined_filter_keys = {
             'title': f'title_{language}',
         }

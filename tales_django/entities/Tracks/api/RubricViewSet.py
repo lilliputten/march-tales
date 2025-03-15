@@ -11,7 +11,7 @@ from core.helpers.utils import debugObj
 from core.logging import getDebugLogger
 
 from tales_django.core.helpers.check_csrf import check_csrf
-from tales_django.core.model_helpers import get_currrent_django_language
+from tales_django.core.model_helpers import get_current_language
 
 from .rubric_serializers import RubricSerializer
 
@@ -35,7 +35,7 @@ default_headers = {
 
 # NOTE: No `viewsets.ModelViewSet` -- we don't use modification methods, only our custom `retrieve` and `list` (see below)
 class RubricViewSet(viewsets.GenericViewSet):
-    language = get_currrent_django_language()
+    language = get_current_language()
     queryset = Rubric.objects.order_by(f'text_{language}').all()
     serializer_class = RubricSerializer
     # pagination_class = DefaultPagination
@@ -75,7 +75,7 @@ class RubricViewSet(viewsets.GenericViewSet):
 
             # TODO: Extract sort/filter params and modify results below?
 
-            language = get_currrent_django_language()
+            language = get_current_language()
             query = Rubric.objects.order_by(f'text_{language}')
             subset = query.all()
             if offset or limit:

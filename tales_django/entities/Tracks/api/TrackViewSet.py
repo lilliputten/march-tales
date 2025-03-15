@@ -15,7 +15,7 @@ from core.helpers.utils import debugObj
 from core.logging import getDebugLogger
 
 from tales_django.core.helpers.check_csrf import check_csrf
-from tales_django.core.model_helpers import get_currrent_django_language
+from tales_django.core.model_helpers import get_current_language
 
 from ..models import Track
 
@@ -30,7 +30,7 @@ logger = getDebugLogger()
 
 # NOTE: No `viewsets.ModelViewSet` -- we don't use modification methods, only our custom `retrieve` and `list` (see below)
 class TrackViewSet(viewsets.GenericViewSet):
-    language = get_currrent_django_language()
+    language = get_current_language()
     queryset = Track.objects.order_by('-published_at', f'title_{language}').all()
     serializer_class = TrackSerializer
     # pagination_class = DefaultPagination
@@ -183,7 +183,7 @@ class TrackViewSet(viewsets.GenericViewSet):
             }
             logger.info(f'[list]: params:\n{debugObj(debugData)}')
 
-            # language = get_currrent_django_language()
+            # language = get_current_language()
 
             # TODO: Extract sort/filter params and modify results below?
             query = Track.objects.filter(id__in=idsList, track_status='PUBLISHED')

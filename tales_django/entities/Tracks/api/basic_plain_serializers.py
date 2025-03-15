@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from tales_django.core.model_helpers import get_currrent_django_language
+from tales_django.core.model_helpers import get_current_language
 
 from ..models import Track, Tag, Rubric, Author
 
@@ -14,7 +14,7 @@ class AuthorSerializer(serializers.HyperlinkedModelSerializer):
     track_ids = serializers.SerializerMethodField('get_track_ids')
 
     def get_track_ids(self, obj):
-        language = get_currrent_django_language()
+        language = get_current_language()
         tracks = (
             Track.objects.filter(track_status='PUBLISHED', author__id=obj.id)
             .distinct()

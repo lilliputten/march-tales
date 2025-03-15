@@ -16,7 +16,7 @@ from core.helpers.files import sizeofFmt
 from core.logging import getDebugLogger
 from tales_django.core.helpers.audio import getAudioTrackFolderName
 
-from tales_django.core.model_helpers import get_currrent_django_language, get_non_empty_localized_model_field_attrgetter
+from tales_django.core.model_helpers import get_current_language, get_non_empty_localized_model_field_attrgetter
 
 
 _logger = getDebugLogger()
@@ -116,7 +116,7 @@ class Track(Model):
 
     @property
     def lower_title(self) -> bool:
-        # language = get_currrent_django_language()
+        # language = get_current_language()
         return self.title.lower()
 
     @property

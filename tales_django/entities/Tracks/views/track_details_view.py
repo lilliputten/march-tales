@@ -16,7 +16,7 @@ def track_details_view(request: HttpRequest, track_id):
 
     # TODO: Fetch and set language from telegram request and set it for the response. Find telegram language parameter.
     current_language = request.LANGUAGE_CODE
-    required_locale = request.headers.get('Accept-Language') # current_language
+    required_locale = request.headers.get('Accept-Language')   # current_language
     set_language = True
     debugData = {
         'required_locale': required_locale,
@@ -61,7 +61,6 @@ def track_details_view(request: HttpRequest, track_id):
         )
 
     return response
-
 
 
 __all__ = ['track_details_view']
