@@ -64,7 +64,7 @@ def get_track_filter_kwargs(request: Request):
         }
         predefined_filter_values = {}
         default_filter_args = {
-            'status': 'PUBLISHED',
+            'track_status': 'PUBLISHED',
         }
         filter = request.query_params.getlist('filter')
         if not filter or not len(filter):

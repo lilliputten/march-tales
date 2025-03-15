@@ -497,9 +497,10 @@ AUTHENTICATION_BACKENDS = [
 # @see https://docs.allauth.org/en/dev/account/configuration.html
 ACCOUNT_ACTIVATION_DAYS = 7  # One-week activation window
 # ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_REQUIRED = True
+# ACCOUNT_EMAIL_REQUIRED = True
+# ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_SIGNUP_FIELDS = ['email*', 'password1*', 'password2*']
 ACCOUNT_UNIQUE_EMAIL = True
-ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_PASSWORD_MIN_LENGTH = 8
 

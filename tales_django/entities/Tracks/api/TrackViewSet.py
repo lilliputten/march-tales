@@ -21,7 +21,7 @@ from ..models import Track
 
 from .common_constants import content_type, default_headers
 from .track_constants import default_tracks_limit, default_tracks_offset
-from .track_filters import DefaultPagination, get_track_filter_kwargs, get_track_order_args
+from .track_filters import get_track_filter_kwargs, get_track_order_args
 from .track_serializers import TrackSerializer
 
 
@@ -33,7 +33,7 @@ class TrackViewSet(viewsets.GenericViewSet):
     language = get_currrent_django_language()
     queryset = Track.objects.order_by('-published_at', f'title_{language}').all()
     serializer_class = TrackSerializer
-    pagination_class = DefaultPagination
+    # pagination_class = DefaultPagination
 
     def retrieve(self, request, *args, **kwargs):
         """
@@ -47,8 +47,10 @@ class TrackViewSet(viewsets.GenericViewSet):
                 errorDetail, headers=default_headers, content_type=content_type, status=status.HTTP_403_FORBIDDEN
             )
 
+        full = int(request.query_params.get('full', '0'))
+
         instance = self.get_object()
-        serializer = TrackSerializer(instance=instance)
+        serializer = TrackSerializer(instance=instance, full=full)
         result = serializer.data
         return JsonResponse(result, headers=default_headers, content_type=content_type)
 
@@ -81,9 +83,11 @@ class TrackViewSet(viewsets.GenericViewSet):
             if limit:
                 subset = query.all()[offset : offset + limit]
 
+            full = int(request.query_params.get('full', '0'))
+
             result = {
                 'count': len(query),
-                'results': TrackSerializer(subset, many=True).data,
+                'results': TrackSerializer(subset, many=True, full=full).data,
             }
 
             # result.update({
@@ -188,9 +192,11 @@ class TrackViewSet(viewsets.GenericViewSet):
             if limit:
                 subset = query.all()[offset : offset + limit]
 
+            full = int(request.query_params.get('full', '0'))
+
             result = {
                 'count': len(query),
-                'results': TrackSerializer(subset, many=True).data,
+                'results': TrackSerializer(subset, many=True, full=full).data,
             }
 
             return JsonResponse(
@@ -320,7 +326,10 @@ class TrackViewSet(viewsets.GenericViewSet):
             data = {
                 'played_count': track.played_count + 1,
             }
-            serializer = TrackSerializer(track, data=data, partial=True, context={'request': request})
+
+            full = int(request.query_params.get('full', '0'))
+
+            serializer = TrackSerializer(track, data=data, full=full, partial=True, context={'request': request})
 
             if not serializer.is_valid():
                 return JsonResponse(

@@ -15,7 +15,7 @@ from tales_django.core.model_helpers import get_currrent_django_language
 
 from .rubric_serializers import RubricSerializer
 
-from ..models import Rubric, Author
+from ..models import Rubric
 
 logger = getDebugLogger()
 
@@ -29,8 +29,8 @@ default_headers = {
 }
 
 
-class DefaultPagination(pagination.LimitOffsetPagination):
-    default_limit = defaultRubricsLimit
+# class DefaultPagination(pagination.LimitOffsetPagination):
+#     default_limit = defaultRubricsLimit
 
 
 # NOTE: No `viewsets.ModelViewSet` -- we don't use modification methods, only our custom `retrieve` and `list` (see below)
@@ -38,7 +38,7 @@ class RubricViewSet(viewsets.GenericViewSet):
     language = get_currrent_django_language()
     queryset = Rubric.objects.order_by(f'text_{language}').all()
     serializer_class = RubricSerializer
-    pagination_class = DefaultPagination
+    # pagination_class = DefaultPagination
 
     def retrieve(self, request, *args, **kwargs):
         """
