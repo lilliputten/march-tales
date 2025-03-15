@@ -1,4 +1,4 @@
-default_tracks_limit = 5
+default_tracks_limit = 10
 default_tracks_offset = 0
 
 __all__ = [
