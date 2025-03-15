@@ -1,9 +1,9 @@
 {
   "name": "march-tales",
   "description": "March Tales django site",
-  "version": "0.0.29",
-  "timetag": "250315-0326",
-  "timestamp": "2025.03.15 03:26:20 +0300",
+  "version": "0.0.30",
+  "timetag": "250315-0920",
+  "timestamp": "2025.03.15 09:20:41 +0300",
   "changed": "2025.01.12, 02:52",
   "main": "index.html",
   "author": "lilliputten@gmail.com",
