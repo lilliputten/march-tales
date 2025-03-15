@@ -21,7 +21,7 @@ from ..models import Track
 
 from .common_constants import content_type, default_headers
 from .track_constants import default_tracks_limit, default_tracks_offset
-from .track_filters import get_track_filter_kwargs, get_track_order_args
+from .track_filters import get_track_filter_kwargs, get_track_order_args, get_search_filter_args
 from .track_serializers import TrackSerializer
 
 
@@ -74,11 +74,13 @@ class TrackViewSet(viewsets.GenericViewSet):
             filter = request.query_params.get('filter')
             logger.info(f'[TrackViewSet:list] filter={filter}')
 
-            filter_args = get_track_filter_kwargs(request)
             order_args = get_track_order_args(request)
+            filter_kwargs = get_track_filter_kwargs(request)
+            # filter_args = []
+            filter_args = get_search_filter_args(request)
 
             # query = Track.objects.filter(track_status='PUBLISHED').order_by('-published_at', f'title_{language}')
-            query = Track.objects.filter(**filter_args).order_by(*order_args)
+            query = Track.objects.filter(*filter_args, **filter_kwargs).order_by(*order_args)
             subset = query.all()
             if limit:
                 subset = query.all()[offset : offset + limit]

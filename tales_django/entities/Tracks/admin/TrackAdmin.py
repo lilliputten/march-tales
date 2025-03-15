@@ -213,6 +213,8 @@ class TrackAdmin(TranslatedFieldAdmin, ImportExportModelAdmin, ExportActionModel
         # 'played_count',
     ]
 
+    IsPublishedFilter.boolean = True
+
     def is_published(self, track):
         return track.track_status == 'PUBLISHED'
 
