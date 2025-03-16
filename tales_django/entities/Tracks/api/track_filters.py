@@ -22,8 +22,16 @@ logger = getDebugLogger()
 class DefaultPagination(pagination.LimitOffsetPagination):
     default_limit = default_tracks_limit
 
+
 def get_request_params(request: Request):
-    return request.query_params if 'query_params' in request and request.query_params else request.GET
+    """
+    Return different dictionaries depending on request type: HttpRequest or Request
+    """
+    # return request.query_params if 'query_params' in request and request.query_params else request.GET
+    try:
+        return request.query_params
+    except Exception as err:
+        return request.GET
 
 
 def get_track_order_args(request: Request):

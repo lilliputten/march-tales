@@ -4,7 +4,11 @@ from django.utils import translation
 from core.helpers.utils import debugObj
 from core.logging import getDebugLogger
 
-from tales_django.entities.Tracks.api.track_filters import get_search_filter_args, get_track_filter_kwargs, get_track_order_args
+from tales_django.entities.Tracks.api.track_filters import (
+    get_search_filter_args,
+    get_track_filter_kwargs,
+    get_track_order_args,
+)
 from tales_django.models import Track
 
 

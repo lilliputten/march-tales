@@ -158,8 +158,8 @@ class Track(Model):
             self.title,
             '[%d]' % self.id if LOCAL else None,
         ]
-        info = ' '.join(filter(None, map(str, items)))
-        return info # f'Track(id={self.id}, title={self.title})'
+        info = ' '.join(map(str, filter(None, items)))
+        return info   # f'Track(id={self.id}, title={self.title})'
 
 
 @receiver(post_delete, sender=Track)
