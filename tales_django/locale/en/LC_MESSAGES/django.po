@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-16 00:27+0300\n"
+"POT-Creation-Date: 2025-03-16 23:30+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -946,6 +946,10 @@ msgstr ""
 
 #: .\tales_django\templates\custom-translations.django:22
 msgid "Or use a third-party"
+msgstr ""
+
+#: .\tales_django\templates\custom-translations.django:23
+msgid "Delete the"
 msgstr ""
 
 #: .\tales_django\templates\registration\logged_out.html:17

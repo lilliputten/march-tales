@@ -9,14 +9,12 @@ from django.db.models import Model
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
 
-# from django.contrib.auth.models import Permission
-# from django.contrib.contenttypes.models import ContentType
-
+from core.appEnv import LOCAL
 from core.helpers.files import sizeofFmt
 from core.logging import getDebugLogger
 from tales_django.core.helpers.audio import getAudioTrackFolderName
 
-from tales_django.core.model_helpers import get_current_language, get_non_empty_localized_model_field_attrgetter
+from tales_django.core.model_helpers import get_non_empty_localized_model_field_attrgetter
 
 
 _logger = getDebugLogger()
@@ -156,12 +154,12 @@ class Track(Model):
         super(Track, self).save(*args, **kwargs)
 
     def __str__(self):
-        # items = [
-        #     self.title,
-        #     # '[%d]' % self.id if LOCAL else None,
-        # ]
-        # info = ' '.join(filter(None, map(str, items)))
-        return f'Track(id={self.id}, title={self.title})'
+        items = [
+            self.title,
+            '[%d]' % self.id if LOCAL else None,
+        ]
+        info = ' '.join(filter(None, map(str, items)))
+        return info # f'Track(id={self.id}, title={self.title})'
 
 
 @receiver(post_delete, sender=Track)
