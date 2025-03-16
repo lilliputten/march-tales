@@ -32,7 +32,7 @@ logger = getDebugLogger()
 class TrackViewSet(viewsets.GenericViewSet):
     language = get_current_language()
     queryset = Track.objects.order_by('-published_at', f'title_{language}').all()
-    serializer_class = TrackSerializer
+    # serializer_class = TrackSerializer
     # pagination_class = DefaultPagination
 
     def retrieve(self, request, *args, **kwargs):
@@ -76,7 +76,6 @@ class TrackViewSet(viewsets.GenericViewSet):
 
             order_args = get_track_order_args(request)
             filter_kwargs = get_track_filter_kwargs(request)
-            # filter_args = []
             filter_args = get_search_filter_args(request)
 
             # query = Track.objects.filter(track_status='PUBLISHED').order_by('-published_at', f'title_{language}')

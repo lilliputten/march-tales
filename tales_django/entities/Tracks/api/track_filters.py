@@ -22,6 +22,9 @@ logger = getDebugLogger()
 class DefaultPagination(pagination.LimitOffsetPagination):
     default_limit = default_tracks_limit
 
+def get_request_params(request: Request):
+    return request.query_params if 'query_params' in request and request.query_params else request.GET
+
 
 def get_track_order_args(request: Request):
     try:
@@ -36,7 +39,8 @@ def get_track_order_args(request: Request):
             predefined_order_values['-published'],
             predefined_order_values['title'],
         ]
-        order = request.query_params.getlist('order')
+        params = get_request_params(request)
+        order = params.getlist('order') if params else None
         if not order or not len(order):
             return default_order_args
         logger.info(f'[track_filters:get_track_order_args] order={order}')
@@ -83,7 +87,8 @@ def get_track_filter_kwargs(request: Request):
             # Use published filter always
             **predefined_filter_entries['published'],
         }
-        filter = request.query_params.getlist('filter')
+        params = get_request_params(request)
+        filter = params.getlist('filter') if params else None
         if filter and len(filter):
             logger.info(f'[track_filters:get_track_filter_kwargs] filter={filter}')
             for value in filter:
@@ -124,9 +129,11 @@ def get_search_filter_args(request: Request):
     NOTE: Case-insensitive search (icontains etc) works only for myqsql, not for sqlite.
     """
     try:
-        # Check if has `search` parameter
-        search = request.query_params.get('search')
+        # Result arguments
         args = []
+        # Check if has `search` parameter
+        params = get_request_params(request)
+        search = params.get('search') if params else None
         if search:
             logger.info(f'[track_filters:get_track_filter_kwargs] search={search}')
             # Search in all the titles and tags...
