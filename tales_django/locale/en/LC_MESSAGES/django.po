@@ -946,7 +946,7 @@ msgstr ""
 
 #: .\tales_django\templates\custom-translations.django:22
 msgid "Or use a third-party"
-msgstr ""
+msgstr "Or use a third-party account"
 
 #: .\tales_django\templates\custom-translations.django:23
 msgid "Delete the"
