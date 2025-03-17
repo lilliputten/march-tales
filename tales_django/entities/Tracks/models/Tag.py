@@ -23,11 +23,15 @@ class Tag(Model):
         attrgetter=get_non_empty_localized_model_field_attrgetter,
     )
 
-    promote = models.BooleanField(_('Promote'), default=False, help_text=_('Promote on the main page'))
+    promote = models.BooleanField(_('Promote'), default=True, help_text=_('Promote on the main page'))
 
     @property
     def tracks_count(self):
         return self.track_set.count()
+
+    @property
+    def published_tracks_count(self):
+        return self.tracks.filter(track_status='PUBLISHED').count()
 
     # Paired (reversed) relation to tracks
     tracks = models.ManyToManyField('Track', blank=True, through='Track_tags')
