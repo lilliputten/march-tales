@@ -70,9 +70,9 @@ class TrackViewSet(viewsets.GenericViewSet):
             limit = int(request.query_params.get('limit', default_tracks_limit))
             offset = int(request.query_params.get('offset', default_tracks_offset))
 
-            # TODO: Extract sort/filter params and modify results below?
-            filter = request.query_params.get('filter')
-            logger.info(f'[TrackViewSet:list] filter={filter}')
+            # # TODO: Extract sort/filter params and modify results below?
+            # filter = request.query_params.get('filter')
+            # logger.info(f'[TrackViewSet:list] filter={filter}')
 
             order_args = get_track_order_args(request)
             filter_kwargs = get_track_filter_kwargs(request)
@@ -206,6 +206,74 @@ class TrackViewSet(viewsets.GenericViewSet):
                 content_type=content_type,
                 json_dumps_params={'ensure_ascii': True},
             )
+
+        except Exception as err:
+            sError = errorToString(err)
+            sTraceback = str(traceback.format_exc())
+            debugData = {
+                'err': err,
+                'traceback': sTraceback,
+            }
+            logger.error(f'Caught error {sError} (returning in response):\n{debugObj(debugData)}')
+            errorDetail = {'detail': sError}
+            return JsonResponse(
+                errorDetail,
+                headers=default_headers,
+                content_type=content_type,
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+
+    @action(
+        methods=['get'],
+        url_path='next',
+        url_name='track-next',
+        detail=True,
+        permission_classes=[permissions.BasePermission],
+    )
+    def next(self, request: Request, pk=None):
+        """
+        Find next track in the current query set (according to filter parameters).
+        """
+        try:
+
+            session_key = request.session.session_key if request.session else None
+            csrftoken = request.headers.get('X-CSRFToken')
+
+            # Check session or csrf?
+            if not session_key and not csrftoken:
+                errorDetail = {'detail': _('Client session not found')}
+                return JsonResponse(
+                    errorDetail, headers=default_headers, content_type=content_type, status=status.HTTP_403_FORBIDDEN
+                )
+
+            track = get_object_or_404(Track, pk=pk)
+
+            order_args = get_track_order_args(request)
+            filter_kwargs = get_track_filter_kwargs(request)
+            filter_args = get_search_filter_args(request)
+
+            query = Track.objects.filter(*filter_args, **filter_kwargs).order_by(*order_args)
+            ids = list(query.values_list('id', flat=True))
+            idx = ids.index(track.id)
+            next_idx = (idx + 1) % len(ids)
+
+            # TODO: Find next track
+            next_track = query[next_idx]
+
+            debugData = {
+                'ids': ids,
+                'idx': idx,
+                'track.id': track.id,
+                'track': track,
+                'query': query,
+            }
+            logger.info(f'[next]: params:\n{debugObj(debugData)}')
+
+            full = int(request.query_params.get('full', '0'))
+
+            serializer = TrackSerializer(instance=next_track, full=full)
+            result = serializer.data
+            return JsonResponse(result, headers=default_headers, content_type=content_type)
 
         except Exception as err:
             sError = errorToString(err)
