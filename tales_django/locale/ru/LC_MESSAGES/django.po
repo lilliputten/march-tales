@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-17 00:24+0300\n"
+"POT-Creation-Date: 2025-03-19 07:02+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,7 +33,7 @@ msgstr "На главную страницу"
 msgid "Tracks count"
 msgstr "Треки"
 
-#: .\src\assets\common-blocks\authors-list\authors-list.django:31
+#: .\src\assets\common-blocks\authors-list\authors-list.django:35
 msgid "Show all authors"
 msgstr "Все авторы"
 
@@ -80,7 +80,7 @@ msgstr "Пауза"
 
 #: .\src\assets\common-blocks\big-tracks-list\big-tracks-list.django:19
 #: .\src\assets\common-blocks\medium-tracks-list\medium-tracks-list.django:19
-#: .\src\assets\common-blocks\small-tracks-list\small-tracks-list.django:19
+#: .\src\assets\common-blocks\small-tracks-list\small-tracks-list.django:20
 msgid "Show all tracks"
 msgstr "Показать все треки"
 
@@ -486,8 +486,9 @@ msgstr "Аудио файл успешно загружен"
 #: .\tales_django\entities\Tracks\api\TrackViewSet.py:45
 #: .\tales_django\entities\Tracks\api\TrackViewSet.py:65
 #: .\tales_django\entities\Tracks\api\TrackViewSet.py:142
-#: .\tales_django\entities\Tracks\api\TrackViewSet.py:248
-#: .\tales_django\entities\Tracks\api\TrackViewSet.py:321
+#: .\tales_django\entities\Tracks\api\TrackViewSet.py:244
+#: .\tales_django\entities\Tracks\api\TrackViewSet.py:316
+#: .\tales_django\entities\Tracks\api\TrackViewSet.py:389
 msgid "Client session not found"
 msgstr "Не найдена клиентская сессия"
 
@@ -499,7 +500,7 @@ msgstr "Ожидается список индексов треков"
 msgid "Error parsing track indices list"
 msgstr "Неверный формат списка индексов треков"
 
-#: .\tales_django\entities\Tracks\api\TrackViewSet.py:242
+#: .\tales_django\entities\Tracks\api\TrackViewSet.py:310
 msgid "User in not authenticated"
 msgstr "Пользователь не авторизован"
 
@@ -661,7 +662,7 @@ msgid "Addrress"
 msgstr "Адрес"
 
 #: .\tales_django\entities\Users\models\User.py:33
-#: .\tales_django\templates\tales_django\profile.html.django:64
+#: .\tales_django\templates\tales_django\profile.html.django:68
 msgid "Favorite tracks"
 msgstr "Избранные треки"
 
@@ -786,7 +787,7 @@ msgstr "Управление учетной записью"
 #: .\tales_django\templates\allauth\layouts\manage.html:22
 #: .\tales_django\templates\registration\password_change_form.html:30
 #: .\tales_django\templates\tales_django\login_success.html.django:44
-#: .\tales_django\templates\tales_django\profile.html.django:72
+#: .\tales_django\templates\tales_django\profile.html.django:76
 #: .\tales_django\templates\tales_django\profile_edit.html.django:8
 #: .\tales_django\templates\tales_django\profile_edit.html.django:15
 msgid "Edit profile"
@@ -1121,16 +1122,16 @@ msgid "Main page"
 msgstr "Главная страница"
 
 #: .\tales_django\templates\tales_django\about.html.django:31
-msgid "Версии"
-msgstr "Versions"
+msgid "Versions"
+msgstr "Версии"
 
 #: .\tales_django\templates\tales_django\about.html.django:34
-msgid "Версия сервера"
-msgstr "Server version"
+msgid "Server version"
+msgstr "Версия сервера"
 
 #: .\tales_django\templates\tales_django\about.html.django:35
-msgid "Версия мобильного приложения"
-msgstr "Mobile applicaiton version"
+msgid "Mobile applicaiton version"
+msgstr "Версия мобильного приложения"
 
 #: .\tales_django\templates\tales_django\about.html.django:40
 #: .\tales_django\templates\tales_django\author_details.html.django:49
@@ -1160,44 +1161,6 @@ msgstr "Список треков"
 msgid "Successful login"
 msgstr "Успешный вход"
 
-#: .\tales_django\templates\tales_django\profile.html.django:26
-msgid "Your registrations"
-msgstr "Ваши регистрации"
-
-#: .\tales_django\templates\tales_django\profile.html.django:29
-msgid "You don't have any active registrations yet."
-msgstr "У вас еще нет активных регистраций."
-
-#: .\tales_django\templates\tales_django\profile.html.django:32
-msgid "Membership"
-msgstr "Членство"
-
-#: .\tales_django\templates\tales_django\profile.html.django:38
-#, python-format
-msgid ""
-"You’re a member since %(membership_started)s. Membership type: "
-"%(membership_type)s."
-msgstr ""
-"Вы являетесь участником сообщества с %(membership_started)s. Тип участия: "
-"%(membership_type)s."
-
-#: .\tales_django\templates\tales_django\profile.html.django:42
-msgid "Not yet a member"
-msgstr "Вы ещё не член сообщества."
-
-#: .\tales_django\templates\tales_django\profile.html.django:43
-msgid "Apply for a membership"
-msgstr "Подать заявку на членство в сообщество"
-
-#: .\tales_django\templates\tales_django\profile.html.django:50
-msgid ""
-"You have unpaid membership, download invoice: {{ invoice_download_url }}"
-msgstr ""
-"<strong>У вас неоплаченный счет за участие.</strong> Ваше членство еще "
-"недействительно. Вы можете <a target=\"_blank\" href=\"%"
-"(invoice_download_url)s\">загрузите счет-фактуру</a> и оплатите его прямо "
-"сейчас."
-
 #: .\tales_django\templates\tales_django\profile_edit.html.django:26
 msgid "Save"
 msgstr "Сохранить"
@@ -1220,3 +1183,43 @@ msgstr "Список тегов"
 #: .\tales_django\templates\tales_django\terms.html.django:14
 msgid "Terms and conditions"
 msgstr "Пользовательское соглашение"
+
+#~ msgid "Версии"
+#~ msgstr "Versions"
+
+#~ msgid "Версия сервера"
+#~ msgstr "Server version"
+
+#~ msgid "Версия мобильного приложения"
+#~ msgstr "Mobile applicaiton version"
+
+#~ msgid "Your registrations"
+#~ msgstr "Ваши регистрации"
+
+#~ msgid "You don't have any active registrations yet."
+#~ msgstr "У вас еще нет активных регистраций."
+
+#~ msgid "Membership"
+#~ msgstr "Членство"
+
+#, python-format
+#~ msgid ""
+#~ "You’re a member since %(membership_started)s. Membership type: "
+#~ "%(membership_type)s."
+#~ msgstr ""
+#~ "Вы являетесь участником сообщества с %(membership_started)s. Тип участия: "
+#~ "%(membership_type)s."
+
+#~ msgid "Not yet a member"
+#~ msgstr "Вы ещё не член сообщества."
+
+#~ msgid "Apply for a membership"
+#~ msgstr "Подать заявку на членство в сообщество"
+
+#~ msgid ""
+#~ "You have unpaid membership, download invoice: {{ invoice_download_url }}"
+#~ msgstr ""
+#~ "<strong>У вас неоплаченный счет за участие.</strong> Ваше членство еще "
+#~ "недействительно. Вы можете <a target=\"_blank\" href=\"%"
+#~ "(invoice_download_url)s\">загрузите счет-фактуру</a> и оплатите его прямо "
+#~ "сейчас."
