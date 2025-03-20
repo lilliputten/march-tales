@@ -58,5 +58,6 @@ export function saveActivePlayerData(data?: ActivePlayerData) {
 
 export function loadActivePlayerData() {
   const str = window.localStorage.getItem(storageActivePlayerDataId);
-  return convertActivePlayerDataFromJsonStr(str);
+  const data = convertActivePlayerDataFromJsonStr(str);
+  return data?.id ? data : undefined;
 }

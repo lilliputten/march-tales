@@ -215,11 +215,16 @@ export class FloatingPlayer {
     if (!duration) {
       const error = new Error(`No duration provided for a track: ${id}`);
       // eslint-disable-next-line no-console
-      console.error('[FloatingPlayerClass:calculateProgress]', error.message, {
+      console.warn('[FloatingPlayerClass:calculateProgress]', error.message, {
         error,
+        id,
+        duration,
+        position,
+        activePlayerData,
       });
       debugger; // eslint-disable-line no-debugger
-      throw error;
+      // throw error;
+      return 0;
     }
     const ratio = position / duration;
     const progress = Math.min(100, ratio * 100);
@@ -266,24 +271,7 @@ export class FloatingPlayer {
       return;
     }
     const activePlayerData = this.requireActivePlayerData();
-    const {
-      currentTime,
-      // readyState, // DEBUG
-    } = audio;
-    /* // DEBUG
-     * const source = audio.getElementsByTagName('SOURCE')[0] as HTMLSourceElement;
-     * console.log('[FloatingPlayerClass:handleAudioTimeUpdate]', {
-     *   currentTime,
-     *   readyState,
-     *   id: activePlayerData.id,
-     *   activePlayerData,
-     *   src: source.src,
-     *   source,
-     *   thisAudio: currAudio === audio,
-     *   currAudio,
-     *   audio,
-     * });
-     */
+    const { currentTime } = audio;
     // TODO: Check loaded status?
     if (this.state.position != currentTime) {
       this.state.position = currentTime;
@@ -344,7 +332,7 @@ export class FloatingPlayer {
   handleAudioSourceError(ev: Event) {
     const srcElement = ev.currentTarget as HTMLSourceElement;
     const { src, type } = srcElement;
-    const errMsg = getJsText('errorLoadingAudioFile') + ' ' + src + (type ? `( ${type})` : '');
+    const errMsg = getJsText('errorLoadingAudioFile') + ' ' + src + (type ? `(${type})` : '');
     const error = new Error(errMsg);
     this.handleError(error);
   }

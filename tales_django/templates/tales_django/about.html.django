@@ -28,11 +28,13 @@
 {% endautoescape %}
 {% endwith %}
 
-<h3>{% trans "Версии" %}</h3>
+<hr />
+
+<h4>{% trans "Versions" %}</h4>
 
 <ul>
-  <li>{% trans "Версия сервера" %}: {{ settings.PROJECT_VERSION }}</li>
-  <li>{% trans "Версия мобильного приложения" %}: {{ settings.APK_DOWNLOAD_VERSION }}</li>
+  <li>{% trans "Server version" %}: {{ settings.PROJECT_VERSION }}</li>
+  <li>{% trans "Mobile applicaiton version" %}: {{ settings.APK_DOWNLOAD_VERSION }}</li>
 </ul>
 
 </div>

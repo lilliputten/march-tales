@@ -3,7 +3,7 @@
 {% load i18n %}
 
 {% include 'assets/template-right-blocks/right-about/right-about.django' %}
-{% comment %} {% include 'assets/template-right-blocks/right-search/right-search.django' %} {% endcomment %}
+{% include 'assets/template-right-blocks/right-search/right-search.django' %}
 {% include 'assets/template-right-blocks/right-mobile-promo/right-mobile-promo.django' %}
 {% include 'assets/template-right-blocks/right-authors-list/right-authors-list.django' %}
 {% comment %} {% include 'assets/template-right-blocks/right-membership/right-membership.django' %} {% endcomment %}

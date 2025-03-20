@@ -11,7 +11,7 @@ from core.helpers.utils import debugObj
 from core.logging import getDebugLogger
 
 from tales_django.core.helpers.check_csrf import check_csrf
-from tales_django.core.model_helpers import get_currrent_django_language
+from tales_django.core.model_helpers import get_current_language
 
 from .tag_serializers import TagSerializer
 
@@ -35,7 +35,7 @@ class DefaultPagination(pagination.LimitOffsetPagination):
 
 # NOTE: No `viewsets.ModelViewSet` -- we don't use modification methods, only our custom `retrieve` and `list` (see below)
 class TagViewSet(viewsets.GenericViewSet):
-    language = get_currrent_django_language()
+    language = get_current_language()
     queryset = Tag.objects.order_by(f'text_{language}').all()
     serializer_class = TagSerializer
     pagination_class = DefaultPagination
@@ -75,7 +75,7 @@ class TagViewSet(viewsets.GenericViewSet):
 
             # TODO: Extract sort/filter params and modify results below?
 
-            language = get_currrent_django_language()
+            language = get_current_language()
             query = Tag.objects.order_by(f'text_{language}')
             subset = query.all()
             if offset or limit:

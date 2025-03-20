@@ -4,49 +4,36 @@ from django.http import JsonResponse
 from django.utils.translation import gettext_lazy as _
 from django.shortcuts import get_object_or_404
 
-# from django.views.decorators.csrf import csrf_exempt
-
 from rest_framework.decorators import action
 from rest_framework.request import Request
 
-# from rest_framework.response import Response
 from rest_framework import viewsets, status
 from rest_framework import permissions
-from rest_framework import pagination
 
 from core.helpers.errors import errorToString
 from core.helpers.utils import debugObj
 from core.logging import getDebugLogger
 
 from tales_django.core.helpers.check_csrf import check_csrf
-from tales_django.core.model_helpers import get_currrent_django_language
-
-from .track_serializers import TrackSerializer
+from tales_django.core.model_helpers import get_current_language
 
 from ..models import Track
+
+from .common_constants import content_type, default_headers
+from .track_constants import default_tracks_limit, default_tracks_offset
+from .track_filters import get_track_filter_kwargs, get_track_order_args, get_search_filter_args
+from .track_serializers import TrackSerializer
+
 
 logger = getDebugLogger()
 
 
-defaultTracksLimit = 5
-defaultTracksOffset = 0
-
-content_type = 'application/json; charset=utf-8'
-default_headers = {
-    # 'Content-Type': content_type,
-}
-
-
-class DefaultPagination(pagination.LimitOffsetPagination):
-    default_limit = defaultTracksLimit
-
-
 # NOTE: No `viewsets.ModelViewSet` -- we don't use modification methods, only our custom `retrieve` and `list` (see below)
 class TrackViewSet(viewsets.GenericViewSet):
-    language = get_currrent_django_language()
+    language = get_current_language()
     queryset = Track.objects.order_by('-published_at', f'title_{language}').all()
-    serializer_class = TrackSerializer
-    pagination_class = DefaultPagination
+    # serializer_class = TrackSerializer
+    # pagination_class = DefaultPagination
 
     def retrieve(self, request, *args, **kwargs):
         """
@@ -60,8 +47,10 @@ class TrackViewSet(viewsets.GenericViewSet):
                 errorDetail, headers=default_headers, content_type=content_type, status=status.HTTP_403_FORBIDDEN
             )
 
+        full = int(request.query_params.get('full', '0'))
+
         instance = self.get_object()
-        serializer = TrackSerializer(instance=instance)
+        serializer = TrackSerializer(instance=instance, full=full)
         result = serializer.data
         return JsonResponse(result, headers=default_headers, content_type=content_type)
 
@@ -78,20 +67,28 @@ class TrackViewSet(viewsets.GenericViewSet):
                     errorDetail, headers=default_headers, content_type=content_type, status=status.HTTP_403_FORBIDDEN
                 )
 
-            limit = int(request.query_params.get('limit', defaultTracksLimit))
-            offset = int(request.query_params.get('offset', defaultTracksOffset))
+            limit = int(request.query_params.get('limit', default_tracks_limit))
+            offset = int(request.query_params.get('offset', default_tracks_offset))
 
-            # TODO: Extract sort/filter params and modify results below?
+            # # TODO: Extract sort/filter params and modify results below?
+            # filter = request.query_params.get('filter')
+            # logger.info(f'[TrackViewSet:list] filter={filter}')
 
-            language = get_currrent_django_language()
-            query = Track.objects.filter(track_status='PUBLISHED').order_by('-published_at', f'title_{language}')
+            order_args = get_track_order_args(request)
+            filter_kwargs = get_track_filter_kwargs(request)
+            filter_args = get_search_filter_args(request)
+
+            # query = Track.objects.filter(track_status='PUBLISHED').order_by('-published_at', f'title_{language}')
+            query = Track.objects.filter(*filter_args, **filter_kwargs).order_by(*order_args)
             subset = query.all()
-            if offset or limit:
+            if limit:
                 subset = query.all()[offset : offset + limit]
+
+            full = int(request.query_params.get('full', '0'))
 
             result = {
                 'count': len(query),
-                'results': TrackSerializer(subset, many=True).data,
+                'results': TrackSerializer(subset, many=True, full=full).data,
             }
 
             # result.update({
@@ -116,7 +113,7 @@ class TrackViewSet(viewsets.GenericViewSet):
             )
 
     @action(
-        methods=['get', 'post'],
+        methods=['get'],
         url_path='by-ids',
         url_name='track-by-ids',
         detail=False,
@@ -177,8 +174,8 @@ class TrackViewSet(viewsets.GenericViewSet):
             )
 
         try:
-            limit = int(request.query_params.get('limit', defaultTracksLimit))
-            offset = int(request.query_params.get('offset', defaultTracksOffset))
+            limit = int(request.query_params.get('limit', default_tracks_limit))
+            offset = int(request.query_params.get('offset', default_tracks_offset))
 
             debugData = {
                 'idsList': idsList,
@@ -187,18 +184,20 @@ class TrackViewSet(viewsets.GenericViewSet):
             }
             logger.info(f'[list]: params:\n{debugObj(debugData)}')
 
-            # language = get_currrent_django_language()
+            # language = get_current_language()
 
             # TODO: Extract sort/filter params and modify results below?
             query = Track.objects.filter(id__in=idsList, track_status='PUBLISHED')
             # .order_by('-published_at', f'title_{language}')
             subset = query.all()
-            if offset or limit:
+            if limit:
                 subset = query.all()[offset : offset + limit]
+
+            full = int(request.query_params.get('full', '0'))
 
             result = {
                 'count': len(query),
-                'results': TrackSerializer(subset, many=True).data,
+                'results': TrackSerializer(subset, many=True, full=full).data,
             }
 
             return JsonResponse(
@@ -207,6 +206,74 @@ class TrackViewSet(viewsets.GenericViewSet):
                 content_type=content_type,
                 json_dumps_params={'ensure_ascii': True},
             )
+
+        except Exception as err:
+            sError = errorToString(err)
+            sTraceback = str(traceback.format_exc())
+            debugData = {
+                'err': err,
+                'traceback': sTraceback,
+            }
+            logger.error(f'Caught error {sError} (returning in response):\n{debugObj(debugData)}')
+            errorDetail = {'detail': sError}
+            return JsonResponse(
+                errorDetail,
+                headers=default_headers,
+                content_type=content_type,
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+
+    @action(
+        methods=['get'],
+        url_path='next',
+        url_name='track-next',
+        detail=True,
+        permission_classes=[permissions.BasePermission],
+    )
+    def next(self, request: Request, pk=None):
+        """
+        Find next track in the current query set (according to filter parameters).
+        """
+        try:
+
+            session_key = request.session.session_key if request.session else None
+            csrftoken = request.headers.get('X-CSRFToken')
+
+            # Check session or csrf?
+            if not session_key and not csrftoken:
+                errorDetail = {'detail': _('Client session not found')}
+                return JsonResponse(
+                    errorDetail, headers=default_headers, content_type=content_type, status=status.HTTP_403_FORBIDDEN
+                )
+
+            track = get_object_or_404(Track, pk=pk)
+
+            order_args = get_track_order_args(request)
+            filter_kwargs = get_track_filter_kwargs(request)
+            filter_args = get_search_filter_args(request)
+
+            query = Track.objects.filter(*filter_args, **filter_kwargs).order_by(*order_args)
+            ids = list(query.values_list('id', flat=True))
+            idx = ids.index(track.id)
+            next_idx = (idx + 1) % len(ids)
+
+            # TODO: Find next track
+            next_track = query[next_idx]
+
+            debugData = {
+                'ids': ids,
+                'idx': idx,
+                'track.id': track.id,
+                'track': track,
+                'query': query,
+            }
+            logger.info(f'[next]: params:\n{debugObj(debugData)}')
+
+            full = int(request.query_params.get('full', '0'))
+
+            serializer = TrackSerializer(instance=next_track, full=full)
+            result = serializer.data
+            return JsonResponse(result, headers=default_headers, content_type=content_type)
 
         except Exception as err:
             sError = errorToString(err)
@@ -328,7 +395,10 @@ class TrackViewSet(viewsets.GenericViewSet):
             data = {
                 'played_count': track.played_count + 1,
             }
-            serializer = TrackSerializer(track, data=data, partial=True, context={'request': request})
+
+            full = int(request.query_params.get('full', '0'))
+
+            serializer = TrackSerializer(track, data=data, full=full, partial=True, context={'request': request})
 
             if not serializer.is_valid():
                 return JsonResponse(

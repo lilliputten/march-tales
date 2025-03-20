@@ -2,7 +2,7 @@ from django.conf import settings
 from typing import List
 from translated_fields import TranslatedField, to_attribute
 
-from .get_currrent_django_language import get_currrent_django_language
+from .get_current_language import get_current_language
 
 
 def get_non_empty_localized_model_field_value(obj: object, name: str):
@@ -10,7 +10,7 @@ def get_non_empty_localized_model_field_value(obj: object, name: str):
     Get first non-empty alternative translation for the field if the current translaiton is empty
     """
     languages_list: List[str] = settings.LANGUAGES_LIST
-    language = get_currrent_django_language()
+    language = get_current_language()
     field_id = to_attribute(name, language)   # f'{name}_{language}'
     value = getattr(obj, field_id)
     if not value:

@@ -1,0 +1,19 @@
+# @changed 2025.01.02, 17:01
+
+- model: tales_django.user
+  pk: 3
+  fields:
+    # mN***
+    password: 'pbkdf2_sha256$870000$HMKrTbktzNb6S9vrdDZrVU$iIc6EIGsGyAxTZdAFp9aB0FN7tfOkcg7Avh6+Wg0V+U='
+    username: 'lilliputten@yandex.ru'
+    email: 'lilliputten@yandex.ru'
+    first_name: 'John'
+    last_name: 'Lennon'
+    is_superuser: false
+    is_staff: false
+    is_active: true
+    date_joined: '2024-12-30T18:30:47.819Z'
+    last_login: null
+    address: '251 Menlove Avenue, Liverpool, Merseyside L25 7SA, UK'
+    groups: []
+    user_permissions: []

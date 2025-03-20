@@ -10,14 +10,16 @@
 {% endcomment %}
 
 <ul class="small-tracks-list mb-0">
-  {% for track in tracks %}
-    {% include 'assets/common-blocks/small-tracks-list/small-tracks-list-item.django' %}
-  {% endfor %}
-  {% if has_more_tracks %}
-    <div class="actions d-flex flex-wrap gap-1 mt-3">
-      <a class="btn btn-light btn-block" href="{{ more_button_link|default:'/tracks' }}">
-        <i class="icon fa fa-chevron-right "></i> <span class="text">{{ more_button_text|default:_('Show all tracks') }}</span>
-      </a>
-    </div>
+  {% if tracks.length %}
+    {% for track in tracks %}
+      {% include 'assets/common-blocks/small-tracks-list/small-tracks-list-item.django' %}
+    {% endfor %}
+    {% if has_more_tracks %}
+      <div class="actions d-flex flex-wrap gap-1 mt-3">
+        <a class="btn btn-light btn-block" href="{{ more_button_link|default:'/tracks' }}">
+          <i class="icon fa fa-chevron-right "></i> <span class="text">{{ more_button_text|default:_('Show all tracks') }}</span>
+        </a>
+      </div>
+    {% endif %}
   {% endif %}
 </ul>

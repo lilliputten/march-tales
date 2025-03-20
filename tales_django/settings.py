@@ -141,7 +141,7 @@ INSTALLED_APPS = [
     'unfold.contrib.filters',  # optional, if special filters are needed
     'unfold.contrib.forms',  # optional, if special form elements are needed
     'unfold.contrib.inlines',  # optional, if special inlines are needed
-    # 'unfold.contrib.import_export',  # optional, if django-import-export package is used
+    'unfold.contrib.import_export',  # optional, if django-import-export package is used
     # 'unfold.contrib.guardian',  # optional, if django-guardian package is used
     # 'unfold.contrib.simple_history',  # optional, if django-simple-history package is used
     'django.contrib.admin',  # required
@@ -177,7 +177,9 @@ INSTALLED_APPS = [
     'allauth.headless',
     'allauth.usersessions',
     # Other...
-    # 'import_export',
+    # Filters, see: https://django-filter.readthedocs.io/en/stable/guide/usage.html https://django-filter.readthedocs.io/en/latest/guide/rest_framework.html
+    # 'django_filters',
+    'import_export',
     'markdownify.apps.MarkdownifyConfig',
     # app
     # APP_NAME + '.apps.TalesConfig',
@@ -203,6 +205,24 @@ MIDDLEWARE = [
     # APP_NAME + '.middleware.BeautifulMiddleware.BeautifulMiddleware',
     APP_NAME + '.middleware.CurrentRequestMiddleware.CurrentRequestMiddleware',
 ]
+
+# Add livereload app...
+# @see https://pypi.org/project/django-livereload/
+# @see https://github.com/tjwalch/django-livereload-server
+# Run the reload server with a command: `python manage.py livereload src static`
+INSTALLED_APPS.insert(0, 'livereload')
+if DEBUG:
+    MIDDLEWARE.insert(0, 'livereload.middleware.LiveReloadScript')
+    # MIDDLEWARE.append('livereload.middleware.LiveReloadScript')
+# TODO: Do we actually need livereload in production? I remember some issues with it. Can we completely remove it from production?
+# There is already present the check in the `tales_django/templates/base-core.html.django` template:
+# ```
+#  {% if settings.DEBUG %}
+#  {% load livereload_tags %}
+#  {% endif %}
+# ```
+
+IMPORT_EXPORT_USE_TRANSACTIONS = True
 
 UNFOLD = {
     # @see https://unfoldadmin.com/docs/configuration/settings/
@@ -272,13 +292,13 @@ UNFOLD = {
             },
         ],
     },
-    # "SITE_DROPDOWN": [
-    #     {
-    #         "icon": "diamond",
-    #         "title": _("My site"),
-    #         "link": "https://example.com",
-    #     },
-    # ],
+    'SITE_DROPDOWN': [
+        {
+            'icon': 'home',
+            'title': _('Open site'),
+            'link': '/',
+        },
+    ],
     'EXTENSIONS': {
         'modeltranslation': {
             'flags': {
@@ -354,22 +374,6 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-# Add livereload app...
-# @see https://pypi.org/project/django-livereload/
-# @see https://github.com/tjwalch/django-livereload-server
-# Run the reload server with a command: `python manage.py livereload src static`
-INSTALLED_APPS.insert(0, 'livereload')
-if DEBUG:
-    MIDDLEWARE.insert(0, 'livereload.middleware.LiveReloadScript')
-    # MIDDLEWARE.append('livereload.middleware.LiveReloadScript')
-# TODO: Do we actually need livereload in production? I remember some issues with it. Can we completely remove it from production?
-# There is already present the check in the `tales_django/templates/base-core.html.django` template:
-# ```
-#  {% if settings.DEBUG %}
-#  {% load livereload_tags %}
-#  {% endif %}
-# ```
-
 ROOT_URLCONF = APP_NAME + '.urls'
 
 # Templates folders...
@@ -419,6 +423,13 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
         # 'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+    # # Filters, see also `django_filters` record in `INSTALLED_APPS` and `django-filter` dependency in `pyproject.toml`,
+    # 'DEFAULT_FILTER_BACKENDS': [
+    #     # @see https://www.django-rest-framework.org/api-guide/filtering/#setting-filter-backends
+    #     # @see https://django-filter.readthedocs.io/en/stable/guide/usage.html
+    #     # @see https://django-filter.readthedocs.io/en/latest/guide/rest_framework.html
+    #     'django_filters.rest_framework.DjangoFilterBackend',
+    # ],
 }
 
 # Database
@@ -486,9 +497,10 @@ AUTHENTICATION_BACKENDS = [
 # @see https://docs.allauth.org/en/dev/account/configuration.html
 ACCOUNT_ACTIVATION_DAYS = 7  # One-week activation window
 # ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_REQUIRED = True
+# ACCOUNT_EMAIL_REQUIRED = True
+# ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_SIGNUP_FIELDS = ['email*', 'password1*', 'password2*']
 ACCOUNT_UNIQUE_EMAIL = True
-ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_PASSWORD_MIN_LENGTH = 8
 
@@ -519,7 +531,7 @@ LANGUAGES = (
     ('ru', 'Русский'),
     ('en', 'English'),
 )
-DEFAULT_LANGUAGE = 'en'   # LANGUAGES[0][0]
+DEFAULT_LANGUAGE = LANGUAGES[0][0]
 LANGUAGES_DICT = {lng: name for lng, name in list(LANGUAGES)}
 LANGUAGES_LIST = [lng[0] for lng in list(LANGUAGES)]
 CMS_LANGUAGES = {

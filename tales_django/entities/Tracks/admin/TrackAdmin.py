@@ -1,25 +1,22 @@
 import traceback
 
-from django.urls import reverse
 from translated_fields import TranslatedFieldAdmin, to_attribute
 
-# from modeltranslation.admin import TabbedTranslationAdmin
-# from translated_fields import TranslatedFieldAdmin
+from unfold.admin import ModelAdmin as UnfoldModelAdmin
+from import_export.admin import ExportActionModelAdmin, ImportExportModelAdmin
+from unfold.contrib.import_export.forms import ExportForm, ImportForm   # , SelectableFieldsExportForm
 
 from django.utils.translation import gettext_lazy as _
 from django.utils.translation import get_language
 
-from django.contrib.admin import SimpleListFilter
 from django.contrib import admin
 from django.contrib import messages
-from django.db import models
+
 from django.db.models import Q, F
 from django.db.models.functions import Lower
 
 from django.core.files.uploadedfile import TemporaryUploadedFile
 from django.core.files.base import File
-
-from unfold.admin import ModelAdmin as UnfoldModelAdmin
 
 from tales_django.sites import unfold_admin_site
 
@@ -28,8 +25,6 @@ from core.helpers.errors import errorToString
 from core.logging import getDebugLogger, errorStyle, warningTitleStyle, tretiaryStyle
 
 from ..models import Track
-
-# from ..forms import TrackAdminForm
 
 
 _logger = getDebugLogger()
@@ -71,15 +66,102 @@ def mark_test_action(modeladmin, request, queryset):
     queryset.update(track_status='TEST')
 
 
-@admin.register(Track, site=unfold_admin_site)
-class TrackAdmin(TranslatedFieldAdmin, UnfoldModelAdmin):
+@admin.action(description=_('Promote'))
+def promote_action(modeladmin, request, queryset):
+    queryset.update(promote=True)
 
-    # form = TrackAdminForm
+
+@admin.action(description=_('No promote'))
+def no_promote_action(modeladmin, request, queryset):
+    queryset.update(promote=False)
+
+
+@admin.register(Track, site=unfold_admin_site)
+class TrackAdmin(TranslatedFieldAdmin, ImportExportModelAdmin, ExportActionModelAdmin, UnfoldModelAdmin):
+    import_form_class = ImportForm
+    export_form_class = ExportForm
+    # export_form_class = SelectableFieldsExportForm
+
+    fieldsets = (
+        (
+            _('Title'),
+            {
+                'fields': (
+                    'title_ru',
+                    'title_en',
+                )
+            },
+        ),
+        (
+            _('Description'),
+            {
+                'fields': (
+                    'description_ru',
+                    'description_en',
+                )
+            },
+        ),
+        (
+            _('Media'),
+            {
+                'fields': (
+                    # 'youtube_url',
+                    'audio_file',
+                    'preview_picture',
+                )
+            },
+        ),
+        (
+            _('Attributes'),
+            {
+                'fields': (
+                    'author',
+                    'tags',
+                    'rubrics',
+                )
+            },
+        ),
+        (
+            _('Status'),
+            {
+                'fields': (
+                    'track_status',
+                    'promote',
+                    'for_members',
+                )
+            },
+        ),
+        (
+            _('Publication'),
+            {
+                'fields': (
+                    'published_at',
+                    'published_by',
+                )
+            },
+        ),
+        (
+            _('Information'),
+            {
+                'fields': (
+                    'played_count',
+                    # 'audio_duration',
+                    # 'audio_size',
+                    'duration_formatted',
+                    'size_formatted',
+                    # 'updated_at',
+                    # 'updated_by',
+                )
+            },
+        ),
+    )
 
     actions = [
         mark_published_action,
         mark_hidden_action,
         mark_test_action,
+        promote_action,
+        no_promote_action,
     ]
     list_display = [
         'title_translated',
@@ -88,7 +170,7 @@ class TrackAdmin(TranslatedFieldAdmin, UnfoldModelAdmin):
         'tags_list',
         'duration_formatted',
         'size_formatted',
-        # 'resolved_date',
+        'promote',
         'is_published',
         'published_at',
         'updated_at',
@@ -113,15 +195,16 @@ class TrackAdmin(TranslatedFieldAdmin, UnfoldModelAdmin):
     )
     exclude = (
         # 'published_by',
-        'updated_by',
         # 'published_at',
-        'updated_at',
+        # 'updated_by',
+        # 'updated_at',
         'audio_duration',
         'audio_size',
     )
     list_filter = [
         IsPublishedFilter,
         'track_status',
+        'promote',
         'published_at',
         'updated_at',
         'author',
@@ -130,11 +213,7 @@ class TrackAdmin(TranslatedFieldAdmin, UnfoldModelAdmin):
         # 'played_count',
     ]
 
-    # fieldsets = [
-    #     (_('Title'), {'fields': Track.title.fields}),
-    #     (_('Description'), {'fields': Track.description.fields}),
-    #     # Requires excplicit list of all the other fields...
-    # ]
+    IsPublishedFilter.boolean = True
 
     def is_published(self, track):
         return track.track_status == 'PUBLISHED'

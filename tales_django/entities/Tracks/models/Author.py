@@ -27,11 +27,15 @@ class Author(Model):
         attrgetter=get_non_empty_localized_model_field_attrgetter,
     )
     portrait_picture = models.ImageField(_('Portrait picture'), upload_to='authors', blank=False, null=False)
-    promote = models.BooleanField(_('Promote'), default=False, help_text=_('Promote on the main page'))
+    promote = models.BooleanField(_('Promote'), default=True, help_text=_('Promote on the main page'))
 
     @property
     def tracks_count(self):
         return self.tracks.count()
+
+    @property
+    def published_tracks_count(self):
+        return self.tracks.filter(track_status='PUBLISHED').count()
 
     def __str__(self):
         return self.name

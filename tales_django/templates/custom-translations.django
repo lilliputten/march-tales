@@ -16,3 +16,8 @@
 {% trans 'Choose file to upload' %}
 {% trans 'Please correct the errors below.' %}
 {% trans 'Type to search' %}
+{% trans 'Select Record' %}
+{% trans 'Select record' %}
+{% trans 'Select all rows' %}
+{% trans 'Or use a third-party' %}
+{% trans 'Delete the' %}

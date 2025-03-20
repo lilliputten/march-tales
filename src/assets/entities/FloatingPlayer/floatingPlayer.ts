@@ -4,5 +4,5 @@ import { FloatingPlayer } from './FloatingPlayerClass';
 export const floatingPlayer = new FloatingPlayer();
 
 export function initFloatingPlayer() {
-  // console.log('[floatingPlayer:initFloatingPlayer]');
+  // NOOP
 }

@@ -96,7 +96,15 @@ function floatingPlayerPlay(data: FloatingPlayerUpdateData) {
   const { dataset } = currentTrackPlayer;
   const id = Number(dataset.trackId);
   if (id !== activePlayerData.id) {
-    throw new Error('Wrong active track id!');
+    const error = new Error('Wrong active track id!');
+    // eslint-disable-next-line no-console
+    console.error('[tracksPlayer:floatingPlayerPlay]', error.message, {
+      id,
+      'activePlayerData.id': activePlayerData.id,
+      error,
+    });
+    debugger; // eslint-disable-line no-debugger
+    return;
   }
   requestAnimationFrame(() => {
     dataset.status = 'playing';
@@ -114,11 +122,30 @@ function floatingPlayerStop(data: FloatingPlayerUpdateData) {
   const { dataset } = currentTrackPlayer;
   const id = Number(dataset.trackId);
   if (id !== activePlayerData.id) {
-    throw new Error('Wrong active track id!');
+    const error = new Error('Wrong active track id!');
+    // eslint-disable-next-line no-console
+    console.error('[tracksPlayer:floatingPlayerState]', error.message, {
+      id,
+      'activePlayerData.id': activePlayerData.id,
+      error,
+    });
+    debugger; // eslint-disable-line no-debugger
+    return;
   }
   requestAnimationFrame(() => {
     delete dataset.status;
   });
+  setTimeout(tryToPlayNextTrack.bind(undefined, currentTrackPlayer), 100);
+}
+
+function tryToPlayNextTrack(currentTrackPlayer: HTMLElement) {
+  const thisIdx = Array.from(allPlayers).indexOf(currentTrackPlayer);
+  const nextIdx = (thisIdx + 1) % allPlayers.length;
+  const nextTrackNode = allPlayers[nextIdx];
+  if (!nextTrackNode || nextTrackNode === currentTrackPlayer) {
+    return;
+  }
+  playTrackNode(nextTrackNode);
 }
 
 function getTrackNode(id: number) {
@@ -180,10 +207,7 @@ function updateIncrementCallback(data: FloatingPlayerIncrementData) {
   }
 }
 
-/** Play button click handler */
-function trackPlayHandler(ev: MouseEvent) {
-  const controlNode = ev.currentTarget as HTMLElement;
-  const trackNode = controlNode.closest('.track-player') as HTMLElement;
+function playTrackNode(trackNode: HTMLElement) {
   // Reset previous player
   if (currentTrackPlayer && currentTrackPlayer !== trackNode) {
     stopPreviousPlayer();
@@ -223,6 +247,13 @@ function trackPlayHandler(ev: MouseEvent) {
   if (!isFloatingPlaying) {
     floatingPlayer.showFloatingPlayer();
   }
+}
+
+/** Play button click handler */
+function trackPlayHandler(ev: MouseEvent) {
+  const controlNode = ev.currentTarget as HTMLElement;
+  const trackNode = controlNode.closest('.track-player') as HTMLElement;
+  playTrackNode(trackNode);
 }
 
 function updateTrackFavoriteInDataset(trackNode: HTMLElement, isFavorite: boolean) {
@@ -296,24 +327,6 @@ function initTrackPlayerNode(trackNode: HTMLElement) {
   const isCurrent = activePlayerData?.id == id;
   const trackInfo: TrackInfo | undefined = localTrackInfoDb.getById(id);
   const favorite = hasServerData ? Boolean(dataset.favorite) : !!trackInfo?.favorite;
-  /* // DEBUG
-   * if (trackInfo) {
-   *   console.log('[tracksPlayer:initTrackPlayerNode] start', id, {
-   *     hasServerData,
-   *     isCurrent,
-   *     trackInfo,
-   *     favorite,
-   *     inited,
-   *     trackId, // "1"
-   *     trackMediaUrl, // "/media/samples/gr-400x225.jpg"
-   *     dataset,
-   *     trackNode,
-   *   });
-   *   if (id === 5) {
-   *     debugger;
-   *   }
-   * }
-   */
   if (trackInfo) {
     if (!hasServerData) {
       // If no server data then update favorite from the local db

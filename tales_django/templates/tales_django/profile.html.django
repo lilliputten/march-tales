@@ -22,13 +22,16 @@
   </h1>
 {% endif %}
 
+{% comment %}
 {% if active_regs %}
   <h2 class="primary-color mt-5 mb-4">{% trans "Your registrations" %}:</h2>
   {% include "assets/events-list-table/events-list-table.django" %}
 {% else %}
   <p class="dimmed-info">{% trans "You don't have any active registrations yet." %}</p>
 {% endif %}
+{% endcomment %}
 
+{% comment %}
 <h2 class="primary-color mt-5 mb-4">{% trans "Membership" %}:</h2>
 
 {% with membership=user.membership %}
@@ -53,6 +56,7 @@
 {% endwith %}
 
 {% endwith %}
+{% endcomment %}
 
 <!--
   TODO:
@@ -60,7 +64,7 @@
   - Add listings for your own tracks.
 -->
 
-{% if favorites_count %}
+{% if favorite_tracks.length %}
   <h2 class="primary-color mt-5 mb-4">{% trans "Favorite tracks" %}:</h2>
   {% include 'assets/template-right-blocks/right-favorites-list/right-favorites-list-wrapper.django' %}
 {% endif %}

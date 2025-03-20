@@ -1,8 +1,6 @@
 from unfold.sites import UnfoldAdminSite
 from allauth.account.views import login
 
-# from django.utils.translation import gettext_lazy as _
-
 
 class NewUnfoldAdminSite(UnfoldAdminSite):
     def login(self, request, extra_context=None):

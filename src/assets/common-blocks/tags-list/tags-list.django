@@ -10,15 +10,17 @@
 
 <ul class="tags-list list-unstyled widget-list mb-0">
   {% for tag in tags %}
-    <li>
-      <a href="/tags/{{ tag.id }}/" class="d-flex">
-        {{ tag.text }}
-        {% if tag.tracks.count %}
-          <small class="ms-auto opacity-75">
-            ({{ tag.tracks.count }})
-          </small>
-        {% endif %}
-      </a>
-    </li>
+    {% if tag.published_tracks_count and tag.promote %}
+      <li>
+        <a href="/tags/{{ tag.id }}/" class="d-flex">
+          {{ tag.text }}
+          {% if tag.tracks.count %}
+            <small class="ms-auto opacity-75">
+              ({{ tag.published_tracks_count }})
+            </small>
+          {% endif %}
+        </a>
+      </li>
+    {% endif %}
   {% endfor %}
 </ul>

@@ -9,6 +9,7 @@ from django.db.models import Model
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
 
+from core.appEnv import LOCAL
 from core.helpers.files import sizeofFmt
 from core.logging import getDebugLogger
 from tales_django.core.helpers.audio import getAudioTrackFolderName
@@ -75,17 +76,28 @@ class Track(Model):
         ('TEST', _('Test')),  # DEBUG!
     ]
     DEFAULT_TRACK_STATUS = TRACK_STATUS[0][0]
-    track_status = models.TextField(_('Status'), choices=TRACK_STATUS, default=DEFAULT_TRACK_STATUS)
+    track_status = models.TextField(
+        _('Status'),
+        choices=TRACK_STATUS,
+        default=DEFAULT_TRACK_STATUS,
+        help_text=_('Only published tracks will be shown'),
+    )
 
-    for_members = models.BooleanField(_('For members only'), default=False)   # , verbose_name=_('For members only'))
+    promote = models.BooleanField(_('Promote'), default=False, help_text=_('Promote on the main page'))
+
+    for_members = models.BooleanField(
+        _('For members only'), default=False, help_text=_('Show only for privileged members')
+    )
 
     played_count = models.BigIntegerField(
-        blank=True, default=0, help_text=_('Played count'), verbose_name=_('Played count')
+        blank=True,
+        default=0,
+        verbose_name=_('Played count'),
     )
 
     # Properties derived from the audio track file
-    audio_duration = models.FloatField(null=True, help_text=_('Duration (seconds)'))
-    audio_size = models.BigIntegerField(null=True, help_text=_('File size (bytes)'))
+    audio_duration = models.FloatField(null=True, verbose_name=_('Duration (seconds)'))
+    audio_size = models.BigIntegerField(null=True, verbose_name=_('File size (bytes)'))
 
     # Timestamps
     # created_at = models.DateField(auto_now_add=True)
@@ -99,6 +111,11 @@ class Track(Model):
     updated_by = models.ForeignKey(
         'User', verbose_name=_('Updated by'), related_name='updater', on_delete=models.DO_NOTHING
     )
+
+    @property
+    def lower_title(self) -> bool:
+        # language = get_current_language()
+        return self.title.lower()
 
     @property
     def active(self) -> bool:
@@ -138,12 +155,11 @@ class Track(Model):
 
     def __str__(self):
         items = [
-            # _('Track'),
             self.title,
-            # '[%d]' % self.id if LOCAL else None,
+            '[%d]' % self.id if LOCAL else None,
         ]
-        info = ' '.join(filter(None, map(str, items)))
-        return info
+        info = ' '.join(map(str, filter(None, items)))
+        return info   # f'Track(id={self.id}, title={self.title})'
 
 
 @receiver(post_delete, sender=Track)

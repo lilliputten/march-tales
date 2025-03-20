@@ -10,17 +10,19 @@
 
 <ul class="rubrics-list list-inline widget-list-inline widget-card mb-0 pb-0">
   {% for rubric in rubrics %}
-    <li class="list-inline-item">
-      <a href="/rubrics/{{ rubric.id }}/"
-        class="d-flex align-items-center gap-2 {% if rubric.tracks.count %}pe-2{% endif %}"
-      >
-        {{ rubric.text }}
-        {% if rubric.tracks.count %}
-           <span class="rounded-pill px-2 font-small">
-              {{ rubric.tracks.count }}
-           </span>
-        {% endif %}
-      </a>
-    </li>
+    {% if rubric.published_tracks_count and rubric.promote %}
+      <li class="list-inline-item">
+        <a href="/rubrics/{{ rubric.id }}/"
+          class="d-flex align-items-center gap-2 {% if rubric.tracks.count %}pe-2{% endif %}"
+        >
+          {{ rubric.text }}
+          {% if rubric.tracks.count %}
+             <span class="rounded-pill px-2 font-small">
+                {{ rubric.published_tracks_count }}
+             </span>
+          {% endif %}
+        </a>
+      </li>
+    {% endif %}
   {% endfor %}
 </ul>

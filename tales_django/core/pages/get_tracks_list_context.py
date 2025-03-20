@@ -4,6 +4,11 @@ from django.utils import translation
 from core.helpers.utils import debugObj
 from core.logging import getDebugLogger
 
+from tales_django.entities.Tracks.api.track_filters import (
+    get_search_filter_args,
+    get_track_filter_kwargs,
+    get_track_order_args,
+)
 from tales_django.models import Track
 
 
@@ -26,8 +31,15 @@ def get_tracks_list_context(request: HttpRequest):
     # Regex:
     # \<\(tracks\|tracks_count\|tracks_offset\|tracks_limit\)\>
 
+    order_args = get_track_order_args(request)
+    filter_kwargs = get_track_filter_kwargs(request)
+    filter_args = get_search_filter_args(request)
+
+    tracks = Track.objects.filter(*filter_args, **filter_kwargs).order_by(*order_args)
+    # tracks = Track.objects.filter(track_status='PUBLISHED').order_by('-published_at', f'title_{language}').all()
+
     tracks_offset = int(request.GET.get('tracks_offset', 0))
-    tracks = Track.objects.filter(track_status='PUBLISHED').order_by('-published_at', f'title_{language}').all()
+
     tracks_end = tracks_offset + tracks_limit
     tracks_set = tracks[tracks_offset:tracks_end]
     tracks_count = len(tracks)

@@ -9,7 +9,7 @@ from tales_django.models import Tag
 from tales_django.models import Author
 
 
-show_authors_count = 3
+show_authors_count = 10
 show_favorite_tracks_count = 10
 
 logger = getDebugLogger()
