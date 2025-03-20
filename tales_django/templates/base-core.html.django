@@ -27,7 +27,7 @@
   <meta charset="utf-8" />
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="robots" content="index, nofollow" />
+  <meta name="robots" content="index, follow" />
   <link href="{% static 'favicon.ico' %}" rel="icon" type="image/x-icon" />
   <link rel="shortcut icon" href="{% static 'images/march-cat/march-cat-sq-48.jpg' %}" type="image/x-icon">
   <link rel="icon" href="{% static 'images/march-cat/march-cat-sq-48.jpg' %}" type="image/x-icon">
