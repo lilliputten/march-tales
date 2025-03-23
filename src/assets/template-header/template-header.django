@@ -8,7 +8,7 @@
     <nav class="navbar navbar-expand-lg navbar-white">
       <a class="navbar-brand d-flex align-items-center gap-3 order-1 font-lobster" href="/">
         <span class="rounded-circle-wrapper d-flex align-items-center">
-        {% lqip_media_img_tag className="img-fluid rounded-circle lazy-load" url="/static/images/march-cat/march-cat-sq-48.jpg" thumb="/static/images/march-cat/march-cat-sq-8.jpg" %}
+        {% lqip_media_img_tag className="img-fluid rounded-circle lazy-load" url="/static/images/march-cat/march-cat-sq-48.jpg" thumb="/static/images/march-cat/march-cat-sq-48-sm.jpg" %}
         {% comment %}
           <img
             class="img-fluid rounded-circle"

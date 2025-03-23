@@ -8,7 +8,7 @@
 <div class="right-about widget widget-about active-link">
   <h4 class="font-supertitle mt-2 mb-4">{% trans "Hi, I'm March Cat!" %}</h4>
 
-  {% lqip_media_img_tag className="img-fluid lazy-load" url="/static/images/march-cat/march-cat-sq-180.jpg" thumb="static/images/march-cat/march-cat-sq-16.jpg" %}
+  {% lqip_media_img_tag className="img-fluid lazy-load" url="/static/images/march-cat/march-cat-sq-180.jpg" thumb="static/images/march-cat/march-cat-sq-180-sm.jpg" %}
   {% comment %}
   <img
     class="img-fluid"
