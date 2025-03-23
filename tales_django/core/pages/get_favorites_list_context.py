@@ -7,7 +7,7 @@ from core.logging import getDebugLogger
 from tales_django.models import Track
 
 
-favorites_limit = 10
+favorites_limit= 20
 
 logger = getDebugLogger()
 

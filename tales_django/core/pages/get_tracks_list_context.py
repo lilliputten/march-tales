@@ -12,7 +12,7 @@ from tales_django.entities.Tracks.api.track_filters import (
 from tales_django.models import Track
 
 
-tracks_limit = 10
+tracks_limit= 20
 
 logger = getDebugLogger()
 
