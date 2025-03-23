@@ -1,11 +1,24 @@
 {# ex: set ft=htmldjango : #}
+
 {% load static %}
 {% load i18n %}
+{% load imagekit %}
 
 <!-- About -->
 <div class="right-about widget widget-about active-link">
   <h4 class="font-supertitle mt-2 mb-4">{% trans "Hi, I'm March Cat!" %}</h4>
-  <img class="img-fluid" src="{% static 'images/march-cat/march-cat-sq-180.jpg' %}" alt="{% trans 'The March Cat' %}" loading="lazy" />
+
+  {% lqip_media_img_tag className="img-fluid lazy-load" url="/static/images/march-cat/march-cat-sq-180.jpg" thumb="static/images/march-cat/march-cat-sq-16.jpg" %}
+  {% comment %}
+  <img
+    class="img-fluid"
+    src="{% static 'images/march-cat/march-cat-sq-180.jpg' %}"
+    alt="{% trans 'The March Cat' %}"
+    loading="lazy"
+  />
+  {% generateimage 'tales_django:small_image_thumb' source='static/images/march-cat/march-cat-sq-180.jpg' %}
+  {% endcomment %}
+
   <p>{% blocktranslate %}Site description block.{% endblocktranslate %}</p>
   <ul class="list-inline social-icons mb-3">
     {% include 'assets/common-blocks/social-links/social-links.django' %}

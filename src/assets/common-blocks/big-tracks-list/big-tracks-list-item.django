@@ -33,9 +33,11 @@ track_url: {% if request.path|str_starts:"/favorites" %}/favorites{% else %}/tra
     <div class="thumb-preview">
       {% if not show_details %}
       <a class="thumb-link" href="{% if request.path|str_starts:"/favorites" %}/favorites{% else %}/tracks{% endif %}/{{ track.id }}/">
-      {% endif %}
-        {% lqip_media_img_tag url=track.preview_picture_full.url thumb=track.preview_picture_thumb.url className="card-img lazy-load" %}
-        {% comment %} {% generateimage 'tales_django:preview_picture_thumb' source=track.preview_picture %} {% endcomment %}
+      {% endif %}{% lqip_media_img_tag url=track.preview_picture_full.url thumb=track.preview_picture_thumb.url className="card-img lazy-load" %}
+
+        {% comment %}
+        {% generateimage 'tales_django:preview_picture_thumb' source=track.preview_picture %}
+        {% endcomment %}
         <img
           {% comment %}
           src="{{ track.preview_picture_full.url }}"

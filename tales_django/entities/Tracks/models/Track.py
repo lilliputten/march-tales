@@ -10,11 +10,7 @@ from django.db.models.signals import post_delete
 from django.dispatch import receiver
 
 from imagekit.models import ImageSpecField
-from imagekit.processors import (
-    # ResizeToFill,
-    # ResizeToCover,
-    ResizeToFit,
-)
+from imagekit.processors import ResizeToFit
 
 from core.appEnv import LOCAL
 from core.helpers.files import sizeofFmt

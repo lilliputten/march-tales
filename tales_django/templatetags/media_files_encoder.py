@@ -1,11 +1,19 @@
 import base64
+import posixpath
 import re
+import traceback
+from urllib.parse import quote, unquote
 
 from PIL import Image
 
+from django.conf import settings
 from django.template.defaultfilters import register
 from django.contrib.staticfiles.finders import find as find_static_file
 from django.utils.safestring import mark_safe
+
+from core.helpers.errors import errorToString
+from core.helpers.utils import debugObj
+from core.logging import getDebugLogger
 
 ESCAPE_TABLE = {
     '#': '%23',
@@ -16,6 +24,8 @@ ESCAPE_TABLE = {
     '"': "'",
 }
 escape_re = re.compile('|'.join(ESCAPE_TABLE.keys()))
+
+logger = getDebugLogger()
 
 
 def prepare_svg(svg: str):
@@ -74,41 +84,57 @@ def lqip_media_img_tag(url, thumb, id='', className='', encoding='base64', file_
     thumbPath = get_media_url_path(thumb)
     file_data = raw_media_file(thumbPath)
     file_data = base64.b64encode(file_data)
-    origPath = get_media_url_path(url)
-    im = Image.open(origPath)
-    width, height = im.size
-    encoded_data = encode_file_data(file_data, ext, encoding, file_type)
-    svg_data = (
-        r'<svg xmlns="http://www.w3.org/2000/svg"'
-        r' xmlns:xlink="http://www.w3.org/1999/xlink"'
-        f' viewBox="0 0 {width} {height}">'
-        r'<filter id="b" color-interpolation-filters="sRGB">'
-        r'<feGaussianBlur stdDeviation=".5"></feGaussianBlur>'
-        r'<feComponentTransfer>'
-        r'<feFuncA type="discrete" tableValues="1 1"></feFuncA>'
-        r'</feComponentTransfer>'
-        r'</filter>'
-        r'<image filter="url(#b)" preserveAspectRatio="none"'
-        r' height="100%" width="100%"'
-        f' xlink:href="{encoded_data}">'
-        r'</image>'
-        r'</svg>'
-    )
-    escaped_svg_data = prepare_svg(svg_data)
-    URI = f'data:image/svg+xml;charset=utf-8,{escaped_svg_data}'
-    styleCode = f'background-size: cover; background-image: url("{URI}");'
-    quotedStyleCode = re.sub(r'"', '&quot;', styleCode)
-    return mark_safe(
-        r'<img'
-        f' id="{id}"'
-        f' class="{className}"'
-        f' src="{url}"'
-        f' style="{quotedStyleCode}"'
-        f' width="{width}"'
-        f' height="{height}"'
-        r' loading="lazy"'
-        r' />'
-    )
+    urlPath = get_media_url_path(url)
+    width = 0
+    height = 0
+    try:
+        im = Image.open(urlPath)
+        width, height = im.size
+    except:
+        pass
+    try:
+        encoded_data = encode_file_data(file_data, ext, encoding, file_type)
+        svg_data = (
+            r'<svg xmlns="http://www.w3.org/2000/svg"'
+            r' xmlns:xlink="http://www.w3.org/1999/xlink"'
+            f' viewBox="0 0 {width} {height}">'
+            r'<filter id="b" color-interpolation-filters="sRGB">'
+            r'<feGaussianBlur stdDeviation=".5"></feGaussianBlur>'
+            r'<feComponentTransfer>'
+            r'<feFuncA type="discrete" tableValues="1 1"></feFuncA>'
+            r'</feComponentTransfer>'
+            r'</filter>'
+            r'<image filter="url(#b)" preserveAspectRatio="none"'
+            r' height="100%" width="100%"'
+            f' xlink:href="{encoded_data}">'
+            r'</image>'
+            r'</svg>'
+        )
+        escaped_svg_data = prepare_svg(svg_data)
+        URI = f'data:image/svg+xml;charset=utf-8,{escaped_svg_data}'
+        styleCode = f'background-size: cover; background-image: url("{URI}");'
+        quotedStyleCode = re.sub(r'"', '&quot;', styleCode)
+        code = mark_safe(
+            r'<img'
+            f' id="{id}"'
+            f' class="{className}"'
+            f' src="{url}"'
+            f' style="{quotedStyleCode}"'
+            f' width="{width}"'
+            f' height="{height}"'
+            r' loading="lazy"'
+            r' />'
+        )
+        return code
+    except Exception as err:
+        sError = errorToString(err, show_stacktrace=False)
+        sTraceback = str(traceback.format_exc())
+        debugData = {
+            'err': err,
+            'traceback': sTraceback,
+        }
+        logger.error(f'Caught error {sError} (re-raising):\n' + debugObj(debugData))
+        raise err
 
 
 def get_file_extension(path: str):
@@ -120,8 +146,16 @@ def encode_file_data(file_data: bytes, ext='', encoding='base64', file_type='ima
 
 
 def get_media_url_path(url: str):
-    path = get_following_url_part(url, '/media/')
-    path = find_static_file(path)
+    parsed_url = unquote(url)
+    if '/media/' in parsed_url or parsed_url.startswith('media/'):
+        parsed_url = get_following_url_part(parsed_url, 'media/')
+    elif '/static/' in parsed_url or parsed_url.startswith('static/'):
+        parsed_url = get_following_url_part(parsed_url, 'static/')
+        path = posixpath.join(settings.STATIC_ROOT, parsed_url)
+        return path
+    path = find_static_file(parsed_url)
+    # if isinstance(path, list):
+    #     return path[0]
     return path
 
 

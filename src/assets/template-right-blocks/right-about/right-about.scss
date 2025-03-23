@@ -1,0 +1,9 @@
+@use 'sass:color';
+
+@import '../../shared';
+
+.right-about {
+  img {
+    border: 2px solid red;
+  }
+}

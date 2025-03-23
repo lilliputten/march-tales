@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-19 07:02+0300\n"
+"POT-Creation-Date: 2025-03-23 05:54+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,42 +35,37 @@ msgstr ""
 msgid "Show all authors"
 msgstr ""
 
-#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:37
-#: .\src\assets\common-blocks\small-tracks-list\small-tracks-list-item.django:14
-msgid "Track cover image"
-msgstr ""
-
-#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:69
+#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:85
 #: .\src\assets\common-blocks\medium-tracks-list\medium-tracks-list-item.django:46
 #: .\src\assets\entities\FloatingPlayer\floating-player.django:28
 msgid "Add to favorites"
 msgstr ""
 
-#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:70
+#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:86
 #: .\src\assets\common-blocks\medium-tracks-list\medium-tracks-list-item.django:47
 #: .\src\assets\entities\FloatingPlayer\floating-player.django:29
 msgid "Remove from favorites"
 msgstr ""
 
-#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:79
+#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:95
 #: .\src\assets\common-blocks\medium-tracks-list\medium-tracks-list-item.django:38
 #: .\src\assets\entities\FloatingPlayer\floating-player.django:41
 msgid "Loading"
 msgstr ""
 
-#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:80
+#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:96
 #: .\src\assets\common-blocks\medium-tracks-list\medium-tracks-list-item.django:39
 #: .\src\assets\entities\FloatingPlayer\floating-player.django:42
 msgid "Resume"
 msgstr ""
 
-#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:81
+#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:97
 #: .\src\assets\common-blocks\medium-tracks-list\medium-tracks-list-item.django:40
 #: .\src\assets\entities\FloatingPlayer\floating-player.django:43
 msgid "Play"
 msgstr ""
 
-#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:82
+#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:98
 #: .\src\assets\common-blocks\medium-tracks-list\medium-tracks-list-item.django:41
 #: .\src\assets\entities\FloatingPlayer\floating-player.django:44
 msgid "Pause"
@@ -86,8 +81,12 @@ msgstr ""
 msgid "No favorite tracks"
 msgstr ""
 
+#: .\src\assets\common-blocks\small-tracks-list\small-tracks-list-item.django:14
+msgid "Track cover image"
+msgstr ""
+
 #: .\src\assets\common-blocks\track-details\track-details.django:23
-#: .\tales_django\entities\Tracks\models\Track.py:95
+#: .\tales_django\entities\Tracks\models\Track.py:145
 msgid "Played count"
 msgstr ""
 
@@ -97,7 +96,7 @@ msgid "Duration"
 msgstr ""
 
 #: .\src\assets\common-blocks\track-details\track-details.django:31
-#: .\tales_django\entities\Tracks\models\Track.py:104
+#: .\tales_django\entities\Tracks\models\Track.py:154
 msgid "Published at"
 msgstr ""
 
@@ -105,8 +104,8 @@ msgstr ""
 #: .\src\assets\template-right-blocks\right-rubrics-list\right-rubrics-list.django:7
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:244
 #: .\tales_django\entities\Tracks\models\Rubric.py:13
-#: .\tales_django\entities\Tracks\models\Track.py:57
-#: .\tales_django\settings.py:263
+#: .\tales_django\entities\Tracks\models\Track.py:83
+#: .\tales_django\settings.py:261
 #: .\tales_django\templates\tales_django\rubric_details.html.django:21
 #: .\tales_django\templates\tales_django\rubric_index.html.django:20
 msgid "Rubrics"
@@ -116,8 +115,8 @@ msgstr ""
 #: .\src\assets\template-right-blocks\right-tags-list\right-tags-list.django:7
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:238
 #: .\tales_django\entities\Tracks\models\Tag.py:13
-#: .\tales_django\entities\Tracks\models\Track.py:56
-#: .\tales_django\settings.py:268
+#: .\tales_django\entities\Tracks\models\Track.py:80
+#: .\tales_django\settings.py:266
 #: .\tales_django\templates\tales_django\tag_details.html.django:21
 #: .\tales_django\templates\tales_django\tag_index.html.django:20
 msgid "Tags"
@@ -256,7 +255,7 @@ msgstr ""
 
 #: .\src\assets\template-right-blocks\right-authors-list\right-authors-list.django:15
 #: .\tales_django\entities\Tracks\models\Author.py:15
-#: .\tales_django\settings.py:258
+#: .\tales_django\settings.py:256
 #: .\tales_django\templates\tales_django\author_details.html.django:36
 #: .\tales_django\templates\tales_django\author_index.html.django:20
 msgid "Authors"
@@ -300,7 +299,7 @@ msgstr ""
 #: .\tales_django\templates\base-full-column.html.django:31
 #: .\tales_django\templates\tales_django\index.html.django:35
 msgid "Recent Tracks"
-msgstr ""
+msgstr "Tracks"
 
 #: .\src\assets\template-right-blocks\right-search\right-search.django:7
 msgid "Search for an audio"
@@ -370,7 +369,7 @@ msgstr ""
 #: .\tales_django\entities\Tracks\models\Author.py:30
 #: .\tales_django\entities\Tracks\models\Rubric.py:26
 #: .\tales_django\entities\Tracks\models\Tag.py:26
-#: .\tales_django\entities\Tracks\models\Track.py:86
+#: .\tales_django\entities\Tracks\models\Track.py:134
 msgid "Promote"
 msgstr ""
 
@@ -402,7 +401,7 @@ msgstr ""
 
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:38
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:223
-#: .\tales_django\entities\Tracks\models\Track.py:74
+#: .\tales_django\entities\Tracks\models\Track.py:122
 msgid "Published"
 msgstr ""
 
@@ -430,7 +429,7 @@ msgstr ""
 
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:87
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:271
-#: .\tales_django\entities\Tracks\models\Track.py:30
+#: .\tales_django\entities\Tracks\models\Track.py:44
 #, fuzzy
 #| msgid "Site title"
 msgid "Title"
@@ -438,7 +437,7 @@ msgstr "The March Cat Tales"
 
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:96
 #: .\tales_django\entities\Tracks\models\Author.py:26
-#: .\tales_django\entities\Tracks\models\Track.py:42
+#: .\tales_django\entities\Tracks\models\Track.py:56
 #, fuzzy
 #| msgid "Site description"
 msgid "Description"
@@ -453,7 +452,7 @@ msgid "Attributes"
 msgstr ""
 
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:125
-#: .\tales_django\entities\Tracks\models\Track.py:80
+#: .\tales_django\entities\Tracks\models\Track.py:128
 msgid "Status"
 msgstr ""
 
@@ -505,7 +504,7 @@ msgid "User in not authenticated"
 msgstr ""
 
 #: .\tales_django\entities\Tracks\models\Author.py:14
-#: .\tales_django\entities\Tracks\models\Track.py:54
+#: .\tales_django\entities\Tracks\models\Track.py:74
 msgid "Author"
 msgstr ""
 
@@ -522,7 +521,7 @@ msgstr ""
 #: .\tales_django\entities\Tracks\models\Author.py:30
 #: .\tales_django\entities\Tracks\models\Rubric.py:26
 #: .\tales_django\entities\Tracks\models\Tag.py:26
-#: .\tales_django\entities\Tracks\models\Track.py:86
+#: .\tales_django\entities\Tracks\models\Track.py:134
 msgid "Promote on the main page"
 msgstr ""
 
@@ -539,81 +538,81 @@ msgstr ""
 msgid "Tag"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\models\Track.py:25
+#: .\tales_django\entities\Tracks\models\Track.py:39
 msgid "Track"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\models\Track.py:26
+#: .\tales_django\entities\Tracks\models\Track.py:40
 #: .\tales_django\entities\Users\admin\UserAdmin.py:49
-#: .\tales_django\settings.py:252
+#: .\tales_django\settings.py:250
 #: .\tales_django\templates\tales_django\favorites.html.django:37
 #: .\tales_django\templates\tales_django\track_details.html.django:42
 msgid "Tracks"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\models\Track.py:36
+#: .\tales_django\entities\Tracks\models\Track.py:50
 msgid "The track title text, required."
 msgstr ""
 
-#: .\tales_django\entities\Tracks\models\Track.py:46
+#: .\tales_django\entities\Tracks\models\Track.py:60
 #, fuzzy
 #| msgid "Site description"
 msgid "Optional description"
 msgstr "Listen to classic fairy tales online"
 
-#: .\tales_django\entities\Tracks\models\Track.py:51
+#: .\tales_django\entities\Tracks\models\Track.py:65
 msgid "Youtube link"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\models\Track.py:51
+#: .\tales_django\entities\Tracks\models\Track.py:69
 msgid "YouTube video link url"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\models\Track.py:63
+#: .\tales_django\entities\Tracks\models\Track.py:92
 msgid "Audio file"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\models\Track.py:69
+#: .\tales_django\entities\Tracks\models\Track.py:101
 msgid "Preview picture"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\models\Track.py:75
+#: .\tales_django\entities\Tracks\models\Track.py:123
 msgid "Hidden"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\models\Track.py:76
+#: .\tales_django\entities\Tracks\models\Track.py:124
 msgid "Test"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\models\Track.py:83
+#: .\tales_django\entities\Tracks\models\Track.py:131
 msgid "Only published tracks will be shown"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\models\Track.py:89
+#: .\tales_django\entities\Tracks\models\Track.py:137
 msgid "For members only"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\models\Track.py:89
+#: .\tales_django\entities\Tracks\models\Track.py:139
 msgid "Show only for privileged members"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\models\Track.py:99
+#: .\tales_django\entities\Tracks\models\Track.py:149
 msgid "Duration (seconds)"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\models\Track.py:100
+#: .\tales_django\entities\Tracks\models\Track.py:150
 msgid "File size (bytes)"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\models\Track.py:105
+#: .\tales_django\entities\Tracks\models\Track.py:155
 msgid "Updated at"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\models\Track.py:109
+#: .\tales_django\entities\Tracks\models\Track.py:160
 msgid "Published by"
 msgstr ""
 
-#: .\tales_django\entities\Tracks\models\Track.py:112
+#: .\tales_django\entities\Tracks\models\Track.py:166
 msgid "Updated by"
 msgstr ""
 
@@ -682,29 +681,29 @@ msgstr ""
 msgid "Receive notifications via email and in the mobile application"
 msgstr ""
 
-#: .\tales_django\settings.py:229 .\tales_django\settings.py:230
+#: .\tales_django\settings.py:227 .\tales_django\settings.py:228
 #, fuzzy
 #| msgid "Site description"
 msgid "Administration"
 msgstr "Listen to classic fairy tales online"
 
-#: .\tales_django\settings.py:247
+#: .\tales_django\settings.py:245
 msgid "Content"
 msgstr ""
 
-#: .\tales_django\settings.py:275
+#: .\tales_django\settings.py:273
 msgid "Manage"
 msgstr ""
 
-#: .\tales_django\settings.py:280
+#: .\tales_django\settings.py:278
 msgid "Dashboard"
 msgstr ""
 
-#: .\tales_django\settings.py:287
+#: .\tales_django\settings.py:285
 msgid "Users"
 msgstr ""
 
-#: .\tales_django\settings.py:298
+#: .\tales_django\settings.py:296
 msgid "Open site"
 msgstr ""
 
@@ -1105,19 +1104,19 @@ msgstr ""
 msgid "Main page"
 msgstr ""
 
-#: .\tales_django\templates\tales_django\about.html.django:31
+#: .\tales_django\templates\tales_django\about.html.django:33
 msgid "Versions"
 msgstr ""
 
-#: .\tales_django\templates\tales_django\about.html.django:34
+#: .\tales_django\templates\tales_django\about.html.django:36
 msgid "Server version"
 msgstr ""
 
-#: .\tales_django\templates\tales_django\about.html.django:35
+#: .\tales_django\templates\tales_django\about.html.django:37
 msgid "Mobile applicaiton version"
 msgstr ""
 
-#: .\tales_django\templates\tales_django\about.html.django:40
+#: .\tales_django\templates\tales_django\about.html.django:42
 #: .\tales_django\templates\tales_django\author_details.html.django:49
 #: .\tales_django\templates\tales_django\cookies-agreement.html.django:33
 #: .\tales_django\templates\tales_django\rubric_details.html.django:39

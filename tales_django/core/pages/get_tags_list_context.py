@@ -6,7 +6,7 @@ from core.logging import getDebugLogger
 from tales_django.models import Tag
 
 
-tags_limit= 20
+tags_limit = 20
 
 logger = getDebugLogger()
 

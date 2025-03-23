@@ -7,7 +7,7 @@ from core.logging import getDebugLogger
 from tales_django.models import Rubric
 
 
-rubrics_limit= 20
+rubrics_limit = 20
 
 logger = getDebugLogger()
 
