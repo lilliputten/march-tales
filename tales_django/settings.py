@@ -66,13 +66,10 @@ from core.djangoConfig import (
     # OAuth
     GOOGLE_CLIENT_ID,
     GOOGLE_CLIENT_SECRET,
+    # TODO: Add other oath adapters...
     # YANDEX_CLIENT_ID,
     # YANDEX_CLIENT_SECRET,
 )
-
-# TRANSLATIONS_PROJECT_BASE_DIR = BASE_DIR
-
-# _ = lambda s: s
 
 # Define default site id for `sites.models`
 SITE_ID = 1
@@ -181,6 +178,7 @@ INSTALLED_APPS = [
     # 'django_filters',
     'import_export',
     'markdownify.apps.MarkdownifyConfig',
+    'imagekit',
     # app
     # APP_NAME + '.apps.TalesConfig',
     APP_NAME,

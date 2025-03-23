@@ -9,12 +9,26 @@ from django.db.models import Model
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
 
+from imagekit.models import ImageSpecField
+from imagekit.processors import (
+    # ResizeToFill,
+    # ResizeToCover,
+    ResizeToFit,
+)
+
 from core.appEnv import LOCAL
 from core.helpers.files import sizeofFmt
 from core.logging import getDebugLogger
-from tales_django.core.helpers.audio import getAudioTrackFolderName
 
-from tales_django.core.model_helpers import get_non_empty_localized_model_field_attrgetter
+from tales_django.core.helpers.audio import getAudioTrackFolderName
+from tales_django.core.model_helpers import (
+    get_non_empty_localized_model_field_attrgetter,
+)
+from tales_django.entities.Tracks.constants.preview_picture_sizes import (
+    track_preview_picture_full_size,
+    track_preview_picture_jpeg_quality,
+    track_preview_picture_thumb_size,
+)
 
 
 _logger = getDebugLogger()
@@ -48,13 +62,28 @@ class Track(Model):
         attrgetter=get_non_empty_localized_model_field_attrgetter,
     )
     youtube_url = models.URLField(
-        verbose_name=_('Youtube link'), blank=True, null=False, max_length=64, help_text=_('YouTube video link url')
+        verbose_name=_('Youtube link'),
+        blank=True,
+        null=False,
+        max_length=64,
+        help_text=_('YouTube video link url'),
     )
 
-    author = models.ForeignKey('Author', verbose_name=_('Author'), blank=False, null=False, on_delete=models.DO_NOTHING)
+    author = models.ForeignKey(
+        'Author',
+        verbose_name=_('Author'),
+        blank=False,
+        null=False,
+        on_delete=models.DO_NOTHING,
+    )
 
     tags = models.ManyToManyField('Tag', verbose_name=_('Tags'), blank=True, related_name='tagged_tracks')
-    rubrics = models.ManyToManyField('Rubric', verbose_name=_('Rubrics'), blank=True, related_name='rubricated_tracks')
+    rubrics = models.ManyToManyField(
+        'Rubric',
+        verbose_name=_('Rubrics'),
+        blank=True,
+        related_name='rubricated_tracks',
+    )
 
     uploadsFolder = getAudioTrackFolderName()
 
@@ -66,7 +95,26 @@ class Track(Model):
         null=False,
     )
     preview_picture = models.ImageField(
-        upload_to=uploadsFolder, blank=False, null=False, verbose_name=_('Preview picture')
+        upload_to=uploadsFolder,
+        blank=False,
+        null=False,
+        verbose_name=_('Preview picture'),
+    )
+    preview_picture_full = ImageSpecField(
+        source='preview_picture',
+        processors=[
+            ResizeToFit(track_preview_picture_full_size, track_preview_picture_full_size),
+        ],
+        format='JPEG',
+        options={'quality': track_preview_picture_jpeg_quality},
+    )
+    preview_picture_thumb = ImageSpecField(
+        source='preview_picture',
+        processors=[
+            ResizeToFit(track_preview_picture_thumb_size, track_preview_picture_thumb_size),
+        ],
+        format='JPEG',
+        options={'quality': track_preview_picture_jpeg_quality},
     )
 
     # Track status
@@ -86,7 +134,9 @@ class Track(Model):
     promote = models.BooleanField(_('Promote'), default=False, help_text=_('Promote on the main page'))
 
     for_members = models.BooleanField(
-        _('For members only'), default=False, help_text=_('Show only for privileged members')
+        _('For members only'),
+        default=False,
+        help_text=_('Show only for privileged members'),
     )
 
     played_count = models.BigIntegerField(
@@ -106,10 +156,16 @@ class Track(Model):
 
     # Owner/creator
     published_by = models.ForeignKey(
-        'User', verbose_name=_('Published by'), related_name='publisher', on_delete=models.DO_NOTHING
+        'User',
+        verbose_name=_('Published by'),
+        related_name='publisher',
+        on_delete=models.DO_NOTHING,
     )
     updated_by = models.ForeignKey(
-        'User', verbose_name=_('Updated by'), related_name='updater', on_delete=models.DO_NOTHING
+        'User',
+        verbose_name=_('Updated by'),
+        related_name='updater',
+        on_delete=models.DO_NOTHING,
     )
 
     @property
@@ -159,7 +215,7 @@ class Track(Model):
             '[%d]' % self.id if LOCAL else None,
         ]
         info = ' '.join(map(str, filter(None, items)))
-        return info   # f'Track(id={self.id}, title={self.title})'
+        return info  # f'Track(id={self.id}, title={self.title})'
 
 
 @receiver(post_delete, sender=Track)

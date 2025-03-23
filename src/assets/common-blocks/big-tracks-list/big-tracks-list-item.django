@@ -2,6 +2,7 @@
 {% load static %}
 {% load i18n %}
 {% load markdownify %}
+{% load imagekit %}
 
 {% comment %}
 
@@ -33,7 +34,20 @@ track_url: {% if request.path|str_starts:"/favorites" %}/favorites{% else %}/tra
       {% if not show_details %}
       <a class="thumb-link" href="{% if request.path|str_starts:"/favorites" %}/favorites{% else %}/tracks{% endif %}/{{ track.id }}/">
       {% endif %}
-        <img src="{% get_media_prefix %}{{ track.preview_picture }}" class="card-img" alt="{% trans 'Track cover image' %}" aria-hidden="false" tabindex="0" loading="lazy" />
+        {% lqip_media_img_tag url=track.preview_picture_full.url thumb=track.preview_picture_thumb.url className="card-img lazy-load" %}
+        {% comment %} {% generateimage 'tales_django:preview_picture_thumb' source=track.preview_picture %} {% endcomment %}
+        <img
+          {% comment %}
+          src="{{ track.preview_picture_full.url }}"
+          data-original-src="{% get_media_prefix %}{{ track.preview_picture }}"
+          data-thumb-src="{{ track.preview_picture_thumb.url }}"
+          class="card-img"
+          alt="{% trans 'Track cover image' %}"
+          aria-hidden="false"
+          tabindex="0"
+          loading="lazy"
+          {% endcomment %}
+        />
       {% if not show_details %}
       </a>
       {% endif %}
