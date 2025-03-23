@@ -11,7 +11,7 @@
 <div class="small-tracks-list-item widget-card">
   <a class="d-flex" href="/tracks/{{ track.id }}/">
     {% if track.preview_picture %}
-    <img class="card-img-sm" src="{% get_media_prefix %}{{ track.preview_picture}}" alt="{% trans 'Track cover image' %}" loading="lazy" />
+    <img class="card-img-sm" src="{% get_media_prefix %}{{ track.preview_picture_full.url }}" alt="{% trans 'Track cover image' %}" loading="lazy" />
     {% endif %}
     <div class="content ms-3">
       <p class="title mb-1"><strong>{{ track.title }}</strong></p>

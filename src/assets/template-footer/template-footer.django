@@ -16,23 +16,6 @@
       stroke="#b269"
     />
   </svg>
-  <!--
-  <div class="instafeed text-center mb-5">
-      <h2 class="h3 mb-4">INSTAGRAM POST</h2>
-      <div class="instagram-slider">
-        <div class="instagram-post"><img src="images/instagram/1.jpg"></div>
-        <div class="instagram-post"><img src="images/instagram/2.jpg"></div>
-        <div class="instagram-post"><img src="images/instagram/4.jpg"></div>
-        <div class="instagram-post"><img src="images/instagram/3.jpg"></div>
-        <div class="instagram-post"><img src="images/instagram/2.jpg"></div>
-        <div class="instagram-post"><img src="images/instagram/1.jpg"></div>
-        <div class="instagram-post"><img src="images/instagram/3.jpg"></div>
-        <div class="instagram-post"><img src="images/instagram/4.jpg"></div>
-        <div class="instagram-post"><img src="images/instagram/2.jpg"></div>
-        <div class="instagram-post"><img src="images/instagram/4.jpg"></div>
-      </div>
-  </div>
-  -->
   <div class="align-items-center d-flex flex-md-row">
     <div class="col-12">
       <div class="delimiter border-top"></div>
@@ -49,11 +32,15 @@
         <div class="footer-cell footer-brand-cell text-center">
           <a href="/" class="navbar-brand d-flex justify-content-center align-items-center gap-3 order-1 font-lobster">
             <span class="rounded-circle-wrapper d-flex align-items-center">
+              {% lqip_media_img_tag className="img-fluid rounded-circle lazy-load" url="/static/images/march-cat/march-cat-sq-48.jpg" thumb="/static/images/march-cat/march-cat-sq-48-sm.jpg" %}
+              {% comment %}
               <img
                 class="img-fluid rounded-circle"
                 width="48"
                 src="{% static 'images/march-cat/march-cat-sq-48.jpg' %}"
-                alt="{% trans 'Site title' %}">
+                alt="{% trans 'Site title' %}"
+              />
+              {% endcomment %}
             </span>
             <span class="text">
               {% trans 'Site title' %}

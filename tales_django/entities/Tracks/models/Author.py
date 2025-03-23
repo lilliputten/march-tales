@@ -4,8 +4,16 @@ from django.utils.translation import gettext_lazy as _
 from django.db import models
 from django.db.models import Model
 
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFit
+
 from tales_django.core.model_helpers import (
     get_non_empty_localized_model_field_attrgetter,
+)
+from tales_django.entities.Tracks.constants.preview_picture_sizes import (
+    author_portrait_picture_full_size,
+    author_portrait_picture_jpeg_quality,
+    author_portrait_picture_thumb_size,
 )
 
 
@@ -26,7 +34,25 @@ class Author(Model):
         models.TextField(_('Description'), blank=True, null=False, max_length=1024),
         attrgetter=get_non_empty_localized_model_field_attrgetter,
     )
+
     portrait_picture = models.ImageField(_('Portrait picture'), upload_to='authors', blank=False, null=False)
+    portrait_picture_full = ImageSpecField(
+        source='portrait_picture',
+        processors=[
+            ResizeToFit(author_portrait_picture_full_size, author_portrait_picture_full_size),
+        ],
+        format='JPEG',
+        options={'quality': author_portrait_picture_jpeg_quality},
+    )
+    portrait_picture_thumb = ImageSpecField(
+        source='portrait_picture',
+        processors=[
+            ResizeToFit(author_portrait_picture_thumb_size, author_portrait_picture_thumb_size),
+        ],
+        format='JPEG',
+        options={'quality': author_portrait_picture_jpeg_quality},
+    )
+
     promote = models.BooleanField(_('Promote'), default=True, help_text=_('Promote on the main page'))
 
     @property

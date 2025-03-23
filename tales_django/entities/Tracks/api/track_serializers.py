@@ -32,6 +32,7 @@ class TrackSerializer(serializers.HyperlinkedModelSerializer):
     preview_picture = serializers.SerializerMethodField('get_preview_picture')
 
     def get_preview_picture(self, obj):
+        # TODO: Use thumbnail/full images: preview_picture_thumb/preview_picture_full
         return obj.preview_picture.url
 
     rubric_ids = serializers.SerializerMethodField('get_rubric_ids')

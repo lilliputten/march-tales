@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "march-tales"
-version = "0.0.34"
-description = "March Tales django api and web frontend server"
+version = "0.0.35"
+description = "March Tales django rest api and web frontend server"
 authors = ["lilliputten <lilliputten@gmail.com>"]
 readme = "README.md"
 
@@ -45,6 +45,7 @@ django-markdownify = "^0.9.5"
 django-unfold = "^0.51.0"
 django-import-export = "^4.3.7"
 # django-filter = "^25.1"
+django-imagekit = "^5.0.0"
 
 [tool.poetry.group.dev.dependencies]
 blue = "^0.9.1"
