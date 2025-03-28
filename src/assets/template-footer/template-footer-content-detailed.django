@@ -38,8 +38,8 @@
       <li><a href="{% url 'index' %}">{% trans "Main page" %}</a></li>
       <li><a href="{% url 'tracks' %}">{% trans "Tracks" %}</a></li>
       <li><a href="/authors/">{% trans "Authors" %}</a></li>
-      <li><a href="/rubric/">{% trans "Rubrics" %}</a></li>
-      <li><a href="/tag/">{% trans "Tags" %}</a></li>
+      <li><a href="/rubrics/">{% trans "Rubrics" %}</a></li>
+      <li><a href="/tags/">{% trans "Tags" %}</a></li>
     </ul>
   </div>
   <div class="footer-group footer-group-links">
