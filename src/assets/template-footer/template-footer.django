@@ -23,30 +23,10 @@
   </div>
   <div class="container py-4">
     <div class="row align-items-center d-flex flex-md-row">
-      <div class="d-flex gap-3 justify-content-between align-items-center flex-column flex-md-row">
-        <div class="footer-cell footer-cell-side footer-cell-left footer-cell-socials text-center text-md-start py-2">
-          <ul class="list-inline footer-list mb-0 widget-social">
-            {% include 'assets/common-blocks/social-links/social-links.django' %}
-            </ul>
-        </div>
-        <div class="footer-cell footer-brand-cell text-center">
-          <a href="/" class="navbar-brand d-flex justify-content-center align-items-center gap-3 order-1 font-lobster">
-            <span class="rounded-circle-wrapper d-flex align-items-center">
-              {% static "images/march-cat/march-cat-sq-48.jpg" as imgpath %}
-              {% lqip_media_img_tag className="img-fluid rounded-circle lazy-load" url=imgpath thumb=imgpath|thumb_image_name %}
-            </span>
-            <span class="text">
-              {% trans 'Site title' %}
-            </span>
-          </a>
-        </div>
-        <div class="footer-cell footer-cell-side footer-cell-right footer-cell-menu text-md-end text-center py-2">
-          <ul class="_list-inline footer-list d-flex flex-wrap mb-0 small justify-content-md-end">
-            <li class="_list-inline-item nav-item"><a class="nav-link" href="{% url 'privacy-policy' %}">{% trans "Privacy Policy" %}</a></li>
-            <li class="_list-inline-item nav-item"><a class="nav-link" href="{% url 'terms' %}">{% trans "Terms Conditions" %}</a></li>
-          </ul>
-        </div>
-      </div>
+      {% include "./template-footer-content-detailed.django" %}
+      {% comment %}
+      {% include "./template-footer-content.django" %}
+      {% endcomment %}
     </div>
   </div>
   <div>

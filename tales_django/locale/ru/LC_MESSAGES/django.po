@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-28 04:20+0300\n"
+"POT-Creation-Date: 2025-03-28 06:00+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -103,6 +103,7 @@ msgid "Published at"
 msgstr "Дата публикации"
 
 #: .\src\assets\common-blocks\track-details\track-details.django:36
+#: .\src\assets\template-footer\template-footer-content-detailed.django:63
 #: .\src\assets\template-right-blocks\right-rubrics-list\right-rubrics-list.django:7
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:244
 #: .\tales_django\entities\Tracks\models\Rubric.py:13
@@ -114,6 +115,7 @@ msgid "Rubrics"
 msgstr "Разделы"
 
 #: .\src\assets\common-blocks\track-details\track-details.django:48
+#: .\src\assets\template-footer\template-footer-content-detailed.django:64
 #: .\src\assets\template-right-blocks\right-tags-list\right-tags-list.django:7
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:238
 #: .\tales_django\entities\Tracks\models\Tag.py:13
@@ -189,12 +191,14 @@ msgid "Logout"
 msgstr "Выйти"
 
 #: .\src\assets\page-menus\menu-main.django:47
+#: .\src\assets\template-footer\template-footer-content-detailed.django:73
 #: .\tales_django\templates\django_registration\registration_form.html:27
 #: .\tales_django\templates\registration\signup.html:30
 msgid "Log in"
 msgstr "Войти"
 
 #: .\src\assets\page-menus\menu-main.django:53
+#: .\src\assets\template-footer\template-footer-content-detailed.django:74
 #: .\tales_django\templates\django_registration\registration_form.html:12
 #: .\tales_django\templates\django_registration\registration_form.html:16
 #: .\tales_django\templates\django_registration\registration_form.html:26
@@ -209,7 +213,8 @@ msgstr "Регистрация"
 msgid "What’d You Like<br> To Listen Today?"
 msgstr "Что бы Вы хотели<br> послушать сегодня?"
 
-#: .\src\assets\template-footer\template-footer.django:39
+#: .\src\assets\template-footer\template-footer-content-detailed.django:42
+#: .\src\assets\template-footer\template-footer-content.django:18
 #: .\src\assets\template-header\template-header.django:15
 #: .\tales_django\templates\base-core.html.django:24
 #: .\tales_django\templates\base-core.html.django:39
@@ -224,7 +229,70 @@ msgstr "Что бы Вы хотели<br> послушать сегодня?"
 msgid "Site title"
 msgstr "Сказки Мартовского Кота"
 
-#: .\src\assets\template-footer\template-footer.django:45
+#: .\src\assets\template-footer\template-footer-content-detailed.django:52
+#: .\tales_django\templates\tales_django\application.html.django:9
+#: .\tales_django\templates\tales_django\application.html.django:16
+#: .\tales_django\templates\tales_django\application.html.django:20
+msgid "Mobile application"
+msgstr "Мобильное приложение"
+
+#: .\src\assets\template-footer\template-footer-content-detailed.django:53
+msgid "Developed by"
+msgstr "Разработано"
+
+#: .\src\assets\template-footer\template-footer-content-detailed.django:58
+msgid "Navigation"
+msgstr "Навигация"
+
+#: .\src\assets\template-footer\template-footer-content-detailed.django:60
+#: .\tales_django\templates\tales_django\about.html.django:15
+#: .\tales_django\templates\tales_django\application.html.django:15
+#: .\tales_django\templates\tales_django\author_details.html.django:35
+#: .\tales_django\templates\tales_django\author_index.html.django:19
+#: .\tales_django\templates\tales_django\cookies-agreement.html.django:15
+#: .\tales_django\templates\tales_django\favorites.html.django:32
+#: .\tales_django\templates\tales_django\index.html.django:25
+#: .\tales_django\templates\tales_django\rubric_details.html.django:20
+#: .\tales_django\templates\tales_django\rubric_index.html.django:19
+#: .\tales_django\templates\tales_django\tag_details.html.django:20
+#: .\tales_django\templates\tales_django\tag_index.html.django:19
+#: .\tales_django\templates\tales_django\track_details.html.django:37
+msgid "Main page"
+msgstr "Главная страница"
+
+#: .\src\assets\template-footer\template-footer-content-detailed.django:61
+#: .\tales_django\entities\Tracks\models\Track.py:36
+#: .\tales_django\entities\Users\admin\UserAdmin.py:49
+#: .\tales_django\settings.py:250
+#: .\tales_django\templates\tales_django\favorites.html.django:37
+#: .\tales_django\templates\tales_django\track_details.html.django:42
+msgid "Tracks"
+msgstr "Треки"
+
+#: .\src\assets\template-footer\template-footer-content-detailed.django:62
+#: .\src\assets\template-right-blocks\right-authors-list\right-authors-list.django:15
+#: .\tales_django\entities\Tracks\models\Author.py:23
+#: .\tales_django\settings.py:256
+#: .\tales_django\templates\tales_django\author_details.html.django:36
+#: .\tales_django\templates\tales_django\author_index.html.django:20
+msgid "Authors"
+msgstr "Авторы"
+
+#: .\src\assets\template-footer\template-footer-content-detailed.django:68
+msgid "Project"
+msgstr "Проект"
+
+#: .\src\assets\template-footer\template-footer-content-detailed.django:70
+#: .\src\assets\template-right-blocks\right-about\right-about.django:16
+#: .\tales_django\templates\tales_django\about.html.django:9
+#: .\tales_django\templates\tales_django\about.html.django:16
+#: .\tales_django\templates\tales_django\about.html.django:20
+#: .\tales_django\templates\tales_django\cookies-agreement.html.django:16
+msgid "About the project"
+msgstr "О проекте"
+
+#: .\src\assets\template-footer\template-footer-content-detailed.django:71
+#: .\src\assets\template-footer\template-footer-content.django:24
 #: .\tales_django\templates\tales_django\privacy-policy.html.django:8
 #: .\tales_django\templates\tales_django\privacy-policy.html.django:14
 #: .\tales_django\templates\tales_django\terms.html.django:111
@@ -232,7 +300,8 @@ msgstr "Сказки Мартовского Кота"
 msgid "Privacy Policy"
 msgstr "Политика конфиденциальности"
 
-#: .\src\assets\template-footer\template-footer.django:46
+#: .\src\assets\template-footer\template-footer-content-detailed.django:72
+#: .\src\assets\template-footer\template-footer-content.django:25
 msgid "Terms Conditions"
 msgstr "Пользовательское соглашение"
 
@@ -246,22 +315,6 @@ msgstr ""
 "Я с большим удовольствием занимаюсь озвучиванием сказок. Это мое хобби, "
 "которое позволяет делиться волшебными историями с теми, кто любит мечтать и "
 "погружаться в мир фантазии."
-
-#: .\src\assets\template-right-blocks\right-about\right-about.django:16
-#: .\tales_django\templates\tales_django\about.html.django:9
-#: .\tales_django\templates\tales_django\about.html.django:16
-#: .\tales_django\templates\tales_django\about.html.django:20
-#: .\tales_django\templates\tales_django\cookies-agreement.html.django:16
-msgid "About the project"
-msgstr "О проекте"
-
-#: .\src\assets\template-right-blocks\right-authors-list\right-authors-list.django:15
-#: .\tales_django\entities\Tracks\models\Author.py:23
-#: .\tales_django\settings.py:256
-#: .\tales_django\templates\tales_django\author_details.html.django:36
-#: .\tales_django\templates\tales_django\author_index.html.django:20
-msgid "Authors"
-msgstr "Авторы"
 
 #: .\src\assets\template-right-blocks\right-favorites-list\right-favorites-list-wrapper.django:6
 msgid "Show all favorite tracks"
@@ -534,14 +587,6 @@ msgstr "Тег"
 #: .\tales_django\entities\Tracks\models\Track.py:35
 msgid "Track"
 msgstr "Трек"
-
-#: .\tales_django\entities\Tracks\models\Track.py:36
-#: .\tales_django\entities\Users\admin\UserAdmin.py:49
-#: .\tales_django\settings.py:250
-#: .\tales_django\templates\tales_django\favorites.html.django:37
-#: .\tales_django\templates\tales_django\track_details.html.django:42
-msgid "Tracks"
-msgstr "Треки"
 
 #: .\tales_django\entities\Tracks\models\Track.py:46
 msgid "The track title text, required."
@@ -1101,21 +1146,6 @@ msgstr "Сбросить мой пароль"
 msgid "Password reset for"
 msgstr "Пароль сброшен для"
 
-#: .\tales_django\templates\tales_django\about.html.django:15
-#: .\tales_django\templates\tales_django\application.html.django:15
-#: .\tales_django\templates\tales_django\author_details.html.django:35
-#: .\tales_django\templates\tales_django\author_index.html.django:19
-#: .\tales_django\templates\tales_django\cookies-agreement.html.django:15
-#: .\tales_django\templates\tales_django\favorites.html.django:32
-#: .\tales_django\templates\tales_django\index.html.django:25
-#: .\tales_django\templates\tales_django\rubric_details.html.django:20
-#: .\tales_django\templates\tales_django\rubric_index.html.django:19
-#: .\tales_django\templates\tales_django\tag_details.html.django:20
-#: .\tales_django\templates\tales_django\tag_index.html.django:19
-#: .\tales_django\templates\tales_django\track_details.html.django:37
-msgid "Main page"
-msgstr "Главная страница"
-
 #: .\tales_django\templates\tales_django\about.html.django:33
 msgid "Versions"
 msgstr "Версии"
@@ -1128,64 +1158,57 @@ msgstr "Версия сервера"
 msgid "Mobile applicaiton version"
 msgstr "Версия мобильного приложения"
 
-#: .\tales_django\templates\tales_django\about.html.django:42
+#: .\tales_django\templates\tales_django\application.html.django:25
+#: .\tales_django\templates\tales_django\application.html.django:34
+msgid "Tracks list."
+msgstr "Список треков."
+
+#: .\tales_django\templates\tales_django\application.html.django:26
+msgid "Author screen."
+msgstr "Экран авторов."
+
+#: .\tales_django\templates\tales_django\application.html.django:27
+msgid "Author tracks."
+msgstr "Треки конкретного автора."
+
+#: .\tales_django\templates\tales_django\application.html.django:28
+msgid "Authors list."
+msgstr "Список авторов."
+
+#: .\tales_django\templates\tales_django\application.html.django:29
+msgid "Notification pane player."
+msgstr "Плеер в панели уведомлений."
+
+#: .\tales_django\templates\tales_django\application.html.django:30
+msgid "Rubric info."
+msgstr "Информация о разделе."
+
+#: .\tales_django\templates\tales_django\application.html.django:31
+msgid "Settings page."
+msgstr "Страница настроек."
+
+#: .\tales_django\templates\tales_django\application.html.django:32
+msgid "Tag info."
+msgstr "Информация о теге."
+
+#: .\tales_django\templates\tales_django\application.html.django:33
+msgid "Track details."
+msgstr "Данные трека."
+
+#: .\tales_django\templates\tales_django\application.html.django:35
+msgid "Tracks list with a player."
+msgstr "Список композиций с плеером."
+
+#: .\tales_django\templates\tales_django\application.html.django:36
+msgid "Tracks list without panels during scroll."
+msgstr "Список треков без панелей при прокрутке."
+
 #: .\tales_django\templates\tales_django\author_details.html.django:49
 #: .\tales_django\templates\tales_django\cookies-agreement.html.django:33
 #: .\tales_django\templates\tales_django\rubric_details.html.django:39
 #: .\tales_django\templates\tales_django\tag_details.html.django:35
 msgid "Tracks List"
 msgstr "Список треков"
-
-#: .\tales_django\templates\tales_django\application.html.django:9
-#: .\tales_django\templates\tales_django\application.html.django:16
-#: .\tales_django\templates\tales_django\application.html.django:20
-msgid "Mobile application"
-msgstr "Мобильное приложение"
-
-#: .\tales_django\templates\tales_django\application.html.django:32
-#: .\tales_django\templates\tales_django\application.html.django:41
-msgid "Tracks list."
-msgstr "Список треков."
-
-#: .\tales_django\templates\tales_django\application.html.django:33
-msgid "Author screen."
-msgstr "Экран авторов."
-
-#: .\tales_django\templates\tales_django\application.html.django:34
-msgid "Author tracks."
-msgstr "Треки конкретного автора."
-
-#: .\tales_django\templates\tales_django\application.html.django:35
-msgid "Authors list."
-msgstr "Список авторов."
-
-#: .\tales_django\templates\tales_django\application.html.django:36
-msgid "Notification pane player."
-msgstr "Плеер в панели уведомлений."
-
-#: .\tales_django\templates\tales_django\application.html.django:37
-msgid "Rubric info."
-msgstr "Информация о разделе."
-
-#: .\tales_django\templates\tales_django\application.html.django:38
-msgid "Settings page."
-msgstr "Страница настроек."
-
-#: .\tales_django\templates\tales_django\application.html.django:39
-msgid "Tag info."
-msgstr "Информация о теге."
-
-#: .\tales_django\templates\tales_django\application.html.django:40
-msgid "Track details."
-msgstr "Данные трека."
-
-#: .\tales_django\templates\tales_django\application.html.django:42
-msgid "Tracks list with a player."
-msgstr "Список композиций с плеером."
-
-#: .\tales_django\templates\tales_django\application.html.django:43
-msgid "Tracks list without panels during scroll."
-msgstr "Список треков без панелей при прокрутке."
 
 #: .\tales_django\templates\tales_django\author_index.html.django:8
 #: .\tales_django\templates\tales_django\author_index.html.django:24

@@ -1,0 +1,64 @@
+{# ex: set ft=htmldjango : #}
+{% load static %}
+{% load i18n %}
+
+<div class="template-footer-content d-flex flex-wrap gap-3 justify-content-between">
+  <div class="footer-group footer-group-logo">
+    <div class="footer-cell footer-brand-cell text-center">
+      <a href="/" class="navbar-brand d-flex justify-content-center align-items-center gap-3 order-1 font-lobster">
+        <span class="rounded-circle-wrapper d-flex align-items-center">
+          {% static "images/march-cat/march-cat-sq-48.jpg" as imgpath %}
+          {% lqip_media_img_tag className="img-fluid rounded-circle lazy-load" url=imgpath thumb=imgpath|thumb_image_name %}
+        </span>
+        <span class="text">
+          {% trans 'Site title' %}
+        </span>
+      </a>
+    </div>
+    <div class="footer-cell footer-cell-side footer-cell-left footer-cell-socials text-center text-md-start mt-2 py-2">
+      <ul class="list-inline footer-list mb-0 widget-social justify-content-start">
+        {% include 'assets/common-blocks/social-links/social-links.django' %}
+        </ul>
+    </div>
+    <ul class="mt-2">
+      <li><a href="{% url 'application' %}">{% trans "Mobile application" %}</a></li>
+      <li>
+        {% trans "Developed by" %}
+        <a class="external" target="blank" href="https://lilliputten.com/projects/2025/march-tales/">
+          lilliputten.com
+          <span class="icon icon-external bi bi-box-arrow-up-right"></span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="footer-group footer-group-links">
+    <h6>{% trans "Navigation" %}</h6>
+    <ul>
+      <li><a href="{% url 'index' %}">{% trans "Main page" %}</a></li>
+      <li><a href="{% url 'tracks' %}">{% trans "Tracks" %}</a></li>
+      <li><a href="/authors/">{% trans "Authors" %}</a></li>
+      <li><a href="/rubric/">{% trans "Rubrics" %}</a></li>
+      <li><a href="/tag/">{% trans "Tags" %}</a></li>
+    </ul>
+  </div>
+  <div class="footer-group footer-group-links">
+    <h6>{% trans "Project" %}</h6>
+    <ul>
+      <li><a href="{% url 'about' %}">{% trans "About the project" %}</a></li>
+      <li><a href="{% url 'privacy-policy' %}">{% trans "Privacy Policy" %}</a></li>
+      <li><a href="{% url 'terms' %}">{% trans "Terms Conditions" %}</a></li>
+      {% if user.is_authenticated %}
+        <li><a href="{% url 'profile' %}">{% trans 'Profile' %}</a></li>
+        {% if user.is_staff %}
+          <li><a target="_blank" href="{% url 'unfold-admin:tales_django_track_changelist' %}">{% trans 'Admin panel' %}</a></li>
+        {% endif %}
+        <li><a href="{% url 'logout_user' %}">{% trans 'Logout' %}</a></li>
+      {% else %}
+        <li><a href="{% url 'account_login' %}">{% trans "Log in" %}</a></li>
+        <li><a href="{% url 'account_signup' %}">{% trans "Sign up" %}</a></li>
+      {% endif %}
+    </ul>
+  </div>
+</div>
+
