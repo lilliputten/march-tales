@@ -9,16 +9,7 @@
       <a class="navbar-brand d-flex align-items-center gap-3 order-1 font-lobster" href="/">
         <span class="rounded-circle-wrapper d-flex align-items-center">
         {% static "images/march-cat/march-cat-sq-48.jpg" as imgpath %}
-        {% static "images/march-cat/march-cat-sq-48-sm.jpg" as thumbpath %}
-        {% lqip_media_img_tag className="img-fluid rounded-circle lazy-load" url=imgpath thumb=thumbpath %}
-        {% comment %}
-          <img
-            class="img-fluid rounded-circle"
-            width="48"
-            src="{% static 'images/march-cat/march-cat-sq-48.jpg' %}"
-            alt="{% trans 'Site title' %}"
-          />
-        {% endcomment %}
+        {% lqip_media_img_tag className="img-fluid rounded-circle lazy-load" url=imgpath thumb=imgpath|thumb_image_name %}
         </span>
         <span class="text">
           {% trans 'Site title' %}

@@ -1,6 +1,6 @@
 /**
  * @module styles.scss
- * @changed 2025.02.23, 21:54
+ * @changed 2025.03.28, 03:33
  */
 
 @import 'shared/variables-expose';
@@ -46,5 +46,7 @@
 @import 'template-banner/template-banner';
 @import 'template-right-blocks/right-mobile-promo/right-mobile-promo';
 @import 'template-right-blocks/right-about/right-about';
+
+@import 'carousel/carousels-styles';
 
 // @import 'membership-splash/membership-splash'; // TODO: To remove!

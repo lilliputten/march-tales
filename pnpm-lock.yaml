@@ -21,14 +21,17 @@ importers:
         specifier: ^3.0.9
         version: 3.0.9
       '@types/jquery':
-        specifier: ^2.0.68
-        version: 2.0.68
+        specifier: ^3.5.1
+        version: 3.5.1
       '@types/jquery-mask-plugin':
         specifier: ^1.14.6
         version: 1.14.6
       '@types/node':
         specifier: ^22.7.4
         version: 22.10.2
+      '@types/slick-carousel':
+        specifier: ^1.6.40
+        version: 1.6.40
       '@typescript-eslint/eslint-plugin':
         specifier: ^8.8.0
         version: 8.18.2(@typescript-eslint/parser@8.18.2(eslint@8.57.1)(typescript@5.7.2))(eslint@8.57.1)(typescript@5.7.2)
@@ -989,6 +992,9 @@ packages:
   '@types/jquery@2.0.68':
     resolution: {integrity: sha512-9E8HinL4D/VgWf6tci0/NWlkw8i8e5pL00yVmBpFaVmveSwMq3lEQcrRJVbu62Fprm3nBTHXkqkEByjGoQCpTA==}
 
+  '@types/jquery@3.5.1':
+    resolution: {integrity: sha512-Tyctjh56U7eX2b9udu3wG853ASYP0uagChJcQJXLUXEU6C/JiW5qt5dl8ao01VRj1i5pgXPAf8f1mq4+FDLRQg==}
+
   '@types/json-schema@7.0.15':
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
 
@@ -1003,6 +1009,12 @@ packages:
 
   '@types/normalize-package-data@2.4.4':
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
+
+  '@types/sizzle@2.3.9':
+    resolution: {integrity: sha512-xzLEyKB50yqCUPUJkIsrVvoWNfFUbIZI+RspLWt8u+tIW/BetMBZtgV2LY/2o+tYH8dRvQ+eoPf3NdhQCcLE2w==}
+
+  '@types/slick-carousel@1.6.40':
+    resolution: {integrity: sha512-r56PBGVLYHmZvFSV+UC4dYbnpEu3LGzgJiSSixBx5ME+IUhsyho1XP7gKSG0R9tiYSx54ftq/g+miLQTbA10Dw==}
 
   '@types/vinyl@2.0.12':
     resolution: {integrity: sha512-Sr2fYMBUVGYq8kj3UthXFAu5UN6ZW+rYr4NACjZQJvHvj+c8lYv0CahmZ2P/r7iUkN44gGUBwqxZkrKXYPb7cw==}
@@ -4948,6 +4960,10 @@ snapshots:
 
   '@types/jquery@2.0.68': {}
 
+  '@types/jquery@3.5.1':
+    dependencies:
+      '@types/sizzle': 2.3.9
+
   '@types/json-schema@7.0.15': {}
 
   '@types/json5@0.0.29': {}
@@ -4959,6 +4975,12 @@ snapshots:
       undici-types: 6.20.0
 
   '@types/normalize-package-data@2.4.4': {}
+
+  '@types/sizzle@2.3.9': {}
+
+  '@types/slick-carousel@1.6.40':
+    dependencies:
+      '@types/jquery': 2.0.68
 
   '@types/vinyl@2.0.12':
     dependencies:

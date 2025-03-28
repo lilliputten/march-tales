@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-23 05:54+0300\n"
+"POT-Creation-Date: 2025-03-28 04:20+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,37 +37,37 @@ msgstr "Треки"
 msgid "Show all authors"
 msgstr "Все авторы"
 
-#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:85
+#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:87
 #: .\src\assets\common-blocks\medium-tracks-list\medium-tracks-list-item.django:46
 #: .\src\assets\entities\FloatingPlayer\floating-player.django:28
 msgid "Add to favorites"
 msgstr "В избранное"
 
-#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:86
+#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:88
 #: .\src\assets\common-blocks\medium-tracks-list\medium-tracks-list-item.django:47
 #: .\src\assets\entities\FloatingPlayer\floating-player.django:29
 msgid "Remove from favorites"
 msgstr "Удалить из избранного"
 
-#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:95
+#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:97
 #: .\src\assets\common-blocks\medium-tracks-list\medium-tracks-list-item.django:38
 #: .\src\assets\entities\FloatingPlayer\floating-player.django:41
 msgid "Loading"
 msgstr "Загрузка"
 
-#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:96
+#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:98
 #: .\src\assets\common-blocks\medium-tracks-list\medium-tracks-list-item.django:39
 #: .\src\assets\entities\FloatingPlayer\floating-player.django:42
 msgid "Resume"
 msgstr "Продолжить"
 
-#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:97
+#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:99
 #: .\src\assets\common-blocks\medium-tracks-list\medium-tracks-list-item.django:40
 #: .\src\assets\entities\FloatingPlayer\floating-player.django:43
 msgid "Play"
 msgstr "Слушать"
 
-#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:98
+#: .\src\assets\common-blocks\big-tracks-list\big-tracks-list-item.django:100
 #: .\src\assets\common-blocks\medium-tracks-list\medium-tracks-list-item.django:41
 #: .\src\assets\entities\FloatingPlayer\floating-player.django:44
 msgid "Pause"
@@ -88,7 +88,7 @@ msgid "Track cover image"
 msgstr "Обложка трека"
 
 #: .\src\assets\common-blocks\track-details\track-details.django:23
-#: .\tales_django\entities\Tracks\models\Track.py:145
+#: .\tales_django\entities\Tracks\models\Track.py:141
 msgid "Played count"
 msgstr "Счётчик прослушиваний"
 
@@ -98,7 +98,7 @@ msgid "Duration"
 msgstr "Длительность"
 
 #: .\src\assets\common-blocks\track-details\track-details.django:31
-#: .\tales_django\entities\Tracks\models\Track.py:154
+#: .\tales_django\entities\Tracks\models\Track.py:150
 msgid "Published at"
 msgstr "Дата публикации"
 
@@ -106,7 +106,7 @@ msgstr "Дата публикации"
 #: .\src\assets\template-right-blocks\right-rubrics-list\right-rubrics-list.django:7
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:244
 #: .\tales_django\entities\Tracks\models\Rubric.py:13
-#: .\tales_django\entities\Tracks\models\Track.py:83
+#: .\tales_django\entities\Tracks\models\Track.py:79
 #: .\tales_django\settings.py:261
 #: .\tales_django\templates\tales_django\rubric_details.html.django:21
 #: .\tales_django\templates\tales_django\rubric_index.html.django:20
@@ -117,7 +117,7 @@ msgstr "Разделы"
 #: .\src\assets\template-right-blocks\right-tags-list\right-tags-list.django:7
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:238
 #: .\tales_django\entities\Tracks\models\Tag.py:13
-#: .\tales_django\entities\Tracks\models\Track.py:80
+#: .\tales_django\entities\Tracks\models\Track.py:76
 #: .\tales_django\settings.py:266
 #: .\tales_django\templates\tales_django\tag_details.html.django:21
 #: .\tales_django\templates\tales_django\tag_index.html.django:20
@@ -209,10 +209,8 @@ msgstr "Регистрация"
 msgid "What’d You Like<br> To Listen Today?"
 msgstr "Что бы Вы хотели<br> послушать сегодня?"
 
-#: .\src\assets\template-footer\template-footer.django:56
-#: .\src\assets\template-footer\template-footer.django:59
+#: .\src\assets\template-footer\template-footer.django:39
 #: .\src\assets\template-header\template-header.django:15
-#: .\src\assets\template-header\template-header.django:18
 #: .\tales_django\templates\base-core.html.django:24
 #: .\tales_django\templates\base-core.html.django:39
 #: .\tales_django\templates\tales_django\author_details.html.django:17
@@ -226,7 +224,7 @@ msgstr "Что бы Вы хотели<br> послушать сегодня?"
 msgid "Site title"
 msgstr "Сказки Мартовского Кота"
 
-#: .\src\assets\template-footer\template-footer.django:65
+#: .\src\assets\template-footer\template-footer.django:45
 #: .\tales_django\templates\tales_django\privacy-policy.html.django:8
 #: .\tales_django\templates\tales_django\privacy-policy.html.django:14
 #: .\tales_django\templates\tales_django\terms.html.django:111
@@ -234,26 +232,22 @@ msgstr "Сказки Мартовского Кота"
 msgid "Privacy Policy"
 msgstr "Политика конфиденциальности"
 
-#: .\src\assets\template-footer\template-footer.django:66
+#: .\src\assets\template-footer\template-footer.django:46
 msgid "Terms Conditions"
 msgstr "Пользовательское соглашение"
 
-#: .\src\assets\template-right-blocks\right-about\right-about.django:7
+#: .\src\assets\template-right-blocks\right-about\right-about.django:9
 msgid "Hi, I'm March Cat!"
 msgstr "Привет, я Мартовский Кот!"
 
-#: .\src\assets\template-right-blocks\right-about\right-about.django:8
-msgid "The March Cat"
-msgstr "Мартовский Кот"
-
-#: .\src\assets\template-right-blocks\right-about\right-about.django:9
+#: .\src\assets\template-right-blocks\right-about\right-about.django:12
 msgid "Site description block."
 msgstr ""
 "Я с большим удовольствием занимаюсь озвучиванием сказок. Это мое хобби, "
 "которое позволяет делиться волшебными историями с теми, кто любит мечтать и "
 "погружаться в мир фантазии."
 
-#: .\src\assets\template-right-blocks\right-about\right-about.django:13
+#: .\src\assets\template-right-blocks\right-about\right-about.django:16
 #: .\tales_django\templates\tales_django\about.html.django:9
 #: .\tales_django\templates\tales_django\about.html.django:16
 #: .\tales_django\templates\tales_django\about.html.django:20
@@ -262,7 +256,7 @@ msgid "About the project"
 msgstr "О проекте"
 
 #: .\src\assets\template-right-blocks\right-authors-list\right-authors-list.django:15
-#: .\tales_django\entities\Tracks\models\Author.py:15
+#: .\tales_django\entities\Tracks\models\Author.py:23
 #: .\tales_django\settings.py:256
 #: .\tales_django\templates\tales_django\author_details.html.django:36
 #: .\tales_django\templates\tales_django\author_index.html.django:20
@@ -289,15 +283,16 @@ msgstr "Подробно о статусе члена сообщества и п
 msgid "Obtain membership"
 msgstr "Стать членом сообщества"
 
-#: .\src\assets\template-right-blocks\right-mobile-promo\right-mobile-promo.django:9
+#: .\src\assets\template-right-blocks\right-mobile-promo\right-mobile-promo.django:10
 msgid "Try the mobile app!"
 msgstr "Слушай на мобильном!"
 
-#: .\src\assets\template-right-blocks\right-mobile-promo\right-mobile-promo.django:13
+#: .\src\assets\template-right-blocks\right-mobile-promo\right-mobile-promo.django:14
+#: .\tales_django\templates\tales_django\application.html.django:51
 msgid "Download for Android"
 msgstr "Скачать для Android"
 
-#: .\src\assets\template-right-blocks\right-mobile-promo\right-mobile-promo.django:18
+#: .\src\assets\template-right-blocks\right-mobile-promo\right-mobile-promo.django:19
 msgid "Actual version is:"
 msgstr "Актуальная версия"
 
@@ -354,7 +349,7 @@ msgstr "Ошибка проверки токена CSRF"
 msgid "Expected POST or GET request"
 msgstr "Ожидается POST или GET запрос"
 
-#: .\tales_django\entities\App\app_urlpatterns.py:40
+#: .\tales_django\entities\App\app_urlpatterns.py:41
 msgid "Site administration"
 msgstr "Администрирование сайта"
 
@@ -370,10 +365,10 @@ msgstr "членство"
 #: .\tales_django\entities\Tracks\admin\RubricAdmin.py:19
 #: .\tales_django\entities\Tracks\admin\TagAdmin.py:18
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:69
-#: .\tales_django\entities\Tracks\models\Author.py:30
+#: .\tales_django\entities\Tracks\models\Author.py:56
 #: .\tales_django\entities\Tracks\models\Rubric.py:26
 #: .\tales_django\entities\Tracks\models\Tag.py:26
-#: .\tales_django\entities\Tracks\models\Track.py:134
+#: .\tales_django\entities\Tracks\models\Track.py:130
 msgid "Promote"
 msgstr "Продвигать"
 
@@ -385,7 +380,7 @@ msgid "No promote"
 msgstr "Не продвигать"
 
 #: .\tales_django\entities\Tracks\admin\AuthorAdmin.py:63
-#: .\tales_django\entities\Tracks\models\Author.py:18
+#: .\tales_django\entities\Tracks\models\Author.py:26
 msgid "Name"
 msgstr "Имя"
 
@@ -405,7 +400,7 @@ msgstr "треки"
 
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:38
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:223
-#: .\tales_django\entities\Tracks\models\Track.py:122
+#: .\tales_django\entities\Tracks\models\Track.py:118
 msgid "Published"
 msgstr "Опубликовано"
 
@@ -433,13 +428,13 @@ msgstr "Пометить для тестов"
 
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:87
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:271
-#: .\tales_django\entities\Tracks\models\Track.py:44
+#: .\tales_django\entities\Tracks\models\Track.py:40
 msgid "Title"
 msgstr "Название"
 
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:96
-#: .\tales_django\entities\Tracks\models\Author.py:26
-#: .\tales_django\entities\Tracks\models\Track.py:56
+#: .\tales_django\entities\Tracks\models\Author.py:34
+#: .\tales_django\entities\Tracks\models\Track.py:52
 msgid "Description"
 msgstr "Описание"
 
@@ -452,7 +447,7 @@ msgid "Attributes"
 msgstr "Атрибуты"
 
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:125
-#: .\tales_django\entities\Tracks\models\Track.py:128
+#: .\tales_django\entities\Tracks\models\Track.py:124
 msgid "Status"
 msgstr "Статус"
 
@@ -503,23 +498,23 @@ msgstr "Неверный формат списка индексов треков
 msgid "User in not authenticated"
 msgstr "Пользователь не авторизован"
 
-#: .\tales_django\entities\Tracks\models\Author.py:14
-#: .\tales_django\entities\Tracks\models\Track.py:74
+#: .\tales_django\entities\Tracks\models\Author.py:22
+#: .\tales_django\entities\Tracks\models\Track.py:70
 msgid "Author"
 msgstr "Автор"
 
-#: .\tales_django\entities\Tracks\models\Author.py:22
+#: .\tales_django\entities\Tracks\models\Author.py:30
 msgid "Short description"
 msgstr "Краткое описание"
 
-#: .\tales_django\entities\Tracks\models\Author.py:29
+#: .\tales_django\entities\Tracks\models\Author.py:38
 msgid "Portrait picture"
 msgstr "Портрет"
 
-#: .\tales_django\entities\Tracks\models\Author.py:30
+#: .\tales_django\entities\Tracks\models\Author.py:56
 #: .\tales_django\entities\Tracks\models\Rubric.py:26
 #: .\tales_django\entities\Tracks\models\Tag.py:26
-#: .\tales_django\entities\Tracks\models\Track.py:134
+#: .\tales_django\entities\Tracks\models\Track.py:130
 msgid "Promote on the main page"
 msgstr "Продвигать на главной странице"
 
@@ -536,11 +531,11 @@ msgstr "Текст"
 msgid "Tag"
 msgstr "Тег"
 
-#: .\tales_django\entities\Tracks\models\Track.py:39
+#: .\tales_django\entities\Tracks\models\Track.py:35
 msgid "Track"
 msgstr "Трек"
 
-#: .\tales_django\entities\Tracks\models\Track.py:40
+#: .\tales_django\entities\Tracks\models\Track.py:36
 #: .\tales_django\entities\Users\admin\UserAdmin.py:49
 #: .\tales_django\settings.py:250
 #: .\tales_django\templates\tales_django\favorites.html.django:37
@@ -548,67 +543,67 @@ msgstr "Трек"
 msgid "Tracks"
 msgstr "Треки"
 
-#: .\tales_django\entities\Tracks\models\Track.py:50
+#: .\tales_django\entities\Tracks\models\Track.py:46
 msgid "The track title text, required."
 msgstr "Обязательное название трека."
 
-#: .\tales_django\entities\Tracks\models\Track.py:60
+#: .\tales_django\entities\Tracks\models\Track.py:56
 msgid "Optional description"
 msgstr "Опциональное описание"
 
-#: .\tales_django\entities\Tracks\models\Track.py:65
+#: .\tales_django\entities\Tracks\models\Track.py:61
 msgid "Youtube link"
 msgstr "Ссылка на YouTube"
 
-#: .\tales_django\entities\Tracks\models\Track.py:69
+#: .\tales_django\entities\Tracks\models\Track.py:65
 msgid "YouTube video link url"
 msgstr "Ссылка на ролик в YouTube"
 
-#: .\tales_django\entities\Tracks\models\Track.py:92
+#: .\tales_django\entities\Tracks\models\Track.py:88
 msgid "Audio file"
 msgstr "Аудио файл"
 
-#: .\tales_django\entities\Tracks\models\Track.py:101
+#: .\tales_django\entities\Tracks\models\Track.py:97
 msgid "Preview picture"
 msgstr "Изображение предпросмотра"
 
-#: .\tales_django\entities\Tracks\models\Track.py:123
+#: .\tales_django\entities\Tracks\models\Track.py:119
 msgid "Hidden"
 msgstr "Скрыто"
 
-#: .\tales_django\entities\Tracks\models\Track.py:124
+#: .\tales_django\entities\Tracks\models\Track.py:120
 msgid "Test"
 msgstr "Проверка"
 
-#: .\tales_django\entities\Tracks\models\Track.py:131
+#: .\tales_django\entities\Tracks\models\Track.py:127
 msgid "Only published tracks will be shown"
 msgstr "Будут показаны только опубликованные треки"
 
-#: .\tales_django\entities\Tracks\models\Track.py:137
+#: .\tales_django\entities\Tracks\models\Track.py:133
 msgid "For members only"
 msgstr "Только для членов"
 
-#: .\tales_django\entities\Tracks\models\Track.py:139
+#: .\tales_django\entities\Tracks\models\Track.py:135
 msgid "Show only for privileged members"
 msgstr "Показывать только для привилегированных пользователей"
 
-#: .\tales_django\entities\Tracks\models\Track.py:149
+#: .\tales_django\entities\Tracks\models\Track.py:145
 msgid "Duration (seconds)"
 msgstr "Длительность (сек)"
 
-#: .\tales_django\entities\Tracks\models\Track.py:150
+#: .\tales_django\entities\Tracks\models\Track.py:146
 msgid "File size (bytes)"
 msgstr "Размер файла (байты)"
 
-#: .\tales_django\entities\Tracks\models\Track.py:155
+#: .\tales_django\entities\Tracks\models\Track.py:151
 msgid "Updated at"
 msgstr "Дата обновления"
 
-#: .\tales_django\entities\Tracks\models\Track.py:160
+#: .\tales_django\entities\Tracks\models\Track.py:156
 msgid "Published by"
 msgstr "Опубликовано пользователем"
 
-#: .\tales_django\entities\Tracks\models\Track.py:166
+#: .\tales_django\entities\Tracks\models\Track.py:162
 msgid "Updated by"
 msgstr "Обновлено пользователем"
 
@@ -838,31 +833,31 @@ msgstr "Авторское чтение классических сказок и
 msgid "Site keywords"
 msgstr "Мартовский Кот, Сказки, Истории, Чтение, mp3"
 
-#: .\tales_django\templates\base-core.html.django:122
+#: .\tales_django\templates\base-core.html.django:128
 msgid "Error loading audio file"
 msgstr "Ошибка при загрузке аудиофайла"
 
-#: .\tales_django\templates\base-core.html.django:123
+#: .\tales_django\templates\base-core.html.django:129
 msgid "No audio node found"
 msgstr "Страница не найдена"
 
-#: .\tales_django\templates\base-core.html.django:124
+#: .\tales_django\templates\base-core.html.django:130
 msgid "No audio source node found"
 msgstr "Узел источника звука не найден"
 
-#: .\tales_django\templates\base-core.html.django:125
+#: .\tales_django\templates\base-core.html.django:131
 msgid "Fetch error"
 msgstr "Ошибка получения данных"
 
-#: .\tales_django\templates\base-core.html.django:126
+#: .\tales_django\templates\base-core.html.django:132
 msgid "Failed api request"
 msgstr "Ошибка запроса данных с сервера"
 
-#: .\tales_django\templates\base-core.html.django:127
+#: .\tales_django\templates\base-core.html.django:133
 msgid "The track has been successfully added to favorites"
 msgstr "Трек был успешно добавлен в избранное"
 
-#: .\tales_django\templates\base-core.html.django:128
+#: .\tales_django\templates\base-core.html.django:134
 msgid "The track has been successfully removed from favorites"
 msgstr "Трек был успешно удален из избранного"
 
@@ -1107,6 +1102,7 @@ msgid "Password reset for"
 msgstr "Пароль сброшен для"
 
 #: .\tales_django\templates\tales_django\about.html.django:15
+#: .\tales_django\templates\tales_django\application.html.django:15
 #: .\tales_django\templates\tales_django\author_details.html.django:35
 #: .\tales_django\templates\tales_django\author_index.html.django:19
 #: .\tales_django\templates\tales_django\cookies-agreement.html.django:15
@@ -1139,6 +1135,57 @@ msgstr "Версия мобильного приложения"
 #: .\tales_django\templates\tales_django\tag_details.html.django:35
 msgid "Tracks List"
 msgstr "Список треков"
+
+#: .\tales_django\templates\tales_django\application.html.django:9
+#: .\tales_django\templates\tales_django\application.html.django:16
+#: .\tales_django\templates\tales_django\application.html.django:20
+msgid "Mobile application"
+msgstr "Мобильное приложение"
+
+#: .\tales_django\templates\tales_django\application.html.django:32
+#: .\tales_django\templates\tales_django\application.html.django:41
+msgid "Tracks list."
+msgstr "Список треков."
+
+#: .\tales_django\templates\tales_django\application.html.django:33
+msgid "Author screen."
+msgstr "Экран авторов."
+
+#: .\tales_django\templates\tales_django\application.html.django:34
+msgid "Author tracks."
+msgstr "Треки конкретного автора."
+
+#: .\tales_django\templates\tales_django\application.html.django:35
+msgid "Authors list."
+msgstr "Список авторов."
+
+#: .\tales_django\templates\tales_django\application.html.django:36
+msgid "Notification pane player."
+msgstr "Плеер в панели уведомлений."
+
+#: .\tales_django\templates\tales_django\application.html.django:37
+msgid "Rubric info."
+msgstr "Информация о разделе."
+
+#: .\tales_django\templates\tales_django\application.html.django:38
+msgid "Settings page."
+msgstr "Страница настроек."
+
+#: .\tales_django\templates\tales_django\application.html.django:39
+msgid "Tag info."
+msgstr "Информация о теге."
+
+#: .\tales_django\templates\tales_django\application.html.django:40
+msgid "Track details."
+msgstr "Данные трека."
+
+#: .\tales_django\templates\tales_django\application.html.django:42
+msgid "Tracks list with a player."
+msgstr "Список композиций с плеером."
+
+#: .\tales_django\templates\tales_django\application.html.django:43
+msgid "Tracks list without panels during scroll."
+msgstr "Список треков без панелей при прокрутке."
 
 #: .\tales_django\templates\tales_django\author_index.html.django:8
 #: .\tales_django\templates\tales_django\author_index.html.django:24
@@ -1182,6 +1229,9 @@ msgstr "Список тегов"
 #: .\tales_django\templates\tales_django\terms.html.django:14
 msgid "Terms and conditions"
 msgstr "Пользовательское соглашение"
+
+#~ msgid "The March Cat"
+#~ msgstr "Мартовский Кот"
 
 #~ msgid "Версии"
 #~ msgstr "Versions"

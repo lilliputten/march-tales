@@ -4,6 +4,7 @@ from .root_views import (
     empty_demo,
 )
 from .about_view import about_view
+from .application_view import application_view
 from .cookies_agreement_view import cookies_agreement_view
 from .privacy_policy_view import privacy_policy_view
 from .terms_view import terms_view
@@ -19,6 +20,7 @@ __all__ = [
     'components_demo',
     'empty_demo',
     'about_view',
+    'application_view',
     'cookies_agreement_view',
     'privacy_policy_view',
     'terms_view',

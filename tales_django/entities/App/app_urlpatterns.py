@@ -24,6 +24,7 @@ from .api import api_urlpatterns
 from .views import (
     index_view,
     about_view,
+    application_view,
     cookies_agreement_view,
     terms_view,
     privacy_policy_view,
@@ -45,6 +46,7 @@ app_urlpatterns = [
     path(r'tracks/', index_view, name='tracks'),  # TODO: Create dedicated view in tracks.
     # Secondary & static pages
     path(r'about/', about_view, name='about'),
+    path(r'application/', application_view, name='application'),
     path(r'terms/', terms_view, name='terms'),
     path(r'cookies-agreement/', cookies_agreement_view, name='cookies-agreement'),
     path(r'privacy-policy/', privacy_policy_view, name='privacy-policy'),

@@ -7,18 +7,8 @@
 <!-- About -->
 <div class="right-about widget widget-about active-link">
   <h4 class="font-supertitle mt-2 mb-4">{% trans "Hi, I'm March Cat!" %}</h4>
-
-  {% lqip_media_img_tag className="img-fluid lazy-load" url="/static/images/march-cat/march-cat-sq-180.jpg" thumb="static/images/march-cat/march-cat-sq-180-sm.jpg" %}
-  {% comment %}
-  <img
-    class="img-fluid"
-    src="{% static 'images/march-cat/march-cat-sq-180.jpg' %}"
-    alt="{% trans 'The March Cat' %}"
-    loading="lazy"
-  />
-  {% generateimage 'tales_django:small_image_thumb' source='static/images/march-cat/march-cat-sq-180.jpg' %}
-  {% endcomment %}
-
+  {% static "images/march-cat/march-cat-sq-180.jpg" as imgpath %}
+  {% lqip_media_img_tag className="img-fluid lazy-load" url=imgpath thumb=imgpath|thumb_image_name %}
   <p>{% blocktranslate %}Site description block.{% endblocktranslate %}</p>
   <ul class="list-inline social-icons mb-3">
     {% include 'assets/common-blocks/social-links/social-links.django' %}

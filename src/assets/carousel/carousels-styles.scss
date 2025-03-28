@@ -1,0 +1,68 @@
+@use 'sass:color';
+
+@import '../shared';
+
+.shots-slider {
+  figure {
+    img {
+      border-radius: 10px;
+    }
+  }
+}
+
+.slick-carousel {
+  position: relative;
+  // Show in a row while not initialized
+  display: flex;
+  &.slick-slider {
+    display: block;
+  }
+  // &.full-width {
+  //   grid-template-columns: 1fr 700px 1fr;
+  //   grid-column: 1 / -1;
+  // }
+  .slick-dots {
+    bottom: 0;
+    li button {
+      &:before {
+        [data-theme='dark'] & {
+          color: #fff;
+        }
+      }
+      &:hover {
+        &:before {
+          color: $primaryColor;
+        }
+      }
+    }
+  }
+  figure {
+    display: block;
+    padding: 10px;
+    img {
+      margin-bottom: 0.5em;
+      border-radius: 10px;
+      max-width: 100%;
+      height: auto;
+    }
+    figcaption {
+      margin: 0;
+      padding: 0;
+      padding-top: 10px;
+      font-style: italic;
+      max-width: 100%;
+      font-size: 90%;
+      // white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      opacity: 0.5;
+      text-align: left;
+    }
+  }
+  &.no-captions {
+    // Use for `variableWidth` carousels
+    figcaption {
+      display: none;
+    }
+  }
+}

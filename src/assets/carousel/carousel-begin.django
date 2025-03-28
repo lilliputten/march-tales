@@ -1,0 +1,12 @@
+{# ex: set ft=htmldjango : #}
+
+{% comment %}
+
+Expected:
+
+- `class` -- Carousel tag class
+- `type` -- Carousel type
+
+{% endcomment %}
+
+<div class="slick-carousel {{ class }}" data-carousel-type="{{ type }}">

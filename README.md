@@ -1,13 +1,13 @@
 <!--
  @since 2025.03.14, 22:00
- @changed 2025.03.22, 23:42
+ @changed 2025.03.28, 04:52
 -->
 
 # March Tales django rest api and web frontend server
 
 ## Build info (auto-generated)
 
-- Project info: march-tales v.0.0.36 / 2025.03.26 02:00:56 +0300
+- Project info: march-tales v.0.0.37 / 2025.03.28 04:41:22 +0300
 
 ## Resources
 
@@ -16,6 +16,10 @@ Repository: https://github.com/lilliputten/march-tales
 Web page: https://tales.march.team
 
 Android application: https://github.com/lilliputten/march-tales-flutter-app
+
+See also:
+
+- [Changelog](CHANGELOG.md)
 
 ## Project maintenance
 

@@ -1,0 +1,19 @@
+{# ex: set ft=htmldjango : #}
+{% load static %}
+{% load i18n %}
+
+{% comment %}
+
+Expected:
+
+- `img` -- Static image path (without leading `static`)
+- `title` -- Item title
+
+{% endcomment %}
+
+<figure title="{{ title }}">
+  {% static img as imgpath %}
+  {% trans title as text %}
+  {% lqip_media_img_tag className="lazy-load" url=imgpath thumb=imgpath|thumb_image_name %}
+  <figcaption class="descr">{{ text }}</figcaption>
+</figure>
