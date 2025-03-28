@@ -100,23 +100,49 @@
       }
     }
 
-    &-list {
-      a {
-        display: block;
-        // color: $text-color-dark;
-        padding: 5px;
-
-        &:hover {
-          color: $primary-color;
-        }
-      }
-    }
+    /* // UNUSED: For non-detailed footer only
+     * &-list {
+     *   a {
+     *     display: block;
+     *     // color: $text-color-dark;
+     *     padding: 5px;
+     *     &:hover {
+     *       color: $primary-color;
+     *     }
+     *   }
+     * }
+     */
 
     &-border {
       position: absolute;
       top: -75px;
       width: 100%;
       stroke: $primary-color;
+    }
+
+    // Detailed footer
+    .footer-group-logo {
+      @media (width <= $screenMdMin) {
+        width: 100%;
+      }
+    }
+    .footer-group-links {
+      margin-top: 1.6em;
+    }
+    .footer-group {
+      h6 {
+        text-transform: uppercase;
+        margin-bottom: 25px;
+        font-weight: bold;
+      }
+      ul {
+        @include activeTextLinkWrapper;
+        padding: 0;
+        li {
+          margin-bottom: 10px;
+          list-style: none;
+        }
+      }
     }
   }
 }

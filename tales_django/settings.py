@@ -250,7 +250,8 @@ UNFOLD = {
                         'title': _('Tracks'),
                         'icon': 'headphones',
                         # 'link': reverse_lazy('unfold-admin:tales_django_track_changelist', kwargs={'is_published': 1}),
-                        'link': '/unfold-admin/tales_django/track/?is_published=1',
+                        # 'link': '/unfold-admin/tales_django/track/?is_published=1',
+                        'link': reverse_lazy('unfold-admin:tales_django_track_changelist'),
                     },
                     {
                         'title': _('Authors'),
