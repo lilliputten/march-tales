@@ -10,12 +10,9 @@ Here you will find audio fairy tales and short stories for children and adults. 
 
 To make my fairy tales more accessible, we have created:
 
-- **Mobile application** where you can listen to my recordings at any time.
-
+- [**A mobile application**](/application) where you can listen to my recordings at any time.
 - **This website**, where all my works are collected in a convenient format.
-
 - On [**YouTube**](https://youtube.com/@bibliocaty) you will find the full versions of my audio tales.
-
 - On the page in [**VKontakte**](https://vk.com/club227997256) and in [**Telegram**](https://t.me/cat_andersen) I'm sharing new stories, announcements and interesting facts about fairy tales.
 
 ### Conclusion

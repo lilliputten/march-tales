@@ -1,0 +1,86 @@
+{# ex: set ft=htmldjango : #}
+{% extends 'base-main-columns-with-header.html.django' %}
+{% load static %}
+{% load i18n %}
+{% load markdownify %}
+
+{% block body_class %}application {{ block.super }}{% endblock %}
+
+{% block title %}{% trans 'Mobile application' %} — {{ block.super }}{% endblock title %}
+
+{% block main_column_content %}
+
+<nav aria-label="breadcrumb" class="active-text-link-wrapper">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">{% trans 'Main page' %}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{% trans 'Mobile application' %}</li>
+  </ol>
+</nav>
+
+<h1 class="page-title primary-color my-4">{% trans 'Mobile application' %}</h1>
+
+<div class="text-content pb-4">
+
+{% include "assets/carousel/carousel-begin.django" with class="shots-slider" type="phoneScreenshots" %}
+  {% include "assets/carousel/carousel-item.django" with img="images/app-shots/phone/tracks-list.jpg" title=_("Tracks list.") %}
+  {% include "assets/carousel/carousel-item.django" with img="images/app-shots/phone/author-screen-light.jpg" title=_("Author screen.") %}
+  {% include "assets/carousel/carousel-item.django" with img="images/app-shots/phone/author-tracks-light.jpg" title=_("Author tracks.") %}
+  {% include "assets/carousel/carousel-item.django" with img="images/app-shots/phone/authors-list-light.jpg" title=_("Authors list.") %}
+  {% include "assets/carousel/carousel-item.django" with img="images/app-shots/phone/notification-pane-player.jpg" title=_("Notification pane player.") %}
+  {% include "assets/carousel/carousel-item.django" with img="images/app-shots/phone/rubric-info-light.jpg" title=_("Rubric info.") %}
+  {% include "assets/carousel/carousel-item.django" with img="images/app-shots/phone/settings-page.jpg" title=_("Settings page.") %}
+  {% include "assets/carousel/carousel-item.django" with img="images/app-shots/phone/tag-info-light.jpg" title=_("Tag info.") %}
+  {% include "assets/carousel/carousel-item.django" with img="images/app-shots/phone/track-details.jpg" title=_("Track details.") %}
+  {% include "assets/carousel/carousel-item.django" with img="images/app-shots/phone/tracks-list-light.jpg" title=_("Tracks list.") %}
+  {% include "assets/carousel/carousel-item.django" with img="images/app-shots/phone/tracks-list-with-a-player.jpg" title=_("Tracks list with a player.") %}
+  {% include "assets/carousel/carousel-item.django" with img="images/app-shots/phone/tracks-list-without-panels-furing-scroll.jpg" title=_("Tracks list without panels during scroll.") %}
+{% include "assets/carousel/carousel-end.django" %}
+
+{% get_current_language as LANGUAGE %}
+{% with TEMPLATE='content/application-'|add:LANGUAGE|add:'.md' %}
+  {% autoescape off %}
+  {% include_md TEMPLATE %}
+  {% endautoescape %}
+{% endwith %}
+
+</div>
+
+{% if settings.APK_DOWNLOAD_FILE %}
+  <p>
+    <a href="/{{ settings.APK_DOWNLOAD_FILE }}" class="btn btn-primary mb-4">
+      {% trans 'Download for Android' %}
+      <span class="dimmed-info">
+        {% if settings.APK_DOWNLOAD_VERSION %}
+          v.{{ settings.APK_DOWNLOAD_VERSION }}
+        {% endif %}
+        {% if settings.APK_DOWNLOAD_SIZE %}
+          {{ settings.APK_DOWNLOAD_SIZE|filesizeformat }}
+        {% endif %}
+      </span>
+    </a>
+  </p>
+{% endif %}
+
+{% comment %}
+<h4>{% trans "Download" %}</h4>
+{% if settings.APK_DOWNLOAD_SIZE %}
+  <p>{% blocktrans %}File size:{% endblocktrans %} {{ settings.APK_DOWNLOAD_SIZE|filesizeformat }}.</p>
+{% endif %}
+{% if settings.APK_DOWNLOAD_VERSION %}
+  <p>{% blocktrans %}Actual version is:{% endblocktrans %} {{ settings.APK_DOWNLOAD_VERSION }}.</p>
+{% endif %}
+{% endcomment %}
+
+{% comment %}
+<h2 class="h5 section-title mt-4">{% trans "Tracks List" %}</h2>
+
+{# Show tracks list (crsp context is required) #}
+{% include 'assets/common-blocks/big-tracks-list/big-tracks-list.django' %}
+
+{# Show tracks pagination #}
+{% with count=tracks_count offset=tracks_offset limit=tracks_limit offset_param_name="tracks_offset" %}
+{% include "assets/template-columns/pagination.django" %}
+{% endwith %}
+{% endcomment %}
+
+{% endblock main_column_content %}

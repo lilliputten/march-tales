@@ -32,15 +32,8 @@
         <div class="footer-cell footer-brand-cell text-center">
           <a href="/" class="navbar-brand d-flex justify-content-center align-items-center gap-3 order-1 font-lobster">
             <span class="rounded-circle-wrapper d-flex align-items-center">
-              {% lqip_media_img_tag className="img-fluid rounded-circle lazy-load" url="/static/images/march-cat/march-cat-sq-48.jpg" thumb="/static/images/march-cat/march-cat-sq-48-sm.jpg" %}
-              {% comment %}
-              <img
-                class="img-fluid rounded-circle"
-                width="48"
-                src="{% static 'images/march-cat/march-cat-sq-48.jpg' %}"
-                alt="{% trans 'Site title' %}"
-              />
-              {% endcomment %}
+              {% static "images/march-cat/march-cat-sq-48.jpg" as imgpath %}
+              {% lqip_media_img_tag className="img-fluid rounded-circle lazy-load" url=imgpath thumb=imgpath|thumb_image_name %}
             </span>
             <span class="text">
               {% trans 'Site title' %}

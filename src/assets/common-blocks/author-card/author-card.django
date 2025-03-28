@@ -19,9 +19,6 @@ Expected:
     {% if author.portrait_picture %}
       <span class="me-2">
         {% lqip_media_img_tag className="widget-author-image lazy-load" url=author.portrait_picture_full.url thumb=author.portrait_picture_thumb.url %}
-        {% comment %}
-        <img class="widget-author-image" src="{% get_media_prefix %}{{ author.portrait_picture }}" loading="lazy" />
-        {% endcomment %}
       </span>
     {% endif %}
     <div class="card-body no-padding d-flex gap-4 flex-column">

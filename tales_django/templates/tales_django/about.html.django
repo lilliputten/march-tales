@@ -39,6 +39,7 @@
 
 </div>
 
+{% comment %}
 <h2 class="h5 section-title mt-4">{% trans "Tracks List" %}</h2>
 
 {# Show tracks list (crsp context is required) #}
@@ -48,5 +49,6 @@
 {% with count=tracks_count offset=tracks_offset limit=tracks_limit offset_param_name="tracks_offset" %}
 {% include "assets/template-columns/pagination.django" %}
 {% endwith %}
+{% endcomment %}
 
 {% endblock main_column_content %}

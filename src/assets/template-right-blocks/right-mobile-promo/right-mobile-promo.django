@@ -4,12 +4,10 @@
 
 <!-- Promotion -->
 <div class="right-mobile-promo promotion">
-  {% lqip_media_img_tag className="img-fluid w-100 lazy-load" url="/static/images/mobile-promo/vertical-mobile-promo.jpg" thumb="/static/images/mobile-promo/vertical-mobile-promo-sm.jpg" %}
-  {% comment %}
-  <img src="{% static 'images/mobile-promo/vertical-mobile-promo.jpg' %}" class="img-fluid w-100" loading="lazy" />
-  {% endcomment %}
+  {% static "images/mobile-promo/vertical-mobile-promo.jpg" as imgpath %}
+  {% lqip_media_img_tag className="img-fluid w-100 lazy-load" url=imgpath thumb=imgpath|thumb_image_name %}
   <div class="promotion-content">
-    <h5 class="top text-white mb-3">{% trans 'Try the mobile app!' %}</h5>
+    <h5 class="top text-white mb-3"><a href="{% url "application" %}">{% trans 'Try the mobile app!' %}</a></h5>
     <div class="bottom">
       {% if settings.APK_DOWNLOAD_FILE %}
       <a href="/{{ settings.APK_DOWNLOAD_FILE }}" class="btn btn-primary mb-4">
