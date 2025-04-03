@@ -45,7 +45,10 @@ app_urlpatterns = [
     path(r'privacy-policy/', privacy_policy_view, name='privacy-policy'),
     # Pages
     # path('', include('pages.urls')),
-    path(r'pages/', include('django.contrib.flatpages.urls')),
+    # tales_django/entities/flatpages/urls.py
+    path(r'pages/', include('tales_django.entities.flatpages.urls'), name='django.contrib.flatpages.views.flatpage'),
+    # path(r'pages/', flatpage, name='django.contrib.flatpages.views.flatpage'),
+    # path(r'pages/', include('django.contrib.flatpages.urls')),
     # path(r'ckeditor/', include('ckeditor_uploader.urls')),
     path(r'ckeditor5/', include('django_ckeditor_5.urls')),
     # Language switching

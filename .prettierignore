@@ -31,3 +31,6 @@
 # !tales_django/templates/tales_django/profile_edit.html.django
 
 **/*_
+
+# Temporarily (during dev/PR)
+tales_django/entities/flatpages/

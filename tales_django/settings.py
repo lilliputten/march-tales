@@ -216,8 +216,8 @@ MIDDLEWARE = [
     'allauth.account.middleware.AccountMiddleware',
     # # Html content prettifier (TODO: Requires fixes for invalid html tags formatting)
     # APP_NAME + '.middleware.BeautifulMiddleware.BeautifulMiddleware',
-    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
-    # 'ckeditor_uploader',
+    'tales_django.entities.flatpages.middleware.FlatpageFallbackMiddleware',
+    # 'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
     APP_NAME + '.middleware.CurrentRequestMiddleware.CurrentRequestMiddleware',
 ]
 
@@ -236,6 +236,10 @@ if DEBUG:
 #  {% load livereload_tags %}
 #  {% endif %}
 # ```
+
+# FLATPAGE
+# @see https://docs.djangoproject.com/en/5.1/ref/contrib/flatpages/
+FLATPAGE_CONTEXT_GETTER = 'tales_django.get_flatpages_context.get_flatpages_context'
 
 # # @see https://github.com/django-ckeditor/django-ckeditor
 CKEDITOR_5_FILE_STORAGE = 'tales_django.ckeditor_storage.ckeditor_storage'   # optional
