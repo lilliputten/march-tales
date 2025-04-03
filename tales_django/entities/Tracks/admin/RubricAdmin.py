@@ -37,9 +37,15 @@ class RubricAdmin(TranslatedFieldAdmin, ImportExportModelAdmin, ExportActionMode
     ]
     list_display = [
         'text_translated',
-        'promote',
         'rubricated_tracks_count',
+        'promote',
+        # 'published_at',
+        'updated_at',
     ]
+    readonly_fields = (
+        'published_at',
+        'updated_at',
+    )
     search_fields = [
         'text_en',
         'text_ru',

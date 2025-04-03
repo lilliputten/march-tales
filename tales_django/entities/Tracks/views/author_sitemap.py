@@ -6,6 +6,7 @@ from ..models import Author
 
 
 class author_sitemap(Sitemap):
+    i18n = True
     changefreq = 'weekly'
     # priority = 0.6
 

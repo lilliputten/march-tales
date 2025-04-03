@@ -106,6 +106,7 @@ class UserAdmin(BaseUserAdmin, TranslatedFieldAdmin, ImportExportModelAdmin, Exp
 
     is_administrator.short_description = _('Administrator')
     is_administrator.boolean = True
+    is_administrator.admin_order_field = 'is_staff'
 
     is_regular_user.short_description = _('Regular user')
     is_regular_user.boolean = True

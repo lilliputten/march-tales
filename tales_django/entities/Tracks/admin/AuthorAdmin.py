@@ -39,8 +39,8 @@ class AuthorAdmin(TranslatedFieldAdmin, ImportExportModelAdmin, ExportActionMode
     list_display = [
         'name_translated',
         # 'name',
-        'promote',
         'tracks_count',
+        'promote',
         'has_portrait',
         # 'published_at',
         'updated_at',

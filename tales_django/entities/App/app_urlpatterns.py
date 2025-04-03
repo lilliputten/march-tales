@@ -39,6 +39,7 @@ admin.site.site_header = _('Site administration')
 
 
 class StaticSitemap(Sitemap):
+    i18n = True
     changefreq = 'monthly'
 
     def items(self):

@@ -100,12 +100,6 @@ class FlatPageAdmin(
         'published_at',
         'updated_at',
     )
-
-    ordering = [
-        'url',
-        'page_title_ru',
-        'registration_required',
-    ]
     search_fields = [
         'url',
         'page_title_en',
