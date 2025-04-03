@@ -272,7 +272,7 @@ customColorPalette = [
 # @see https://pypi.org/project/django-ckeditor-5/
 CKEDITOR_5_CONFIGS = {
     'default': {
-        'language': LANGUAGES_LIST, # ['ru', 'en'],
+        'language': LANGUAGES_LIST,
         'toolbar': {
             'items': [
                 'heading',
@@ -345,87 +345,6 @@ CKEDITOR_5_CONFIGS = {
             ],
         },
     },
-    # 'extends': {
-    #     'blockToolbar': [
-    #         'paragraph',
-    #         'heading1',
-    #         'heading2',
-    #         'heading3',
-    #         '|',
-    #         'bulletedList',
-    #         'numberedList',
-    #         '|',
-    #         'blockQuote',
-    #     ],
-    #     'toolbar': {
-    #         'items': [
-    #             'heading',
-    #             '|',
-    #             'outdent',
-    #             'indent',
-    #             '|',
-    #             'bold',
-    #             'italic',
-    #             'link',
-    #             'underline',
-    #             'strikethrough',
-    #             'code',
-    #             'subscript',
-    #             'superscript',
-    #             'highlight',
-    #             '|',
-    #             'codeBlock',
-    #             'sourceEditing',
-    #             'insertImage',
-    #             'bulletedList',
-    #             'numberedList',
-    #             'todoList',
-    #             '|',
-    #             'blockQuote',
-    #             'imageUpload',
-    #             '|',
-    #             'fontSize',
-    #             'fontFamily',
-    #             'fontColor',
-    #             'fontBackgroundColor',
-    #             'mediaEmbed',
-    #             'removeFormat',
-    #             'insertTable',
-    #         ],
-    #         'shouldNotGroupWhenFull': 'true',
-    #     },
-    #     'image': {
-    #         'toolbar': [
-    #             'imageTextAlternative',
-    #             '|',
-    #             'imageStyle:alignLeft',
-    #             'imageStyle:alignRight',
-    #             'imageStyle:alignCenter',
-    #             'imageStyle:side',
-    #             '|',
-    #         ],
-    #         'styles': [
-    #             'full',
-    #             'side',
-    #             'alignLeft',
-    #             'alignRight',
-    #             'alignCenter',
-    #         ],
-    #     },
-    #     'table': {
-    #         'contentToolbar': ['tableColumn', 'tableRow', 'mergeTableCells', 'tableProperties', 'tableCellProperties'],
-    #         'tableProperties': {'borderColors': customColorPalette, 'backgroundColors': customColorPalette},
-    #         'tableCellProperties': {'borderColors': customColorPalette, 'backgroundColors': customColorPalette},
-    #     },
-    #     'heading': {
-    #         'options': [
-    #             {'model': 'paragraph', 'title': 'Paragraph', 'class': 'ck-heading_paragraph'},
-    #             {'model': 'heading1', 'view': 'h1', 'title': 'Heading 1', 'class': 'ck-heading_heading1'},
-    #             {'model': 'heading2', 'view': 'h2', 'title': 'Heading 2', 'class': 'ck-heading_heading2'},
-    #             {'model': 'heading3', 'view': 'h3', 'title': 'Heading 3', 'class': 'ck-heading_heading3'},
-    #         ],
-    #     },
-    # },
     'list': {
         'properties': {
             'styles': 'true',
@@ -519,26 +438,6 @@ UNFOLD = {
                         'icon': 'communities',
                         'link': reverse_lazy('unfold-admin:tales_django_group_changelist'),
                     },
-                    # NOTE: Core admin urls:
-                    # admin/[name='index']
-                    # admin/login/ [name='login']
-                    # admin/logout/ [name='logout']
-                    # admin/password_change/ [name='password_change']
-                    # admin/password_change/done/ [name='password_change_done']
-                    # admin/autocomplete/ [name='autocomplete']
-                    # admin/jsi18n/ [name='jsi18n']
-                    # admin/r/<int:content_type_id>/<path:object_id>/ [name='view_on_site']
-                    # admin/sites/site/
-                    # admin/account/emailaddress/
-                    # admin/socialaccount/socialapp/
-                    # admin/socialaccount/socialtoken/
-                    # admin/socialaccount/socialaccount/
-                    # admin/mfa/authenticator/
-                    # admin/usersessions/usersession/
-                    # admin/flatpages/flatpage/
-                    # admin/tales_django/membership/
-                    # admin/^(?P<app_label>sites|account|socialaccount|mfa|usersessions|flatpages|tales_django)/$ [name='app_list']
-                    # admin/(?P<url>.*)$
                 ],
             },
         ],

@@ -32,9 +32,9 @@ class IsAdministratorFilter(admin.SimpleListFilter):
 
     def queryset(self, _request, queryset):
         if self.value() == '1':
-            return queryset.filter(is_staff=False, is_superuser=False)
-        if self.value() == '0':
             return queryset.filter(~Q(is_staff=False, is_superuser=False))
+        if self.value() == '0':
+            return queryset.filter(is_staff=False, is_superuser=False)
 
 
 @admin.register(User, site=unfold_admin_site)

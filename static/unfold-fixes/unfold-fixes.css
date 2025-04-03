@@ -2,14 +2,15 @@
  * @changed 2025.04.03, 03:50
  */
 
-html {
-    --primaryColor: #b26;
+html form {
+    --primaryColor: rgb(var(--color-primary-600) / 1); /* #b26; */
+    --primaryColorDark: rgb(var(--color-primary-600) / 1); /* #901a4e; */
     --ck-color-button-on-background: var(--primaryColor);
     --ck-color-button-on-color: #fff;
-    --ck-color-button-on-hover-background: #901a4e;
+    --ck-color-button-on-hover-background: var(--primaryColorDark);
     --maxFieldWidth: 42rem;
 }
-html.dark {
+html.dark form {
     --ck-color-text: #999;
 }
 
