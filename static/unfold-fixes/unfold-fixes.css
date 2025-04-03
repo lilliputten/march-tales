@@ -1,3 +1,7 @@
+/*
+ * @changed 2025.04.03, 03:50
+ */
+
 textarea.vLargeTextField {
     max-width: 42rem !important;
     height: 8em;
@@ -5,3 +9,48 @@ textarea.vLargeTextField {
 .readonly {
     opacity: 0.25;
 }
+form#flatpage_form {
+    /* border: 1px solid red; */
+}
+
+/*
+ * form#flatpage_form label[for="id_url"] {
+ *     display: block;
+ *     font-weight: 600;
+ *     font-size: .875rem;
+ *     line-height: 1.25rem;
+ *     margin-bottom: .5rem;
+ * }
+ * form#flatpage_form #id_url {
+ *     padding-left: .75rem;
+ *     padding-right: .75rem;
+ *     padding-top: .5rem;
+ *     padding-bottom: .5rem;
+ *     border-width: 1px;
+ *     border-radius: var(--border-radius, 6px);
+ *     width: 100%;
+ *     min-width: 5rem;
+ *     max-width: 42rem;
+ *     --tw-shadow: 0 1px 2px 0 rgba(0, 0, 0, .05);
+ *     --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+ *     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+ *     color: rgb(var(--color-font-default-light) / var(--tw-text-opacity, 1));
+ *     font-size: .875rem;
+ *     line-height: 1.25rem;
+ * }
+ * html.dark form#flatpage_form #id_url {
+ *     background-color: rgb(var(--color-base-900) / var(--tw-bg-opacity, 1));
+ *     color: rgb(var(--color-font-default-dark) / var(--tw-text-opacity, 1));
+ * }
+ * form#flatpage_form #id_url:focus {
+ *     outline: 2px solid transparent;
+ *     outline-offset: 2px;
+ *     --tw-border-opacity: 1;
+ *     --tw-ring-opacity: 1;
+ *     --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+ *     --tw-ring-color: rgb(var(--color-primary-300) / var(--tw-ring-opacity, 1));
+ *     --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(3px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+ *     box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+ *     border-color: rgb(var(--color-primary-600) / var(--tw-border-opacity, 1));
+ * }
+ */

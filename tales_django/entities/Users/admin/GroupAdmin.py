@@ -5,6 +5,10 @@ from django.contrib import admin
 
 # from translated_fields import TranslatedFieldAdmin
 
+from import_export.admin import ExportActionModelAdmin, ImportExportModelAdmin
+from unfold.contrib.import_export.forms import ExportForm, ImportForm
+from translated_fields import TranslatedFieldAdmin
+
 from unfold.admin import ModelAdmin as UnfoldModelAdmin
 
 from tales_django.sites import unfold_admin_site
@@ -28,5 +32,9 @@ admin.site.unregister(DjangoGroup)
 # @admin.register(Group)
 # class GroupAdmin(BaseGroupAdmin):
 @admin.register(Group, site=unfold_admin_site)
-class GroupAdmin(BaseGroupAdmin, UnfoldModelAdmin):
-    pass
+class GroupAdmin(
+    BaseGroupAdmin, TranslatedFieldAdmin, ImportExportModelAdmin, ExportActionModelAdmin, UnfoldModelAdmin
+):
+    import_form_class = ImportForm
+    export_form_class = ExportForm
+    # pass

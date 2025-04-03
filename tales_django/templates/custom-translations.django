@@ -21,3 +21,5 @@
 {% trans 'Select all rows' %}
 {% trans 'Or use a third-party' %}
 {% trans 'Delete the' %}
+{% trans 'flat pages' %}
+{% trans 'flat page' %}

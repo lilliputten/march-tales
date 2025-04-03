@@ -6,6 +6,7 @@ declare global {
     isAuthenticated?: boolean;
     hasFavoriteTracks?: boolean;
     AOS: { init: (o: Record<string, any>) => void };
+    $: jQuery;
   }
 }
 

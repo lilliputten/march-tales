@@ -24,6 +24,7 @@
 /pnpm-lock.yaml
 
 /static
+!/static/unfold-fixes
 
 # Temp: Don't prettify temlates (or ensure correct prettifiying)
 */templates/**/*.html

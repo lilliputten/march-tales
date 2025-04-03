@@ -179,6 +179,8 @@ INSTALLED_APPS = [
     'import_export',
     'markdownify.apps.MarkdownifyConfig',
     'imagekit',
+    'django.contrib.flatpages',
+    'ckeditor',
     # app
     # APP_NAME + '.apps.TalesConfig',
     APP_NAME,
@@ -201,6 +203,7 @@ MIDDLEWARE = [
     'allauth.account.middleware.AccountMiddleware',
     # # Html content prettifier (TODO: Requires fixes for invalid html tags formatting)
     # APP_NAME + '.middleware.BeautifulMiddleware.BeautifulMiddleware',
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
     APP_NAME + '.middleware.CurrentRequestMiddleware.CurrentRequestMiddleware',
 ]
 
@@ -287,6 +290,43 @@ UNFOLD = {
                         'icon': 'account_circle',
                         'link': reverse_lazy('unfold-admin:tales_django_user_changelist'),
                     },
+                    {
+                        'title': _('Groups'),
+                        'icon': 'account_circle',
+                        'link': reverse_lazy('unfold-admin:tales_django_group_changelist'),
+                    },
+                    # {
+                    #     'title': _('Sites'),
+                    #     'icon': 'account_home',
+                    #     'link': reverse_lazy('unfold-admin:tales_django_site_changelist'),
+                    # },
+                    {
+                        'title': _('Flat pages'),
+                        'icon': 'layers',
+                        # See: "admin:%s_%s_changelist" % info, current_app=self.name
+                        # 'link': reverse_lazy('unfold-admin:flatpages_flatpage_changelist'),
+                        'link': reverse_lazy('unfold-admin:tales_django_flatpage_changelist'),
+                    },
+                    # NOTE: Core admin urls:
+                    # admin/[name='index']
+                    # admin/login/ [name='login']
+                    # admin/logout/ [name='logout']
+                    # admin/password_change/ [name='password_change']
+                    # admin/password_change/done/ [name='password_change_done']
+                    # admin/autocomplete/ [name='autocomplete']
+                    # admin/jsi18n/ [name='jsi18n']
+                    # admin/r/<int:content_type_id>/<path:object_id>/ [name='view_on_site']
+                    # admin/sites/site/
+                    # admin/account/emailaddress/
+                    # admin/socialaccount/socialapp/
+                    # admin/socialaccount/socialtoken/
+                    # admin/socialaccount/socialaccount/
+                    # admin/mfa/authenticator/
+                    # admin/usersessions/usersession/
+                    # admin/flatpages/flatpage/
+                    # admin/tales_django/membership/
+                    # admin/^(?P<app_label>sites|account|socialaccount|mfa|usersessions|flatpages|tales_django)/$ [name='app_list']
+                    # admin/(?P<url>.*)$
                 ],
             },
         ],

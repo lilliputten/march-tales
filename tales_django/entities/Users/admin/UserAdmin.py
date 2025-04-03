@@ -44,7 +44,16 @@ class UserAdmin(BaseUserAdmin, TranslatedFieldAdmin, ImportExportModelAdmin, Exp
 
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
-        (_('Personal info'), {'fields': ('first_name', 'last_name', 'address')}),
+        (
+            _('Personal info'),
+            {
+                'fields': (
+                    'first_name',
+                    'last_name',
+                    # 'address',
+                )
+            },
+        ),
         (
             _('Tracks'),
             {
@@ -104,5 +113,5 @@ class UserAdmin(BaseUserAdmin, TranslatedFieldAdmin, ImportExportModelAdmin, Exp
     def get_form(self, request, obj=None, **kwargs):
         form = super().get_form(request, obj, **kwargs)
         form.base_fields['username'].label = _('E-mail (username)')
-        form.base_fields['address'].label = _('Address')
+        # form.base_fields['address'].label = _('Address')
         return form

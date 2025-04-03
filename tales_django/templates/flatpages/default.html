@@ -1,0 +1,28 @@
+{# ex: set ft=htmldjango : #}
+{% extends 'base-main-columns-with-header.html.django' %}
+{% load static %}
+{% load i18n %}
+{% load markdownify %}
+
+{% block body_class %}flatpage {{ block.super }}{% endblock %}
+
+{% block title %}{{ flatpage.title }} — {{ block.super }}{% endblock title %}
+
+{% block main_column_content %}
+
+XXX: {{ get_current_language }}
+
+<nav aria-label="breadcrumb" class="active-text-link-wrapper">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">{% trans 'Main page' %}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ flatpage.title }}</li>
+  </ol>
+</nav>
+
+<h1 class="page-title primary-color my-4">{{ flatpage.title }}</h1>
+
+<div class="text-content flatpage pb-2">
+{{ flatpage.content }}
+</div>
+
+{% endblock main_column_content %}
