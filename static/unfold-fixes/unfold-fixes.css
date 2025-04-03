@@ -2,28 +2,45 @@
  * @changed 2025.04.03, 03:50
  */
 
-textarea.vLargeTextField {
-    max-width: 42rem !important;
-    height: 8em;
-}
-.readonly {
-    opacity: 0.25;
-}
-form#flatpage_form {
-    /* border: 1px solid red; */
-}
-form .ck.ck-image-insert-form>.ck.ck-button {
-    display: flex;
-}
-
-form {
+html {
     --primaryColor: #b26;
     --ck-color-button-on-background: var(--primaryColor);
     --ck-color-button-on-color: #fff;
     --ck-color-button-on-hover-background: #901a4e;
+    --maxFieldWidth: 42rem;
 }
-html.dark form {
+html.dark {
     --ck-color-text: #999;
+}
+
+.readonly {
+    opacity: 0.25;
+}
+
+.ck-editor-container,
+textarea.vLargeTextField {
+    width: 100%;
+    max-width: var(--maxFieldWidth) !important;
+}
+textarea.vLargeTextField {
+    height: 8em;
+}
+.ck-editor-container {
+    overflow: hidden;
+}
+
+.ck-editor .ck.ck-image-insert-form>.ck.ck-button {
+    display: flex;
+}
+
+.ck-editor.fullscreen-mode .ck-sticky-panel__content {
+    top: 0;
+    z-index: 100;
+    width: 100% !important;
+    top: 0 !important;
+}
+.ck-editor.fullscreen-mode .ck-toolbar {
+    width: 100%;
 }
 
 .ck-content blockquote,
@@ -56,7 +73,7 @@ html.dark form {
 .ck-content h4,
 .ck-content h5,
 .ck-content h6 {
-    margin: 2em 0;
+    margin: 1.5em 0;
 }
 .ck-content a {
     color: var(--primaryColor);
@@ -70,87 +87,35 @@ html.dark form {
     color: revert;
 }
 
-form .ck.ck-toolbar__separator {
+.ck-editor .ck.ck-toolbar__separator {
     background-color: rgba(128 128 128 / 0.15) !important;
 }
 
-form .ck.ck-editor__main>.ck-editor__editable {
+.ck-editor .ck.ck-editor__main>.ck-editor__editable {
     background-color: initial;
-    /* border-color: rgba(128 128 128 / 0.5); */
-    /* border: 0 solid #e5e7eb; */
-    /* --tw-border-opacity: 1; */
-    /* border-color: rgb(var(--color-base-700) / var(--tw-border-opacity, 1)) !important; */
-    /* border-width: 1px; */
     border-radius: var(--border-radius, 6px);
     border: 1px solid var(--ck-color-base-border);
-    /* border: 1px solid rgb(var(--color-base-700) / 0.5) !important; */
-    overflow: hidden;
-    max-width: 100%;
+    /* overflow: hidden; */
+    /* max-width: 100%; */
     position: relative;
 }
-form .ck.ck-editor__top .ck-sticky-panel .ck-sticky-panel__content,
-form .ck.ck-editor__main>.ck-editor__editable {
+.ck-editor .ck.ck-editor__top .ck-sticky-panel .ck-sticky-panel__content,
+.ck-editor .ck.ck-editor__main>.ck-editor__editable {
     border-color: rgb(var(--color-base-500) / 0.2) !important;
 }
-html.dark form .ck.ck-editor__top .ck-sticky-panel .ck-sticky-panel__content,
-html.dark form .ck.ck-editor__main>.ck-editor__editable {
+html.dark .ck-editor .ck.ck-editor__top .ck-sticky-panel .ck-sticky-panel__content,
+html.dark .ck-editor .ck.ck-editor__main>.ck-editor__editable {
     border-color: rgb(var(--color-base-700) / 0.5) !important;
-    /* border-radius: var(--border-radius, 6px); */
 }
-form .ck.ck-editor__main>.ck-editor__editable {
+.ck-editor .ck.ck-editor__main>.ck-editor__editable {
     border-bottom-left-radius: var(--border-radius, 6px) !important;
     border-bottom-right-radius: var(--border-radius, 6px) !important;
 }
-form .ck.ck-editor__top .ck-sticky-panel .ck-sticky-panel__content {
+.ck-editor .ck.ck-editor__top .ck-sticky-panel .ck-sticky-panel__content {
     border-top-left-radius: var(--border-radius, 6px) !important;
     border-top-right-radius: var(--border-radius, 6px) !important;
 }
-form .ck.ck-toolbar {
+.ck-editor .ck.ck-toolbar {
     background-color: initial;
     background-color: rgba(128 128 128 / 0.05);
 }
-form .ck.ck-toolbar button {
-    /* color: #888 !important; */
-}
-
-/*
- * form#flatpage_form label[for="id_url"] {
- *     display: block;
- *     font-weight: 600;
- *     font-size: .875rem;
- *     line-height: 1.25rem;
- *     margin-bottom: .5rem;
- * }
- * form#flatpage_form #id_url {
- *     padding-left: .75rem;
- *     padding-right: .75rem;
- *     padding-top: .5rem;
- *     padding-bottom: .5rem;
- *     border-width: 1px;
- *     border-radius: var(--border-radius, 6px);
- *     width: 100%;
- *     min-width: 5rem;
- *     max-width: 42rem;
- *     --tw-shadow: 0 1px 2px 0 rgba(0, 0, 0, .05);
- *     --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
- *     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
- *     color: rgb(var(--color-font-default-light) / var(--tw-text-opacity, 1));
- *     font-size: .875rem;
- *     line-height: 1.25rem;
- * }
- * html.dark form#flatpage_form #id_url {
- *     background-color: rgb(var(--color-base-900) / var(--tw-bg-opacity, 1));
- *     color: rgb(var(--color-font-default-dark) / var(--tw-text-opacity, 1));
- * }
- * form#flatpage_form #id_url:focus {
- *     outline: 2px solid transparent;
- *     outline-offset: 2px;
- *     --tw-border-opacity: 1;
- *     --tw-ring-opacity: 1;
- *     --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
- *     --tw-ring-color: rgb(var(--color-primary-300) / var(--tw-ring-opacity, 1));
- *     --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(3px + var(--tw-ring-offset-width)) var(--tw-ring-color);
- *     box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
- *     border-color: rgb(var(--color-primary-600) / var(--tw-border-opacity, 1));
- * }
- */
