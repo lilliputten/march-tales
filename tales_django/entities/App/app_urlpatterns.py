@@ -8,8 +8,10 @@ from django.utils.translation import gettext_lazy as _
 from allauth.account.decorators import secure_admin_login
 from django.views.generic import RedirectView
 from django.contrib.sitemaps.views import sitemap
+from django.contrib.sitemaps import GenericSitemap
 from django.contrib.flatpages.sitemaps import FlatPageSitemap
 
+from tales_django.entities.Tracks.models import Rubric, Tag, Track
 from tales_django.entities.Tracks.views import author_sitemap
 from tales_django.sites import unfold_admin_site
 
@@ -40,9 +42,13 @@ cache_timeout = 0 if settings.LOCAL or settings.DEBUG else 15 * 60  # in seconds
 
 admin.site.site_header = _('Site administration')
 
+# @see https://docs.djangoproject.com/en/5.1/ref/contrib/sitemaps/
 sitemaps = {
-    'authors': author_sitemap,
     'flatpages': FlatPageSitemap,
+    'tracks': GenericSitemap({'queryset': Track.objects.all(), 'date_field': 'updated_at'}),
+    'authors': author_sitemap,
+    'rubrics': GenericSitemap({'queryset': Rubric.objects.all(), 'date_field': 'updated_at'}),
+    'tags': GenericSitemap({'queryset': Tag.objects.all(), 'date_field': 'updated_at'}),
 }
 
 app_urlpatterns = [

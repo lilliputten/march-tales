@@ -1,6 +1,16 @@
 /* eslint-env browser, jquery */
 
 function onUnfoldFixesLoad() {
+    // Delayed processing of collapsed nodes...
+    setTimeout((function () {
+        var toOpen = document.querySelectorAll('.collapse.opened-by-default');
+        // To open...
+        toOpen.forEach(function (node) {
+            node.classList.remove('collapsed');
+        });
+    }), 100);
+
+    // Flatpage fields...
     var labels = document.querySelectorAll('form#flatpage_form label');
     var fields = document.querySelectorAll('form#flatpage_form #id_url');
     // Fields...

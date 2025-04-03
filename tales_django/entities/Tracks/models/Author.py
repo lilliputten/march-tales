@@ -1,10 +1,15 @@
+from datetime import date
+
+# from datetime import timedelta
+
 from translated_fields import TranslatedField
 
 from django.utils.translation import gettext_lazy as _
 from django.db import models
 from django.db.models import Model
 from django.urls import reverse
-from django.utils.text import slugify
+
+# from django.utils.text import slugify
 
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFit
@@ -25,7 +30,7 @@ class Author(Model):
         verbose_name_plural = _('Authors')
 
     name = TranslatedField(
-        models.TextField(_('Name'), blank=False, max_length=256),
+        models.CharField(_('Name'), blank=False, max_length=256),
         attrgetter=get_non_empty_localized_model_field_attrgetter,
     )
     short_description = TranslatedField(
@@ -57,6 +62,9 @@ class Author(Model):
 
     promote = models.BooleanField(_('Promote'), default=True, help_text=_('Promote on the main page'))
 
+    published_at = models.DateField(verbose_name=_('Published at'), default=date.today)
+    updated_at = models.DateField(verbose_name=_('Updated at'), auto_now=True)
+
     @property
     def tracks_count(self):
         return self.tracks.count()
@@ -66,9 +74,14 @@ class Author(Model):
         return self.tracks.filter(track_status='PUBLISHED').count()
 
     def get_absolute_url(self):
-        # Ensure this value is URL-friendly
-        author_name = slugify(self.name)
-        return reverse('author', kwargs={'author_id': self.id, 'author_name': author_name})
+        # author_name = slugify(self.name)
+        return reverse(
+            'author_details',
+            kwargs={
+                'author_id': self.id,
+                # 'author_name': author_name,
+            },
+        )
 
     def __str__(self):
         return self.name

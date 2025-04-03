@@ -42,7 +42,13 @@ class AuthorAdmin(TranslatedFieldAdmin, ImportExportModelAdmin, ExportActionMode
         'promote',
         'tracks_count',
         'has_portrait',
+        # 'published_at',
+        'updated_at',
     ]
+    readonly_fields = (
+        'published_at',
+        'updated_at',
+    )
     search_fields = [
         'name_en',
         'name_ru',

@@ -1,0 +1,19 @@
+  -
+    pk: 1
+    model: "flatpages.flatpage"
+    fields:
+      url: "/about/"
+      sites:
+        - 1
+
+  -
+    model: "tales_django.flatpage"
+    pk: 1
+    fields:
+      page_title_ru: "О проекте"
+      page_title_en: "About the project"
+      page_content_ru: "<p>Добро пожаловать! Я — Мартовский Кот, и я с большим удовольствием занимаюсь озвучиванием сказок. Это мое хобби, которое позволяет делиться волшебными историями с теми, кто любит мечтать и погружаться в мир фантазии.</p><h3>О себе</h3><p>Я не профессиональный актер или диктор, но я искренне люблю сказки и верю в их магию. Озвучивая истории, я стараюсь передать атмосферу каждого произведения — от добрых и уютных до загадочных и захватывающих. Для меня это способ подарить немного тепла и радости всем, кто слушает мои записи.</p><h3>Что можно найти на этом сайте?</h3><p>Здесь вы найдете аудиосказки и рассказы для детей и взрослых. Кроме того, я стараюсь делиться интересной информацией об авторах сказок и их произведениях.</p><p>Чтобы сделать мои сказки доступнее, мы создали:</p><ul><li><a href=\"/application\"><strong>Мобильное приложение</strong></a>, где вы можете слушать мои записи в любое время.</li><li><strong>Этот веб-сайт</strong>, где собраны все мои работы в удобном формате.</li><li>На <a href=\"https://youtube.com/@bibliocaty\"><strong>YouTube</strong></a> вы найдете полные версии моих аудиосказок.</li><li>На страничке во <a href=\"https://vk.com/club227997256\"><strong>ВКонтакте</strong></a> и в <a href=\"https://t.me/cat_andersen\"><strong>Телеграм</strong></a> я делюсь новыми историями, анонсами и интересными фактами о сказках.</li></ul><h3>Заключение</h3><p>Спасибо, что вы заглянули на мою страничку! Надеюсь, мои аудиосказки подарят вам уютные вечера и вдохновят на новые мечты. Подписывайтесь, слушайте и делитесь впечатлениями — вместе мы сделаем мир чуть волшебнее!</p>"
+      page_content_en: "<p>Welcome! I'm The March Cat, and I take great pleasure in dubbing fairy tales. This is my hobby, which allows me to share magical stories with those who like to dream and immerse themselves in the world of fantasy.</p><h2>About myself</h2><p>I'm not a professional actor or broadcaster, but I genuinely love fairy tales and believe in their magic. By voicing the stories, I try to convey the atmosphere of each work — from kind and cozy to mysterious and exciting. For me, this is a way to give a little warmth and joy to everyone who listens to my recordings.</p><h2>What can you find on my site</h2><p>Here you will find audio fairy tales and short stories for children and adults. In addition, I try to share interesting information about the authors of fairy tales and their works.</p><p>To make my fairy tales more accessible, we have created:</p><ul><li><a href=\"/application\"><strong>A mobile application</strong></a> where you can listen to my recordings at any time.</li><li><strong>This website</strong>, where all my works are collected in a convenient format.</li><li>On <a href=\"https://youtube.com/@bibliocaty\"><strong>YouTube</strong></a> you will find the full versions of my audio tales.</li><li>On the page in <a href=\"https://vk.com/club227997256\"><strong>VKontakte</strong></a> and in <a href=\"https://t.me/cat_andersen\"><strong>Telegram</strong></a> I'm sharing new stories, announcements and interesting facts about fairy tales.</li></ul><h2>Conclusion</h2><p>Thank you for visiting my page! I hope my audio stories will give you cozy evenings and inspire you to new dreams. Subscribe, listen and share your impressions — together we will make the world a little more magical!</p>"
+      published_at: "2025-04-03"
+      updated_at: "2025-04-03"
+

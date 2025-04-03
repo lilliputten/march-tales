@@ -91,72 +91,79 @@ class TrackAdmin(
         (
             _('Title'),
             {
+                # 'classes': ['collapse', '--opened-by-default'],
                 'fields': (
                     'title_ru',
                     'title_en',
-                )
+                ),
             },
         ),
         (
             _('Description'),
             {
+                'classes': ['collapse'],
                 'fields': (
                     'description_ru',
                     'description_en',
-                )
+                ),
             },
         ),
         (
             _('Media'),
             {
+                'classes': ['collapse'],
                 'fields': (
                     # 'youtube_url',
                     'audio_file',
                     'preview_picture',
-                )
+                ),
             },
         ),
         (
             _('Attributes'),
             {
+                'classes': ['collapse'],
                 'fields': (
                     'author',
                     'tags',
                     'rubrics',
-                )
+                ),
             },
         ),
         (
             _('Status'),
             {
+                'classes': ['collapse'],
                 'fields': (
                     'track_status',
                     'promote',
                     'for_members',
-                )
+                ),
             },
         ),
         (
             _('Publication'),
             {
+                'classes': ['collapse'],
                 'fields': (
                     'published_at',
                     'published_by',
-                )
+                    'updated_at',
+                    'updated_by',
+                ),
             },
         ),
         (
             _('Information'),
             {
+                'classes': ['collapse'],
                 'fields': (
                     'played_count',
                     # 'audio_duration',
                     # 'audio_size',
                     'duration_formatted',
                     'size_formatted',
-                    # 'updated_at',
-                    # 'updated_by',
-                )
+                ),
             },
         ),
     )
@@ -195,8 +202,8 @@ class TrackAdmin(
         # 'audio_size',
         # 'published_at',
         # 'published_by',
-        # 'updated_at',
-        # 'updated_by',
+        'updated_at',
+        'updated_by',
     )
     exclude = (
         # 'published_by',

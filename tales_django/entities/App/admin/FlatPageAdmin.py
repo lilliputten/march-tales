@@ -39,6 +39,7 @@ class FlatPageAdmin(
         (
             _('Basic Settings'),
             {
+                # 'classes': ['collapse', '--opened-by-default'],
                 'fields': [
                     'url',
                     'sites',
@@ -48,6 +49,7 @@ class FlatPageAdmin(
         (
             _('Title'),
             {
+                'classes': ['collapse'],
                 'fields': (
                     'page_title_ru',
                     'page_title_en',
@@ -57,6 +59,7 @@ class FlatPageAdmin(
         (
             _('Content'),
             {
+                'classes': ['collapse'],
                 'fields': (
                     'page_content_ru',
                     'page_content_en',
@@ -74,13 +77,30 @@ class FlatPageAdmin(
                 ],
             },
         ),
+        (
+            _('Information'),
+            {
+                'classes': ['collapse'],
+                'fields': (
+                    'published_at',
+                    'updated_at',
+                ),
+            },
+        ),
     ]
     list_display = [
         'url',
         # 'page_title',
         'title_translated',
         'registration_required',
+        # 'published_at',
+        'updated_at',
     ]
+    readonly_fields = (
+        'published_at',
+        'updated_at',
+    )
+
     ordering = [
         'url',
         'page_title_ru',

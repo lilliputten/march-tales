@@ -1,4 +1,5 @@
-# from django.contrib import admin
+from datetime import date
+
 from translated_fields import TranslatedField
 from django_ckeditor_5.fields import CKEditor5Field
 
@@ -19,12 +20,9 @@ from tales_django.core.model_helpers import (
 
 # @see .venv/Lib/site-packages/django/contrib/flatpages/models.py
 
-# admin.site.unregister(BaseFlatPage)
-
 
 class FlatPage(BaseFlatPage):
     class Meta:
-        # db_table = 'django_flatpage'
         db_table = 'tales_django_flatpage'
         verbose_name = _('Flat page')
         verbose_name_plural = _('Flat pages')
@@ -45,6 +43,9 @@ class FlatPage(BaseFlatPage):
         ),
         attrgetter=get_non_empty_localized_model_field_attrgetter,
     )
+
+    published_at = models.DateField(verbose_name=_('Published at'), default=date.today)
+    updated_at = models.DateField(verbose_name=_('Updated at'), auto_now=True)
 
     def __str__(self):
         items = [

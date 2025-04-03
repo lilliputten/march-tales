@@ -3,17 +3,20 @@ from django.urls import reverse
 
 from ..models import Author
 
-# from transcriber.models import PodcastGenre
+# @see https://docs.djangoproject.com/en/5.1/ref/contrib/sitemaps/
 
 
 class author_sitemap(Sitemap):
-    changefreq = 'daily'
-    priority = 0.6
+    # changefreq = 'daily'
+    # priority = 0.6
 
     def items(self):
-        # Assuming you have a method to fetch episodes
         return Author.objects.all()
 
     def lastmod(self, obj):
-        # Assuming you have a date field for last modification
-        return obj.date_published
+        return obj.updated_at
+
+    # def location(self, item):
+    #     # if kwargs not in item set as None
+    #     kwargs = item['kwargs'] if 'kwargs' in item else None
+    #     return reverse(item['view_name'], kwargs=kwargs)

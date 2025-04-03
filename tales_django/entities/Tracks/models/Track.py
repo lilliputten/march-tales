@@ -1,6 +1,7 @@
 from datetime import date
 from datetime import timedelta
 
+from django.urls import reverse
 from translated_fields import TranslatedField
 
 from django.utils.translation import gettext_lazy as _
@@ -36,7 +37,7 @@ class Track(Model):
         verbose_name_plural = _('Tracks')
 
     title = TranslatedField(
-        models.TextField(
+        models.CharField(
             _('Title'),
             unique=False,
             blank=False,
@@ -204,6 +205,14 @@ class Track(Model):
             pass
         # Call save first, to create a primary key
         super(Track, self).save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse(
+            'track_details',
+            kwargs={
+                'track_id': self.id,
+            },
+        )
 
     def __str__(self):
         items = [
