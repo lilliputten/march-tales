@@ -77,7 +77,12 @@ def no_promote_action(modeladmin, request, queryset):
 
 
 @admin.register(Track, site=unfold_admin_site)
-class TrackAdmin(TranslatedFieldAdmin, ImportExportModelAdmin, ExportActionModelAdmin, UnfoldModelAdmin):
+class TrackAdmin(
+    TranslatedFieldAdmin,
+    ImportExportModelAdmin,
+    ExportActionModelAdmin,
+    UnfoldModelAdmin,
+):
     import_form_class = ImportForm
     export_form_class = ExportForm
     # export_form_class = SelectableFieldsExportForm

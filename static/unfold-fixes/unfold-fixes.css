@@ -12,6 +12,106 @@ textarea.vLargeTextField {
 form#flatpage_form {
     /* border: 1px solid red; */
 }
+form .ck.ck-image-insert-form>.ck.ck-button {
+    display: flex;
+}
+
+form {
+    --primaryColor: #b26;
+    --ck-color-button-on-background: var(--primaryColor);
+    --ck-color-button-on-color: #fff;
+    --ck-color-button-on-hover-background: #901a4e;
+}
+html.dark form {
+    --ck-color-text: #999;
+}
+
+.ck-content blockquote,
+.ck-content dd,
+.ck-content dl,
+.ck-content figure,
+.ck-content h1,
+.ck-content h2,
+.ck-content h3,
+.ck-content h4,
+.ck-content h5,
+.ck-content h6,
+.ck-content hr,
+.ck-content p,
+.ck-content pre {
+    margin: revert;
+    font-size: revert;
+    font-weight: revert;
+    font-style: revert;
+}
+.ck-content h1 { font-size: 200%; font-weight: normal; }
+.ck-content h2 { font-size: 180%; font-weight: normal; }
+.ck-content h3 { font-size: 160%; font-weight: normal; }
+.ck-content h4 { font-size: 140%; font-weight: normal; }
+.ck-content h5 { font-size: 120%; }
+.ck-content h6 { font-size: 100%; }
+.ck-content h1,
+.ck-content h2,
+.ck-content h3,
+.ck-content h4,
+.ck-content h5,
+.ck-content h6 {
+    margin: 2em 0;
+}
+.ck-content a {
+    color: var(--primaryColor);
+}
+
+.ck-source-editing-area button,
+.ck-source-editing-area input,
+.ck-source-editing-area optgroup,
+.ck-source-editing-area select,
+.ck-source-editing-area textarea {
+    color: revert;
+}
+
+form .ck.ck-toolbar__separator {
+    background-color: rgba(128 128 128 / 0.15) !important;
+}
+
+form .ck.ck-editor__main>.ck-editor__editable {
+    background-color: initial;
+    /* border-color: rgba(128 128 128 / 0.5); */
+    /* border: 0 solid #e5e7eb; */
+    /* --tw-border-opacity: 1; */
+    /* border-color: rgb(var(--color-base-700) / var(--tw-border-opacity, 1)) !important; */
+    /* border-width: 1px; */
+    border-radius: var(--border-radius, 6px);
+    border: 1px solid var(--ck-color-base-border);
+    /* border: 1px solid rgb(var(--color-base-700) / 0.5) !important; */
+    overflow: hidden;
+    max-width: 100%;
+    position: relative;
+}
+form .ck.ck-editor__top .ck-sticky-panel .ck-sticky-panel__content,
+form .ck.ck-editor__main>.ck-editor__editable {
+    border-color: rgb(var(--color-base-500) / 0.2) !important;
+}
+html.dark form .ck.ck-editor__top .ck-sticky-panel .ck-sticky-panel__content,
+html.dark form .ck.ck-editor__main>.ck-editor__editable {
+    border-color: rgb(var(--color-base-700) / 0.5) !important;
+    /* border-radius: var(--border-radius, 6px); */
+}
+form .ck.ck-editor__main>.ck-editor__editable {
+    border-bottom-left-radius: var(--border-radius, 6px) !important;
+    border-bottom-right-radius: var(--border-radius, 6px) !important;
+}
+form .ck.ck-editor__top .ck-sticky-panel .ck-sticky-panel__content {
+    border-top-left-radius: var(--border-radius, 6px) !important;
+    border-top-right-radius: var(--border-radius, 6px) !important;
+}
+form .ck.ck-toolbar {
+    background-color: initial;
+    background-color: rgba(128 128 128 / 0.05);
+}
+form .ck.ck-toolbar button {
+    /* color: #888 !important; */
+}
 
 /*
  * form#flatpage_form label[for="id_url"] {

@@ -4,6 +4,8 @@
 
 assets
 samples
+authors
+tracks
 
 # Separetly uploaded android application and build report to load during
 # initialization (see `APK_JSON_FILE`, by default `output-metadata.json` and

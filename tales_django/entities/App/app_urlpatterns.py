@@ -54,6 +54,8 @@ app_urlpatterns = [
     # path('', include('pages.urls')),
     # Pages
     path(r'pages/', include('django.contrib.flatpages.urls')),
+    # path(r'ckeditor/', include('ckeditor_uploader.urls')),
+    path(r'ckeditor5/', include('django_ckeditor_5.urls')),
     # Language switching
     path(r'i18n/', include('django.conf.urls.i18n')),
     # App-provided paths...

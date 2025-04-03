@@ -124,6 +124,17 @@ if LOCAL:
     ALLOWED_HOSTS.append('localhost:3000')
     CSRF_TRUSTED_ORIGINS.append('http://localhost:3000')
 
+# Define languages
+
+LANGUAGES = (
+    ('ru', 'Русский'),
+    ('en', 'English'),
+)
+DEFAULT_LANGUAGE = LANGUAGES[0][0]
+LANGUAGE_CODE = DEFAULT_LANGUAGE
+LANGUAGES_DICT = {lng: name for lng, name in list(LANGUAGES)}
+LANGUAGES_LIST = [lng[0] for lng in list(LANGUAGES)]
+
 # Application definition
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
@@ -180,7 +191,8 @@ INSTALLED_APPS = [
     'markdownify.apps.MarkdownifyConfig',
     'imagekit',
     'django.contrib.flatpages',
-    'ckeditor',
+    # 'ckeditor',
+    'django_ckeditor_5',
     # app
     # APP_NAME + '.apps.TalesConfig',
     APP_NAME,
@@ -204,6 +216,7 @@ MIDDLEWARE = [
     # # Html content prettifier (TODO: Requires fixes for invalid html tags formatting)
     # APP_NAME + '.middleware.BeautifulMiddleware.BeautifulMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
+    # 'ckeditor_uploader',
     APP_NAME + '.middleware.CurrentRequestMiddleware.CurrentRequestMiddleware',
 ]
 
@@ -222,6 +235,202 @@ if DEBUG:
 #  {% load livereload_tags %}
 #  {% endif %}
 # ```
+
+# # @see https://github.com/django-ckeditor/django-ckeditor
+CKEDITOR_5_FILE_STORAGE = 'tales_django.ckeditor_storage.ckeditor_storage'   # optional
+# CKEDITOR_5_CUSTOM_CSS = 'path_to.css' # optional
+CKEDITOR_5_FILE_UPLOAD_PERMISSION = 'staff'  # Possible values: 'staff', 'authenticated', 'any'
+CKEDITOR_5_USER_LANGUAGE = True
+
+customColorPalette = [
+    {
+        'color': 'hsl(4, 90%, 58%)',
+        'label': 'Red',
+    },
+    {
+        'color': 'hsl(340, 82%, 52%)',
+        'label': 'Pink',
+    },
+    {
+        'color': 'hsl(291, 64%, 42%)',
+        'label': 'Purple',
+    },
+    {
+        'color': 'hsl(262, 52%, 47%)',
+        'label': 'Deep Purple',
+    },
+    {
+        'color': 'hsl(231, 48%, 48%)',
+        'label': 'Indigo',
+    },
+    {
+        'color': 'hsl(207, 90%, 54%)',
+        'label': 'Blue',
+    },
+]
+
+# @see https://pypi.org/project/django-ckeditor-5/
+CKEDITOR_5_CONFIGS = {
+    'default': {
+        'language': LANGUAGES_LIST, # ['ru', 'en'],
+        'toolbar': {
+            'items': [
+                'heading',
+                '|',
+                'bold',
+                'italic',
+                'link',
+                'underline',
+                'strikethrough',
+                'code',
+                # 'subscript',
+                # 'superscript',
+                # 'highlight',
+                '|',
+                # 'codeBlock',
+                'insertImage',
+                'mediaEmbed',
+                # 'imageUpload',
+                '|',
+                'bulletedList',
+                'numberedList',
+                # 'todoList',
+                '|',
+                'outdent',
+                'indent',
+                '|',
+                # '|',
+                # 'blockQuote',
+                # 'imageUpload',
+                '|',
+                # 'fontSize',
+                # 'fontFamily',
+                # 'fontColor',
+                # 'fontBackgroundColor',
+                'removeFormat',
+                'sourceEditing',
+                # 'insertTable',
+            ],
+        },
+        'image': {
+            'toolbar': [
+                'imageTextAlternative',
+                '|',
+                'imageStyle:alignLeft',
+                'imageStyle:alignRight',
+                'imageStyle:alignCenter',
+                'imageStyle:side',
+                '|',
+            ],
+            'styles': [
+                'full',
+                'side',
+                'alignLeft',
+                'alignRight',
+                'alignCenter',
+            ],
+        },
+        'heading': {
+            'options': [
+                {'model': 'paragraph', 'title': 'Paragraph', 'class': 'ck-heading_paragraph'},
+                {'model': 'heading1', 'view': 'h1', 'title': 'Heading 1', 'class': 'ck-heading_heading1'},
+                {'model': 'heading2', 'view': 'h2', 'title': 'Heading 2', 'class': 'ck-heading_heading2'},
+                {'model': 'heading3', 'view': 'h3', 'title': 'Heading 3', 'class': 'ck-heading_heading3'},
+                {'model': 'heading4', 'view': 'h4', 'title': 'Heading 4', 'class': 'ck-heading_heading4'},
+                {'model': 'heading5', 'view': 'h5', 'title': 'Heading 5', 'class': 'ck-heading_heading5'},
+                {'model': 'heading6', 'view': 'h6', 'title': 'Heading 6', 'class': 'ck-heading_heading6'},
+            ],
+        },
+    },
+    # 'extends': {
+    #     'blockToolbar': [
+    #         'paragraph',
+    #         'heading1',
+    #         'heading2',
+    #         'heading3',
+    #         '|',
+    #         'bulletedList',
+    #         'numberedList',
+    #         '|',
+    #         'blockQuote',
+    #     ],
+    #     'toolbar': {
+    #         'items': [
+    #             'heading',
+    #             '|',
+    #             'outdent',
+    #             'indent',
+    #             '|',
+    #             'bold',
+    #             'italic',
+    #             'link',
+    #             'underline',
+    #             'strikethrough',
+    #             'code',
+    #             'subscript',
+    #             'superscript',
+    #             'highlight',
+    #             '|',
+    #             'codeBlock',
+    #             'sourceEditing',
+    #             'insertImage',
+    #             'bulletedList',
+    #             'numberedList',
+    #             'todoList',
+    #             '|',
+    #             'blockQuote',
+    #             'imageUpload',
+    #             '|',
+    #             'fontSize',
+    #             'fontFamily',
+    #             'fontColor',
+    #             'fontBackgroundColor',
+    #             'mediaEmbed',
+    #             'removeFormat',
+    #             'insertTable',
+    #         ],
+    #         'shouldNotGroupWhenFull': 'true',
+    #     },
+    #     'image': {
+    #         'toolbar': [
+    #             'imageTextAlternative',
+    #             '|',
+    #             'imageStyle:alignLeft',
+    #             'imageStyle:alignRight',
+    #             'imageStyle:alignCenter',
+    #             'imageStyle:side',
+    #             '|',
+    #         ],
+    #         'styles': [
+    #             'full',
+    #             'side',
+    #             'alignLeft',
+    #             'alignRight',
+    #             'alignCenter',
+    #         ],
+    #     },
+    #     'table': {
+    #         'contentToolbar': ['tableColumn', 'tableRow', 'mergeTableCells', 'tableProperties', 'tableCellProperties'],
+    #         'tableProperties': {'borderColors': customColorPalette, 'backgroundColors': customColorPalette},
+    #         'tableCellProperties': {'borderColors': customColorPalette, 'backgroundColors': customColorPalette},
+    #     },
+    #     'heading': {
+    #         'options': [
+    #             {'model': 'paragraph', 'title': 'Paragraph', 'class': 'ck-heading_paragraph'},
+    #             {'model': 'heading1', 'view': 'h1', 'title': 'Heading 1', 'class': 'ck-heading_heading1'},
+    #             {'model': 'heading2', 'view': 'h2', 'title': 'Heading 2', 'class': 'ck-heading_heading2'},
+    #             {'model': 'heading3', 'view': 'h3', 'title': 'Heading 3', 'class': 'ck-heading_heading3'},
+    #         ],
+    #     },
+    # },
+    'list': {
+        'properties': {
+            'styles': 'true',
+            'startIndex': 'true',
+            'reversed': 'true',
+        },
+    },
+}
 
 IMPORT_EXPORT_USE_TRANSACTIONS = True
 
@@ -286,26 +495,26 @@ UNFOLD = {
                         'permission': lambda request: request.user.is_superuser,
                     },
                     {
+                        'title': _('Flat pages'),
+                        'icon': 'edit',
+                        # See: "admin:%s_%s_changelist" % info, current_app=self.name
+                        # 'link': reverse_lazy('unfold-admin:flatpages_flatpage_changelist'),
+                        'link': reverse_lazy('unfold-admin:tales_django_flatpage_changelist'),
+                    },
+                    {
+                        'title': _('Sites'),
+                        'icon': 'app_registration',
+                        'link': reverse_lazy('unfold-admin:sites_site_changelist'),
+                    },
+                    {
                         'title': _('Users'),
                         'icon': 'account_circle',
                         'link': reverse_lazy('unfold-admin:tales_django_user_changelist'),
                     },
                     {
                         'title': _('Groups'),
-                        'icon': 'account_circle',
+                        'icon': 'communities',
                         'link': reverse_lazy('unfold-admin:tales_django_group_changelist'),
-                    },
-                    # {
-                    #     'title': _('Sites'),
-                    #     'icon': 'account_home',
-                    #     'link': reverse_lazy('unfold-admin:tales_django_site_changelist'),
-                    # },
-                    {
-                        'title': _('Flat pages'),
-                        'icon': 'layers',
-                        # See: "admin:%s_%s_changelist" % info, current_app=self.name
-                        # 'link': reverse_lazy('unfold-admin:flatpages_flatpage_changelist'),
-                        'link': reverse_lazy('unfold-admin:tales_django_flatpage_changelist'),
                     },
                     # NOTE: Core admin urls:
                     # admin/[name='index']
@@ -560,19 +769,11 @@ SERVER_EMAIL = DEFAULT_FROM_EMAIL
 # Internationalization
 # @see https://docs.djangoproject.com/en/5.1/topics/i18n/
 # @see https://docs.djangoproject.com/en/5.1/topics/i18n/translation/
-LANGUAGE_CODE = 'ru'
 TIME_ZONE = 'Europe/Moscow'  # 'UTC'
 USE_TZ = True
 USE_I18N = True
 USE_L10N = True
 LOCALE_PATHS = (posixpath.join(BASE_DIR, APP_NAME, 'locale'),)
-LANGUAGES = (
-    ('ru', 'Русский'),
-    ('en', 'English'),
-)
-DEFAULT_LANGUAGE = LANGUAGES[0][0]
-LANGUAGES_DICT = {lng: name for lng, name in list(LANGUAGES)}
-LANGUAGES_LIST = [lng[0] for lng in list(LANGUAGES)]
 CMS_LANGUAGES = {
     'default': {
         'public': True,

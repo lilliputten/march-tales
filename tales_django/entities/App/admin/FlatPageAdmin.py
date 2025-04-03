@@ -1,12 +1,8 @@
-from translated_fields import TranslatedField
-from ckeditor_uploader.fields import RichTextUploadingField
+from django.contrib.flatpages.admin import FlatPageAdmin as BaseFlatPageAdmin
 
 from django.contrib import admin
-from django.contrib.flatpages.admin import FlatPageAdmin
-from django.contrib.flatpages.models import FlatPage as BaseFlatPage
+from django.db.models.functions import Lower
 from django.utils.translation import gettext_lazy as _
-from django.db import models
-from django.db.models import Model
 
 from import_export.admin import ExportActionModelAdmin, ImportExportModelAdmin
 from unfold.contrib.import_export.forms import ExportForm, ImportForm
@@ -14,53 +10,29 @@ from translated_fields import TranslatedFieldAdmin
 
 from unfold.admin import ModelAdmin as UnfoldModelAdmin
 
-from tales_django.core.model_helpers import get_non_empty_localized_model_field_attrgetter
 
 from tales_django.sites import unfold_admin_site
 
-
-class FlatPage(BaseFlatPage):
-    class Meta:
-        verbose_name = _('Flat page')
-        verbose_name_plural = _('Flat pages')
-
-    title = TranslatedField(
-        models.CharField(
-            _('title'),
-            max_length=200,
-            default='',
-        ),
-        attrgetter=get_non_empty_localized_model_field_attrgetter,
-    )
-    content = TranslatedField(
-        models.TextField(
-            _('content'),
-            blank=True,
-            default='',
-        ),
-        attrgetter=get_non_empty_localized_model_field_attrgetter,
-    )
-
-    # text = TranslatedField(
-    #     models.TextField(
-    #         _('Text'),
-    #         unique=False,
-    #         blank=False,
-    #         null=False,
-    #         max_length=256,
-    #     ),
-    #     attrgetter=get_non_empty_localized_model_field_attrgetter,
-    # )
-    #
-    # pass
+from ..forms import FlatPageForm
+from ..models import FlatPage, BaseFlatPage
 
 
-# Define a new FlatPageAdmin
+# @see .venv/Lib/site-packages/django/contrib/flatpages/models.py
+
+
+admin.site.unregister(BaseFlatPage)
+
+
 # @admin.register(FlatPage, site=unfold_admin_site)
 @admin.register(FlatPage, site=unfold_admin_site)
-class CustomFlatPageAdmin(
-    FlatPageAdmin, TranslatedFieldAdmin, ImportExportModelAdmin, ExportActionModelAdmin, UnfoldModelAdmin
+class FlatPageAdmin(
+    BaseFlatPageAdmin,
+    TranslatedFieldAdmin,
+    ImportExportModelAdmin,
+    ExportActionModelAdmin,
+    UnfoldModelAdmin,
 ):
+    form = FlatPageForm
     import_form_class = ImportForm
     export_form_class = ExportForm
     fieldsets = [
@@ -69,9 +41,7 @@ class CustomFlatPageAdmin(
             {
                 'fields': [
                     'url',
-                    # 'title',
-                    # 'content',
-                    # 'sites',
+                    'sites',
                 ],
             },
         ),
@@ -79,8 +49,8 @@ class CustomFlatPageAdmin(
             _('Title'),
             {
                 'fields': (
-                    'title_ru',
-                    'title_en',
+                    'page_title_ru',
+                    'page_title_en',
                 )
             },
         ),
@@ -88,8 +58,8 @@ class CustomFlatPageAdmin(
             _('Content'),
             {
                 'fields': (
-                    'content_ru',
-                    'content_en',
+                    'page_content_ru',
+                    'page_content_en',
                 )
             },
         ),
@@ -101,14 +71,29 @@ class CustomFlatPageAdmin(
                     # 'enable_comments',
                     'registration_required',
                     'template_name',
-                    'sites',
                 ],
             },
         ),
     ]
-    # pass
+    list_display = [
+        'url',
+        # 'page_title',
+        'title_translated',
+        'registration_required',
+    ]
+    ordering = [
+        'url',
+        'page_title_ru',
+        'registration_required',
+    ]
+    search_fields = [
+        'url',
+        'page_title_en',
+        'page_title_ru',
+    ]
 
+    def title_translated(self, track):
+        return track.page_title
 
-# Re-register FlatPageAdmin
-admin.site.unregister(BaseFlatPage)
-# admin.site.register(FlatPage, CustomFlatPageAdmin)
+    title_translated.admin_order_field = Lower('_title_translated')
+    title_translated.short_description = _('Title')

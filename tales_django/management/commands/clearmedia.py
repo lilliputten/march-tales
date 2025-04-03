@@ -11,7 +11,7 @@ from django.db.models import FileField
 keepfiles = [
     '.keep',
 ]
-excludeRegex = re.compile(r'^samples/')
+excludeRegex = re.compile(r'^(samples|ckeditor)/')
 
 
 class Command(BaseCommand):
