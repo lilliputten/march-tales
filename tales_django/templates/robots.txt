@@ -1,9 +1,10 @@
 User-agent: *
-Disallow: /favorites
+Disallow: /favorites/
 Disallow: /favorites/*
 Disallow: /login/
 Disallow: /signup/
 Disallow: /accounts/
-Disallow: /profile
+Disallow: /profile/
+Disallow: /profile/*
 
 Host: {{ site.domain }}

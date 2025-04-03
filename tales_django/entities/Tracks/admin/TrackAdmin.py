@@ -301,7 +301,20 @@ class TrackAdmin(
         obj.updated_by_id = request.user.id
         # Get audio duration
         audioFile = obj.audio_file
-        fileInstance: File | TemporaryUploadedFile = audioFile.file
+        fileInstance: File | TemporaryUploadedFile = None
+        try:
+            fileInstance = audioFile.file
+        except Exception as err:
+            errText = errorToString(err, show_stacktrace=False)
+            sTraceback = '\n\n' + str(traceback.format_exc()) + '\n\n'
+            errMsg = 'Can not access an audio file: ' + errText
+            _logger.info(
+                warningTitleStyle('save_model: Traceback for the following error:') + tretiaryStyle(sTraceback)
+            )
+            _logger.error(errorStyle('save_model: ' + errMsg))
+            messages.add_message(request, messages.ERROR, errMsg)
+            obj.track_status = 'HIDDEN'
+            obj.audio_duration = None
         if fileInstance and isinstance(fileInstance, TemporaryUploadedFile):
             try:
                 obj.audio_size = audioFile.size

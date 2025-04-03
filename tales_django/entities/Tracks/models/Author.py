@@ -3,6 +3,8 @@ from translated_fields import TranslatedField
 from django.utils.translation import gettext_lazy as _
 from django.db import models
 from django.db.models import Model
+from django.urls import reverse
+from django.utils.text import slugify
 
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFit
@@ -62,6 +64,11 @@ class Author(Model):
     @property
     def published_tracks_count(self):
         return self.tracks.filter(track_status='PUBLISHED').count()
+
+    def get_absolute_url(self):
+        # Ensure this value is URL-friendly
+        author_name = slugify(self.name)
+        return reverse('author', kwargs={'author_id': self.id, 'author_name': author_name})
 
     def __str__(self):
         return self.name

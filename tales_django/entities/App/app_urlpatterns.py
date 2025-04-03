@@ -1,6 +1,3 @@
-# from django.contrib.staticfiles.views import serve
-# from rest_framework import status
-
 from django.conf import settings
 from django.contrib import admin
 from django.conf.urls.static import static
@@ -10,7 +7,10 @@ from django.views.decorators.cache import cache_page
 from django.utils.translation import gettext_lazy as _
 from allauth.account.decorators import secure_admin_login
 from django.views.generic import RedirectView
+from django.contrib.sitemaps.views import sitemap
+from django.contrib.flatpages.sitemaps import FlatPageSitemap
 
+from tales_django.entities.Tracks.views import author_sitemap
 from tales_django.sites import unfold_admin_site
 
 # from .views.about_view import about_view
@@ -40,6 +40,11 @@ cache_timeout = 0 if settings.LOCAL or settings.DEBUG else 15 * 60  # in seconds
 
 admin.site.site_header = _('Site administration')
 
+sitemaps = {
+    'authors': author_sitemap,
+    'flatpages': FlatPageSitemap,
+}
+
 app_urlpatterns = [
     # Root page
     path(r'', index_view, name='index'),
@@ -67,6 +72,12 @@ app_urlpatterns = [
         r'robots.txt',
         cache_page(cache_timeout)(RobotsView.as_view()),
         name='robots',
+    ),
+    path(
+        'sitemap.xml',
+        sitemap,
+        {'sitemaps': sitemaps},
+        name='django.contrib.sitemaps.views.sitemap',
     ),
     re_path(r'^favicon\.ico$', RedirectView.as_view(url='/static/favicon.ico', permanent=True)),
 ]
