@@ -12,6 +12,7 @@ from core.helpers.utils import debugObj
 from core.logging import getDebugLogger
 
 from tales_django.core.model_helpers import get_current_language
+from tales_django.entities.Tracks.models import Author
 
 from .track_constants import default_tracks_limit
 from .common_constants import filter_delimiter
@@ -144,10 +145,26 @@ def get_search_filter_args(request: Request):
         search = params.get('search') if params else None
         if search:
             logger.info(f'[track_filters:get_track_filter_kwargs] search={search}')
+
+            # # Find authors for this search (TODO: To use intefrated search)
+            # # authors = Author.objects.filter(Q(**{f'name_ru__lower__trigram_similar': search})).all() # Postgres only way?
+            # authors = Author.objects.filter(Q(**{f'name_ru__icontains': search})).all()
+            # # EXAMPLE: Use this query in filters
+            # # | Q(**{f'author_id__in': author_ids}) # A silly way: to lookup by ids (see an example above)
+
             # Search in all the titles and tags...
+            # @see https://docs.djangoproject.com/en/5.1/topics/db/search/
             query = (
+                # Search our own title...
                 Q(**{f'title_ru__icontains': search})
                 | Q(**{f'title_en__icontains': search})
+                # Search in authors...
+                | Q(**{f'author__name_ru__icontains': search})
+                | Q(**{f'author__name_en__icontains': search})
+                # Search in rubrics...
+                | Q(**{f'rubric__text_ru__icontains': search})
+                | Q(**{f'rubric__text_en__icontains': search})
+                # Search in tags...
                 | Q(**{f'tag__text_ru__icontains': search})
                 | Q(**{f'tag__text_en__icontains': search})
             )
