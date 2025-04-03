@@ -53,7 +53,7 @@ class FlatPageAdmin(
                 'fields': (
                     'page_title_ru',
                     'page_title_en',
-                )
+                ),
             },
         ),
         (
@@ -63,7 +63,7 @@ class FlatPageAdmin(
                 'fields': (
                     'page_content_ru',
                     'page_content_en',
-                )
+                ),
             },
         ),
         (
