@@ -24,6 +24,8 @@ from .track_constants import default_tracks_limit, default_tracks_offset
 from .track_filters import get_track_filter_kwargs, get_track_order_args, get_search_filter_args
 from .track_serializers import TrackSerializer
 
+from django.db.models import QuerySet
+
 
 logger = getDebugLogger()
 
@@ -70,19 +72,22 @@ class TrackViewSet(viewsets.GenericViewSet):
             limit = int(request.query_params.get('limit', default_tracks_limit))
             offset = int(request.query_params.get('offset', default_tracks_offset))
 
-            # # TODO: Extract sort/filter params and modify results below?
-            # filter = request.query_params.get('filter')
-            # logger.info(f'[TrackViewSet:list] filter={filter}')
+            order_args = get_track_order_args(
+                request
+            )  # Retrieves ordering parameters from the request to determine how tracks should be sorted
+            filter_kwargs = get_track_filter_kwargs(
+                request
+            )  # Gets filter keyword arguments from the request for filtering tracks based on specific criteria
+            filter_args = get_search_filter_args(
+                request
+            )  # Extracts search-related filter arguments from the request for text-based searching
 
-            order_args = get_track_order_args(request)
-            filter_kwargs = get_track_filter_kwargs(request)
-            filter_args = get_search_filter_args(request)
-
+            # Previous straightforward approach, keeping for reference
             # query = Track.objects.filter(track_status='PUBLISHED').order_by('-published_at', f'title_{language}')
-            query = Track.objects.filter(*filter_args, **filter_kwargs).order_by(*order_args)
-            subset = query.all()
-            if limit:
-                subset = query.all()[offset : offset + limit]
+            # Build filtered and ordered query with distinct results
+            query = Track.objects.filter(*filter_args, **filter_kwargs).distinct().order_by(*order_args)
+            # Apply pagination: slice query if limit provided, otherwise get all results
+            subset: QuerySet[Track] = query[offset : offset + limit] if limit else query.all()
 
             full = int(request.query_params.get('full', '0'))
 
@@ -252,7 +257,7 @@ class TrackViewSet(viewsets.GenericViewSet):
             filter_kwargs = get_track_filter_kwargs(request)
             filter_args = get_search_filter_args(request)
 
-            query = Track.objects.filter(*filter_args, **filter_kwargs).order_by(*order_args)
+            query = Track.objects.filter(*filter_args, **filter_kwargs).distinct().order_by(*order_args)
             ids = list(query.values_list('id', flat=True))
             idx = ids.index(track.id)
             next_idx = (idx + 1) % len(ids)

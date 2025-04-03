@@ -2,19 +2,15 @@ from django.conf import settings
 from django.contrib import admin
 from django.conf.urls.static import static
 from django.conf.urls import handler404, handler403, handler500
-from django.urls import include, path, re_path, reverse
+from django.urls import include, path, re_path
 from django.views.decorators.cache import cache_page
 from django.utils.translation import gettext_lazy as _
 from allauth.account.decorators import secure_admin_login
 from django.views.generic import RedirectView
-from django.contrib.sitemaps.views import sitemap
-from django.contrib.sitemaps import GenericSitemap, Sitemap
-from django.contrib.flatpages.sitemaps import FlatPageSitemap as BaseFlatPageSitemap
 
-from tales_django.entities.Tracks.models import Rubric, Tag, Track
-from tales_django.entities.Tracks.views import author_sitemap
 from tales_django.sites import unfold_admin_site
 
+from .sitemap import sitemap_url
 from .views import page403, page404, page500
 from .api import api_urlpatterns
 
@@ -36,50 +32,6 @@ admin.site.login = secure_admin_login(admin.site.login)
 cache_timeout = 0 if settings.LOCAL or settings.DEBUG else 15 * 60  # in seconds: {min}*60
 
 admin.site.site_header = _('Site administration')
-
-
-class StaticSitemap(Sitemap):
-    i18n = True
-    changefreq = 'monthly'
-
-    def items(self):
-        return [
-            'index',
-            'tracks',
-            'author_index',
-            'rubric_index',
-            'tag_index',
-            'about',
-            'application',
-            'terms',
-            'cookies-agreement',
-            'privacy-policy',
-        ]
-
-    def location(self, item):
-        return reverse(item)
-
-
-class CustomFlatPageSitemap(BaseFlatPageSitemap):
-    changefreq = 'weekly'
-
-    def lastmod(self, obj):
-        return obj.flatpage.updated_at
-
-
-# @see https://docs.djangoproject.com/en/5.1/ref/contrib/sitemaps/
-sitemaps = {
-    # TODO:
-    # - Add indices and other 'static' pages to the sitemap.
-    # - Extract the sitemap to the dedicated module.
-    # - Cache sitemaps.
-    'static': StaticSitemap,
-    'flatpages': CustomFlatPageSitemap,
-    'tracks': GenericSitemap({'queryset': Track.objects.all(), 'date_field': 'updated_at'}, changefreq='weekly'),
-    'authors': author_sitemap,
-    'rubrics': GenericSitemap({'queryset': Rubric.objects.all(), 'date_field': 'updated_at'}, changefreq='weekly'),
-    'tags': GenericSitemap({'queryset': Tag.objects.all(), 'date_field': 'updated_at'}, changefreq='weekly'),
-}
 
 app_urlpatterns = [
     # Root page
@@ -108,12 +60,7 @@ app_urlpatterns = [
         cache_page(cache_timeout)(RobotsView.as_view()),
         name='robots',
     ),
-    path(
-        'sitemap.xml',
-        sitemap,
-        {'sitemaps': sitemaps},
-        name='django.contrib.sitemaps.views.sitemap',
-    ),
+    sitemap_url,
     re_path(r'^favicon\.ico$', RedirectView.as_view(url='/static/favicon.ico', permanent=True)),
 ]
 
