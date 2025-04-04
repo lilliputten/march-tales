@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "march-tales"
-version = "0.0.37"
+version = "0.0.38"
 description = "March Tales django rest api and web frontend server"
 authors = ["lilliputten <lilliputten@gmail.com>"]
 readme = "README.md"
@@ -21,8 +21,7 @@ django-crispy-forms = "^2.3"
 django-environ = "^0.11.2"
 django-livereload-server = "^0.5.1"
 django-preferences = "^1.0.0"
-django-registration = "^3.4" # Using an old version intentionally
-# django-registration = "^5.1.0" # @see https://django-registration.readthedocs.io/en/stable/
+django-registration = "^3.4" # Using an old version intentionally # = "^5.1.0" # @see https://django-registration.readthedocs.io/en/stable/
 django-timezone-field = "^7.0"
 # fpdf2 = "^2.8.2" # Probably, will be required later, to generate reports
 python = "^3.11"
@@ -36,15 +35,15 @@ django-allauth = {extras = ["mfa", "socialaccount"], version = "^65.3.1"}
 django-cors-headers = "^4.6.0"
 django-minify-html = "^1.11.0"
 mysqlclient = "^2.2.7"
-pyright = "^1.1.393"
 django-markdownify = "^0.9.5"
 django-unfold = "^0.51.0"
 django-import-export = "^4.3.7"
 django-imagekit = "^5.0.0"
+django-ckeditor-5 = "^0.2.17"
 
 [tool.poetry.group.dev.dependencies]
 blue = "^0.9.1"
-pyright = "^1.1"
+pyright = "^1.1.398"
 poetry-plugin-export = "^1.8.0"
 
 [build-system]
@@ -62,7 +61,7 @@ aggressive = 3
 line-length = 120
 extend-exclude = '''(
 \._
-| .*\/migrations\/.*
+| .*\/tales_django\/(migrations|entities\/flatpages)\/.*
 )'''
 
 [tool.poetry.scripts]

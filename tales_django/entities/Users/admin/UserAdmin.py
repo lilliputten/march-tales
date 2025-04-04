@@ -32,9 +32,9 @@ class IsAdministratorFilter(admin.SimpleListFilter):
 
     def queryset(self, _request, queryset):
         if self.value() == '1':
-            return queryset.filter(is_staff=False, is_superuser=False)
-        if self.value() == '0':
             return queryset.filter(~Q(is_staff=False, is_superuser=False))
+        if self.value() == '0':
+            return queryset.filter(is_staff=False, is_superuser=False)
 
 
 @admin.register(User, site=unfold_admin_site)
@@ -44,7 +44,16 @@ class UserAdmin(BaseUserAdmin, TranslatedFieldAdmin, ImportExportModelAdmin, Exp
 
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
-        (_('Personal info'), {'fields': ('first_name', 'last_name', 'address')}),
+        (
+            _('Personal info'),
+            {
+                'fields': (
+                    'first_name',
+                    'last_name',
+                    # 'address',
+                )
+            },
+        ),
         (
             _('Tracks'),
             {
@@ -97,6 +106,7 @@ class UserAdmin(BaseUserAdmin, TranslatedFieldAdmin, ImportExportModelAdmin, Exp
 
     is_administrator.short_description = _('Administrator')
     is_administrator.boolean = True
+    is_administrator.admin_order_field = 'is_staff'
 
     is_regular_user.short_description = _('Regular user')
     is_regular_user.boolean = True
@@ -104,5 +114,5 @@ class UserAdmin(BaseUserAdmin, TranslatedFieldAdmin, ImportExportModelAdmin, Exp
     def get_form(self, request, obj=None, **kwargs):
         form = super().get_form(request, obj, **kwargs)
         form.base_fields['username'].label = _('E-mail (username)')
-        form.base_fields['address'].label = _('Address')
+        # form.base_fields['address'].label = _('Address')
         return form

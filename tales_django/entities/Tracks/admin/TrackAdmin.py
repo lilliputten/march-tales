@@ -77,7 +77,12 @@ def no_promote_action(modeladmin, request, queryset):
 
 
 @admin.register(Track, site=unfold_admin_site)
-class TrackAdmin(TranslatedFieldAdmin, ImportExportModelAdmin, ExportActionModelAdmin, UnfoldModelAdmin):
+class TrackAdmin(
+    TranslatedFieldAdmin,
+    ImportExportModelAdmin,
+    ExportActionModelAdmin,
+    UnfoldModelAdmin,
+):
     import_form_class = ImportForm
     export_form_class = ExportForm
     # export_form_class = SelectableFieldsExportForm
@@ -86,72 +91,79 @@ class TrackAdmin(TranslatedFieldAdmin, ImportExportModelAdmin, ExportActionModel
         (
             _('Title'),
             {
+                'classes': ['--collapse', '--opened-by-default', 'columns'],
                 'fields': (
                     'title_ru',
                     'title_en',
-                )
+                ),
             },
         ),
         (
             _('Description'),
             {
+                'classes': ['--collapse', 'columns'],
                 'fields': (
                     'description_ru',
                     'description_en',
-                )
+                ),
             },
         ),
         (
             _('Media'),
             {
+                'classes': ['--collapse', 'columns'],
                 'fields': (
                     # 'youtube_url',
                     'audio_file',
                     'preview_picture',
-                )
+                ),
             },
         ),
         (
             _('Attributes'),
             {
+                'classes': ['--collapse', 'columns'],
                 'fields': (
                     'author',
                     'tags',
                     'rubrics',
-                )
+                ),
             },
         ),
         (
             _('Status'),
             {
+                'classes': ['--collapse', 'columns'],
                 'fields': (
                     'track_status',
                     'promote',
                     'for_members',
-                )
+                ),
             },
         ),
         (
             _('Publication'),
             {
+                'classes': ['--collapse', 'columns'],
                 'fields': (
                     'published_at',
                     'published_by',
-                )
+                    'updated_at',
+                    'updated_by',
+                ),
             },
         ),
         (
             _('Information'),
             {
+                'classes': ['--collapse', 'columns'],
                 'fields': (
                     'played_count',
                     # 'audio_duration',
                     # 'audio_size',
                     'duration_formatted',
                     'size_formatted',
-                    # 'updated_at',
-                    # 'updated_by',
-                )
+                ),
             },
         ),
     )
@@ -190,8 +202,8 @@ class TrackAdmin(TranslatedFieldAdmin, ImportExportModelAdmin, ExportActionModel
         # 'audio_size',
         # 'published_at',
         # 'published_by',
-        # 'updated_at',
-        # 'updated_by',
+        'updated_at',
+        'updated_by',
     )
     exclude = (
         # 'published_by',
@@ -296,7 +308,20 @@ class TrackAdmin(TranslatedFieldAdmin, ImportExportModelAdmin, ExportActionModel
         obj.updated_by_id = request.user.id
         # Get audio duration
         audioFile = obj.audio_file
-        fileInstance: File | TemporaryUploadedFile = audioFile.file
+        fileInstance: File | TemporaryUploadedFile = None
+        try:
+            fileInstance = audioFile.file
+        except Exception as err:
+            errText = errorToString(err, show_stacktrace=False)
+            sTraceback = '\n\n' + str(traceback.format_exc()) + '\n\n'
+            errMsg = 'Can not access an audio file: ' + errText
+            _logger.info(
+                warningTitleStyle('save_model: Traceback for the following error:') + tretiaryStyle(sTraceback)
+            )
+            _logger.error(errorStyle('save_model: ' + errMsg))
+            messages.add_message(request, messages.ERROR, errMsg)
+            obj.track_status = 'HIDDEN'
+            obj.audio_duration = None
         if fileInstance and isinstance(fileInstance, TemporaryUploadedFile):
             try:
                 obj.audio_size = audioFile.size

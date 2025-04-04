@@ -1,6 +1,3 @@
-# from django.contrib.staticfiles.views import serve
-# from rest_framework import status
-
 from django.conf import settings
 from django.contrib import admin
 from django.conf.urls.static import static
@@ -13,11 +10,7 @@ from django.views.generic import RedirectView
 
 from tales_django.sites import unfold_admin_site
 
-# from .views.about_view import about_view
-# from tales_django.entities.App.views import cookies_agreement_view
-# from .views.terms_view import terms_view
-# from .views.privacy_policy_view import privacy_policy_view
-
+from .sitemap import sitemap_url
 from .views import page403, page404, page500
 from .api import api_urlpatterns
 
@@ -45,17 +38,25 @@ app_urlpatterns = [
     path(r'', index_view, name='index'),
     path(r'tracks/', index_view, name='tracks'),  # TODO: Create dedicated view in tracks.
     # Secondary & static pages
-    path(r'about/', about_view, name='about'),
-    path(r'application/', application_view, name='application'),
+    # path(r'about/', about_view, name='about'),
+    # path(r'about/', RedirectView.as_view(url='/pages/about/', permanent=True)),
+    path(r'application-old/', application_view, name='application'),
     path(r'terms/', terms_view, name='terms'),
     path(r'cookies-agreement/', cookies_agreement_view, name='cookies-agreement'),
     path(r'privacy-policy/', privacy_policy_view, name='privacy-policy'),
-    # Core?
+    # Pages
     # path('', include('pages.urls')),
+    # tales_django/entities/flatpages/urls.py
+    path(r'/', include('tales_django.entities.flatpages.urls'), name='django.contrib.flatpages.views.flatpage'),
+    # path(r'pages/', flatpage, name='django.contrib.flatpages.views.flatpage'),
+    # path(r'pages/', include('django.contrib.flatpages.urls')),
+    # path(r'ckeditor/', include('ckeditor_uploader.urls')),
+    path(r'ckeditor5/', include('django_ckeditor_5.urls')),
     # Language switching
     path(r'i18n/', include('django.conf.urls.i18n')),
     # App-provided paths...
     path(r'admin/', admin.site.urls, name='unfold-admin'),
+    # path(r'admin/', unfold_admin_site.urls),  # <-- Unfold admin
     path(r'unfold-admin/', unfold_admin_site.urls),  # <-- Unfold admin
     # Service pages...
     path(
@@ -63,6 +64,7 @@ app_urlpatterns = [
         cache_page(cache_timeout)(RobotsView.as_view()),
         name='robots',
     ),
+    sitemap_url,
     re_path(r'^favicon\.ico$', RedirectView.as_view(url='/static/favicon.ico', permanent=True)),
 ]
 

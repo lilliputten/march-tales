@@ -1,6 +1,7 @@
 {% extends 'unfold/layouts/skeleton.html' %}
 
 {% load i18n unfold %}
+{% load static %}
 
 {% block base %}
     <div id="page" class="flex min-h-screen">
@@ -61,8 +62,22 @@
     </div>
 {% endblock %}
 
-{# XXX 2025.03.14, 20:52 -- Added style fixes #}
+{# XXX 2025.03.14, 20:52 -- Added style & scripts fixes #}
 {% block extrastyle %}
     {{ block.super }}
-    <link href="/static/unfold-fixes/unfold-fixes.css" rel="stylesheet">
+
+    <link href="{% static 'unfold-fixes/unfold-fixes.css' %}?{{ settings.PROJECT_VERSION }}" rel="stylesheet">
+
+{% endblock %}
+
+{% block extrahead %}
+    {{ block.super }}
+
+    <script src="{% static 'unfold-fixes/unfold-fixes.js' %}?{{ settings.PROJECT_VERSION }}"></script>
+
+    {% comment %}
+    {# CKBox is a premium ckeditor feature. #}
+    <script src="{% if settings.DEBUG %}{% static 'vendor/ckeditor/ckbox-2.4.0.js' %}{% else %}https://cdn.ckbox.io/ckbox/2.4.0/ckbox.js{% endif %}" type="text/javascript"></script>
+    {% endcomment %}
+
 {% endblock %}

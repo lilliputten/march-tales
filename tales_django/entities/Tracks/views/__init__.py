@@ -1,4 +1,5 @@
 from .track_details_view import track_details_view
+from .author_sitemap import author_sitemap
 from .author_index_view import author_index_view
 from .author_details_view import author_details_view
 from .rubric_index_view import rubric_index_view
@@ -9,6 +10,7 @@ from .favorites_view import favorites_view
 
 __all__ = [
     'track_details_view',
+    'author_sitemap',
     'author_index_view',
     'author_details_view',
     'rubric_index_view',

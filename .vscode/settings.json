@@ -19,5 +19,6 @@
       ".venv": true
     },
     "git.ignoreLimitWarning": true,
-    "vscode-as-git-mergetool.settingsAssistantOnStartup": false
+    "vscode-as-git-mergetool.settingsAssistantOnStartup": false,
+    "python.pythonPath": "d:\\Work\\March\\tales\\march-tales\\.venv\\Scripts\\python.exe"
 }

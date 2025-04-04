@@ -81,37 +81,58 @@ def lqip_media_img_tag(url, thumb, id='', className='', encoding='base64', file_
     - `/media/samples/thumb.png` -> `samples/thumb.png`
     """
     ext = get_file_extension(url)
-    thumbPath = get_media_url_path(thumb)
-    file_data = raw_media_file(thumbPath)
-    file_data = base64.b64encode(file_data)
-    urlPath = get_media_url_path(url)
+    file_data = None
+    urlPath = ''
+    try:
+        urlPath = get_media_url_path(url)
+        # if urlPath is None:
+        #     return ''
+        thumbPath = get_media_url_path(thumb)
+        if thumbPath is not None:
+            file_data = raw_media_file(thumbPath)
+            file_data = base64.b64encode(file_data)
+    except Exception as err:
+        sError = errorToString(err, show_stacktrace=False)
+        sTraceback = str(traceback.format_exc())
+        debugData = {
+            'url': url,
+            'thumb': thumb,
+            'err': err,
+            'traceback': sTraceback,
+        }
+        logger.error(f'Can not read source file: {sError}:\n' + debugObj(debugData))
+        return ''
+
     width = 0
     height = 0
     try:
-        im = Image.open(urlPath)
-        width, height = im.size
+        if urlPath is not None:
+            im = Image.open(urlPath)
+            width, height = im.size
     except:
         pass
     try:
-        encoded_data = encode_file_data(file_data, ext, encoding, file_type)
-        svg_data = (
-            r'<svg xmlns="http://www.w3.org/2000/svg"'
-            r' xmlns:xlink="http://www.w3.org/1999/xlink"'
-            f' viewBox="0 0 {width} {height}">'
-            r'<filter id="b" color-interpolation-filters="sRGB">'
-            r'<feGaussianBlur stdDeviation=".5"></feGaussianBlur>'
-            r'<feComponentTransfer>'
-            r'<feFuncA type="discrete" tableValues="1 1"></feFuncA>'
-            r'</feComponentTransfer>'
-            r'</filter>'
-            r'<image filter="url(#b)" preserveAspectRatio="none"'
-            r' height="100%" width="100%"'
-            f' xlink:href="{encoded_data}">'
-            r'</image>'
-            r'</svg>'
-        )
-        escaped_svg_data = prepare_svg(svg_data)
-        URI = f'data:image/svg+xml;charset=utf-8,{escaped_svg_data}'
+        URI = thumb
+        if file_data is not None:
+            encoded_data = encode_file_data(file_data, ext, encoding, file_type)
+            svg_data = (
+                r'<svg xmlns="http://www.w3.org/2000/svg"'
+                r' xmlns:xlink="http://www.w3.org/1999/xlink"'
+                f' viewBox="0 0 {width} {height}">'
+                r'<filter id="b" color-interpolation-filters="sRGB">'
+                r'<feGaussianBlur stdDeviation=".5"></feGaussianBlur>'
+                r'<feComponentTransfer>'
+                r'<feFuncA type="discrete" tableValues="1 1"></feFuncA>'
+                r'</feComponentTransfer>'
+                r'</filter>'
+                r'<image filter="url(#b)" preserveAspectRatio="none"'
+                r' height="100%" width="100%"'
+                f' xlink:href="{encoded_data}">'
+                r'</image>'
+                r'</svg>'
+            )
+            escaped_svg_data = prepare_svg(svg_data)
+            URI = f'data:image/svg+xml;charset=utf-8,{escaped_svg_data}'
         styleCode = f'background-size: cover; background-image: url("{URI}");'
         quotedStyleCode = re.sub(r'"', '&quot;', styleCode)
         code = mark_safe(
@@ -130,11 +151,13 @@ def lqip_media_img_tag(url, thumb, id='', className='', encoding='base64', file_
         sError = errorToString(err, show_stacktrace=False)
         sTraceback = str(traceback.format_exc())
         debugData = {
+            'url': url,
+            'thumb': thumb,
             'err': err,
             'traceback': sTraceback,
         }
-        logger.error(f'Caught error {sError} (re-raising):\n' + debugObj(debugData))
-        raise err
+        logger.error(f'Can not create a thumbnail tag: {sError}:\n' + debugObj(debugData))
+        # raise err
 
 
 def get_file_extension(path: str):
@@ -146,17 +169,28 @@ def encode_file_data(file_data: bytes, ext='', encoding='base64', file_type='ima
 
 
 def get_media_url_path(url: str):
-    parsed_url = unquote(url)
-    if '/media/' in parsed_url or parsed_url.startswith('media/'):
-        parsed_url = get_following_url_part(parsed_url, 'media/')
-    elif '/static/' in parsed_url or parsed_url.startswith('static/'):
-        parsed_url = get_following_url_part(parsed_url, 'static/')
-        path = posixpath.join(settings.STATIC_ROOT, parsed_url)
+    try:
+        parsed_url = unquote(url)
+        if '/media/' in parsed_url or parsed_url.startswith('media/'):
+            parsed_url = get_following_url_part(parsed_url, 'media/')
+        elif '/static/' in parsed_url or parsed_url.startswith('static/'):
+            parsed_url = get_following_url_part(parsed_url, 'static/')
+            path = posixpath.join(settings.STATIC_ROOT, parsed_url)
+            return path
+        path = find_static_file(parsed_url)
+        # if isinstance(path, list):
+        #     return path[0]
         return path
-    path = find_static_file(parsed_url)
-    # if isinstance(path, list):
-    #     return path[0]
-    return path
+    except Exception as err:
+        sError = errorToString(err, show_stacktrace=False)
+        sTraceback = str(traceback.format_exc())
+        debugData = {
+            'url': url,
+            'err': err,
+            'traceback': sTraceback,
+        }
+        logger.error(f'Can not get media file path: {sError}:\n' + debugObj(debugData))
+        return None
 
 
 def get_following_url_part(path: str, find_needle: str):

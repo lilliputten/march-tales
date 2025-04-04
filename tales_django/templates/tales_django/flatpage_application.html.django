@@ -1,0 +1,42 @@
+{# ex: set ft=htmldjango : #}
+{% extends 'tales_django/flatpage.html.django' %}
+{% load static %}
+{% load i18n %}
+
+{% block flatpage_before %}
+{{ block.super }}
+{% include "assets/carousel/carousel-begin.django" with class="shots-slider" type="phoneScreenshots" %}
+  {% include "assets/carousel/carousel-item.django" with img="images/app-shots/phone/tracks-list.jpg" title=_("Tracks list.") %}
+  {% include "assets/carousel/carousel-item.django" with img="images/app-shots/phone/author-screen-light.jpg" title=_("Author screen.") %}
+  {% include "assets/carousel/carousel-item.django" with img="images/app-shots/phone/author-tracks-light.jpg" title=_("Author tracks.") %}
+  {% include "assets/carousel/carousel-item.django" with img="images/app-shots/phone/authors-list-light.jpg" title=_("Authors list.") %}
+  {% include "assets/carousel/carousel-item.django" with img="images/app-shots/phone/notification-pane-player.jpg" title=_("Notification pane player.") %}
+  {% include "assets/carousel/carousel-item.django" with img="images/app-shots/phone/rubric-info-light.jpg" title=_("Rubric info.") %}
+  {% include "assets/carousel/carousel-item.django" with img="images/app-shots/phone/settings-page.jpg" title=_("Settings page.") %}
+  {% include "assets/carousel/carousel-item.django" with img="images/app-shots/phone/tag-info-light.jpg" title=_("Tag info.") %}
+  {% include "assets/carousel/carousel-item.django" with img="images/app-shots/phone/track-details.jpg" title=_("Track details.") %}
+  {% include "assets/carousel/carousel-item.django" with img="images/app-shots/phone/tracks-list-light.jpg" title=_("Tracks list.") %}
+  {% include "assets/carousel/carousel-item.django" with img="images/app-shots/phone/tracks-list-with-a-player.jpg" title=_("Tracks list with a player.") %}
+  {% include "assets/carousel/carousel-item.django" with img="images/app-shots/phone/tracks-list-without-panels-furing-scroll.jpg" title=_("Tracks list without panels during scroll.") %}
+{% include "assets/carousel/carousel-end.django" %}
+{% endblock flatpage_before %}
+
+{% block flatpage_after %}
+<hr />
+
+{% if settings.APK_DOWNLOAD_FILE %}
+  <p>
+    <a href="/{{ settings.APK_DOWNLOAD_FILE }}" class="btn btn-primary mb-4">
+      {% trans 'Download for Android' %}
+      <span class="dimmed-info">
+        {% if settings.APK_DOWNLOAD_VERSION %}
+          v.{{ settings.APK_DOWNLOAD_VERSION }}
+        {% endif %}
+        {% if settings.APK_DOWNLOAD_SIZE %}
+          {{ settings.APK_DOWNLOAD_SIZE|filesizeformat }}
+        {% endif %}
+      </span>
+    </a>
+  </p>
+{% endif %}
+{% endblock flatpage_after %}
