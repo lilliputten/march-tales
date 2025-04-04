@@ -61,7 +61,7 @@ aggressive = 3
 line-length = 120
 extend-exclude = '''(
 \._
-| .*\/migrations\/.*
+| .*\/tales_django\/(migrations|entities\/flatpages)\/.*
 )'''
 
 [tool.poetry.scripts]

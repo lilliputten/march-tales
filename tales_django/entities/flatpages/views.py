@@ -16,7 +16,7 @@ from core.helpers.errors import errorToString
 from core.helpers.utils import debugObj
 from core.logging import getDebugLogger
 
-DEFAULT_TEMPLATE = 'flatpages/default.html'
+DEFAULT_TEMPLATE = "flatpages/default.html"
 
 # This view is called from FlatpageFallbackMiddleware.process_response
 # when a 404 is raised, which often means CsrfViewMiddleware.process_view
@@ -30,7 +30,7 @@ DEFAULT_TEMPLATE = 'flatpages/default.html'
 logger = getDebugLogger()
 
 __all__ = [
-    'flatpage',
+    "flatpage",
 ]
 
 
@@ -47,11 +47,11 @@ def get_context(request: HttpRequest, flatpage: FlatPage):
         # Import and instantiate the context getter function dynamically
         # This follows Django's pattern of configurable behavior through settings
         getter = import_string(getter_string)
-        logger.info(f'get_context: {getter}')
+        logger.info(f"get_context: {getter}")
         return getter(request, flatpage)
     except ImportError:
         # Handle configuration errors where the specified getter function can't be imported
-        error_msg = f'Invalid flatpage context getter: {getter_string}'
+        error_msg = f"Invalid flatpage context getter: {getter_string}"
         raise ImproperlyConfigured(error_msg)
     except Exception as err:
         # DEBUG ONLY: Log detailed error information for debugging purposes
@@ -59,10 +59,10 @@ def get_context(request: HttpRequest, flatpage: FlatPage):
         sError = errorToString(err)
         sTraceback = str(traceback.format_exc())
         debugData = {
-            'err': err,
-            'traceback': sTraceback,
+            "err": err,
+            "traceback": sTraceback,
         }
-        logger.error(f'Context getter error: {sError}\n{debugObj(debugData)}')
+        logger.error(f"Context getter error: {sError}\n{debugObj(debugData)}")
         raise err
 
 
@@ -77,16 +77,16 @@ def flatpage(request, url):
         flatpage
             `flatpages.flatpages` object
     """
-    if not url.startswith('/'):
-        url = '/' + url
+    if not url.startswith("/"):
+        url = "/" + url
     site_id = get_current_site(request).id
     try:
         f = get_object_or_404(FlatPage, url=url, sites=site_id)
     except Http404:
-        if not url.endswith('/') and settings.APPEND_SLASH:
-            url += '/'
+        if not url.endswith("/") and settings.APPEND_SLASH:
+            url += "/"
             f = get_object_or_404(FlatPage, url=url, sites=site_id)
-            return HttpResponsePermanentRedirect('%s/' % request.path)
+            return HttpResponsePermanentRedirect("%s/" % request.path)
         else:
             raise
     return render_flatpage(request, f)
@@ -103,10 +103,18 @@ def render_flatpage(request, f):
         from django.contrib.auth.views import redirect_to_login
 
         return redirect_to_login(request.path)
-    if f.template_name:
-        template = loader.select_template((f.template_name, DEFAULT_TEMPLATE))
-    else:
-        template = loader.get_template(DEFAULT_TEMPLATE)
+
+    # Template resolution follows a priority order:
+    template_names: list[str] = [
+        # 1. FlatPage.template_name: Template specified in the FlatPage model database entry
+        f.template_name,
+        # 2. settings.FLATPAGE_DEFAULT_TEMPLATE: Site-wide default from settings
+        getattr(settings, "FLATPAGE_DEFAULT_TEMPLATE", None),
+        # 3. DEFAULT_TEMPLATE: Hardcoded fallback template name
+        DEFAULT_TEMPLATE,
+    ]
+    # Pass non-empty template names
+    template = loader.select_template(list(filter(None, template_names)))
 
     # To avoid having to always use the "|safe" filter in flatpage templates,
     # mark the title and content as already safe (since they are raw HTML
@@ -117,7 +125,7 @@ def render_flatpage(request, f):
     # Create the context dictionary for template rendering
     # First, include the flatpage object itself
     context = {
-        'flatpage': f,  # The FlatPage instance containing the page content
+        "flatpage": f,  # The FlatPage instance containing the page content
         # Merge in any additional context from the custom context getter
         # This allows for dynamic context data based on the request and flatpage
         **get_context(request, f),

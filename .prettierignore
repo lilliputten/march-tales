@@ -33,4 +33,4 @@
 **/*_
 
 # Temporarily (during dev/PR)
-tales_django/entities/flatpages/
+/tales_django/entities/flatpages/

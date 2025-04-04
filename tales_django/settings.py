@@ -239,7 +239,20 @@ if DEBUG:
 
 # FLATPAGE
 # @see https://docs.djangoproject.com/en/5.1/ref/contrib/flatpages/
+
+# An optional string path to a callable that provides additional context for
+# flatpage templates. It follows Django's pattern of dynamic imports for
+# configuration. The function should accept the current request and flatpage
+# objects (request: HttpRequest, flatpage: FlatPage) as parameters and return a
+# context dictionary.
 FLATPAGE_CONTEXT_GETTER = 'tales_django.get_flatpages_context.get_flatpages_context'
+
+# The default template used to render flatpages when the FlatPage model does
+# not specify a specific template for a specific page. This serves as a
+# site-wide default template for all flatpages. The template should be located
+# in the templates directory and follow Django's template naming conventions.
+# The default value is "flatpages/default.html".
+FLATPAGE_DEFAULT_TEMPLATE = 'tales_django/flatpage.html.django'
 
 # # @see https://github.com/django-ckeditor/django-ckeditor
 CKEDITOR_5_FILE_STORAGE = 'tales_django.ckeditor_storage.ckeditor_storage'   # optional
