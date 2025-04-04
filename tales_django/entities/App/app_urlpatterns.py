@@ -38,7 +38,8 @@ app_urlpatterns = [
     path(r'', index_view, name='index'),
     path(r'tracks/', index_view, name='tracks'),  # TODO: Create dedicated view in tracks.
     # Secondary & static pages
-    path(r'about/', about_view, name='about'),
+    # path(r'about/', about_view, name='about'),
+    # path(r'about/', RedirectView.as_view(url='/pages/about/', permanent=True)),
     path(r'application/', application_view, name='application'),
     path(r'terms/', terms_view, name='terms'),
     path(r'cookies-agreement/', cookies_agreement_view, name='cookies-agreement'),
@@ -46,7 +47,7 @@ app_urlpatterns = [
     # Pages
     # path('', include('pages.urls')),
     # tales_django/entities/flatpages/urls.py
-    path(r'pages/', include('tales_django.entities.flatpages.urls'), name='django.contrib.flatpages.views.flatpage'),
+    path(r'/', include('tales_django.entities.flatpages.urls'), name='django.contrib.flatpages.views.flatpage'),
     # path(r'pages/', flatpage, name='django.contrib.flatpages.views.flatpage'),
     # path(r'pages/', include('django.contrib.flatpages.urls')),
     # path(r'ckeditor/', include('ckeditor_uploader.urls')),
