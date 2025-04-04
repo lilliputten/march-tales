@@ -65,8 +65,15 @@
 {# XXX 2025.03.14, 20:52 -- Added style & scripts fixes #}
 {% block extrastyle %}
     {{ block.super }}
-    <link href="{% static 'unfold-fixes/unfold-fixes.css' %}" rel="stylesheet">
-    <script src="{% static 'unfold-fixes/unfold-fixes.js' %}"></script>
+
+    <link href="{% static 'unfold-fixes/unfold-fixes.css' %}?{{ settings.PROJECT_VERSION }}" rel="stylesheet">
+
+{% endblock %}
+
+{% block extrahead %}
+    {{ block.super }}
+
+    <script src="{% static 'unfold-fixes/unfold-fixes.js' %}?{{ settings.PROJECT_VERSION }}"></script>
 
     {% comment %}
     {# CKBox is a premium ckeditor feature. #}

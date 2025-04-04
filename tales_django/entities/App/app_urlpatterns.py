@@ -40,7 +40,7 @@ app_urlpatterns = [
     # Secondary & static pages
     # path(r'about/', about_view, name='about'),
     # path(r'about/', RedirectView.as_view(url='/pages/about/', permanent=True)),
-    path(r'application/', application_view, name='application'),
+    path(r'application-old/', application_view, name='application'),
     path(r'terms/', terms_view, name='terms'),
     path(r'cookies-agreement/', cookies_agreement_view, name='cookies-agreement'),
     path(r'privacy-policy/', privacy_policy_view, name='privacy-policy'),

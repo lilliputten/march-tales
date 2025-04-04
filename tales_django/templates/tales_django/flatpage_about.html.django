@@ -3,7 +3,7 @@
 {% load static %}
 {% load i18n %}
 
-{% block main_column_content %}
+{% block flatpage_after %}
 {{ block.super }}
 
 <hr />
@@ -15,4 +15,4 @@
   <li>{% trans "Mobile applicaiton version" %}: {{ settings.APK_DOWNLOAD_VERSION }}</li>
 </ul>
 
-{% endblock main_column_content %}
+{% endblock flatpage_after %}

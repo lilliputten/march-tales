@@ -91,7 +91,7 @@ class TrackAdmin(
         (
             _('Title'),
             {
-                # 'classes': ['collapse', '--opened-by-default'],
+                'classes': ['--collapse', '--opened-by-default', 'columns'],
                 'fields': (
                     'title_ru',
                     'title_en',
@@ -101,7 +101,7 @@ class TrackAdmin(
         (
             _('Description'),
             {
-                'classes': ['collapse'],
+                'classes': ['--collapse', 'columns'],
                 'fields': (
                     'description_ru',
                     'description_en',
@@ -111,7 +111,7 @@ class TrackAdmin(
         (
             _('Media'),
             {
-                'classes': ['collapse'],
+                'classes': ['--collapse', 'columns'],
                 'fields': (
                     # 'youtube_url',
                     'audio_file',
@@ -122,7 +122,7 @@ class TrackAdmin(
         (
             _('Attributes'),
             {
-                'classes': ['collapse'],
+                'classes': ['--collapse', 'columns'],
                 'fields': (
                     'author',
                     'tags',
@@ -133,7 +133,7 @@ class TrackAdmin(
         (
             _('Status'),
             {
-                'classes': ['collapse'],
+                'classes': ['--collapse', 'columns'],
                 'fields': (
                     'track_status',
                     'promote',
@@ -144,7 +144,7 @@ class TrackAdmin(
         (
             _('Publication'),
             {
-                'classes': ['collapse'],
+                'classes': ['--collapse', 'columns'],
                 'fields': (
                     'published_at',
                     'published_by',
@@ -156,7 +156,7 @@ class TrackAdmin(
         (
             _('Information'),
             {
-                'classes': ['collapse'],
+                'classes': ['--collapse', 'columns'],
                 'fields': (
                     'played_count',
                     # 'audio_duration',

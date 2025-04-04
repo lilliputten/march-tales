@@ -39,7 +39,7 @@ class FlatPageAdmin(
         (
             _('Basic Settings'),
             {
-                # 'classes': ['collapse', '--opened-by-default'],
+                'classes': ['--collapse', '--opened-by-default', 'columns'],
                 'fields': [
                     'url',
                     'sites',
@@ -49,7 +49,7 @@ class FlatPageAdmin(
         (
             _('Title'),
             {
-                'classes': ['collapse'],
+                'classes': ['--collapse', 'columns'],
                 'fields': (
                     'page_title_ru',
                     'page_title_en',
@@ -59,7 +59,7 @@ class FlatPageAdmin(
         (
             _('Content'),
             {
-                'classes': ['collapse'],
+                'classes': ['--collapse', 'columns'],
                 'fields': (
                     'page_content_ru',
                     'page_content_en',
@@ -69,7 +69,7 @@ class FlatPageAdmin(
         (
             _('Advanced options'),
             {
-                'classes': ['collapse'],
+                'classes': ['--collapse', 'columns'],
                 'fields': [
                     # 'enable_comments',
                     'registration_required',
@@ -80,7 +80,7 @@ class FlatPageAdmin(
         (
             _('Information'),
             {
-                'classes': ['collapse'],
+                'classes': ['--collapse', 'columns'],
                 'fields': (
                     'published_at',
                     'updated_at',

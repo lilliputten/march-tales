@@ -120,3 +120,17 @@ html.dark .ck-editor .ck.ck-editor__main>.ck-editor__editable {
     background-color: initial;
     background-color: rgba(128 128 128 / 0.05);
 }
+
+/* columns */
+@media (width > 1024px) {
+    fieldset.columns:not(.collapsed) > div {
+        /* border: 1px solid red !important; */
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+    }
+    fieldset.columns > div > .form-row {
+        flex: 1;
+    }
+}
+

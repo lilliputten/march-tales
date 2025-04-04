@@ -18,8 +18,12 @@
 
 <h1 class="page-title primary-color my-4">{{ flatpage.flatpage.page_title }}</h1>
 
+{% block flatpage_before %}{% endblock flatpage_before %}
+
 <div class="text-content flatpage pb-2">
 {{ flatpage.flatpage.page_content|safe }}
 </div>
+
+{% block flatpage_after %}{% endblock flatpage_after %}
 
 {% endblock main_column_content %}
