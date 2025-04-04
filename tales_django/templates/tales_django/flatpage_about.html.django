@@ -1,0 +1,18 @@
+{# ex: set ft=htmldjango : #}
+{% extends 'tales_django/flatpage.html.django' %}
+{% load static %}
+{% load i18n %}
+
+{% block main_column_content %}
+{{ block.super }}
+
+<hr />
+
+<h4>{% trans "Versions" %}</h4>
+
+<ul>
+  <li>{% trans "Server version" %}: {{ settings.PROJECT_VERSION }}</li>
+  <li>{% trans "Mobile applicaiton version" %}: {{ settings.APK_DOWNLOAD_VERSION }}</li>
+</ul>
+
+{% endblock main_column_content %}

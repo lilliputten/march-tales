@@ -2,7 +2,6 @@
 {% extends 'base-main-columns-with-header.html.django' %}
 {% load static %}
 {% load i18n %}
-{% load markdownify %}
 
 {% block body_class %}flatpage {{ block.super }}{% endblock %}
 
