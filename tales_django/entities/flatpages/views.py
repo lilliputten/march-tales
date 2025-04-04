@@ -35,6 +35,32 @@ __all__ = [
 
 
 def get_context(request: HttpRequest, flatpage: FlatPage):
+    """
+    Dynamically retrieves additional context data for flatpage templates.
+
+    This function provides a flexible way to add dynamic context data to flatpage
+    templates without modifying the core flatpage rendering logic. It works by:
+
+    1. Reading the FLATPAGE_CONTEXT_GETTER setting, which should be a string path
+       to a callable that generates context data
+    2. Dynamically importing and calling that function with the current request
+       and flatpage objects
+    3. Returning the resulting context dictionary to be merged with the base context
+       in the render_flatpage function
+
+    Parameters:
+        request (HttpRequest): The current HTTP request object
+        flatpage (FlatPage): The flatpage object being rendered
+
+    Returns:
+        dict: A dictionary of context data to be included in the template rendering
+              Returns an empty dict if no context getter is specified
+
+    Raises:
+        ImproperlyConfigured: If the specified getter function can't be imported
+        Exception: Any exception raised by the context getter function will be
+                   logged and re-raised
+    """
     # Get the custom context getter function path from Django settings
     # This allows for flexible context generation without modifying the core code
     getter_string = getattr(settings, "FLATPAGE_CONTEXT_GETTER", None)
@@ -113,7 +139,7 @@ def render_flatpage(request, f):
         # 3. DEFAULT_TEMPLATE: Hardcoded fallback template name
         DEFAULT_TEMPLATE,
     ]
-    # Pass non-empty template names
+    # Pass non-empty template names to a template selector
     template = loader.select_template(list(filter(None, template_names)))
 
     # To avoid having to always use the "|safe" filter in flatpage templates,

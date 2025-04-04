@@ -216,8 +216,8 @@ MIDDLEWARE = [
     'allauth.account.middleware.AccountMiddleware',
     # # Html content prettifier (TODO: Requires fixes for invalid html tags formatting)
     # APP_NAME + '.middleware.BeautifulMiddleware.BeautifulMiddleware',
-    'tales_django.entities.flatpages.middleware.FlatpageFallbackMiddleware',
-    # 'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
+    APP_NAME + '.entities.flatpages.middleware.FlatpageFallbackMiddleware',
+    # 'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware', # TODO: Return to this scheme after a PR to `django.contrib.flatpages`
     APP_NAME + '.middleware.CurrentRequestMiddleware.CurrentRequestMiddleware',
 ]
 
