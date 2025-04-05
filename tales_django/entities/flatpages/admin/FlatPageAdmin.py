@@ -23,7 +23,6 @@ from ..models import FlatPage, BaseFlatPage
 admin.site.unregister(BaseFlatPage)
 
 
-# @admin.register(FlatPage, site=unfold_admin_site)
 @admin.register(FlatPage, site=unfold_admin_site)
 class FlatPageAdmin(
     BaseFlatPageAdmin,
@@ -39,7 +38,7 @@ class FlatPageAdmin(
         (
             _('Basic Settings'),
             {
-                'classes': ['--collapse', '--opened-by-default', 'columns'],
+                'classes': ['columns'],
                 'fields': [
                     'url',
                     'sites',
@@ -49,7 +48,7 @@ class FlatPageAdmin(
         (
             _('Title'),
             {
-                'classes': ['--collapse', 'columns'],
+                'classes': ['columns'],
                 'fields': (
                     'page_title_ru',
                     'page_title_en',
@@ -59,7 +58,7 @@ class FlatPageAdmin(
         (
             _('Content'),
             {
-                'classes': ['--collapse', 'columns'],
+                'classes': ['columns'],
                 'fields': (
                     'page_content_ru',
                     'page_content_en',
@@ -69,9 +68,8 @@ class FlatPageAdmin(
         (
             _('Advanced options'),
             {
-                'classes': ['--collapse', 'columns'],
+                'classes': ['collapse', 'columns'],
                 'fields': [
-                    # 'enable_comments',
                     'registration_required',
                     'template_name',
                 ],
@@ -80,7 +78,7 @@ class FlatPageAdmin(
         (
             _('Information'),
             {
-                'classes': ['--collapse', 'columns'],
+                'classes': ['collapse', 'columns'],
                 'fields': (
                     'published_at',
                     'updated_at',
@@ -90,10 +88,8 @@ class FlatPageAdmin(
     ]
     list_display = [
         'url',
-        # 'page_title',
         'title_translated',
         'registration_required',
-        # 'published_at',
         'updated_at',
     ]
     readonly_fields = (

@@ -193,8 +193,7 @@ INSTALLED_APPS = [
     'imagekit',
     'django.contrib.flatpages',
     'django_ckeditor_5',
-    # app
-    # APP_NAME + '.apps.TalesConfig',
+    # The app...
     APP_NAME,
 ]
 if LOCAL:
@@ -211,12 +210,13 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_minify_html.middleware.MinifyHtmlMiddleware',
-    # allauth, @see https://docs.allauth.org/en/latest/installation/quickstart.html
+    # @see https://docs.allauth.org/en/latest/installation/quickstart.html
     'allauth.account.middleware.AccountMiddleware',
     # # Html content prettifier (TODO: Requires fixes for invalid html tags formatting)
     # APP_NAME + '.middleware.BeautifulMiddleware.BeautifulMiddleware',
     APP_NAME + '.entities.flatpages.middleware.FlatpageFallbackMiddleware',
-    # 'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware', # TODO: Return to this scheme after a PR to `django.contrib.flatpages`
+    # TODO: Return to this scheme after the PR to `django.contrib.flatpages` will be accepted and rolled out
+    # 'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
     APP_NAME + '.middleware.CurrentRequestMiddleware.CurrentRequestMiddleware',
 ]
 

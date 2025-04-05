@@ -1,3 +1,0 @@
-{# ex: set ft=htmldjango : #}
-
-Registration already cancelled

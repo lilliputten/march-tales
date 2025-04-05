@@ -1,3 +1,0 @@
-{# ex: set ft=htmldjango : #}
-
-[{{ settings.SITE_SHORT_NAME }}]: Your payment for event {{ event.title }} registration has been successfully completed
