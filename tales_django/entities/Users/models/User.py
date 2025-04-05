@@ -36,6 +36,8 @@ class User(AbstractUser):
         'Track', blank=True, related_name='playlisted_users', verbose_name=_('Playlist')
     )
 
+    # TODO: Add plyback positions data field and synchronisation with clients (API, sending data to clients).
+
     allow_notifications = models.BooleanField(
         _('Allow notifications'),
         default=False,

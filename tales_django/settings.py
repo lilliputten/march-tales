@@ -192,7 +192,6 @@ INSTALLED_APPS = [
     'markdownify.apps.MarkdownifyConfig',
     'imagekit',
     'django.contrib.flatpages',
-    # 'ckeditor',
     'django_ckeditor_5',
     # app
     # APP_NAME + '.apps.TalesConfig',

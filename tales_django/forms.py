@@ -1,4 +1,4 @@
-from .entities.App.forms import FlatPageForm
+from .entities.flatpages.forms import FlatPageForm
 from .entities.Users.forms import (
     SignUpForm,
     UpdateUserForm,
