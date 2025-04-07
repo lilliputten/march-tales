@@ -2,18 +2,16 @@ from django.http import HttpRequest
 from django.shortcuts import get_object_or_404, render
 
 from core.logging import getDebugLogger
-from tales_django.core.model_helpers import check_required_locale
-from tales_django.core.pages import get_favorites_list_context, get_tag_tracks_list_context, get_common_context
+from tales_django.core.model_helpers import check_locale_decorator
+from tales_django.core.pages import get_common_context, get_favorites_list_context, get_tag_tracks_list_context
 from tales_django.entities.Tracks.models import Tag
 
 
 logger = getDebugLogger()
 
 
+@check_locale_decorator
 def tag_details_view(request: HttpRequest, tag_id):
-
-    check_required_locale(request)
-
     tag = get_object_or_404(Tag, id=tag_id)
 
     # TODO: Use get_generic_context (without tags list)?
