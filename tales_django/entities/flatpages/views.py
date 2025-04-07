@@ -15,6 +15,7 @@ from django.utils.module_loading import import_string
 from core.helpers.errors import errorToString
 from core.helpers.utils import debugObj
 from core.logging import getDebugLogger
+from tales_django.core.model_helpers import check_locale_decorator
 
 DEFAULT_TEMPLATE = 'flatpages/default.html'
 
@@ -92,6 +93,7 @@ def get_context(request: HttpRequest, flatpage: FlatPage):
         raise err
 
 
+@check_locale_decorator
 def flatpage(request, url):
     """
     Public interface to the flat page view.
