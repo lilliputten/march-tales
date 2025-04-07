@@ -16,8 +16,8 @@ from .api import api_urlpatterns
 
 from .views import (
     index_view,
-    about_view,
-    application_view,
+    # about_view,
+    # application_view,
     cookies_agreement_view,
     terms_view,
     privacy_policy_view,
