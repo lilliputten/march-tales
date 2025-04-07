@@ -1,3 +1,4 @@
+from .check_required_locale import check_required_locale
 from .get_valid_language import get_valid_language
 from .get_current_language import get_current_language
 from .get_non_empty_localized_model_field_value import (
@@ -6,6 +7,7 @@ from .get_non_empty_localized_model_field_value import (
 )
 
 __all__ = [
+    'check_required_locale',
     'get_valid_language',
     'get_current_language',
     'get_non_empty_localized_model_field_value',

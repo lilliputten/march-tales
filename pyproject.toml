@@ -45,6 +45,7 @@ django-ckeditor-5 = "^0.2.17"
 blue = "^0.9.1"
 pyright = "^1.1.398"
 poetry-plugin-export = "^1.8.0"
+isort = "^6.0.1"
 
 [build-system]
 requires = ["poetry-core"]

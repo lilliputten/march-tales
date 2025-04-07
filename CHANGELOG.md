@@ -14,6 +14,7 @@
 - Fixed search issues (filter only unique results, added search by author and rubrics)
 - Added flatpages context getter and core template.
 - Added flat pages `about` and `application` (with crsp templates).
+- Added a forced language parameter (`?hl=ru`).
 
 [Compare with the previous version](https://github.com/lilliputten/march-tales/compare/v.0.0.37...v.0.0.38)
 

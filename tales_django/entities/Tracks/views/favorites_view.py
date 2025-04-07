@@ -3,6 +3,7 @@ from django.shortcuts import render
 
 # from core.helpers.utils import debugObj
 from core.logging import getDebugLogger
+from tales_django.core.model_helpers import check_required_locale
 from tales_django.core.pages import (
     get_common_context,
     get_favorites_list_context,
@@ -14,6 +15,8 @@ logger = getDebugLogger()
 
 
 def favorites_view(request: HttpRequest):
+
+    check_required_locale(request)
 
     context = {
         **get_common_context(request),

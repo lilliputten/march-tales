@@ -2,6 +2,8 @@ from django.contrib.sites.models import Site
 from django.shortcuts import render
 from django.views.generic import TemplateView
 
+from tales_django.core.model_helpers import check_required_locale
+
 
 class RobotsView(TemplateView):
     template_name = 'robots.txt'
@@ -20,17 +22,20 @@ class RobotsView(TemplateView):
 
 
 def page403(request, *args, **argv):
-    # LOG.error("403 error")
+    check_required_locale(request)
+
     return render(request, '403.html.django', {}, status=403)
 
 
 def page404(request, *args, **argv):
-    # LOG.error("404 error")
+    check_required_locale(request)
+
     return render(request, '404.html.django', {}, status=404)
 
 
 def page500(request, *args, **argv):
-    # LOG.error("500 error")
+    check_required_locale(request)
+
     return render(request, '500.html.django', {}, status=500)
 
 

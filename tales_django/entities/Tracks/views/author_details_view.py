@@ -2,6 +2,7 @@ from django.http import HttpRequest
 from django.shortcuts import get_object_or_404, render
 
 from core.logging import getDebugLogger
+from tales_django.core.model_helpers import check_required_locale
 from tales_django.core.pages import get_author_tracks_list_context, get_common_context, get_favorites_list_context
 from tales_django.entities.Tracks.models import Author
 
@@ -10,6 +11,8 @@ logger = getDebugLogger()
 
 
 def author_details_view(request: HttpRequest, author_id):
+
+    check_required_locale(request)
 
     author = get_object_or_404(Author, id=author_id)
 
