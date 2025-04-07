@@ -21,7 +21,7 @@
         </ul>
     </div>
     <ul class="mt-2">
-      <li><a href="{% url 'application' %}">{% trans "Mobile application" %}</a></li>
+      <li><a href="/application/">{% trans "Mobile application" %}</a></li>
       <li>
         {% trans "Developed by" %}
         <a class="external" target="blank" href="https://lilliputten.com/projects/2025/march-tales/">
