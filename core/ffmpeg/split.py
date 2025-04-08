@@ -1,9 +1,8 @@
 import subprocess
 
-from core.logging import getDebugLogger, titleStyle, secondaryStyle
+from core.logging import getDebugLogger, secondaryStyle, titleStyle
 
 from .helpers import convertKwargsToCmdLineArgs
-
 
 _logger = getDebugLogger()
 

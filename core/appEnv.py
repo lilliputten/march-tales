@@ -1,9 +1,10 @@
 # -*- coding:utf-8 -*-
 
 import os
-import re
 import pathlib
 import posixpath
+import re
+
 import environ
 
 BASE_DIR = pathlib.Path(__file__).resolve().parent.parent

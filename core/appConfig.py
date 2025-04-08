@@ -1,13 +1,10 @@
 # -*- coding:utf-8 -*-
 
-import os.path
 import json
+import os.path
 import posixpath
 
-from .appEnv import (
-    BASE_DIR,
-    appEnv,
-)
+from .appEnv import BASE_DIR, appEnv
 
 # Timezone (set `TZ_HOURS` to hours value to adjust date representation to corresponding timezone)
 TZ_HOURS = appEnv.int('TZ_HOURS_OFFSET', 0)
