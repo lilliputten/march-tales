@@ -12,10 +12,18 @@ from tales_django.sites import unfold_admin_site
 
 from .api import api_urlpatterns
 from .sitemap import sitemap_url
-from .views import (RobotsView,  # about_view,; application_view,
-                    components_demo, cookies_agreement_view, empty_demo,
-                    index_view, page403, page404, page500, privacy_policy_view,
-                    terms_view)
+from .views import RobotsView  # about_view,; application_view,
+from .views import (
+    components_demo,
+    cookies_agreement_view,
+    empty_demo,
+    index_view,
+    page403,
+    page404,
+    page500,
+    privacy_policy_view,
+    terms_view,
+)
 
 admin.autodiscover()
 admin.site.login = secure_admin_login(admin.site.login)

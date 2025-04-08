@@ -4,8 +4,7 @@ from django.conf import settings
 from django.contrib.flatpages.models import FlatPage
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.exceptions import ImproperlyConfigured
-from django.http import (Http404, HttpRequest, HttpResponse,
-                         HttpResponsePermanentRedirect)
+from django.http import Http404, HttpRequest, HttpResponse, HttpResponsePermanentRedirect
 from django.shortcuts import get_object_or_404
 from django.template import loader
 from django.utils.module_loading import import_string

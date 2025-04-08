@@ -1,12 +1,6 @@
 from import_export import resources
 
-from .models import (
-    Track,
-    Author,
-    Rubric,
-    Tag,
-    User,
-)
+from .models import Author, Rubric, Tag, Track, User
 
 
 class TrackResource(resources.ModelResource):

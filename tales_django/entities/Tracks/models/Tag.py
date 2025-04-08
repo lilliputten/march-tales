@@ -6,8 +6,7 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from translated_fields import TranslatedField
 
-from tales_django.core.model_helpers import \
-    get_non_empty_localized_model_field_attrgetter
+from tales_django.core.model_helpers import get_non_empty_localized_model_field_attrgetter
 
 
 class Tag(Model):

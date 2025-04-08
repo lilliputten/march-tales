@@ -12,9 +12,6 @@ from tales_django.sites import unfold_admin_site
 # from translated_fields import TranslatedFieldAdmin
 
 
-
-
-
 class Group(BaseGroup):
     """Instead of trying to get new user under existing `Aunthentication and Authorization`
     banner, create a proxy group model under our Accounts app label.

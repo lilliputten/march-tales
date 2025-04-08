@@ -1,11 +1,6 @@
 from .entities.flatpages.forms import FlatPageForm
-from .entities.Users.forms import (
-    SignUpForm,
-    UpdateUserForm,
-    UserRegistrationForm,
-)
 from .entities.Membership.forms import MembershipForm
-
+from .entities.Users.forms import SignUpForm, UpdateUserForm, UserRegistrationForm
 
 __all__ = [
     'FlatPageForm',

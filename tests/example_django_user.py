@@ -1,5 +1,4 @@
-from tales_django.models import Track
-from tales_django.models import User
+from tales_django.models import Track, User
 
 user = User.objects.get(email='dmia@yandex.ru')
 track = Track.objects.all()[:1].get()

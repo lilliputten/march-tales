@@ -1,6 +1,7 @@
 import traceback
 
 from django.conf import settings
+
 # from django.utils.translation import gettext_lazy as _
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt, get_token

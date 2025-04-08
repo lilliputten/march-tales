@@ -6,8 +6,7 @@ from django.utils.translation import gettext_lazy as _
 from django_ckeditor_5.fields import CKEditor5Field
 from translated_fields import TranslatedField
 
-from tales_django.core.model_helpers import \
-    get_non_empty_localized_model_field_attrgetter
+from tales_django.core.model_helpers import get_non_empty_localized_model_field_attrgetter
 
 # NOTE: For some reason, it doubles the `django_flatpage` db with a `tales_django_flatpage` with doubling fields for `title` and `content`.
 

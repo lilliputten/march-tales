@@ -7,7 +7,6 @@ from tales_django.entities.Membership.models.Membership import MEMBERSHIP_DATA
 # from ..models import MEMBERSHIP_DATA
 
 
-
 class MembershipForm(forms.Form):
     name = forms.CharField(
         label='Name on invoice',

@@ -1,12 +1,10 @@
 from imagekit import ImageSpec, register
-from imagekit.processors import (
-    ResizeToFit,
-)
+from imagekit.processors import ResizeToFit
 
 from tales_django.entities.Tracks.constants.preview_picture_sizes import (
     default_preview_jpeg_quality,
-    track_small_image_thumb_size,
     micro_image_thumb_size,
+    track_small_image_thumb_size,
 )
 
 

@@ -66,8 +66,9 @@ extend-exclude = '''(
 )'''
 
 [tool.isort]
-skip = [".venv"]
-skip_glob = ["tales_django/migrations/*"]
+# @see https://pycqa.github.io/isort/docs/configuration/options.html
+extend_skip = [".venv", "node_modules"]
+extend_skip_glob = ["tales_django/migrations/*"]
 
 [tool.poetry.scripts]
 export_requirements = "poetry-scripts.export_requirements:export_requirements"

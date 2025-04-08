@@ -2,8 +2,16 @@ from . import loggerConfig
 from .CustomHttpHandler import *
 from .DebugLog import *
 from .getDebugLogger import getDebugLogger
-from .utils import (errorStyle, errorTitleStyle, primaryStyle, secondaryStyle,
-                    titleStyle, tretiaryStyle, warningStyle, warningTitleStyle)
+from .utils import (
+    errorStyle,
+    errorTitleStyle,
+    primaryStyle,
+    secondaryStyle,
+    titleStyle,
+    tretiaryStyle,
+    warningStyle,
+    warningTitleStyle,
+)
 
 __all__ = [
     'errorStyle',

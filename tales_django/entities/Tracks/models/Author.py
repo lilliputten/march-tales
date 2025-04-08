@@ -8,19 +8,17 @@ from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFit
 from translated_fields import TranslatedField
 
-from tales_django.core.model_helpers import \
-    get_non_empty_localized_model_field_attrgetter
+from tales_django.core.model_helpers import get_non_empty_localized_model_field_attrgetter
 from tales_django.entities.Tracks.constants.preview_picture_sizes import (
-    author_portrait_picture_full_size, author_portrait_picture_jpeg_quality,
-    author_portrait_picture_thumb_size)
+    author_portrait_picture_full_size,
+    author_portrait_picture_jpeg_quality,
+    author_portrait_picture_thumb_size,
+)
 
 # from datetime import timedelta
 
 
-
 # from django.utils.text import slugify
-
-
 
 
 class Author(Model):

@@ -1,8 +1,7 @@
 # @module tales_django/views/registration.py
 # @changed 2024.12.31, 13:13
 
-from django_registration.backends.activation.views import \
-    RegistrationView as BackendRegistrationView
+from django_registration.backends.activation.views import RegistrationView as BackendRegistrationView
 
 from ..forms import UserRegistrationForm
 

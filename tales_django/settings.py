@@ -14,61 +14,48 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 import posixpath
+
+from corsheaders.defaults import default_headers
 from django.templatetags.static import static
 from django.utils.translation import gettext_lazy as _
-from corsheaders.defaults import default_headers
 from unfold.sites import reverse_lazy
 
+from core.appConfig import APK_DOWNLOAD_FILE, APK_DOWNLOAD_SIZE, APK_DOWNLOAD_VERSION
 from core.appEnv import (
+    ASSETS_ROOT,
     BASE_DIR,
-    LOCAL,
     DEBUG,
-    STATIC_FOLDER,
-    STATIC_ROOT,
+    LOCAL,
     MEDIA_FOLDER,
     MEDIA_ROOT,
-    SRC_ROOT,
-    ASSETS_ROOT,
     PROJECT_INFO,
     PROJECT_VERSION,
+    SRC_ROOT,
+    STATIC_FOLDER,
+    STATIC_ROOT,
 )
-from core.appConfig import (
-    APK_DOWNLOAD_FILE,
-    APK_DOWNLOAD_VERSION,
-    APK_DOWNLOAD_SIZE,
-)
-from core.appSecrets import (
-    SECRET_KEY,
+from core.appSecrets import (  # SENDGRID_API_KEY,; STRIPE_PUBLISHABLE_KEY,; STRIPE_SECRET_KEY,; SLACK_WEBHOOK,
     REGISTRATION_SALT,
-    # SENDGRID_API_KEY,
-    # STRIPE_PUBLISHABLE_KEY,
-    # STRIPE_SECRET_KEY,
-    # SLACK_WEBHOOK,
+    SECRET_KEY,
 )
-from core.djangoConfig import (
+from core.djangoConfig import (  # Database setup; Email...; OAuth; TODO: Add other oath adapters...; YANDEX_CLIENT_ID,; YANDEX_CLIENT_SECRET,
     APP_NAME,
-    DEFAULT_HOST,
-    # Database setup
     DB_ENGINE,
-    DB_NAME,
-    DB_USER,
-    DB_PASSWORD,
     DB_HOST,
+    DB_NAME,
+    DB_PASSWORD,
     DB_PORT,
-    # Email...
-    EMAIL_HOST,
-    EMAIL_PORT,
-    EMAIL_USE_TLS,
-    EMAIL_USE_SSL,
+    DB_USER,
     DEFAULT_FROM_EMAIL,
-    EMAIL_HOST_USER,
+    DEFAULT_HOST,
+    EMAIL_HOST,
     EMAIL_HOST_PASSWORD,
-    # OAuth
+    EMAIL_HOST_USER,
+    EMAIL_PORT,
+    EMAIL_USE_SSL,
+    EMAIL_USE_TLS,
     GOOGLE_CLIENT_ID,
     GOOGLE_CLIENT_SECRET,
-    # TODO: Add other oath adapters...
-    # YANDEX_CLIENT_ID,
-    # YANDEX_CLIENT_SECRET,
 )
 
 # Define default site id for `sites.models`

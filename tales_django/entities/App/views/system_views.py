@@ -2,8 +2,7 @@ from django.contrib.sites.models import Site
 from django.shortcuts import render
 from django.views.generic import TemplateView
 
-from tales_django.core.model_helpers import (check_locale_decorator,
-                                             check_required_locale)
+from tales_django.core.model_helpers import check_locale_decorator, check_required_locale
 
 
 class RobotsView(TemplateView):

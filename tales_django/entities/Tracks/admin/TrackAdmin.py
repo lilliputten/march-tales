@@ -10,13 +10,11 @@ from django.utils.translation import gettext_lazy as _
 from import_export.admin import ExportActionModelAdmin, ImportExportModelAdmin
 from translated_fields import TranslatedFieldAdmin, to_attribute
 from unfold.admin import ModelAdmin as UnfoldModelAdmin
-from unfold.contrib.import_export.forms import (  # , SelectableFieldsExportForm
-    ExportForm, ImportForm)
+from unfold.contrib.import_export.forms import ExportForm, ImportForm  # , SelectableFieldsExportForm
 
 from core.ffmpeg import probeDuration
 from core.helpers.errors import errorToString
-from core.logging import (errorStyle, getDebugLogger, tretiaryStyle,
-                          warningTitleStyle)
+from core.logging import errorStyle, getDebugLogger, tretiaryStyle, warningTitleStyle
 from tales_django.sites import unfold_admin_site
 
 from ..models import Track

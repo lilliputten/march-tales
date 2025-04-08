@@ -14,11 +14,12 @@ from core.appEnv import LOCAL
 from core.helpers.files import sizeofFmt
 from core.logging import getDebugLogger
 from tales_django.core.helpers.audio import getAudioTrackFolderName
-from tales_django.core.model_helpers import \
-    get_non_empty_localized_model_field_attrgetter
+from tales_django.core.model_helpers import get_non_empty_localized_model_field_attrgetter
 from tales_django.entities.Tracks.constants.preview_picture_sizes import (
-    track_preview_picture_full_size, track_preview_picture_jpeg_quality,
-    track_preview_picture_thumb_size)
+    track_preview_picture_full_size,
+    track_preview_picture_jpeg_quality,
+    track_preview_picture_thumb_size,
+)
 
 _logger = getDebugLogger()
 

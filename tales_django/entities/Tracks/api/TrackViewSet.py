@@ -17,8 +17,7 @@ from tales_django.core.model_helpers import get_current_language
 from ..models import Track
 from .common_constants import content_type, default_headers
 from .track_constants import default_tracks_limit, default_tracks_offset
-from .track_filters import (get_search_filter_args, get_track_filter_kwargs,
-                            get_track_order_args)
+from .track_filters import get_search_filter_args, get_track_filter_kwargs, get_track_order_args
 from .track_serializers import TrackSerializer
 
 logger = getDebugLogger()

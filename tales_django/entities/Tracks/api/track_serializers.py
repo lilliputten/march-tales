@@ -3,8 +3,7 @@ from rest_framework import serializers
 from core.logging import getDebugLogger
 
 from ..models import Track
-from .basic_plain_serializers import (AuthorSerializer, RubricSerializer,
-                                      TagSerializer)
+from .basic_plain_serializers import AuthorSerializer, RubricSerializer, TagSerializer
 
 logger = getDebugLogger()
 
