@@ -1,10 +1,9 @@
 from django.urls import path
 
-from .tick_api_view import tick_api_view
 from .check_api_view import check_api_view
-from .logout_api_view import logout_api_view
 from .favorites_ids_api_view import favorites_ids_api_view
-
+from .logout_api_view import logout_api_view
+from .tick_api_view import tick_api_view
 
 api_urlpatterns = [
     # API

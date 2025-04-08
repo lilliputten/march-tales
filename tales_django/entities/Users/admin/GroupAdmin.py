@@ -1,17 +1,18 @@
-from django.utils.translation import gettext_lazy as _
-from django.contrib.auth.models import Group as BaseGroup
-from django.contrib.auth.admin import GroupAdmin as BaseGroupAdmin
 from django.contrib import admin
+from django.contrib.auth.admin import GroupAdmin as BaseGroupAdmin
+from django.contrib.auth.models import Group as BaseGroup
+from django.utils.translation import gettext_lazy as _
+from import_export.admin import ExportActionModelAdmin, ImportExportModelAdmin
+from translated_fields import TranslatedFieldAdmin
+from unfold.admin import ModelAdmin as UnfoldModelAdmin
+from unfold.contrib.import_export.forms import ExportForm, ImportForm
+
+from tales_django.sites import unfold_admin_site
 
 # from translated_fields import TranslatedFieldAdmin
 
-from import_export.admin import ExportActionModelAdmin, ImportExportModelAdmin
-from unfold.contrib.import_export.forms import ExportForm, ImportForm
-from translated_fields import TranslatedFieldAdmin
 
-from unfold.admin import ModelAdmin as UnfoldModelAdmin
 
-from tales_django.sites import unfold_admin_site
 
 
 class Group(BaseGroup):

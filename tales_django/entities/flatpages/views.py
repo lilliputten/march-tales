@@ -1,16 +1,16 @@
 import traceback
+
 from django.conf import settings
 from django.contrib.flatpages.models import FlatPage
 from django.contrib.sites.shortcuts import get_current_site
-from django.http import Http404, HttpResponse, HttpResponsePermanentRedirect
+from django.core.exceptions import ImproperlyConfigured
+from django.http import (Http404, HttpRequest, HttpResponse,
+                         HttpResponsePermanentRedirect)
 from django.shortcuts import get_object_or_404
 from django.template import loader
+from django.utils.module_loading import import_string
 from django.utils.safestring import mark_safe
 from django.views.decorators.csrf import csrf_protect
-
-from django.core.exceptions import ImproperlyConfigured
-from django.http import HttpRequest
-from django.utils.module_loading import import_string
 
 from core.helpers.errors import errorToString
 from core.helpers.utils import debugObj

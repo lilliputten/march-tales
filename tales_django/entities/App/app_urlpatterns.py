@@ -1,30 +1,21 @@
-from django.conf import settings
-from django.contrib import admin
-from django.conf.urls.static import static
-from django.conf.urls import handler404, handler403, handler500
-from django.urls import include, path, re_path
-from django.views.decorators.cache import cache_page
-from django.utils.translation import gettext_lazy as _
 from allauth.account.decorators import secure_admin_login
+from django.conf import settings
+from django.conf.urls import handler403, handler404, handler500
+from django.conf.urls.static import static
+from django.contrib import admin
+from django.urls import include, path, re_path
+from django.utils.translation import gettext_lazy as _
+from django.views.decorators.cache import cache_page
 from django.views.generic import RedirectView
 
 from tales_django.sites import unfold_admin_site
 
-from .sitemap import sitemap_url
-from .views import page403, page404, page500
 from .api import api_urlpatterns
-
-from .views import (
-    index_view,
-    # about_view,
-    # application_view,
-    cookies_agreement_view,
-    terms_view,
-    privacy_policy_view,
-    RobotsView,
-    components_demo,
-    empty_demo,
-)
+from .sitemap import sitemap_url
+from .views import (RobotsView,  # about_view,; application_view,
+                    components_demo, cookies_agreement_view, empty_demo,
+                    index_view, page403, page404, page500, privacy_policy_view,
+                    terms_view)
 
 admin.autodiscover()
 admin.site.login = secure_admin_login(admin.site.login)

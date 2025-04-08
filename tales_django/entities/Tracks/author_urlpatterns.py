@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import author_index_view, author_details_view
+from .views import author_details_view, author_index_view
 
 author_urlpatterns = [
     path(r'authors/', author_index_view, name='author_index'),

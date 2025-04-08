@@ -1,19 +1,17 @@
 import traceback
 
+from django.conf import settings
 # from django.utils.translation import gettext_lazy as _
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt, get_token
-from django.conf import settings
-
-from rest_framework.request import Request
 from rest_framework import status
+from rest_framework.request import Request
 
 from core.appEnv import PROJECT_INFO
 from core.helpers.errors import errorToString
 from core.helpers.time import getTimeStamp
 from core.helpers.utils import debugObj
 from core.logging import getDebugLogger
-
 
 logger = getDebugLogger()
 

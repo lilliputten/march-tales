@@ -1,5 +1,5 @@
-from .UserAdmin import UserAdmin
 from .GroupAdmin import GroupAdmin
+from .UserAdmin import UserAdmin
 
 __all__ = [
     'UserAdmin',

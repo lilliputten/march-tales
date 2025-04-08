@@ -1,31 +1,25 @@
 import traceback
 
+from django.db.models import QuerySet
 from django.http import JsonResponse
-from django.utils.translation import gettext_lazy as _
 from django.shortcuts import get_object_or_404
-
+from django.utils.translation import gettext_lazy as _
+from rest_framework import permissions, status, viewsets
 from rest_framework.decorators import action
 from rest_framework.request import Request
-
-from rest_framework import viewsets, status
-from rest_framework import permissions
 
 from core.helpers.errors import errorToString
 from core.helpers.utils import debugObj
 from core.logging import getDebugLogger
-
 from tales_django.core.helpers.check_csrf import check_csrf
 from tales_django.core.model_helpers import get_current_language
 
 from ..models import Track
-
 from .common_constants import content_type, default_headers
 from .track_constants import default_tracks_limit, default_tracks_offset
-from .track_filters import get_track_filter_kwargs, get_track_order_args, get_search_filter_args
+from .track_filters import (get_search_filter_args, get_track_filter_kwargs,
+                            get_track_order_args)
 from .track_serializers import TrackSerializer
-
-from django.db.models import QuerySet
-
 
 logger = getDebugLogger()
 

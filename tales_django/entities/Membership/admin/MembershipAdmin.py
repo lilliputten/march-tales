@@ -1,8 +1,6 @@
 from django.contrib import admin
 
-from ..models import (
-    Membership,
-)
+from ..models import Membership
 
 
 class MembershipAdmin(admin.ModelAdmin):

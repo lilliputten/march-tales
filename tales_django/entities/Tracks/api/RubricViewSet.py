@@ -2,20 +2,16 @@ import traceback
 
 from django.http import JsonResponse
 from django.utils.translation import gettext_lazy as _
-
-from rest_framework import viewsets, status
-from rest_framework import pagination
+from rest_framework import pagination, status, viewsets
 
 from core.helpers.errors import errorToString
 from core.helpers.utils import debugObj
 from core.logging import getDebugLogger
-
 from tales_django.core.helpers.check_csrf import check_csrf
 from tales_django.core.model_helpers import get_current_language
 
-from .rubric_serializers import RubricSerializer
-
 from ..models import Rubric
+from .rubric_serializers import RubricSerializer
 
 logger = getDebugLogger()
 

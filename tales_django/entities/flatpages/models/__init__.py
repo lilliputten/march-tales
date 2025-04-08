@@ -1,4 +1,4 @@
-from .FlatPage import FlatPage, BaseFlatPage
+from .FlatPage import BaseFlatPage, FlatPage
 
 __all__ = [
     'FlatPage',

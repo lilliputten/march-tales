@@ -2,16 +2,15 @@ import traceback
 
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-
-from rest_framework.request import Request
 from rest_framework import status
+from rest_framework.request import Request
 
 from core.helpers.errors import errorToString
 from core.helpers.utils import debugObj
 from core.logging import getDebugLogger
-
 from tales_django.core.helpers.check_csrf import check_csrf
-from tales_django.core.pages.get_favorites_list_context import get_favorites_ids
+from tales_django.core.pages.get_favorites_list_context import \
+    get_favorites_ids
 
 logger = getDebugLogger()
 
