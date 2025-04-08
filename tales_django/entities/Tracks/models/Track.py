@@ -129,11 +129,7 @@ class Track(Model):
         help_text=_('Show only for privileged members'),
     )
 
-    played_count = models.BigIntegerField(
-        blank=True,
-        default=0,
-        verbose_name=_('Played count'),
-    )
+    played_count = models.BigIntegerField(_('Played count'), default=0)
 
     # Properties derived from the audio track file
     audio_duration = models.FloatField(null=True, verbose_name=_('Duration (seconds)'))

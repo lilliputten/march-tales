@@ -378,6 +378,7 @@ UNFOLD = {
     'SIDEBAR': {
         'show_search': True,
         'show_all_applications': True,
+        # Supported icon set: https://fonts.google.com/icons
         'navigation': [
             {
                 'title': _('Content'),
@@ -415,7 +416,7 @@ UNFOLD = {
                 'items': [
                     {
                         'title': _('Dashboard'),
-                        'icon': 'dashboard',  # Supported icon set: https://fonts.google.com/icons
+                        'icon': 'dashboard',
                         'link': reverse_lazy('unfold-admin:index'),
                         # 'badge': 'sample_app.badge_callback',
                         'permission': lambda request: request.user.is_superuser,
@@ -424,7 +425,6 @@ UNFOLD = {
                         'title': _('Flat pages'),
                         'icon': 'edit',
                         # See: "admin:%s_%s_changelist" % info, current_app=self.name
-                        # 'link': reverse_lazy('unfold-admin:flatpages_flatpage_changelist'),
                         'link': reverse_lazy('unfold-admin:tales_django_flatpage_changelist'),
                     },
                     {
@@ -436,6 +436,11 @@ UNFOLD = {
                         'title': _('Users'),
                         'icon': 'account_circle',
                         'link': reverse_lazy('unfold-admin:tales_django_user_changelist'),
+                    },
+                    {
+                        'title': _('User tracks'),
+                        'icon': 'voicemail',
+                        'link': reverse_lazy('unfold-admin:tales_django_usertrack_changelist'),
                     },
                     {
                         'title': _('Groups'),

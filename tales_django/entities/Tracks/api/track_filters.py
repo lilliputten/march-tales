@@ -9,7 +9,6 @@ from rest_framework.request import Request
 from core.helpers.utils import debugObj
 from core.logging import getDebugLogger
 from tales_django.core.model_helpers import get_current_language
-from tales_django.entities.Tracks.models import Author
 
 from .common_constants import filter_delimiter
 from .track_constants import default_tracks_limit

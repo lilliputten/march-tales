@@ -6,22 +6,35 @@
 
 {% comment %}
 
-- `track` object expected as an external variable.
+Expected:
+
+- track: Track object
+- user_track: UserTrack object, optional, if user is authenticated
 
 track_url: {% if request.path|str_starts:"/favorites" %}/favorites{% else %}/tracks{% endif %}/{{ track.id }}/
 
 {% endcomment %}
 
+<pre>
+XXX: {{ user_track }}
+</pre>
+
 <article
   class="big-tracks-list-item card no-bg mb-4 track-player"
   data-track-id="{{ track.id }}"
   {# Duration in seconds #}
-  data-track-duration="{{ track.audio_duration }}"
+  data-track-duration="{{ track.audio_duration|floatformat:3 }}"
   data-track-title="{{ track.title|escape }}"
   {# NOTE: Using remote host for testing resumeable tracks with 206 Partial Content https headers #}
   {% define False as USE_REMOTE_HOST %}
   data-track-media-url="{% if USE_REMOTE_HOST and settings.LOCAL %}https://{{ settings.DEFAULT_HOST }}{% endif %}{% get_media_prefix %}{{ track.audio_file }}"
-  {% if track in favorites %}data-favorite="true"{% endif %}
+  {% if user_track.is_favorite or track in favorites %}data-favorite="true"{% endif %}
+  {% if user_track.favorited_at %}data-favorited-at-sec="{{ user_track.favorited_at.timestamp|floatformat:0 }}"{% endif %}
+  {% if user_track.favorited_at %}--data-favorited-at-date="{{ user_track.favorited_at }}"{% endif %}
+  {% if user_track.played_at %}data-played-at-sec="{{ user_track.played_at.timestamp|floatformat:0 }}"{% endif %}
+  {% if user_track.played_at %}--data-played-at-date="{{ user_track.played_at }}"{% endif %}
+  {% if user_track.played_count %}data-user-played-count="{{ user_track.played_count }}"{% endif %}
+  {% if user_track.position %}data-position="{{ user_track.position|floatformat:3 }}"{% endif %}
   {% comment %}
     Possible runtime dynamic values:
     data-status="ready"

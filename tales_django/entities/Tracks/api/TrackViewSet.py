@@ -1,3 +1,4 @@
+import datetime
 import traceback
 
 from django.db.models import QuerySet
@@ -13,12 +14,15 @@ from core.helpers.utils import debugObj
 from core.logging import getDebugLogger
 from tales_django.core.helpers.check_csrf import check_csrf
 from tales_django.core.model_helpers import get_current_language
+from tales_django.entities.Tracks.models import UserTrack
+from tales_django.entities.Users.models import User
 
 from ..models import Track
 from .common_constants import content_type, default_headers
 from .track_constants import default_tracks_limit, default_tracks_offset
 from .track_filters import get_search_filter_args, get_track_filter_kwargs, get_track_order_args
 from .track_serializers import TrackSerializer
+from .user_track_serializers import UserTrackSerializer
 
 logger = getDebugLogger()
 
@@ -39,7 +43,10 @@ class TrackViewSet(viewsets.GenericViewSet):
         if not check_csrf(request):
             errorDetail = {'detail': _('Client session not found')}
             return JsonResponse(
-                errorDetail, headers=default_headers, content_type=content_type, status=status.HTTP_403_FORBIDDEN
+                errorDetail,
+                headers=default_headers,
+                content_type=content_type,
+                status=status.HTTP_403_FORBIDDEN,
             )
 
         full = int(request.query_params.get('full', '0'))
@@ -59,7 +66,10 @@ class TrackViewSet(viewsets.GenericViewSet):
             if not check_csrf(request):
                 errorDetail = {'detail': _('Client session not found')}
                 return JsonResponse(
-                    errorDetail, headers=default_headers, content_type=content_type, status=status.HTTP_403_FORBIDDEN
+                    errorDetail,
+                    headers=default_headers,
+                    content_type=content_type,
+                    status=status.HTTP_403_FORBIDDEN,
                 )
 
             limit = int(request.query_params.get('limit', default_tracks_limit))
@@ -139,7 +149,10 @@ class TrackViewSet(viewsets.GenericViewSet):
         if not check_csrf(request):
             errorDetail = {'detail': _('Client session not found')}
             return JsonResponse(
-                errorDetail, headers=default_headers, content_type=content_type, status=status.HTTP_403_FORBIDDEN
+                errorDetail,
+                headers=default_headers,
+                content_type=content_type,
+                status=status.HTTP_403_FORBIDDEN,
             )
 
         ids = request.query_params.get('ids')
@@ -241,7 +254,10 @@ class TrackViewSet(viewsets.GenericViewSet):
             if not session_key and not csrftoken:
                 errorDetail = {'detail': _('Client session not found')}
                 return JsonResponse(
-                    errorDetail, headers=default_headers, content_type=content_type, status=status.HTTP_403_FORBIDDEN
+                    errorDetail,
+                    headers=default_headers,
+                    content_type=content_type,
+                    status=status.HTTP_403_FORBIDDEN,
                 )
 
             track = get_object_or_404(Track, pk=pk)
@@ -296,7 +312,7 @@ class TrackViewSet(viewsets.GenericViewSet):
         detail=True,
         permission_classes=[permissions.IsAuthenticated],
     )
-    def toggleFavorite(self, request: Request, pk=None):
+    def toggle_favorite(self, request: Request, pk=None):
         try:
             value = request.data.get('value')
 
@@ -307,23 +323,49 @@ class TrackViewSet(viewsets.GenericViewSet):
             if not request.user.is_authenticated:
                 errorDetail = {'detail': _('User in not authenticated')}
                 return JsonResponse(
-                    errorDetail, headers=default_headers, content_type=content_type, status=status.HTTP_403_FORBIDDEN
+                    errorDetail,
+                    headers=default_headers,
+                    content_type=content_type,
+                    status=status.HTTP_403_FORBIDDEN,
                 )
             # Check session or csrf?
             if not session_key and not csrftoken:
                 errorDetail = {'detail': _('Client session not found')}
                 return JsonResponse(
-                    errorDetail, headers=default_headers, content_type=content_type, status=status.HTTP_403_FORBIDDEN
+                    errorDetail,
+                    headers=default_headers,
+                    content_type=content_type,
+                    status=status.HTTP_403_FORBIDDEN,
                 )
 
             track = get_object_or_404(Track, pk=pk)
 
+            user: User = request.user
+            user_tracks_list = UserTrack.objects.get_or_create(user=user, track=track)
+            if user_tracks_list is None or len(user_tracks_list) == 0:
+                errorDetail = {'detail': _('User track object not found (could not be created)')}
+                return JsonResponse(
+                    errorDetail,
+                    headers=default_headers,
+                    content_type=content_type,
+                    status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                )
+            user_track = user_tracks_list[0]
+
             debugData = {
                 'value': value,
                 'track.id': track.id,
+                'user': user.id,
+                'user_track': user_track.id,
             }
-            logger.info(f'[toggleFavorite]: params:\n{debugObj(debugData)}')
+            logger.info(f'[toggle_favorite]: params:\n{debugObj(debugData)}')
 
+            now = datetime.datetime.now()
+            user_track.favorited_at = now
+            user_track.is_favorite = value
+            user_track.save()
+
+            # TODO: Use UserTrack.is_favorite
             favorite_tracks = request.user.favorite_tracks
             if value:
                 favorite_tracks.add(track)
@@ -337,7 +379,10 @@ class TrackViewSet(viewsets.GenericViewSet):
             responseData = {'favorite_track_ids': favorite_track_ids}
 
             return JsonResponse(
-                responseData, headers=default_headers, content_type=content_type, status=status.HTTP_200_OK
+                responseData,
+                headers=default_headers,
+                content_type=content_type,
+                status=status.HTTP_200_OK,
             )
         except Exception as err:
             sError = errorToString(err)
@@ -346,7 +391,7 @@ class TrackViewSet(viewsets.GenericViewSet):
                 'err': err,
                 'traceback': sTraceback,
             }
-            logger.error(f'Caught error {sError} (returning in response):\n{debugObj(debugData)}')
+            logger.error(f'[toggle_favorite] Caught error {sError} (returning in response):\n{debugObj(debugData)}')
             errorDetail = {'detail': sError}
             return JsonResponse(
                 errorDetail,
@@ -363,7 +408,7 @@ class TrackViewSet(viewsets.GenericViewSet):
         detail=True,
         permission_classes=[permissions.BasePermission],
     )
-    def incrementPlayedCount(self, request: Request, pk=None):
+    def increment_played_count(self, request: Request, pk=None):
         try:
             host = request.headers.get('Host')
             referer = request.headers.get('Referer')
@@ -372,7 +417,27 @@ class TrackViewSet(viewsets.GenericViewSet):
             meta_csrftoken = request.META.get('CSRF_COOKIE')
             csrftoken = meta_csrftoken if meta_csrftoken else headers_csrftoken
 
+            # Check session or csrf?
+            if not check_csrf(request):
+                errorDetail = {'detail': _('Client session not found')}
+                return JsonResponse(
+                    errorDetail,
+                    headers=default_headers,
+                    content_type=content_type,
+                    status=status.HTTP_403_FORBIDDEN,
+                )
+
+            track = get_object_or_404(Track, pk=pk)
+            data = {
+                'played_count': track.played_count + 1,
+            }
+
+            is_authenticated = request.user.is_authenticated
+            user: User | None = request.user if is_authenticated else None
             debugData = {
+                'is_authenticated': is_authenticated,
+                'user': user.id,
+                'track': track.id,
                 'host': host,
                 'referer': referer,
                 'session_key': session_key,
@@ -380,19 +445,29 @@ class TrackViewSet(viewsets.GenericViewSet):
                 'meta_csrftoken': meta_csrftoken,
                 'csrftoken': csrftoken,
             }
-            logger.info(f'[incrementPlayedCount]: DEBUG:\n{debugObj(debugData)}')
+            logger.info(f'[increment_played_count]: DEBUG:\n{debugObj(debugData)}')
 
-            # Check session or csrf?
-            if not check_csrf(request):
-                errorDetail = {'detail': _('Client session not found')}
-                return JsonResponse(
-                    errorDetail, headers=default_headers, content_type=content_type, status=status.HTTP_403_FORBIDDEN
-                )
-
-            track = get_object_or_404(Track, pk=pk)
-            data = {
-                'played_count': track.played_count + 1,
-            }
+            if is_authenticated:
+                user: User = request.user
+                user_tracks_list = UserTrack.objects.get_or_create(user=user, track=track)
+                if user_tracks_list is None or len(user_tracks_list) == 0:
+                    errorDetail = {'detail': _('User track object not found (could not be created)')}
+                    return JsonResponse(
+                        errorDetail,
+                        headers=default_headers,
+                        content_type=content_type,
+                        status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                    )
+                user_track = user_tracks_list[0]
+                debugData = {
+                    'is_authenticated': is_authenticated,
+                    'user_track': user_track.id,
+                }
+                logger.info(f'[increment_played_count]: is_authenticated DEBUG:\n{debugObj(debugData)}')
+                now = datetime.datetime.now()
+                user_track.played_at = now
+                user_track.played_count = user_track.played_count + 1
+                user_track.save()
 
             full = int(request.query_params.get('full', '0'))
 
@@ -416,7 +491,90 @@ class TrackViewSet(viewsets.GenericViewSet):
                 'err': err,
                 'traceback': sTraceback,
             }
-            logger.error(f'Caught error {sError} (returning in response):\n{debugObj(debugData)}')
+            logger.error(
+                f'[increment_played_count] Caught error {sError} (returning in response):\n{debugObj(debugData)}'
+            )
+            errorDetail = {'detail': sError}
+            return JsonResponse(
+                errorDetail,
+                headers=default_headers,
+                content_type=content_type,
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+
+    @action(
+        methods=['post', 'get'],
+        url_path='update-position',
+        url_name='track-update-position',
+        detail=True,
+        permission_classes=[permissions.IsAuthenticated],
+    )
+    def update_position(self, request: Request, pk=None):
+        try:
+            position = float(request.data.get('position', '0'))
+
+            session_key = request.session.session_key if request.session else None
+            csrftoken = request.headers.get('X-CSRFToken')
+
+            # Check user is_authenticated?
+            if not request.user.is_authenticated:
+                errorDetail = {'detail': _('User in not authenticated')}
+                return JsonResponse(
+                    errorDetail,
+                    headers=default_headers,
+                    content_type=content_type,
+                    status=status.HTTP_403_FORBIDDEN,
+                )
+            # Check session or csrf?
+            if not session_key and not csrftoken:
+                errorDetail = {'detail': _('Client session not found')}
+                return JsonResponse(
+                    errorDetail,
+                    headers=default_headers,
+                    content_type=content_type,
+                    status=status.HTTP_403_FORBIDDEN,
+                )
+
+            track = get_object_or_404(Track, pk=pk)
+
+            user: User = request.user
+            user_tracks_list = UserTrack.objects.get_or_create(user=user, track=track)
+            if user_tracks_list is None or len(user_tracks_list) == 0:
+                errorDetail = {'detail': _('User track object not found (could not be created)')}
+                return JsonResponse(
+                    errorDetail,
+                    headers=default_headers,
+                    content_type=content_type,
+                    status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                )
+            user_track = user_tracks_list[0]
+
+            debugData = {
+                'position': position,
+                'track.id': track.id,
+                'user': user.id,
+                'user_track': user_track.id,
+            }
+            logger.info(f'[update_position]: params:\n{debugObj(debugData)}')
+
+            now = datetime.datetime.now()
+            user_track.played_at = now
+            user_track.position = position
+            user_track.save()
+
+            full = int(request.query_params.get('full', '0'))
+
+            serializer = UserTrackSerializer(instance=user_track, full=full)
+            result = serializer.data
+            return JsonResponse(result, headers=default_headers, content_type=content_type)
+        except Exception as err:
+            sError = errorToString(err)
+            sTraceback = str(traceback.format_exc())
+            debugData = {
+                'err': err,
+                'traceback': sTraceback,
+            }
+            logger.error(f'[update_position] Caught error {sError} (returning in response):\n{debugObj(debugData)}')
             errorDetail = {'detail': sError}
             return JsonResponse(
                 errorDetail,

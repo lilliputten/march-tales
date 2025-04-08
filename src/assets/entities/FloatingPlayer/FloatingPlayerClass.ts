@@ -509,7 +509,7 @@ export class FloatingPlayer {
     const activePlayerData = this.activePlayerData;
     const isCurrent = id === activePlayerData?.id;
     const trackInfo = localTrackInfoDb.getById(id);
-    const nextFavorite = !trackInfo?.favorite;
+    const expectedFavoriteValue = !trackInfo?.favorite;
     /* console.log('[FloatingPlayerClass:toggleFavoriteById]', {
      *   activePlayerData,
      *   isCurrent,
@@ -517,23 +517,25 @@ export class FloatingPlayer {
      *   nextFavorite,
      * });
      */
-    localTrackInfoDb.updateFavorite(id, nextFavorite);
+    localTrackInfoDb.updateFavorite(id, expectedFavoriteValue);
     if (isCurrent) {
-      activePlayerData.favorite = nextFavorite;
+      activePlayerData.favorite = expectedFavoriteValue;
       this.updateActivePlayerDataInDom();
       this.saveActivePlayerData();
     }
-    this.callbacks.invokeFavorite({ id, favorite: nextFavorite });
+    this.callbacks.invokeFavorite({ id, favorite: expectedFavoriteValue });
     if (window.isAuthenticated) {
       this.toggling[id] = true;
-      this.sendToggleFavoriteRequest(id, nextFavorite)
+      this.sendToggleFavoriteRequest(id, expectedFavoriteValue)
         .then((results: { favorite_track_ids: number[] }) => {
           const { favorite_track_ids } = results;
           localTrackInfoDb.updateFavoritesByTrackIds(favorite_track_ids);
           this.callbacks.invokeFavorites({
             favorites: favorite_track_ids,
           });
-          const msgId = nextFavorite ? 'trackAddedToFavorites' : 'trackRemovedFromFavorites';
+          const msgId = expectedFavoriteValue
+            ? 'trackAddedToFavorites'
+            : 'trackRemovedFromFavorites';
           commonNotify.showSuccess(getJsText(msgId));
         })
         .catch((err) => {

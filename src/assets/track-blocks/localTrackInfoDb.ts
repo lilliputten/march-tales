@@ -59,6 +59,7 @@ class LocalTrackInfoDb {
       const _now = now || Date.now();
       const trackInfo = this.getOrCreate(id);
       trackInfo.favorite = favorite;
+      trackInfo.lastFavorited = _now;
       trackInfo.lastUpdated = _now;
       this.insert(trackInfo);
       this._toggleInFavoritesIndex(id, favorite);
@@ -83,6 +84,7 @@ class LocalTrackInfoDb {
       const trackInfo = this.getOrCreate(id);
       if (trackInfo.favorite !== isFavorite) {
         trackInfo.favorite = isFavorite;
+        trackInfo.lastFavorited = _now;
         trackInfo.lastUpdated = _now;
         this.insert(trackInfo);
       }
@@ -119,8 +121,9 @@ class LocalTrackInfoDb {
       favorite: false,
       playedCount: 0, // track.played_count (but only for current user!).
       position: 0, // position
-      lastUpdated: now, // DateTime.now()
-      lastPlayed: 0, // DateTime.now()
+      lastUpdated: now, // DateTime
+      lastPlayed: 0, // DateTime
+      lastFavorited: 0, // DateTime
     };
     return trackInfo;
   }

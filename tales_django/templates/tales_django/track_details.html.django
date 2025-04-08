@@ -4,6 +4,15 @@
 {% load i18n %}
 {% load markdownify %}
 
+{% comment %}
+
+Expected:
+
+- track: Track object
+- user_track: UserTrack object, optional, if user is authenticated
+
+{% endcomment %}
+
 {% block body_class %}track_details {{ block.super }}{% endblock %}
 
 {% block title %}{{ track.title }} — {{ block.super }}{% endblock title %}
@@ -23,11 +32,6 @@
   <meta property="og:image" content="{{request.scheme}}://{{request.get_host}}{% get_media_prefix %}{{ track.preview_picture_full.url }}" />
   <meta property="twitter:image" content="{{request.scheme}}://{{request.get_host}}{% get_media_prefix %}{{ track.preview_picture_full.url }}" />
 {% endblock %}
-
-{% comment %}
-- track_id: Track id
-- track: Track object is expected
-{% endcomment %}
 
 {% block main_column_content %}
 
