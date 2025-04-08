@@ -14,6 +14,7 @@ from core.helpers.utils import debugObj
 from core.logging import getDebugLogger
 from tales_django.core.helpers.check_csrf import check_csrf
 from tales_django.core.model_helpers import get_current_language
+from tales_django.core.pages.get_favorites_list_context import get_user_favorites
 from tales_django.entities.Tracks.models import UserTrack
 from tales_django.entities.Users.models import User
 
@@ -372,11 +373,20 @@ class TrackViewSet(viewsets.GenericViewSet):
             else:
                 favorite_tracks.remove(track)
 
-            favorite_track_ids = list(map(lambda it: it.id, favorite_tracks.all()))
-
             request.user.save()
 
-            responseData = {'favorite_track_ids': favorite_track_ids}
+            # TODO: Return `user_tracks` list
+            user_tracks = UserTrack.objects.filter(user=user).all()
+            user_tracks_serializer = UserTrackSerializer(user_tracks, read_only=True, many=True)
+
+            favorites = get_user_favorites(user)
+            # favorite_track_ids = list(map(lambda it: it.id, favorite_tracks.all()))
+            favorite_track_ids = list(map(lambda it: it.id, favorites.all()))
+
+            responseData = {
+                'user_tracks': user_tracks_serializer.data,
+                'favorite_track_ids': favorite_track_ids,
+            }
 
             return JsonResponse(
                 responseData,

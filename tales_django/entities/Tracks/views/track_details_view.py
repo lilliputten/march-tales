@@ -18,13 +18,8 @@ def track_details_view(request: HttpRequest, track_id):
         **get_common_context(request),
         **get_tracks_list_context(request),
         **get_favorites_list_context(request),
-        # 'track_id': track_id,
         'track': track,
     }
-
-    if request.user.is_authenticated:
-        user_track = UserTrack.objects.get(user=request.user, track=track)
-        context['user_track'] = user_track
 
     response = render(
         request=request,

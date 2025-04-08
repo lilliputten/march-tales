@@ -3,6 +3,7 @@ from datetime import timedelta
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from core.appEnv import LOCAL
 from core.logging import getDebugLogger
 
 logger = getDebugLogger()
@@ -14,11 +15,11 @@ class UserTrack(models.Model):
         verbose_name_plural = _('user tracks')
 
     # Relations
-    user = models.ForeignKey(
-        'User', verbose_name=_('User'), related_name='user_track_relation', on_delete=models.CASCADE
-    )
     track = models.ForeignKey(
         'Track', verbose_name=_('Track'), related_name='track_user_relation', on_delete=models.CASCADE
+    )
+    user = models.ForeignKey(
+        'User', verbose_name=_('User'), related_name='user_track_relation', on_delete=models.CASCADE
     )
 
     # Favorite
@@ -50,9 +51,20 @@ class UserTrack(models.Model):
         help_text=_('Last played time'),
     )
 
+    # Info
+    updated_at = models.DateTimeField(_('Updated at'), auto_now=True)
+
     @property
     def position_formatted(track):
         return str(timedelta(seconds=round(track.position))) if track.position else '-'
 
-    # Info
-    updated_at = models.DateTimeField(_('Updated at'), auto_now=True)
+    def __str__(self):
+        items = [
+            f'[{self.id}] —' if LOCAL else None,
+            f'[{self.track.id}]' if LOCAL else None,
+            f'{self.track.title}',
+            '—',
+            f'[{self.user.id}]' if LOCAL else None,
+            f'{self.user.email}',
+        ]
+        return ' '.join(map(str, filter(None, items)))

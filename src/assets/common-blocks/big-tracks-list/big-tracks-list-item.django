@@ -15,8 +15,18 @@ track_url: {% if request.path|str_starts:"/favorites" %}/favorites{% else %}/tra
 
 {% endcomment %}
 
+{% find_item_by_key user_tracks 'track_id' track.id as user_track %}
+
 <pre>
-XXX: {{ user_track }}
+DEBUG: {{ user_track }}
+favorited-at-sec: {{ user_track.favorited_at.timestamp|floatformat:0 }}
+favorited-at-date: {{ user_track.favorited_at }}
+played-at-sec: {{ user_track.played_at.timestamp|floatformat:0 }}
+played-at-date: {{ user_track.played_at }}
+user-played-count: {{ user_track.played_count }}
+position: {{ user_track.position|floatformat:3 }}
+updated-at-sec: {{ user_track.updated_at.timestamp|floatformat:0 }}
+updated-at-date: {{ user_track.updated_at }}
 </pre>
 
 <article
@@ -30,11 +40,13 @@ XXX: {{ user_track }}
   data-track-media-url="{% if USE_REMOTE_HOST and settings.LOCAL %}https://{{ settings.DEFAULT_HOST }}{% endif %}{% get_media_prefix %}{{ track.audio_file }}"
   {% if user_track.is_favorite or track in favorites %}data-favorite="true"{% endif %}
   {% if user_track.favorited_at %}data-favorited-at-sec="{{ user_track.favorited_at.timestamp|floatformat:0 }}"{% endif %}
-  {% if user_track.favorited_at %}--data-favorited-at-date="{{ user_track.favorited_at }}"{% endif %}
+  {% if user_track.favorited_at %}data-favorited-at-date="{{ user_track.favorited_at }}"{% endif %}
   {% if user_track.played_at %}data-played-at-sec="{{ user_track.played_at.timestamp|floatformat:0 }}"{% endif %}
-  {% if user_track.played_at %}--data-played-at-date="{{ user_track.played_at }}"{% endif %}
+  {% if user_track.played_at %}data-played-at-date="{{ user_track.played_at }}"{% endif %}
   {% if user_track.played_count %}data-user-played-count="{{ user_track.played_count }}"{% endif %}
   {% if user_track.position %}data-position="{{ user_track.position|floatformat:3 }}"{% endif %}
+  {% if user_track.updated_at %}data-updated-at-sec="{{ user_track.updated_at.timestamp|floatformat:0 }}"{% endif %}
+  {% if user_track.updated_at %}data-updated-at-date="{{ user_track.updated_at }}"{% endif %}
   {% comment %}
     Possible runtime dynamic values:
     data-status="ready"

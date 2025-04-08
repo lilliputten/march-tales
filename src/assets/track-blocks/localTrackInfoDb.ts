@@ -8,17 +8,17 @@ import { acceptedCookiesId } from '../constants/acceptedCookiesId';
 class LocalTrackInfoDb {
   // End-user api
 
-  updatePlayedCount(id: number, playedCount?: number, now?: number) {
+  updatePlayedCount(id: number, playedCount?: number, timestamp?: number) {
     try {
-      const _now = now || Date.now();
+      const now = Date.now();
       const trackInfo = this.getOrCreate(id);
       if (playedCount == undefined || isNaN(playedCount)) {
         trackInfo.playedCount = trackInfo.playedCount ? trackInfo.playedCount + 1 : 1;
       } else {
         trackInfo.playedCount = playedCount;
       }
-      trackInfo.lastPlayed = _now;
-      trackInfo.lastUpdated = _now;
+      trackInfo.lastPlayed = timestamp || now;
+      trackInfo.lastUpdated = now;
       this.insert(trackInfo);
       // this.updateEvents.broadcast(TracksInfoDbUpdate(trackInfo));
       return trackInfo;
@@ -33,13 +33,13 @@ class LocalTrackInfoDb {
     }
   }
 
-  updatePosition(id: number, position: number, now?: number) {
+  updatePosition(id: number, position: number, timestamp?: number) {
     try {
-      const _now = now || Date.now();
+      const now = Date.now();
       const trackInfo = this.getOrCreate(id);
       trackInfo.position = position;
-      trackInfo.lastPlayed = _now; // ???
-      trackInfo.lastUpdated = _now;
+      trackInfo.lastPlayed = timestamp || now; // ???
+      trackInfo.lastUpdated = now;
       this.insert(trackInfo);
       // this.updateEvents.broadcast(TracksInfoDbUpdate(trackInfo));
       return trackInfo;
@@ -54,13 +54,13 @@ class LocalTrackInfoDb {
     }
   }
 
-  updateFavorite(id: number, favorite: boolean, now?: number) {
+  updateFavorite(id: number, favorite: boolean, timestamp?: number) {
     try {
-      const _now = now || Date.now();
+      const now = Date.now();
       const trackInfo = this.getOrCreate(id);
       trackInfo.favorite = favorite;
-      trackInfo.lastFavorited = _now;
-      trackInfo.lastUpdated = _now;
+      trackInfo.lastFavorited = timestamp || now;
+      trackInfo.lastUpdated = now;
       this.insert(trackInfo);
       this._toggleInFavoritesIndex(id, favorite);
       // this.updateEvents.broadcast(TracksInfoDbUpdate(trackInfo));
@@ -76,27 +76,33 @@ class LocalTrackInfoDb {
     }
   }
 
-  updateFavoritesByTrackIds(ids: number[], now?: number) {
-    const _now = now || Date.now();
+  updateFavoritesByTrackIds(
+    ids: number[],
+    favoritedTimes?: Record<UserTrack['track_id'], UserTrack['favorited_at_sec']>,
+    timestamp?: number,
+  ) {
+    const now = Date.now();
     const index = this._getIndex();
     index.forEach((id) => {
       const isFavorite = ids.includes(id);
       const trackInfo = this.getOrCreate(id);
       if (trackInfo.favorite !== isFavorite) {
         trackInfo.favorite = isFavorite;
-        trackInfo.lastFavorited = _now;
-        trackInfo.lastUpdated = _now;
+        trackInfo.lastFavorited = (favoritedTimes && favoritedTimes[id]) || timestamp || now;
+        // TODO: To check if it works correct
+        debugger;
+        trackInfo.lastUpdated = now;
         this.insert(trackInfo);
       }
     });
     this._setFavoritesIndex(ids);
   }
 
-  save(trackInfo: TrackInfo, now?: number) {
+  save(trackInfo: TrackInfo, timestamp?: number) {
     try {
-      const _now = now || Date.now();
-      trackInfo.lastPlayed = _now; // ???
-      trackInfo.lastUpdated = _now;
+      const now = Date.now();
+      trackInfo.lastPlayed = timestamp || now; // ???
+      trackInfo.lastUpdated = now;
       this.insert(trackInfo);
       // this.updateEvents.broadcast(TracksInfoDbUpdate(trackInfo));
       // const testTrackInfo = await this.getById(id);

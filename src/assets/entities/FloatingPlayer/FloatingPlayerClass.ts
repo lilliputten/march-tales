@@ -44,6 +44,9 @@ export class FloatingPlayer {
     this.loadFloatingPlayerState();
     this.initDomNode();
     this.updateAll();
+  }
+
+  tracksLoaded() {
     // Check if it was recently playing...
     const now = Date.now();
     if (this.activePlayerData) {
@@ -53,14 +56,9 @@ export class FloatingPlayer {
         this.state.lastTimestamp &&
         this.state.lastTimestamp > now - 5000
       ) {
-        // TODO: Then resume playback...
-        /* console.log('[FloatingPlayerClass:constructor] Start play', {
-         *   activePlayerData: this.activePlayerData,
-         *   state: this.state,
-         * });
-         */
-        // TODO: Care about: `Uncaught (in promise) NotAllowedError: play() failed because the user didn't interact with the document first. https://goo.gl/xX8pDD`
+        // Then resume playback...
         this.playCurrentPlayer();
+        // TODO: Care about: `Uncaught (in promise) NotAllowedError: play() failed because the user didn't interact with the document first. https://goo.gl/xX8pDD`
       } else {
         // Reset the status
         delete this.state.status;
@@ -514,7 +512,7 @@ export class FloatingPlayer {
      *   activePlayerData,
      *   isCurrent,
      *   trackInfo,
-     *   nextFavorite,
+     *   expectedFavoriteValue,
      * });
      */
     localTrackInfoDb.updateFavorite(id, expectedFavoriteValue);
@@ -527,9 +525,24 @@ export class FloatingPlayer {
     if (window.isAuthenticated) {
       this.toggling[id] = true;
       this.sendToggleFavoriteRequest(id, expectedFavoriteValue)
-        .then((results: { favorite_track_ids: number[] }) => {
-          const { favorite_track_ids } = results;
-          localTrackInfoDb.updateFavoritesByTrackIds(favorite_track_ids);
+        .then((results: { favorite_track_ids: number[]; user_tracks: UserTrack[] }) => {
+          const { favorite_track_ids, user_tracks } = results;
+          const trackFavoritedTimes = user_tracks.reduce<Record<UserTrack['track_id'], number>>(
+            (result, userTrack) => {
+              const { track_id, favorited_at_sec } = userTrack;
+              if (track_id && favorited_at_sec) {
+                result[track_id] = favorited_at_sec * 1000; // ms
+              }
+              return result;
+            },
+            {},
+          );
+          /* console.log('[FloatingPlayerClass:toggleFavoriteById] sendToggleFavoriteRequest:then', {
+           *   favorite_track_ids,
+           *   user_tracks,
+           * });
+           */
+          localTrackInfoDb.updateFavoritesByTrackIds(favorite_track_ids, trackFavoritedTimes);
           this.callbacks.invokeFavorites({
             favorites: favorite_track_ids,
           });
