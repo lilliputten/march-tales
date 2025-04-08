@@ -1,13 +1,9 @@
+from django.db.models import Count
 from django.http import HttpRequest
 from django.utils import translation
-from django.db.models import Count
 
 from core.logging import getDebugLogger
-
-from tales_django.models import Rubric
-from tales_django.models import Tag
-from tales_django.models import Author
-
+from tales_django.models import Author, Rubric, Tag
 
 show_authors_count = 20
 show_favorite_tracks_count = 20

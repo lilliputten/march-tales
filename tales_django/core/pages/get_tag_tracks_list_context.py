@@ -3,9 +3,7 @@ from django.utils import translation
 
 from core.helpers.utils import debugObj
 from core.logging import getDebugLogger
-
 from tales_django.models import Track
-
 
 tag_tracks_limit = 20
 

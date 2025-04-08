@@ -2,9 +2,7 @@ from django.http import HttpRequest
 from django.utils import translation
 
 from core.logging import getDebugLogger
-
 from tales_django.models import Author
-
 
 authors_limit = 20
 

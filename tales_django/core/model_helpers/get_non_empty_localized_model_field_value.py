@@ -1,5 +1,6 @@
-from django.conf import settings
 from typing import List
+
+from django.conf import settings
 from translated_fields import TranslatedField, to_attribute
 
 from .get_current_language import get_current_language
