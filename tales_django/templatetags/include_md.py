@@ -1,6 +1,6 @@
 import traceback
-import markdown
 
+import markdown
 from django.template.defaultfilters import register
 from django.template.loader import render_to_string
 

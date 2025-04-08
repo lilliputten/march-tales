@@ -4,12 +4,11 @@ import re
 import traceback
 from urllib.parse import quote, unquote
 
-from PIL import Image
-
 from django.conf import settings
-from django.template.defaultfilters import register
 from django.contrib.staticfiles.finders import find as find_static_file
+from django.template.defaultfilters import register
 from django.utils.safestring import mark_safe
+from PIL import Image
 
 from core.helpers.errors import errorToString
 from core.helpers.utils import debugObj

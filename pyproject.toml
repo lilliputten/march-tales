@@ -65,6 +65,10 @@ extend-exclude = '''(
 | .*\/tales_django\/(migrations)\/.*
 )'''
 
+[tool.isort]
+skip = [".venv"]
+skip_glob = ["tales_django/migrations/*"]
+
 [tool.poetry.scripts]
 export_requirements = "poetry-scripts.export_requirements:export_requirements"
 lint = "poetry-scripts:lint"

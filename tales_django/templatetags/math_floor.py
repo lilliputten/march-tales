@@ -1,5 +1,6 @@
-from django.template.defaultfilters import register
 import math
+
+from django.template.defaultfilters import register
 
 
 @register.filter(name='math_floor')
