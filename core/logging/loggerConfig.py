@@ -3,7 +3,7 @@
 import logging
 import logging.handlers
 
-from core.appEnv import appEnv, LOCAL
+from core.appEnv import LOCAL, appEnv
 
 USE_LOGS_SERVER = appEnv.bool('USE_LOGS_SERVER', False)
 USE_SYSLOG_SERVER = appEnv.bool('USE_SYSLOG_SERVER', False)

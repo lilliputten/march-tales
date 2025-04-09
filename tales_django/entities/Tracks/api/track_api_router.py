@@ -1,9 +1,9 @@
 from rest_framework import routers
 
-from .TrackViewSet import TrackViewSet
 from .AuthorViewSet import AuthorViewSet
 from .RubricViewSet import RubricViewSet
 from .TagViewSet import TagViewSet
+from .TrackViewSet import TrackViewSet
 
 # Routers provide an easy way of automatically determining the URL conf.
 # @see https://www.django-rest-framework.org/api-guide/routers/

@@ -1,15 +1,32 @@
+from django.contrib.auth.models import User
 from django.http import HttpRequest
 from django.utils import translation
 
 from core.helpers.utils import debugObj
 from core.logging import getDebugLogger
-
+from tales_django.entities.Tracks.models import UserTrack
 from tales_django.models import Track
-
 
 favorites_limit = 20
 
 logger = getDebugLogger()
+
+
+def get_user_favorites(user: User):
+    user_favorite_tracks = UserTrack.objects.filter(user=user, is_favorite=True).order_by('-favorited_at')
+    user_favorite_track_ids = user_favorite_tracks.values_list('track_id', flat=True)
+    favorites = Track.objects.filter(id__in=user_favorite_track_ids).filter(track_status='PUBLISHED')
+    # NOTE: FUTURE: To use only UserTrack.is_favorite. Track.favorites is deprecated.
+    favorites_old = user.favorite_tracks.filter(track_status='PUBLISHED').order_by('-published_at')
+    favorites |= favorites_old
+    favorites = favorites.distinct()
+    # debugData = {
+    #     'favorites': favorites,
+    #     'favorites_old': favorites_old,
+    #     'user_track': user_favorite_tracks,
+    # }
+    # logger.info(f'[get_user_favorites]: is_authenticated:\n{debugObj(debugData)}')
+    return favorites
 
 
 def get_favorites(request: HttpRequest):
@@ -18,17 +35,22 @@ def get_favorites(request: HttpRequest):
 
     favorites = None
     if request.user.is_authenticated:
-        favorites = request.user.favorite_tracks.filter(track_status='PUBLISHED').order_by('-published_at').all()
+        favorites = get_user_favorites(request.user)
     else:
         favorites_cookie = request.COOKIES.get('favorites')
         if favorites_cookie is not None and favorites_cookie:
+            # NOTE: This should be replaced by `UserTrack.is_favorite` field
             list_str = favorites_cookie.split('-')
-            ids = filter(None, map(int, list_str))
+            ids = list(filter(None, map(int, list_str)))
+            # TODO: Ensure order by client list!
             favorites = (
                 Track.objects.filter(pk__in=ids, track_status='PUBLISHED')
-                .order_by('-published_at', f'title_{language}')
+                # NOTE: Don't sort -- it should be sorted on the client, in this case
+                # .order_by('-published_at', f'title_{language}')
                 .all()
             )
+            # Re-order favorites as it is on the client
+            favorites = sorted(favorites, key=lambda it: ids.index(it.id))
 
     return favorites
 

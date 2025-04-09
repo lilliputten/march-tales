@@ -3,7 +3,6 @@ from rest_framework import serializers
 from core.logging import getDebugLogger
 
 from ..models import Track
-
 from .basic_plain_serializers import AuthorSerializer, RubricSerializer, TagSerializer
 
 logger = getDebugLogger()
@@ -75,7 +74,7 @@ class TrackSerializer(serializers.HyperlinkedModelSerializer):
             'updated_by_id',
             'youtube_url',
             'author',
-            # TODO: Use ids istead of fully serialized objects
+            # Use ids istead of fully serialized objects if no `full` parameter provided
             'rubric_ids' if send_ids else None,
             'rubrics' if send_data else None,
             'tag_ids' if send_ids else None,
@@ -90,30 +89,3 @@ class TrackSerializer(serializers.HyperlinkedModelSerializer):
         model = Track
 
         exclude = []
-
-        # fields = (
-        #     'id',
-        #     # 'active',  # ???
-        #     # 'duration_formatted',
-        #     'title',
-        #     'audio_duration',
-        #     'audio_file',
-        #     'audio_size',
-        #     'description',
-        #     'promote',
-        #     'for_members',
-        #     'played_count',
-        #     'preview_picture',
-        #     'published_at',
-        #     'published_by_id',
-        #     'track_status',
-        #     'updated_at',
-        #     'updated_by_id',
-        #     'youtube_url',
-        #     'author',
-        #     # TODO: Use ids istead of fully serialized objects
-        #     'rubric_ids',
-        #     'rubrics',
-        #     'tag_ids',
-        #     'tags',
-        # )

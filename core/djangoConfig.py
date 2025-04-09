@@ -1,6 +1,4 @@
-from .appEnv import (
-    appEnv,
-)
+from .appEnv import appEnv
 
 # \<\(SECRET_KEY\|REGISTRATION_SALT\|EMAIL_HOST\|DEFAULT_FROM_EMAIL\|EMAIL_HOST_USER\|EMAIL_HOST_PASSWORD\)\>
 

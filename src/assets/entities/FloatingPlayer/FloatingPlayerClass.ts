@@ -27,6 +27,11 @@ const TRUE = 'true';
 /** A value of forward/backward seek step */
 const seekTimeSec = 1;
 
+const useDebugDelay = true;
+
+/** Delay between server playback position update, msec */
+const updateServerPlaybackDelay = useDebugDelay && window.DEBUG ? 1000 : 10 * 1000;
+
 export class FloatingPlayer {
   inited = false;
   callbacks = new FloatingPlayerCallbacks();
@@ -39,11 +44,18 @@ export class FloatingPlayer {
   toggling: Record<number, boolean> = {};
   seeking = false;
 
+  /** Last updated server playback position timestamp, msec, see updateServerPlaybackDelay */
+  lastUpdatedServerPlayback: number = 0;
+  isUpdatingServerPlayback: boolean = false;
+
   constructor() {
     this.loadActivePlayerData();
     this.loadFloatingPlayerState();
     this.initDomNode();
     this.updateAll();
+  }
+
+  tracksLoaded() {
     // Check if it was recently playing...
     const now = Date.now();
     if (this.activePlayerData) {
@@ -53,14 +65,9 @@ export class FloatingPlayer {
         this.state.lastTimestamp &&
         this.state.lastTimestamp > now - 5000
       ) {
-        // TODO: Then resume playback...
-        /* console.log('[FloatingPlayerClass:constructor] Start play', {
-         *   activePlayerData: this.activePlayerData,
-         *   state: this.state,
-         * });
-         */
-        // TODO: Care about: `Uncaught (in promise) NotAllowedError: play() failed because the user didn't interact with the document first. https://goo.gl/xX8pDD`
+        // Then resume playback...
         this.playCurrentPlayer();
+        // TODO: Care about: `Uncaught (in promise) NotAllowedError: play() failed because the user didn't interact with the document first. https://goo.gl/xX8pDD`
       } else {
         // Reset the status
         delete this.state.status;
@@ -231,7 +238,7 @@ export class FloatingPlayer {
     return progress;
   }
 
-  updateTrackPosition() {
+  updateTrackPosition(onInit: boolean = false) {
     const domNode = this.requireDomNode();
     const timeNode = domNode.querySelector<HTMLElement>('.time');
     const activePlayerData = this.requireActivePlayerData();
@@ -245,12 +252,14 @@ export class FloatingPlayer {
         timeNode.innerText = formatDuration(Math.floor(position * 1000));
       });
     }
-    localTrackInfoDb.updatePosition(id, position);
+    if (!onInit) {
+      localTrackInfoDb.updatePosition(id, position);
+    }
   }
 
   updateAll() {
     if (this.activePlayerData) {
-      this.updateTrackPosition();
+      this.updateTrackPosition(true);
     }
     this.updateStateInDom();
     this.updatePositionInDom();
@@ -277,6 +286,7 @@ export class FloatingPlayer {
       this.state.position = currentTime;
       this.updateTrackPosition();
       this.saveFloatingPlayerState();
+      this.updateServerPlayback();
       this.callbacks.invokeUpdate({ floatingPlayerState: this.state, activePlayerData });
       localTrackInfoDb.updatePosition(activePlayerData.id, currentTime);
     }
@@ -294,6 +304,7 @@ export class FloatingPlayer {
     this.state.status = 'playing';
     this.updateStateInDom();
     this.saveFloatingPlayerState();
+    this.updateServerPlayback();
     this.callbacks.invokePlayStart({
       floatingPlayerState: this.state,
       activePlayerData,
@@ -306,6 +317,7 @@ export class FloatingPlayer {
     this.state.status = 'paused'; // stopped, ready?
     this.updateStateInDom();
     this.saveFloatingPlayerState();
+    this.updateServerPlayback(true);
     this.callbacks.invokePlayStop({
       floatingPlayerState: this.state,
       activePlayerData,
@@ -335,6 +347,61 @@ export class FloatingPlayer {
     const errMsg = getJsText('errorLoadingAudioFile') + ' ' + src + (type ? `(${type})` : '');
     const error = new Error(errMsg);
     this.handleError(error);
+  }
+
+  /// Server playback state
+
+  sendUpdateServerPlayback(id: number, position: number) {
+    const url = `/api/v1/tracks/${id}/update-position/?position=${position.toFixed(3)}`;
+    return sendApiRequest(url, 'POST'); // , { position });
+  }
+
+  resetUpdateServerPlayback() {
+    const now = Date.now();
+    this.lastUpdatedServerPlayback = now;
+    this.isUpdatingServerPlayback = false;
+  }
+
+  async updateServerPlayback(force: boolean = false) {
+    // Do nothing if there isn't authenticated user, or the component hasn't been initialized, or no player data, or still updating right now
+    if (
+      !window.isAuthenticated ||
+      !this.inited ||
+      !this.activePlayerData ||
+      this.isUpdatingServerPlayback
+    ) {
+      return;
+    }
+    const { id } = this.activePlayerData;
+    const { position } = this.state;
+    if (id == null || position == null) {
+      return;
+    }
+    // Check if it's enough time passed
+    const now = Date.now();
+    const diff = now - this.lastUpdatedServerPlayback;
+    if (!force && diff < updateServerPlaybackDelay) {
+      return;
+    }
+    // Send update request
+    this.isUpdatingServerPlayback = true;
+    return this.sendUpdateServerPlayback(id, position)
+      .then((_userTrack: UserTrack) => {
+        // TODO: To update local data from server-provided UserTrack?
+        this.lastUpdatedServerPlayback = now;
+      })
+      .catch((err) => {
+        // eslint-disable-next-line no-console
+        console.error('[FloatingPlayerClass:handleAudioTimeUpdate] request error', {
+          err,
+        });
+        debugger; // eslint-disable-line no-debugger
+        commonNotify.showError(err);
+        throw err;
+      })
+      .finally(() => {
+        this.isUpdatingServerPlayback = false;
+      });
   }
 
   /// Active player data
@@ -372,6 +439,7 @@ export class FloatingPlayer {
       this.state.status = 'paused';
       this.updateStateInDom();
       this.saveFloatingPlayerState();
+      this.updateServerPlayback(true);
     }
   }
 
@@ -390,12 +458,17 @@ export class FloatingPlayer {
       audio.load();
     }
     this.updateTrackPosition();
+    this.updateServerPlayback(true);
     this.callbacks.invokeUpdate({
       floatingPlayerState: this.state,
       activePlayerData,
     });
 
-    audio.currentTime = this.state.position || 0;
+    const position = this.state.position || 0;
+    if (!position) {
+      audio.load();
+    }
+    audio.currentTime = position;
     const result = audio.play();
     result.catch((err) => {
       if (err.name === 'NotAllowedError') {
@@ -509,31 +582,48 @@ export class FloatingPlayer {
     const activePlayerData = this.activePlayerData;
     const isCurrent = id === activePlayerData?.id;
     const trackInfo = localTrackInfoDb.getById(id);
-    const nextFavorite = !trackInfo?.favorite;
+    const expectedFavoriteValue = !trackInfo?.favorite;
     /* console.log('[FloatingPlayerClass:toggleFavoriteById]', {
      *   activePlayerData,
      *   isCurrent,
      *   trackInfo,
-     *   nextFavorite,
+     *   expectedFavoriteValue,
      * });
      */
-    localTrackInfoDb.updateFavorite(id, nextFavorite);
+    localTrackInfoDb.updateFavorite(id, expectedFavoriteValue);
     if (isCurrent) {
-      activePlayerData.favorite = nextFavorite;
+      activePlayerData.favorite = expectedFavoriteValue;
       this.updateActivePlayerDataInDom();
       this.saveActivePlayerData();
     }
-    this.callbacks.invokeFavorite({ id, favorite: nextFavorite });
+    this.callbacks.invokeFavorite({ id, favorite: expectedFavoriteValue });
     if (window.isAuthenticated) {
       this.toggling[id] = true;
-      this.sendToggleFavoriteRequest(id, nextFavorite)
-        .then((results: { favorite_track_ids: number[] }) => {
-          const { favorite_track_ids } = results;
-          localTrackInfoDb.updateFavoritesByTrackIds(favorite_track_ids);
+      this.sendToggleFavoriteRequest(id, expectedFavoriteValue)
+        .then((results: { favorite_track_ids: number[]; user_tracks: UserTrack[] }) => {
+          const { favorite_track_ids, user_tracks } = results;
+          const trackFavoritedTimes = user_tracks.reduce<Record<UserTrack['track_id'], number>>(
+            (result, userTrack) => {
+              const { track_id, favorited_at_sec } = userTrack;
+              if (track_id && favorited_at_sec) {
+                result[track_id] = favorited_at_sec * 1000; // ms
+              }
+              return result;
+            },
+            {},
+          );
+          /* console.log('[FloatingPlayerClass:toggleFavoriteById] sendToggleFavoriteRequest:then', {
+           *   favorite_track_ids,
+           *   user_tracks,
+           * });
+           */
+          localTrackInfoDb.updateFavoritesByTrackIds(favorite_track_ids, trackFavoritedTimes);
           this.callbacks.invokeFavorites({
             favorites: favorite_track_ids,
           });
-          const msgId = nextFavorite ? 'trackAddedToFavorites' : 'trackRemovedFromFavorites';
+          const msgId = expectedFavoriteValue
+            ? 'trackAddedToFavorites'
+            : 'trackRemovedFromFavorites';
           commonNotify.showSuccess(getJsText(msgId));
         })
         .catch((err) => {
@@ -557,6 +647,7 @@ export class FloatingPlayer {
     this.state.position = position;
     this.updateTrackPosition();
     this.saveFloatingPlayerState();
+    this.updateServerPlayback();
     const activePlayerData = this.requireActivePlayerData();
     this.callbacks.invokeUpdate({ floatingPlayerState: this.state, activePlayerData });
     setTimeout(() => {

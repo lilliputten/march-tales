@@ -1,11 +1,13 @@
-from .Track import Track   # , Tag
-from .Tag import Tag
-from .Rubric import Rubric
 from .Author import Author
+from .Rubric import Rubric
+from .Tag import Tag
+from .Track import Track
+from .UserTrack import UserTrack
 
 __all__ = [
-    'Track',
-    'Tag',
-    'Rubric',
     'Author',
+    'Rubric',
+    'Tag',
+    'Track',
+    'UserTrack',
 ]

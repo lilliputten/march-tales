@@ -1,10 +1,5 @@
 // @ts-check
 
-/** @module Webpack config
- *  @since 2024.10.07, 00:00
- *  @changed 2025.02.18, 03:04
- */
-
 const path = require('path');
 
 const webpack = require('webpack');

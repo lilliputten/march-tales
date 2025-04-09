@@ -1,5 +1,5 @@
-from unfold.sites import UnfoldAdminSite
 from allauth.account.views import login
+from unfold.sites import UnfoldAdminSite
 
 
 class NewUnfoldAdminSite(UnfoldAdminSite):

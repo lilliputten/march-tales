@@ -1,8 +1,8 @@
+from django.contrib.flatpages.sitemaps import FlatPageSitemap
+from django.contrib.sitemaps import GenericSitemap, Sitemap
+from django.contrib.sitemaps.views import sitemap
 from django.urls import path, reverse
 from django.utils.translation import gettext_lazy as _
-from django.contrib.sitemaps.views import sitemap
-from django.contrib.sitemaps import GenericSitemap, Sitemap
-from django.contrib.flatpages.sitemaps import FlatPageSitemap
 
 from tales_django.entities.Tracks.models import Rubric, Tag, Track
 from tales_django.entities.Tracks.views import author_sitemap

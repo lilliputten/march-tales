@@ -1,21 +1,17 @@
 import traceback
 
+from django.db.models.functions import Lower
 from django.db.models.query import Q
 from django.utils.translation import gettext_lazy as _
-
-from django.db.models.functions import Lower
-
-from rest_framework.request import Request
 from rest_framework import pagination
+from rest_framework.request import Request
 
 from core.helpers.utils import debugObj
 from core.logging import getDebugLogger
-
 from tales_django.core.model_helpers import get_current_language
-from tales_django.entities.Tracks.models import Author
 
-from .track_constants import default_tracks_limit
 from .common_constants import filter_delimiter
+from .track_constants import default_tracks_limit
 
 logger = getDebugLogger()
 

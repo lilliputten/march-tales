@@ -1,6 +1,5 @@
-from django.utils import translation
-
 from django.conf import settings
+from django.utils import translation
 
 
 def get_current_language():

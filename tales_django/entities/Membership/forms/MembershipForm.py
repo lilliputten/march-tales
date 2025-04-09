@@ -1,11 +1,10 @@
 from django import forms
 from django.conf import settings
 
+from tales_django.core.widgets import textAreaWidget, textInputWidget
 from tales_django.entities.Membership.models.Membership import MEMBERSHIP_DATA
 
 # from ..models import MEMBERSHIP_DATA
-
-from tales_django.core.widgets import textAreaWidget, textInputWidget
 
 
 class MembershipForm(forms.Form):

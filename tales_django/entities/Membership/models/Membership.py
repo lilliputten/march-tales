@@ -1,11 +1,10 @@
-from django.utils.translation import gettext_lazy as _
 from django.db import models
 from django.db.models import Model
+from django.utils.translation import gettext_lazy as _
 
 from core.helpers.dates import this_year
 
 from .MembershipData import MembershipData
-
 
 MEMBERSHIP_DATA = MembershipData()
 

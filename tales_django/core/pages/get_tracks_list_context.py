@@ -3,14 +3,13 @@ from django.utils import translation
 
 from core.helpers.utils import debugObj
 from core.logging import getDebugLogger
-
 from tales_django.entities.Tracks.api.track_filters import (
     get_search_filter_args,
     get_track_filter_kwargs,
     get_track_order_args,
 )
+from tales_django.entities.Tracks.models import UserTrack
 from tales_django.models import Track
-
 
 tracks_limit = 20
 
@@ -48,12 +47,15 @@ def get_tracks_list_context(request: HttpRequest):
     # tracks_page_no = math.floor(tracks_offset / tracks_limit) + 1
     # tracks_pages_count = math.ceil(tracks_count / tracks_limit)
 
-    debugData = {
-        'language': language,
-        'tracks_offset': tracks_offset,
-    }
-    debugStr = debugObj(debugData)
-    logger.info(f'get_tracks_list_context\n{debugStr}')
+    user_tracks = UserTrack.objects.filter(user=request.user).all() if request.user.is_authenticated else None
+
+    # debugData = {
+    #     'user_tracks': user_tracks,
+    #     'language': language,
+    #     'tracks_offset': tracks_offset,
+    # }
+    # debugStr = debugObj(debugData)
+    # logger.info(f'get_tracks_list_context\n{debugStr}')
 
     context = {
         # Tracks...
@@ -61,6 +63,7 @@ def get_tracks_list_context(request: HttpRequest):
         'tracks_count': tracks_count,
         'tracks_offset': tracks_offset,
         'tracks_limit': tracks_limit,
+        'user_tracks': user_tracks,
         # 'has_prev_tracks': has_prev_tracks,
         # 'has_next_tracks': has_next_tracks,
         # 'tracks_page_no': tracks_page_no,

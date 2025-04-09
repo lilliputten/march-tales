@@ -6,21 +6,20 @@ from django.http import JsonResponse
 # from django.middleware.csrf import CsrfViewMiddleware
 from django.views.decorators.csrf import csrf_exempt
 
-from rest_framework.request import Request
-
 # from rest_framework.response import Response
 from rest_framework import status
-
-# from rest_framework import views
-# from rest_framework import permissions
+from rest_framework.request import Request
 
 from core.appEnv import PROJECT_INFO
 from core.helpers.errors import errorToString
 from core.helpers.time import getTimeStamp
 from core.helpers.utils import debugObj
 from core.logging import getDebugLogger
-
 from tales_django.core.helpers.check_csrf import check_csrf
+
+# from rest_framework import views
+# from rest_framework import permissions
+
 
 logger = getDebugLogger()
 

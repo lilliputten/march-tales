@@ -20,7 +20,8 @@ const TRUE = 'true';
 function calculateAndUpdateTrackPosition(
   trackNode: HTMLElement,
   position: number,
-  _isCurrent?: boolean,
+  lastPlayed: number,
+  isCurrent?: boolean,
 ) {
   const timeNode = trackNode.querySelector<HTMLElement>('.time');
   const { dataset } = trackNode;
@@ -47,7 +48,12 @@ function calculateAndUpdateTrackPosition(
       timeNode.innerText = timeFormatted;
     }
   });
-  localTrackInfoDb.updatePosition(id, position);
+  localTrackInfoDb.updatePosition(id, position, lastPlayed);
+  if (isCurrent) {
+    floatingPlayer.state.position = position;
+    floatingPlayer.state.progress = progress;
+    floatingPlayer.updateTrackPosition(true);
+  }
   // TODO: Update the floating player if isCurrent?
   return { position, duration, progress };
 }
@@ -81,8 +87,6 @@ function floatingPlayerUpdate(data: FloatingPlayerUpdateData) {
       timeNode.innerText = timeFormatted;
     }
   });
-  // calculateAndUpdateTrackPosition(trackNode, position, isCurrent); // Is it required here?
-  // TODO: Update the floating player if isCurrent?
 }
 
 function floatingPlayerPlay(data: FloatingPlayerUpdateData) {
@@ -135,7 +139,7 @@ function floatingPlayerStop(data: FloatingPlayerUpdateData) {
   requestAnimationFrame(() => {
     delete dataset.status;
   });
-  setTimeout(tryToPlayNextTrack.bind(undefined, currentTrackPlayer), 100);
+  setTimeout(tryToPlayNextTrack.bind(undefined, currentTrackPlayer), 500);
 }
 
 function tryToPlayNextTrack(currentTrackPlayer: HTMLElement) {
@@ -318,13 +322,29 @@ function initTrackPlayerNode(trackNode: HTMLElement) {
     inited,
     trackId, // "1"
     trackMediaUrl, // "/media/samples/gr-400x225.jpg"
+    trackTitle,
+    trackDuration,
+    // favorite,
+    favoritedAtSec,
+    // favoritedAtDate, // DEBUG
+    playedAtSec,
+    // playedAtDate, // DEBUG
+    // userPlayedCount,
+    position: positionStr,
+    // updatedAtSec,
+    // updatedAtDate,
   } = dataset;
+  const position = positionStr ? parseFloat(positionStr.replace(',', '.')) : 0;
+  const duration = trackDuration ? parseFloat(trackDuration.replace(',', '.')) : 0;
+  const playedAt = isNaN(Number(playedAtSec)) ? undefined : Number(playedAtSec) * 1000;
+  const favoritedAt = isNaN(Number(favoritedAtSec)) ? undefined : Number(favoritedAtSec) * 1000;
+  // const updatedAt = isNaN(Number(updatedAtSec)) ? undefined : Number(updatedAtSec) * 1000;
   const id = Number(trackId || '');
   if (!id || inited || !trackMediaUrl) {
     return;
   }
   const hasServerData = window.isAuthenticated;
-  const isCurrent = activePlayerData?.id == id;
+  const isCurrent = !!activePlayerData && activePlayerData.id == id;
   const trackInfo: TrackInfo | undefined = localTrackInfoDb.getById(id);
   const favorite = hasServerData ? Boolean(dataset.favorite) : !!trackInfo?.favorite;
   if (trackInfo) {
@@ -333,29 +353,32 @@ function initTrackPlayerNode(trackNode: HTMLElement) {
       if (favorite) {
         updateTrackFavoriteInDataset(trackNode, trackInfo.favorite);
       }
+    } else {
+      const lastPlayed = trackInfo.lastPlayed;
+      // const lastPlayedDate = new Date(lastPlayed); // DEBUG
+      const lastFavorited = trackInfo.lastFavorited;
+      // Merge server & local data
+      if (dataset.favorite != null && favoritedAt && favoritedAt >= lastFavorited) {
+        trackInfo.favorite = Boolean(dataset.favorite);
+        trackInfo.lastFavorited = favoritedAt;
+        localTrackInfoDb.updateFavorite(id, Boolean(dataset.favorite), favoritedAt);
+      }
+      // const playedAtDate = playedAt && new Date(playedAt); // DEBUG
+      if (playedAt && playedAt >= lastPlayed) {
+        trackInfo.position = position;
+        trackInfo.lastPlayed = playedAt;
+        localTrackInfoDb.updatePosition(id, position, playedAt);
+      }
     }
-    // TODO: Get position from the server (dataset)
-    const {
-      duration,
-      // position,
-      // progress,
-    } = calculateAndUpdateTrackPosition(trackNode, trackInfo.position || 0, isCurrent);
+    calculateAndUpdateTrackPosition(
+      trackNode,
+      trackInfo.position || 0,
+      trackInfo.lastPlayed,
+      isCurrent,
+    );
     const playedCount = Number(
       trackNode.querySelector<HTMLElement>('.track-played-count')?.dataset.playedCount || '0',
     );
-    // Update the local db date...
-    if (activePlayerData) {
-      activePlayerData.favorite = favorite;
-      activePlayerData.duration = duration;
-    }
-    /* TODO: Update local data (favorite, playedCount) from track node dataset?
-     * - id
-     * - favorite
-     * - lastPlayed
-     * - lastUpdated
-     * - playedCount
-     * - position
-     */
     const hasChangedData = playedCount !== trackInfo.playedCount || favorite !== trackInfo.favorite;
     if (hasChangedData) {
       trackInfo.playedCount = playedCount;
@@ -365,11 +388,23 @@ function initTrackPlayerNode(trackNode: HTMLElement) {
   }
   if (isCurrent) {
     activePlayerData.title = dataset.trackTitle || '';
+    activePlayerData.mediaUrl = trackMediaUrl;
     currentTrackPlayer = trackNode;
+    const img = trackNode.querySelector('.thumb-preview img');
+    const imgUrl = img?.getAttribute('src');
+    if (imgUrl) {
+      activePlayerData.imageUrl = imgUrl;
+    }
+    activePlayerData.duration = duration;
+    activePlayerData.favorite = favorite;
+    if (trackTitle) {
+      activePlayerData.title = trackTitle;
+    }
     requestAnimationFrame(() => {
       trackNode.classList.toggle('current', true);
     });
     floatingPlayerUpdate({ floatingPlayerState: floatingPlayer.state, activePlayerData });
+    floatingPlayer.saveActivePlayerData();
   }
   initTrackPlayerNodeControls(trackNode);
 }
@@ -383,4 +418,5 @@ export function initTracksPlayerWrapper(domNode: HTMLElement = document.body) {
   floatingPlayer.callbacks.addIncrementCallback(updateIncrementCallback);
   floatingPlayer.callbacks.addFavoritesCallback(updateFavoritesCallback);
   floatingPlayer.callbacks.addFavoriteCallback(updateSingleFavoriteCallback);
+  floatingPlayer.tracksLoaded();
 }

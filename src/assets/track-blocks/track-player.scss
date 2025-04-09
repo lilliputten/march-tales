@@ -215,5 +215,6 @@
   &:not([data-status='waiting']) .track-control-play .option-waiting {
     // display: none;
     opacity: 0;
+    visibility: hidden;
   }
 }

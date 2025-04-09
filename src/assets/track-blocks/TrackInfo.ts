@@ -8,6 +8,7 @@ export interface TrackInfo {
   position: number; // position?.inMilliseconds ?? 0
   lastUpdated: number; // DateTime.now().millisecondsSinceEpoch <-> DateTime.fromMillisecondsSinceEpoch(ms)
   lastPlayed: number; // DateTime.now().millisecondsSinceEpoch <-> DateTime.fromMillisecondsSinceEpoch(ms)
+  lastFavorited: number; // DateTime
 }
 
 const finalPackDelimReg = new RegExp(packDelim + '+$');
@@ -26,6 +27,7 @@ export function trackInfoFromJsonStr(str: string): TrackInfo | undefined {
       position,
       lastUpdated, // Timestamp
       lastPlayed, // Timestamp
+      lastFavorited,
     ] = list;
     const data: TrackInfo = {
       // Keep the order!
@@ -35,6 +37,7 @@ export function trackInfoFromJsonStr(str: string): TrackInfo | undefined {
       position: position ? Number(position) : 0,
       lastUpdated: lastUpdated ? Number(lastUpdated) * 1000 : 0, // Timestamp
       lastPlayed: lastPlayed ? Number(lastPlayed) * 1000 : 0, // Timestamp
+      lastFavorited: lastFavorited ? Number(lastFavorited) * 1000 : 0, // Timestamp
     };
     return data;
   } catch (
@@ -58,6 +61,7 @@ export function trackInfoToJsonStr(trackInfo: TrackInfo) {
     position,
     lastUpdated,
     lastPlayed,
+    lastFavorited,
   } = trackInfo;
   const list = [
     // Keep the order!
@@ -67,6 +71,7 @@ export function trackInfoToJsonStr(trackInfo: TrackInfo) {
     position ? floatToStr(position) : undefined, // Use fixed decimal presentation for floats
     lastUpdated ? Math.round(lastUpdated / 1000) : undefined, // Timestamp
     lastPlayed ? Math.round(lastPlayed / 1000) : undefined, // Timestamp
+    lastFavorited ? Math.round(lastFavorited / 1000) : undefined, // Timestamp
   ];
   return list.join(packDelim).replace(finalPackDelimReg, '');
 }

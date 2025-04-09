@@ -1,11 +1,9 @@
+from django.db.models import Count
 from django.http import HttpRequest
 from django.utils import translation
-from django.db.models import Count
 
 from core.logging import getDebugLogger
-
 from tales_django.models import Rubric
-
 
 rubrics_limit = 20
 

@@ -5,6 +5,7 @@ declare global {
     projectInfo?: string;
     isAuthenticated?: boolean;
     hasFavoriteTracks?: boolean;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     AOS: { init: (o: Record<string, any>) => void };
     $: jQuery;
   }

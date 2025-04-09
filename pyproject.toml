@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "march-tales"
-version = "0.0.38"
+version = "0.0.39"
 description = "March Tales django rest api and web frontend server"
 authors = ["lilliputten <lilliputten@gmail.com>"]
 readme = "README.md"
@@ -64,6 +64,11 @@ extend-exclude = '''(
 \._
 | .*\/tales_django\/(migrations)\/.*
 )'''
+
+[tool.isort]
+# @see https://pycqa.github.io/isort/docs/configuration/options.html
+extend_skip = [".venv", "node_modules"]
+extend_skip_glob = ["tales_django/migrations/*"]
 
 [tool.poetry.scripts]
 export_requirements = "poetry-scripts.export_requirements:export_requirements"

@@ -1,5 +1,5 @@
-from .probeDuration import probeDuration
 from .probe import probe
+from .probeDuration import probeDuration
 from .split import split
 
 __all__ = [

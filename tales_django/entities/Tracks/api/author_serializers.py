@@ -2,8 +2,7 @@ from rest_framework import serializers
 
 from tales_django.core.model_helpers import get_current_language
 
-from ..models import Track, Tag, Rubric, Author
-
+from ..models import Author, Rubric, Tag, Track
 from .basic_plain_serializers import AuthorSerializer, RubricSerializer, TagSerializer
 
 

@@ -6,7 +6,6 @@ from tales_django.core.model_helpers import check_locale_decorator
 from tales_django.core.pages import get_author_tracks_list_context, get_common_context, get_favorites_list_context
 from tales_django.entities.Tracks.models import Author
 
-
 logger = getDebugLogger()
 
 

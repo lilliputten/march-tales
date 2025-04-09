@@ -1,32 +1,25 @@
-from datetime import date
-from datetime import timedelta
+from datetime import date, timedelta
 
-from django.urls import reverse
-from translated_fields import TranslatedField
-
-from django.utils.translation import gettext_lazy as _
 from django.db import models
 from django.db.models import Model
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
-
+from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFit
+from translated_fields import TranslatedField
 
 from core.appEnv import LOCAL
 from core.helpers.files import sizeofFmt
 from core.logging import getDebugLogger
-
 from tales_django.core.helpers.audio import getAudioTrackFolderName
-from tales_django.core.model_helpers import (
-    get_non_empty_localized_model_field_attrgetter,
-)
+from tales_django.core.model_helpers import get_non_empty_localized_model_field_attrgetter
 from tales_django.entities.Tracks.constants.preview_picture_sizes import (
     track_preview_picture_full_size,
     track_preview_picture_jpeg_quality,
     track_preview_picture_thumb_size,
 )
-
 
 _logger = getDebugLogger()
 
@@ -136,11 +129,7 @@ class Track(Model):
         help_text=_('Show only for privileged members'),
     )
 
-    played_count = models.BigIntegerField(
-        blank=True,
-        default=0,
-        verbose_name=_('Played count'),
-    )
+    played_count = models.BigIntegerField(_('Played count'), default=0)
 
     # Properties derived from the audio track file
     audio_duration = models.FloatField(null=True, verbose_name=_('Duration (seconds)'))

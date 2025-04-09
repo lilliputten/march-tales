@@ -1,8 +1,4 @@
 // @ts-check
-/** @module Webpack params
- *  @since 2024.10.07, 00:00
- *  @changed 2024.12.31, 12:58
- */
 
 const fs = require('fs');
 const path = require('path');

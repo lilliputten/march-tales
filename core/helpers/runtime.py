@@ -1,8 +1,8 @@
 # -*- coding:utf-8 -*-
 
-import traceback
-import re
 import pathlib
+import re
+import traceback
 
 from core.appEnv import PROJECT_PATH
 

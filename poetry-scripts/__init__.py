@@ -1,6 +1,16 @@
 import subprocess
 
 
+def isort():
+    print('Running imports sorter...')
+    cmd = [
+        'isort',
+        '--only-modified',
+        '.',
+    ]
+    subprocess.run(cmd)
+
+
 def lint():
     print('Running pyright linter...')
     cmd = [
@@ -20,6 +30,7 @@ def format():
 
 
 def check_all():
+    isort()
     format()
     lint()
 

@@ -1,9 +1,7 @@
-from .getDebugLogger import getDebugLogger
 from . import loggerConfig
-
 from .CustomHttpHandler import *
 from .DebugLog import *
-
+from .getDebugLogger import getDebugLogger
 from .utils import (
     errorStyle,
     errorTitleStyle,
@@ -11,8 +9,8 @@ from .utils import (
     secondaryStyle,
     titleStyle,
     tretiaryStyle,
-    warningTitleStyle,
     warningStyle,
+    warningTitleStyle,
 )
 
 __all__ = [

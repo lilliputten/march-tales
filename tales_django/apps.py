@@ -1,9 +1,8 @@
-from django.utils.translation import gettext_lazy as _
-from django.conf import settings
 from django.apps import AppConfig
+from django.conf import settings
+from django.utils.translation import gettext_lazy as _
 
 from core.logging import getDebugLogger
-
 
 _logger = getDebugLogger()
 

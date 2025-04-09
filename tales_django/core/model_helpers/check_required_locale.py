@@ -1,6 +1,6 @@
+from django.conf import settings
 from django.http import HttpRequest
 from django.utils import translation
-from django.conf import settings
 
 from core.logging import getDebugLogger
 

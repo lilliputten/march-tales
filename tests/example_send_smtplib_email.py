@@ -1,22 +1,20 @@
 import os
-import sys
 import pathlib
-import traceback
 import smtplib
+import sys
+import traceback
 
 # Inject project path to allow server-side tests
 sys.path.insert(1, pathlib.Path(os.getcwd()).as_posix())
 
-from core.helpers.errors import errorToString
-from core.djangoConfig import (
-    EMAIL_HOST,
-    EMAIL_PORT,
+from core.djangoConfig import (  # EMAIL_USE_TLS,; EMAIL_USE_SSL,
     DEFAULT_FROM_EMAIL,
-    EMAIL_HOST_USER,
+    EMAIL_HOST,
     EMAIL_HOST_PASSWORD,
-    # EMAIL_USE_TLS,
-    # EMAIL_USE_SSL,
+    EMAIL_HOST_USER,
+    EMAIL_PORT,
 )
+from core.helpers.errors import errorToString
 
 
 def test_send_smtplib_email():

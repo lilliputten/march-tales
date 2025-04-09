@@ -3,7 +3,7 @@
 import random
 import string
 
-from core.appEnv import appEnv, LOCAL
+from core.appEnv import LOCAL, appEnv
 
 # Secrets
 # SECURITY WARNING: keep the secret key used in production secret!

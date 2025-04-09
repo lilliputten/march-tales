@@ -1,5 +1,6 @@
-from django.template.defaultfilters import register
 import re
+
+from django.template.defaultfilters import register
 
 
 @register.simple_tag

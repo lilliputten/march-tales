@@ -1,18 +1,17 @@
 # -*- coding:utf-8 -*-
 
+import json
 import logging
 import logging.handlers
-import json
 
 import requests
 from requests.adapters import HTTPAdapter
-
 from urllib3.util import Retry
 
-from .DebugLog import addDebugLog, useDebugLogs
-from . import loggerConfig
 from core.helpers.utils.stripHtml import stripHtml
 
+from . import loggerConfig
+from .DebugLog import addDebugLog, useDebugLogs
 
 # @see https://habr.com/ru/companies/wunderfund/articles/683880/
 # @see https://docs.python.org/3/library/logging

@@ -1,21 +1,16 @@
-from django.contrib.flatpages.admin import FlatPageAdmin as BaseFlatPageAdmin
-
 from django.contrib import admin
+from django.contrib.flatpages.admin import FlatPageAdmin as BaseFlatPageAdmin
 from django.db.models.functions import Lower
 from django.utils.translation import gettext_lazy as _
-
 from import_export.admin import ExportActionModelAdmin, ImportExportModelAdmin
-from unfold.contrib.import_export.forms import ExportForm, ImportForm
 from translated_fields import TranslatedFieldAdmin
-
 from unfold.admin import ModelAdmin as UnfoldModelAdmin
-
+from unfold.contrib.import_export.forms import ExportForm, ImportForm
 
 from tales_django.sites import unfold_admin_site
 
 from ..forms import FlatPageForm
-from ..models import FlatPage, BaseFlatPage
-
+from ..models import BaseFlatPage, FlatPage
 
 # @see .venv/Lib/site-packages/django/contrib/flatpages/models.py
 

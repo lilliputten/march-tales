@@ -1,4 +1,4 @@
-from .Membership import Membership, MEMBERSHIP_DATA
+from .Membership import MEMBERSHIP_DATA, Membership
 
 __all__ = [
     'Membership',

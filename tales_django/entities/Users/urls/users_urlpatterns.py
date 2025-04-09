@@ -5,12 +5,12 @@ from django.urls import include, path
 
 from ..forms import UserRegistrationForm
 from ..views import (
-    profile,
-    login_success,
     UserRegistrationView,
-    logout_user_route,
-    edit_user_profile,
     delete_user_account,
+    edit_user_profile,
+    login_success,
+    logout_user_route,
+    profile,
 )
 
 users_urlpatterns = [

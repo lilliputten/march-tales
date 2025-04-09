@@ -1,4 +1,5 @@
-from typing import Any, TypedDict, Optional
+from typing import Any, Optional, TypedDict
+
 from .variableAndKeyString import variableAndKeyString
 
 space = ' - '

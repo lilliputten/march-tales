@@ -12,7 +12,6 @@ from core.logging import getDebugLogger
 from ..forms import UpdateUserForm
 from ..helpers.activation import send_re_actvation_email
 
-
 logger = getDebugLogger()
 
 
