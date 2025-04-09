@@ -10,7 +10,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 
-@changed 2025.03.14, 02:23
+@changed 2025.04.09, 16:55
 """
 
 import posixpath
@@ -20,7 +20,7 @@ from django.templatetags.static import static
 from django.utils.translation import gettext_lazy as _
 from unfold.sites import reverse_lazy
 
-from core.appConfig import APK_DOWNLOAD_FILE, APK_DOWNLOAD_SIZE, APK_DOWNLOAD_VERSION
+from core.appConfig import APK_DOWNLOAD_FILE, APK_DOWNLOAD_SIZE, APK_DOWNLOAD_VERSION, TIME_ZONE
 from core.appEnv import (
     ASSETS_ROOT,
     BASE_DIR,
@@ -106,7 +106,7 @@ CSRF_TRUSTED_ORIGINS = [
 
 if LOCAL:
     # Allow work with local server in local dev mode
-    ALLOWED_HOSTS.append('10.0.2.2')   # Flutter emulator VM host
+    ALLOWED_HOSTS.append('10.0.2.2')  # Flutter emulator VM host
     ALLOWED_HOSTS.append('localhost')
     ALLOWED_HOSTS.append('localhost:3000')
     CSRF_TRUSTED_ORIGINS.append('http://localhost:3000')
@@ -241,7 +241,7 @@ FLATPAGE_CONTEXT_GETTER = 'tales_django.get_flatpages_context.get_flatpages_cont
 FLATPAGE_DEFAULT_TEMPLATE = 'tales_django/flatpage.html.django'
 
 # # @see https://github.com/django-ckeditor/django-ckeditor
-CKEDITOR_5_FILE_STORAGE = 'tales_django.ckeditor_storage.ckeditor_storage'   # optional
+CKEDITOR_5_FILE_STORAGE = 'tales_django.ckeditor_storage.ckeditor_storage'  # optional
 # CKEDITOR_5_CUSTOM_CSS = 'path_to.css' # optional
 CKEDITOR_5_FILE_UPLOAD_PERMISSION = 'staff'  # Possible values: 'staff', 'authenticated', 'any'
 CKEDITOR_5_USER_LANGUAGE = True
@@ -339,13 +339,47 @@ CKEDITOR_5_CONFIGS = {
         },
         'heading': {
             'options': [
-                {'model': 'paragraph', 'title': 'Paragraph', 'class': 'ck-heading_paragraph'},
-                {'model': 'heading1', 'view': 'h1', 'title': 'Heading 1', 'class': 'ck-heading_heading1'},
-                {'model': 'heading2', 'view': 'h2', 'title': 'Heading 2', 'class': 'ck-heading_heading2'},
-                {'model': 'heading3', 'view': 'h3', 'title': 'Heading 3', 'class': 'ck-heading_heading3'},
-                {'model': 'heading4', 'view': 'h4', 'title': 'Heading 4', 'class': 'ck-heading_heading4'},
-                {'model': 'heading5', 'view': 'h5', 'title': 'Heading 5', 'class': 'ck-heading_heading5'},
-                {'model': 'heading6', 'view': 'h6', 'title': 'Heading 6', 'class': 'ck-heading_heading6'},
+                {
+                    'model': 'paragraph',
+                    'title': 'Paragraph',
+                    'class': 'ck-heading_paragraph',
+                },
+                {
+                    'model': 'heading1',
+                    'view': 'h1',
+                    'title': 'Heading 1',
+                    'class': 'ck-heading_heading1',
+                },
+                {
+                    'model': 'heading2',
+                    'view': 'h2',
+                    'title': 'Heading 2',
+                    'class': 'ck-heading_heading2',
+                },
+                {
+                    'model': 'heading3',
+                    'view': 'h3',
+                    'title': 'Heading 3',
+                    'class': 'ck-heading_heading3',
+                },
+                {
+                    'model': 'heading4',
+                    'view': 'h4',
+                    'title': 'Heading 4',
+                    'class': 'ck-heading_heading4',
+                },
+                {
+                    'model': 'heading5',
+                    'view': 'h5',
+                    'title': 'Heading 5',
+                    'class': 'ck-heading_heading5',
+                },
+                {
+                    'model': 'heading6',
+                    'view': 'h6',
+                    'title': 'Heading 6',
+                    'class': 'ck-heading_heading6',
+                },
             ],
         },
     },
@@ -680,7 +714,7 @@ SERVER_EMAIL = DEFAULT_FROM_EMAIL
 # Internationalization
 # @see https://docs.djangoproject.com/en/5.1/topics/i18n/
 # @see https://docs.djangoproject.com/en/5.1/topics/i18n/translation/
-TIME_ZONE = 'Europe/Moscow'  # 'UTC'
+# TIME_ZONE = 'Europe/Moscow'  # 'UTC' Get from config?
 USE_TZ = True
 USE_I18N = True
 USE_L10N = True
@@ -916,6 +950,7 @@ __all__ = [
     'APK_DOWNLOAD_FILE',
     'APK_DOWNLOAD_VERSION',
     'APK_DOWNLOAD_SIZE',
+    'TIME_ZONE',
 ]
 
 try:

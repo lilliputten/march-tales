@@ -90,10 +90,6 @@ function initCarousel(carousel: HTMLElement) {
     ...extraSettings,
     ...seedSettings,
   };
-  console.log('[carousels:initCarousel]', {
-    type,
-    settings,
-  });
   $(carousel).slick(settings);
 }
 

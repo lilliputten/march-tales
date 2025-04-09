@@ -8,6 +8,7 @@ from .appEnv import BASE_DIR, appEnv
 
 # Timezone (set `TZ_HOURS` to hours value to adjust date representation to corresponding timezone)
 TZ_HOURS = appEnv.int('TZ_HOURS_OFFSET', 0)
+TIME_ZONE = appEnv.str('TIME_ZONE', 'Europe/Moscow')
 
 APK_FOLDER = appEnv.str('APK_FOLDER', 'static/downloads/apk')
 APK_JSON_FILE = appEnv.str('APK_JSON_FILE', posixpath.join(APK_FOLDER, 'output-metadata.json'))

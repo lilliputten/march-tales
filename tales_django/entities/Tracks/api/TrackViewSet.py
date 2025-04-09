@@ -1,9 +1,9 @@
-import datetime
 import traceback
 
 from django.db.models import QuerySet
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from rest_framework import permissions, status, viewsets
 from rest_framework.decorators import action
@@ -307,7 +307,7 @@ class TrackViewSet(viewsets.GenericViewSet):
             )
 
     @action(
-        methods=['post', 'get'],
+        methods=['post'],
         url_path='toggle-favorite',
         url_name='track-toggle-favorite',
         detail=True,
@@ -361,7 +361,7 @@ class TrackViewSet(viewsets.GenericViewSet):
             }
             logger.info(f'[toggle_favorite]: params:\n{debugObj(debugData)}')
 
-            now = datetime.datetime.now()
+            now = timezone.now()   # datetime.datetime.now()
             user_track.favorited_at = now
             user_track.is_favorite = value
             user_track.save()
@@ -474,7 +474,7 @@ class TrackViewSet(viewsets.GenericViewSet):
                     'user_track': user_track.id,
                 }
                 logger.info(f'[increment_played_count]: is_authenticated DEBUG:\n{debugObj(debugData)}')
-                now = datetime.datetime.now()
+                now = timezone.now()   # datetime.datetime.now()
                 user_track.played_at = now
                 user_track.played_count = user_track.played_count + 1
                 user_track.save()
@@ -521,8 +521,6 @@ class TrackViewSet(viewsets.GenericViewSet):
     )
     def update_position(self, request: Request, pk=None):
         try:
-            position = float(request.data.get('position', '0'))
-
             session_key = request.session.session_key if request.session else None
             csrftoken = request.headers.get('X-CSRFToken')
 
@@ -559,6 +557,8 @@ class TrackViewSet(viewsets.GenericViewSet):
                 )
             user_track = user_tracks_list[0]
 
+            position = float(request.query_params.get('position', '0'))
+
             debugData = {
                 'position': position,
                 'track.id': track.id,
@@ -567,7 +567,7 @@ class TrackViewSet(viewsets.GenericViewSet):
             }
             logger.info(f'[update_position]: params:\n{debugObj(debugData)}')
 
-            now = datetime.datetime.now()
+            now = timezone.now()   # datetime.datetime.now()
             user_track.played_at = now
             user_track.position = position
             user_track.save()

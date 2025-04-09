@@ -90,7 +90,6 @@ class LocalTrackInfoDb {
         trackInfo.favorite = isFavorite;
         trackInfo.lastFavorited = (favoritedTimes && favoritedTimes[id]) || timestamp || now;
         // TODO: To check if it works correct
-        debugger;
         trackInfo.lastUpdated = now;
         this.insert(trackInfo);
       }
