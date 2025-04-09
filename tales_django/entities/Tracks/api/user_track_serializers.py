@@ -26,13 +26,13 @@ class UserTrackSerializer(serializers.HyperlinkedModelSerializer):
     updated_at_sec = serializers.SerializerMethodField('get_updated_at_sec')
 
     def get_favorited_at_sec(self, obj):
-        return round(obj.favorited_at.timestamp())
+        return round(obj.favorited_at.timestamp()) if obj.favorited_at is not None else None
 
     def get_played_at_sec(self, obj):
-        return round(obj.played_at.timestamp())
+        return round(obj.played_at.timestamp()) if obj.played_at is not None else None
 
     def get_updated_at_sec(self, obj):
-        return round(obj.updated_at.timestamp())
+        return round(obj.updated_at.timestamp()) if obj.updated_at is not None else None
 
     # Objects (will be required for `full` data, not used at the moment)
     # user = UserSerializer(read_only=False, many=False)
