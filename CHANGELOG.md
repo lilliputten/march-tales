@@ -1,13 +1,19 @@
 <!--
  @since 2025.03.19
- @changed 2025.04.05, 02:26
+ @changed 2025.04.09, 19:15
 -->
 
 # CHANGELOG
 
+## [v.0.0.39](https://github.com/lilliputten/march-tales/releases/tag/v.0.0.39) - 2025.04.09
+
+- [Issue #75](https://github.com/lilliputten/march-tales/issues/75): Added synchronization of playback positions on the web clients: if the last played timestamp from the server is newer than local one, then the server playback position is used, if presented.
+
+[Compare with the previous version](https://github.com/lilliputten/march-tales/compare/v.0.0.38...v.0.0.39)
+
 ## [v.0.0.38](https://github.com/lilliputten/march-tales/releases/tag/v.0.0.38) - 2025.03.28
 
-- [Issue #74](https://github.com/lilliputten/march-tales/issues/71): Added editable flat pages (via overriden `django.contrib.flatpages`).
+- [Issue #74](https://github.com/lilliputten/march-tales/issues/74): Added editable flat pages (via overriden `django.contrib.flatpages`).
 - Added flatpage module workarounds. Used overriden ewxposed modules (`tales_django/entities/flatpages`: ). A settings parameter `FLATPAGE_CONTEXT_GETTER` to pass a context to the template. Added settings parameter `FLATPAGE_DEFAULT_TEMPLATE` to specify default flat pages' template.
 - Added `ckeditor` module to allow rich text content editor.
 - Extended `FlatPage` data model to allow content translation.
