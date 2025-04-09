@@ -8,15 +8,10 @@
 {% block page_content %}
   {{ block.super }}
 
-<!--
-XXX DEBUG
-django_language: "{{ django_language }}"
-mobile_auth: "{{ mobile_auth }}"
-is_mobile_auth: {{ is_mobile_auth }}
--->
-
   {# SAMPLE: Optional top promo section #}
-  {#% include "assets/template-columns/top-columns.django" %#}
+  {% if show_top_columns %}
+    {% include "assets/template-columns/top-columns.django" %}
+  {% endif %}
 
   <!-- {{{ Template columns layout -->
   {#% include "assets/template-columns/template-columns.django" %#}

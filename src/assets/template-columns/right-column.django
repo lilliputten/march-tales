@@ -10,6 +10,6 @@
 {% include 'assets/template-right-blocks/right-rubrics-list/right-rubrics-list.django' %}
 {% comment %} {% include 'assets/template-right-blocks/right-subscribe/right-subscribe.django' %} {% endcomment %}
 {% include 'assets/template-right-blocks/right-tags-list/right-tags-list.django' %}
-{% include 'assets/template-right-blocks/right-favorites-list/right-favorites-list.django' %}
+{% comment %} {% include 'assets/template-right-blocks/right-favorites-list/right-favorites-list.django' %} {% endcomment %}
 {% comment %} {% include 'assets/template-right-blocks/right-recents-list/right-recents-list.django' %} {% endcomment %}
 {% include 'assets/template-right-blocks/right-social-links/right-social-links.django' %}

@@ -1,0 +1,30 @@
+{# ex: set ft=htmldjango : #}
+{% load static %}
+{% load i18n %}
+
+{% comment %}
+
+- `track` -- Tracks object expected as an external variable.
+
+{% endcomment %}
+
+<article class="small-tracks-card-list-item card mb-4">
+  <div class="card-body d-flex">
+    {% if track.preview_picture %}
+      <a href="/tracks/{{ track.id }}/">
+        {% lqip_media_img_tag url=track.preview_picture_small_sq.url thumb=track.preview_picture_small_sq_thumb.url className="card-img-sm lazy-load" %}
+      </a>
+    {% endif %}
+    <div class="content ms-3">
+      <h5><a href="/tracks/{{ track.id }}/" class="post-title">{{ track.title }}</a></h5>
+      <ul class="details card-meta list-inline mb-0">
+        <li class="list-inline-item mb-1">
+          <i class="icon ti-calendar"></i>{{ track.published_at }}
+        </li>
+        <li class="list-inline-item mb-1">
+          <i class="icon ti-timer"></i>{{ track.duration_formatted }}
+        </li>
+      </ul>
+    </div>
+  </div>
+</article>

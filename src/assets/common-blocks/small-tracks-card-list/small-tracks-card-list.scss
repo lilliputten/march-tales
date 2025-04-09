@@ -1,0 +1,28 @@
+@use 'sass:color';
+
+@import '../../shared';
+
+.small-tracks-card-list {
+  // padding-left: 0;
+}
+.small-tracks-card-list-item.card {
+  a {
+    &,
+    & img {
+      transition: all var(--transitionTimeMs);
+    }
+  }
+  a {
+    color: $defaultTextColor;
+  }
+  a:hover {
+    &,
+    .post-title {
+      color: $primaryColor;
+      text-decoration: underline;
+    }
+    img {
+      opacity: 0.75;
+    }
+  }
+}

@@ -7,7 +7,7 @@ from django.dispatch import receiver
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from imagekit.models import ImageSpecField
-from imagekit.processors import ResizeToFit
+from imagekit.processors import ResizeToFill, ResizeToFit  # ResizeToCover,
 from translated_fields import TranslatedField
 
 from core.appEnv import LOCAL
@@ -16,8 +16,10 @@ from core.logging import getDebugLogger
 from tales_django.core.helpers.audio import getAudioTrackFolderName
 from tales_django.core.model_helpers import get_non_empty_localized_model_field_attrgetter
 from tales_django.entities.Tracks.constants.preview_picture_sizes import (
+    micro_image_thumb_size,
     track_preview_picture_full_size,
     track_preview_picture_jpeg_quality,
+    track_preview_picture_small_size,
     track_preview_picture_thumb_size,
 )
 
@@ -94,6 +96,30 @@ class Track(Model):
         source='preview_picture',
         processors=[
             ResizeToFit(track_preview_picture_full_size, track_preview_picture_full_size),
+        ],
+        format='JPEG',
+        options={'quality': track_preview_picture_jpeg_quality},
+    )
+    preview_picture_small = ImageSpecField(
+        source='preview_picture',
+        processors=[
+            ResizeToFit(track_preview_picture_small_size, track_preview_picture_small_size),
+        ],
+        format='JPEG',
+        options={'quality': track_preview_picture_jpeg_quality},
+    )
+    preview_picture_small_sq = ImageSpecField(
+        source='preview_picture',
+        processors=[
+            ResizeToFill(track_preview_picture_small_size, track_preview_picture_small_size),
+        ],
+        format='JPEG',
+        options={'quality': track_preview_picture_jpeg_quality},
+    )
+    preview_picture_small_sq_thumb = ImageSpecField(
+        source='preview_picture',
+        processors=[
+            ResizeToFill(micro_image_thumb_size, micro_image_thumb_size),
         ],
         format='JPEG',
         options={'quality': track_preview_picture_jpeg_quality},

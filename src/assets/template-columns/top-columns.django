@@ -2,16 +2,33 @@
 {% load static %}
 {% load i18n %}
 
+{% comment %}
+{% if settings.DEBUG %}
+<pre>
+recent_tracks: {{ recent_tracks }}
+popular_tracks: {{ popular_tracks }}
+most_recent_track: {{ most_recent_track }}
+random_track: {{ random_track }}
+</pre>
+{% endif %}
+{% endcomment %}
+
 <section class="section pb-0">
   <div class="container">
     <div class="row">
-      <div class="col-lg-4 mb-5">
-        <h2 class="h5 section-title">Editors Pick</h2>
+      <div class="col-lg-4 mb-0">
+        <h2 class="h5 section-title">{% trans "Most recent" %}</h2>
+
+        {% with track=most_recent_track no_controls=True %}
+        {% include 'assets/common-blocks/big-tracks-list/big-tracks-list-item.django' %}
+        {% endwith %}
+
+        {% comment %}
+        {# Example: Template promo section #}
         <article class="card">
           <div class="post-slider slider-sm">
             <img src="{% static 'template/post/post-1.jpg' %}" class="card-img-top" alt="post-thumb">
           </div>
-
           <div class="card-body">
             <h3 class="h5 mb-3"><a class="post-title" href="post-details.html">Use apples to give your bakes caramel and a moist texture</a></h3>
             <ul class="card-meta list-inline">
@@ -39,11 +56,20 @@
             <a href="post-details.html" class="btn btn-outline-primary">Read More</a>
           </div>
         </article>
+        {% endcomment %}
+
       </div>
 
-      <div class="col-lg-4 mb-5">
-        <h2 class="h5 section-title">Trending Post</h2>
+      <div class="col-lg-4 mb-0">
+        <h2 class="h5 section-title">{% trans "Most popular" %}</h2>
 
+        {% with tracks=popular_tracks %}
+        {% include 'assets/common-blocks/small-tracks-list/small-tracks-list.django' %}
+        {% comment %} {% include 'assets/common-blocks/small-tracks-card-list/small-tracks-card-list.django' %} {% endcomment %}
+        {% endwith %}
+
+        {% comment %}
+        {# Example: Template small promo item #}
         <article class="card mb-4">
           <div class="card-body d-flex">
             <img class="card-img-sm" src="{% static 'template/post/post-3.jpg' %}">
@@ -60,76 +86,17 @@
             </div>
           </div>
         </article>
+        {% endcomment %}
 
-        <article class="card mb-4">
-          <div class="card-body d-flex">
-            <img class="card-img-sm" src="{% static 'template/post/post-2.jpg' %}">
-            <div class="ms-3">
-              <h5><a href="post-details.html" class="post-title">The Design Files - Homes Minimalist</a></h5>
-              <ul class="card-meta list-inline mb-0">
-                <li class="list-inline-item mb-0">
-                  <i class="ti-calendar"></i>14 jan, 2020
-                </li>
-                <li class="list-inline-item mb-0">
-                  <i class="ti-timer"></i>2 Min To Read
-                </li>
-              </ul>
-            </div>
-          </div>
-        </article>
-
-        <article class="card mb-4">
-          <div class="card-body d-flex">
-            <img class="card-img-sm" src="{% static 'template/post/post-4.jpg' %}">
-            <div class="ms-3">
-              <h5><a href="post-details.html" class="post-title">The Skinny Confidential</a></h5>
-              <ul class="card-meta list-inline mb-0">
-                <li class="list-inline-item mb-0">
-                  <i class="ti-calendar"></i>14 jan, 2020
-                </li>
-                <li class="list-inline-item mb-0">
-                  <i class="ti-timer"></i>2 Min To Read
-                </li>
-              </ul>
-            </div>
-          </div>
-        </article>
       </div>
 
-      <div class="col-lg-4 mb-5">
-        <h2 class="h5 section-title">Popular Post</h2>
+      <div class="col-lg-4 mb-0">
+        <h2 class="h5 section-title">{% trans "Random" %}</h2>
 
-        <article class="card">
-          <div class="post-slider slider-sm">
-            <img src="{% static 'template/post/post-5.jpg' %}" class="card-img-top" alt="post-thumb">
-          </div>
-          <div class="card-body">
-            <h3 class="h5 mb-3"><a class="post-title" href="post-details.html">How To Make Cupcakes and Cashmere Recipe At Home</a></h3>
-            <ul class="card-meta list-inline">
-              <li class="list-inline-item">
-                <a href="author-single.html" class="card-meta-author">
-                  <img src="{% static 'template/kate-stone.jpg' %}" alt="Kate Stone">
-                  <span>Kate Stone</span>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <i class="ti-timer"></i>2 Min To Read
-              </li>
-              <li class="list-inline-item">
-                <i class="ti-calendar"></i>14 jan, 2020
-              </li>
-              <li class="list-inline-item">
-                <ul class="card-meta-tag list-inline">
-                  <li class="list-inline-item"><a href="tags.html">City</a></li>
-                  <li class="list-inline-item"><a href="tags.html">Food</a></li>
-                  <li class="list-inline-item"><a href="tags.html">Taste</a></li>
-                </ul>
-              </li>
-            </ul>
-            <p>It’s no secret that the digital industry is booming. From exciting startups to …</p>
-            <a href="post-details.html" class="btn btn-outline-primary">Read More</a>
-          </div>
-        </article>
+        {% with track=random_track no_controls=True %}
+        {% include 'assets/common-blocks/big-tracks-list/big-tracks-list-item.django' %}
+        {% endwith %}
+
       </div>
 
     </div>
