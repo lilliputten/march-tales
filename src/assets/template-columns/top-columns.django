@@ -16,13 +16,12 @@ random_track: {{ random_track }}
 <section class="section pb-0">
   <div class="container">
     <div class="row">
+
       <div class="col-lg-4 mb-0">
         <h2 class="h5 section-title">{% trans "Most recent" %}</h2>
-
         {% with track=most_recent_track no_controls=True %}
         {% include 'assets/common-blocks/big-tracks-list/big-tracks-list-item.django' %}
         {% endwith %}
-
         {% comment %}
         {# Example: Template promo section #}
         <article class="card">
@@ -57,46 +56,21 @@ random_track: {{ random_track }}
           </div>
         </article>
         {% endcomment %}
-
-      </div>
-
-      <div class="col-lg-4 mb-0">
-        <h2 class="h5 section-title">{% trans "Most popular" %}</h2>
-
-        {% with tracks=popular_tracks %}
-        {% include 'assets/common-blocks/small-tracks-list/small-tracks-list.django' %}
-        {% comment %} {% include 'assets/common-blocks/small-tracks-card-list/small-tracks-card-list.django' %} {% endcomment %}
-        {% endwith %}
-
-        {% comment %}
-        {# Example: Template small promo item #}
-        <article class="card mb-4">
-          <div class="card-body d-flex">
-            <img class="card-img-sm" src="{% static 'template/post/post-3.jpg' %}">
-            <div class="ms-3">
-              <h5><a href="post-details.html" class="post-title">Advice From a Twenty Something</a></h5>
-              <ul class="card-meta list-inline mb-0">
-                <li class="list-inline-item mb-0">
-                  <i class="ti-calendar"></i>14 jan, 2020
-                </li>
-                <li class="list-inline-item mb-0">
-                  <i class="ti-timer"></i>2 Min To Read
-                </li>
-              </ul>
-            </div>
-          </div>
-        </article>
-        {% endcomment %}
-
       </div>
 
       <div class="col-lg-4 mb-0">
         <h2 class="h5 section-title">{% trans "Random" %}</h2>
-
         {% with track=random_track no_controls=True %}
         {% include 'assets/common-blocks/big-tracks-list/big-tracks-list-item.django' %}
         {% endwith %}
+      </div>
 
+      <div class="col-lg-4 mb-0">
+        <h2 class="h5 section-title">{% trans "Most popular" %}</h2>
+        {% with tracks=popular_tracks %}
+        {% include 'assets/common-blocks/small-tracks-list/small-tracks-list.django' %}
+        {% comment %} {% include 'assets/common-blocks/small-tracks-card-list/small-tracks-card-list.django' %} {% endcomment %}
+        {% endwith %}
       </div>
 
     </div>

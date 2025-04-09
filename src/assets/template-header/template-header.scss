@@ -6,8 +6,6 @@
 $menuItemsFontSize: $fontSizeSmall;
 
 .template-header {
-  // @include basicActiveLink;
-
   .navbar-brand {
     overflow: hidden;
     &,
@@ -24,9 +22,20 @@ $menuItemsFontSize: $fontSizeSmall;
     }
     .text {
       color: $defaultTextColor;
-      font-size: 3.5vw;
+      font-size: 4vw;
       text-overflow: ellipsis;
       overflow: hidden;
+      max-width: 100%;
+      margin-right: 20px;
+      @media screen and (width >= 5em) {
+        font-size: 4.5vw;
+      }
+      @media screen and (width >= 25em) {
+        font-size: 5vw;
+      }
+      @media screen and (width >= $screenSmMin) {
+        font-size: 1em;
+      }
       @media screen and (width >= $screenMdMin) {
         font-size: 1em;
       }
@@ -42,7 +51,7 @@ $menuItemsFontSize: $fontSizeSmall;
       color: $primaryColor;
     }
     &:focus {
-      box-shadow: none; // 0 0 2px color.change(#999, $alpha: .5);
+      box-shadow: none;
     }
   }
 
@@ -50,9 +59,6 @@ $menuItemsFontSize: $fontSizeSmall;
     border-bottom: 1px solid $border-color;
     transition: 0.2s ease;
     padding: 10px 0;
-    // &.nav-bg {
-    //   background-color: $white;
-    // }
     background-color: color.change($white, $alpha: 0.75);
     @include desktop {
       background-color: $white;
@@ -60,15 +66,20 @@ $menuItemsFontSize: $fontSizeSmall;
   }
 
   .right-menu {
-    @media screen and (width <= $screenMdMax) {
+    top: 12px;
+    @media screen and (width > 220px) {
+      top: 16px;
+    }
+    @media screen and (width > 280px) {
+      top: 22px;
+    }
+    @media screen and (width > $screenSmMin) {
+      top: 24px;
+    }
+    @media screen and (width <= $screenMdMin) {
       position: absolute;
       right: 0;
-      top: 20px;
     }
-    // @media screen and (width < $screenSmMax) {
-    //   width: 100%;
-    //   justify-content: center;
-    // }
   }
 
   .navbar-menu {
@@ -77,7 +88,6 @@ $menuItemsFontSize: $fontSizeSmall;
       .nav-link {
         white-space: nowrap;
         font-size: $menuItemsFontSize;
-        // @include activeLink;
       }
       .nav-link.show,
       &:hover .nav-link {
@@ -87,7 +97,6 @@ $menuItemsFontSize: $fontSizeSmall;
   }
   .navbar {
     padding: 0;
-    // display: flex;
     @media screen and (width >= $screenLgMin) {
       flex-wrap: nowrap;
     }
@@ -141,7 +150,6 @@ $menuItemsFontSize: $fontSizeSmall;
         position: relative;
         color: $text-color-dark;
         transition: 0.2s ease;
-        // font-size: inherit;
         font-size: $menuItemsFontSize;
         padding: 8px 10px;
         border-radius: inherit;

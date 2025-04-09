@@ -210,7 +210,7 @@ msgstr "Что бы Вы хотели<br> послушать сегодня?"
 
 #: .\src\assets\template-columns\top-columns.django:20
 msgid "Most recent"
-msgstr "Самое свежее"
+msgstr "Свежее"
 
 #: .\src\assets\template-columns\top-columns.django:65
 msgid "Most popular"
