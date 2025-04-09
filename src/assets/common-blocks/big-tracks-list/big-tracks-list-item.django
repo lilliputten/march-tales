@@ -9,7 +9,7 @@
 Expected:
 
 - track: Track object
-- user_track: UserTrack object, optional, if user is authenticated
+- user_tracks: UserTrack objects list/query -- optional, if user is authenticated
 
 track_url: {% if request.path|str_starts:"/favorites" %}/favorites{% else %}/tracks{% endif %}/{{ track.id }}/
 
@@ -29,6 +29,7 @@ updated-at-date: {{ user_track.updated_at }}
 
 {% endcomment %}
 
+{% if track %}
 {% find_item_by_key user_tracks 'track_id' track.id as user_track %}
 
 <article
@@ -60,23 +61,8 @@ updated-at-date: {{ user_track.updated_at }}
     <div class="thumb-preview">
       {% if not show_details %}
       <a class="thumb-link" href="{% if request.path|str_starts:"/favorites" %}/favorites{% else %}/tracks{% endif %}/{{ track.id }}/">
-      {% endif %}{% lqip_media_img_tag url=track.preview_picture_full.url thumb=track.preview_picture_thumb.url className="card-img lazy-load" %}
-
-        {% comment %}
-        {% generateimage 'tales_django:preview_picture_thumb' source=track.preview_picture %}
-        {% endcomment %}
-        <img
-          {% comment %}
-          src="{{ track.preview_picture_full.url }}"
-          data-original-src="{% get_media_prefix %}{{ track.preview_picture }}"
-          data-thumb-src="{{ track.preview_picture_thumb.url }}"
-          class="card-img"
-          alt="{% trans 'Track cover image' %}"
-          aria-hidden="false"
-          tabindex="0"
-          loading="lazy"
-          {% endcomment %}
-        />
+      {% endif %}
+        {% lqip_media_img_tag url=track.preview_picture_full.url thumb=track.preview_picture_thumb.url className="card-img lazy-load" %}
       {% if not show_details %}
       </a>
       {% endif %}
@@ -98,13 +84,10 @@ updated-at-date: {{ user_track.updated_at }}
         {% include "assets/common-blocks/track-details/track-details.django" %}
       </ul>
     </div>
+    {% if not no_controls %}
     <div class="track-details-controls">
       {# {{{ Actions #}
-      <div
-        class="track-controls d-flex gap-1"
-        {% comment %} data-track-id="{{ track.id }}" {% endcomment %}
-        {% comment %} {% if track in favorite_tracks %}data-favorite="true"{% endif %} {% endcomment %}
-      >
+      <div class="track-controls d-flex gap-1">
         <button data-control-id="toggleFavorite" class="track-control btn">
           <span class="option option-not-favorite" title="{% trans 'Add to favorites' %}"><i class="icon favorite bi bi-heart"></i></span>
           <span class="option option-favorite" title="{% trans 'Remove from favorites' %}"><i class="icon favorite bi bi-heart-fill"></i></span>
@@ -120,12 +103,11 @@ updated-at-date: {{ user_track.updated_at }}
           <span class="option option-resume" title="{% trans 'Resume' %}"><i class="icon play bi bi-play-fill"></i></span>
           <span class="option option-ready" title="{% trans 'Play' %}"><i class="icon bi play bi-play-fill"></i></span>
           <span class="option option-playing" title="{% trans 'Pause' %}"><i class="icon pause bi bi-pause-fill"></i></span>
-          {% comment %}
-          <span class="time">time</span>
-          {% endcomment %}
         </button>
       </div>
       {# Actions }}} #}
     </div>
+    {% endif %}
   </div>
 </article>
+{% endif %}

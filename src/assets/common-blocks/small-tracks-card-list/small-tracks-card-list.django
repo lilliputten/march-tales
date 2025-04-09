@@ -1,0 +1,16 @@
+{# ex: set ft=htmldjango : #}
+{% load static %}
+{% load i18n %}
+
+{% comment %}
+
+- `tracks` -- Tracks list expected as an external variable.
+- `has_more_tracks` -- Does it have more thracks than passed (to display 'show all' button)
+
+{% endcomment %}
+
+{% if tracks %}
+  {% for track in tracks %}
+    {% include 'assets/common-blocks/small-tracks-card-list/small-tracks-card-list-item.django' %}
+  {% endfor %}
+{% endif %}

@@ -6,7 +6,10 @@
   padding-left: 0;
 }
 .small-tracks-list-item {
-  // @include activeTextLink;
+  margin-bottom: 20px;
+  .list-inline-item {
+    margin-bottom: 3px !important;
+  }
   a {
     &,
     & img {

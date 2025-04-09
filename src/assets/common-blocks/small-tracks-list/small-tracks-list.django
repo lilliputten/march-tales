@@ -10,7 +10,7 @@
 {% endcomment %}
 
 <ul class="small-tracks-list mb-0">
-  {% if tracks.length %}
+  {% if tracks %}
     {% for track in tracks %}
       {% include 'assets/common-blocks/small-tracks-list/small-tracks-list-item.django' %}
     {% endfor %}

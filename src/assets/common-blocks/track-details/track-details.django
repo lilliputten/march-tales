@@ -31,6 +31,7 @@ Expected:
 <li class="list-inline-item" title="{% trans 'Published at' %}">
   <i class="ti-calendar"></i>{{ track.published_at }}
 </li>
+{% comment %}
 {# Rubrics #}
 {% if track.rubrics.count %}
 <li class="track-rubrics list-inline-item" data-rubrics-count="{{ track.rubrics.count }}" title="{% trans 'Rubrics' %}">
@@ -43,6 +44,7 @@ Expected:
   </ul>
 </li>
 {% endif %}
+{% endcomment %}
 {# Tags #}
 {% if track.tags.count %}
 <li class="track-tags list-inline-item" data-tags-count="{{ track.tags.count }}" title="{% trans 'Tags' %}">

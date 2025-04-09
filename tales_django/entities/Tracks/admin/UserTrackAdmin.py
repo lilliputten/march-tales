@@ -26,8 +26,8 @@ class UserTrackAdmin(
             {
                 'classes': ['columns'],
                 'fields': (
-                    'user',
                     'track',
+                    'user',
                 ),
             },
         ),
@@ -64,12 +64,12 @@ class UserTrackAdmin(
     list_display = [
         'track',
         'user',
+        'updated_at',
         'is_favorite',
         'favorited_at',
         'played_count',
         'position_formatted',
         'played_at',
-        'updated_at',
     ]
     readonly_fields = ('updated_at',)
     search_fields = [
@@ -80,13 +80,18 @@ class UserTrackAdmin(
     list_filter = [
         'is_favorite',
         # 'position',
+        'updated_at',
         'favorited_at',
         'played_at',
-        'updated_at',
         'played_count',
         'track',
         'user',
     ]
+
+    def get_ordering(self, request):
+        return [
+            '-updated_at',
+        ]
 
     def position_formatted(self, track):
         return track.position_formatted

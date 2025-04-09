@@ -1,9 +1,15 @@
 <!--
  @since 2025.03.19
- @changed 2025.04.09, 19:15
+ @changed 2025.04.09, 22:29
 -->
 
 # CHANGELOG
+
+## [v.0.0.40](https://github.com/lilliputten/march-tales/releases/tag/v.0.0.40) - 2025.04.09
+
+- [Issue #79](https://github.com/lilliputten/march-tales/issues/79): Added promo/stat section for the main page: it displays an information on recent/popular/random tracks.
+
+[Compare with the previous version](https://github.com/lilliputten/march-tales/compare/v.0.0.39...v.0.0.40)
 
 ## [v.0.0.39](https://github.com/lilliputten/march-tales/releases/tag/v.0.0.39) - 2025.04.09
 
