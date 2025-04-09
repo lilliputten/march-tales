@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.http import HttpRequest
 from django.utils import translation
 
-from core.helpers.utils import debugObj
+# from core.helpers.utils import debugObj
 from core.logging import getDebugLogger
 from tales_django.entities.Tracks.models import UserTrack
 from tales_django.models import Track
@@ -91,12 +91,12 @@ def get_favorites_list_context(request: HttpRequest):
     favorites_set = favorites[favorites_offset:favorites_end] if favorites is not None and favorites else None
     favorites_count = len(favorites) if favorites is not None and favorites else 0
 
-    debugData = {
-        'language': language,
-        'favorites_offset': favorites_offset,
-    }
-    debugStr = debugObj(debugData)
-    logger.info(f'get_favorites_list_context\n{debugStr}')
+    # debugData = {
+    #     'language': language,
+    #     'favorites_offset': favorites_offset,
+    # }
+    # debugStr = debugObj(debugData)
+    # logger.info(f'get_favorites_list_context\n{debugStr}')
 
     context = {
         'favorites': favorites_set,
