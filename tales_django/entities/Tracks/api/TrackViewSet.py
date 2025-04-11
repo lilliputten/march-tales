@@ -35,6 +35,11 @@ class TrackViewSet(viewsets.GenericViewSet):
     # serializer_class = TrackSerializer
     # pagination_class = DefaultPagination
 
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context.update({'request': self.request})
+        return context
+
     def retrieve(self, request, *args, **kwargs):
         """
         Overrided single track retrieve method
@@ -53,7 +58,7 @@ class TrackViewSet(viewsets.GenericViewSet):
         full = int(request.query_params.get('full', '0'))
 
         instance = self.get_object()
-        serializer = TrackSerializer(instance=instance, full=full)
+        serializer = TrackSerializer(instance=instance, full=full, context={'request': request})
         result = serializer.data
         return JsonResponse(result, headers=default_headers, content_type=content_type)
 
@@ -97,7 +102,7 @@ class TrackViewSet(viewsets.GenericViewSet):
 
             result = {
                 'count': len(query),
-                'results': TrackSerializer(subset, many=True, full=full).data,
+                'results': TrackSerializer(subset, many=True, full=full, context={'request': request}).data,
             }
 
             # result.update({
@@ -209,7 +214,7 @@ class TrackViewSet(viewsets.GenericViewSet):
 
             result = {
                 'count': len(query),
-                'results': TrackSerializer(subset, many=True, full=full).data,
+                'results': TrackSerializer(subset, many=True, full=full, context={'request': request}).data,
             }
 
             return JsonResponse(
@@ -286,7 +291,7 @@ class TrackViewSet(viewsets.GenericViewSet):
 
             full = int(request.query_params.get('full', '0'))
 
-            serializer = TrackSerializer(instance=next_track, full=full)
+            serializer = TrackSerializer(instance=next_track, full=full, context={'request': request})
             result = serializer.data
             return JsonResponse(result, headers=default_headers, content_type=content_type)
 

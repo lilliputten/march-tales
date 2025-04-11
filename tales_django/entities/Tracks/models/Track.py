@@ -132,6 +132,7 @@ class Track(Model):
         format='JPEG',
         options={'quality': track_preview_picture_jpeg_quality},
     )
+    # TODO: Add small previews for mobile devices
 
     # Track status
     TRACK_STATUS = [

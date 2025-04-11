@@ -1,6 +1,9 @@
+from django.http import HttpRequest
 from rest_framework import serializers
 
 from core.logging import getDebugLogger
+from tales_django.entities.Tracks.api.user_track_serializers import UserTrackSerializer
+from tales_django.entities.Tracks.models import UserTrack
 
 from ..models import Track
 from .basic_plain_serializers import AuthorSerializer, RubricSerializer, TagSerializer
@@ -34,6 +37,13 @@ class TrackSerializer(serializers.HyperlinkedModelSerializer):
         # TODO: Use thumbnail/full images: preview_picture_thumb/preview_picture_full
         return obj.preview_picture.url
 
+    # # TODO: Add small previews for mobile devices
+    # preview_picture_full
+    # preview_picture_small
+    # preview_picture_small_sq
+    # preview_picture_small_sq_thumb
+    # preview_picture_thumb
+
     rubric_ids = serializers.SerializerMethodField('get_rubric_ids')
 
     def get_rubric_ids(self, obj):
@@ -44,10 +54,30 @@ class TrackSerializer(serializers.HyperlinkedModelSerializer):
     def get_tag_ids(self, obj):
         return list(map(lambda it: it.id, obj.tags.all()))
 
+    user_track = serializers.SerializerMethodField('get_user_track_json')
+
+    def get_user_track(self, track: Track) -> UserTrack | None:
+        if 'request' not in self.context:
+            return None
+        request: HttpRequest = self.context['request']
+        if not request.user or not request.user.is_authenticated:
+            return None
+        try:
+            return UserTrack.objects.get(user=request.user, track=track)
+        except UserTrack.DoesNotExist:
+            pass
+        return None
+
+    def get_user_track_json(self, track: Track) -> UserTrack | None:
+        user_track = self.get_user_track(track)
+        if user_track is None:
+            return None
+        serializer = UserTrackSerializer(instance=user_track, read_only=True, context=self.context)
+        return serializer.data
+
     # Constructor
     def __init__(self, *args, full=False, **kwargs):
         self._full = full
-        # logger.info(f'[track_serializers:TrackSerializer:__init__] full={full} args={args} kwargs={kwargs}')
         super().__init__(*args, **kwargs)
 
     # Fields list creator
@@ -74,6 +104,8 @@ class TrackSerializer(serializers.HyperlinkedModelSerializer):
             'updated_by_id',
             'youtube_url',
             'author',
+            # UserTrack data
+            'user_track',
             # Use ids istead of fully serialized objects if no `full` parameter provided
             'rubric_ids' if send_ids else None,
             'rubrics' if send_data else None,

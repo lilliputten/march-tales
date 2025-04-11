@@ -1,8 +1,6 @@
 from django.contrib.auth.models import User
 from django.http import HttpRequest
-from django.utils import translation
 
-# from core.helpers.utils import debugObj
 from core.logging import getDebugLogger
 from tales_django.entities.Tracks.models import UserTrack
 from tales_django.models import Track
@@ -30,9 +28,6 @@ def get_user_favorites(user: User):
 
 
 def get_favorites(request: HttpRequest):
-
-    language = translation.get_language()
-
     favorites = None
     if request.user.is_authenticated:
         favorites = get_user_favorites(request.user)
@@ -70,9 +65,6 @@ def get_favorites_ids(request: HttpRequest):
 
 
 def get_favorites_list_context(request: HttpRequest):
-
-    language = translation.get_language()
-
     # Will produce params:
     # 1. For data display (eg, for `src/assets/common-blocks/big-favorites-list/big-favorites-list.django`):
     # - favorites
