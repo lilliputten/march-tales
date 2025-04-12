@@ -579,7 +579,7 @@ class TrackViewSet(viewsets.GenericViewSet):
 
             full = int(request.query_params.get('full', '0'))
 
-            serializer = UserTrackSerializer(instance=user_track, full=full)
+            serializer = UserTrackSerializer(instance=user_track)
             result = serializer.data
             return JsonResponse(result, headers=default_headers, content_type=content_type)
         except Exception as err:
