@@ -14,14 +14,12 @@ from tales_django.core.pages.get_favorites_list_context import get_favorites_ids
 
 logger = getDebugLogger()
 
-# _ = lambda _: _
-
 
 @csrf_exempt  # Will send json failure response manually
-def favorites_ids_api_view(request: Request):
+def sync_user_tracks_api_view(request: Request):
     try:
-        if request.method != 'POST' and request.method != 'GET':
-            data = {'detail': _('Expected POST or GET request')}
+        if request.method != 'POST':
+            data = {'detail': _('Expected POST request')}
             return JsonResponse(
                 data,
                 status=status.HTTP_403_FORBIDDEN,
@@ -30,25 +28,43 @@ def favorites_ids_api_view(request: Request):
                 content_type='application/json; charset=utf-8',
             )
 
-        debugData = {
-            'is_authenticated': request.user.is_authenticated,
-        }
-        debugStr = debugObj(debugData)
-        logger.info(f'get\n{debugStr}')
-
         if not check_csrf(request):
             data = {'detail': _('Failed checking CSRF token')}
             return JsonResponse(data, status=status.HTTP_403_FORBIDDEN, safe=False)
 
-        # # Check user is_authenticated?
-        # if not request.user.is_authenticated:
-        #     data = {'detail': _('User in not authenticated')}
-        #     return JsonResponse(data, status=status.HTTP_403_FORBIDDEN, safe=False, json_dumps_params={'ensure_ascii': True}, content_type='application/json; charset=utf-8')
+        # Check user is_authenticated?
+        if not request.user.is_authenticated:
+            data = {'detail': _('User in not authenticated')}
+            return JsonResponse(
+                data,
+                status=status.HTTP_403_FORBIDDEN,
+                safe=False,
+                json_dumps_params={'ensure_ascii': True},
+                content_type='application/json; charset=utf-8',
+            )
 
-        ids = get_favorites_ids(request)
+        list = request.data.get('list')
+
+        if list is None or not isinstance(list, list):
+            data = {'detail': _('Expected objects list')}
+            return JsonResponse(
+                data,
+                status=status.HTTP_400_BAD_REQUEST,
+                safe=False,
+                json_dumps_params={'ensure_ascii': True},
+                content_type='application/json; charset=utf-8',
+            )
+
+        debugData = {
+            'list': list,
+        }
+        debugStr = debugObj(debugData)
+        logger.info(f'[sync_user_tracks_api_view] Got data\n{debugStr}')
+
+        # TODO: Sync UserTrack list
 
         data = {
-            'ids': list(ids) if ids else [],
+            'items': list,
             # **debugData,  # DEBUG: Show debug data
         }
         return JsonResponse(

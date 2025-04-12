@@ -1,0 +1,43 @@
+{# ex: set ft=htmldjango : #}
+{% extends 'base-main-columns-with-header.html.django' %}
+
+{% load i18n %}
+{% load allauth %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block body_class %}logged_out {{ block.super }}{% endblock %}
+
+{% block title %}{% trans "You're logged out" %} — {{ block.super }}{% endblock title %}
+
+{% block main_column_content %}
+
+<!--
+  mobile_auth: "{{ mobile_auth }}"
+  is_mobile_auth: {{ is_mobile_auth }}
+-->
+
+<h1 class="h1 primary-color font-supertitle mb-4">
+  {% trans "You're logged out" %}
+</h1>
+
+<p>{% blocktranslate %}You are logged out. Thank you for spending some time with us.{% endblocktranslate %}</p>
+
+{# Buttons #}
+<div class="actions mt-5 mb-4 d-flex flex-wrap gap-1">
+  {# TODO: Put common actions toolbar here #}
+  {% if is_mobile_auth %}
+    <a
+      class="for-mobile-auth-only btn btn-outline-primary d-flex align-items-center gap-2"
+      href="app://close"
+      {% comment %}onClick="window.close(); return false"{% endcomment %}
+    >
+      <i class="icon fa fa-times"></i>
+      <span class="text">{% trans 'Close' %}</span>
+    </a>
+  {% else %}
+    {% include "assets/buttons/main-page-button.django" %}
+  {% endif %}
+</div>
+
+{% endblock main_column_content %}

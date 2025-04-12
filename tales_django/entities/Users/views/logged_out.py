@@ -1,4 +1,3 @@
-from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest
 from django.shortcuts import redirect, render
 
@@ -9,16 +8,7 @@ from tales_django.core.pages import get_common_context, get_favorites_list_conte
 logger = getDebugLogger()
 
 
-@login_required
-def login_success(request: HttpRequest, key=''):
-    if not request.user.is_authenticated:
-        return redirect('index')
-
-    session_key = request.session.session_key
-
-    if not session_key:
-        return redirect('index')
-
+def logged_out(request: HttpRequest):
     mobile_auth = request.COOKIES.get('mobile_auth')
 
     context = {
@@ -31,8 +21,6 @@ def login_success(request: HttpRequest, key=''):
     referer = request.headers.get('Referer')
 
     debugData = {
-        'key': key,
-        'session_key': session_key,
         'host': host,
         'referer': referer,
         'request': request,
@@ -42,15 +30,11 @@ def login_success(request: HttpRequest, key=''):
         'context': context,
     }
     debugStr = debugObj(debugData)
-    logger.info(f'login_success\n{debugStr}')
-
-    if not key and mobile_auth:
-        return redirect(f'/login-success/{session_key}/')
+    logger.info(f'logged_out\n{debugStr}')
 
     response = render(
         request=request,
-        template_name='tales_django/login_success.html.django',
+        template_name='tales_django/logged_out.html.django',
         context=context,
     )
-
     return response

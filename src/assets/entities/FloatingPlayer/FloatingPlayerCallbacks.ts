@@ -7,7 +7,6 @@ export interface FloatingPlayerUpdateData {
 }
 export interface FloatingPlayerIncrementData {
   count?: number;
-  // floatingPlayerState: FloatingPlayerState;
   activePlayerData: ActivePlayerData;
 }
 export interface FloatingPlayerFavoritesData {
@@ -16,7 +15,6 @@ export interface FloatingPlayerFavoritesData {
 export interface FloatingPlayerFavoriteData {
   id: number;
   favorite: boolean;
-  // activePlayerData: ActivePlayerData;
 }
 type UpdateCallback = (data: FloatingPlayerUpdateData) => void;
 type IncrementCallback = (data: FloatingPlayerIncrementData) => void;
@@ -24,7 +22,6 @@ type FavoritesCallback = (data: FloatingPlayerFavoritesData) => void;
 type FavoriteCallback = (data: FloatingPlayerFavoriteData) => void;
 type ErrorCallback = (error: Error | string) => void;
 
-// type HandlerId = 'play' | 'stop' | 'time';
 export class FloatingPlayerCallbacks {
   onPlayStartCallbacks: UpdateCallback[] = [];
   onPlayStopCallbacks: UpdateCallback[] = [];
@@ -33,8 +30,6 @@ export class FloatingPlayerCallbacks {
   onFavoritesCallbacks: FavoritesCallback[] = [];
   onFavoriteCallbacks: FavoriteCallback[] = [];
   onErrorCallbacks: ErrorCallback[] = [];
-
-  // handlers: Record<HandlerId, ErrorCallback[]> = {};
 
   addPlayStartCallback(cb: UpdateCallback) {
     if (cb && !this.onPlayStartCallbacks.includes(cb)) {

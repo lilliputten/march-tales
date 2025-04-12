@@ -46,13 +46,17 @@
           <li><a href="{{ usersessions_list_url_ }}">{% trans "Sessions" %}</a></li>
         {% endif %}
 
+        <li><hr class="divider" /></li>
+
         {% if user.is_staff %}
           <!-- Admin panel -->
           <li><a class="dropdown-item" target="_blank" href="{% url 'unfold-admin:tales_django_track_changelist' %}">{% trans 'Admin panel' %}</a></li>
-          <li><hr class="dropdown-divider" /></li>
+          <li><hr class="divider" /></li>
         {% endif %}
 
         <li><a href="{% url 'logout_user' %}">{% trans 'Logout' %}</a></li>
+
+        <li><hr class="divider" /></li>
 
         <li><a data-bs-toggle="modal" data-bs-target="#deleteAccountModal">{% trans "Delete account" %}</a></li>
 

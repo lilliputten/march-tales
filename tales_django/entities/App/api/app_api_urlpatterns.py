@@ -5,7 +5,7 @@ from .favorites_ids_api_view import favorites_ids_api_view
 from .logout_api_view import logout_api_view
 from .tick_api_view import tick_api_view
 
-api_urlpatterns = [
+app_api_urlpatterns = [
     # API
     # path(r'api/v1/', include(test_api_router.urls)),
     path('api/v1/tick/', tick_api_view),
@@ -15,5 +15,5 @@ api_urlpatterns = [
 ]
 
 __all__ = [
-    'api_urlpatterns',
+    'app_api_urlpatterns',
 ]

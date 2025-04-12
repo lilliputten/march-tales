@@ -670,7 +670,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 LOGIN_REDIRECT_URL = 'login_success'
-LOGOUT_REDIRECT_URL = 'index'
+LOGOUT_REDIRECT_URL = 'logged_out'
 
 # Registration
 # @see https://django-registration.readthedocs.io

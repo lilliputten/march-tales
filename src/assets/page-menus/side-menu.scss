@@ -7,4 +7,9 @@
   a {
     color: $defaultTextColor;
   }
+  .divider {
+    background-color: color.change(#888, $alpha: 0.25);
+    height: 1px;
+    margin: 5px 0;
+  }
 }

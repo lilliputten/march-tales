@@ -3,6 +3,8 @@
 
 from django.urls import include, path
 
+from tales_django.entities.Users.views import logged_out
+
 from ..forms import UserRegistrationForm
 from ..views import (
     UserRegistrationView,
@@ -29,6 +31,7 @@ users_urlpatterns = [
     # Stock accounts...
     # path(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/successfully_logged_out/'}),
     path(r'logout/', logout_user_route, name='logout_user'),
+    path(r'logged-out/', logged_out, name='logged_out'),
     path(
         r'accounts/',
         include('django_registration.backends.activation.urls'),
