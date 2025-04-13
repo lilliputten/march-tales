@@ -4,7 +4,12 @@ from django.shortcuts import redirect, render
 
 from core.helpers.utils import debugObj
 from core.logging import getDebugLogger
-from tales_django.core.pages import get_common_context, get_favorites_list_context, get_tracks_list_context
+from tales_django.core.pages import (
+    get_common_context,
+    get_favorites_list_context,
+    get_tracks_list_context,
+    get_user_tracks_context,
+)
 
 logger = getDebugLogger()
 
@@ -25,6 +30,7 @@ def login_success(request: HttpRequest, key=''):
         **get_common_context(request),
         **get_favorites_list_context(request),
         **get_tracks_list_context(request),
+        **get_user_tracks_context(request),
     }
 
     host = request.headers.get('Host')

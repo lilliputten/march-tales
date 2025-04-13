@@ -39,6 +39,7 @@ appEnv = environ.FileAwareEnv(
     DEBUG=(bool, False),
 )
 
+# NOTE: The overriding order is reverted: the top record oveerides the bottom one
 environ.Env.read_env(os.path.join(PROJECT_PATH, '.env'))
 environ.Env.read_env(os.path.join(PROJECT_PATH, '.env.local'))
 environ.Env.read_env(os.path.join(PROJECT_PATH, '.env.secure'))
@@ -46,6 +47,8 @@ environ.Env.read_env(os.path.join(PROJECT_PATH, '.env.secure'))
 LOCAL = appEnv.bool('LOCAL', False)
 DEBUG = appEnv.bool('DEBUG', LOCAL)
 # DEBUG = True if appEnv.bool('DEBUG', False) else LOCAL
+
+USE_LOCAL_MYSQL = appEnv.bool('USE_LOCAL_MYSQL', '')
 
 WERKZEUG_RUN_MAIN = appEnv.bool('WERKZEUG_RUN_MAIN', False)
 isNormalRun = not LOCAL or WERKZEUG_RUN_MAIN
