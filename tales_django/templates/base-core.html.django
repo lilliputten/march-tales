@@ -2,7 +2,7 @@
 <!--
 - Html template
 - Version: 0.0.41
-- Last changes timestamp: 2025.04.13 17:09:03 +0300
+- Last changes timestamp: 2025.04.13 18:55:59 +0300
 - Generated: {% now "Y.m.d H:i:s O" %}
 -->
 
@@ -39,6 +39,7 @@
     <meta property="og:title" content="{% trans 'Site title' %}" />
     <meta property="og:description" content="{% trans 'Site description' %}" />
     <meta property="og:url" content="{{ request.build_absolute_uri }}" />
+    <meta property="og:logo" content="{{request.scheme}}://{{request.get_host}}{% static 'images/march-cat/march-cat-sq-256.jpg' %}" />
     <meta property="og:image" content="{{request.scheme}}://{{request.get_host}}{% static 'images/og-splash/splash-1200x630.jpg' %}" />
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">

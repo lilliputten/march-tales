@@ -29,8 +29,8 @@ Expected:
   {% comment %}
   <meta property="og:url" content="{{ request.build_absolute_uri }}" />
   {% endcomment %}
-  <meta property="og:image" content="{{request.scheme}}://{{request.get_host}}{% get_media_prefix %}{{ track.preview_picture_full.url }}" />
-  <meta property="twitter:image" content="{{request.scheme}}://{{request.get_host}}{% get_media_prefix %}{{ track.preview_picture_full.url }}" />
+  <meta property="og:image" content="{{request.scheme}}://{{request.get_host}}{{ track.preview_picture_full.url }}" />
+  <meta property="twitter:image" content="{{request.scheme}}://{{request.get_host}}{{ track.preview_picture_full.url }}" />
 {% endblock %}
 
 {% block main_column_content %}

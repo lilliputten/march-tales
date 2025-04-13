@@ -20,7 +20,7 @@ const TRUE = 'true';
 function calculateAndUpdateTrackPosition(
   trackNode: HTMLElement,
   position: number,
-  lastPlayed: number,
+  lastPlayed?: number,
   isCurrent?: boolean,
 ) {
   const timeNode = trackNode.querySelector<HTMLElement>('.time');
@@ -48,7 +48,9 @@ function calculateAndUpdateTrackPosition(
       timeNode.innerText = timeFormatted;
     }
   });
-  localTrackInfoDb.updatePosition(id, position, lastPlayed);
+  if (lastPlayed) {
+    localTrackInfoDb.updatePosition(id, position, lastPlayed);
+  }
   if (isCurrent) {
     floatingPlayer.state.position = position;
     floatingPlayer.state.progress = progress;
@@ -312,10 +314,11 @@ function initTrackPlayerNodeControls(trackNode: HTMLElement) {
 
 function initTrackPlayerNode(trackNode: HTMLElement) {
   const activePlayerData = floatingPlayer.activePlayerData;
+  const id = Number(trackNode.id);
   const { dataset } = trackNode;
   const {
     inited,
-    trackId, // "1"
+    // trackId, // "1"
     trackMediaUrl, // "/media/samples/gr-400x225.jpg"
     trackTitle,
     trackDuration,
@@ -334,7 +337,7 @@ function initTrackPlayerNode(trackNode: HTMLElement) {
   const playedAt = isNaN(Number(playedAtSec)) ? undefined : Number(playedAtSec) * 1000;
   const favoritedAt = isNaN(Number(favoritedAtSec)) ? undefined : Number(favoritedAtSec) * 1000;
   // const updatedAt = isNaN(Number(updatedAtSec)) ? undefined : Number(updatedAtSec) * 1000;
-  const id = Number(trackId || '');
+  // const id = Number(trackId || '');
   if (!id || inited || !trackMediaUrl) {
     return;
   }
@@ -342,6 +345,17 @@ function initTrackPlayerNode(trackNode: HTMLElement) {
   const isCurrent = !!activePlayerData && activePlayerData.id == id;
   const trackInfo: TrackInfo | undefined = localTrackInfoDb.getById(id);
   const favorite = hasServerData ? Boolean(dataset.favorite) : !!trackInfo?.favorite;
+  /* console.log('[tracksPlayer:initTrackPlayerNode]', id, {
+   *   position,
+   *   positionStr,
+   *   playedAt,
+   *   playedAtSec,
+   *   hasServerData,
+   *   isCurrent,
+   *   trackInfo,
+   *   favorite,
+   * });
+   */
   if (trackInfo) {
     if (!hasServerData) {
       // If no server data then update favorite from the local db
@@ -350,7 +364,6 @@ function initTrackPlayerNode(trackNode: HTMLElement) {
       }
     } else {
       const lastPlayed = trackInfo.lastPlayed;
-      // const lastPlayedDate = new Date(lastPlayed); // DEBUG
       const lastFavorited = trackInfo.lastFavorited;
       // Merge server & local data
       if (dataset.favorite != null && favoritedAt && favoritedAt >= lastFavorited) {
@@ -358,7 +371,6 @@ function initTrackPlayerNode(trackNode: HTMLElement) {
         trackInfo.lastFavorited = favoritedAt;
         localTrackInfoDb.updateFavorite(id, Boolean(dataset.favorite), favoritedAt);
       }
-      // const playedAtDate = playedAt && new Date(playedAt); // DEBUG
       if (playedAt && playedAt >= lastPlayed) {
         trackInfo.position = position;
         trackInfo.lastPlayed = playedAt;
@@ -380,6 +392,9 @@ function initTrackPlayerNode(trackNode: HTMLElement) {
       trackInfo.favorite = favorite;
       localTrackInfoDb.save(trackInfo);
     }
+  } else {
+    // If no local data: just initialize the local data and update dom
+    calculateAndUpdateTrackPosition(trackNode, position, playedAt, isCurrent);
   }
   if (isCurrent) {
     activePlayerData.title = dataset.trackTitle || '';
