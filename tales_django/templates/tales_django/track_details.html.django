@@ -26,6 +26,7 @@ Expected:
   <meta property="og:title" content="{{ track.title }} — {% trans 'Site title' %}" />
   <meta property="og:description" content="{{ track.description|markdownify|striptags }}" />
   <meta property="og:url" content="{{request.scheme}}://{{request.get_host}}/tracks/{{ track.id }}/" />
+  <meta property="og:logo" content="{{request.scheme}}://{{request.get_host}}{% static 'images/march-cat/march-cat-sq-256.jpg' %}" />
   {% comment %}
   <meta property="og:url" content="{{ request.build_absolute_uri }}" />
   {% endcomment %}
