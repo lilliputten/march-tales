@@ -7,6 +7,7 @@ export interface FloatingPlayerUpdateData {
 }
 export interface FloatingPlayerIncrementData {
   count?: number;
+  // localCount?: number;
   activePlayerData: ActivePlayerData;
 }
 export interface FloatingPlayerFavoritesData {

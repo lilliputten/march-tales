@@ -454,7 +454,7 @@ class TrackViewSet(viewsets.GenericViewSet):
             user: User | None = request.user if is_authenticated else None
             debugData = {
                 'is_authenticated': is_authenticated,
-                'user': user.id,
+                'user': user.id if is_authenticated else None,
                 'track': track.id,
                 'host': host,
                 'referer': referer,

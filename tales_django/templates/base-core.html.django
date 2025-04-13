@@ -1,8 +1,8 @@
 {# ex: set ft=htmldjango : #}
 <!--
 - Html template
-- Version: 0.0.40
-- Last changes timestamp: 2025.04.12 17:38:06 +0300
+- Version: 0.0.41
+- Last changes timestamp: 2025.04.13 17:09:03 +0300
 - Generated: {% now "Y.m.d H:i:s O" %}
 -->
 
@@ -54,7 +54,7 @@
   <link href="{% if settings.DEBUG %}{% static 'vendor/font-awesome-4.7.0/css/font-awesome.min.css' %}{% else %}https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css{% endif %}" rel="stylesheet" type="text/css" />
 
   {# Webfonts #}
-  {% if False and settings.DEBUG %}
+  {% if True and settings.DEBUG %}
     <link href="{% static 'vendor/webfonts/lobster/lobster.css' %}" rel="stylesheet" type="text/css" />
     <link href="{% static 'vendor/webfonts/nunito/nunito.css' %}" rel="stylesheet" type="text/css" />
     {% comment %}
@@ -107,7 +107,8 @@
       {% block js_variables_content %}
         {{ block.super }}
         var projectInfo = '{{ settings.PROJECT_INFO }}';
-        var isAuthenticated = {% if user.is_authenticated %}true{% else %}false{% endif %};
+        {% if user.is_authenticated %}var isAuthenticated = true;{% endif %}
+        {% comment %} {% if user.is_authenticated %}var userId = {{ user.id }};{% endif %} {% endcomment %}
         {% if settings.LOCAL %}var LOCAL = true;{% endif %}
         {% if settings.DEBUG %}var DEBUG = true;{% endif %}
         var DEFAULT_HOST = '{{ settings.DEFAULT_HOST }}';

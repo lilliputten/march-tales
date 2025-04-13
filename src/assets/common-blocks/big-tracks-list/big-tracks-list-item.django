@@ -34,6 +34,7 @@ updated-at-date: {{ user_track.updated_at }}
 
 <article
   class="big-tracks-list-item card no-bg mb-4 track-player"
+  id="{{ track.id }}"
   data-track-id="{{ track.id }}"
   {# Duration in seconds #}
   data-track-duration="{{ track.audio_duration|floatformat:3 }}"
@@ -43,13 +44,13 @@ updated-at-date: {{ user_track.updated_at }}
   data-track-media-url="{% if USE_REMOTE_HOST and settings.LOCAL %}https://{{ settings.DEFAULT_HOST }}{% endif %}{% get_media_prefix %}{{ track.audio_file }}"
   {% if user_track.is_favorite or track in favorites %}data-favorite="true"{% endif %}
   {% if user_track.favorited_at %}data-favorited-at-sec="{{ user_track.favorited_at.timestamp|floatformat:0 }}"{% endif %}
-  {% if user_track.favorited_at %}--data-favorited-at-date="{{ user_track.favorited_at }}"{% endif %}
+  {% comment %} {% if user_track.favorited_at %}--data-favorited-at-date="{{ user_track.favorited_at }}"{% endif %} {% endcomment %}
   {% if user_track.played_at %}data-played-at-sec="{{ user_track.played_at.timestamp|floatformat:0 }}"{% endif %}
-  {% if user_track.played_at %}--data-played-at-date="{{ user_track.played_at }}"{% endif %}
+  {% comment %} {% if user_track.played_at %}--data-played-at-date="{{ user_track.played_at }}"{% endif %} {% endcomment %}
   {% if user_track.played_count %}data-user-played-count="{{ user_track.played_count }}"{% endif %}
   {% if user_track.position %}data-position="{{ user_track.position|floatformat:3 }}"{% endif %}
   {% if user_track.updated_at %}data-updated-at-sec="{{ user_track.updated_at.timestamp|floatformat:0 }}"{% endif %}
-  {% if user_track.updated_at %}--data-updated-at-date="{{ user_track.updated_at }}"{% endif %}
+  {% comment %} {% if user_track.updated_at %}--data-updated-at-date="{{ user_track.updated_at }}"{% endif %} {% endcomment %}
   {% comment %}
     Possible runtime dynamic values:
     data-status="ready"
