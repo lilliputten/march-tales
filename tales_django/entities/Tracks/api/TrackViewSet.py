@@ -358,7 +358,9 @@ class TrackViewSet(viewsets.GenericViewSet):
             user_track = user_tracks_list[0]
 
             value = request.data.get('value')
-            timestamp_s = int(request.data.get('timestamp_s', '0')) if request.data.get('timestamp_s') is not None else 0
+            timestamp_s = (
+                int(request.data.get('timestamp_s', '0')) if request.data.get('timestamp_s') is not None else 0
+            )
 
             debugData = {
                 'value': value,
@@ -465,7 +467,9 @@ class TrackViewSet(viewsets.GenericViewSet):
             }
             logger.info(f'[increment_played_count]: DEBUG:\n{debugObj(debugData)}')
 
-            timestamp_s = int(request.data.get('timestamp_s', '0')) if request.data.get('timestamp_s') is not None else 0
+            timestamp_s = (
+                int(request.data.get('timestamp_s', '0')) if request.data and request.data.get('timestamp_s') else 0
+            )
 
             if is_authenticated:
                 user: User = request.user
@@ -570,7 +574,9 @@ class TrackViewSet(viewsets.GenericViewSet):
 
             # position = float(request.query_params.get('position', '0'))
             position = float(request.data.get('position', '0'))
-            timestamp_s = int(request.data.get('timestamp_s', '0')) if request.data.get('timestamp_s') is not None else 0
+            timestamp_s = (
+                int(request.data.get('timestamp_s', '0')) if request.data.get('timestamp_s') is not None else 0
+            )
 
             debugData = {
                 'position': position,
