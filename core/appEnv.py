@@ -31,6 +31,12 @@ with open(posixpath.join(STATIC_ROOT, 'project-info.txt')) as fh:
         PROJECT_INFO = info.strip()
         PROJECT_VERSION = re.sub(r'^.*v\.([0-9.]+).*$', r'\1', PROJECT_INFO)
 
+PROJECT_HASH = ''
+with open(posixpath.join(STATIC_ROOT, 'project-hash.txt')) as fh:
+    hash = fh.read()
+    if hash:
+        PROJECT_HASH = hash.strip()
+
 appEnv = environ.FileAwareEnv(
     # @see local `.dev` file and example in `.dev.SAMPLE`
     # @see https://django-environ.readthedocs.io
@@ -39,6 +45,7 @@ appEnv = environ.FileAwareEnv(
     DEBUG=(bool, False),
 )
 
+# NOTE: The overriding order is reverted: the top record oveerides the bottom one
 environ.Env.read_env(os.path.join(PROJECT_PATH, '.env'))
 environ.Env.read_env(os.path.join(PROJECT_PATH, '.env.local'))
 environ.Env.read_env(os.path.join(PROJECT_PATH, '.env.secure'))
@@ -46,6 +53,8 @@ environ.Env.read_env(os.path.join(PROJECT_PATH, '.env.secure'))
 LOCAL = appEnv.bool('LOCAL', False)
 DEBUG = appEnv.bool('DEBUG', LOCAL)
 # DEBUG = True if appEnv.bool('DEBUG', False) else LOCAL
+
+USE_LOCAL_MYSQL = appEnv.bool('USE_LOCAL_MYSQL', '')
 
 WERKZEUG_RUN_MAIN = appEnv.bool('WERKZEUG_RUN_MAIN', False)
 isNormalRun = not LOCAL or WERKZEUG_RUN_MAIN

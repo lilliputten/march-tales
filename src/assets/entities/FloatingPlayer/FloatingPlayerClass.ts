@@ -142,12 +142,22 @@ export class FloatingPlayer {
     saveActivePlayerData(this.activePlayerData);
   }
 
+  clearActivePlayerData() {
+    this.activePlayerData = undefined;
+    this.saveActivePlayerData();
+  }
+
   loadFloatingPlayerState() {
     this.state = loadFloatingPlayerState();
   }
 
   saveFloatingPlayerState() {
     saveFloatingPlayerState(this.state);
+  }
+
+  clearFloatingPlayerState() {
+    this.state = {};
+    this.saveFloatingPlayerState();
   }
 
   // Dom node...
@@ -351,9 +361,13 @@ export class FloatingPlayer {
 
   /// Server playback state
 
-  sendUpdateServerPlayback(id: number, position: number) {
-    const url = `/api/v1/tracks/${id}/update-position/?position=${position.toFixed(3)}`;
-    return sendApiRequest(url, 'POST'); // , { position });
+  sendUpdateServerPlayback(id: number, position: number, timestamp?: number) {
+    const url = `/api/v1/tracks/${id}/update-position/`;
+    const data = {
+      position: Number(position.toFixed(3)),
+      timestamp_s: timestamp ? Math.round(timestamp / 1000) : null,
+    };
+    return sendApiRequest(url, 'POST', data);
   }
 
   resetUpdateServerPlayback() {
@@ -385,7 +399,7 @@ export class FloatingPlayer {
     }
     // Send update request
     this.isUpdatingServerPlayback = true;
-    return this.sendUpdateServerPlayback(id, position)
+    return this.sendUpdateServerPlayback(id, position, this.state.lastTimestamp)
       .then((_userTrack: UserTrack) => {
         // TODO: To update local data from server-provided UserTrack?
         this.lastUpdatedServerPlayback = now;
@@ -529,9 +543,12 @@ export class FloatingPlayer {
 
   // Update related data
 
-  sendIncrementPlayedCount(id: number) {
+  sendIncrementPlayedCount(id: number, timestamp?: number) {
     const url = `/api/v1/tracks/${id}/increment-played-count/`;
-    return sendApiRequest(url, 'POST');
+    const data = {
+      timestamp_s: timestamp ? Math.round(timestamp / 1000) : null,
+    };
+    return sendApiRequest(url, 'POST', data);
   }
 
   incrementPlayedCount() {
@@ -540,7 +557,7 @@ export class FloatingPlayer {
       return;
     }
     this.incrementing = true;
-    return this.sendIncrementPlayedCount(activePlayerData.id)
+    return this.sendIncrementPlayedCount(activePlayerData.id /* , this.state.lastTimestamp */)
       .then(({ played_count }: { played_count?: number }) => {
         if (played_count != null) {
           // Re-update local data with server data...
@@ -564,9 +581,13 @@ export class FloatingPlayer {
       });
   }
 
-  sendToggleFavoriteRequest(id: number, value: boolean) {
+  sendToggleFavoriteRequest(id: number, value: boolean, timestamp?: number) {
     const url = `/api/v1/tracks/${id}/toggle-favorite/`;
-    return sendApiRequest(url, 'POST', { value });
+    const data = {
+      value,
+      timestamp_s: timestamp ? Math.round(timestamp / 1000) : null,
+    };
+    return sendApiRequest(url, 'POST', data);
   }
 
   toggleFavorite() {
@@ -583,13 +604,6 @@ export class FloatingPlayer {
     const isCurrent = id === activePlayerData?.id;
     const trackInfo = localTrackInfoDb.getById(id);
     const expectedFavoriteValue = !trackInfo?.favorite;
-    /* console.log('[FloatingPlayerClass:toggleFavoriteById]', {
-     *   activePlayerData,
-     *   isCurrent,
-     *   trackInfo,
-     *   expectedFavoriteValue,
-     * });
-     */
     localTrackInfoDb.updateFavorite(id, expectedFavoriteValue);
     if (isCurrent) {
       activePlayerData.favorite = expectedFavoriteValue;
@@ -599,7 +613,7 @@ export class FloatingPlayer {
     this.callbacks.invokeFavorite({ id, favorite: expectedFavoriteValue });
     if (window.isAuthenticated) {
       this.toggling[id] = true;
-      this.sendToggleFavoriteRequest(id, expectedFavoriteValue)
+      this.sendToggleFavoriteRequest(id, expectedFavoriteValue, this.state.lastTimestamp)
         .then((results: { favorite_track_ids: number[]; user_tracks: UserTrack[] }) => {
           const { favorite_track_ids, user_tracks } = results;
           const trackFavoritedTimes = user_tracks.reduce<Record<UserTrack['track_id'], number>>(
@@ -612,11 +626,6 @@ export class FloatingPlayer {
             },
             {},
           );
-          /* console.log('[FloatingPlayerClass:toggleFavoriteById] sendToggleFavoriteRequest:then', {
-           *   favorite_track_ids,
-           *   user_tracks,
-           * });
-           */
           localTrackInfoDb.updateFavoritesByTrackIds(favorite_track_ids, trackFavoritedTimes);
           this.callbacks.invokeFavorites({
             favorites: favorite_track_ids,

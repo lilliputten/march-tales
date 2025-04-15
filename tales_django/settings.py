@@ -29,10 +29,12 @@ from core.appEnv import (
     MEDIA_FOLDER,
     MEDIA_ROOT,
     PROJECT_INFO,
+    PROJECT_HASH,
     PROJECT_VERSION,
     SRC_ROOT,
     STATIC_FOLDER,
     STATIC_ROOT,
+    USE_LOCAL_MYSQL,
 )
 from core.appSecrets import (  # SENDGRID_API_KEY,; STRIPE_PUBLISHABLE_KEY,; STRIPE_SECRET_KEY,; SLACK_WEBHOOK,
     REGISTRATION_SALT,
@@ -634,6 +636,21 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+if LOCAL and USE_LOCAL_MYSQL:
+    DATABASES['default'] = {
+        'ENGINE': DB_ENGINE,
+        'NAME': DB_NAME,
+        'USER': DB_USER,
+        'PASSWORD': DB_PASSWORD,
+        'HOST': DB_HOST,
+        'PORT': DB_PORT,
+        'OPTIONS': {
+            # 'init_command': 'SET storage_engine=INNODB',
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES', innodb_strict_mode=1",
+            'charset': 'utf8mb4',
+            'autocommit': True,
+        },
+    }
 # Use real db (MySQL) server in production mode
 if not LOCAL:
     DATABASES['default'] = {
@@ -670,7 +687,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 LOGIN_REDIRECT_URL = 'login_success'
-LOGOUT_REDIRECT_URL = 'index'
+LOGOUT_REDIRECT_URL = 'logged_out'
 
 # Registration
 # @see https://django-registration.readthedocs.io
@@ -891,6 +908,7 @@ SITE_SHORT_NAME = SITE_NAME
 PASS_VARIABLES = {
     'DEBUG': DEBUG,  # Pass django debug flag to the code (from environment)
     'LOCAL': LOCAL,  # Local dev server mode (from the environment)
+    'PROJECT_HASH': PROJECT_HASH,
     'PROJECT_INFO': PROJECT_INFO,
     'PROJECT_VERSION': PROJECT_VERSION,
     'DEFAULT_HOST': DEFAULT_HOST,

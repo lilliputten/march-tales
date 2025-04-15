@@ -7,7 +7,7 @@
 
 ## Build info (auto-generated)
 
-- Project info: march-tales v.0.0.40 / 2025.04.12 17:38:06 +0300
+- Project info: march-tales v.0.0.41 / 2025.04.15 14:50:15 +0300
 
 ## Resources
 

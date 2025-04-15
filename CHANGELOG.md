@@ -1,9 +1,34 @@
 <!--
  @since 2025.03.19
- @changed 2025.04.09, 22:29
+ @changed 2025.04.15, 15:59
 -->
 
 # CHANGELOG
+
+## [v.0.0.41](https://github.com/lilliputten/march-tales/releases/tag/v.0.0.41) - 2025.04.15
+
+- [Issue #82](https://github.com/lilliputten/march-tales/issues/82): Added data synchronization on the server side and on the web client.
+
+- Added client js triggers on login/logout, with cleaning data on logout and sending all the local data to sync on the server on log in. Added `logged-out` route and template.
+- Server: Accepting timestamp values on track data update (favorite, played count, position).
+- Added server-side user track update routine (`sync_user_tracks_api_view`)
+- Updated client track controlling code (it allows multiple track nodes for the same track entity -- in different areas on the page).
+- Added support for a local mysql database. Extracted user tracks' context to a dedicated module (should be used alongside track and favorites list contexts). Updated test fixtures' data.
+- Client: Fixed a bug with empty local data but existed server ones.
+- Client: Fixed open graph markup bugs.
+
+## [v.0.0.41](https://github.com/lilliputten/march-tales/releases/tag/v.0.0.41) - 2025.04.13
+
+- [Issue #82](https://github.com/lilliputten/march-tales/issues/82): Added data synchronization on the server side and on the web client.
+
+- Added client js triggers on login/logout, with cleaning data on logout and sending all the local data to sync on the server on log in. Added `logged-out` route and template.
+- Server: Accepting timestamp values on track data update (favorite, played count, position).
+- Added server-side user track update routine (`sync_user_tracks_api_view`)
+- Updated client track controlling code (it allows multiple track nodes for the same track entity -- in different areas on the page).
+- Added support for a local mysql database. Extracted user tracks' context to a dedicated module (should be used alongside track and favorites list contexts). Updated test fixtures' data.
+- Client: Fixed a bug with empty local data but existed server ones.
+
+[Compare with the previous version](https://github.com/lilliputten/march-tales/compare/v.0.0.40...v.0.0.41)
 
 ## [v.0.0.40](https://github.com/lilliputten/march-tales/releases/tag/v.0.0.40) - 2025.04.09
 

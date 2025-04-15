@@ -2,18 +2,7 @@
 {% load static %}
 {% load i18n %}
 
-{% comment %}
-{% if settings.DEBUG %}
-<pre>
-recent_tracks: {{ recent_tracks }}
-popular_tracks: {{ popular_tracks }}
-most_recent_track: {{ most_recent_track }}
-random_track: {{ random_track }}
-</pre>
-{% endif %}
-{% endcomment %}
-
-<section class="section pb-0">
+<section class="top-columns section pb-0">
   <div class="container">
     <div class="row">
 

@@ -15,12 +15,12 @@ logger = getDebugLogger()
 def _get_required_locale(request: HttpRequest):
     hl_locale = str(request.GET.get('hl', ''))
     if hl_locale is not None and hl_locale:
-        return hl_locale
+        return get_valid_language(hl_locale)
     # # !!!
     language_cookie = request.COOKIES.get(settings.LANGUAGE_COOKIE_NAME)
-    accept_language = get_valid_language(request.headers.get('Accept-Language'))  # current_language
+    accept_language = request.headers.get('Accept-Language', '')
     if language_cookie is None and accept_language is not None and accept_language:
-        return accept_language
+        return get_valid_language(accept_language)
     return ''
 
 

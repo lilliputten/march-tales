@@ -2,7 +2,7 @@ interface UserTrack {
   id: number;
   user_id: number;
   track_id: number;
-  is_favorite: number;
+  is_favorite: boolean;
   played_count: number;
   position: number;
   favorited_at_sec: number; // DateTime, in seconds

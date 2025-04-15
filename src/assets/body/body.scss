@@ -11,11 +11,11 @@ html {
 }
 
 body {
+  flex: 1;
   &:not(.mobile-auth) {
     display: flex;
     min-height: 100%;
     flex-direction: column;
-    flex: 1;
     justify-content: space-between;
     .content,
     .container {

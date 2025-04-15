@@ -51,17 +51,9 @@ def get_favorites(request: HttpRequest):
 
 
 def get_favorites_ids(request: HttpRequest):
-
-    if request.user.is_authenticated:
-        favorites = request.user.favorite_tracks.filter(track_status='PUBLISHED').order_by('-published_at').all()
-        ids = map(lambda t: t.id, favorites)
-        return ids
-    else:
-        favorites_cookie = request.COOKIES.get('favorites')
-        if favorites_cookie is not None and favorites_cookie:
-            list_str = favorites_cookie.split('-')
-            ids = filter(None, map(int, list_str))
-            return ids
+    favorites = get_favorites(request)
+    ids = map(lambda t: t.id, favorites)
+    return ids
 
 
 def get_favorites_list_context(request: HttpRequest):
@@ -82,13 +74,6 @@ def get_favorites_list_context(request: HttpRequest):
     favorites_end = favorites_offset + favorites_limit
     favorites_set = favorites[favorites_offset:favorites_end] if favorites is not None and favorites else None
     favorites_count = len(favorites) if favorites is not None and favorites else 0
-
-    # debugData = {
-    #     'language': language,
-    #     'favorites_offset': favorites_offset,
-    # }
-    # debugStr = debugObj(debugData)
-    # logger.info(f'get_favorites_list_context\n{debugStr}')
 
     context = {
         'favorites': favorites_set,

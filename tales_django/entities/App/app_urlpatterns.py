@@ -10,7 +10,7 @@ from django.views.generic import RedirectView
 
 from tales_django.sites import unfold_admin_site
 
-from .api import api_urlpatterns
+from .api import app_api_urlpatterns
 from .sitemap import sitemap_url
 from .views import RobotsView  # about_view,; application_view,
 from .views import (
@@ -67,7 +67,7 @@ app_urlpatterns = [
     re_path(r'^favicon\.ico$', RedirectView.as_view(url='/static/favicon.ico', permanent=True)),
 ]
 
-app_urlpatterns += api_urlpatterns
+app_urlpatterns += app_api_urlpatterns
 
 # app_urlpatterns.append(url(r'^translations/', include(translation_urls)))
 # app_urlpatterns.append(path(r'^translations/', translation_urls.urlpatterns))

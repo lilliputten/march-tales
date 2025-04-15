@@ -1,3 +1,5 @@
+from tales_django.entities.Tracks.api import track_api_urlpatterns
+
 from .entities.App.app_urlpatterns import app_urlpatterns, handler403, handler404, handler500
 from .entities.Membership.urls import membership_urlpatterns
 from .entities.Tracks.author_urlpatterns import author_urlpatterns
@@ -11,6 +13,7 @@ urlpatterns = (
     + membership_urlpatterns
     + app_urlpatterns
     + track_urlpatterns
+    + track_api_urlpatterns
     + author_urlpatterns
     + rubric_urlpatterns
     + tag_urlpatterns

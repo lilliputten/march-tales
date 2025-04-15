@@ -6,10 +6,17 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
+{% block body_class %}login_success {{ block.super }}{% endblock %}
+
 {% block title %}{% trans 'Successful login' %} — {{ block.super }}{% endblock title %}
 
 {% block content %}
 {{ block.super }}
+
+<!--
+  mobile_auth: "{{ mobile_auth }}"
+  is_mobile_auth: {{ is_mobile_auth }}
+-->
 
 {% if user.is_authenticated %}
   {# DEMO: Show a greetings or other info? #}
@@ -21,11 +28,6 @@
   {% trans "Welcome," %} {{ user.get_full_name|default:user.username }}.
   </h1>
 {% endif %}
-
-<!--
-  mobile_auth: "{{ mobile_auth }}"
-  is_mobile_auth: {{ is_mobile_auth }}
--->
 
 {# Buttons #}
 <div class="actions mt-5 mb-4 d-flex flex-wrap gap-1">

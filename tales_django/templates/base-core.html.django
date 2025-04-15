@@ -1,8 +1,8 @@
 {# ex: set ft=htmldjango : #}
 <!--
 - Html template
-- Version: 0.0.40
-- Last changes timestamp: 2025.04.12 17:38:06 +0300
+- Version: 0.0.41
+- Last changes timestamp: 2025.04.15 14:50:15 +0300
 - Generated: {% now "Y.m.d H:i:s O" %}
 -->
 
@@ -39,6 +39,7 @@
     <meta property="og:title" content="{% trans 'Site title' %}" />
     <meta property="og:description" content="{% trans 'Site description' %}" />
     <meta property="og:url" content="{{ request.build_absolute_uri }}" />
+    <meta property="og:logo" content="{{request.scheme}}://{{request.get_host}}{% static 'images/march-cat/march-cat-sq-256.jpg' %}" />
     <meta property="og:image" content="{{request.scheme}}://{{request.get_host}}{% static 'images/og-splash/splash-1200x630.jpg' %}" />
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -54,7 +55,7 @@
   <link href="{% if settings.DEBUG %}{% static 'vendor/font-awesome-4.7.0/css/font-awesome.min.css' %}{% else %}https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css{% endif %}" rel="stylesheet" type="text/css" />
 
   {# Webfonts #}
-  {% if False and settings.DEBUG %}
+  {% if True and settings.DEBUG %}
     <link href="{% static 'vendor/webfonts/lobster/lobster.css' %}" rel="stylesheet" type="text/css" />
     <link href="{% static 'vendor/webfonts/nunito/nunito.css' %}" rel="stylesheet" type="text/css" />
     {% comment %}
@@ -85,7 +86,7 @@
   {% compress css %}
   <link rel="stylesheet" href="{% static 'libs/themify-icons/themify-icons.min.css' %}" />
   <link rel="stylesheet" href="{% static 'libs/aos/aos.css' %}" />
-  <link href="{% static 'compiled/styles.css' %}" rel="stylesheet" type="text/css" />
+  <link href="{% static 'compiled/styles.css' %}?{{ settings.PROJECT_HASH }}" rel="stylesheet" type="text/css" />
   {% endcompress css %}
 
   <!-- CSS }}} -->
@@ -107,7 +108,8 @@
       {% block js_variables_content %}
         {{ block.super }}
         var projectInfo = '{{ settings.PROJECT_INFO }}';
-        var isAuthenticated = {% if user.is_authenticated %}true{% else %}false{% endif %};
+        {% if user.is_authenticated %}var isAuthenticated = true;{% endif %}
+        {% comment %} {% if user.is_authenticated %}var userId = {{ user.id }};{% endif %} {% endcomment %}
         {% if settings.LOCAL %}var LOCAL = true;{% endif %}
         {% if settings.DEBUG %}var DEBUG = true;{% endif %}
         var DEFAULT_HOST = '{{ settings.DEFAULT_HOST }}';
@@ -181,7 +183,7 @@ is_mobile_auth: {{ is_mobile_auth }}
   {# TODO: Place custom scripts here, within compress tag #}
   {% compress js %}
   <script src="{% static 'libs/aos/aos.js' %}" type="text/javascript"></script>
-  <script src="{% static 'compiled/scripts.js' %}" type="text/javascript"></script>
+  <script src="{% static 'compiled/scripts.js' %}?{{ settings.PROJECT_HASH }}" type="text/javascript"></script>
   {#% include "compiled/js-init/js-init.django" %#}
   {% endcompress js %}
 

@@ -145,6 +145,7 @@
     text_en: 'Test'
     text_ru: 'Тест'
     promote: true
+    updated_at: '2025-02-09'
     tracks:
       - 1
 
@@ -154,6 +155,7 @@
     text_en: 'Sample'
     text_ru: 'Пример'
     promote: false
+    updated_at: '2025-02-09'
     tracks:
       - 1
       - 2
@@ -164,6 +166,7 @@
     text_en: 'Tales'
     text_ru: 'Сказки'
     promote: true
+    updated_at: '2025-02-09'
     tracks:
       - 1
       - 2
@@ -174,6 +177,7 @@
     text_en: 'Stories'
     text_ru: 'Рассказы'
     promote: false
+    updated_at: '2025-02-09'
     tracks:
       - 2
 
@@ -183,6 +187,7 @@
     text_en: 'Something else'
     text_ru: 'Иное'
     promote: false
+    updated_at: '2025-02-09'
     tracks: []
 
 - model: 'tales_django.author'
@@ -196,6 +201,7 @@
     description_en: "Wilhelm Hauff (29 November 1802 – 18 November 1827) was a German poet and novelist.\n\nHauff was born in Stuttgart, the son of August Friedrich Hauff, a secretary in the Württemberg ministry of foreign affairs, and Hedwig Wilhelmine Elsaesser Hauff. He was the second of four children.\n\nHauff lost his father when he was seven years old, and his early education was practically self-gained in the library of his maternal grandfather at Tübingen, where his mother had moved after the death of her husband. In 1818 he was sent to the Klosterschule at Blaubeuren, and in 1820 began to study at the University of Tübingen. In four years he completed his philosophical and theological studies at the Tübinger Stift."
     portrait_picture: 'samples/author-wilhelm-hauff-sq-200.jpg'
     promote: true
+    updated_at: '2025-02-09'
 
 - model: 'tales_django.author'
   pk: 2
@@ -208,3 +214,4 @@
     description_en: "Hans Christian Andersen (/ˈændərsən/ AN-dər-sən; Danish: [ˈhænˀs ˈkʰʁestjæn ˈɑnɐsn̩] ⓘ; 2 April 1805 – 4 August 1875) was a Danish author. Although a prolific writer of plays, travelogues, novels, and poems, he is best remembered for his literary fairy tales.\n\nAndersen's fairy tales, consisting of 156 stories across nine volumes, have been translated into more than 125 languages. They have become embedded in Western collective consciousness, accessible to children as well as presenting lessons of virtue and resilience in the face of adversity for mature readers. His most famous fairy tales include \"The Emperor's New Clothes\", \"The Little Mermaid\", \"The Nightingale\", \"The Steadfast Tin Soldier\", \"The Red Shoes\", \"The Princess and the Pea\", \"The Snow Queen\", \"The Ugly Duckling\", \"The Little Match Girl\", and \"Thumbelina.\" Andersen's stories have inspired ballets, plays, and animated and live-action films."
     portrait_picture: 'samples/author-andersen-sq-200.jpg'
     promote: true
+    updated_at: '2025-02-09'

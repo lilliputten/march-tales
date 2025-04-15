@@ -1,5 +1,5 @@
-from .api_urlpatterns import api_urlpatterns
+from .app_api_urlpatterns import app_api_urlpatterns
 
 __all__ = [
-    'api_urlpatterns',
+    'app_api_urlpatterns',
 ]

@@ -7,6 +7,10 @@
 
 - `track` -- Tracks object expected as an external variable.
 
+UNUSED: As on 2025.04.13
+
+TODO: To update the template, according to `src/assets/common-blocks/big-tracks-list/big-tracks-list-item.django`
+
 {% endcomment %}
 
 <div

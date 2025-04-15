@@ -8,7 +8,12 @@ import { acceptedCookiesId } from '../constants/acceptedCookiesId';
 class LocalTrackInfoDb {
   // End-user api
 
-  updatePlayedCount(id: number, playedCount?: number, timestamp?: number) {
+  updatePlayedCount(
+    id: number,
+    playedCount?: number,
+    // localPlayedCount?: number,
+    timestamp?: number,
+  ) {
     try {
       const now = Date.now();
       const trackInfo = this.getOrCreate(id);
@@ -17,6 +22,14 @@ class LocalTrackInfoDb {
       } else {
         trackInfo.playedCount = playedCount;
       }
+      /** if (localPlayedCount == undefined || isNaN(localPlayedCount)) {
+       *   trackInfo.localPlayedCount = trackInfo.localPlayedCount
+       *     ? trackInfo.localPlayedCount + 1
+       *     : 1;
+       * } else {
+       *   trackInfo.localPlayedCount = localPlayedCount;
+       * }
+       */
       trackInfo.lastPlayed = timestamp || now;
       trackInfo.lastUpdated = now;
       this.insert(trackInfo);
@@ -129,6 +142,7 @@ class LocalTrackInfoDb {
       lastUpdated: now, // DateTime
       lastPlayed: 0, // DateTime
       lastFavorited: 0, // DateTime
+      // localPlayedCount: 0,
     };
     return trackInfo;
   }

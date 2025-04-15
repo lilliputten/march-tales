@@ -8,6 +8,7 @@ from tales_django.core.pages import (
     get_favorites_list_context,
     get_stat_context,
     get_tracks_list_context,
+    get_user_tracks_context,
 )
 
 
@@ -18,6 +19,7 @@ def index_view(request: HttpRequest):
         **get_common_context(request),
         **get_favorites_list_context(request),
         **get_tracks_list_context(request),
+        **get_user_tracks_context(request),
         **get_stat_context(request),
         'show_top_columns': True,
     }

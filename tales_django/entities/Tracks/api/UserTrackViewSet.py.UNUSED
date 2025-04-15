@@ -30,10 +30,10 @@ logger = getDebugLogger()
 
 
 # NOTE: No `viewsets.ModelViewSet` -- we don't use modification methods, only our custom `retrieve` and `list` (see below)
-class TrackViewSet(viewsets.GenericViewSet):
+class UserTrackViewSet(viewsets.GenericViewSet):
     language = get_current_language()
-    queryset = Track.objects.order_by('-published_at', f'title_{language}').all()
-    # serializer_class = TrackSerializer
+    queryset = UserTrack.objects.order_by('-published_at', f'title_{language}').all()
+    # serializer_class = UserTrackSerializer
     # pagination_class = DefaultPagination
 
     def get_serializer_context(self):
@@ -92,10 +92,7 @@ class TrackViewSet(viewsets.GenericViewSet):
                 request
             )  # Extracts search-related filter arguments from the request for text-based searching
 
-            # Previous straightforward approach, keeping for reference
-            # query = Track.objects.filter(track_status='PUBLISHED').order_by('-published_at', f'title_{language}')
-            # Build filtered and ordered query with distinct results
-            query = Track.objects.filter(*filter_args, **filter_kwargs).distinct().order_by(*order_args)
+            query = UserTrack.objects.filter(*filter_args, **filter_kwargs).distinct().order_by(*order_args)
             # Apply pagination: slice query if limit provided, otherwise get all results
             subset: QuerySet[Track] = query[offset : offset + limit] if limit else query.all()
 
@@ -321,6 +318,9 @@ class TrackViewSet(viewsets.GenericViewSet):
     )
     def toggle_favorite(self, request: Request, pk=None):
         try:
+            value = request.data.get('value')
+            timestamp_s = int(request.data.get('timestamp_s', '0'))
+
             session_key = request.session.session_key if request.session else None
             csrftoken = request.headers.get('X-CSRFToken')
 
@@ -356,11 +356,6 @@ class TrackViewSet(viewsets.GenericViewSet):
                     status=status.HTTP_500_INTERNAL_SERVER_ERROR,
                 )
             user_track = user_tracks_list[0]
-
-            value = request.data.get('value')
-            timestamp_s = (
-                int(request.data.get('timestamp_s', '0')) if request.data.get('timestamp_s') is not None else 0
-            )
 
             debugData = {
                 'value': value,
@@ -456,7 +451,7 @@ class TrackViewSet(viewsets.GenericViewSet):
             user: User | None = request.user if is_authenticated else None
             debugData = {
                 'is_authenticated': is_authenticated,
-                'user': user.id if is_authenticated else None,
+                'user': user.id,
                 'track': track.id,
                 'host': host,
                 'referer': referer,
@@ -467,9 +462,7 @@ class TrackViewSet(viewsets.GenericViewSet):
             }
             logger.info(f'[increment_played_count]: DEBUG:\n{debugObj(debugData)}')
 
-            timestamp_s = (
-                int(request.data.get('timestamp_s', '0')) if request.data and request.data.get('timestamp_s') else 0
-            )
+            timestamp_s = int(request.data.get('timestamp_s', '0'))
 
             if is_authenticated:
                 user: User = request.user
@@ -574,9 +567,7 @@ class TrackViewSet(viewsets.GenericViewSet):
 
             # position = float(request.query_params.get('position', '0'))
             position = float(request.data.get('position', '0'))
-            timestamp_s = (
-                int(request.data.get('timestamp_s', '0')) if request.data.get('timestamp_s') is not None else 0
-            )
+            timestamp_s = int(request.data.get('timestamp_s', '0'))
 
             debugData = {
                 'position': position,

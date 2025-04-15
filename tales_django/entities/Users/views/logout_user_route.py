@@ -4,7 +4,7 @@ from django.shortcuts import redirect
 
 def logout_user_route(request):
     logout(request)
-    return redirect('index')
+    return redirect('logged_out')
 
 
 __all__ = []

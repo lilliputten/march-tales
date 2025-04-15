@@ -1,6 +1,7 @@
 import traceback
 
 from django.http import JsonResponse
+from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status
 from rest_framework.request import Request
@@ -13,7 +14,7 @@ from tales_django.core.pages.get_favorites_list_context import get_favorites_ids
 
 logger = getDebugLogger()
 
-_ = lambda _: _
+# _ = lambda _: _
 
 
 @csrf_exempt  # Will send json failure response manually
@@ -42,13 +43,13 @@ def favorites_ids_api_view(request: Request):
         # # Check user is_authenticated?
         # if not request.user.is_authenticated:
         #     data = {'detail': _('User in not authenticated')}
-        #     return JsonResponse(data, status=status.HTTP_403_FORBIDDEN, safe=False, json_dumps_params={'ensure_ascii': True}, content_type="application/json; charset=utf-8")
+        #     return JsonResponse(data, status=status.HTTP_403_FORBIDDEN, safe=False, json_dumps_params={'ensure_ascii': True}, content_type='application/json; charset=utf-8')
 
         ids = get_favorites_ids(request)
 
         data = {
             'ids': list(ids) if ids else [],
-            **debugData,  # DEBUG: Show debug data
+            # **debugData,  # DEBUG: Show debug data
         }
         return JsonResponse(
             data,
