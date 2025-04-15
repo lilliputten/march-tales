@@ -29,6 +29,7 @@ from core.appEnv import (
     MEDIA_FOLDER,
     MEDIA_ROOT,
     PROJECT_INFO,
+    PROJECT_HASH,
     PROJECT_VERSION,
     SRC_ROOT,
     STATIC_FOLDER,
@@ -907,6 +908,7 @@ SITE_SHORT_NAME = SITE_NAME
 PASS_VARIABLES = {
     'DEBUG': DEBUG,  # Pass django debug flag to the code (from environment)
     'LOCAL': LOCAL,  # Local dev server mode (from the environment)
+    'PROJECT_HASH': PROJECT_HASH,
     'PROJECT_INFO': PROJECT_INFO,
     'PROJECT_VERSION': PROJECT_VERSION,
     'DEFAULT_HOST': DEFAULT_HOST,

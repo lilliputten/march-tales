@@ -31,6 +31,12 @@ with open(posixpath.join(STATIC_ROOT, 'project-info.txt')) as fh:
         PROJECT_INFO = info.strip()
         PROJECT_VERSION = re.sub(r'^.*v\.([0-9.]+).*$', r'\1', PROJECT_INFO)
 
+PROJECT_HASH = ''
+with open(posixpath.join(STATIC_ROOT, 'project-hash.txt')) as fh:
+    hash = fh.read()
+    if hash:
+        PROJECT_HASH = hash.strip()
+
 appEnv = environ.FileAwareEnv(
     # @see local `.dev` file and example in `.dev.SAMPLE`
     # @see https://django-environ.readthedocs.io

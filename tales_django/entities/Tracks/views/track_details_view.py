@@ -9,7 +9,7 @@ from tales_django.core.pages import (
     get_tracks_list_context,
     get_user_tracks_context,
 )
-from tales_django.entities.Tracks.models import Track, UserTrack
+from tales_django.entities.Tracks.models import Track
 
 logger = getDebugLogger()
 

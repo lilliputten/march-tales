@@ -2,7 +2,7 @@
 <!--
 - Html template
 - Version: 0.0.41
-- Last changes timestamp: 2025.04.13 18:55:59 +0300
+- Last changes timestamp: 2025.04.15 14:50:15 +0300
 - Generated: {% now "Y.m.d H:i:s O" %}
 -->
 
@@ -86,7 +86,7 @@
   {% compress css %}
   <link rel="stylesheet" href="{% static 'libs/themify-icons/themify-icons.min.css' %}" />
   <link rel="stylesheet" href="{% static 'libs/aos/aos.css' %}" />
-  <link href="{% static 'compiled/styles.css' %}" rel="stylesheet" type="text/css" />
+  <link href="{% static 'compiled/styles.css' %}?{{ settings.PROJECT_HASH }}" rel="stylesheet" type="text/css" />
   {% endcompress css %}
 
   <!-- CSS }}} -->
@@ -183,7 +183,7 @@ is_mobile_auth: {{ is_mobile_auth }}
   {# TODO: Place custom scripts here, within compress tag #}
   {% compress js %}
   <script src="{% static 'libs/aos/aos.js' %}" type="text/javascript"></script>
-  <script src="{% static 'compiled/scripts.js' %}" type="text/javascript"></script>
+  <script src="{% static 'compiled/scripts.js' %}?{{ settings.PROJECT_HASH }}" type="text/javascript"></script>
   {#% include "compiled/js-init/js-init.django" %#}
   {% endcompress js %}
 
