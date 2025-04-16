@@ -47,6 +47,7 @@ function initActiveBanner(bannerNode: HTMLElement) {
   bannerNode
     .querySelector<HTMLButtonElement>('button#Reject')
     ?.addEventListener('click', handleReject);
+  bannerNode.classList.toggle('visible', true);
 }
 
 function hideBanner(bannerNode?: HTMLElement) {
@@ -68,7 +69,7 @@ export function initCookiesBanner() {
   const cookiesBannerStr = window.localStorage.getItem(acceptedCookiesId);
   if (cookiesBannerStr == null) {
     initActiveBanner(bannerNode);
-    return;
+  } else {
+    hideBanner(bannerNode);
   }
-  hideBanner(bannerNode);
 }
