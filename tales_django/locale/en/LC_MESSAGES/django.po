@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-13 17:22+0300\n"
+"POT-Creation-Date: 2025-04-16 19:28+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -110,7 +110,7 @@ msgstr ""
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:242
 #: .\tales_django\entities\Tracks\models\Tag.py:15
 #: .\tales_django\entities\Tracks\models\Track.py:72
-#: .\tales_django\settings.py:440
+#: .\tales_django\settings.py:442
 #: .\tales_django\templates\tales_django\tag_details.html.django:21
 #: .\tales_django\templates\tales_django\tag_index.html.django:20
 msgid "Tags"
@@ -118,11 +118,11 @@ msgstr ""
 
 #: .\src\assets\cookies-banner\cookies-banner.html.django:10
 msgid ""
-"Our website uses cookies. By clicking “Accept”, you agree to the storage of "
-"cookies on your device to improve website navigation, analyze website usage "
-"and improve marketing. By clicking “Reject”, you agree to use only basic "
-"system cookies. Please leave the site if you do not want to use cookies at "
-"all."
+"The website uses cookies and processes personal data using Yandex Metrika. "
+"This improves the site's performance and interaction with it. Confirm your "
+"consent by clicking Accept. By clicking “Reject”, you agree to use only "
+"basic system cookies. Please leave the site if you do not want to use "
+"cookies at all."
 msgstr ""
 
 #: .\src\assets\cookies-banner\cookies-banner.html.django:13
@@ -149,7 +149,7 @@ msgstr ""
 #: .\src\assets\page-menus\menu-main.django:28
 #: .\tales_django\templates\tales_django\favorites.html.django:35
 #: .\tales_django\templates\tales_django\favorites.html.django:43
-#: .\tales_django\templates\tales_django\track_details.html.django:44
+#: .\tales_django\templates\tales_django\track_details.html.django:45
 msgid "Favorites"
 msgstr ""
 
@@ -256,23 +256,23 @@ msgstr ""
 #: .\tales_django\templates\tales_django\rubric_index.html.django:19
 #: .\tales_django\templates\tales_django\tag_details.html.django:20
 #: .\tales_django\templates\tales_django\tag_index.html.django:19
-#: .\tales_django\templates\tales_django\track_details.html.django:41
+#: .\tales_django\templates\tales_django\track_details.html.django:42
 msgid "Main page"
 msgstr ""
 
 #: .\src\assets\template-footer\template-footer-content-detailed.django:39
 #: .\tales_django\entities\Tracks\models\Track.py:32
 #: .\tales_django\entities\Users\admin\UserAdmin.py:56
-#: .\tales_django\settings.py:423
+#: .\tales_django\settings.py:425
 #: .\tales_django\templates\tales_django\favorites.html.django:37
-#: .\tales_django\templates\tales_django\track_details.html.django:46
+#: .\tales_django\templates\tales_django\track_details.html.django:47
 msgid "Tracks"
 msgstr ""
 
 #: .\src\assets\template-footer\template-footer-content-detailed.django:40
 #: .\src\assets\template-right-blocks\right-authors-list\right-authors-list.django:15
 #: .\tales_django\entities\Tracks\models\Author.py:27
-#: .\tales_django\settings.py:430
+#: .\tales_django\settings.py:432
 #: .\tales_django\templates\tales_django\author_details.html.django:36
 #: .\tales_django\templates\tales_django\author_index.html.django:20
 msgid "Authors"
@@ -283,7 +283,7 @@ msgstr ""
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:248
 #: .\tales_django\entities\Tracks\models\Rubric.py:15
 #: .\tales_django\entities\Tracks\models\Track.py:75
-#: .\tales_django\settings.py:435
+#: .\tales_django\settings.py:437
 #: .\tales_django\templates\tales_django\rubric_details.html.django:21
 #: .\tales_django\templates\tales_django\rubric_index.html.django:20
 msgid "Rubrics"
@@ -579,8 +579,8 @@ msgstr "Listen to classic fairy tales online"
 #: .\tales_django\entities\Tracks\api\TrackViewSet.py:157
 #: .\tales_django\entities\Tracks\api\TrackViewSet.py:262
 #: .\tales_django\entities\Tracks\api\TrackViewSet.py:338
-#: .\tales_django\entities\Tracks\api\TrackViewSet.py:440
-#: .\tales_django\entities\Tracks\api\TrackViewSet.py:549
+#: .\tales_django\entities\Tracks\api\TrackViewSet.py:442
+#: .\tales_django\entities\Tracks\api\TrackViewSet.py:553
 msgid "Client session not found"
 msgstr ""
 
@@ -593,14 +593,14 @@ msgid "Error parsing track indices list"
 msgstr ""
 
 #: .\tales_django\entities\Tracks\api\TrackViewSet.py:329
-#: .\tales_django\entities\Tracks\api\TrackViewSet.py:540
+#: .\tales_django\entities\Tracks\api\TrackViewSet.py:544
 #: .\tales_django\entities\Tracks\api\sync_user_tracks_api_view.py:106
 msgid "User in not authenticated"
 msgstr ""
 
 #: .\tales_django\entities\Tracks\api\TrackViewSet.py:351
-#: .\tales_django\entities\Tracks\api\TrackViewSet.py:474
-#: .\tales_django\entities\Tracks\api\TrackViewSet.py:562
+#: .\tales_django\entities\Tracks\api\TrackViewSet.py:478
+#: .\tales_django\entities\Tracks\api\TrackViewSet.py:566
 msgid "User track object not found (could not be created)"
 msgstr ""
 
@@ -772,7 +772,7 @@ msgid "Group"
 msgstr ""
 
 #: .\tales_django\entities\Users\admin\GroupAdmin.py:23
-#: .\tales_django\settings.py:480
+#: .\tales_django\settings.py:482
 msgid "Groups"
 msgstr ""
 
@@ -834,7 +834,7 @@ msgid "Basic Settings"
 msgstr ""
 
 #: .\tales_django\entities\flatpages\admin\FlatPageAdmin.py:54
-#: .\tales_django\settings.py:418
+#: .\tales_django\settings.py:420
 msgid "Content"
 msgstr ""
 
@@ -847,7 +847,7 @@ msgid "Flat page"
 msgstr ""
 
 #: .\tales_django\entities\flatpages\models\FlatPage.py:22
-#: .\tales_django\settings.py:459
+#: .\tales_django\settings.py:461
 msgid "Flat pages"
 msgstr ""
 
@@ -861,33 +861,33 @@ msgstr "The March Cat Tales"
 msgid "Page content"
 msgstr ""
 
-#: .\tales_django\settings.py:399 .\tales_django\settings.py:400
+#: .\tales_django\settings.py:401 .\tales_django\settings.py:402
 #, fuzzy
 #| msgid "Site description"
 msgid "Administration"
 msgstr "Listen to classic fairy tales online"
 
-#: .\tales_django\settings.py:447
+#: .\tales_django\settings.py:449
 msgid "Manage"
 msgstr ""
 
-#: .\tales_django\settings.py:452
+#: .\tales_django\settings.py:454
 msgid "Dashboard"
 msgstr ""
 
-#: .\tales_django\settings.py:465
+#: .\tales_django\settings.py:467
 msgid "Sites"
 msgstr ""
 
-#: .\tales_django\settings.py:470
+#: .\tales_django\settings.py:472
 msgid "Users"
 msgstr ""
 
-#: .\tales_django\settings.py:475
+#: .\tales_django\settings.py:477
 msgid "User tracks"
 msgstr ""
 
-#: .\tales_django\settings.py:491
+#: .\tales_django\settings.py:493
 msgid "Open site"
 msgstr ""
 
@@ -1032,31 +1032,31 @@ msgstr "Listen to classic fairy tales online"
 msgid "Site keywords"
 msgstr "March Cat, Tales, Fairy tales, Listen, mp3"
 
-#: .\tales_django\templates\base-core.html.django:130
+#: .\tales_django\templates\base-core.html.django:135
 msgid "Error loading audio file"
 msgstr ""
 
-#: .\tales_django\templates\base-core.html.django:131
+#: .\tales_django\templates\base-core.html.django:136
 msgid "No audio node found"
 msgstr ""
 
-#: .\tales_django\templates\base-core.html.django:132
+#: .\tales_django\templates\base-core.html.django:137
 msgid "No audio source node found"
 msgstr ""
 
-#: .\tales_django\templates\base-core.html.django:133
+#: .\tales_django\templates\base-core.html.django:138
 msgid "Fetch error"
 msgstr ""
 
-#: .\tales_django\templates\base-core.html.django:134
+#: .\tales_django\templates\base-core.html.django:139
 msgid "Failed api request"
 msgstr ""
 
-#: .\tales_django\templates\base-core.html.django:135
+#: .\tales_django\templates\base-core.html.django:140
 msgid "The track has been successfully added to favorites"
 msgstr ""
 
-#: .\tales_django\templates\base-core.html.django:136
+#: .\tales_django\templates\base-core.html.django:141
 msgid "The track has been successfully removed from favorites"
 msgstr ""
 

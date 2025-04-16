@@ -7,7 +7,7 @@
 
 ## Build info (auto-generated)
 
-- Project info: march-tales v.0.0.41 / 2025.04.15 16:04:16 +0300
+- Project info: march-tales v.0.0.41 / 2025.04.16 20:30:29 +0300
 
 ## Resources
 
@@ -45,7 +45,7 @@ See `poetry-scripts` and `pyproject.toml` `[tool.poetry.scripts]` sectionfor ref
 
 Don't forget to export requirements (from the poetry project a to plain `requirements.txt` file) after dependencies updates.
 
-### Webpack-based forntend part
+### Webpack-based frontend part
 
 Use pnpm commands (see `package.json`, `scripts` section`):
 

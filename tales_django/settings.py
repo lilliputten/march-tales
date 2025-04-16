@@ -28,8 +28,8 @@ from core.appEnv import (
     LOCAL,
     MEDIA_FOLDER,
     MEDIA_ROOT,
-    PROJECT_INFO,
     PROJECT_HASH,
+    PROJECT_INFO,
     PROJECT_VERSION,
     SRC_ROOT,
     STATIC_FOLDER,
@@ -124,6 +124,8 @@ LANGUAGE_CODE = DEFAULT_LANGUAGE
 LANGUAGES_DICT = {lng: name for lng, name in list(LANGUAGES)}
 LANGUAGES_LIST = [lng[0] for lng in list(LANGUAGES)]
 
+LANGUAGE_COOKIE_AGE = 7 * 24 * 60 # Remember a language for a week
+
 # Application definition
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
@@ -198,7 +200,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django_minify_html.middleware.MinifyHtmlMiddleware',
+    # @see https://pypi.org/project/django-minify-html/
+    # 'django_minify_html.middleware.MinifyHtmlMiddleware',
+    APP_NAME + '.middleware.ProjectMinifyHtmlMiddleware.ProjectMinifyHtmlMiddleware',
     # @see https://docs.allauth.org/en/latest/installation/quickstart.html
     'allauth.account.middleware.AccountMiddleware',
     # # Html content prettifier (TODO: Requires fixes for invalid html tags formatting)

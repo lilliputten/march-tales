@@ -1,6 +1,8 @@
 import { acceptedCookiesId } from '../constants/acceptedCookiesId';
 import { deleteAllCookies, setCookie } from '../helpers/CommonHelpers';
 
+let eventHandler: () => void;
+
 function updateBannerGeometry(bannerNode: HTMLElement) {
   const footerNode = document.querySelector<HTMLElement>('.template-footer');
   if (!bannerNode || !footerNode) {
@@ -30,7 +32,11 @@ function handleReject(event: Event) {
 }
 
 function initActiveBanner(bannerNode: HTMLElement) {
-  const eventHandler = updateBannerGeometry.bind(bannerNode);
+  if (eventHandler) {
+    window.removeEventListener('resize', eventHandler);
+    window.removeEventListener('orientationchange', eventHandler);
+  }
+  eventHandler = updateBannerGeometry.bind(bannerNode);
   window.addEventListener('resize', eventHandler);
   window.addEventListener('orientationchange', eventHandler);
   updateBannerGeometry(bannerNode);
@@ -41,6 +47,7 @@ function initActiveBanner(bannerNode: HTMLElement) {
   bannerNode
     .querySelector<HTMLButtonElement>('button#Reject')
     ?.addEventListener('click', handleReject);
+  bannerNode.classList.toggle('visible', true);
 }
 
 function hideBanner(bannerNode?: HTMLElement) {
@@ -48,6 +55,10 @@ function hideBanner(bannerNode?: HTMLElement) {
     bannerNode.remove();
   }
   document.body.classList.add('no-cookies-banner');
+  if (eventHandler) {
+    window.removeEventListener('resize', eventHandler);
+    window.removeEventListener('orientationchange', eventHandler);
+  }
 }
 
 export function initCookiesBanner() {
@@ -58,7 +69,7 @@ export function initCookiesBanner() {
   const cookiesBannerStr = window.localStorage.getItem(acceptedCookiesId);
   if (cookiesBannerStr == null) {
     initActiveBanner(bannerNode);
-    return;
+  } else {
+    hideBanner(bannerNode);
   }
-  hideBanner(bannerNode);
 }
