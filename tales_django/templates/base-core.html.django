@@ -2,7 +2,7 @@
 <!--
 - Html template
 - Version: 0.0.41
-- Last changes timestamp: 2025.04.15 16:04:16 +0300
+- Last changes timestamp: 2025.04.16 19:30:18 +0300
 - Generated: {% now "Y.m.d H:i:s O" %}
 -->
 
@@ -88,6 +88,10 @@
   <link rel="stylesheet" href="{% static 'libs/aos/aos.css' %}" />
   <link href="{% static 'compiled/styles.css' %}?{{ settings.PROJECT_HASH }}" rel="stylesheet" type="text/css" />
   {% endcompress css %}
+
+  {% if not settings.LOCAL %}
+  {% include "assets/yandex-metrika/yandex-metrika.django" %}
+  {% endif %}
 
   <!-- CSS }}} -->
 </head>
