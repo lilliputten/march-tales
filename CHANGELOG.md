@@ -1,6 +1,6 @@
 <!--
  @since 2025.03.19
- @changed 2025.04.16, 19:22
+ @changed 2025.04.16, 20:30
 -->
 
 # CHANGELOG
@@ -9,6 +9,7 @@
 ## Staged changes
 
 - Issue #84: Added yandex metrika counter.
+- Issue #84: Updated cookie banner logic, added language cookie age parameter (to allow it to be saved for a longer time), yandex metrika is hidden for local dev server.
 
 ## [v.0.0.41](https://github.com/lilliputten/march-tales/releases/tag/v.0.0.41) - 2025.04.15
 

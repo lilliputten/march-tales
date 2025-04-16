@@ -124,6 +124,8 @@ LANGUAGE_CODE = DEFAULT_LANGUAGE
 LANGUAGES_DICT = {lng: name for lng, name in list(LANGUAGES)}
 LANGUAGES_LIST = [lng[0] for lng in list(LANGUAGES)]
 
+LANGUAGE_COOKIE_AGE = 7 * 24 * 60 # Remember a language for a week
+
 # Application definition
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
