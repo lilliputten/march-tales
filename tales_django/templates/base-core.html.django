@@ -90,8 +90,8 @@
   {% endcompress css %}
 
   {% if not settings.LOCAL %}
-  {% include "assets/yandex-metrika/yandex-metrika.django" %}
   {% endif %}
+  {% include "assets/yandex-metrika/yandex-metrika.django" %}
 
   <!-- CSS }}} -->
 </head>

@@ -198,7 +198,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django_minify_html.middleware.MinifyHtmlMiddleware',
+    # @see https://pypi.org/project/django-minify-html/
+    # 'django_minify_html.middleware.MinifyHtmlMiddleware',
+    APP_NAME + '.middleware.ProjectMinifyHtmlMiddleware.ProjectMinifyHtmlMiddleware',
     # @see https://docs.allauth.org/en/latest/installation/quickstart.html
     'allauth.account.middleware.AccountMiddleware',
     # # Html content prettifier (TODO: Requires fixes for invalid html tags formatting)
