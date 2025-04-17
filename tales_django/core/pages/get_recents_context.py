@@ -10,7 +10,7 @@ from tales_django.models import Track
 logger = getDebugLogger()
 
 
-def get_stat_context(request: HttpRequest):
+def get_recents_context(request: HttpRequest):
 
     language = translation.get_language()
 
@@ -40,7 +40,7 @@ def get_stat_context(request: HttpRequest):
         'random_track': random_track,
     }
     debugStr = debugObj(debugData)
-    logger.info(f'get_stat_context\n{debugStr}')
+    logger.info(f'get_recents_context\n{debugStr}')
 
     context = {
         'recent_tracks': recent_tracks_set,
