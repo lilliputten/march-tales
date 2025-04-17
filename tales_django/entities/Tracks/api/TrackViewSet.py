@@ -13,6 +13,7 @@ from rest_framework.request import Request
 from core.helpers.errors import errorToString
 from core.helpers.utils import debugObj
 from core.logging import getDebugLogger
+from tales_django.core.constants.common_constants import data_content_type, default_headers
 from tales_django.core.helpers.check_csrf import check_csrf
 from tales_django.core.model_helpers import get_current_language
 from tales_django.core.pages.get_favorites_list_context import get_user_favorites
@@ -20,7 +21,6 @@ from tales_django.entities.Tracks.models import UserTrack
 from tales_django.entities.Users.models import User
 
 from ..models import Track
-from .common_constants import content_type, default_headers
 from .track_constants import default_tracks_limit, default_tracks_offset
 from .track_filters import get_search_filter_args, get_track_filter_kwargs, get_track_order_args
 from .track_serializers import TrackSerializer
@@ -52,7 +52,7 @@ class TrackViewSet(viewsets.GenericViewSet):
             return JsonResponse(
                 errorDetail,
                 headers=default_headers,
-                content_type=content_type,
+                content_type=data_content_type,
                 status=status.HTTP_403_FORBIDDEN,
             )
 
@@ -61,7 +61,7 @@ class TrackViewSet(viewsets.GenericViewSet):
         instance = self.get_object()
         serializer = TrackSerializer(instance=instance, full=full, context={'request': request})
         result = serializer.data
-        return JsonResponse(result, headers=default_headers, content_type=content_type)
+        return JsonResponse(result, headers=default_headers, content_type=data_content_type)
 
     def list(self, request):
         """
@@ -75,7 +75,7 @@ class TrackViewSet(viewsets.GenericViewSet):
                 return JsonResponse(
                     errorDetail,
                     headers=default_headers,
-                    content_type=content_type,
+                    content_type=data_content_type,
                     status=status.HTTP_403_FORBIDDEN,
                 )
 
@@ -110,7 +110,7 @@ class TrackViewSet(viewsets.GenericViewSet):
             #     'meta':{'api':'SmartTag'}
             # })
 
-            return JsonResponse(result, headers=default_headers, content_type=content_type)
+            return JsonResponse(result, headers=default_headers, content_type=data_content_type)
         except Exception as err:
             sError = errorToString(err)
             sTraceback = str(traceback.format_exc())
@@ -123,7 +123,7 @@ class TrackViewSet(viewsets.GenericViewSet):
             return JsonResponse(
                 errorDetail,
                 headers=default_headers,
-                content_type=content_type,
+                content_type=data_content_type,
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 
@@ -158,7 +158,7 @@ class TrackViewSet(viewsets.GenericViewSet):
             return JsonResponse(
                 errorDetail,
                 headers=default_headers,
-                content_type=content_type,
+                content_type=data_content_type,
                 status=status.HTTP_403_FORBIDDEN,
             )
 
@@ -168,7 +168,7 @@ class TrackViewSet(viewsets.GenericViewSet):
             return JsonResponse(
                 {'details': _('Expected track indices list')},
                 headers=default_headers,
-                content_type=content_type,
+                content_type=data_content_type,
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
@@ -187,7 +187,7 @@ class TrackViewSet(viewsets.GenericViewSet):
             return JsonResponse(
                 errorDetail,
                 headers=default_headers,
-                content_type=content_type,
+                content_type=data_content_type,
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 
@@ -221,7 +221,7 @@ class TrackViewSet(viewsets.GenericViewSet):
             return JsonResponse(
                 result,
                 headers=default_headers,
-                content_type=content_type,
+                content_type=data_content_type,
                 json_dumps_params={'ensure_ascii': True},
             )
 
@@ -237,7 +237,7 @@ class TrackViewSet(viewsets.GenericViewSet):
             return JsonResponse(
                 errorDetail,
                 headers=default_headers,
-                content_type=content_type,
+                content_type=data_content_type,
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 
@@ -263,7 +263,7 @@ class TrackViewSet(viewsets.GenericViewSet):
                 return JsonResponse(
                     errorDetail,
                     headers=default_headers,
-                    content_type=content_type,
+                    content_type=data_content_type,
                     status=status.HTTP_403_FORBIDDEN,
                 )
 
@@ -294,7 +294,7 @@ class TrackViewSet(viewsets.GenericViewSet):
 
             serializer = TrackSerializer(instance=next_track, full=full, context={'request': request})
             result = serializer.data
-            return JsonResponse(result, headers=default_headers, content_type=content_type)
+            return JsonResponse(result, headers=default_headers, content_type=data_content_type)
 
         except Exception as err:
             sError = errorToString(err)
@@ -308,7 +308,7 @@ class TrackViewSet(viewsets.GenericViewSet):
             return JsonResponse(
                 errorDetail,
                 headers=default_headers,
-                content_type=content_type,
+                content_type=data_content_type,
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 
@@ -330,7 +330,7 @@ class TrackViewSet(viewsets.GenericViewSet):
                 return JsonResponse(
                     errorDetail,
                     headers=default_headers,
-                    content_type=content_type,
+                    content_type=data_content_type,
                     status=status.HTTP_403_FORBIDDEN,
                 )
             # Check session or csrf?
@@ -339,7 +339,7 @@ class TrackViewSet(viewsets.GenericViewSet):
                 return JsonResponse(
                     errorDetail,
                     headers=default_headers,
-                    content_type=content_type,
+                    content_type=data_content_type,
                     status=status.HTTP_403_FORBIDDEN,
                 )
 
@@ -352,7 +352,7 @@ class TrackViewSet(viewsets.GenericViewSet):
                 return JsonResponse(
                     errorDetail,
                     headers=default_headers,
-                    content_type=content_type,
+                    content_type=data_content_type,
                     status=status.HTTP_500_INTERNAL_SERVER_ERROR,
                 )
             user_track = user_tracks_list[0]
@@ -401,7 +401,7 @@ class TrackViewSet(viewsets.GenericViewSet):
             return JsonResponse(
                 responseData,
                 headers=default_headers,
-                content_type=content_type,
+                content_type=data_content_type,
                 status=status.HTTP_200_OK,
             )
         except Exception as err:
@@ -416,7 +416,7 @@ class TrackViewSet(viewsets.GenericViewSet):
             return JsonResponse(
                 errorDetail,
                 headers=default_headers,
-                content_type=content_type,
+                content_type=data_content_type,
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 
@@ -443,7 +443,7 @@ class TrackViewSet(viewsets.GenericViewSet):
                 return JsonResponse(
                     errorDetail,
                     headers=default_headers,
-                    content_type=content_type,
+                    content_type=data_content_type,
                     status=status.HTTP_403_FORBIDDEN,
                 )
 
@@ -479,7 +479,7 @@ class TrackViewSet(viewsets.GenericViewSet):
                     return JsonResponse(
                         errorDetail,
                         headers=default_headers,
-                        content_type=content_type,
+                        content_type=data_content_type,
                         status=status.HTTP_500_INTERNAL_SERVER_ERROR,
                     )
                 user_track = user_tracks_list[0]
@@ -502,13 +502,13 @@ class TrackViewSet(viewsets.GenericViewSet):
                 return JsonResponse(
                     serializer.errors,
                     headers=default_headers,
-                    content_type=content_type,
+                    content_type=data_content_type,
                     status=status.HTTP_400_BAD_REQUEST,
                 )
 
             serializer.save()
 
-            return JsonResponse(serializer.data, headers=default_headers, content_type=content_type)
+            return JsonResponse(serializer.data, headers=default_headers, content_type=data_content_type)
         except Exception as err:
             sError = errorToString(err)
             sTraceback = str(traceback.format_exc())
@@ -523,7 +523,7 @@ class TrackViewSet(viewsets.GenericViewSet):
             return JsonResponse(
                 errorDetail,
                 headers=default_headers,
-                content_type=content_type,
+                content_type=data_content_type,
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 
@@ -545,7 +545,7 @@ class TrackViewSet(viewsets.GenericViewSet):
                 return JsonResponse(
                     errorDetail,
                     headers=default_headers,
-                    content_type=content_type,
+                    content_type=data_content_type,
                     status=status.HTTP_403_FORBIDDEN,
                 )
             # Check session or csrf?
@@ -554,7 +554,7 @@ class TrackViewSet(viewsets.GenericViewSet):
                 return JsonResponse(
                     errorDetail,
                     headers=default_headers,
-                    content_type=content_type,
+                    content_type=data_content_type,
                     status=status.HTTP_403_FORBIDDEN,
                 )
 
@@ -567,7 +567,7 @@ class TrackViewSet(viewsets.GenericViewSet):
                 return JsonResponse(
                     errorDetail,
                     headers=default_headers,
-                    content_type=content_type,
+                    content_type=data_content_type,
                     status=status.HTTP_500_INTERNAL_SERVER_ERROR,
                 )
             user_track = user_tracks_list[0]
@@ -596,7 +596,7 @@ class TrackViewSet(viewsets.GenericViewSet):
 
             serializer = UserTrackSerializer(instance=user_track)
             result = serializer.data
-            return JsonResponse(result, headers=default_headers, content_type=content_type)
+            return JsonResponse(result, headers=default_headers, content_type=data_content_type)
         except Exception as err:
             sError = errorToString(err)
             sTraceback = str(traceback.format_exc())
@@ -609,6 +609,6 @@ class TrackViewSet(viewsets.GenericViewSet):
             return JsonResponse(
                 errorDetail,
                 headers=default_headers,
-                content_type=content_type,
+                content_type=data_content_type,
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )

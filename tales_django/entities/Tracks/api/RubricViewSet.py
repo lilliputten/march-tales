@@ -7,6 +7,7 @@ from rest_framework import pagination, status, viewsets
 from core.helpers.errors import errorToString
 from core.helpers.utils import debugObj
 from core.logging import getDebugLogger
+from tales_django.core.constants.common_constants import data_content_type, default_headers
 from tales_django.core.helpers.check_csrf import check_csrf
 from tales_django.core.model_helpers import get_current_language
 
@@ -18,12 +19,6 @@ logger = getDebugLogger()
 
 defaultRubricsLimit = 5
 defaultRubricsOffset = 0
-
-content_type = 'application/json; charset=utf-8'
-default_headers = {
-    # 'Content-Type': content_type,
-}
-
 
 # class DefaultPagination(pagination.LimitOffsetPagination):
 #     default_limit = defaultRubricsLimit
@@ -45,13 +40,13 @@ class RubricViewSet(viewsets.GenericViewSet):
         if not check_csrf(request):
             errorDetail = {'detail': _('Client session not found')}
             return JsonResponse(
-                errorDetail, headers=default_headers, content_type=content_type, status=status.HTTP_403_FORBIDDEN
+                errorDetail, headers=default_headers, content_type=data_content_type, status=status.HTTP_403_FORBIDDEN
             )
 
         instance = self.get_object()
         serializer = RubricSerializer(instance=instance)
         result = serializer.data
-        return JsonResponse(result, headers=default_headers, content_type=content_type)
+        return JsonResponse(result, headers=default_headers, content_type=data_content_type)
 
     def list(self, request):
         """
@@ -63,7 +58,10 @@ class RubricViewSet(viewsets.GenericViewSet):
             if not check_csrf(request):
                 errorDetail = {'detail': _('Client session not found')}
                 return JsonResponse(
-                    errorDetail, headers=default_headers, content_type=content_type, status=status.HTTP_403_FORBIDDEN
+                    errorDetail,
+                    headers=default_headers,
+                    content_type=data_content_type,
+                    status=status.HTTP_403_FORBIDDEN,
                 )
 
             limit = int(request.query_params.get('limit', defaultRubricsLimit))
@@ -82,7 +80,7 @@ class RubricViewSet(viewsets.GenericViewSet):
                 'results': RubricSerializer(subset, many=True).data,
             }
 
-            return JsonResponse(result, headers=default_headers, content_type=content_type)
+            return JsonResponse(result, headers=default_headers, content_type=data_content_type)
         except Exception as err:
             sError = errorToString(err)
             sTraceback = str(traceback.format_exc())
@@ -95,6 +93,6 @@ class RubricViewSet(viewsets.GenericViewSet):
             return JsonResponse(
                 errorDetail,
                 headers=default_headers,
-                content_type=content_type,
+                content_type=data_content_type,
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )

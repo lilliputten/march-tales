@@ -1,12 +1,8 @@
 import traceback
 
-# from django.utils.translation import gettext_lazy as _
 from django.http import JsonResponse
-
-# from django.middleware.csrf import CsrfViewMiddleware
+from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
-
-# from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.request import Request
 
@@ -15,15 +11,10 @@ from core.helpers.errors import errorToString
 from core.helpers.time import getTimeStamp
 from core.helpers.utils import debugObj
 from core.logging import getDebugLogger
-from tales_django.core.helpers.check_csrf import check_csrf
-
-# from rest_framework import views
-# from rest_framework import permissions
-
+from tales_django.core.constants.common_constants import data_content_type
+from tales_django.core.helpers import check_csrf
 
 logger = getDebugLogger()
-
-_ = lambda _: _
 
 
 @csrf_exempt  # Will send json failure response manually
@@ -72,7 +63,7 @@ def check_api_view(request: Request):  # , *args, **kwargs):
             data,
             status=status.HTTP_200_OK,
             json_dumps_params={'ensure_ascii': True},
-            content_type='application/json; charset=utf-8',
+            content_type=data_content_type,
         )
     except Exception as err:
         sError = errorToString(err)
@@ -89,5 +80,5 @@ def check_api_view(request: Request):  # , *args, **kwargs):
             status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             safe=False,
             json_dumps_params={'ensure_ascii': True},
-            content_type='application/json; charset=utf-8',
+            content_type=data_content_type,
         )

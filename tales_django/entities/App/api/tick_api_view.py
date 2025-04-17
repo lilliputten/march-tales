@@ -1,9 +1,8 @@
 import traceback
 
 from django.conf import settings
-
-# from django.utils.translation import gettext_lazy as _
 from django.http import JsonResponse
+from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt, get_token
 from rest_framework import status
 from rest_framework.request import Request
@@ -13,10 +12,9 @@ from core.helpers.errors import errorToString
 from core.helpers.time import getTimeStamp
 from core.helpers.utils import debugObj
 from core.logging import getDebugLogger
+from tales_django.core.constants.common_constants import data_content_type
 
 logger = getDebugLogger()
-
-_ = lambda _: _
 
 
 @csrf_exempt  # CSRF check isn't required here: should answer even for 'clear' requests (with a brand new token)
@@ -32,7 +30,7 @@ def tick_api_view(request: Request):  # , *args, **kwargs):
                 status=status.HTTP_403_FORBIDDEN,
                 safe=False,
                 json_dumps_params={'ensure_ascii': True},
-                content_type='application/json; charset=utf-8',
+                content_type=data_content_type,
             )
 
         user = request.user if request else None
@@ -80,7 +78,7 @@ def tick_api_view(request: Request):  # , *args, **kwargs):
             data,
             status=status.HTTP_200_OK,
             json_dumps_params={'ensure_ascii': True},
-            content_type='application/json; charset=utf-8',
+            content_type=data_content_type,
         )
         # XXX: Test multiple cookies processing
         # response.set_cookie(key='key1', value='value1', max_age=3600)
@@ -101,5 +99,5 @@ def tick_api_view(request: Request):  # , *args, **kwargs):
             status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             safe=False,
             json_dumps_params={'ensure_ascii': True},
-            content_type='application/json; charset=utf-8',
+            content_type=data_content_type,
         )

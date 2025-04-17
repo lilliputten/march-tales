@@ -13,6 +13,7 @@ from core.helpers.errors import errorToString
 from core.helpers.time import getTimeStamp
 from core.helpers.utils import debugObj
 from core.logging import getDebugLogger
+from tales_django.core.constants.common_constants import data_content_type
 
 logger = getDebugLogger()
 
@@ -32,7 +33,7 @@ def logout_api_view(request: Request):  # , *args, **kwargs):
                 status=status.HTTP_403_FORBIDDEN,
                 safe=False,
                 json_dumps_params={'ensure_ascii': True},
-                content_type='application/json; charset=utf-8',
+                content_type=data_content_type,
             )
 
         user = request.user if request else None
@@ -55,7 +56,7 @@ def logout_api_view(request: Request):  # , *args, **kwargs):
                 data,
                 status=status.HTTP_200_OK,
                 json_dumps_params={'ensure_ascii': True},
-                content_type='application/json; charset=utf-8',
+                content_type=data_content_type,
             )
 
         session_key = request.session.session_key if request.session else None
@@ -75,7 +76,7 @@ def logout_api_view(request: Request):  # , *args, **kwargs):
             data,
             status=status.HTTP_200_OK,
             json_dumps_params={'ensure_ascii': True},
-            content_type='application/json; charset=utf-8',
+            content_type=data_content_type,
         )
         return response
     except Exception as err:
@@ -93,5 +94,5 @@ def logout_api_view(request: Request):  # , *args, **kwargs):
             status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             safe=False,
             json_dumps_params={'ensure_ascii': True},
-            content_type='application/json; charset=utf-8',
+            content_type=data_content_type,
         )

@@ -12,6 +12,7 @@ from rest_framework import status
 from core.helpers.errors import errorToString
 from core.helpers.utils import debugObj
 from core.logging import getDebugLogger
+from tales_django.core.constants.common_constants import data_content_type
 from tales_django.core.helpers.check_csrf import check_csrf
 from tales_django.entities.Tracks.api.user_track_serializers import UserTrackSerializer
 from tales_django.entities.Tracks.models import UserTrack
@@ -94,7 +95,7 @@ def sync_user_tracks_api_view(request: WSGIRequest):
                 status=status.HTTP_403_FORBIDDEN,
                 safe=False,
                 json_dumps_params={'ensure_ascii': True},
-                content_type='application/json; charset=utf-8',
+                content_type=data_content_type,
             )
 
         if not check_csrf(request):
@@ -109,7 +110,7 @@ def sync_user_tracks_api_view(request: WSGIRequest):
                 status=status.HTTP_403_FORBIDDEN,
                 safe=False,
                 json_dumps_params={'ensure_ascii': True},
-                content_type='application/json; charset=utf-8',
+                content_type=data_content_type,
             )
 
         data = json.loads(request.body)
@@ -123,7 +124,7 @@ def sync_user_tracks_api_view(request: WSGIRequest):
                 status=status.HTTP_400_BAD_REQUEST,
                 safe=False,
                 json_dumps_params={'ensure_ascii': True},
-                content_type='application/json; charset=utf-8',
+                content_type=data_content_type,
             )
 
         debugData = {
@@ -144,7 +145,7 @@ def sync_user_tracks_api_view(request: WSGIRequest):
             data,
             status=status.HTTP_200_OK,
             json_dumps_params={'ensure_ascii': True},
-            content_type='application/json; charset=utf-8',
+            content_type=data_content_type,
         )
     except Exception as err:
         sError = errorToString(err)
@@ -161,5 +162,5 @@ def sync_user_tracks_api_view(request: WSGIRequest):
             status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             safe=False,
             json_dumps_params={'ensure_ascii': True},
-            content_type='application/json; charset=utf-8',
+            content_type=data_content_type,
         )

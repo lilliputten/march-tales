@@ -9,6 +9,7 @@ from rest_framework.request import Request
 from core.helpers.errors import errorToString
 from core.helpers.utils import debugObj
 from core.logging import getDebugLogger
+from tales_django.core.constants.common_constants import data_content_type
 from tales_django.core.helpers.check_csrf import check_csrf
 from tales_django.core.pages.get_favorites_list_context import get_favorites_ids
 
@@ -27,7 +28,7 @@ def favorites_ids_api_view(request: Request):
                 status=status.HTTP_403_FORBIDDEN,
                 safe=False,
                 json_dumps_params={'ensure_ascii': True},
-                content_type='application/json; charset=utf-8',
+                content_type=data_content_type,
             )
 
         debugData = {
@@ -43,7 +44,7 @@ def favorites_ids_api_view(request: Request):
         # # Check user is_authenticated?
         # if not request.user.is_authenticated:
         #     data = {'detail': _('User in not authenticated')}
-        #     return JsonResponse(data, status=status.HTTP_403_FORBIDDEN, safe=False, json_dumps_params={'ensure_ascii': True}, content_type='application/json; charset=utf-8')
+        #     return JsonResponse(data, status=status.HTTP_403_FORBIDDEN, safe=False, json_dumps_params={'ensure_ascii': True}, content_type=data_content_type)
 
         ids = get_favorites_ids(request)
 
@@ -55,7 +56,7 @@ def favorites_ids_api_view(request: Request):
             data,
             status=status.HTTP_200_OK,
             json_dumps_params={'ensure_ascii': True},
-            content_type='application/json; charset=utf-8',
+            content_type=data_content_type,
         )
     except Exception as err:
         sError = errorToString(err)
@@ -72,5 +73,5 @@ def favorites_ids_api_view(request: Request):
             status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             safe=False,
             json_dumps_params={'ensure_ascii': True},
-            content_type='application/json; charset=utf-8',
+            content_type=data_content_type,
         )
