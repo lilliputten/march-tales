@@ -40,15 +40,15 @@ def recents_api_view(request: Request):  # , *args, **kwargs):
             **get_recents_context(request, serialize=True),
         }
 
-        debugData = {
-            'context': context,
-        }
-        debugStr = debugObj(debugData)
-        logger.info(f'[recents_api_view] get\n{debugStr}')
+        # debugData = {
+        #     'context': context,
+        # }
+        # debugStr = debugObj(debugData)
+        # logger.info(f'[recents_api_view] get\n{debugStr}')
 
         data = {
             **context,
-            **debugData,  # DEBUG: Show debug data
+            # **debugData,  # DEBUG: Show debug data
         }
         response = JsonResponse(
             data,

@@ -30,9 +30,15 @@ def get_recents_context(request: HttpRequest, serialize: bool = False):
 
     most_recent_track = recent_tracks[0] if total_tracks_count else None
 
-    random_idx = random.randrange(0, total_tracks_count)
-    random_track = recent_tracks[random_idx] if total_tracks_count else None
-    # TODO: Ensure that random track isn't the same as the `most_recent_track`
+    random_track: Track
+    # Ensure that random track isn't the same as the `most_recent_track`
+    counter = 0
+    while counter < 5:
+        random_idx = random.randrange(0, total_tracks_count)
+        random_track = recent_tracks[random_idx] if total_tracks_count else None
+        if random_track != most_recent_track:
+            break
+        counter += 1
 
     context = {
         'recent_tracks': recent_tracks_set,
@@ -53,7 +59,7 @@ def get_recents_context(request: HttpRequest, serialize: bool = False):
             'random_track': TrackSerializer(random_track, context=serializer_context).data if random_track else None,
         }
 
-    debugStr = debugObj(context)
-    logger.info(f'get_recents_context\n{debugStr}')
+    # debugStr = debugObj(context)
+    # logger.info(f'get_recents_context\n{debugStr}')
 
     return context
