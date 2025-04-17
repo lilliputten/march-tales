@@ -1,10 +1,18 @@
 <!--
  @since 2025.03.19
- @changed 2025.04.16, 21:22
+ @changed 2025.04.17, 14:19
 -->
 
 # CHANGELOG
 
+
+## [v.0.0.43](https://github.com/lilliputten/march-tales/releases/tag/v.0.0.43) - 2025.04.17
+
+- Added `recents` api method.
+
+See also:
+
+- [Compare with the previous version](https://github.com/lilliputten/march-tales/compare/v.0.0.42...v.0.0.43)
 
 ## [v.0.0.42](https://github.com/lilliputten/march-tales/releases/tag/v.0.0.42) - 2025.04.16
 
@@ -15,7 +23,6 @@ See also:
 
 - [Issue #84: Add yandex metrica counter to the site](https://github.com/lilliputten/march-tales/issues/84)
 - [Compare with the previous version](https://github.com/lilliputten/march-tales/compare/v.0.0.41...v.0.0.42)
-
 
 ## [v.0.0.41](https://github.com/lilliputten/march-tales/releases/tag/v.0.0.41) - 2025.04.15
 

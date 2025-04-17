@@ -5,12 +5,13 @@ from django.utils import translation
 
 from core.helpers.utils import debugObj
 from core.logging import getDebugLogger
+from tales_django.entities.Tracks.api.track_serializers import TrackSerializer
 from tales_django.models import Track
 
 logger = getDebugLogger()
 
 
-def get_recents_context(request: HttpRequest):
+def get_recents_context(request: HttpRequest, serialize: bool = False):
 
     language = translation.get_language()
 
@@ -33,19 +34,26 @@ def get_recents_context(request: HttpRequest):
     random_track = recent_tracks[random_idx] if total_tracks_count else None
     # TODO: Ensure that random track isn't the same as the `most_recent_track`
 
-    debugData = {
-        'recent_tracks': recent_tracks_set,
-        'popular_tracks': popular_tracks_set,
-        'most_recent_track': most_recent_track,
-        'random_track': random_track,
-    }
-    debugStr = debugObj(debugData)
-    logger.info(f'get_recents_context\n{debugStr}')
-
     context = {
         'recent_tracks': recent_tracks_set,
         'popular_tracks': popular_tracks_set,
         'most_recent_track': most_recent_track,
         'random_track': random_track,
     }
+
+    if serialize:
+        # Serialize context data using TrackSerializer
+        serializer_context = {'request': request}
+        context = {
+            'recent_tracks': TrackSerializer(recent_tracks_set, many=True, context=serializer_context).data,
+            'popular_tracks': TrackSerializer(popular_tracks_set, many=True, context=serializer_context).data,
+            'most_recent_track': TrackSerializer(most_recent_track, context=serializer_context).data
+            if most_recent_track
+            else None,
+            'random_track': TrackSerializer(random_track, context=serializer_context).data if random_track else None,
+        }
+
+    debugStr = debugObj(context)
+    logger.info(f'get_recents_context\n{debugStr}')
+
     return context
