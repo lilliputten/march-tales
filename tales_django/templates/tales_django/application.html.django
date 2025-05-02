@@ -45,10 +45,13 @@
 
 </div>
 
-{% if settings.APK_DOWNLOAD_FILE %}
-  <p>
+<p>
+  <a href="https://play.google.com/store/apps/details?id=team.march.march_tales_app" class="btn btn-primary mb-4">
+    {% trans 'Install from the Google Play Store' %}
+  </a>
+  {% if settings.APK_DOWNLOAD_FILE %}
     <a href="/{{ settings.APK_DOWNLOAD_FILE }}" class="btn btn-primary mb-4">
-      {% trans 'Download for Android' %}
+      {% trans 'Download the Android APK here' %}
       <span class="dimmed-info">
         {% if settings.APK_DOWNLOAD_VERSION %}
           v.{{ settings.APK_DOWNLOAD_VERSION }}
@@ -58,29 +61,7 @@
         {% endif %}
       </span>
     </a>
-  </p>
-{% endif %}
-
-{% comment %}
-<h4>{% trans "Download" %}</h4>
-{% if settings.APK_DOWNLOAD_SIZE %}
-  <p>{% blocktrans %}File size:{% endblocktrans %} {{ settings.APK_DOWNLOAD_SIZE|filesizeformat }}.</p>
-{% endif %}
-{% if settings.APK_DOWNLOAD_VERSION %}
-  <p>{% blocktrans %}Actual version is:{% endblocktrans %} {{ settings.APK_DOWNLOAD_VERSION }}.</p>
-{% endif %}
-{% endcomment %}
-
-{% comment %}
-<h2 class="h5 section-title mt-4">{% trans "Tracks List" %}</h2>
-
-{# Show tracks list (crsp context is required) #}
-{% include 'assets/common-blocks/big-tracks-list/big-tracks-list.django' %}
-
-{# Show tracks pagination #}
-{% with count=tracks_count offset=tracks_offset limit=tracks_limit offset_param_name="tracks_offset" %}
-{% include "assets/template-columns/pagination.django" %}
-{% endwith %}
-{% endcomment %}
+  {% endif %}
+</p>
 
 {% endblock main_column_content %}

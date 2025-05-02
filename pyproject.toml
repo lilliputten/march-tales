@@ -43,7 +43,7 @@ django-ckeditor-5 = "^0.2.17"
 
 [tool.poetry.group.dev.dependencies]
 blue = "^0.9.1"
-pyright = "^1.1.399"
+pyright = "^1.1.400"
 poetry-plugin-export = "^1.8.0"
 isort = "^6.0.1"
 

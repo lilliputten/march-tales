@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-02 17:39+0300\n"
+"POT-Creation-Date: 2025-05-02 18:35+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -219,21 +219,6 @@ msgstr "Случайное"
 msgid "Most popular"
 msgstr "Популярное"
 
-#: .\src\assets\template-footer\template-footer-content-detailed.django:14
-#: .\src\assets\template-footer\template-footer-content.django:18
-#: .\src\assets\template-header\template-header.django:15
-#: .\tales_django\templates\base-core.html.django:39
-#: .\tales_django\templates\tales_django\author_details.html.django:17
-#: .\tales_django\templates\tales_django\terms.html.django:24
-#: .\tales_django\templates\tales_django\terms.html.django:26
-#: .\tales_django\templates\tales_django\terms.html.django:33
-#: .\tales_django\templates\tales_django\terms.html.django:34
-#: .\tales_django\templates\tales_django\terms.html.django:148
-#: .\tales_django\templates\tales_django\terms.html.django:153
-#: .\tales_django\templates\tales_django\track_details.html.django:26
-msgid "Site title"
-msgstr "Сказки Мартовского Кота"
-
 #: .\src\assets\template-footer\template-footer-content-detailed.django:24
 #: .\tales_django\templates\tales_django\application.html.django:9
 #: .\tales_django\templates\tales_django\application.html.django:16
@@ -322,17 +307,6 @@ msgstr "Политика конфиденциальности"
 msgid "Terms Conditions"
 msgstr "Пользовательское соглашение"
 
-#: .\src\assets\template-right-blocks\right-about\right-about.django:9
-msgid "Hi, I'm March Cat!"
-msgstr "Привет, я Мартовский Кот!"
-
-#: .\src\assets\template-right-blocks\right-about\right-about.django:12
-msgid "Site description block."
-msgstr ""
-"Я с большим удовольствием занимаюсь озвучиванием сказок. Это мое хобби, "
-"которое позволяет делиться волшебными историями с теми, кто любит мечтать и "
-"погружаться в мир фантазии."
-
 #: .\src\assets\template-right-blocks\right-favorites-list\right-favorites-list-wrapper.django:6
 msgid "Show all favorite tracks"
 msgstr "Все избранные треки"
@@ -358,8 +332,6 @@ msgid "Try the mobile app!"
 msgstr "Слушай на мобильном!"
 
 #: .\src\assets\template-right-blocks\right-mobile-promo\right-mobile-promo.django:14
-#: .\tales_django\templates\tales_django\application.html.django:51
-#: .\tales_django\templates\tales_django\flatpage_application.html.django:30
 msgid "Download for Android"
 msgstr "Скачать для Android"
 
@@ -1064,15 +1036,6 @@ msgstr ""
 msgid "Delete"
 msgstr "Удалить"
 
-#: .\tales_django\templates\base-core.html.django:25
-#: .\tales_django\templates\base-core.html.django:40
-msgid "Site description"
-msgstr "Авторское чтение классических сказок и рассказов"
-
-#: .\tales_django\templates\base-core.html.django:26
-msgid "Site keywords"
-msgstr "Мартовский Кот, Сказки, Истории, Чтение, mp3"
-
 #: .\tales_django\templates\base-core.html.django:135
 msgid "Error loading audio file"
 msgstr "Ошибка при загрузке аудиофайла"
@@ -1421,6 +1384,16 @@ msgstr "Список композиций с плеером."
 msgid "Tracks list without panels during scroll."
 msgstr "Список треков без панелей при прокрутке."
 
+#: .\tales_django\templates\tales_django\application.html.django:50
+#: .\tales_django\templates\tales_django\flatpage_application.html.django:43
+msgid "Install from the Google Play Store"
+msgstr "Установить из магазина приложений Google Play Store"
+
+#: .\tales_django\templates\tales_django\application.html.django:54
+#: .\tales_django\templates\tales_django\flatpage_application.html.django:49
+msgid "Download the Android APK here"
+msgstr "Скачать файл для Android здесь"
+
 #: .\tales_django\templates\tales_django\author_details.html.django:49
 #: .\tales_django\templates\tales_django\cookies-agreement.html.django:33
 #: .\tales_django\templates\tales_django\rubric_details.html.django:39
@@ -1443,6 +1416,10 @@ msgstr "Соглашение об использовании файлов cookie
 #: .\tales_django\templates\tales_django\index.html.django:30
 msgid "Tracks list"
 msgstr "Список треков"
+
+#: .\tales_django\templates\tales_django\flatpage_application.html.django:31
+msgid "Current version:"
+msgstr "Текущая версия:"
 
 #: .\tales_django\templates\tales_django\logged_out.html.django:11
 #: .\tales_django\templates\tales_django\logged_out.html.django:21
@@ -1479,6 +1456,24 @@ msgstr "Список меток"
 #: .\tales_django\templates\tales_django\terms.html.django:14
 msgid "Terms and conditions"
 msgstr "Пользовательское соглашение"
+
+#~ msgid "Site title"
+#~ msgstr "Сказки Мартовского Кота"
+
+#~ msgid "Hi, I'm March Cat!"
+#~ msgstr "Привет, я Мартовский Кот!"
+
+#~ msgid "Site description block."
+#~ msgstr ""
+#~ "Я с большим удовольствием занимаюсь озвучиванием сказок. Это мое хобби, "
+#~ "которое позволяет делиться волшебными историями с теми, кто любит мечтать "
+#~ "и погружаться в мир фантазии."
+
+#~ msgid "Site description"
+#~ msgstr "Авторское чтение классических сказок и рассказов"
+
+#~ msgid "Site keywords"
+#~ msgstr "Мартовский Кот, Сказки, Истории, Чтение, mp3"
 
 #~ msgid "name"
 #~ msgstr "имя"
