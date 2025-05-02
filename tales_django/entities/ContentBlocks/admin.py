@@ -32,6 +32,16 @@ def make_rich_block(modeladmin, request, queryset):
     queryset.update(type=ContentBlocks.RICH_BLOCK)
 
 
+@admin.action(description=_('Active'))
+def active_action(modeladmin, request, queryset):
+    queryset.update(active=True)
+
+
+@admin.action(description=_('Inctive'))
+def no_active_action(modeladmin, request, queryset):
+    queryset.update(active=False)
+
+
 @admin.register(ContentBlocks, site=unfold_admin_site)
 class ContentBlocksAdmin(
     TranslatedFieldAdmin,
@@ -40,6 +50,8 @@ class ContentBlocksAdmin(
     UnfoldModelAdmin,
 ):
     actions = [
+        active_action,
+        no_active_action,
         make_string,
         make_block,
         make_rich_block,
@@ -55,6 +67,7 @@ class ContentBlocksAdmin(
                 'fields': [
                     'name',
                     'type',
+                    'active',
                 ],
             },
         ),
@@ -80,6 +93,7 @@ class ContentBlocksAdmin(
     list_display = [
         'name',
         'content_short',
+        'active',
         'type',
         'updated_at',
     ]
@@ -95,6 +109,7 @@ class ContentBlocksAdmin(
 
     list_filter = [
         'type',
+        'active',
         'created_at',
         'updated_at',
     ]

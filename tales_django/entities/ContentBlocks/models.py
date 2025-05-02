@@ -22,6 +22,9 @@ class ContentBlocks(models.Model):
     type = models.CharField(_('Type'), choices=TYPE, max_length=16, blank=False, default=STRING)
 
     name = models.CharField(_('Name'), max_length=100)
+
+    active = models.BooleanField(_('Active'), default=True, help_text=_('Use this value'))
+
     content = TranslatedField(
         CKEditor5Field(
             _('Content'),

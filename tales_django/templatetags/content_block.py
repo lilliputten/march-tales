@@ -24,7 +24,7 @@ def content_block(name: str, default: str = ''):
     try:
         if name:
             block = ContentBlocks.objects.filter(name=name).first()
-            if block is not None:
+            if block is not None and block.active:
                 content = block.content
                 if block.type != ContentBlocks.RICH_BLOCK:
                     content = remove_html_tags(content)

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-02 18:35+0300\n"
+"POT-Creation-Date: 2025-05-02 18:46+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -285,7 +285,7 @@ msgid "Project"
 msgstr "Проект"
 
 #: .\src\assets\template-footer\template-footer-content-detailed.django:48
-#: .\src\assets\template-right-blocks\right-about\right-about.django:16
+#: .\src\assets\template-right-blocks\right-about\right-about.django:17
 #: .\tales_django\templates\tales_django\about.html.django:9
 #: .\tales_django\templates\tales_django\about.html.django:16
 #: .\tales_django\templates\tales_django\about.html.django:20
@@ -412,26 +412,35 @@ msgstr "Сделать блоком"
 msgid "Make rich block"
 msgstr "СДелать блоком с разметкой"
 
-#: .\tales_django\entities\ContentBlocks\admin.py:52
+#: .\tales_django\entities\ContentBlocks\admin.py:35
+#: .\tales_django\entities\ContentBlocks\models.py:26
+msgid "Active"
+msgstr "Активно"
+
+#: .\tales_django\entities\ContentBlocks\admin.py:40
+msgid "Inctive"
+msgstr "Не активно"
+
+#: .\tales_django\entities\ContentBlocks\admin.py:64
 #: .\tales_django\entities\flatpages\admin\FlatPageAdmin.py:35
 msgid "Basic Settings"
 msgstr "Основные параметры"
 
-#: .\tales_django\entities\ContentBlocks\admin.py:62
-#: .\tales_django\entities\ContentBlocks\models.py:27
+#: .\tales_django\entities\ContentBlocks\admin.py:75
+#: .\tales_django\entities\ContentBlocks\models.py:30
 #: .\tales_django\entities\flatpages\admin\FlatPageAdmin.py:52
 #: .\tales_django\settings.py:426
 msgid "Content"
 msgstr "Контент"
 
-#: .\tales_django\entities\ContentBlocks\admin.py:69
+#: .\tales_django\entities\ContentBlocks\admin.py:82
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:149
 #: .\tales_django\entities\Tracks\admin\UserTrackAdmin.py:56
 #: .\tales_django\entities\flatpages\admin\FlatPageAdmin.py:69
 msgid "Information"
 msgstr "Информация"
 
-#: .\tales_django\entities\ContentBlocks\admin.py:114
+#: .\tales_django\entities\ContentBlocks\admin.py:129
 msgid "content"
 msgstr "Контент"
 
@@ -457,11 +466,15 @@ msgstr "Тип"
 msgid "Name"
 msgstr "Имя"
 
-#: .\tales_django\entities\ContentBlocks\models.py:34
+#: .\tales_django\entities\ContentBlocks\models.py:26
+msgid "Use this value"
+msgstr "Исопльзовать значение"
+
+#: .\tales_django\entities\ContentBlocks\models.py:37
 msgid "Created at"
 msgstr "Дата создания"
 
-#: .\tales_django\entities\ContentBlocks\models.py:35
+#: .\tales_django\entities\ContentBlocks\models.py:38
 #: .\tales_django\entities\Tracks\models\Author.py:63
 #: .\tales_django\entities\Tracks\models\Rubric.py:31
 #: .\tales_django\entities\Tracks\models\Tag.py:31
@@ -471,11 +484,11 @@ msgstr "Дата создания"
 msgid "Updated at"
 msgstr "Дата обновления"
 
-#: .\tales_django\entities\ContentBlocks\models.py:38
+#: .\tales_django\entities\ContentBlocks\models.py:41
 msgid "content block"
 msgstr "блок контета"
 
-#: .\tales_django\entities\ContentBlocks\models.py:39
+#: .\tales_django\entities\ContentBlocks\models.py:42
 msgid "content blocks"
 msgstr "блоки контета"
 
@@ -1392,7 +1405,7 @@ msgstr "Установить из магазина приложений Google P
 #: .\tales_django\templates\tales_django\application.html.django:54
 #: .\tales_django\templates\tales_django\flatpage_application.html.django:49
 msgid "Download the Android APK here"
-msgstr "Скачать файл для Android здесь"
+msgstr "Скачать apk файл для Android здесь"
 
 #: .\tales_django\templates\tales_django\author_details.html.django:49
 #: .\tales_django\templates\tales_django\cookies-agreement.html.django:33
