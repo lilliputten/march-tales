@@ -7,6 +7,7 @@ from translated_fields import TranslatedFieldAdmin
 from unfold.admin import ModelAdmin as UnfoldModelAdmin
 from unfold.contrib.import_export.forms import ExportForm, ImportForm
 
+from tales_django.core.model_helpers import localized_field_names
 from tales_django.sites import unfold_admin_site
 
 from ..forms import FlatPageForm
@@ -44,20 +45,14 @@ class FlatPageAdmin(
             _('Title'),
             {
                 'classes': ['columns'],
-                'fields': (
-                    'page_title_ru',
-                    'page_title_en',
-                ),
+                'fields': localized_field_names('page_title'),
             },
         ),
         (
             _('Content'),
             {
                 'classes': ['columns'],
-                'fields': (
-                    'page_content_ru',
-                    'page_content_en',
-                ),
+                'fields': localized_field_names('page_content'),
             },
         ),
         (
@@ -93,8 +88,7 @@ class FlatPageAdmin(
     )
     search_fields = [
         'url',
-        'page_title_en',
-        'page_title_ru',
+        *localized_field_names('page_title'),
     ]
 
     def title_translated(self, track):

@@ -63,8 +63,12 @@ def get_recents_context(request: HttpRequest, serialize: bool = False):
         # Serialize context data using TrackSerializer
         context['recent_tracks'] = TrackSerializer(recent_tracks_set, many=True, context=serializer_context).data
         context['popular_tracks'] = TrackSerializer(popular_tracks_set, many=True, context=serializer_context).data
-        context['most_recent_track'] = TrackSerializer(most_recent_track, context=serializer_context).data if most_recent_track else None
-        context['random_track'] = TrackSerializer(random_track, context=serializer_context).data if random_track else None
+        context['most_recent_track'] = (
+            TrackSerializer(most_recent_track, context=serializer_context).data if most_recent_track else None
+        )
+        context['random_track'] = (
+            TrackSerializer(random_track, context=serializer_context).data if random_track else None
+        )
 
     # debugStr = debugObj(context)
     # logger.info(f'get_recents_context\n{debugStr}')

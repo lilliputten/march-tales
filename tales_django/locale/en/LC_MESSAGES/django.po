@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-17 14:15+0300\n"
+"POT-Creation-Date: 2025-05-02 17:39+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -110,7 +110,7 @@ msgstr ""
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:242
 #: .\tales_django\entities\Tracks\models\Tag.py:15
 #: .\tales_django\entities\Tracks\models\Track.py:72
-#: .\tales_django\settings.py:446
+#: .\tales_django\settings.py:448
 #: .\tales_django\templates\tales_django\tag_details.html.django:21
 #: .\tales_django\templates\tales_django\tag_index.html.django:20
 msgid "Tags"
@@ -215,7 +215,6 @@ msgstr ""
 #: .\src\assets\template-footer\template-footer-content-detailed.django:14
 #: .\src\assets\template-footer\template-footer-content.django:18
 #: .\src\assets\template-header\template-header.django:15
-#: .\tales_django\templates\base-core.html.django:24
 #: .\tales_django\templates\base-core.html.django:39
 #: .\tales_django\templates\tales_django\author_details.html.django:17
 #: .\tales_django\templates\tales_django\terms.html.django:24
@@ -263,7 +262,7 @@ msgstr ""
 #: .\src\assets\template-footer\template-footer-content-detailed.django:39
 #: .\tales_django\entities\Tracks\models\Track.py:32
 #: .\tales_django\entities\Users\admin\UserAdmin.py:56
-#: .\tales_django\settings.py:429
+#: .\tales_django\settings.py:431
 #: .\tales_django\templates\tales_django\favorites.html.django:37
 #: .\tales_django\templates\tales_django\track_details.html.django:47
 msgid "Tracks"
@@ -272,7 +271,7 @@ msgstr ""
 #: .\src\assets\template-footer\template-footer-content-detailed.django:40
 #: .\src\assets\template-right-blocks\right-authors-list\right-authors-list.django:15
 #: .\tales_django\entities\Tracks\models\Author.py:27
-#: .\tales_django\settings.py:436
+#: .\tales_django\settings.py:438
 #: .\tales_django\templates\tales_django\author_details.html.django:36
 #: .\tales_django\templates\tales_django\author_index.html.django:20
 msgid "Authors"
@@ -283,7 +282,7 @@ msgstr ""
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:248
 #: .\tales_django\entities\Tracks\models\Rubric.py:15
 #: .\tales_django\entities\Tracks\models\Track.py:75
-#: .\tales_django\settings.py:441
+#: .\tales_django\settings.py:443
 #: .\tales_django\templates\tales_django\rubric_details.html.django:21
 #: .\tales_django\templates\tales_django\rubric_index.html.django:20
 msgid "Rubrics"
@@ -426,6 +425,85 @@ msgstr ""
 msgid "Site administration"
 msgstr "Listen to classic fairy tales online"
 
+#: .\tales_django\entities\ContentBlocks\admin.py:20
+msgid "Make string"
+msgstr ""
+
+#: .\tales_django\entities\ContentBlocks\admin.py:25
+msgid "Make block"
+msgstr ""
+
+#: .\tales_django\entities\ContentBlocks\admin.py:30
+msgid "Make rich block"
+msgstr ""
+
+#: .\tales_django\entities\ContentBlocks\admin.py:52
+#: .\tales_django\entities\flatpages\admin\FlatPageAdmin.py:35
+msgid "Basic Settings"
+msgstr ""
+
+#: .\tales_django\entities\ContentBlocks\admin.py:62
+#: .\tales_django\entities\ContentBlocks\models.py:27
+#: .\tales_django\entities\flatpages\admin\FlatPageAdmin.py:52
+#: .\tales_django\settings.py:426
+msgid "Content"
+msgstr ""
+
+#: .\tales_django\entities\ContentBlocks\admin.py:69
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:149
+#: .\tales_django\entities\Tracks\admin\UserTrackAdmin.py:56
+#: .\tales_django\entities\flatpages\admin\FlatPageAdmin.py:69
+msgid "Information"
+msgstr ""
+
+#: .\tales_django\entities\ContentBlocks\admin.py:114
+msgid "content"
+msgstr ""
+
+#: .\tales_django\entities\ContentBlocks\models.py:18
+msgid "String"
+msgstr ""
+
+#: .\tales_django\entities\ContentBlocks\models.py:19
+msgid "Block"
+msgstr ""
+
+#: .\tales_django\entities\ContentBlocks\models.py:20
+msgid "Rich block"
+msgstr ""
+
+#: .\tales_django\entities\ContentBlocks\models.py:22
+msgid "Type"
+msgstr ""
+
+#: .\tales_django\entities\ContentBlocks\models.py:24
+#: .\tales_django\entities\Tracks\admin\AuthorAdmin.py:67
+#: .\tales_django\entities\Tracks\models\Author.py:30
+msgid "Name"
+msgstr ""
+
+#: .\tales_django\entities\ContentBlocks\models.py:34
+msgid "Created at"
+msgstr ""
+
+#: .\tales_django\entities\ContentBlocks\models.py:35
+#: .\tales_django\entities\Tracks\models\Author.py:63
+#: .\tales_django\entities\Tracks\models\Rubric.py:31
+#: .\tales_django\entities\Tracks\models\Tag.py:31
+#: .\tales_django\entities\Tracks\models\Track.py:168
+#: .\tales_django\entities\Tracks\models\UserTrack.py:55
+#: .\tales_django\entities\flatpages\models\FlatPage.py:42
+msgid "Updated at"
+msgstr ""
+
+#: .\tales_django\entities\ContentBlocks\models.py:38
+msgid "content block"
+msgstr ""
+
+#: .\tales_django\entities\ContentBlocks\models.py:39
+msgid "content blocks"
+msgstr ""
+
 #: .\tales_django\entities\Membership\models\Membership.py:14
 msgid "membership"
 msgstr ""
@@ -450,11 +528,6 @@ msgstr ""
 #: .\tales_django\entities\Tracks\admin\TagAdmin.py:21
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:66
 msgid "No promote"
-msgstr ""
-
-#: .\tales_django\entities\Tracks\admin\AuthorAdmin.py:67
-#: .\tales_django\entities\Tracks\models\Author.py:30
-msgid "Name"
 msgstr ""
 
 #: .\tales_django\entities\Tracks\admin\AuthorAdmin.py:74
@@ -502,8 +575,8 @@ msgstr ""
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:84
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:275
 #: .\tales_django\entities\Tracks\models\Track.py:36
-#: .\tales_django\entities\flatpages\admin\FlatPageAdmin.py:44
-#: .\tales_django\entities\flatpages\admin\FlatPageAdmin.py:104
+#: .\tales_django\entities\flatpages\admin\FlatPageAdmin.py:45
+#: .\tales_django\entities\flatpages\admin\FlatPageAdmin.py:98
 #, fuzzy
 #| msgid "Site title"
 msgid "Title"
@@ -532,12 +605,6 @@ msgstr ""
 
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:137
 msgid "Publication"
-msgstr ""
-
-#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:149
-#: .\tales_django\entities\Tracks\admin\UserTrackAdmin.py:56
-#: .\tales_django\entities\flatpages\admin\FlatPageAdmin.py:74
-msgid "Information"
 msgstr ""
 
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:235
@@ -630,15 +697,6 @@ msgstr ""
 #: .\tales_django\entities\Tracks\models\Tag.py:28
 #: .\tales_django\entities\Tracks\models\Track.py:151
 msgid "Promote on the main page"
-msgstr ""
-
-#: .\tales_django\entities\Tracks\models\Author.py:63
-#: .\tales_django\entities\Tracks\models\Rubric.py:31
-#: .\tales_django\entities\Tracks\models\Tag.py:31
-#: .\tales_django\entities\Tracks\models\Track.py:168
-#: .\tales_django\entities\Tracks\models\UserTrack.py:55
-#: .\tales_django\entities\flatpages\models\FlatPage.py:42
-msgid "Updated at"
 msgstr ""
 
 #: .\tales_django\entities\Tracks\models\Rubric.py:14
@@ -774,7 +832,7 @@ msgid "Group"
 msgstr ""
 
 #: .\tales_django\entities\Users\admin\GroupAdmin.py:23
-#: .\tales_django\settings.py:486
+#: .\tales_django\settings.py:494
 msgid "Groups"
 msgstr ""
 
@@ -831,16 +889,7 @@ msgstr ""
 msgid "Receive notifications via email and in the mobile application"
 msgstr ""
 
-#: .\tales_django\entities\flatpages\admin\FlatPageAdmin.py:34
-msgid "Basic Settings"
-msgstr ""
-
-#: .\tales_django\entities\flatpages\admin\FlatPageAdmin.py:54
-#: .\tales_django\settings.py:424
-msgid "Content"
-msgstr ""
-
-#: .\tales_django\entities\flatpages\admin\FlatPageAdmin.py:64
+#: .\tales_django\entities\flatpages\admin\FlatPageAdmin.py:59
 msgid "Advanced options"
 msgstr ""
 
@@ -849,7 +898,7 @@ msgid "Flat page"
 msgstr ""
 
 #: .\tales_django\entities\flatpages\models\FlatPage.py:22
-#: .\tales_django\settings.py:465
+#: .\tales_django\settings.py:467
 msgid "Flat pages"
 msgstr ""
 
@@ -863,33 +912,37 @@ msgstr "The March Cat Tales"
 msgid "Page content"
 msgstr ""
 
-#: .\tales_django\settings.py:405 .\tales_django\settings.py:406
+#: .\tales_django\settings.py:407 .\tales_django\settings.py:408
 #, fuzzy
 #| msgid "Site description"
 msgid "Administration"
 msgstr "Listen to classic fairy tales online"
 
-#: .\tales_django\settings.py:453
+#: .\tales_django\settings.py:455
 msgid "Manage"
 msgstr ""
 
-#: .\tales_django\settings.py:458
+#: .\tales_django\settings.py:460
 msgid "Dashboard"
 msgstr ""
 
-#: .\tales_django\settings.py:471
+#: .\tales_django\settings.py:473
+msgid "Content blocks"
+msgstr ""
+
+#: .\tales_django\settings.py:479
 msgid "Sites"
 msgstr ""
 
-#: .\tales_django\settings.py:476
+#: .\tales_django\settings.py:484
 msgid "Users"
 msgstr ""
 
-#: .\tales_django\settings.py:481
+#: .\tales_django\settings.py:489
 msgid "User tracks"
 msgstr ""
 
-#: .\tales_django\settings.py:497
+#: .\tales_django\settings.py:505
 msgid "Open site"
 msgstr ""
 
