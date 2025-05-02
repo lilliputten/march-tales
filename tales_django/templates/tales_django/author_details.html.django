@@ -14,7 +14,7 @@
   {# Opengraph tags #}
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="{{ LANGUAGE_CODE }}" />
-  <meta property="og:title" content="{{ author.name }} — {% trans 'Site title' %}" />
+  <meta property="og:title" content="{{ author.name }} — {% content_block 'Site title' 'Site title' %}" />
   <meta property="og:description" content="{{ author.short_description|markdownify|striptags }}" />
   <meta property="og:url" content="{{ request.build_absolute_uri }}" />
   <meta property="og:logo" content="{{request.scheme}}://{{request.get_host}}{% static 'images/march-cat/march-cat-sq-256.jpg' %}" />
