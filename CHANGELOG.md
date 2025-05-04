@@ -1,10 +1,19 @@
 <!--
  @since 2025.03.19
- @changed 2025.04.17, 14:19
+ @changed 2025.05.02 18:54
 -->
 
 # CHANGELOG
 
+
+## [v.0.0.44](https://github.com/lilliputten/march-tales/releases/tag/v.0.0.44) - 2025.05.02
+
+- Added content blocks model, admin panel & tag, some  content blocks. Updated application page (added google play download link).
+
+See also:
+
+- [Issue #86: Add ability to maintain user content blocks and strings](https://github.com/lilliputten/march-tales/issues/86)
+- [Compare with the previous version](https://github.com/lilliputten/march-tales/compare/v.0.0.43...v.0.0.44)
 
 ## [v.0.0.43](https://github.com/lilliputten/march-tales/releases/tag/v.0.0.43) - 2025.04.17
 
