@@ -6,10 +6,16 @@
 
 <!-- About -->
 <div class="right-about widget widget-about active-link">
-  <h4 class="font-supertitle mt-2 mb-4">{% trans "Hi, I'm March Cat!" %}</h4>
+  {% content_block 'Greeting title' as greeting_title %}
+  {% if greeting_title %}
+    <h4 class="font-supertitle mt-2 mb-4">{{ greeting_title }}</h4>
+  {% endif %}
   {% static "images/march-cat/march-cat-sq-180.jpg" as imgpath %}
   {% lqip_media_img_tag className="img-fluid lazy-load" url=imgpath thumb=imgpath|thumb_image_name %}
-  <p>{% blocktranslate %}Site description block.{% endblocktranslate %}</p>
+  {% content_block 'Greeting text' as greeting_text %}
+  {% if greeting_text %}
+    <p>{{ greeting_text}}</p>
+  {% endif %}
   <ul class="list-inline social-icons mb-3">
     {% include 'assets/common-blocks/social-links/social-links.django' %}
   </ul>

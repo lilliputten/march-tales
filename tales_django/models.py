@@ -1,3 +1,4 @@
+from .entities.ContentBlocks.models import ContentBlocks
 from .entities.flatpages.models import FlatPage
 from .entities.Membership.models import Membership
 from .entities.Users.models import User
@@ -7,12 +8,13 @@ from .entities.Users.models import User
 from .entities.Tracks.models import Track, Tag, Rubric, Author, UserTrack  # isort:skip
 
 __all__ = [
-    'FlatPage',
-    'User',
-    'Membership',
-    'Track',
-    'Tag',
-    'Rubric',
     'Author',
+    'ContentBlocks',
+    'FlatPage',
+    'Membership',
+    'Rubric',
+    'Tag',
+    'Track',
+    'User',
     'UserTrack',
 ]

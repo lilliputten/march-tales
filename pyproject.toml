@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "march-tales"
-version = "0.0.43"
+version = "0.0.44"
 description = "March Tales django rest api and web frontend server"
 authors = ["lilliputten <lilliputten@gmail.com>"]
 readme = "README.md"
@@ -43,7 +43,7 @@ django-ckeditor-5 = "^0.2.17"
 
 [tool.poetry.group.dev.dependencies]
 blue = "^0.9.1"
-pyright = "^1.1.399"
+pyright = "^1.1.400"
 poetry-plugin-export = "^1.8.0"
 isort = "^6.0.1"
 

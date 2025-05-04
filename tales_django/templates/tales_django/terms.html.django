@@ -21,17 +21,17 @@
     {% if LANGUAGE_CODE == 'ru' %}
 
       <h2 id="1">Общие положения</h2>
-        <p id="1.1">Настоящее Пользовательское соглашение (далее – Соглашение) относится к сайту «{% trans 'Site title' %}», расположенному по адресу <a href="https://{{ settings.DEFAULT_HOST }}/">{{ settings.DEFAULT_HOST }}</a>.</p>
-        {# <li id="1.2">Сайт «{% trans 'Site title' %}» (далее – Сайт) является собственностью юридического лица ОРГАНИЗАЦИЯ (ОГРН: НОМЕР, ИНН: НОМЕР, адрес регистрации: ЮР.АДРЕС)</li> #}
-        <p id="1.3">Настоящее Соглашение регулирует отношения между Администрацией сайта «{% trans 'Site title' %}» (далее – Администрация сайта) и Пользователем данного Сайта.</p>
+        <p id="1.1">Настоящее Пользовательское соглашение (далее – Соглашение) относится к сайту «{% content_block 'Site title' 'Site title' %}», расположенному по адресу <a href="https://{{ settings.DEFAULT_HOST }}/">{{ settings.DEFAULT_HOST }}</a>.</p>
+        {# <li id="1.2">Сайт «{% content_block 'Site title' 'Site title' %}» (далее – Сайт) является собственностью юридического лица ОРГАНИЗАЦИЯ (ОГРН: НОМЕР, ИНН: НОМЕР, адрес регистрации: ЮР.АДРЕС)</li> #}
+        <p id="1.3">Настоящее Соглашение регулирует отношения между Администрацией сайта «{% content_block 'Site title' 'Site title' %}» (далее – Администрация сайта) и Пользователем данного Сайта.</p>
         <p id="1.4">Администрация сайта оставляет за собой право в любое время изменять, добавлять или удалять пункты настоящего Соглашения без уведомления Пользователя.</p>
         <p id="1.5">Использование Сайта Пользователем означает принятие Соглашения и изменений, внесенных в настоящее Соглашение.</p>
         <p id="1.6">Пользователь несет персональную ответственность за проверку настоящего Соглашения на наличие изменений в нем.</p>
       <h2 id="2">Определения терминов</h2>
         <p id="2.1">Перечисленные ниже термины имеют для целей настоящего Соглашения следующее значение:</p>
           <ul>
-            <li id="2.1.1">«{% trans 'Site title' %}» – Интернет-ресурс, расположенный на доменном имени <a href="https://{{ settings.DEFAULT_HOST }}/">{{ settings.DEFAULT_HOST }}</a>, осуществляющий свою деятельность посредством Интернет-ресурса и сопутствующих ему сервисов (далее - Сайт).</li>
-            <li id="2.1.2">«{% trans 'Site title' %}» – сайт, содержащий информацию о Товарах и/или Услугах и/или Иных ценностях для пользователя, Продавце и/или Исполнителе услуг, позволяющий осуществить выбор, заказ и (или) приобретение Товара, и/или получение услуги.</li>
+            <li id="2.1.1">«{% content_block 'Site title' 'Site title' %}» – Интернет-ресурс, расположенный на доменном имени <a href="https://{{ settings.DEFAULT_HOST }}/">{{ settings.DEFAULT_HOST }}</a>, осуществляющий свою деятельность посредством Интернет-ресурса и сопутствующих ему сервисов (далее - Сайт).</li>
+            <li id="2.1.2">«{% content_block 'Site title' 'Site title' %}» – сайт, содержащий информацию о Товарах и/или Услугах и/или Иных ценностях для пользователя, Продавце и/или Исполнителе услуг, позволяющий осуществить выбор, заказ и (или) приобретение Товара, и/или получение услуги.</li>
             <li id="2.1.3">Администрация сайта – уполномоченные сотрудники на управления Сайтом, действующие от имени юридического лица ОРГАНИЗАЦИЯ.</li>
             <li id="2.1.4">Пользователь сайта (далее - Пользователь) – лицо, имеющее доступ к Сайту, посредством сети Интернет и использующее Сайт.</li>
             <li id="2.1.5">Содержание сайта (далее – Содержание) - охраняемые результаты интеллектуальной деятельности, включая тексты литературных произведений, их названия, предисловия, аннотации, статьи, иллюстрации, обложки, музыкальные произведения с текстом или без текста, графические, текстовые, фотографические, производные, составные и иные произведения, пользовательские интерфейсы, визуальные интерфейсы, названия товарных знаков, логотипы, программы для ЭВМ, базы данных, а также дизайн, структура, выбор, координация, внешний вид, общий стиль и расположение данного Содержания, входящего в состав Сайта и другие объекты интеллектуальной собственности все вместе и/или по отдельности, содержащиеся на сайте <a href="https://{{ settings.DEFAULT_HOST }}/">{{ settings.DEFAULT_HOST }}</a>.</li>
@@ -143,12 +143,12 @@
           <ul>
             <li><strong>Affiliate</strong> means an entity that controls, is controlled by or is under common control with a party, where "control" means ownership of 50% or more of the shares, equity interest or other securities entitled to vote for election of directors or other managing authority.</li>
             <li><strong>Country</strong> refers to: Russia</li>
-            <li><strong>Company</strong> (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to {% trans 'Site title' %}.</li>
+            <li><strong>Company</strong> (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to {% content_block 'Site title' 'Site title' %}.</li>
             <li><strong>Device</strong> means any device that can access the Service such as a computer, a cellphone or a digital tablet.</li>
             <li><strong>Service</strong> refers to the Website.</li>
             <li><strong>Terms and Conditions</strong> (also referred as "Terms") mean these Terms and Conditions that form the entire agreement between You and the Company regarding the use of the Service.</li>
             <li><strong>Third-party Social Media Service</strong> means any services or content (including data, information, products or services) provided by a third-party that may be displayed, included or made available by the Service.</li>
-            <li><strong>Website</strong> refers to {% trans 'Site title' %}, accessible from <a href="https://{{ settings.DEFAULT_HOST }}/" rel="external nofollow noopener" target="_blank">{{ settings.DEFAULT_HOST }}</a>.</li>
+            <li><strong>Website</strong> refers to {% content_block 'Site title' 'Site title' %}, accessible from <a href="https://{{ settings.DEFAULT_HOST }}/" rel="external nofollow noopener" target="_blank">{{ settings.DEFAULT_HOST }}</a>.</li>
             <li><strong>You</strong> means the individual accessing or using the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.</li>
           </ul>
       <h2>Acknowledgment</h2>

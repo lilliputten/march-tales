@@ -11,7 +11,7 @@
           {% lqip_media_img_tag className="img-fluid rounded-circle lazy-load" url=imgpath thumb=imgpath|thumb_image_name %}
         </span>
         <span class="text">
-          {% trans 'Site title' %}
+          {% content_block 'Site title' 'Site title' %}
         </span>
       </a>
     </div>

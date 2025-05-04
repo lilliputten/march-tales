@@ -24,19 +24,37 @@
 {% block flatpage_after %}
 <hr />
 
+<div class="text-content">
+
 {% if settings.APK_DOWNLOAD_FILE %}
   <p>
-    <a href="/{{ settings.APK_DOWNLOAD_FILE }}" class="btn btn-primary mb-4">
-      {% trans 'Download for Android' %}
-      <span class="dimmed-info">
-        {% if settings.APK_DOWNLOAD_VERSION %}
-          v.{{ settings.APK_DOWNLOAD_VERSION }}
-        {% endif %}
-        {% if settings.APK_DOWNLOAD_SIZE %}
-          {{ settings.APK_DOWNLOAD_SIZE|filesizeformat }}
-        {% endif %}
-      </span>
-    </a>
+    {% trans 'Current version:' %}
+    <strong>
+      {% if settings.APK_DOWNLOAD_VERSION %}
+        v.{{ settings.APK_DOWNLOAD_VERSION }}
+      {% endif %}
+    </strong>
   </p>
 {% endif %}
+
+<ul>
+  <li>
+    <a href="https://play.google.com/store/apps/details?id=team.march.march_tales_app">
+      {% trans 'Install from the Google Play Store' %}
+    </a>
+  </li>
+  {% if settings.APK_DOWNLOAD_FILE %}
+    <li>
+      <a href="/{{ settings.APK_DOWNLOAD_FILE }}">
+        {% trans 'Download the Android APK here' %}
+        {% if settings.APK_DOWNLOAD_SIZE %}
+          ({{ settings.APK_DOWNLOAD_SIZE|filesizeformat }})
+        {% endif %}
+      </a>
+    </li>
+  {% endif %}
+</ul>
+
+</div>
+
 {% endblock flatpage_after %}

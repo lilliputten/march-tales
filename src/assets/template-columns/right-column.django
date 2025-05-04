@@ -2,9 +2,18 @@
 {% load static %}
 {% load i18n %}
 
+{% if request.path != '/about/' %}
 {% include 'assets/template-right-blocks/right-about/right-about.django' %}
+{% endif %}
+
 {% include 'assets/template-right-blocks/right-search/right-search.django' %}
-{% comment %} {% include 'assets/template-right-blocks/right-mobile-promo/right-mobile-promo.django' %} {% endcomment %}
+
+{% comment %}
+{% if request.path != '/application/' %}
+{% include 'assets/template-right-blocks/right-mobile-promo/right-mobile-promo.django' %}
+{% endif %}
+{% endcomment %}
+
 {% include 'assets/template-right-blocks/right-authors-list/right-authors-list.django' %}
 {% comment %} {% include 'assets/template-right-blocks/right-membership/right-membership.django' %} {% endcomment %}
 {% include 'assets/template-right-blocks/right-rubrics-list/right-rubrics-list.django' %}

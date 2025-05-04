@@ -1,8 +1,8 @@
 {# ex: set ft=htmldjango : #}
 <!--
 - Html template
-- Version: 0.0.43
-- Last changes timestamp: 2025.04.18 17:45:23 +0300
+- Version: 0.0.44
+- Last changes timestamp: 2025.05.02 18:54:02 +0300
 - Generated: {% now "Y.m.d H:i:s O" %}
 -->
 
@@ -21,9 +21,9 @@
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE|default:settings.LANGUAGE_CODE }}">
 <head>
-  <title>{% block title %}{% trans 'Site title' %}{% endblock title %}</title>
-  <meta name="description" content="{% block meta_description %}{% trans 'Site description' %}{% endblock meta_description %}" />
-  <meta name="keywords" content="{% block meta_keywords %}{% trans 'Site keywords' %}{% endblock meta_keywords %}" />
+  <title>{% block title %}{% content_block 'Site title' 'Site title' %}{% endblock title %}</title>
+  <meta name="description" content="{% block meta_description %}{% content_block 'Site description' 'Site description' %}{% endblock meta_description %}" />
+  <meta name="keywords" content="{% block meta_keywords %}{% content_block 'Site keywords' 'Site keywords' %}{% endblock meta_keywords %}" />
   <meta charset="utf-8" />
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -36,8 +36,8 @@
     {# Opengraph tags #}
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="{{ LANGUAGE_CODE }}" />
-    <meta property="og:title" content="{% trans 'Site title' %}" />
-    <meta property="og:description" content="{% trans 'Site description' %}" />
+    <meta property="og:title" content="{% content_block 'Site title' 'Site title' %}" />
+    <meta property="og:description" content="{% content_block 'Site description' 'Site description' %}" />
     <meta property="og:url" content="{{ request.build_absolute_uri }}" />
     <meta property="og:logo" content="{{request.scheme}}://{{request.get_host}}{% static 'images/march-cat/march-cat-sq-256.jpg' %}" />
     <meta property="og:image" content="{{request.scheme}}://{{request.get_host}}{% static 'images/og-splash/splash-1200x630.jpg' %}" />

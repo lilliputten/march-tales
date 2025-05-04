@@ -121,7 +121,9 @@ LANGUAGES = (
 )
 DEFAULT_LANGUAGE = LANGUAGES[0][0]
 LANGUAGE_CODE = DEFAULT_LANGUAGE
+# Languages dict (`{'ru': 'Русский', 'en': 'English'}`)
 LANGUAGES_DICT = {lng: name for lng, name in list(LANGUAGES)}
+# Language ids (`['ru', 'en']`)
 LANGUAGES_LIST = [lng[0] for lng in list(LANGUAGES)]
 
 LANGUAGE_COOKIE_AGE = 7 * 24 * 60   # Remember a language for a week
@@ -463,9 +465,15 @@ UNFOLD = {
                     },
                     {
                         'title': _('Flat pages'),
-                        'icon': 'edit',
+                        'icon': 'article',
                         # See: "admin:%s_%s_changelist" % info, current_app=self.name
                         'link': reverse_lazy('unfold-admin:tales_django_flatpage_changelist'),
+                    },
+                    {
+                        'title': _('Content blocks'),
+                        'icon': 'variables',
+                        # See: "admin:%s_%s_changelist" % info, current_app=self.name
+                        'link': reverse_lazy('unfold-admin:tales_django_contentblocks_changelist'),
                     },
                     {
                         'title': _('Sites'),

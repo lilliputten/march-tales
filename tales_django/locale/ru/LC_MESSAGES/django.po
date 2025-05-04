@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-17 14:15+0300\n"
+"POT-Creation-Date: 2025-05-02 18:46+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -112,7 +112,7 @@ msgstr "Длительность"
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:242
 #: .\tales_django\entities\Tracks\models\Tag.py:15
 #: .\tales_django\entities\Tracks\models\Track.py:72
-#: .\tales_django\settings.py:446
+#: .\tales_django\settings.py:448
 #: .\tales_django\templates\tales_django\tag_details.html.django:21
 #: .\tales_django\templates\tales_django\tag_index.html.django:20
 msgid "Tags"
@@ -219,22 +219,6 @@ msgstr "Случайное"
 msgid "Most popular"
 msgstr "Популярное"
 
-#: .\src\assets\template-footer\template-footer-content-detailed.django:14
-#: .\src\assets\template-footer\template-footer-content.django:18
-#: .\src\assets\template-header\template-header.django:15
-#: .\tales_django\templates\base-core.html.django:24
-#: .\tales_django\templates\base-core.html.django:39
-#: .\tales_django\templates\tales_django\author_details.html.django:17
-#: .\tales_django\templates\tales_django\terms.html.django:24
-#: .\tales_django\templates\tales_django\terms.html.django:26
-#: .\tales_django\templates\tales_django\terms.html.django:33
-#: .\tales_django\templates\tales_django\terms.html.django:34
-#: .\tales_django\templates\tales_django\terms.html.django:148
-#: .\tales_django\templates\tales_django\terms.html.django:153
-#: .\tales_django\templates\tales_django\track_details.html.django:26
-msgid "Site title"
-msgstr "Сказки Мартовского Кота"
-
 #: .\src\assets\template-footer\template-footer-content-detailed.django:24
 #: .\tales_django\templates\tales_django\application.html.django:9
 #: .\tales_django\templates\tales_django\application.html.django:16
@@ -270,7 +254,7 @@ msgstr "Главная страница"
 #: .\src\assets\template-footer\template-footer-content-detailed.django:39
 #: .\tales_django\entities\Tracks\models\Track.py:32
 #: .\tales_django\entities\Users\admin\UserAdmin.py:56
-#: .\tales_django\settings.py:429
+#: .\tales_django\settings.py:431
 #: .\tales_django\templates\tales_django\favorites.html.django:37
 #: .\tales_django\templates\tales_django\track_details.html.django:47
 msgid "Tracks"
@@ -279,7 +263,7 @@ msgstr "Треки"
 #: .\src\assets\template-footer\template-footer-content-detailed.django:40
 #: .\src\assets\template-right-blocks\right-authors-list\right-authors-list.django:15
 #: .\tales_django\entities\Tracks\models\Author.py:27
-#: .\tales_django\settings.py:436
+#: .\tales_django\settings.py:438
 #: .\tales_django\templates\tales_django\author_details.html.django:36
 #: .\tales_django\templates\tales_django\author_index.html.django:20
 msgid "Authors"
@@ -290,7 +274,7 @@ msgstr "Авторы"
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:248
 #: .\tales_django\entities\Tracks\models\Rubric.py:15
 #: .\tales_django\entities\Tracks\models\Track.py:75
-#: .\tales_django\settings.py:441
+#: .\tales_django\settings.py:443
 #: .\tales_django\templates\tales_django\rubric_details.html.django:21
 #: .\tales_django\templates\tales_django\rubric_index.html.django:20
 msgid "Rubrics"
@@ -301,7 +285,7 @@ msgid "Project"
 msgstr "Проект"
 
 #: .\src\assets\template-footer\template-footer-content-detailed.django:48
-#: .\src\assets\template-right-blocks\right-about\right-about.django:16
+#: .\src\assets\template-right-blocks\right-about\right-about.django:17
 #: .\tales_django\templates\tales_django\about.html.django:9
 #: .\tales_django\templates\tales_django\about.html.django:16
 #: .\tales_django\templates\tales_django\about.html.django:20
@@ -322,17 +306,6 @@ msgstr "Политика конфиденциальности"
 #: .\src\assets\template-footer\template-footer-content.django:25
 msgid "Terms Conditions"
 msgstr "Пользовательское соглашение"
-
-#: .\src\assets\template-right-blocks\right-about\right-about.django:9
-msgid "Hi, I'm March Cat!"
-msgstr "Привет, я Мартовский Кот!"
-
-#: .\src\assets\template-right-blocks\right-about\right-about.django:12
-msgid "Site description block."
-msgstr ""
-"Я с большим удовольствием занимаюсь озвучиванием сказок. Это мое хобби, "
-"которое позволяет делиться волшебными историями с теми, кто любит мечтать и "
-"погружаться в мир фантазии."
 
 #: .\src\assets\template-right-blocks\right-favorites-list\right-favorites-list-wrapper.django:6
 msgid "Show all favorite tracks"
@@ -359,8 +332,6 @@ msgid "Try the mobile app!"
 msgstr "Слушай на мобильном!"
 
 #: .\src\assets\template-right-blocks\right-mobile-promo\right-mobile-promo.django:14
-#: .\tales_django\templates\tales_django\application.html.django:51
-#: .\tales_django\templates\tales_django\flatpage_application.html.django:30
 msgid "Download for Android"
 msgstr "Скачать для Android"
 
@@ -429,6 +400,98 @@ msgstr "Ожидается POST или GET запрос"
 msgid "Site administration"
 msgstr "Администрирование сайта"
 
+#: .\tales_django\entities\ContentBlocks\admin.py:20
+msgid "Make string"
+msgstr "Сделать строкой"
+
+#: .\tales_django\entities\ContentBlocks\admin.py:25
+msgid "Make block"
+msgstr "Сделать блоком"
+
+#: .\tales_django\entities\ContentBlocks\admin.py:30
+msgid "Make rich block"
+msgstr "СДелать блоком с разметкой"
+
+#: .\tales_django\entities\ContentBlocks\admin.py:35
+#: .\tales_django\entities\ContentBlocks\models.py:26
+msgid "Active"
+msgstr "Активно"
+
+#: .\tales_django\entities\ContentBlocks\admin.py:40
+msgid "Inctive"
+msgstr "Не активно"
+
+#: .\tales_django\entities\ContentBlocks\admin.py:64
+#: .\tales_django\entities\flatpages\admin\FlatPageAdmin.py:35
+msgid "Basic Settings"
+msgstr "Основные параметры"
+
+#: .\tales_django\entities\ContentBlocks\admin.py:75
+#: .\tales_django\entities\ContentBlocks\models.py:30
+#: .\tales_django\entities\flatpages\admin\FlatPageAdmin.py:52
+#: .\tales_django\settings.py:426
+msgid "Content"
+msgstr "Контент"
+
+#: .\tales_django\entities\ContentBlocks\admin.py:82
+#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:149
+#: .\tales_django\entities\Tracks\admin\UserTrackAdmin.py:56
+#: .\tales_django\entities\flatpages\admin\FlatPageAdmin.py:69
+msgid "Information"
+msgstr "Информация"
+
+#: .\tales_django\entities\ContentBlocks\admin.py:129
+msgid "content"
+msgstr "Контент"
+
+#: .\tales_django\entities\ContentBlocks\models.py:18
+msgid "String"
+msgstr "Строка"
+
+#: .\tales_django\entities\ContentBlocks\models.py:19
+msgid "Block"
+msgstr "Блок"
+
+#: .\tales_django\entities\ContentBlocks\models.py:20
+msgid "Rich block"
+msgstr "Блок с разметкой"
+
+#: .\tales_django\entities\ContentBlocks\models.py:22
+msgid "Type"
+msgstr "Тип"
+
+#: .\tales_django\entities\ContentBlocks\models.py:24
+#: .\tales_django\entities\Tracks\admin\AuthorAdmin.py:67
+#: .\tales_django\entities\Tracks\models\Author.py:30
+msgid "Name"
+msgstr "Имя"
+
+#: .\tales_django\entities\ContentBlocks\models.py:26
+msgid "Use this value"
+msgstr "Исопльзовать значение"
+
+#: .\tales_django\entities\ContentBlocks\models.py:37
+msgid "Created at"
+msgstr "Дата создания"
+
+#: .\tales_django\entities\ContentBlocks\models.py:38
+#: .\tales_django\entities\Tracks\models\Author.py:63
+#: .\tales_django\entities\Tracks\models\Rubric.py:31
+#: .\tales_django\entities\Tracks\models\Tag.py:31
+#: .\tales_django\entities\Tracks\models\Track.py:168
+#: .\tales_django\entities\Tracks\models\UserTrack.py:55
+#: .\tales_django\entities\flatpages\models\FlatPage.py:42
+msgid "Updated at"
+msgstr "Дата обновления"
+
+#: .\tales_django\entities\ContentBlocks\models.py:41
+msgid "content block"
+msgstr "блок контета"
+
+#: .\tales_django\entities\ContentBlocks\models.py:42
+msgid "content blocks"
+msgstr "блоки контета"
+
 #: .\tales_django\entities\Membership\models\Membership.py:14
 msgid "membership"
 msgstr "членство"
@@ -454,11 +517,6 @@ msgstr "Продвигать"
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:66
 msgid "No promote"
 msgstr "Не продвигать"
-
-#: .\tales_django\entities\Tracks\admin\AuthorAdmin.py:67
-#: .\tales_django\entities\Tracks\models\Author.py:30
-msgid "Name"
-msgstr "Имя"
 
 #: .\tales_django\entities\Tracks\admin\AuthorAdmin.py:74
 msgid "Has portrait"
@@ -505,8 +563,8 @@ msgstr "Пометить для тестов"
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:84
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:275
 #: .\tales_django\entities\Tracks\models\Track.py:36
-#: .\tales_django\entities\flatpages\admin\FlatPageAdmin.py:44
-#: .\tales_django\entities\flatpages\admin\FlatPageAdmin.py:104
+#: .\tales_django\entities\flatpages\admin\FlatPageAdmin.py:45
+#: .\tales_django\entities\flatpages\admin\FlatPageAdmin.py:98
 msgid "Title"
 msgstr "Название"
 
@@ -532,12 +590,6 @@ msgstr "Статус"
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:137
 msgid "Publication"
 msgstr "Публикация"
-
-#: .\tales_django\entities\Tracks\admin\TrackAdmin.py:149
-#: .\tales_django\entities\Tracks\admin\UserTrackAdmin.py:56
-#: .\tales_django\entities\flatpages\admin\FlatPageAdmin.py:74
-msgid "Information"
-msgstr "Информация"
 
 #: .\tales_django\entities\Tracks\admin\TrackAdmin.py:235
 msgid "Has preview"
@@ -626,15 +678,6 @@ msgstr "Портрет"
 #: .\tales_django\entities\Tracks\models\Track.py:151
 msgid "Promote on the main page"
 msgstr "Продвигать на главной странице"
-
-#: .\tales_django\entities\Tracks\models\Author.py:63
-#: .\tales_django\entities\Tracks\models\Rubric.py:31
-#: .\tales_django\entities\Tracks\models\Tag.py:31
-#: .\tales_django\entities\Tracks\models\Track.py:168
-#: .\tales_django\entities\Tracks\models\UserTrack.py:55
-#: .\tales_django\entities\flatpages\models\FlatPage.py:42
-msgid "Updated at"
-msgstr "Дата обновления"
 
 #: .\tales_django\entities\Tracks\models\Rubric.py:14
 msgid "Rubric"
@@ -767,7 +810,7 @@ msgid "Group"
 msgstr "Группа"
 
 #: .\tales_django\entities\Users\admin\GroupAdmin.py:23
-#: .\tales_django\settings.py:486
+#: .\tales_django\settings.py:494
 msgid "Groups"
 msgstr "Группы"
 
@@ -820,16 +863,7 @@ msgstr "Разрешить уведомления"
 msgid "Receive notifications via email and in the mobile application"
 msgstr "Получать уведомления по электронной почте и в мобильном приложении"
 
-#: .\tales_django\entities\flatpages\admin\FlatPageAdmin.py:34
-msgid "Basic Settings"
-msgstr "Основные параметры"
-
-#: .\tales_django\entities\flatpages\admin\FlatPageAdmin.py:54
-#: .\tales_django\settings.py:424
-msgid "Content"
-msgstr "Контент"
-
-#: .\tales_django\entities\flatpages\admin\FlatPageAdmin.py:64
+#: .\tales_django\entities\flatpages\admin\FlatPageAdmin.py:59
 msgid "Advanced options"
 msgstr "Детальные настройки"
 
@@ -838,7 +872,7 @@ msgid "Flat page"
 msgstr "Страница сайта"
 
 #: .\tales_django\entities\flatpages\models\FlatPage.py:22
-#: .\tales_django\settings.py:465
+#: .\tales_django\settings.py:467
 msgid "Flat pages"
 msgstr "Страницы сайта"
 
@@ -850,31 +884,35 @@ msgstr "Заголовок"
 msgid "Page content"
 msgstr "Контент"
 
-#: .\tales_django\settings.py:405 .\tales_django\settings.py:406
+#: .\tales_django\settings.py:407 .\tales_django\settings.py:408
 msgid "Administration"
 msgstr "Администрирование"
 
-#: .\tales_django\settings.py:453
+#: .\tales_django\settings.py:455
 msgid "Manage"
 msgstr "Управление"
 
-#: .\tales_django\settings.py:458
+#: .\tales_django\settings.py:460
 msgid "Dashboard"
 msgstr "Панель управления"
 
-#: .\tales_django\settings.py:471
+#: .\tales_django\settings.py:473
+msgid "Content blocks"
+msgstr "Блоки контента"
+
+#: .\tales_django\settings.py:479
 msgid "Sites"
 msgstr "Сайты"
 
-#: .\tales_django\settings.py:476
+#: .\tales_django\settings.py:484
 msgid "Users"
 msgstr "Пользователи"
 
-#: .\tales_django\settings.py:481
+#: .\tales_django\settings.py:489
 msgid "User tracks"
 msgstr "Пользовательские треки"
 
-#: .\tales_django\settings.py:497
+#: .\tales_django\settings.py:505
 msgid "Open site"
 msgstr "Открыть сайт"
 
@@ -1010,15 +1048,6 @@ msgstr ""
 #: .\tales_django\templates\allauth\layouts\manage.html:80
 msgid "Delete"
 msgstr "Удалить"
-
-#: .\tales_django\templates\base-core.html.django:25
-#: .\tales_django\templates\base-core.html.django:40
-msgid "Site description"
-msgstr "Авторское чтение классических сказок и рассказов"
-
-#: .\tales_django\templates\base-core.html.django:26
-msgid "Site keywords"
-msgstr "Мартовский Кот, Сказки, Истории, Чтение, mp3"
 
 #: .\tales_django\templates\base-core.html.django:135
 msgid "Error loading audio file"
@@ -1368,6 +1397,16 @@ msgstr "Список композиций с плеером."
 msgid "Tracks list without panels during scroll."
 msgstr "Список треков без панелей при прокрутке."
 
+#: .\tales_django\templates\tales_django\application.html.django:50
+#: .\tales_django\templates\tales_django\flatpage_application.html.django:43
+msgid "Install from the Google Play Store"
+msgstr "Установить из магазина приложений Google Play Store"
+
+#: .\tales_django\templates\tales_django\application.html.django:54
+#: .\tales_django\templates\tales_django\flatpage_application.html.django:49
+msgid "Download the Android APK here"
+msgstr "Скачать apk файл для Android здесь"
+
 #: .\tales_django\templates\tales_django\author_details.html.django:49
 #: .\tales_django\templates\tales_django\cookies-agreement.html.django:33
 #: .\tales_django\templates\tales_django\rubric_details.html.django:39
@@ -1390,6 +1429,10 @@ msgstr "Соглашение об использовании файлов cookie
 #: .\tales_django\templates\tales_django\index.html.django:30
 msgid "Tracks list"
 msgstr "Список треков"
+
+#: .\tales_django\templates\tales_django\flatpage_application.html.django:31
+msgid "Current version:"
+msgstr "Текущая версия:"
 
 #: .\tales_django\templates\tales_django\logged_out.html.django:11
 #: .\tales_django\templates\tales_django\logged_out.html.django:21
@@ -1426,3 +1469,24 @@ msgstr "Список меток"
 #: .\tales_django\templates\tales_django\terms.html.django:14
 msgid "Terms and conditions"
 msgstr "Пользовательское соглашение"
+
+#~ msgid "Site title"
+#~ msgstr "Сказки Мартовского Кота"
+
+#~ msgid "Hi, I'm March Cat!"
+#~ msgstr "Привет, я Мартовский Кот!"
+
+#~ msgid "Site description block."
+#~ msgstr ""
+#~ "Я с большим удовольствием занимаюсь озвучиванием сказок. Это мое хобби, "
+#~ "которое позволяет делиться волшебными историями с теми, кто любит мечтать "
+#~ "и погружаться в мир фантазии."
+
+#~ msgid "Site description"
+#~ msgstr "Авторское чтение классических сказок и рассказов"
+
+#~ msgid "Site keywords"
+#~ msgstr "Мартовский Кот, Сказки, Истории, Чтение, mp3"
+
+#~ msgid "name"
+#~ msgstr "имя"
