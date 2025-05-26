@@ -8,8 +8,12 @@
 
 {% endcomment %}
 
+{% if tags %}
 <ul class="big-tags-list list-unstyled pt-2 d-flex flex-column gap-3">
   {% for tag in tags %}
     {% include 'assets/common-blocks/big-tags-list/big-tags-list-item.django' %}
   {% endfor %}
 </ul>
+{% else %}
+  <p class="dimmed-info">{% trans 'No tags found' %}</p>
+{% endif %}

@@ -8,8 +8,12 @@
 
 {% endcomment %}
 
-<div class="big-authors-list d-flex flex-column gap-4 pt-2">
-  {% for author in authors %}
-    {% include 'assets/common-blocks/big-authors-list/big-authors-list-item.django' %}
-  {% endfor %}
-</div>
+{% if authors %}
+  <div class="big-authors-list d-flex flex-column gap-4 pt-2">
+    {% for author in authors %}
+      {% include 'assets/common-blocks/big-authors-list/big-authors-list-item.django' %}
+    {% endfor %}
+  </div>
+{% else %}
+  <p class="dimmed-info">{% trans 'No authors found' %}</p>
+{% endif %}

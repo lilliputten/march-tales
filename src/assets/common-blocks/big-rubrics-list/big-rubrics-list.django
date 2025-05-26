@@ -8,8 +8,12 @@
 
 {% endcomment %}
 
-<ul class="big-tags-list list-unstyled pt-2 d-flex flex-column gap-3">
-  {% for rubric in rubrics %}
-    {% include 'assets/common-blocks/big-rubrics-list/big-rubrics-list-item.django' %}
-  {% endfor %}
-</ul>
+{% if rubrics %}
+  <ul class="big-tags-list list-unstyled pt-2 d-flex flex-column gap-3">
+    {% for rubric in rubrics %}
+      {% include 'assets/common-blocks/big-rubrics-list/big-rubrics-list-item.django' %}
+    {% endfor %}
+  </ul>
+{% else %}
+  <p class="dimmed-info">{% trans 'No rubrics found' %}</p>
+{% endif %}
