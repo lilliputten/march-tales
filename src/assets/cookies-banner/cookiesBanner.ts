@@ -1,9 +1,9 @@
 import { acceptedCookiesId } from '../constants/acceptedCookiesId';
 import { deleteAllCookies, setCookie } from '../helpers/CommonHelpers';
 
-let eventHandler: () => void;
+let bannerNode: null | HTMLElement = null;
 
-function updateBannerGeometry(bannerNode: HTMLElement) {
+function updateBannerGeometry() {
   const footerNode = document.querySelector<HTMLElement>('.template-footer');
   if (!bannerNode || !footerNode) {
     return;
@@ -31,15 +31,14 @@ function handleReject(event: Event) {
   hideBanner(bannerNode!);
 }
 
-function initActiveBanner(bannerNode: HTMLElement) {
-  if (eventHandler) {
-    window.removeEventListener('resize', eventHandler);
-    window.removeEventListener('orientationchange', eventHandler);
+function initActiveBanner() {
+  if (!bannerNode) {
+    return;
   }
-  eventHandler = updateBannerGeometry.bind(bannerNode);
-  window.addEventListener('resize', eventHandler);
-  window.addEventListener('orientationchange', eventHandler);
-  updateBannerGeometry(bannerNode);
+  bannerNode.classList.toggle('visible', true);
+  updateBannerGeometry();
+  window.addEventListener('resize', updateBannerGeometry);
+  window.addEventListener('orientationchange', updateBannerGeometry);
   // Set button handlers...
   bannerNode
     .querySelector<HTMLButtonElement>('button#Accept')
@@ -47,7 +46,6 @@ function initActiveBanner(bannerNode: HTMLElement) {
   bannerNode
     .querySelector<HTMLButtonElement>('button#Reject')
     ?.addEventListener('click', handleReject);
-  bannerNode.classList.toggle('visible', true);
 }
 
 function hideBanner(bannerNode?: HTMLElement) {
@@ -55,20 +53,18 @@ function hideBanner(bannerNode?: HTMLElement) {
     bannerNode.remove();
   }
   document.body.classList.add('no-cookies-banner');
-  if (eventHandler) {
-    window.removeEventListener('resize', eventHandler);
-    window.removeEventListener('orientationchange', eventHandler);
-  }
+  window.removeEventListener('resize', updateBannerGeometry);
+  window.removeEventListener('orientationchange', updateBannerGeometry);
 }
 
 export function initCookiesBanner() {
-  const bannerNode = document.querySelector<HTMLElement>('.cookies-banner');
+  bannerNode = document.querySelector<HTMLElement>('.cookies-banner');
   if (!bannerNode) {
     return;
   }
   const cookiesBannerStr = window.localStorage.getItem(acceptedCookiesId);
-  if (cookiesBannerStr == null) {
-    initActiveBanner(bannerNode);
+  if (!cookiesBannerStr) {
+    initActiveBanner();
   } else {
     hideBanner(bannerNode);
   }

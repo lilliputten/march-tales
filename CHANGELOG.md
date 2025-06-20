@@ -1,14 +1,14 @@
 <!--
  @since 2025.03.19
- @changed 2025.05.02, 18:54
+ @changed 2025.06.20, 23:40
 -->
 
 # CHANGELOG
 
+## [v.0.0.44](https://github.com/lilliputten/march-tales/releases/tag/v.0.0.44) - 2025.06.20
 
-## [v.0.0.44](https://github.com/lilliputten/march-tales/releases/tag/v.0.0.44) - 2025.05.02
-
-- Added content blocks model, admin panel & tag, some  content blocks. Updated application page (added google play download link).
+- Added content blocks model, admin panel & tag, some content blocks. Updated application page (added google play download link).
+- Fixed a bug with cookies accept dialog (there was an invalid geometry updating algorithm).
 
 See also:
 
