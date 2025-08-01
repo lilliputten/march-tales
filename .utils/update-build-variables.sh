@@ -15,8 +15,8 @@ test -f "$scriptsPath/config.sh" && . "$scriptsPath/config.sh"
 # Read (and derive) variables from changed files...
 VERSION_PATH="$rootPath/${VERSION_FILE}"
 VERSION=`cat "$VERSION_PATH"`
-TIMESTAMP=`$DATECMD -r "$VERSION_PATH" "+%Y.%m.%d %H:%M:%S %z"`
-TIMETAG=`$DATECMD -r "$VERSION_PATH" "+%y%m%d-%H%M"`
+TIMESTAMP=`TZ="$TIMEZONE" "$DATECMD" -r $VERSION_PATH "+%Y.%m.%d %H:%M:%S %z"`
+TIMETAG=`TZ="$TIMEZONE" "$DATECMD" -r $VERSION_PATH "+%y%m%d-%H%M"`
 
 # APP_ID=`cat "$rootPath/$APP_ID_FILE"`
 

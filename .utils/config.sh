@@ -42,12 +42,12 @@ if [ -z "$CONFIG_IMPORTED" ]; then
   DATECMD="date"
   # # Override posix commands for cygwin or/and windows (may be overrided in `config-local.sh`, see `config-local.sh.TEMPLATE`)...
   if [ "$IS_CYGWIN" ]; then
-      # Don't use windows' own native commands
-      which find_ > /dev/null 2>&1 && FINDCMD="find_"
-      which sort_ > /dev/null 2>&1 && SORTCMD="sort_"
-      which grep_ > /dev/null 2>&1 && GREPCMD="grep_"
-      which rm_ > /dev/null 2>&1 && RMCMD="rm_"
-      # which date_ > /dev/null 2>&1 && DATECMD="date_"
+      # Don't use windows' native commands if there are cygwin's ones
+      which "/usr/bin/find" > /dev/null 2>&1 && FINDCMD="/usr/bin/find"
+      which "/usr/bin/sort" > /dev/null 2>&1 && SORTCMD="/usr/bin/sort"
+      which "/usr/bin/grep" > /dev/null 2>&1 && GREPCMD="/usr/bin/grep"
+      which "/usr/bin/rm" > /dev/null 2>&1 && RMCMD="/usr/bin/rm"
+      which "/usr/bin/date" > /dev/null 2>&1 && DATECMD="/usr/bin/date"
   fi
 
   scriptsPath=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
