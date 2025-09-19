@@ -8,6 +8,15 @@ def isort():
         '--only-modified',
         '.',
     ]
+    subprocess.run(cmd, stdout=subprocess.DEVNULL)
+
+
+def format():
+    print('Running python linter (blue)...')
+    cmd = [
+        'blue',
+        '.',
+    ]
     subprocess.run(cmd)
 
 
@@ -15,15 +24,6 @@ def lint():
     print('Running pyright linter...')
     cmd = [
         'pyright',
-        '.',
-    ]
-    subprocess.run(cmd)
-
-
-def format():
-    print('Running python linter (blue)...')
-    cmd = [
-        'blue',
         '.',
     ]
     subprocess.run(cmd)
