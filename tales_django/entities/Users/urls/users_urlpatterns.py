@@ -1,6 +1,7 @@
 # @module tales_django/urls/accounts.py
 # @changed 2024.12.30, 00:13
 
+from django.conf.urls.i18n import i18n_patterns
 from django.urls import include, path
 
 from tales_django.entities.Users.views import logged_out
@@ -15,7 +16,8 @@ from ..views import (
     profile,
 )
 
-users_urlpatterns = [
+# Content routes with language prefix support
+users_urlpatterns = i18n_patterns(
     # Accounts...
     path(
         # Overrided registration form using updated one
@@ -40,4 +42,4 @@ users_urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('_allauth/', include('allauth.headless.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
-]
+)

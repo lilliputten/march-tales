@@ -1,8 +1,8 @@
 {# ex: set ft=htmldjango : #}
 <!--
 - Html template
-- Version: 0.0.44
-- Last changes timestamp: 2025.06.20 23:37:31 +0300
+- Version: 0.0.45
+- Last changes timestamp: 2026.01.27 20:18:45 +0300
 - Generated: {% now "Y.m.d H:i:s O" %}
 -->
 
@@ -35,6 +35,7 @@
   {% block meta_og %}
     {# Opengraph tags #}
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="{% content_block 'Site title' 'Site title' %}" />
     <meta property="og:locale" content="{{ LANGUAGE_CODE }}" />
     <meta property="og:title" content="{% content_block 'Site title' 'Site title' %}" />
     <meta property="og:description" content="{% content_block 'Site description' 'Site description' %}" />
@@ -43,7 +44,10 @@
     <meta property="og:image" content="{{request.scheme}}://{{request.get_host}}{% static 'images/og-splash/splash-1200x630.jpg' %}" />
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="twitter:image" content="{{request.scheme}}://{{request.get_host}}{% static 'images/og-splash/splash-320x.jpg' %}" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{% content_block 'Site title' 'Site title' %}" />
+    <meta name="twitter:description" content="{% content_block 'Site description' 'Site description' %}" />
+    <meta name="twitter:image" content="{{request.scheme}}://{{request.get_host}}{% static 'images/og-splash/splash-320x.jpg' %}" />
   {% endblock %}
 
   <!-- {{{ CSS -->

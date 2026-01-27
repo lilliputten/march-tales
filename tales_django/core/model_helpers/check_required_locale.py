@@ -13,14 +13,25 @@ logger = getDebugLogger()
 
 
 def _get_required_locale(request: HttpRequest):
+    # Highest priority: URL prefix (e.g., /ru/some-page/, /en/about/)
+    path = request.path
+    for lang in settings.LANGUAGES_LIST:
+        if path.startswith(f'/{lang}/'):
+            return lang
+
+    # Second priority: URL parameter (?hl=)
     hl_locale = str(request.GET.get('hl', ''))
     if hl_locale is not None and hl_locale:
         return get_valid_language(hl_locale)
-    # # !!!
+
+    # Third priority: Language cookie
     language_cookie = request.COOKIES.get(settings.LANGUAGE_COOKIE_NAME)
+
+    # Fourth priority: Accept-Language header (only if no cookie)
     accept_language = request.headers.get('Accept-Language', '')
     if language_cookie is None and accept_language is not None and accept_language:
         return get_valid_language(accept_language)
+
     return ''
 
 
@@ -33,7 +44,7 @@ def check_required_locale(request: HttpRequest):
     current_language = translation.get_language()
     set_language = False
     required_locale = _get_required_locale(request)
-    if required_locale is not None and required_locale and required_locale != current_language:
+    if required_locale is not None and required_locale: # and required_locale != current_language:
         required_locale = get_valid_language(required_locale)
         set_language = True
     # # TODO: Find out the telegram language parameter.
@@ -47,9 +58,10 @@ def check_required_locale(request: HttpRequest):
     # }
     # debugStr = debugObj(debugData)
     # logger.info(f'track_details_view: Check language\n{debugStr}')
-    if set_language:
+    if set_language and required_locale != current_language:
         translation.activate(required_locale)
-        return required_locale
+
+    return required_locale
 
 
 __all__ = [

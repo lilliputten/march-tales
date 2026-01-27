@@ -12,7 +12,7 @@ from tales_django.entities.ContentBlocks.models import ContentBlocks
 
 logger = getDebugLogger()
 
-_showDebug = True
+_showDebug = False
 
 
 @register.simple_tag
