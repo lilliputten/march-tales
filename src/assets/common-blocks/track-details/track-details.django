@@ -45,6 +45,16 @@ Expected:
 </li>
 {% endif %}
 {% endcomment %}
+{# Series #}
+{% if track.series and not show_details %}
+<li class="track-series list-inline-item" title="{% trans 'Series' %}">
+  <i class="ti-layout-list-thumb"></i>
+  <a href="{{ track.series.get_absolute_url }}" class="series-link">
+    {{ track.series.title }} ({{ track.series_order }}/{{ track.series.tracks.count }})
+  </a>
+</li>
+{% endif %}
+
 {# Tags #}
 {% if track.tags.count %}
 <li class="track-tags list-inline-item" data-tags-count="{{ track.tags.count }}" title="{% trans 'Tags' %}">

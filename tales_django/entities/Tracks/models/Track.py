@@ -1,5 +1,6 @@
 from datetime import date, timedelta
 
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models import Model
 from django.db.models.signals import post_delete
@@ -181,6 +182,33 @@ class Track(Model):
         on_delete=models.DO_NOTHING,
     )
 
+    # Series relationship
+    series = models.ForeignKey(
+        'Series',
+        verbose_name=_('Series'),
+        related_name='tracks',
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        help_text=_('Optional series this track belongs to'),
+    )
+
+    series_order = models.PositiveIntegerField(
+        _('Series Order'),
+        default=0,
+        help_text=_('Order within the series (lower numbers appear first)'),
+    )
+
+    def clean(self):
+        super().clean()
+        # Validate series order uniqueness within the same series
+        if self.series and self.pk:
+            existing_tracks = Track.objects.filter(series=self.series, series_order=self.series_order).exclude(
+                pk=self.pk
+            )
+            if existing_tracks.exists():
+                raise ValidationError({'series_order': _('A track with this order already exists in the series.')})
+
     @property
     def lower_title(self) -> bool:
         # language = get_current_language()
@@ -233,6 +261,7 @@ class Track(Model):
     def __str__(self):
         items = [
             self.title,
+            f'({self.series.title} #{self.series_order})' if self.series else None,
             '[%d]' % self.id if LOCAL else None,
         ]
         info = ' '.join(map(str, filter(None, items)))

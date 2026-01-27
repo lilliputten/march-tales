@@ -1,0 +1,15 @@
+{# ex: set ft=htmldjango : #}
+
+<div class="series-info mt-3">
+  <h6 class="text-muted mb-2">{{ _("Series") }}: {{ track.series.title }}</h6>
+  <ul class="series-tracks-list">
+    {% for series_track in track.series.tracks.all|dictsort:"series_order" %}
+      <li class="series-track-item {% if series_track.id == track.id %}current-track{% endif %}">
+        <a href="{{ series_track.get_absolute_url }}" class="{% if series_track.id == track.id %}fw-bold{% endif %}">
+          {{ series_track.title }}
+          {% if series_track.id == track.id %}({{ _("current") }}){% endif %}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+</div>

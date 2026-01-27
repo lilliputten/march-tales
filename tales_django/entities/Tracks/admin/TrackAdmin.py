@@ -123,6 +123,16 @@ class TrackAdmin(
             },
         ),
         (
+            _('Series'),
+            {
+                'classes': ['--collapse', 'columns'],
+                'fields': (
+                    'series',
+                    'series_order',
+                ),
+            },
+        ),
+        (
             _('Status'),
             {
                 'classes': ['--collapse', 'columns'],
@@ -172,6 +182,7 @@ class TrackAdmin(
         'author',
         'rubrics_list',
         'tags_list',
+        'series_info',
         'duration_formatted',
         'size_formatted',
         'promote',
@@ -214,6 +225,7 @@ class TrackAdmin(
         'author',
         'rubrics',
         'tags',
+        'series',
         # 'played_count',
     ]
 
@@ -246,6 +258,15 @@ class TrackAdmin(
         return ', '.join(rubricNames)
 
     rubrics_list.short_description = _('Rubrics')
+
+    def series_info(self, track):
+        if track.series:
+            return f'{track.series.title} ({track.series_order})'
+        return '-'
+
+    series_info.short_description = _('Series')
+    # Remove the admin_order_field since series title sorting is problematic with translated fields
+    # series_info.admin_order_field = 'series__title'
 
     def duration_formatted(self, track):
         return track.duration_formatted
