@@ -31,6 +31,28 @@ class Track(Model):
     class Meta:
         verbose_name = _('Track')
         verbose_name_plural = _('Tracks')
+        # indexes = [
+        #     models.Index(fields=['title_ru']),
+        #     models.Index(fields=['title_en']),
+        #     models.Index(fields=['created_at']),
+        #     models.Index(fields=['author']),
+        #     models.Index(fields=['track_status']),
+        #     models.Index(fields=['promote']),
+        #     models.Index(fields=['for_members']),
+        #     models.Index(fields=['tags']),
+        #     models.Index(fields=['rubrics']),
+        #     models.Index(fields=['published_at']),
+        #     models.Index(fields=['updated_at']),
+        #     models.Index(fields=['played_count']),
+        #     models.Index(fields=['track_status', 'promote']),
+        #     models.Index(fields=['track_status', 'for_members']),
+        #     models.Index(fields=['track_status', 'published_at']),
+        #     models.Index(fields=['track_status', 'updated_at']),
+        #     models.Index(fields=['track_status', 'author']),
+        #     models.Index(fields=['track_status', 'published_at', 'updated_at']),
+        #     models.Index(fields=['track_status', 'author', 'published_at']),
+        #     models.Index(fields=['track_status', 'author', 'published_at', 'updated_at']),
+        # ]
 
     title = TranslatedField(
         models.CharField(
@@ -182,22 +204,22 @@ class Track(Model):
         on_delete=models.DO_NOTHING,
     )
 
-    # Series relationship
-    series = models.ForeignKey(
-        'Series',
-        verbose_name=_('Series'),
-        related_name='tracks',
-        on_delete=models.SET_NULL,
-        blank=True,
-        null=True,
-        help_text=_('Optional series this track belongs to'),
-    )
-
-    series_order = models.PositiveIntegerField(
-        _('Series Order'),
-        default=0,
-        help_text=_('Order within the series (lower numbers appear first)'),
-    )
+    # # Series relationship
+    # series = models.ForeignKey(
+    #     'Series',
+    #     verbose_name=_('Series'),
+    #     related_name='tracks',
+    #     on_delete=models.SET_NULL,
+    #     blank=True,
+    #     null=True,
+    #     help_text=_('Optional series this track belongs to'),
+    # )
+    #
+    # series_order = models.PositiveIntegerField(
+    #     _('Series Order'),
+    #     default=0,
+    #     help_text=_('Order within the series (lower numbers appear first)'),
+    # )
 
     def clean(self):
         super().clean()
@@ -219,12 +241,12 @@ class Track(Model):
         return self.status == 'PUBLISHED'
 
     @property
-    def duration_formatted(track):
-        return str(timedelta(seconds=round(track.audio_duration))) if track.audio_duration else '-'
+    def duration_formatted(self):
+        return str(timedelta(seconds=round(self.audio_duration))) if self.audio_duration else '-'
 
     @property
-    def size_formatted(track):
-        return sizeofFmt(track.audio_size) if track.audio_size else '-'
+    def size_formatted(self):
+        return sizeofFmt(self.audio_size) if self.audio_size else '-'
 
     def save(self, *args, **kwargs):
         # Try to remove the old files...

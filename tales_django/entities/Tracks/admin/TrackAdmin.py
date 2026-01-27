@@ -14,10 +14,12 @@ from unfold.contrib.import_export.forms import ExportForm, ImportForm  # , Selec
 
 from core.ffmpeg import probeDuration
 from core.helpers.errors import errorToString
+from core.helpers.files import sizeofFmt
 from core.logging import errorStyle, getDebugLogger, tretiaryStyle, warningTitleStyle
 from tales_django.sites import unfold_admin_site
 
-from ..models import Track
+from ..models import Series, Track
+from ..models.TrackSeriesOrder import TrackSeriesOrder
 
 _logger = getDebugLogger()
 
@@ -68,6 +70,27 @@ def no_promote_action(modeladmin, request, queryset):
     queryset.update(promote=False)
 
 
+class TrackSeriesOrderInline(admin.TabularInline):
+    model = TrackSeriesOrder
+    fk_name = 'track'
+    extra = 1
+    fields = ('series', 'order')
+    verbose_name = _('Series in Track')
+    verbose_name_plural = _('Series in Track')
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == 'series':
+            # Filter out series already associated with this track
+            if hasattr(self, 'parent_obj') and self.parent_obj:
+                existing_series_ids = TrackSeriesOrder.objects.filter(track=self.parent_obj).values_list(
+                    'series_id', flat=True
+                )
+                kwargs['queryset'] = Series.objects.exclude(id__in=existing_series_ids)
+            else:
+                kwargs['queryset'] = Series.objects.all()
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
+
 @admin.register(Track, site=unfold_admin_site)
 class TrackAdmin(
     TranslatedFieldAdmin,
@@ -78,6 +101,7 @@ class TrackAdmin(
     import_form_class = ImportForm
     export_form_class = ExportForm
     # export_form_class = SelectableFieldsExportForm
+    inlines = [TrackSeriesOrderInline]
 
     fieldsets = (
         (
@@ -122,16 +146,17 @@ class TrackAdmin(
                 ),
             },
         ),
-        (
-            _('Series'),
-            {
-                'classes': ['--collapse', 'columns'],
-                'fields': (
-                    'series',
-                    'series_order',
-                ),
-            },
-        ),
+        # Removed Series field since it's now handled via many-to-many relationship in TrackSeriesOrder
+        # (
+        #     _('Series'),
+        #     {
+        #         'classes': ['--collapse', 'columns'],
+        #         'fields': (
+        #             'series',
+        #             # 'series_order',
+        #         ),
+        #     },
+        # ),
         (
             _('Status'),
             {
@@ -225,7 +250,7 @@ class TrackAdmin(
         'author',
         'rubrics',
         'tags',
-        'series',
+        # 'series',  # Removed since it's no longer a direct field
         # 'played_count',
     ]
 
@@ -260,14 +285,30 @@ class TrackAdmin(
     rubrics_list.short_description = _('Rubrics')
 
     def series_info(self, track):
-        if track.series:
-            return f'{track.series.title} ({track.series_order})'
-            # return f'{track.series.title}'
+        if track.series.exists():
+            from ..models.TrackSeriesOrder import TrackSeriesOrder
+
+            # Get series with their orders
+            series_orders = TrackSeriesOrder.objects.filter(track=track).select_related('series')
+            series_list = []
+            for item in series_orders:
+                series_list.append(f'{item.series.title} (#{item.order})')
+            return ', '.join(series_list) if series_list else '-'
         return '-'
 
-    # series_info.admin_order_field = '_series_title_translated'  # Use the annotated field for sorting
-    series_info.admin_order_field = '_series_combined_sort'  # Use the combined annotated field for sorting
+    # Removed admin_order_field since sorting by series title isn't straightforward with many-to-many
     series_info.short_description = _('Series')
+
+    def get_queryset(self, request):
+        queryset = super().get_queryset(request)
+        queryset = queryset.prefetch_related(
+            'series', 'trackseriesorder_set'
+        )  # Changed to prefetch_related and include the intermediate model
+        queryset = queryset.annotate(
+            _title_translated=F('title_' + get_language()),
+            # Removed _series_title_translated since it's a many-to-many relationship
+        )
+        return queryset
 
     def duration_formatted(self, track):
         return track.duration_formatted
@@ -277,26 +318,11 @@ class TrackAdmin(
     duration_formatted.short_description = _('Duration')
 
     def size_formatted(self, track):
-        return track.size_formatted   # sizeofFmt(track.audio_size) if track.audio_size else '-'
+        return sizeofFmt(track.audio_size) if track.audio_size else '-'
 
     size_formatted.admin_order_field = 'audio_size'
 
     size_formatted.short_description = _('Size')
-
-    def get_queryset(self, request):
-
-        queryset = super().get_queryset(request)
-        queryset = queryset.select_related('series')  # Optimize queries by prefetching series data
-        queryset = queryset.annotate(
-            _title_translated=F('title_' + get_language()),
-            _series_title_translated=F('series__title_' + get_language()),  # Annotate with series title for sorting
-            _series_order=F('series_order'),
-            # Combined field for sorting by series title and series order
-            _series_combined_sort=Concat(
-                F('series__title_' + get_language()), Value(' '), F('series_order'), output_field=CharField()
-            ),
-        )
-        return queryset
 
     def title_translated(self, track):
         return track.title
@@ -306,7 +332,7 @@ class TrackAdmin(
 
     def get_ordering(self, _request):
         return [
-            Lower('_series_combined_sort'),  # Sort by combined series title and order
+            # Lower('_series_combined_sort'),  # Sort by combined series title and order
             '-published_at',  # Then by publication date descending
             Lower(to_attribute('title')),  # Then by track title ascending
         ]
