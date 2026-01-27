@@ -1,9 +1,26 @@
 <!--
  @since 2025.03.19
- @changed 2025.06.20, 23:40
+ @changed 2026.01.27, 20:18
 -->
 
 # CHANGELOG
+
+## [v.0.0.45](https://github.com/lilliputten/march-tales/releases/tag/v.0.0.45) - 2026.01.27
+
+Issue #89, Issue #88: Added i18n URL patterns and updated pages' meta tags
+
+- Implemented i18n URL patterns (Issue #89): All localizable URLs are now wrapped with `i18n_patterns`, allowing localized prefixes like `/en/track/7`.
+- Updated locale checking logic (Issue #89): The URL prefix now has the highest priority for locale detection.
+- Updated Open Graph and Twitter meta tags (Issue #88): Enhanced social media previews and sharing capabilities.
+- Added a default robots.txt file (Issue #88): Provides better control for search engine indexing.
+
+These changes improve the site's internationalization support and overall web presence.
+
+See also:
+
+- [Issue #89: Allow to use locale url prefixes, like `/en/track/7`](https://github.com/lilliputten/march-tales/issues/89)
+- [Issue #88: Add an opengraph images for shareable pages (tracks, authors, rubrics, mb, tags)](https://github.com/lilliputten/march-tales/issues/88)
+- [Compare with the previous version](https://github.com/lilliputten/march-tales/compare/v.0.0.44...v.0.0.45)
 
 ## [v.0.0.44](https://github.com/lilliputten/march-tales/releases/tag/v.0.0.44) - 2025.06.20
 
