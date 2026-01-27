@@ -48,10 +48,14 @@ Expected:
 {# Series #}
 {% if track.series and not show_details %}
 <li class="track-series list-inline-item" title="{% trans 'Series' %}">
-  <i class="ti-layout-list-thumb"></i>
-  <a href="{{ track.series.get_absolute_url }}" class="series-link">
+  <i class="ti-view-list"></i>
+  {% if track.series_order != 1 %}
+  <a href="{{ track.series.get_absolute_url }}" class="card-meta-author">
     {{ track.series.title }} ({{ track.series_order }}/{{ track.series.tracks.count }})
   </a>
+  {% else %}
+    {{ track.series.title }} ({{ track.series_order }}/{{ track.series.tracks.count }})
+  {% endif %}
 </li>
 {% endif %}
 

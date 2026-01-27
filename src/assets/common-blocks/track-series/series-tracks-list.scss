@@ -1,0 +1,36 @@
+@use 'sass:color';
+
+@import '../../shared';
+
+.series-tracks-list {
+  flex-direction: column;
+  color: $text-color-light;
+  align-items: flex-start;
+  font-size: 0.8em;
+  li::marker {
+    color: color.change($text-color-light, $alpha: 0.3);
+  }
+  .series-track-item {
+    line-height: 1.3;
+    margin: 0.3em 0;
+    .track-no {
+      font-size: 0.9em;
+      opacity: 0.8;
+      display: inline-flex;
+      border: 1px solid color.change($text-color-light, $alpha: 0.2);
+      background-color: color.change($text-color-light, $alpha: 0.2);
+      color: $text-color-light;
+      border-radius: 3px;
+      padding: 0 0.2em;
+      padding-top: 0.1em;
+      margin-right: 0.5em;
+      gap: 0.1em;
+      &:after {
+        content: ' ';
+      }
+    }
+    &.current-track {
+      opacity: 0.5;
+    }
+  }
+}

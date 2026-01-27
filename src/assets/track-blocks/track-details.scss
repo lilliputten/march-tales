@@ -10,6 +10,8 @@
   &-main {
     flex: 1;
   }
-  &-controls {
+  .track-details-main {
+    overflow: hidden;
+    max-width: 100%;
   }
 }
