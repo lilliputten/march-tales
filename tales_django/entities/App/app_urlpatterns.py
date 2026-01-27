@@ -1,6 +1,7 @@
 from allauth.account.decorators import secure_admin_login
 from django.conf import settings
 from django.conf.urls import handler403, handler404, handler500
+from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path, re_path
@@ -32,34 +33,40 @@ cache_timeout = 0 if settings.LOCAL or settings.DEBUG else 15 * 60  # in seconds
 
 admin.site.site_header = _('Site administration')
 
-app_urlpatterns = [
+# Main content URLs with language prefix support via i18n_patterns
+# These routes will be accessible with language prefixes like /ru/track/7
+i18n_urlpatterns = i18n_patterns(
     # Root page
-    path(r'', index_view, name='index'),
-    path(r'tracks/', index_view, name='tracks'),  # TODO: Create dedicated view in tracks.
+    path('', index_view, name='index'),
+    path('tracks/', index_view, name='tracks'),  # TODO: Create dedicated view in tracks.
     # Secondary & static pages
     # path(r'about/', about_view, name='about'),
     # path(r'about/', RedirectView.as_view(url='/pages/about/', permanent=True)),
     # path(r'application-old/', application_view, name='application'),
-    path(r'terms/', terms_view, name='terms'),
-    path(r'cookies-agreement/', cookies_agreement_view, name='cookies-agreement'),
-    path(r'privacy-policy/', privacy_policy_view, name='privacy-policy'),
-    # Pages
-    # path('', include('pages.urls')),
-    # tales_django/entities/flatpages/urls.py
-    path(r'/', include('tales_django.entities.flatpages.urls'), name='django.contrib.flatpages.views.flatpage'),
-    # path(r'pages/', flatpage, name='django.contrib.flatpages.views.flatpage'),
-    # path(r'pages/', include('django.contrib.flatpages.urls')),
-    # path(r'ckeditor/', include('ckeditor_uploader.urls')),
-    path(r'ckeditor5/', include('django_ckeditor_5.urls')),
+    path('terms/', terms_view, name='terms'),
+    path('cookies-agreement/', cookies_agreement_view, name='cookies-agreement'),
+    path('privacy-policy/', privacy_policy_view, name='privacy-policy'),
+    # ckeditor5
+    path('ckeditor5/', include('django_ckeditor_5.urls')),
     # Language switching
-    path(r'i18n/', include('django.conf.urls.i18n')),
+    path('i18n/', include('django.conf.urls.i18n')),
+)
+
+# Flatpages - must be included separately to avoid catch-all <path:url> matching specific routes
+# These will be added after specific content patterns in the main urls.py
+flatpages_urlpatterns = [
+    path('', include('tales_django.entities.flatpages.urls'), name='django.contrib.flatpages.views.flatpage'),
+]
+
+# Non-i18n URLs (API, admin, static, services) - no language prefix
+app_urlpatterns = [
     # App-provided paths...
-    path(r'admin/', admin.site.urls, name='unfold-admin'),
+    path('admin/', admin.site.urls, name='unfold-admin'),
     # path(r'admin/', unfold_admin_site.urls),  # <-- Unfold admin
-    path(r'unfold-admin/', unfold_admin_site.urls),  # <-- Unfold admin
+    path('unfold-admin/', unfold_admin_site.urls),  # <-- Unfold admin
     # Service pages...
     path(
-        r'robots.txt',
+        'robots.txt',
         cache_page(cache_timeout)(RobotsView.as_view()),
         name='robots',
     ),
@@ -94,6 +101,7 @@ handler500 = page500   # 'tales_django.views.page500'
 
 __all__ = [
     'app_urlpatterns',
+    'i18n_urlpatterns',
     'handler403',
     'handler404',
     'handler500',
