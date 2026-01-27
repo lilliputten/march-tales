@@ -22,6 +22,7 @@ Expected:
 {% block meta_og %}
   {# Opengraph tags #}
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="{% content_block 'Site title' 'Site title' %}" />
   <meta property="og:locale" content="{{ LANGUAGE_CODE }}" />
   <meta property="og:title" content="{{ track.title }} — {% content_block 'Site title' 'Site title' %}" />
   <meta property="og:description" content="{{ track.description|markdownify|striptags }}" />
@@ -31,7 +32,12 @@ Expected:
   <meta property="og:url" content="{{ request.build_absolute_uri }}" />
   {% endcomment %}
   <meta property="og:image" content="{{request.scheme}}://{{request.get_host}}{{ track.preview_picture_full.url }}" />
-  <meta property="twitter:image" content="{{request.scheme}}://{{request.get_host}}{{ track.preview_picture_full.url }}" />
+  <meta property="og:image:width" content="{{ track.preview_picture_full.width }}">
+  <meta property="og:image:height" content="{{ track.preview_picture_full.height }}">
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{{ track.title }} — {% content_block 'Site title' 'Site title' %}" />
+  <meta name="twitter:description" content="{{ track.description|markdownify|striptags }}" />
+  <meta name="twitter:image" content="{{request.scheme}}://{{request.get_host}}{{ track.preview_picture_full.url }}" />
 {% endblock %}
 
 {% block main_column_content %}
