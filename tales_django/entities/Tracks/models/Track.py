@@ -261,7 +261,7 @@ class Track(Model):
     def __str__(self):
         items = [
             self.title,
-            f'({self.series.title} #{self.series_order})' if self.series else None,
+            # f'({self.series.title} #{self.series_order})' if self.series else None,
             '[%d]' % self.id if LOCAL else None,
         ]
         info = ' '.join(map(str, filter(None, items)))
