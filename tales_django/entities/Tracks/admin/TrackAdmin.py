@@ -3,8 +3,8 @@ import traceback
 from django.contrib import admin, messages
 from django.core.files.base import File
 from django.core.files.uploadedfile import TemporaryUploadedFile
-from django.db.models import F, Q
-from django.db.models.functions import Lower
+from django.db.models import CharField, F, Q, Value
+from django.db.models.functions import Concat, Lower
 from django.utils.translation import get_language
 from django.utils.translation import gettext_lazy as _
 from import_export.admin import ExportActionModelAdmin, ImportExportModelAdmin
@@ -262,11 +262,12 @@ class TrackAdmin(
     def series_info(self, track):
         if track.series:
             return f'{track.series.title} ({track.series_order})'
+            # return f'{track.series.title}'
         return '-'
 
+    # series_info.admin_order_field = '_series_title_translated'  # Use the annotated field for sorting
+    series_info.admin_order_field = '_series_combined_sort'  # Use the combined annotated field for sorting
     series_info.short_description = _('Series')
-    # Remove the admin_order_field since series title sorting is problematic with translated fields
-    # series_info.admin_order_field = 'series__title'
 
     def duration_formatted(self, track):
         return track.duration_formatted
@@ -283,9 +284,17 @@ class TrackAdmin(
     size_formatted.short_description = _('Size')
 
     def get_queryset(self, request):
+
         queryset = super().get_queryset(request)
+        queryset = queryset.select_related('series')  # Optimize queries by prefetching series data
         queryset = queryset.annotate(
             _title_translated=F('title_' + get_language()),
+            _series_title_translated=F('series__title_' + get_language()),  # Annotate with series title for sorting
+            _series_order=F('series_order'),
+            # Combined field for sorting by series title and series order
+            _series_combined_sort=Concat(
+                F('series__title_' + get_language()), Value(' '), F('series_order'), output_field=CharField()
+            ),
         )
         return queryset
 
@@ -295,10 +304,11 @@ class TrackAdmin(
     title_translated.admin_order_field = Lower('_title_translated')
     title_translated.short_description = _('Title')
 
-    def get_ordering(self, request):
+    def get_ordering(self, _request):
         return [
-            '-published_at',
-            Lower(to_attribute('title')),
+            Lower('_series_combined_sort'),  # Sort by combined series title and order
+            '-published_at',  # Then by publication date descending
+            Lower(to_attribute('title')),  # Then by track title ascending
         ]
 
     def get_changeform_initial_data(self, request):
