@@ -110,6 +110,8 @@
                     {% include adminform.model_admin.change_form_after_template %}
                 {% endif %}
 
+              {% block form_bottom %}{% endblock %}
+
                 {% block submit_buttons_bottom %}{% submit_row %}{% endblock %}
 
                 {% block admin_change_form_document_ready %}
