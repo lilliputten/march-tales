@@ -10,6 +10,7 @@ from unfold.contrib.import_export.forms import ExportForm, ImportForm
 
 from tales_django.sites import unfold_admin_site
 
+from ..forms.TrackInlineForm import TrackInlineForm
 from ..models import Series
 
 
@@ -25,6 +26,7 @@ def no_promote_action(modeladmin, request, queryset):
 
 @admin.register(Series, site=unfold_admin_site)
 class SeriesAdmin(TranslatedFieldAdmin, ImportExportModelAdmin, ExportActionModelAdmin, UnfoldModelAdmin):
+    inlines = [TrackInlineForm]
     import_form_class = ImportForm
     export_form_class = ExportForm
 
