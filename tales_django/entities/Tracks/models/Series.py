@@ -66,13 +66,13 @@ class Series(Model):
     # The tracks relationship is now handled by the ForeignKey on the Track model
     # Access tracks via the related_name 'tracks' from Track.series
 
-    def get_absolute_url(self):
-        return reverse(
-            'series_details',
-            kwargs={
-                'series_id': self.id,
-            },
-        )
+    # def get_absolute_url(self):
+    #     return reverse(
+    #         'series_details',
+    #         kwargs={
+    #             'series_id': self.id,
+    #         },
+    #     )
 
     def __str__(self):
         return self.title

@@ -134,3 +134,19 @@ html.dark .ck-editor .ck.ck-editor__main>.ck-editor__editable {
     }
 }
 
+/* TrackInlineForm, tracks-heading: Customize series track list */
+fieldset[aria-labelledby="tracks-heading"] .tabular-table {
+    margin: 10px 0;
+}
+fieldset[aria-labelledby="tracks-heading"] .template,
+fieldset[aria-labelledby="tracks-heading"] .form-row.has_original.dynamic-tracks,
+fieldset[aria-labelledby="tracks-heading"] thead {
+    display: none;
+}
+fieldset[aria-labelledby="tracks-heading"] td.original p {
+    padding-bottom: 8px;
+}
+/* DEBUG */
+fieldset[aria-labelledby="tracks-heading"] {
+    /* border: 1px solid green; */
+}
