@@ -47,6 +47,27 @@ class IsPublishedFilter(admin.SimpleListFilter):
             return queryset.filter(~Q(track_status='PUBLISHED'))
 
 
+class HasSeriesFilter(admin.SimpleListFilter):
+    """
+    Filter tracks by whether they belong to a series
+    """
+
+    title = _('Has Series')
+    parameter_name = 'has_series'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('1', _('True')),
+            ('0', _('False')),
+        )
+
+    def queryset(self, _, queryset):
+        if self.value() == '1':
+            return queryset.filter(series__isnull=False)
+        if self.value() == '0':
+            return queryset.filter(series__isnull=True)
+
+
 @admin.action(description=_('Mark as published'))
 def mark_published_action(modeladmin, request, queryset):
     queryset.update(track_status='PUBLISHED')
@@ -223,6 +244,7 @@ class TrackAdmin(
     )
     list_filter = [
         IsPublishedFilter,
+        HasSeriesFilter,
         'track_status',
         'promote',
         'published_at',
