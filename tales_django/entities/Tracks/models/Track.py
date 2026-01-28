@@ -237,8 +237,8 @@ class Track(Model):
 
     def clean(self):
         super().clean()
-        # Series order validation is handled in TrackSeriesOrder model
-        # since Track no longer has direct series or order fields
+        # Validation for unique series_order within each series will be handled
+        # at the form/view level or in the admin due to M2M complexity at model level
 
     @property
     def lower_title(self) -> bool:

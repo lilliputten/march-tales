@@ -1,6 +1,8 @@
 import traceback
 
+from django import forms
 from django.contrib import admin, messages
+from django.core.exceptions import ValidationError
 from django.core.files.base import File
 from django.core.files.uploadedfile import TemporaryUploadedFile
 from django.db.models import CharField, F, Q, Value
@@ -18,6 +20,7 @@ from core.helpers.files import sizeofFmt
 from core.logging import errorStyle, getDebugLogger, tretiaryStyle, warningTitleStyle
 from tales_django.sites import unfold_admin_site
 
+from ..forms.TrackAdminForm import TrackAdminForm
 from ..models import Track
 
 # from ..models.TrackSeriesOrder import TrackSeriesOrder
@@ -99,6 +102,7 @@ class TrackAdmin(
     ExportActionModelAdmin,
     UnfoldModelAdmin,
 ):
+    form = TrackAdminForm
     import_form_class = ImportForm
     export_form_class = ExportForm
     # export_form_class = SelectableFieldsExportForm
@@ -216,10 +220,10 @@ class TrackAdmin(
     list_display = [
         'title_translated',
         'author',
-        'series_list',
+        'series_info',
+        # 'series_list',
         'rubrics_list',
         'tags_list',
-        'series_info',
         'duration_formatted',
         'size_formatted',
         'promote',
@@ -297,32 +301,25 @@ class TrackAdmin(
 
     rubrics_list.short_description = _('Rubrics')
 
-    def series_list(self, track):
-        seriesNames = map(lambda t: t.title, track.series.all())
-        return ', '.join(seriesNames)
-
-    series_list.short_description = _('Series')
+    # def series_list(self, track):
+    #     seriesNames = map(lambda t: t.title, track.series.all())
+    #     return ', '.join(seriesNames)
+    #
+    # series_list.short_description = _('Series')
 
     def series_info(self, track):
-        # if track.series.exists():
-        #     # from ..models.TrackSeriesOrder import TrackSeriesOrder
-        #
-        #     # Get series with their orders
-        #     # series_orders = TrackSeriesOrder.objects.filter(track=track).select_related('series')
-        #     series_list = []
-        #     for item in series_orders:
-        #         series_list.append(f'{item.series.title} (#{item.order})')
-        #     return ', '.join(series_list) if series_list else '-'
-        return '---'
+        # Get the first series if any, and combine with series_order
+        first_series = track.series.first()
+        if first_series:
+            return f'{first_series.title} (#{track.series_order})'
+        return '-'
 
     # Removed admin_order_field since sorting by series title isn't straightforward with many-to-many
     series_info.short_description = _('Series')
 
     def get_queryset(self, request):
         queryset = super().get_queryset(request)
-        # queryset = queryset.prefetch_related(
-        #     'series', 'trackseriesorder_set'
-        # )  # Changed to prefetch_related and include the intermediate model
+        queryset = queryset.prefetch_related('series')
         queryset = queryset.annotate(
             _title_translated=F('title_' + get_language()),
             # Removed _series_title_translated since it's a many-to-many relationship
@@ -372,6 +369,13 @@ class TrackAdmin(
         """
         Auto update owning users
         """
+        # # Validate unique series_order within each series before saving
+        # try:
+        #     obj.validate_unique_series_order()
+        # except ValidationError as e:
+        #     messages.add_message(request, messages.ERROR, e.message)
+        #     return  # Don't save if validation fails
+
         # Update updater info...
         obj.updated_by_id = request.user.id
         # Get audio duration
@@ -423,3 +427,17 @@ class TrackAdmin(
                 obj.audio_duration = None
                 # TODO: Prevent leaving the edit page?
         return super().save_model(request, obj, form, change)
+
+    def save_form_m2m(self, request, form, formsets, change):
+        """Save M2M relationships."""
+        # Save the M2M relationships
+        return super().save_form_m2m(request, form, formsets, change)
+
+        # # Validate unique series_order since M2M relationships are established
+        # try:
+        #     obj.validate_unique_series_order()
+        # except ValidationError as e:
+        #     # If validation fails, add error message
+        #     messages.add_message(request, messages.ERROR, e.message)
+        #     # Note: At this point, M2M relationships are already saved
+        #     # In a production system, you might want to implement transaction rollback
