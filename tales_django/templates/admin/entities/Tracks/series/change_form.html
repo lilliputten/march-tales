@@ -1,26 +1,58 @@
 {% extends "admin/change_form.html" %}
 
 {% load i18n admin_urls static admin_modify %}
-{% load crispy_forms_tags %}
 
 {% block form_bottom %}
     {{ block.super }}
 
     {% if track_assignment_form %}
-        <div class="submit-row" style="margin-bottom: 20px; padding: 10px; background-color: #f8f8f8; border: 1px solid #ddd;">
-            <h3 style="margin-top: 0; color: #333;">{% trans "Add Track to Series" %}</h3>
-            <form method="post" action="{{ assign_tracks_url }}">
-                {% csrf_token %}
-                <div style="display: flex; align-items: center; gap: 10px;">
-                    {{ track_assignment_form.select_track }}
-                    <button type="submit" class="button" style="margin: 0;">{% trans "Add Track" %}</button>
-                </div>
-                {% if track_assignment_form.select_track.errors %}
-                    <div style="color: red; margin-top: 5px;">
-                        {{ track_assignment_form.select_track.errors }}
+        <div class="card mb-3">
+          <fieldset class="module relative min-w-0" aria-labelledby="tracks-heading">
+            <h2
+              class="bg-base-100 border border-transparent font-semibold mb-6 px-4 py-3 rounded text-font-important-light text-sm lg:-mx-4 dark:bg-white/[.02] dark:text-font-important-dark"
+              id="tracks-heading"
+            >
+              {% trans "Add Track to Series" %}
+            </h2>
+            <div class="card-body p-3 border border-base-200 mb-6 overflow-x-auto rounded shadow-sm dark:border-base-800 flex flex-col md:flex-row md:items-center gap-2">
+                <form method="post" action="{{ assign_tracks_url }}">
+                    {% csrf_token %}
+                    <div class="flex-grow flex flex-col md:flex-row gap-2 md:items-center">
+                        <label for="{{ track_assignment_form.select_track.id_for_label }}" class="whitespace-nowrap form-label">
+                            {{ track_assignment_form.select_track.label }}:
+                        </label>
+                        <select name="{{ track_assignment_form.select_track.html_name }}"
+                                id="{{ track_assignment_form.select_track.id_for_label }}"
+                                class="flex-grow border border-base-200 bg-white font-medium placeholder-base-400 rounded shadow-sm text-font-default-light text-sm focus:ring focus:ring-primary-300 focus:border-primary-600 focus:outline-none group-[.errors]:border-red-600 group-[.errors]:focus:ring-red-200 dark:bg-base-900 dark:border-base-700 dark:text-font-default-dark dark:focus:border-primary-600 dark:focus:ring-primary-700 dark:focus:ring-opacity-50 dark:group-[.errors]:border-red-500 dark:group-[.errors]:focus:ring-red-600/40 px-3 py-2 w-full pr-8 appearance-none select2">
+                            {% for option_value, option_label in track_assignment_form.select_track.field.choices %}
+                                <option value="{{ option_value }}"{% if option_value in track_assignment_form.select_track.value %} selected{% endif %}>
+                                    {{ option_label }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                        {% if track_assignment_form.select_track.errors %}
+                            <div class="invalid-feedback d-block">
+                                {{ track_assignment_form.select_track.errors }}
+                            </div>
+                        {% endif %}
                     </div>
-                {% endif %}
-            </form>
+                    <div class="">
+                        <button
+                          type="submit"
+                          class="border border-base-200 font-medium px-3 py-2 rounded transition-all w-full hover:bg-base-50 lg:block lg:w-auto dark:border-base-700 dark:hover:text-base-200 dark:hover:bg-base-900"
+                          name="_continue"
+                        >
+                          {% trans "Add Track" %}
+                        </button>
+                    </div>
+                    {% if track_assignment_form.non_field_errors %}
+                        <div class="alert alert-danger mt-3">
+                            {{ track_assignment_form.non_field_errors }}
+                        </div>
+                    {% endif %}
+                </form>
+            </div>
+          </fieldset>
         </div>
     {% endif %}
 {% endblock %}
