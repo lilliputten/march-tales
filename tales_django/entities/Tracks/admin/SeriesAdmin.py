@@ -16,7 +16,7 @@ from unfold.contrib.import_export.forms import ExportForm, ImportForm
 
 from tales_django.sites import unfold_admin_site
 
-from ..forms.TrackInlineForm import TrackInlineForm
+from ..forms.TrackInlineForm import TrackInlineAdmin
 from ..models import Series, Track
 
 
@@ -56,7 +56,7 @@ class TrackAssignmentForm(forms.Form):
 
 @admin.register(Series, site=unfold_admin_site)
 class SeriesAdmin(TranslatedFieldAdmin, ImportExportModelAdmin, ExportActionModelAdmin, UnfoldModelAdmin):
-    inlines = [TrackInlineForm]
+    inlines = [TrackInlineAdmin]
     import_form_class = ImportForm
     export_form_class = ExportForm
     change_form_template = 'admin/entities/Tracks/series/change_form.html'
