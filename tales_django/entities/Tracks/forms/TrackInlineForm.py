@@ -107,9 +107,14 @@ class TrackInlineForm(admin.TabularInline):
     fk_name = 'series'  # Specify which foreign key to use
     extra = 0  # No empty forms to prevent creating new tracks directly
     can_add = False  # Disable the add button
-    fields = ('title_ru', 'title_en', 'series_order')
+    fields = (
+        'id',
+        # 'title_ru',
+        # 'title_en',
+        'series_order',
+    )
     verbose_name = _('Track')
     verbose_name_plural = _('Tracks')
     can_delete = True  # Allow removal of existing tracks from the series
     show_change_link = False  # Don't show change link since we're not editing data
-    readonly_fields = ('title_ru', 'title_en', 'series_order')  # Make fields read-only to prevent editing
+    # readonly_fields = ('title_ru', 'title_en', 'series_order')  # Make fields read-only to prevent editing

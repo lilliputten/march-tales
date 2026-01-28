@@ -23,7 +23,8 @@
 /types
 /utils
 
-/static
+/static/*
+!/static/unfold-fixes/
 
 # Log files
 

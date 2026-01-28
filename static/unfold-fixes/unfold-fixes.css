@@ -139,7 +139,8 @@ fieldset[aria-labelledby="tracks-heading"] .tabular-table {
     margin: 10px 0;
 }
 fieldset[aria-labelledby="tracks-heading"] .template,
-fieldset[aria-labelledby="tracks-heading"] .form-row.has_original.dynamic-tracks,
+/* fieldset[aria-labelledby="tracks-heading"] .form-row.has_original.dynamic-tracks, */
+/* fieldset[aria-labelledby="tracks-heading"] .vIntegerField, */
 fieldset[aria-labelledby="tracks-heading"] thead {
     display: none;
 }
