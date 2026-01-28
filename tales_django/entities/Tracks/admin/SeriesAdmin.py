@@ -1,132 +1,74 @@
-from django import forms
 from django.contrib import admin
-from django.db.models import F
+from django.db.models import Count, F
 from django.db.models.functions import Lower
 from django.utils.translation import get_language
 from django.utils.translation import gettext_lazy as _
-from translated_fields import TranslatedFieldAdmin
+from import_export.admin import ExportActionModelAdmin, ImportExportModelAdmin
+from translated_fields import TranslatedFieldAdmin, to_attribute
 from unfold.admin import ModelAdmin as UnfoldModelAdmin
+from unfold.contrib.import_export.forms import ExportForm, ImportForm
 
 from tales_django.sites import unfold_admin_site
 
-from ..models import Series, Track
-from ..models.TrackSeriesOrder import TrackSeriesOrder
+from ..models import Series
 
 
-class TrackSeriesOrderInline(admin.TabularInline):
-    model = TrackSeriesOrder
-    fk_name = 'series'
-    extra = 1
-    max_num = 100
-    fields = ('track', 'order')
-    verbose_name = _('Track in Series')
-    verbose_name_plural = _('Tracks in this Series')
+@admin.action(description=_('Promote'))
+def promote_action(modeladmin, request, queryset):
+    queryset.update(promote=True)
 
-    def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if db_field.name == 'track':
-            # Filter out tracks already associated with this series
-            if hasattr(self, 'parent_obj') and self.parent_obj:
-                existing_track_ids = TrackSeriesOrder.objects.filter(series=self.parent_obj).values_list(
-                    'track_id', flat=True
-                )
-                kwargs['queryset'] = Track.objects.exclude(id__in=existing_track_ids)
-            else:
-                kwargs['queryset'] = Track.objects.all()
-        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
+@admin.action(description=_('No promote'))
+def no_promote_action(modeladmin, request, queryset):
+    queryset.update(promote=False)
 
 
 @admin.register(Series, site=unfold_admin_site)
-class SeriesAdmin(TranslatedFieldAdmin, UnfoldModelAdmin):
-    inlines = [TrackSeriesOrderInline]
+class SeriesAdmin(TranslatedFieldAdmin, ImportExportModelAdmin, ExportActionModelAdmin, UnfoldModelAdmin):
+    import_form_class = ImportForm
+    export_form_class = ExportForm
 
-    fieldsets = (
-        (
-            _('Title'),
-            {
-                'classes': ['--collapse', '--opened-by-default', 'columns'],
-                'fields': (
-                    'title_ru',
-                    'title_en',
-                ),
-            },
-        ),
-        (
-            _('Description'),
-            {
-                'classes': ['--collapse', 'columns'],
-                'fields': (
-                    'description_ru',
-                    'description_en',
-                ),
-            },
-        ),
-        (
-            _('Settings'),
-            {
-                'classes': ['--collapse', 'columns'],
-                'fields': ('is_visible',),
-            },
-        ),
-    )
-
+    actions = [
+        promote_action,
+        no_promote_action,
+    ]
     list_display = [
         'title_translated',
-        'track_count',
-        'published_track_count',
+        'serialized_tracks_count',
+        # 'series_order',
+        'promote',
         'is_visible',
-        'created_at',
+        # 'created_at',
         'updated_at',
     ]
-
-    list_filter = [
-        'is_visible',
+    readonly_fields = (
         'created_at',
         'updated_at',
-    ]
-
+    )
     search_fields = [
         'title_en',
         'title_ru',
-        'description_en',
-        'description_ru',
     ]
-
-    readonly_fields = (
-        'track_count',
-        'published_track_count',
-        'created_at',
-        'updated_at',
-    )
-
-    def track_count(self, series):
-        # Import here to avoid circular imports
-        from ..models import Series as SeriesModel
-
-        if isinstance(series, SeriesModel):
-            return series.track_count
-        return 0
-
-    track_count.short_description = _('Total Tracks')
-
-    def published_track_count(self, series):
-        # Import here to avoid circular imports
-        from ..models import Series as SeriesModel
-
-        if isinstance(series, SeriesModel):
-            return series.published_track_count
-        return 0
-
-    published_track_count.short_description = _('Published Tracks')
 
     def get_queryset(self, request):
         queryset = super().get_queryset(request)
         queryset = queryset.annotate(
+            _tracks_count=Count('tracks', distinct=True),
             _title_translated=F('title_' + get_language()),
         )
         return queryset
 
-    def title_translated(self, series):
-        return series.title
+    def title_translated(self, track):
+        return track.title
 
     title_translated.admin_order_field = Lower('_title_translated')
-    title_translated.short_description = _('Title')
+    title_translated.short_description = _('title')
+
+    def serialized_tracks_count(self, obj):
+        return obj._tracks_count
+
+    serialized_tracks_count.admin_order_field = '_tracks_count'
+    serialized_tracks_count.short_description = _('tracks count')
+
+    def get_ordering(self, request):
+        return [Lower(to_attribute('title'))]

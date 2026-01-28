@@ -24,6 +24,8 @@ from tales_django.entities.Tracks.constants.preview_picture_sizes import (
     track_preview_picture_thumb_size,
 )
 
+# from .TrackSeriesOrder import TrackSeriesOrder
+
 _logger = getDebugLogger()
 
 
@@ -98,6 +100,18 @@ class Track(Model):
         verbose_name=_('Rubrics'),
         blank=True,
         related_name='rubricated_tracks',
+    )
+
+    series = models.ManyToManyField(
+        'Series',
+        verbose_name=_('Series'),
+        blank=True,
+        related_name='serialized_tracks',
+    )
+    series_order = models.PositiveIntegerField(
+        _('Order in Series'),
+        default=1,
+        help_text=_('Order within the series (lower numbers appear first)'),
     )
 
     uploadsFolder = getAudioTrackFolderName()
@@ -223,13 +237,8 @@ class Track(Model):
 
     def clean(self):
         super().clean()
-        # Validate series order uniqueness within the same series
-        if self.series and self.pk:
-            existing_tracks = Track.objects.filter(series=self.series, series_order=self.series_order).exclude(
-                pk=self.pk
-            )
-            if existing_tracks.exists():
-                raise ValidationError({'series_order': _('A track with this order already exists in the series.')})
+        # Series order validation is handled in TrackSeriesOrder model
+        # since Track no longer has direct series or order fields
 
     @property
     def lower_title(self) -> bool:

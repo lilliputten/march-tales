@@ -18,8 +18,9 @@ from core.helpers.files import sizeofFmt
 from core.logging import errorStyle, getDebugLogger, tretiaryStyle, warningTitleStyle
 from tales_django.sites import unfold_admin_site
 
-from ..models import Series, Track
-from ..models.TrackSeriesOrder import TrackSeriesOrder
+from ..models import Track
+
+# from ..models.TrackSeriesOrder import TrackSeriesOrder
 
 _logger = getDebugLogger()
 
@@ -70,25 +71,25 @@ def no_promote_action(modeladmin, request, queryset):
     queryset.update(promote=False)
 
 
-class TrackSeriesOrderInline(admin.TabularInline):
-    model = TrackSeriesOrder
-    fk_name = 'track'
-    extra = 1
-    fields = ('series', 'order')
-    verbose_name = _('Series in Track')
-    verbose_name_plural = _('Series in Track')
-
-    def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if db_field.name == 'series':
-            # Filter out series already associated with this track
-            if hasattr(self, 'parent_obj') and self.parent_obj:
-                existing_series_ids = TrackSeriesOrder.objects.filter(track=self.parent_obj).values_list(
-                    'series_id', flat=True
-                )
-                kwargs['queryset'] = Series.objects.exclude(id__in=existing_series_ids)
-            else:
-                kwargs['queryset'] = Series.objects.all()
-        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+# class TrackSeriesOrderInline(admin.TabularInline):
+#     model = TrackSeriesOrder
+#     fk_name = 'track'
+#     extra = 1
+#     fields = ('series', 'order')
+#     verbose_name = _('Series in Track')
+#     verbose_name_plural = _('Series in Track')
+#
+#     def formfield_for_foreignkey(self, db_field, request, **kwargs):
+#         if db_field.name == 'series':
+#             # Filter out series already associated with this track
+#             if hasattr(self, 'parent_obj') and self.parent_obj:
+#                 existing_series_ids = TrackSeriesOrder.objects.filter(track=self.parent_obj).values_list(
+#                     'series_id', flat=True
+#                 )
+#                 kwargs['queryset'] = Series.objects.exclude(id__in=existing_series_ids)
+#             else:
+#                 kwargs['queryset'] = Series.objects.all()
+#         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 
 @admin.register(Track, site=unfold_admin_site)
@@ -101,7 +102,7 @@ class TrackAdmin(
     import_form_class = ImportForm
     export_form_class = ExportForm
     # export_form_class = SelectableFieldsExportForm
-    inlines = [TrackSeriesOrderInline]
+    # inlines = [TrackSeriesOrderInline]
 
     fieldsets = (
         (
@@ -143,6 +144,16 @@ class TrackAdmin(
                     'author',
                     'tags',
                     'rubrics',
+                ),
+            },
+        ),
+        (
+            _('Series'),
+            {
+                'classes': ['--collapse', 'columns'],
+                'fields': (
+                    'series',
+                    'series_order',
                 ),
             },
         ),
@@ -205,6 +216,7 @@ class TrackAdmin(
     list_display = [
         'title_translated',
         'author',
+        'series_list',
         'rubrics_list',
         'tags_list',
         'series_info',
@@ -247,6 +259,7 @@ class TrackAdmin(
         'promote',
         'published_at',
         'updated_at',
+        'series',
         'author',
         'rubrics',
         'tags',
@@ -284,26 +297,32 @@ class TrackAdmin(
 
     rubrics_list.short_description = _('Rubrics')
 
-    def series_info(self, track):
-        if track.series.exists():
-            from ..models.TrackSeriesOrder import TrackSeriesOrder
+    def series_list(self, track):
+        seriesNames = map(lambda t: t.title, track.series.all())
+        return ', '.join(seriesNames)
 
-            # Get series with their orders
-            series_orders = TrackSeriesOrder.objects.filter(track=track).select_related('series')
-            series_list = []
-            for item in series_orders:
-                series_list.append(f'{item.series.title} (#{item.order})')
-            return ', '.join(series_list) if series_list else '-'
-        return '-'
+    series_list.short_description = _('Series')
+
+    def series_info(self, track):
+        # if track.series.exists():
+        #     # from ..models.TrackSeriesOrder import TrackSeriesOrder
+        #
+        #     # Get series with their orders
+        #     # series_orders = TrackSeriesOrder.objects.filter(track=track).select_related('series')
+        #     series_list = []
+        #     for item in series_orders:
+        #         series_list.append(f'{item.series.title} (#{item.order})')
+        #     return ', '.join(series_list) if series_list else '-'
+        return '---'
 
     # Removed admin_order_field since sorting by series title isn't straightforward with many-to-many
     series_info.short_description = _('Series')
 
     def get_queryset(self, request):
         queryset = super().get_queryset(request)
-        queryset = queryset.prefetch_related(
-            'series', 'trackseriesorder_set'
-        )  # Changed to prefetch_related and include the intermediate model
+        # queryset = queryset.prefetch_related(
+        #     'series', 'trackseriesorder_set'
+        # )  # Changed to prefetch_related and include the intermediate model
         queryset = queryset.annotate(
             _title_translated=F('title_' + get_language()),
             # Removed _series_title_translated since it's a many-to-many relationship

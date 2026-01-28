@@ -1,21 +1,18 @@
+from datetime import date
+
 from django.db import models
+from django.db.models import Model
+from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from translated_fields import TranslatedField
 
 from tales_django.core.model_helpers import get_non_empty_localized_model_field_attrgetter
 
-from .TrackSeriesOrder import TrackSeriesOrder
 
-
-class Series(models.Model):
+class Series(Model):
     class Meta:
         verbose_name = _('Series')
         verbose_name_plural = _('Series')
-        # indexes = [
-        #     models.Index(fields=['title_ru']),
-        #     models.Index(fields=['title_en']),
-        #     models.Index(fields=['created_at']),
-        # ]
 
     title = TranslatedField(
         models.CharField(
@@ -40,6 +37,8 @@ class Series(models.Model):
         attrgetter=get_non_empty_localized_model_field_attrgetter,
     )
 
+    promote = models.BooleanField(_('Promote'), default=True, help_text=_('Promote on the main page'))
+
     is_visible = models.BooleanField(
         _('Visible'),
         default=True,
@@ -56,36 +55,33 @@ class Series(models.Model):
         auto_now=True,
     )
 
+    # published_at = models.DateField(verbose_name=_('Published at'), default=date.today)
+    # updated_at = models.DateField(verbose_name=_('Updated at'), auto_now=True)
+
+    @property
+    def tracks_count(self):
+        return self.tracks.count()
+
+    @property
+    def published_tracks_count(self):
+        return self.tracks.filter(track_status='PUBLISHED').count()
+
+    # Paired (reversed) relation to tracks
     tracks = models.ManyToManyField(
         'Track',
-        through='TrackSeriesOrder',
-        related_name='series',
-        verbose_name=_('Tracks'),
+        blank=True,
+        related_name='series_tracks',
+        # through='Track_series',
+        # related_name='series_tracks',
     )
+
+    def get_absolute_url(self):
+        return reverse(
+            'series_details',
+            kwargs={
+                'series_id': self.id,
+            },
+        )
 
     def __str__(self):
         return self.title
-
-    def get_absolute_url(self):
-        # Link to the first track in the series ordered by track order
-        first_track_order = (
-            TrackSeriesOrder.objects.filter(series=self, track__track_status='PUBLISHED')
-            .order_by('series_order')
-            .first()
-        )
-
-        if first_track_order:
-            return first_track_order.track.get_absolute_url()
-        return '#'
-
-    @property
-    def track_count(self):
-        from .TrackSeriesOrder import TrackSeriesOrder
-
-        return TrackSeriesOrder.objects.filter(series=self).count()
-
-    @property
-    def published_track_count(self):
-        from .TrackSeriesOrder import TrackSeriesOrder
-
-        return TrackSeriesOrder.objects.filter(series=self, track__track_status='PUBLISHED').count()
