@@ -24,8 +24,6 @@ from tales_django.entities.Tracks.constants.preview_picture_sizes import (
     track_preview_picture_thumb_size,
 )
 
-# from .TrackSeriesOrder import TrackSeriesOrder
-
 _logger = getDebugLogger()
 
 
@@ -34,26 +32,13 @@ class Track(Model):
         verbose_name = _('Track')
         verbose_name_plural = _('Tracks')
         # indexes = [
-        #     models.Index(fields=['title_ru']),
-        #     models.Index(fields=['title_en']),
         #     models.Index(fields=['created_at']),
         #     models.Index(fields=['author']),
         #     models.Index(fields=['track_status']),
         #     models.Index(fields=['promote']),
-        #     models.Index(fields=['for_members']),
-        #     models.Index(fields=['tags']),
-        #     models.Index(fields=['rubrics']),
-        #     models.Index(fields=['published_at']),
-        #     models.Index(fields=['updated_at']),
         #     models.Index(fields=['played_count']),
         #     models.Index(fields=['track_status', 'promote']),
         #     models.Index(fields=['track_status', 'for_members']),
-        #     models.Index(fields=['track_status', 'published_at']),
-        #     models.Index(fields=['track_status', 'updated_at']),
-        #     models.Index(fields=['track_status', 'author']),
-        #     models.Index(fields=['track_status', 'published_at', 'updated_at']),
-        #     models.Index(fields=['track_status', 'author', 'published_at']),
-        #     models.Index(fields=['track_status', 'author', 'published_at', 'updated_at']),
         # ]
 
     title = TranslatedField(
@@ -94,24 +79,26 @@ class Track(Model):
         on_delete=models.DO_NOTHING,
     )
 
+    series = models.ForeignKey(
+        'Series',
+        verbose_name=_('Series'),
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name='tracks',
+    )
+    series_order = models.PositiveIntegerField(
+        _('Order in Series'),
+        default=1,
+        help_text=_('Order within the series (lower numbers appear first)'),
+    )
+
     tags = models.ManyToManyField('Tag', verbose_name=_('Tags'), blank=True, related_name='tagged_tracks')
     rubrics = models.ManyToManyField(
         'Rubric',
         verbose_name=_('Rubrics'),
         blank=True,
         related_name='rubricated_tracks',
-    )
-
-    series = models.ManyToManyField(
-        'Series',
-        verbose_name=_('Series'),
-        blank=True,
-        related_name='serialized_tracks',
-    )
-    series_order = models.PositiveIntegerField(
-        _('Order in Series'),
-        default=1,
-        help_text=_('Order within the series (lower numbers appear first)'),
     )
 
     uploadsFolder = getAudioTrackFolderName()

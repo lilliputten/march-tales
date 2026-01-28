@@ -25,17 +25,16 @@ class TrackAdminForm(ModelForm):
 
         if series and series_order is not None:
             # Check if any other track in the same series has the same series_order
-            for series_instance in series.all():
-                same_order_tracks = Track.objects.filter(series=series_instance, series_order=series_order)
+            same_order_tracks = Track.objects.filter(series=series, series_order=series_order)
 
-                # If updating an existing track, exclude it from the check
-                if self.instance and self.instance.pk:
-                    same_order_tracks = same_order_tracks.exclude(pk=self.instance.pk)
+            # If updating an existing track, exclude it from the check
+            if self.instance and self.instance.pk:
+                same_order_tracks = same_order_tracks.exclude(pk=self.instance.pk)
 
-                if same_order_tracks.exists():
-                    raise ValidationError(
-                        f'Track order {series_order} already exists in series {series_instance.title}. '
-                        f'Each track in a series must have a unique order number.'
-                    )
+            if same_order_tracks.exists():
+                raise ValidationError(
+                    f'Track order {series_order} already exists in series {series.title}. '
+                    f'Each track in a series must have a unique order number.'
+                )
 
         return cleaned_data

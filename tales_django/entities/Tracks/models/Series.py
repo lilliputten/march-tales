@@ -66,14 +66,8 @@ class Series(Model):
     def published_tracks_count(self):
         return self.tracks.filter(track_status='PUBLISHED').count()
 
-    # Paired (reversed) relation to tracks
-    tracks = models.ManyToManyField(
-        'Track',
-        blank=True,
-        related_name='series_tracks',
-        # through='Track_series',
-        # related_name='series_tracks',
-    )
+    # The tracks relationship is now handled by the ForeignKey on the Track model
+    # Access tracks via the related_name 'tracks' from Track.series
 
     def get_absolute_url(self):
         return reverse(

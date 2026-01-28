@@ -221,7 +221,6 @@ class TrackAdmin(
         'title_translated',
         'author',
         'series_info',
-        # 'series_list',
         'rubrics_list',
         'tags_list',
         'duration_formatted',
@@ -267,7 +266,6 @@ class TrackAdmin(
         'author',
         'rubrics',
         'tags',
-        # 'series',  # Removed since it's no longer a direct field
         # 'played_count',
     ]
 
@@ -301,28 +299,23 @@ class TrackAdmin(
 
     rubrics_list.short_description = _('Rubrics')
 
-    # def series_list(self, track):
-    #     seriesNames = map(lambda t: t.title, track.series.all())
-    #     return ', '.join(seriesNames)
-    #
-    # series_list.short_description = _('Series')
-
     def series_info(self, track):
-        # Get the first series if any, and combine with series_order
-        first_series = track.series.first()
-        if first_series:
-            return f'{first_series.title} (#{track.series_order})'
+        # Get the series if any, and combine with series_order
+        if track.series:
+            return f'{track.series.title} (#{track.series_order})'
         return '-'
 
-    # Removed admin_order_field since sorting by series title isn't straightforward with many-to-many
+    series_info.admin_order_field = '_series_title'  # Use annotated field for sorting
     series_info.short_description = _('Series')
 
     def get_queryset(self, request):
         queryset = super().get_queryset(request)
-        queryset = queryset.prefetch_related('series')
+        queryset = queryset.select_related('series')
+        language = get_language()
         queryset = queryset.annotate(
-            _title_translated=F('title_' + get_language()),
-            # Removed _series_title_translated since it's a many-to-many relationship
+            _title_translated=F(f'title_{language}'),
+            # Handle potential null series for sorting
+            _series_title=F(f'series__title_{language}'),
         )
         return queryset
 
