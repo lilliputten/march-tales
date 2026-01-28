@@ -35,7 +35,6 @@ class SeriesAdmin(TranslatedFieldAdmin, ImportExportModelAdmin, ExportActionMode
     list_display = [
         'title_translated',
         'serialized_tracks_count',
-        # 'series_order',
         'promote',
         'is_visible',
         # 'created_at',

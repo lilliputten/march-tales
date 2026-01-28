@@ -23,8 +23,6 @@ from tales_django.sites import unfold_admin_site
 from ..forms.TrackAdminForm import TrackAdminForm
 from ..models import Track
 
-# from ..models.TrackSeriesOrder import TrackSeriesOrder
-
 _logger = getDebugLogger()
 
 
@@ -74,27 +72,6 @@ def no_promote_action(modeladmin, request, queryset):
     queryset.update(promote=False)
 
 
-# class TrackSeriesOrderInline(admin.TabularInline):
-#     model = TrackSeriesOrder
-#     fk_name = 'track'
-#     extra = 1
-#     fields = ('series', 'order')
-#     verbose_name = _('Series in Track')
-#     verbose_name_plural = _('Series in Track')
-#
-#     def formfield_for_foreignkey(self, db_field, request, **kwargs):
-#         if db_field.name == 'series':
-#             # Filter out series already associated with this track
-#             if hasattr(self, 'parent_obj') and self.parent_obj:
-#                 existing_series_ids = TrackSeriesOrder.objects.filter(track=self.parent_obj).values_list(
-#                     'series_id', flat=True
-#                 )
-#                 kwargs['queryset'] = Series.objects.exclude(id__in=existing_series_ids)
-#             else:
-#                 kwargs['queryset'] = Series.objects.all()
-#         return super().formfield_for_foreignkey(db_field, request, **kwargs)
-
-
 @admin.register(Track, site=unfold_admin_site)
 class TrackAdmin(
     TranslatedFieldAdmin,
@@ -105,8 +82,6 @@ class TrackAdmin(
     form = TrackAdminForm
     import_form_class = ImportForm
     export_form_class = ExportForm
-    # export_form_class = SelectableFieldsExportForm
-    # inlines = [TrackSeriesOrderInline]
 
     fieldsets = (
         (
@@ -161,17 +136,6 @@ class TrackAdmin(
                 ),
             },
         ),
-        # Removed Series field since it's now handled via many-to-many relationship in TrackSeriesOrder
-        # (
-        #     _('Series'),
-        #     {
-        #         'classes': ['--collapse', 'columns'],
-        #         'fields': (
-        #             'series',
-        #             # 'series_order',
-        #         ),
-        #     },
-        # ),
         (
             _('Status'),
             {
@@ -220,7 +184,8 @@ class TrackAdmin(
     list_display = [
         'title_translated',
         'author',
-        'series_info',
+        'series_title_only',
+        'series_order',
         'rubrics_list',
         'tags_list',
         'duration_formatted',
@@ -299,14 +264,14 @@ class TrackAdmin(
 
     rubrics_list.short_description = _('Rubrics')
 
-    def series_info(self, track):
-        # Get the series if any, and combine with series_order
+    def series_title_only(self, track):
+        # Get the series title only if series exists
         if track.series:
-            return f'{track.series.title} (#{track.series_order})'
+            return track.series.title
         return '-'
 
-    series_info.admin_order_field = '_series_title'  # Use annotated field for sorting
-    series_info.short_description = _('Series')
+    series_title_only.admin_order_field = '_series_title'  # Use annotated field for sorting
+    series_title_only.short_description = _('Series')
 
     def get_queryset(self, request):
         queryset = super().get_queryset(request)
@@ -316,6 +281,8 @@ class TrackAdmin(
             _title_translated=F(f'title_{language}'),
             # Handle potential null series for sorting
             _series_title=F(f'series__title_{language}'),
+            # Add series_order to the queryset for sorting
+            _series_order=F('series_order'),
         )
         return queryset
 
@@ -338,13 +305,6 @@ class TrackAdmin(
 
     title_translated.admin_order_field = Lower('_title_translated')
     title_translated.short_description = _('Title')
-
-    def get_ordering(self, _request):
-        return [
-            # Lower('_series_combined_sort'),  # Sort by combined series title and order
-            '-published_at',  # Then by publication date descending
-            Lower(to_attribute('title')),  # Then by track title ascending
-        ]
 
     def get_changeform_initial_data(self, request):
         get_data = super(TrackAdmin, self).get_changeform_initial_data(request)

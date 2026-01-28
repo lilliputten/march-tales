@@ -55,9 +55,6 @@ class Series(Model):
         auto_now=True,
     )
 
-    # published_at = models.DateField(verbose_name=_('Published at'), default=date.today)
-    # updated_at = models.DateField(verbose_name=_('Updated at'), auto_now=True)
-
     @property
     def tracks_count(self):
         return self.tracks.count()

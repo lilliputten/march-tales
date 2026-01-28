@@ -23,6 +23,10 @@ class TrackAdminForm(ModelForm):
         series = cleaned_data.get('series')
         series_order = cleaned_data.get('series_order')
 
+        # If a series is selected, series_order must not be empty/null
+        if series and (series_order is None or series_order == ''):
+            raise ValidationError({'series_order': 'Series order is required when a series is selected.'})
+
         if series and series_order is not None:
             # Check if any other track in the same series has the same series_order
             same_order_tracks = Track.objects.filter(series=series, series_order=series_order)

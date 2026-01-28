@@ -89,7 +89,9 @@ class Track(Model):
     )
     series_order = models.PositiveIntegerField(
         _('Order in Series'),
-        default=1,
+        # default=1,
+        blank=True,
+        null=True,
         help_text=_('Order within the series (lower numbers appear first)'),
     )
 
