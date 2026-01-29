@@ -66,13 +66,17 @@ class Series(Model):
     # The tracks relationship is now handled by the ForeignKey on the Track model
     # Access tracks via the related_name 'tracks' from Track.series
 
-    # def get_absolute_url(self):
-    #     return reverse(
-    #         'series_details',
-    #         kwargs={
-    #             'series_id': self.id,
-    #         },
-    #     )
+    def get_absolute_url(self):
+        # Find the related track with the lowest series_order value and return its URL
+        first_track = self.tracks.filter(track_status='PUBLISHED').order_by('series_order', 'id').first()
+        if first_track:
+            return first_track.get_absolute_url()
+        return reverse(
+            'series_details',
+            kwargs={
+                'series_id': self.id,
+            },
+        )
 
     def __str__(self):
         count = self.tracks_count
