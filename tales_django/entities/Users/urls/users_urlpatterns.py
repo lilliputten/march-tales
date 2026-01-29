@@ -16,6 +16,12 @@ from ..views import (
     profile,
 )
 
+# NOTE: These urls are required in this fixed form (without leading locale prefix)
+users_fixed_urlpatterns = [
+    path(r'login-success/', login_success, name='login_success'),
+    path(r'login-success/<str:key>/', login_success, name='login_success'),
+]
+
 # Content routes with language prefix support
 users_urlpatterns = i18n_patterns(
     # Accounts...
@@ -25,8 +31,8 @@ users_urlpatterns = i18n_patterns(
         UserRegistrationView.as_view(form_class=UserRegistrationForm),
         name='django_registration_register',
     ),
-    path(r'login-success/', login_success, name='login_success'),
-    path(r'login-success/<str:key>/', login_success, name='login_success'),
+    # path(r'login-success/', login_success, name='login_success'),
+    # path(r'login-success/<str:key>/', login_success, name='login_success'),
     path(r'profile/', profile, name='profile'),
     path(r'profile/edit', edit_user_profile, name='profile_edit'),
     path(r'profile/delete', delete_user_account, name='delete_account'),
@@ -42,4 +48,4 @@ users_urlpatterns = i18n_patterns(
     path('accounts/', include('allauth.urls')),
     path('_allauth/', include('allauth.headless.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
-)
+) + users_fixed_urlpatterns
