@@ -12,7 +12,7 @@ from tales_django.core.model_helpers import get_non_empty_localized_model_field_
 class Series(Model):
     class Meta:
         verbose_name = _('Series')
-        verbose_name_plural = _('Series')
+        verbose_name_plural = _('Series (plural)')
 
     title = TranslatedField(
         models.CharField(
@@ -21,7 +21,7 @@ class Series(Model):
             blank=False,
             null=False,
             max_length=256,
-            help_text=_('The series title text, required.'),
+            help_text=_('The series title text, required'),
         ),
         attrgetter=get_non_empty_localized_model_field_attrgetter,
     )

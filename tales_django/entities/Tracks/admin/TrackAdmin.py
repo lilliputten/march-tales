@@ -169,7 +169,7 @@ class TrackAdmin(
             },
         ),
         (
-            _('Publication'),
+            _('Updates'),
             {
                 'classes': ['--collapse', 'columns'],
                 'fields': (

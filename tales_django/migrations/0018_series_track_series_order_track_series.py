@@ -15,8 +15,8 @@ class Migration(migrations.Migration):
             name='Series',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title_ru', models.CharField(help_text='The series title text, required.', max_length=256, verbose_name='Title')),
-                ('title_en', models.CharField(help_text='The series title text, required.', max_length=256, verbose_name='Title')),
+                ('title_ru', models.CharField(help_text='The series title text, required', max_length=256, verbose_name='Title')),
+                ('title_en', models.CharField(help_text='The series title text, required', max_length=256, verbose_name='Title')),
                 ('description_ru', models.TextField(blank=True, help_text='Optional series description', max_length=1024, verbose_name='Description')),
                 ('description_en', models.TextField(blank=True, help_text='Optional series description', max_length=1024, verbose_name='Description')),
                 ('promote', models.BooleanField(default=True, help_text='Promote on the main page', verbose_name='Promote')),

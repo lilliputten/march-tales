@@ -15,11 +15,6 @@ from tales_django.entities.Tracks.constants.preview_picture_sizes import (
     author_portrait_picture_thumb_size,
 )
 
-# from datetime import timedelta
-
-
-# from django.utils.text import slugify
-
 
 class Author(Model):
     class Meta:

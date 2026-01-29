@@ -60,10 +60,53 @@ class SeriesAdmin(TranslatedFieldAdmin, ImportExportModelAdmin, ExportActionMode
     inlines = [TrackInlineAdmin]
     import_form_class = ImportForm
     export_form_class = ExportForm
-    change_form_template = 'admin/entities/Tracks/series/change_form.html'
+    # change_form_template = 'admin/entities/Tracks/series/change_form.html'
+    change_form_template = 'overriden/admin/Series/change_form.html'
+
+    fieldsets = (
+        (
+            _('Title'),
+            {
+                'classes': ['--collapse', '--opened-by-default', 'columns'],
+                'fields': (
+                    'title_ru',
+                    'title_en',
+                ),
+            },
+        ),
+        (
+            _('Description'),
+            {
+                'classes': ['--collapse', 'columns'],
+                'fields': (
+                    'description_ru',
+                    'description_en',
+                ),
+            },
+        ),
+        (
+            _('Status'),
+            {
+                'classes': ['--collapse', 'columns'],
+                'fields': (
+                    'promote',
+                    'is_visible',
+                ),
+            },
+        ),
+        (
+            _('Updates'),
+            {
+                'classes': ['--collapse', 'columns'],
+                'fields': (
+                    'created_at',
+                    'updated_at',
+                ),
+            },
+        ),
+    )
 
     def get_urls(self):
-
         urls = super().get_urls()
         custom_urls = [
             path(
