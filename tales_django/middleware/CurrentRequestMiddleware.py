@@ -10,6 +10,7 @@ class CurrentRequestMiddleware:
     def __call__(self, request):
         thread_data.request = request
         response = self.get_response(request)
+        thread_data.request = None  # Clean up!
         return response
 
 
