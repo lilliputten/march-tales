@@ -75,4 +75,11 @@ class Series(Model):
     #     )
 
     def __str__(self):
-        return self.title
+        count = self.tracks_count
+        items = [
+            self.title,
+            # f'({self.series.title} #{self.series_order})' if self.series else None,
+            f'({count})' if count else None,
+        ]
+        info = ' '.join(map(str, filter(None, items)))
+        return info  # f'Track(id={self.id}, title={self.title})'

@@ -1,7 +1,8 @@
 from django.conf.urls.i18n import i18n_patterns
 from django.urls import path
 
-from .views import author_details_view, author_index_view
+from .views.author_details_view import author_details_view
+from .views.author_index_view import author_index_view
 
 # Content routes with language prefix support
 author_urlpatterns = i18n_patterns(

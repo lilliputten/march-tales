@@ -18,6 +18,7 @@ from tales_django.sites import unfold_admin_site
 
 from ..forms.TrackInlineForm import TrackInlineAdmin
 from ..models import Series, Track
+from .views.update_series_tracks import update_series_tracks
 
 
 @admin.action(description=_('Promote'))
@@ -49,8 +50,8 @@ class TrackAssignmentForm(forms.Form):
 
         if series_instance:
             # Get tracks that are not already in this series
-            tracks_already_in_series = series_instance.tracks.values_list('id', flat=True)
-            available_tracks = Track.objects.exclude(id__in=tracks_already_in_series)
+            # tracks_already_in_series = series_instance.tracks.values_list('id', flat=True)
+            available_tracks = Track.objects   # .exclude(id__in=tracks_already_in_series)
             self.fields['select_track'].queryset = available_tracks
 
 
@@ -62,9 +63,16 @@ class SeriesAdmin(TranslatedFieldAdmin, ImportExportModelAdmin, ExportActionMode
     change_form_template = 'admin/entities/Tracks/series/change_form.html'
 
     def get_urls(self):
+
         urls = super().get_urls()
-        # No custom URLs for now to avoid the NoReverseMatch error
-        return urls
+        custom_urls = [
+            path(
+                '<int:series_id>/update-tracks/',
+                self.admin_site.admin_view(update_series_tracks),
+                name='update_series_tracks',
+            ),
+        ]
+        return custom_urls + urls
 
     def change_view(self, request, object_id, form_url='', extra_context=None):
         extra_context = extra_context or {}

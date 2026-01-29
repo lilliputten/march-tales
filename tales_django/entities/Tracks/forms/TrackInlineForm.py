@@ -24,8 +24,8 @@ class TrackAssignmentForm(forms.Form):
 
         if series_instance:
             # Get tracks that are not already in this series
-            tracks_already_in_series = series_instance.tracks.values_list('id', flat=True)
-            available_tracks = Track.objects.exclude(id__in=tracks_already_in_series)
+            # tracks_already_in_series = series_instance.tracks.values_list('id', flat=True)
+            available_tracks = Track.objects.all()   # exclude(id__in=tracks_already_in_series)
             self.fields['tracks_to_add'].queryset = available_tracks
 
 
@@ -39,9 +39,15 @@ class TrackInlineForm(forms.ModelForm):
         model = Track
         fields = (
             'id',  # Track ID (primary key)
-            'title_ru',  # Russian title
-            'title_en',  # English title
+            # 'title_ru',  # Russian title
+            # 'title_en',  # English title
+            # 'description_ru',
+            # 'description_en',
             'series_order',  # Order within series
+            # 'promote',
+            # 'track_status',
+            # 'created_at',
+            # 'updated_at',
         )
         widgets = {
             'id': forms.HiddenInput(),
@@ -86,12 +92,12 @@ class TrackInlineAdmin(admin.TabularInline):
     can_add = False  # Disable the add button
     fields = (
         'id',  # Track ID (primary key)
-        'title_ru',  # Russian title
-        'title_en',  # English title
+        # 'title_ru',  # Russian title
+        # 'title_en',  # English title
         'series_order',  # Order within series
     )
     verbose_name = _('Track')
     verbose_name_plural = _('Tracks')
     can_delete = True  # Allow removal of existing tracks from the series
     show_change_link = False  # Don't show change link since we're not editing data
-    readonly_fields = ('id',)  # Make ID read-only
+    # readonly_fields = ('id',)  # Make ID read-only
