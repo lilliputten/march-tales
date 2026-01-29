@@ -39,15 +39,7 @@ class TrackInlineForm(forms.ModelForm):
         model = Track
         fields = (
             'id',  # Track ID (primary key)
-            # 'title_ru',  # Russian title
-            # 'title_en',  # English title
-            # 'description_ru',
-            # 'description_en',
             'series_order',  # Order within series
-            # 'promote',
-            # 'track_status',
-            # 'created_at',
-            # 'updated_at',
         )
         widgets = {
             'id': forms.HiddenInput(),
@@ -92,8 +84,6 @@ class TrackInlineAdmin(admin.TabularInline):
     can_add = False  # Disable the add button
     fields = (
         'id',  # Track ID (primary key)
-        # 'title_ru',  # Russian title
-        # 'title_en',  # English title
         'series_order',  # Order within series
     )
     verbose_name = _('Track')

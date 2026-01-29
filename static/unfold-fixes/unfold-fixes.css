@@ -188,21 +188,17 @@ fieldset[aria-labelledby='tracks-heading'] tbody.has_original:before {
   pointer-events: none;
 }
 fieldset[aria-labelledby='tracks-heading'] tbody.has_original.indicate:before {
-  /* opacity: 1; */
   animation-name: series-tracks-indicate;
   animation-duration: 2s;
 }
 @keyframes series-tracks-indicate {
   from {
     opacity: 1;
-    /* background-color: rgb(var(--color-primary-600) / 0.5); */
   }
   to {
     opacity: 0;
-    /* background-color: rgb(var(--color-primary-600) / 0); */
   }
 }
-
 fieldset[aria-labelledby='tracks-heading'] tbody.has_original:not(:first-child) {
   border-top: 1px solid #8882;
 }
@@ -218,8 +214,4 @@ fieldset[aria-labelledby='tracks-heading'] .edit-icon {
 }
 fieldset[aria-labelledby='tracks-heading'] .edit-icon {
   font-size: 1.2em;
-}
-/* DEBUG */
-fieldset[aria-labelledby='tracks-heading'] {
-  /* border: 1px solid green; */
 }

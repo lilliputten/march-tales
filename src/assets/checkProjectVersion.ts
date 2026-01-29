@@ -20,6 +20,8 @@ function getMinorVersionFromProjectInfo(info?: string | null) {
 export function checkProjectVersion() {
   const oldInfo = window.localStorage.getItem('projectInfo');
   const newInfo = window.projectInfo;
+  // eslint-disable-next-line no-console
+  console.log('[checkProjectVersion]', newInfo);
   if (newInfo && newInfo !== oldInfo) {
     const oldVersion = getMinorVersionFromProjectInfo(oldInfo);
     const newVersion = getMinorVersionFromProjectInfo(newInfo);
