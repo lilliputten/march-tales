@@ -3,7 +3,8 @@ from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 
 from ..models import Series, Track
-from .TrackInlineFormSet import TrackInlineFormSet
+
+# from .TrackInlineFormSet import TrackInlineFormSet
 
 
 class TrackAssignmentForm(forms.Form):
@@ -78,7 +79,7 @@ class TrackInlineAdmin(admin.TabularInline):
 
     model = Track
     form = TrackInlineForm  # Use the custom form
-    formset = TrackInlineFormSet  # Use custom formset
+    # formset = TrackInlineFormSet  # Use custom formset
     fk_name = 'series'  # Specify which foreign key to use
     extra = 0  # No empty forms to prevent creating new tracks directly
     can_add = False  # Disable the add button

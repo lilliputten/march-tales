@@ -284,12 +284,10 @@ fetch('/unfold-admin/tales_django/series/1/update-tracks/', {
     }
     const origOrder = Number(orderInputField.value);
     let order = origOrder;
-    if (order <= 1) {
-      // Do nothing if the lowest value
-      return;
-    }
     // Decrease the order value
-    order--;
+    if (order > 1) {
+      order--;
+    }
     const prevRow = row.previousElementSibling;
     if (prevRow) {
       const prevOrderInputField = prevRow.querySelector('input[type="number"]');

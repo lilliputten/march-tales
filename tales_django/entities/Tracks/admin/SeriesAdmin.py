@@ -121,25 +121,26 @@ class SeriesAdmin(TranslatedFieldAdmin, ImportExportModelAdmin, ExportActionMode
         extra_context = extra_context or {}
         series = self.get_object(request, object_id)
 
+        track_assignment_form = None
         if request.method == 'POST' and 'select_track' in request.POST:
             # Handle track assignment form submission
             track_assignment_form = TrackAssignmentForm(request.POST, series_instance=series)
             if track_assignment_form.is_valid():
-                selected_track = track_assignment_form.cleaned_data['select_track']
-                if selected_track:
-                    selected_track.series = series
-                    selected_track.series_order = series.tracks.count() + 1
-                    selected_track.save()
+                select_track = track_assignment_form.cleaned_data['select_track']
+                if select_track:
+                    select_track.series = series
+                    select_track.series_order = series.tracks.count() + 1
+                    select_track.save()
                     messages.success(
-                        request, _('Track "%(track)s" has been added to the series.') % {'track': selected_track.title}
+                        request, _('Track "%(track)s" has been added to the series.') % {'track': select_track.title}
                     )
-                # Redirect to refresh the page after assignment
-                return HttpResponseRedirect(request.path)
+                    # Redirect to refresh the page after assignment
+                    return HttpResponseRedirect(request.path)
         else:
             # Display the form for GET requests or after successful assignment
             track_assignment_form = TrackAssignmentForm(series_instance=series)
 
-        if series:
+        if series and track_assignment_form:
             # Add form to select existing tracks to assign
             extra_context['track_assignment_form'] = track_assignment_form
             # For now, we'll handle the assignment via a POST to the same page
