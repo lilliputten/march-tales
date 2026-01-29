@@ -1,13 +1,13 @@
 <!--
  @since 2025.03.14, 22:00
- @changed 2025.03.28, 04:52
+ @changed 2026.01.28, 18:31
 -->
 
 # March Tales django rest api and web frontend server
 
 ## Build info (auto-generated)
 
-- Project info: march-tales v.0.0.45 / 2026.01.27 20:18:45 +0300
+- Project info: march-tales v.0.0.46 / 2026.01.29 22:18:12 +0300
 
 ## Resources
 
@@ -65,3 +65,10 @@ Shell maintenance utilities are located in the `.utils` folder:
 - `push-with-tags.sh`
 - `update-build-variables.sh`
 - `venv-init.sh`
+
+### Unfold fixes
+
+Styles and scripts to customize unfold admin panel:
+
+- `static/unfold-fixes/unfold-fixes.css`
+- `static/unfold-fixes/unfold-fixes.js`

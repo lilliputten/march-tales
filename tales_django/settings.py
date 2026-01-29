@@ -435,6 +435,11 @@ UNFOLD = {
                         'link': reverse_lazy('unfold-admin:tales_django_track_changelist'),
                     },
                     {
+                        'title': _('Series (plural)'),
+                        'icon': 'amp_stories',
+                        'link': reverse_lazy('unfold-admin:tales_django_series_changelist'),
+                    },
+                    {
                         'title': _('Authors'),
                         'icon': 'people',
                         'link': reverse_lazy('unfold-admin:tales_django_author_changelist'),

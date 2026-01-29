@@ -2,6 +2,7 @@ from django.conf.urls.i18n import i18n_patterns
 from django.urls import include, path
 
 from .api import track_api_router
+from .api import track_api_urlpatterns as api_module_urlpatterns
 from .views import favorites_view, track_details_view
 
 # Content routes with language prefix support
@@ -12,6 +13,7 @@ track_urlpatterns = i18n_patterns(
 )
 
 # API routes - no language prefix (standard practice)
+# Combine the router endpoints with the custom API endpoints (like sync)
 track_api_urlpatterns = [
     path(r'api/v1/', include(track_api_router.urls)),
-]
+] + api_module_urlpatterns

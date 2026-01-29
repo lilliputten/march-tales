@@ -1,7 +1,7 @@
 /**
  * @desc Main entry point module (scripts)
  * @module src/assets/index.ts
- * @changed 2025.04.12, 23:23
+ * @changed 2026.01.29, 04:17
  */
 
 import { userSession } from './userSession';

@@ -1,0 +1,11 @@
+{# ex: set ft=htmldjango : #}
+
+<span class="series-link">
+  <small class="text-muted">
+    {{ _("Series") }}:
+    <a href="{{ track.series.get_absolute_url }}" class="series-link">
+      {{ track.series.title }}
+    </a>
+    ({{ track.series_order }}/{{ track.series.tracks.count }})
+  </small>
+</span>

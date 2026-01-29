@@ -64,7 +64,7 @@ function onLogin() {
   const userTracks: Partial<UserTrack>[] = trackInfos.map(createUserTrackFromTrackInfo);
   // Sync favorites and local tracks...
   sendSyncUserTracksRequest(userTracks);
-  console.log('[userSession:onLogin]');
+  // console.log('[userSession:onLogin]');
 }
 
 function onLogout() {
@@ -79,7 +79,7 @@ function onLogout() {
   localTrackInfoDb.updateFavoritesByTrackIds([]);
   floatingPlayer.clearActivePlayerData();
   floatingPlayer.clearFloatingPlayerState();
-  console.log('[userSession:onLogout]');
+  // console.log('[userSession:onLogout]');
 }
 
 export function userSession() {

@@ -1,0 +1,8 @@
+@import '../../shared';
+
+.series-full-list {
+  & &__title {
+    font-size: 0.85em;
+    color: $text-color-light;
+  }
+}

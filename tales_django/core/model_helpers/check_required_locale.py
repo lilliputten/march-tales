@@ -44,7 +44,7 @@ def check_required_locale(request: HttpRequest):
     current_language = translation.get_language()
     set_language = False
     required_locale = _get_required_locale(request)
-    if required_locale is not None and required_locale: # and required_locale != current_language:
+    if required_locale is not None and required_locale:   # and required_locale != current_language:
         required_locale = get_valid_language(required_locale)
         set_language = True
     # # TODO: Find out the telegram language parameter.

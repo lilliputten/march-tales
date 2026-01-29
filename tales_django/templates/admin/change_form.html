@@ -65,7 +65,15 @@
             {% include adminform.model_admin.change_form_outer_before_template %}
         {% endif %}
 
-        <form {% if has_file_field %}enctype="multipart/form-data" {% endif %}{% if form_url %}action="{{ form_url }}" {% endif %}method="post" id="{{ opts.model_name }}_form" {% if adminform.model_admin.warn_unsaved_form %}class="warn-unsaved-form"{% endif %} novalidate>
+        <form
+            data-id="change_form_DEFAULT_form"
+            id="{{ opts.model_name }}_form"
+            {% if has_file_field %}enctype="multipart/form-data"{% endif %}
+            {% if form_url %} action="{{ form_url }}"{% endif %}
+            method="post"
+            {% if adminform.model_admin.warn_unsaved_form %}class="warn-unsaved-form"{% endif %}
+            novalidate
+        >
             {% csrf_token %}
 
             {% if adminform.model_admin.change_form_before_template %}
@@ -109,6 +117,8 @@
                 {% if adminform.model_admin.change_form_after_template %}
                     {% include adminform.model_admin.change_form_after_template %}
                 {% endif %}
+
+                {% block form_bottom %}{% endblock %}
 
                 {% block submit_buttons_bottom %}{% submit_row %}{% endblock %}
 

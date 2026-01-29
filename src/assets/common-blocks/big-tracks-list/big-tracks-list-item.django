@@ -70,21 +70,25 @@ updated-at-date: {{ user_track.updated_at }}
     </div>
   {% endif %}
 
-  <div class="card-body track-details no-h-padding">
-    <div class="track-details-main">
-      {# Title (if not details: then it'll be show at the top #}
-      {% if not show_details %}
-      <h5 class="mb-3"><a class="post-title active-text-link" href="{% if request.path|str_starts:"/favorites" %}/favorites{% else %}/tracks{% endif %}/{{ track.id }}/">{{ track.title }}</a></h5>
-      {% endif %}
-      {# Description: if details #}
-      {% if show_details %}
-      <div class="text-content">{{ track.description|markdownify }}</div>
-      {% endif %}
-      {# Details #}
-      <ul class="card-meta list-inline">
-        {% include "assets/common-blocks/track-details/track-details.django" %}
-      </ul>
-    </div>
+    <div class="card-body track-details no-h-padding">
+      <div class="track-details-main">
+        {# Title (if not details: then it'll be show at the top #}
+        {% if not show_details %}
+        <h5 class="mb-3"><a class="post-title active-text-link" href="{% if request.path|str_starts:"/favorites" %}/favorites{% else %}/tracks{% endif %}/{{ track.id }}/">{{ track.title }}</a></h5>
+        {% endif %}
+        {# Description: if details #}
+        {% if show_details %}
+        <div class="text-content">{{ track.description|markdownify }}</div>
+        {% endif %}
+        {# Series information #}
+        {% if track.series and show_details %}
+          {% include "assets/common-blocks/track-series/series-full-list.django" %}
+        {% endif %}
+        {# Details #}
+        <ul class="card-meta list-inline">
+          {% include "assets/common-blocks/track-details/track-details.django" %}
+        </ul>
+      </div>
     {% if not no_controls %}
     <div class="track-details-controls">
       {# {{{ Actions #}

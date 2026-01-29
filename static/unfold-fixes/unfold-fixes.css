@@ -1,47 +1,48 @@
 /*
- * @changed 2025.04.03, 03:50
+ * @changed 2026.01.29, 02:36
+ * vim: ts=2:sw=2
  */
 
 html form {
-    --primaryColor: rgb(var(--color-primary-600) / 1); /* #b26; */
-    --primaryColorDark: rgb(var(--color-primary-600) / 1); /* #901a4e; */
-    --ck-color-button-on-background: var(--primaryColor);
-    --ck-color-button-on-color: #fff;
-    --ck-color-button-on-hover-background: var(--primaryColorDark);
-    --maxFieldWidth: 42rem;
+  --primaryColor: rgb(var(--color-primary-600) / 1); /* #b26; */
+  --primaryColorDark: rgb(var(--color-primary-600) / 1); /* #901a4e; */
+  --ck-color-button-on-background: var(--primaryColor);
+  --ck-color-button-on-color: #fff;
+  --ck-color-button-on-hover-background: var(--primaryColorDark);
+  --maxFieldWidth: 42rem;
 }
 html.dark form {
-    --ck-color-text: #999;
+  --ck-color-text: #999;
 }
 
 .readonly {
-    opacity: 0.25;
+  opacity: 0.25;
 }
 
 .ck-editor-container,
 textarea.vLargeTextField {
-    width: 100%;
-    max-width: var(--maxFieldWidth) !important;
+  width: 100%;
+  max-width: var(--maxFieldWidth) !important;
 }
 textarea.vLargeTextField {
-    height: 8em;
+  height: 8em;
 }
 .ck-editor-container {
-    overflow: hidden;
+  overflow: hidden;
 }
 
-.ck-editor .ck.ck-image-insert-form>.ck.ck-button {
-    display: flex;
+.ck-editor .ck.ck-image-insert-form > .ck.ck-button {
+  display: flex;
 }
 
 .ck-editor.fullscreen-mode .ck-sticky-panel__content {
-    top: 0;
-    z-index: 100;
-    width: 100% !important;
-    top: 0 !important;
+  top: 0;
+  z-index: 100;
+  width: 100% !important;
+  top: 0 !important;
 }
 .ck-editor.fullscreen-mode .ck-toolbar {
-    width: 100%;
+  width: 100%;
 }
 
 .ck-content blockquote,
@@ -57,27 +58,43 @@ textarea.vLargeTextField {
 .ck-content hr,
 .ck-content p,
 .ck-content pre {
-    margin: revert;
-    font-size: revert;
-    font-weight: revert;
-    font-style: revert;
+  margin: revert;
+  font-size: revert;
+  font-weight: revert;
+  font-style: revert;
 }
-.ck-content h1 { font-size: 200%; font-weight: normal; }
-.ck-content h2 { font-size: 180%; font-weight: normal; }
-.ck-content h3 { font-size: 160%; font-weight: normal; }
-.ck-content h4 { font-size: 140%; font-weight: normal; }
-.ck-content h5 { font-size: 120%; }
-.ck-content h6 { font-size: 100%; }
+.ck-content h1 {
+  font-size: 200%;
+  font-weight: normal;
+}
+.ck-content h2 {
+  font-size: 180%;
+  font-weight: normal;
+}
+.ck-content h3 {
+  font-size: 160%;
+  font-weight: normal;
+}
+.ck-content h4 {
+  font-size: 140%;
+  font-weight: normal;
+}
+.ck-content h5 {
+  font-size: 120%;
+}
+.ck-content h6 {
+  font-size: 100%;
+}
 .ck-content h1,
 .ck-content h2,
 .ck-content h3,
 .ck-content h4,
 .ck-content h5,
 .ck-content h6 {
-    margin: 1.5em 0;
+  margin: 1.5em 0;
 }
 .ck-content a {
-    color: var(--primaryColor);
+  color: var(--primaryColor);
 }
 
 .ck-source-editing-area button,
@@ -85,52 +102,116 @@ textarea.vLargeTextField {
 .ck-source-editing-area optgroup,
 .ck-source-editing-area select,
 .ck-source-editing-area textarea {
-    color: revert;
+  color: revert;
 }
 
 .ck-editor .ck.ck-toolbar__separator {
-    background-color: rgba(128 128 128 / 0.15) !important;
+  background-color: rgba(128 128 128 / 0.15) !important;
 }
 
-.ck-editor .ck.ck-editor__main>.ck-editor__editable {
-    background-color: initial;
-    border-radius: var(--border-radius, 6px);
-    border: 1px solid var(--ck-color-base-border);
-    /* overflow: hidden; */
-    /* max-width: 100%; */
-    position: relative;
+.ck-editor .ck.ck-editor__main > .ck-editor__editable {
+  background-color: initial;
+  border-radius: var(--border-radius, 6px);
+  border: 1px solid var(--ck-color-base-border);
+  /* overflow: hidden; */
+  /* max-width: 100%; */
+  position: relative;
 }
 .ck-editor .ck.ck-editor__top .ck-sticky-panel .ck-sticky-panel__content,
-.ck-editor .ck.ck-editor__main>.ck-editor__editable {
-    border-color: rgb(var(--color-base-500) / 0.2) !important;
+.ck-editor .ck.ck-editor__main > .ck-editor__editable {
+  border-color: rgb(var(--color-base-500) / 0.2) !important;
 }
 html.dark .ck-editor .ck.ck-editor__top .ck-sticky-panel .ck-sticky-panel__content,
-html.dark .ck-editor .ck.ck-editor__main>.ck-editor__editable {
-    border-color: rgb(var(--color-base-700) / 0.5) !important;
+html.dark .ck-editor .ck.ck-editor__main > .ck-editor__editable {
+  border-color: rgb(var(--color-base-700) / 0.5) !important;
 }
-.ck-editor .ck.ck-editor__main>.ck-editor__editable {
-    border-bottom-left-radius: var(--border-radius, 6px) !important;
-    border-bottom-right-radius: var(--border-radius, 6px) !important;
+.ck-editor .ck.ck-editor__main > .ck-editor__editable {
+  border-bottom-left-radius: var(--border-radius, 6px) !important;
+  border-bottom-right-radius: var(--border-radius, 6px) !important;
 }
 .ck-editor .ck.ck-editor__top .ck-sticky-panel .ck-sticky-panel__content {
-    border-top-left-radius: var(--border-radius, 6px) !important;
-    border-top-right-radius: var(--border-radius, 6px) !important;
+  border-top-left-radius: var(--border-radius, 6px) !important;
+  border-top-right-radius: var(--border-radius, 6px) !important;
 }
 .ck-editor .ck.ck-toolbar {
-    background-color: initial;
-    background-color: rgba(128 128 128 / 0.05);
+  background-color: initial;
+  background-color: rgba(128 128 128 / 0.05);
 }
 
 /* columns */
 @media (width > 1024px) {
-    fieldset.columns:not(.collapsed) > div {
-        /* border: 1px solid red !important; */
-        display: flex;
-        flex-wrap: wrap;
-        align-items: flex-start;
-    }
-    fieldset.columns > div > .form-row {
-        flex: 1;
-    }
+  fieldset.columns:not(.collapsed) > div {
+    /* border: 1px solid red !important; */
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  fieldset.columns > div > .form-row {
+    flex: 1;
+  }
 }
 
+/* TrackInlineForm, tracks-heading: Customize series track list */
+fieldset[aria-labelledby='tracks-heading'] .tabular-table {
+  /* margin: 10px 0; */
+}
+fieldset[aria-labelledby='tracks-heading'] #number {
+  opacity: 0.3;
+  margin-left: 8px;
+}
+fieldset[aria-labelledby='tracks-heading'] input[type='number'] {
+  border: 1px solid red;
+  width: 3em;
+  background-color: transparent;
+  border: none;
+  pointer-events: none;
+}
+.disabled,
+fieldset[aria-labelledby='tracks-heading'] tbody.has_original:last-child #plusButton,
+fieldset[aria-labelledby='tracks-heading'] tbody.has_original:first-child #minusButton {
+  opacity: 0.2;
+  pointer-events: none;
+}
+fieldset[aria-labelledby='tracks-heading'] tbody.has_original {
+  position: relative;
+}
+fieldset[aria-labelledby='tracks-heading'] tbody.has_original:before {
+  background-color: rgb(var(--color-primary-600) / 0.5);
+  display: block;
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+fieldset[aria-labelledby='tracks-heading'] tbody.has_original.indicate:before {
+  animation-name: series-tracks-indicate;
+  animation-duration: 2s;
+}
+@keyframes series-tracks-indicate {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+fieldset[aria-labelledby='tracks-heading'] tbody.has_original:not(:first-child) {
+  border-top: 1px solid #8882;
+}
+fieldset[aria-labelledby='tracks-heading'] td.original p {
+  padding-top: 18px;
+}
+fieldset[aria-labelledby='tracks-heading'] .edit-link,
+fieldset[aria-labelledby='tracks-heading'] .edit-icon {
+  height: 1em;
+  width: 1em;
+  display: inline-flex;
+  margin-left: 0.3em;
+}
+fieldset[aria-labelledby='tracks-heading'] .edit-icon {
+  font-size: 1.2em;
+}

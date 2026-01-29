@@ -60,6 +60,59 @@ class AuthorAdmin(TranslatedFieldAdmin, ImportExportModelAdmin, ExportActionMode
     #     (_('Description'), {'fields': Author.description.fields}),
     # ]
 
+    fieldsets = (
+        (
+            _('Name'),
+            {
+                'classes': ['--collapse', '--opened-by-default', 'columns'],
+                'fields': (
+                    'name_ru',
+                    'name_en',
+                ),
+            },
+        ),
+        (
+            _('Short Description'),
+            {
+                'classes': ['--collapse', 'columns'],
+                'fields': (
+                    'short_description_ru',
+                    'short_description_en',
+                ),
+            },
+        ),
+        (
+            _('Description'),
+            {
+                'classes': ['--collapse', 'columns'],
+                'fields': (
+                    'description_ru',
+                    'description_en',
+                ),
+            },
+        ),
+        (
+            _('Properties'),
+            {
+                'classes': ['--collapse', 'columns'],
+                'fields': (
+                    'portrait_picture',
+                    'promote',
+                ),
+            },
+        ),
+        (
+            _('Updates'),
+            {
+                'classes': ['--collapse', 'columns'],
+                'fields': (
+                    'published_at',
+                    'updated_at',
+                ),
+            },
+        ),
+    )
+
     def name_translated(self, track):
         return track.name
 

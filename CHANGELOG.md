@@ -1,9 +1,31 @@
 <!--
  @since 2025.03.19
- @changed 2026.01.27, 20:18
+ @changed 2026.01.29, 22:21
 -->
 
 # CHANGELOG
+
+## [v.0.0.46](https://github.com/lilliputten/march-tales/releases/tag/v.0.0.46) - 2026.01.29
+
+Issue #91: Implemented series support for tracks (on the DB, system management level and in the web application)
+
+- Added a new Series model and established a one-to-many relationship with Tracks.
+- Updated admin panels (SeriesAdmin and TrackAdmin) for managing series and tracks.
+- Added an inline form (TrackInlineForm) in the SeriesAdmin to edit related tracks.
+- Implemented series ordering for tracks within a series.
+- Added a filter in TrackAdmin to show only tracks with a series.
+- Updated frontend templates and styles for series representation.
+- Added form validation and error handling for series-track relations.
+- Implemented `get_absolute_url` for the Series model.
+- Added auto-calculation for the `series_order` field when not set manually.
+- Included necessary translations for series-related pages.
+- Fixed bugs in the series admin form and restored system API functionality.
+- Applied a mobile app login fix for the /login-success route.
+
+See also:
+
+- [Issue #91: Implement track series support](https://github.com/lilliputten/march-tales/issues/91)
+- [Compare with the previous version](https://github.com/lilliputten/march-tales/compare/v.0.0.45...v.0.0.46)
 
 ## [v.0.0.45](https://github.com/lilliputten/march-tales/releases/tag/v.0.0.45) - 2026.01.27
 

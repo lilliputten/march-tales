@@ -1,5 +1,6 @@
 from datetime import date, timedelta
 
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models import Model
 from django.db.models.signals import post_delete
@@ -30,6 +31,15 @@ class Track(Model):
     class Meta:
         verbose_name = _('Track')
         verbose_name_plural = _('Tracks')
+        # indexes = [
+        #     models.Index(fields=['created_at']),
+        #     models.Index(fields=['author']),
+        #     models.Index(fields=['track_status']),
+        #     models.Index(fields=['promote']),
+        #     models.Index(fields=['played_count']),
+        #     models.Index(fields=['track_status', 'promote']),
+        #     models.Index(fields=['track_status', 'for_members']),
+        # ]
 
     title = TranslatedField(
         models.CharField(
@@ -67,6 +77,22 @@ class Track(Model):
         blank=False,
         null=False,
         on_delete=models.DO_NOTHING,
+    )
+
+    series = models.ForeignKey(
+        'Series',
+        verbose_name=_('Series'),
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name='tracks',
+    )
+    series_order = models.PositiveIntegerField(
+        _('Order in Series'),
+        # default=1,
+        blank=True,
+        null=True,
+        help_text=_('Order within the series (lower numbers appear first)'),
     )
 
     tags = models.ManyToManyField('Tag', verbose_name=_('Tags'), blank=True, related_name='tagged_tracks')
@@ -181,6 +207,28 @@ class Track(Model):
         on_delete=models.DO_NOTHING,
     )
 
+    # # Series relationship
+    # series = models.ForeignKey(
+    #     'Series',
+    #     verbose_name=_('Series'),
+    #     related_name='tracks',
+    #     on_delete=models.SET_NULL,
+    #     blank=True,
+    #     null=True,
+    #     help_text=_('Optional series this track belongs to'),
+    # )
+    #
+    # series_order = models.PositiveIntegerField(
+    #     _('Series Order'),
+    #     default=0,
+    #     help_text=_('Order within the series (lower numbers appear first)'),
+    # )
+
+    def clean(self):
+        super().clean()
+        # Validation for unique series_order within each series will be handled
+        # at the form/view level or in the admin due to M2M complexity at model level
+
     @property
     def lower_title(self) -> bool:
         # language = get_current_language()
@@ -191,12 +239,12 @@ class Track(Model):
         return self.status == 'PUBLISHED'
 
     @property
-    def duration_formatted(track):
-        return str(timedelta(seconds=round(track.audio_duration))) if track.audio_duration else '-'
+    def duration_formatted(self):
+        return str(timedelta(seconds=round(self.audio_duration))) if self.audio_duration else '-'
 
     @property
-    def size_formatted(track):
-        return sizeofFmt(track.audio_size) if track.audio_size else '-'
+    def size_formatted(self):
+        return sizeofFmt(self.audio_size) if self.audio_size else '-'
 
     def save(self, *args, **kwargs):
         # Try to remove the old files...
@@ -233,6 +281,7 @@ class Track(Model):
     def __str__(self):
         items = [
             self.title,
+            # f'({self.series.title} #{self.series_order})' if self.series else None,
             '[%d]' % self.id if LOCAL else None,
         ]
         info = ' '.join(map(str, filter(None, items)))

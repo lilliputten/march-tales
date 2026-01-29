@@ -28,6 +28,39 @@ class RubricAdmin(TranslatedFieldAdmin, ImportExportModelAdmin, ExportActionMode
     import_form_class = ImportForm
     export_form_class = ExportForm
 
+    fieldsets = (
+        (
+            _('Text'),
+            {
+                'classes': ['--collapse', '--opened-by-default', 'columns'],
+                'fields': (
+                    'text_ru',
+                    'text_en',
+                ),
+            },
+        ),
+        (
+            _('Properties'),
+            {
+                'classes': ['--collapse', 'columns'],
+                'fields': (
+                    'tracks',
+                    'promote',
+                ),
+            },
+        ),
+        (
+            _('Updates'),
+            {
+                'classes': ['--collapse', 'columns'],
+                'fields': (
+                    'published_at',
+                    'updated_at',
+                ),
+            },
+        ),
+    )
+
     actions = [
         promote_action,
         no_promote_action,
