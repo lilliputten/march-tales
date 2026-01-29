@@ -5,7 +5,7 @@ from django.contrib import admin, messages
 from django.core.exceptions import ValidationError
 from django.core.files.base import File
 from django.core.files.uploadedfile import TemporaryUploadedFile
-from django.db.models import CharField, F, Q, Value
+from django.db.models import CharField, F, Max, Q, Value
 from django.db.models.functions import Concat, Lower
 from django.utils.translation import get_language
 from django.utils.translation import gettext_lazy as _
@@ -342,14 +342,51 @@ class TrackAdmin(
         change,
     ):
         """
-        Auto update owning users
+        Create/validate series_order fields and uploaded process audio file information.
+
+        This method executes automatically when saving a Track model instance, with main functions including:
+        1. Auto-set or validate track order within a series
+        2. Update last modifier information
+        3. Process audio file duration and size information
+
+        Args:
+            request: Django HTTP request object
+            obj: Track model instance to be saved
+            form: Form object containing form data
+            change: Boolean indicating if this is an update to an existing record
+
+        Returns:
+            None: Calls parent class's save_model method to complete actual saving operation
         """
-        # # Validate unique series_order within each series before saving
-        # try:
-        #     obj.validate_unique_series_order()
-        # except ValidationError as e:
-        #     messages.add_message(request, messages.ERROR, e.message)
-        #     return  # Don't save if validation fails
+
+        # NOTE: The data preparing and verification is proceeded in the
+        # `tales_django/entities/Tracks/forms/TrackAdminForm.py`. It's just a
+        # reassuring here.
+        if obj.series:
+            # Auto-set series_order if series is set but series_order is not provided
+            if obj.series_order is None or obj.series_order == '' or obj.series_order == 0:
+                # Find the highest series_order in the series and add 1
+                max_order = obj.series.tracks.aggregate(max_order=Max('series_order'))['max_order']
+                obj.series_order = (max_order or 0) + 1
+
+            # Check if series_order is unique within the series
+            elif obj.series_order:
+                # Find other tracks in the same series with the same series_order
+                same_order_tracks = Track.objects.filter(series=obj.series, series_order=obj.series_order)
+
+                # If updating an existing track, exclude it from the check
+                if obj.pk:
+                    same_order_tracks = same_order_tracks.exclude(pk=obj.pk)
+
+                if same_order_tracks.exists():
+                    # Add an error message to the request
+                    messages.add_message(
+                        request,
+                        messages.ERROR,
+                        f'Track order {obj.series_order} already exists in series {obj.series.title}. '
+                        f'Each track in a series must have a unique order number.',
+                    )
+                    return  # Skip saving if there's a duplicate series_order
 
         # Update updater info...
         obj.updated_by_id = request.user.id
@@ -403,16 +440,16 @@ class TrackAdmin(
                 # TODO: Prevent leaving the edit page?
         return super().save_model(request, obj, form, change)
 
-    def save_form_m2m(self, request, form, formsets, change):
-        """Save M2M relationships."""
-        # Save the M2M relationships
-        return super().save_form_m2m(request, form, formsets, change)
+    # def save_form_m2m(self, request, form, formsets, change):
+    #     """Save M2M relationships."""
+    #     # Save the M2M relationships
+    #     return super().save_form_m2m(request, form, formsets, change)
 
-        # # Validate unique series_order since M2M relationships are established
-        # try:
-        #     obj.validate_unique_series_order()
-        # except ValidationError as e:
-        #     # If validation fails, add error message
-        #     messages.add_message(request, messages.ERROR, e.message)
-        #     # Note: At this point, M2M relationships are already saved
-        #     # In a production system, you might want to implement transaction rollback
+    #     # # Validate unique series_order since M2M relationships are established
+    #     # try:
+    #     #     obj.validate_unique_series_order()
+    #     # except ValidationError as e:
+    #     #     # If validation fails, add error message
+    #     #     messages.add_message(request, messages.ERROR, e.message)
+    #     #     # Note: At this point, M2M relationships are already saved
+    #     #     # In a production system, you might want to implement transaction rollback

@@ -1,4 +1,5 @@
 from django.core.exceptions import ValidationError
+from django.db.models import Max
 from django.forms.models import ModelForm
 
 from tales_django.core.widgets import largeTextAreaWidget, textAreaWidget, textInputWidget
@@ -23,22 +24,28 @@ class TrackAdminForm(ModelForm):
         series = cleaned_data.get('series')
         series_order = cleaned_data.get('series_order')
 
-        # If a series is selected, series_order must not be empty/null
-        if series and (series_order is None or series_order == ''):
-            raise ValidationError({'series_order': 'Series order is required when a series is selected.'})
+        # If a series is selected and series_order is not provided or is zero,
+        # automatically assign the next available order
+        if series:
+            if series_order is None or series_order == '' or series_order == 0:
+                # Find the highest series_order in the series and add 1
+                max_order = Track.objects.filter(series=series).aggregate(max_order=Max('series_order'))['max_order']
+                cleaned_data['series_order'] = (max_order or 0) + 1
+                # Update the instance as well for consistency
+                self.instance.series_order = (max_order or 0) + 1
 
-        if series and series_order is not None:
-            # Check if any other track in the same series has the same series_order
-            same_order_tracks = Track.objects.filter(series=series, series_order=series_order)
+            elif series_order is not None and series_order != '':
+                # Check if any other track in the same series has the same series_order
+                same_order_tracks = Track.objects.filter(series=series, series_order=series_order)
 
-            # If updating an existing track, exclude it from the check
-            if self.instance and self.instance.pk:
-                same_order_tracks = same_order_tracks.exclude(pk=self.instance.pk)
+                # If updating an existing track, exclude it from the check
+                if self.instance and self.instance.pk:
+                    same_order_tracks = same_order_tracks.exclude(pk=self.instance.pk)
 
-            if same_order_tracks.exists():
-                raise ValidationError(
-                    f'Track order {series_order} already exists in series {series.title}. '
-                    f'Each track in a series must have a unique order number.'
-                )
+                if same_order_tracks.exists():
+                    raise ValidationError(
+                        f'Track order {series_order} already exists in series {series.title}. '
+                        f'Each track in a series must have a unique order number.'
+                    )
 
         return cleaned_data
