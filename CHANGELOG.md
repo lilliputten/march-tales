@@ -1,9 +1,18 @@
 <!--
  @since 2025.03.19
- @changed 2026.01.29, 22:21
+ @changed 2026.05.15, 02:15
 -->
 
 # CHANGELOG
+
+## [v.0.0.47](https://github.com/lilliputten/march-tales/releases/tag/v.0.0.47) - 2026.01.29
+
+- Implemented a complete restful API route for series data following the same patterns as the existing `TrackViewSet`.
+
+See also:
+
+- [Issue #91: Implement track series support](https://github.com/lilliputten/march-tales/issues/91)
+- [Compare with the previous version](https://github.com/lilliputten/march-tales/compare/v.0.0.46...v.0.0.47)
 
 ## [v.0.0.46](https://github.com/lilliputten/march-tales/releases/tag/v.0.0.46) - 2026.01.29
 
