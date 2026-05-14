@@ -111,6 +111,9 @@ class TrackSerializer(serializers.HyperlinkedModelSerializer):
             'rubrics' if send_data else None,
             'tag_ids' if send_ids else None,
             'tags' if send_data else None,
+            # Series
+            'series_id',
+            'series_order',
         )
         # logger.info(
         #     f'[track_serializers:TrackSerializer:get_default_field_names] send_data={send_data} send_ids={send_ids} fields={fields}'

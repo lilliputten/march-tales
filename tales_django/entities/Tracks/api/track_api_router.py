@@ -2,6 +2,7 @@ from rest_framework import routers
 
 from .AuthorViewSet import AuthorViewSet
 from .RubricViewSet import RubricViewSet
+from .SeriesViewSet import SeriesViewSet
 from .TagViewSet import TagViewSet
 from .TrackViewSet import TrackViewSet
 
@@ -11,6 +12,7 @@ track_api_router = routers.DefaultRouter()
 track_api_router.register(r'tracks', TrackViewSet)
 track_api_router.register(r'authors', AuthorViewSet)
 track_api_router.register(r'rubrics', RubricViewSet)
+track_api_router.register(r'series', SeriesViewSet)
 track_api_router.register(r'tags', TagViewSet)
 
 __all__ = [
